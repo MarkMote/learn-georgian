@@ -1,0 +1,112 @@
+[
+  {
+    "english": "to want",
+    "georgian": "უნდა",
+    "transliteration": "unda",
+    "word_type": "verb",
+    "category": "Mental State",
+    "definition_georgian": "სურვილის გამოხატვა ან რაიმეს სურვილი.",
+    "description_english": "A versatile verb expressing desire or need. Often used with the subjunctive mood. Can indicate both a personal desire and an impersonal obligation.",
+    "examples": [
+      {
+        "georgian": "მე მინდა წავიდე.",
+        "transliteration": "me minda ts'avide",
+        "english": "I want to go."
+      },
+      {
+        "georgian": "გინდა ჩაის დალევა?",
+        "transliteration": "ginda ch'ais daleva?",
+        "english": "Do you want to drink tea?"
+      }
+    ],
+    "conjugation_examples": {
+      "present_tense": {
+        "first_person_singular": {
+          "georgian": "მინდა",
+          "transliteration": "minda",
+          "english": "I want"
+        },
+        "second_person_singular": {
+          "georgian": "გინდა",
+          "transliteration": "ginda",
+          "english": "You want"
+        },
+        "third_person_singular": {
+          "georgian": "უნდა",
+          "transliteration": "unda",
+          "english": "He/She wants"
+        },
+        "first_person_plural": {
+          "georgian": "გვინდა",
+          "transliteration": "gvinda",
+          "english": "We want"
+        },
+        "second_person_plural": {
+          "georgian": "გსურთ",
+          "transliteration": "gsurt",
+          "english": "You (plural) want"
+        },
+        "third_person_plural": {
+          "georgian": "სურთ",
+          "transliteration": "surt",
+          "english": "They want"
+        }
+      }
+    }
+  },
+  {
+    "english": "to eat",
+    "georgian": "ჭამა",
+    "transliteration": "ch'ama",
+    "word_type": "verb",
+    "category": "Action",
+    "definition_georgian": "საკვების მიღების პროცესი.",
+    "description_english": "A common verb used for consuming food. Informal and widely used in everyday conversation. Synonyms include 'მიირთვა' (miirtva) which is more polite.",
+    "examples": [
+      {
+        "georgian": "მე ვჭამ სადილს.",
+        "transliteration": "me vch'am sadils",
+        "english": "I am eating lunch."
+      },
+      {
+        "georgian": "ის ჭამს ხორცს.",
+        "transliteration": "is ch'ams khotss",
+        "english": "He/She is eating meat."
+      }
+    ],
+    "conjugation_examples": {
+      "present_tense": {
+        "first_person_singular": {
+          "georgian": "მე ვჭამ",
+          "transliteration": "me vch'am",
+          "english": "I eat"
+        },
+        "second_person_singular": {
+          "georgian": "შენ ჭამ",
+          "transliteration": "shen ch'am",
+          "english": "You eat"
+        },
+        "third_person_singular": {
+          "georgian": "ის ჭამს",
+          "transliteration": "is ch'ams",
+          "english": "He/She eats"
+        },
+        "first_person_plural": {
+          "georgian": "ჩვენ ვჭამთ",
+          "transliteration": "chven vch'amt",
+          "english": "We eat"
+        },
+        "second_person_plural": {
+          "georgian": "თქვენ ჭამთ",
+          "transliteration": "tkven ch'amt",
+          "english": "You (plural) eat"
+        },
+        "third_person_plural": {
+          "georgian": "ისინი ჭამენ",
+          "transliteration": "isini ch'amen",
+          "english": "They eat"
+        }
+      }
+    }
+  }
+]

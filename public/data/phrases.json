@@ -1,0 +1,15 @@
+[
+  {
+    "english": "Where are you from?",
+    "georgian": "საიდან ხართ?",
+    "transliteration": "saidani khart?",
+    "description_english": "Common question to ask someone's origin or place of origin.",
+    "examples": [
+      {
+        "georgian": "საიდან ხართ? მე ამერიკიდან ვარ.",
+        "transliteration": "saidani khart? me amerikidan var.",
+        "english": "Where are you from? I am from America."
+      }
+    ]
+  }
+]

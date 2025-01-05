@@ -1,0 +1,194 @@
+[
+  {
+    "type": "word",
+    "english": "street",
+    "georgian": "ქუჩა",
+    "created": "2025-01-05 11:49:54",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "today",
+    "georgian": "დღეს",
+    "created": "2025-01-05 11:51:00",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "beer",
+    "georgian": "ლუდი",
+    "created": "2025-01-05 11:51:06",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "phrase",
+    "english": "Where are you from?",
+    "georgian": "საიდან ხართ?",
+    "created": "2025-01-05 12:01:50",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to want",
+    "georgian": "უნდა",
+    "created": "2025-01-05 12:02:32",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "Really",
+    "georgian": "მართლა",
+    "created": "2025-01-05 12:29:32",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "fast",
+    "georgian": "სწრაფი",
+    "created": "2025-01-05 12:29:40",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "noun",
+    "georgian": "სახელი",
+    "created": "2025-01-05 12:29:46",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "and",
+    "georgian": "და",
+    "created": "2025-01-05 12:41:25",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "or",
+    "georgian": "ან",
+    "created": "2025-01-05 12:41:30",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "quiet",
+    "georgian": "მშვიდი",
+    "created": "2025-01-05 12:41:36",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "boy",
+    "georgian": "ბიჭი",
+    "created": "2025-01-05 12:51:33",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "girl",
+    "georgian": "გოგო",
+    "created": "2025-01-05 12:51:39",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "cat",
+    "georgian": "კატა",
+    "created": "2025-01-05 12:51:44",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "dog",
+    "georgian": "ძაღლი",
+    "created": "2025-01-05 12:51:49",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "I",
+    "georgian": "მე",
+    "created": "2025-01-05 12:52:03",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "you",
+    "georgian": "შენ",
+    "created": "2025-01-05 12:52:08",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "he",
+    "georgian": "ის",
+    "created": "2025-01-05 12:52:14",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "she",
+    "georgian": "ის",
+    "created": "2025-01-05 12:52:20",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "it",
+    "georgian": "ის",
+    "created": "2025-01-05 12:52:25",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "we",
+    "georgian": "ჩვენ",
+    "created": "2025-01-05 12:52:50",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "they",
+    "georgian": "მათ",
+    "created": "2025-01-05 12:53:01",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to eat",
+    "georgian": "ჭამა",
+    "created": "2025-01-05 12:53:13",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "water",
+    "georgian": "წყალი",
+    "created": "2025-01-05 13:33:02",
+    "ease": 0,
+    "last_seen_index": 0
+  }
+]

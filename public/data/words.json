@@ -1,0 +1,659 @@
+[
+  {
+    "georgian": "ქუჩა",
+    "english": "street",
+    "transliteration": "k'ucha",
+    "word_type": "noun",
+    "category": "Urban Geography",
+    "definition_georgian": "დასახლებული პუნქტის გზა, რომელიც გაივლის სახლებს ან სხვა შენობებს შორის.",
+    "description_english": "A public road in a city, town, or village, typically with buildings on one or both sides.",
+    "synonyms": [
+      {
+        "georgian": "გზა",
+        "transliteration": "gza",
+        "description": "More general term for 'road'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ჩიხი",
+        "transliteration": "chikhi",
+        "description": "Dead-end or alley"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ჩვენ გავიარეთ გრძელი ქუჩა.",
+        "transliteration": "chven gaviaret grdzeli k'ucha.",
+        "english": "We walked down a long street."
+      }
+    ]
+  },
+  {
+    "georgian": "დღეს",
+    "english": "today",
+    "transliteration": "dghes",
+    "word_type": "noun",
+    "category": "Time",
+    "definition_georgian": "მიმდინარე დღე, დღის მოცემული მომენტი.",
+    "description_english": "A temporal noun referring to the current day or present time.",
+    "synonyms": [
+      {
+        "georgian": "ამ დღეს",
+        "transliteration": "am dghes",
+        "description": "More specific reference to 'this day'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "გუშინ",
+        "transliteration": "gushin",
+        "description": "Yesterday, opposite of today"
+      },
+      {
+        "georgian": "ხვალ",
+        "transliteration": "khval",
+        "description": "Tomorrow, opposite of today"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "დღეს კარგი ამინდია.",
+        "transliteration": "dghes kargi amindia.",
+        "english": "Today the weather is good."
+      },
+      {
+        "georgian": "დღეს სამსახურში მივდივარ.",
+        "transliteration": "dghes samsakhurshi midivart.",
+        "english": "Today I am going to work."
+      }
+    ]
+  },
+  {
+    "georgian": "ლუდი",
+    "english": "beer",
+    "transliteration": "ludi",
+    "word_type": "noun",
+    "category": "Beverage",
+    "definition_georgian": "ალკოჰოლიანი სასმელი, რომელიც მზადდება ლუდის ხორბლისაგან დუღილის გზით.",
+    "description_english": "A popular alcoholic beverage made from grains, typically barley, through a fermentation process.",
+    "synonyms": [
+      {
+        "georgian": "ჭაჭა",
+        "transliteration": "chacha",
+        "description": "Another alcoholic beverage, though not exactly the same as beer"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "წყალი",
+        "transliteration": "ts'qali",
+        "description": "Water, the opposite of an alcoholic beverage"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მე მიყვარს გრილი ლუდი.",
+        "transliteration": "me miqvars grili ludi.",
+        "english": "I like cold beer."
+      }
+    ]
+  },
+  {
+    "english": "Really",
+    "georgian": "მართლა",
+    "transliteration": "martla",
+    "word_type": "adverb",
+    "category": "Discourse Marker",
+    "definition_georgian": "სიმართლის დასტურის ან გამოხატვის სიტყვა.",
+    "description_english": "An adverb used to confirm or emphasize the truth of a statement, similar to 'truly' or 'indeed'.",
+    "synonyms": [
+      {
+        "georgian": "ნამდვილად",
+        "transliteration": "namdvilad",
+        "description": "Another way to say 'really' or 'truly'"
+      },
+      {
+        "georgian": "სწორედ",
+        "transliteration": "ts'oredh",
+        "description": "Means 'exactly' or 'precisely'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "სიცრუე",
+        "transliteration": "sitsrue",
+        "description": "Means 'lie' or 'falsehood'"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მართლა კარგი დღეა.",
+        "transliteration": "martla kargi dghea.",
+        "english": "It's really a good day."
+      },
+      {
+        "georgian": "მართლა გეუბნები.",
+        "transliteration": "martla geubnebi.",
+        "english": "I'm really telling you."
+      }
+    ]
+  },
+  {
+    "english": "fast",
+    "georgian": "სწრაფი",
+    "transliteration": "ts'rapi",
+    "word_type": "adjective",
+    "category": "Descriptive",
+    "definition_georgian": "რაიმე, რაც სწრაფად მოძრაობს ან ხორციელდება.",
+    "description_english": "An adjective describing something that moves or happens quickly, with high speed or efficiency.",
+    "synonyms": [
+      {
+        "georgian": "მოსწრაფე",
+        "transliteration": "mostsrape",
+        "description": "Quick, rapid"
+      },
+      {
+        "georgian": "უსწრაფესი",
+        "transliteration": "utsrapesi",
+        "description": "The fastest"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ნელი",
+        "transliteration": "neli",
+        "description": "Slow"
+      },
+      {
+        "georgian": "ჩქარი",
+        "transliteration": "chkari",
+        "description": "Slow-moving"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ეს მანქანა სწრაფია.",
+        "transliteration": "es manqana ts'rapia.",
+        "english": "This car is fast."
+      },
+      {
+        "georgian": "სწრაფი გადაწყვეტილება მიიღო.",
+        "transliteration": "ts'rapi gadats'q'vetileba miiğo.",
+        "english": "He made a quick decision."
+      }
+    ]
+  },
+  {
+    "english": "noun",
+    "georgian": "სახელი",
+    "transliteration": "sakheli",
+    "word_type": "noun",
+    "category": "Grammar",
+    "definition_georgian": "სიტყვა, რომელიც აღნიშნავს საგანს, პიროვნებას ან მოვლენას.",
+    "description_english": "A grammatical term referring to a word that names a person, place, thing, or idea in language.",
+    "synonyms": [
+      {
+        "georgian": "არსებითი სახელი",
+        "transliteration": "arsebiti sakheli",
+        "description": "More formal grammatical term for noun"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ზმნა",
+        "transliteration": "zmna",
+        "description": "Verb, which describes an action"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "სახელი არის სიტყვის ერთ-ერთი ძირითადი ნაწილი.",
+        "transliteration": "sakheli aris sit'qvis ert'-ert'i dzhirit'adi nats'ili.",
+        "english": "Noun is one of the main parts of speech."
+      }
+    ]
+  },
+  {
+    "english": "and",
+    "georgian": "და",
+    "transliteration": "da",
+    "word_type": "conjunction",
+    "category": "Grammar",
+    "definition_georgian": "კავშირი, რომელიც გამოიყენება სიტყვების ან წინადადების ნაწილების დასაკავშირებლად.",
+    "description_english": "A basic conjunction in Georgian used to connect words, phrases, or clauses, similar to the English 'and'.",
+    "synonyms": [],
+    "antonyms": [],
+    "examples": [
+      {
+        "georgian": "მე და ჩემი მეგობარი სკოლაში მივდივართ.",
+        "transliteration": "me da chemi megobari skolashi midivart.",
+        "english": "My friend and I are going to school."
+      },
+      {
+        "georgian": "ვაშლი და მსხალი.",
+        "transliteration": "vashli da mskhali.",
+        "english": "Apple and pear."
+      }
+    ]
+  },
+  {
+    "english": "or",
+    "georgian": "ან",
+    "transliteration": "an",
+    "word_type": "conjunction",
+    "category": "Logical Connector",
+    "definition_georgian": "კავშირი, რომელიც გამოიყენება ორი ან მეტი ალტერნატიული შესაძლებლობის გამოსახატავად.",
+    "description_english": "A conjunction used to connect alternatives or provide a choice between different options.",
+    "synonyms": [
+      {
+        "georgian": "თუ",
+        "transliteration": "tu",
+        "description": "Another way to express alternative options"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "და",
+        "transliteration": "da",
+        "description": "Conjunction that connects similar or additional options"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "შეგიძლია ჩაი ან ყავა დალიო.",
+        "transliteration": "shegizlia chai an qava dalio.",
+        "english": "You can drink tea or coffee."
+      }
+    ]
+  },
+  {
+    "english": "quiet",
+    "georgian": "მშვიდი",
+    "transliteration": "mshvidi",
+    "word_type": "adjective",
+    "category": "Emotion/State",
+    "definition_georgian": "დაბალი ხმაური, მშვიდობიანი, წყნარი მდგომარეობა.",
+    "description_english": "The Georgian word 'მშვიდი' describes a state of calmness, peace, and low noise level.",
+    "synonyms": [
+      {
+        "georgian": "წყნარი",
+        "transliteration": "ts'qnari",
+        "description": "Another word meaning calm or peaceful"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ხმაურიანი",
+        "transliteration": "khmauriani",
+        "description": "Noisy or loud"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ეს მშვიდი ოთახია.",
+        "transliteration": "es mshvidi otakhi'a.",
+        "english": "This is a quiet room."
+      }
+    ]
+  },
+  {
+    "english": "boy",
+    "georgian": "ბიჭი",
+    "transliteration": "bich'i",
+    "word_type": "noun",
+    "category": "Person",
+    "definition_georgian": "მამრობითი სქესის ადამიანი, რომელიც ჯერ კიდევ არ არის სრულწლოვანი.",
+    "description_english": "The Georgian word 'ბიჭი' (bich'i) refers to a male child or young male before reaching adulthood.",
+    "synonyms": [
+      {
+        "georgian": "ვაჟი",
+        "transliteration": "vazhi",
+        "description": "Another word for boy, often used in more formal contexts."
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "გოგო",
+        "transliteration": "gogo",
+        "description": "A girl, the opposite gender."
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "პატარა ბიჭი სკოლაში მიდის.",
+        "transliteration": "p'at'ara bich'i skolashi midis.",
+        "english": "The little boy is going to school."
+      }
+    ]
+  },
+  {
+    "english": "girl",
+    "georgian": "გოგო",
+    "transliteration": "gogo",
+    "word_type": "noun",
+    "category": "Person",
+    "definition_georgian": "მდედრობითი სქესის ახალგაზრდა ადამიანი, რომელიც ჯერ კიდევ არ არის სრულწლოვანი.",
+    "description_english": "The Georgian word 'გოგო' (gogo) is a common noun used to refer to a young female, typically a child or adolescent.",
+    "synonyms": [
+      {
+        "georgian": "გოგონა",
+        "transliteration": "gogona",
+        "description": "A more formal or polite term for girl"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ბიჭი",
+        "transliteration": "bich'i",
+        "description": "Boy, the male counterpart"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "პატარა გოგო სკოლაში დადის.",
+        "transliteration": "pat'ara gogo skola-shi dadis.",
+        "english": "The little girl goes to school."
+      }
+    ]
+  },
+  {
+    "english": "cat",
+    "georgian": "კატა",
+    "transliteration": "kata",
+    "word_type": "noun",
+    "category": "Animal",
+    "definition_georgian": "შინაური ოთხფეხა ცხოველი, რომელიც ხშირად შინაურ პირობებში ცხოვრობს.",
+    "description_english": "The Georgian word 'კატა' (kata) is a standard noun used to refer to a domestic feline pet.",
+    "synonyms": [
+      {
+        "georgian": "კნუტი",
+        "transliteration": "knuti",
+        "description": "Means 'kitten', used for young cats."
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ძაღლი",
+        "transliteration": "dzaghli",
+        "description": "A dog, often considered an opposite pet."
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ჩემი კატა თეთრია.",
+        "transliteration": "chemi kata tetria.",
+        "english": "My cat is white."
+      }
+    ]
+  },
+  {
+    "english": "dog",
+    "georgian": "ძაღლი",
+    "transliteration": "dzaghli",
+    "word_type": "noun",
+    "category": "Animal",
+    "definition_georgian": "ოთხფეხა შინაური ცხოველი, რომელსაც ადამიანები ხშირად კომპანიონად იყენებენ.",
+    "description_english": "The Georgian word 'ძაღლი' (dzaghli) is a formal and standard noun used to refer to 'dog.'",
+    "synonyms": [
+      {
+        "georgian": "ლეკვი",
+        "transliteration": "lekvi",
+        "description": "Means 'puppy', more affectionate."
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "კატა",
+        "transliteration": "kata",
+        "description": "A cat, often considered an opposite pet."
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მე ძაღლი მყავს.",
+        "transliteration": "me dzaghli mqavts.",
+        "english": "I have a dog."
+      }
+    ]
+  },
+  {
+    "english": "I",
+    "georgian": "მე",
+    "transliteration": "me",
+    "word_type": "pronoun",
+    "category": "Personal Pronoun",
+    "definition_georgian": "პირველი პირის პირადი ნაცვალსახელი, რომელიც მოლაპარაკეზე მიუთითებს.",
+    "description_english": "A first-person singular personal pronoun used to refer to oneself as the speaker or subject.",
+    "synonyms": [],
+    "antonyms": [
+      {
+        "georgian": "შენ",
+        "transliteration": "shen",
+        "description": "Second-person singular pronoun meaning 'you'"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მე ქართველი ვარ.",
+        "transliteration": "me qartsveli var.",
+        "english": "I am Georgian."
+      },
+      {
+        "georgian": "მე მიყვარს ქართული ენა.",
+        "transliteration": "me miqvars qartuli ena.",
+        "english": "I love the Georgian language."
+      }
+    ]
+  },
+  {
+    "english": "you",
+    "georgian": "შენ",
+    "transliteration": "shen",
+    "word_type": "pronoun",
+    "category": "Personal Pronoun",
+    "definition_georgian": "პირის ნაცვალსახელი, რომელიც მიუთითებს მოსაუბრის მიმართ.",
+    "description_english": "A personal pronoun used to directly address someone in singular form.",
+    "synonyms": [
+      {
+        "georgian": "თქვენ",
+        "transliteration": "tqven",
+        "description": "Formal or plural form of 'you'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "მე",
+        "transliteration": "me",
+        "description": "First person singular pronoun 'I'"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "შენ რას აკეთებ?",
+        "transliteration": "shen ras aketeb?",
+        "english": "What are you doing?"
+      }
+    ]
+  },
+  {
+    "english": "he",
+    "georgian": "ის",
+    "transliteration": "is",
+    "word_type": "pronoun",
+    "category": "Personal Pronoun",
+    "definition_georgian": "მამაკაცი პირის აღსანიშნავი პირის ნაცვალსახელი.",
+    "description_english": "A personal pronoun used to refer to a male person or masculine subject in the third person singular.",
+    "synonyms": [],
+    "antonyms": [
+      {
+        "georgian": "იგი",
+        "transliteration": "igi",
+        "description": "Another formal version of the third-person masculine pronoun"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ის კარგი კაცია.",
+        "transliteration": "is kargi kacia.",
+        "english": "He is a good man."
+      },
+      {
+        "georgian": "ის წავიდა.",
+        "transliteration": "is ts'avida.",
+        "english": "He left."
+      }
+    ]
+  },
+  {
+    "english": "she",
+    "georgian": "ის",
+    "transliteration": "is",
+    "word_type": "pronoun",
+    "category": "Personal Pronoun",
+    "definition_georgian": "მდედრობითი სქესის პირის ნაცვალსახელი, რომელიც მიუთითებს ქალზე.",
+    "description_english": "A personal pronoun used to refer to a female person or animal previously mentioned.",
+    "synonyms": [],
+    "antonyms": [
+      {
+        "georgian": "ის (მამრობითი)",
+        "transliteration": "is (mamrobiti)",
+        "description": "Male version of the pronoun 'he'"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ის კარგი მოსწავლეა.",
+        "transliteration": "is kargi mostsavlea.",
+        "english": "She is a good student."
+      },
+      {
+        "georgian": "ის წავიდა.",
+        "transliteration": "is ts'avida.",
+        "english": "She left."
+      }
+    ]
+  },
+  {
+    "english": "it",
+    "georgian": "ის",
+    "transliteration": "is",
+    "word_type": "pronoun",
+    "category": "Grammar",
+    "definition_georgian": "პირის ნაცვალსახელი, რომელიც მიუთითებს რაიმე საგანზე ან პირზე.",
+    "description_english": "A third-person singular pronoun used to refer to a previously mentioned object, animal, or person.",
+    "synonyms": [
+      {
+        "georgian": "იგი",
+        "transliteration": "igi",
+        "description": "A more formal version of 'it'"
+      }
+    ],
+    "antonyms": [],
+    "examples": [
+      {
+        "georgian": "ის კარგია.",
+        "transliteration": "is kargia.",
+        "english": "It is good."
+      },
+      {
+        "georgian": "ის წიგნია.",
+        "transliteration": "is ts'ignia.",
+        "english": "It is a book."
+      }
+    ]
+  },
+  {
+    "english": "we",
+    "georgian": "ჩვენ",
+    "transliteration": "chven",
+    "word_type": "pronoun",
+    "category": "Personal Pronoun",
+    "definition_georgian": "პირველი პირის მრავლობითი რიცხვის ნაცვალსახელი, რომელიც გამოხატავს მოლაპარაკის ჯგუფს.",
+    "description_english": "A first-person plural pronoun used to refer to the speaker and one or more other people.",
+    "synonyms": [],
+    "antonyms": [
+      {
+        "georgian": "მე",
+        "transliteration": "me",
+        "description": "First-person singular pronoun 'I'"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ჩვენ სკოლაში მივდივართ.",
+        "transliteration": "chven skolashi midivart.",
+        "english": "We are going to school."
+      },
+      {
+        "georgian": "ჩვენ გვიყვარს ქართული საჭმელი.",
+        "transliteration": "chven gviqvars kartuli sach'meli.",
+        "english": "We love Georgian food."
+      }
+    ]
+  },
+  {
+    "english": "they",
+    "georgian": "მათ",
+    "transliteration": "mat",
+    "word_type": "pronoun",
+    "category": "Personal Pronoun",
+    "definition_georgian": "მრავლობითი რიცხვის მესამე პირის ნაცვალსახელი, რომელიც მიუთითებს რამდენიმე პირზე ან საგანზე.",
+    "description_english": "A third-person plural pronoun used to refer to multiple people or things.",
+    "synonyms": [],
+    "antonyms": [
+      {
+        "georgian": "მე",
+        "transliteration": "me",
+        "description": "First-person singular pronoun"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მათ წიგნი წაიკითხეს.",
+        "transliteration": "mat ts'igni ts'aik'itkhes.",
+        "english": "They read the book."
+      },
+      {
+        "georgian": "მათ უკვე წავიდნენ.",
+        "transliteration": "mat ukve ts'avidnen.",
+        "english": "They have already left."
+      }
+    ]
+  },
+  {
+    "english": "water",
+    "georgian": "წყალი",
+    "transliteration": "ts'qali",
+    "word_type": "noun",
+    "category": "Nature",
+    "definition_georgian": "გამჭვირვალე, უფერო სითხე, რომელიც აუცილებელია სიცოცხლისთვის.",
+    "description_english": "The Georgian word 'წყალი' (ts'qali) is a fundamental noun referring to the liquid substance essential for life.",
+    "synonyms": [
+      {
+        "georgian": "სითხე",
+        "transliteration": "sitskhe",
+        "description": "A more general term for liquid."
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "მშრალი",
+        "transliteration": "mshrali",
+        "description": "Dry, opposite of water or wet."
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მე წყალი დავლიე.",
+        "transliteration": "me ts'qali davlie.",
+        "english": "I drank water."
+      },
+      {
+        "georgian": "წყალი სასიცოცხლოდ მნიშვნელოვანია.",
+        "transliteration": "ts'qali sasitsotskhlod mnishvnelovania.",
+        "english": "Water is vital for life."
+      }
+    ]
+  }
+]
