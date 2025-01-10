@@ -655,5 +655,650 @@
         "english": "Water is vital for life."
       }
     ]
+  },
+  {
+    "english": "who",
+    "georgian": "ვინ",
+    "transliteration": "vin",
+    "word_type": "pronoun",
+    "category": "Interrogative",
+    "definition_georgian": "კითხვითი ნაცვალსახელი, რომელიც გამოიყენება პიროვნების ან არსებისადმი კითხვის დასმისას.",
+    "description_english": "An interrogative pronoun used to ask about a person or entity, equivalent to 'who' in English.",
+    "synonyms": [],
+    "antonyms": [],
+    "examples": [
+      {
+        "georgian": "ვინ ხართ თქვენ?",
+        "transliteration": "vin khart' tkven?",
+        "english": "Who are you?"
+      },
+      {
+        "georgian": "ვინ მოვიდა?",
+        "transliteration": "vin movida?",
+        "english": "Who came?"
+      }
+    ]
+  },
+  {
+    "english": "close (in proximity)",
+    "georgian": "ახლოა",
+    "transliteration": "akhloa",
+    "word_type": "adjective",
+    "category": "Location/Distance",
+    "definition_georgian": "რაიმე ობიექტის მახლობლად მდებარეობა ან სიახლოვე.",
+    "description_english": "An adjective describing something that is near or in close proximity to something else.",
+    "synonyms": [
+      {
+        "georgian": "ახლოს",
+        "transliteration": "akhlos",
+        "description": "Adverb meaning 'nearby'"
+      },
+      {
+        "georgian": "მახლობელი",
+        "transliteration": "makhloebeli",
+        "description": "Nearby or close"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "შორსაა",
+        "transliteration": "shorsaa",
+        "description": "Far away"
+      },
+      {
+        "georgian": "შორი",
+        "transliteration": "shori",
+        "description": "Distant"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "სუპერმარკეტი ახლოა.",
+        "transliteration": "supermargeti akhloa.",
+        "english": "The supermarket is close."
+      },
+      {
+        "georgian": "ჩემი სახლი აქ ახლოა.",
+        "transliteration": "chemi sakhli aq akhloa.",
+        "english": "My house is close here."
+      }
+    ]
+  },
+  {
+    "english": "in the house",
+    "georgian": "სახლში",
+    "transliteration": "sakhlshi",
+    "word_type": "locative phrase",
+    "category": "Location",
+    "definition_georgian": "ადგილი სადაც პიროვნება იმყოფება შენობის შიგნით",
+    "description_english": "A locative phrase indicating being inside a house or building, formed by adding the locative case suffix '-ში' to the word 'სახლი' (house).",
+    "synonyms": [
+      {
+        "georgian": "შიგნით",
+        "transliteration": "shignit",
+        "description": "Inside, within"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "სახლის გარეთ",
+        "transliteration": "sakhlis garet",
+        "description": "Outside of the house"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მე სახლში ვზივარ.",
+        "transliteration": "me sakhlshi vzivart.",
+        "english": "I am sitting inside the house."
+      }
+    ]
+  },
+  {
+    "english": "down",
+    "georgian": "დაბლა",
+    "transliteration": "dabla",
+    "word_type": "adverb",
+    "category": "Direction",
+    "definition_georgian": "სივრცის ქვედა მიმართულება, ქვემოთ მდებარე პოზიცია.",
+    "description_english": "An adverb indicating a downward direction or lower position in space.",
+    "synonyms": [
+      {
+        "georgian": "ქვევით",
+        "transliteration": "q'evit",
+        "description": "Another way to say 'down' or 'below'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ზევით",
+        "transliteration": "zevit",
+        "description": "Upward or above"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "წარდი დაბლა კიბეზე.",
+        "transliteration": "ts'ardi dabla kibeze.",
+        "english": "Go down the stairs."
+      }
+    ]
+  },
+  {
+    "english": "knowledge",
+    "georgian": "ცოდნა",
+    "transliteration": "ts'odna",
+    "word_type": "noun",
+    "category": "Intellectual Concept",
+    "definition_georgian": "ინფორმაციის, გაგების და გამოცდილების ერთობლიობა, რომელიც პიროვნებას აქვს რაიმე საკითხზე.",
+    "description_english": "In Georgian, 'ცოდნა' (ts'odna) is a fundamental concept that goes beyond mere information, encompassing understanding, comprehension, and practical wisdom. It implies not just knowing facts, but truly understanding their context and application. Unlike English, which can distinguish between 'knowledge' and 'understanding', Georgian uses this single term to convey a more holistic sense of intellectual and experiential learning.",
+    "synonyms": [
+      {
+        "georgian": "გაგება",
+        "transliteration": "gageba",
+        "description": "Understanding, more focused on comprehension"
+      },
+      {
+        "georgian": "ინფორმაცია",
+        "transliteration": "informacia",
+        "description": "Information, more technical term"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "უმეცრება",
+        "transliteration": "umetsreba",
+        "description": "Ignorance, lack of knowledge"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ცოტა ცოდნა მაქვს",
+        "transliteration": "ts'ota ts'odna maqvs.",
+        "english": "I have a little knowledge."
+      },
+      {
+        "georgian": "მაქვს ცოდნა მათემატიკაში.",
+        "transliteration": "maqvs ts'odna matematikashi.",
+        "english": "I have knowledge in mathematics."
+      },
+      {
+        "georgian": "ცოდნა არის ძალა.",
+        "transliteration": "ts'odna aris dzala.",
+        "english": "Knowledge is power."
+      }
+    ]
+  },
+  {
+    "english": "good",
+    "georgian": "კარგი",
+    "transliteration": "k'argi",
+    "word_type": "adjective",
+    "category": "Descriptive",
+    "definition_georgian": "რაიმე დადებითი, სასიამოვნო ან სასარგებლო თვისების მქონე.",
+    "description_english": "A versatile adjective in Georgian that can mean 'good', 'fine', or 'well'. It's used in many contexts, from describing quality to expressing approval. In Georgian, it's more nuanced than the English 'good' and can carry subtle emotional and contextual meanings depending on tone and situation.",
+    "synonyms": [
+      {
+        "georgian": "საუცხოო",
+        "transliteration": "sautskhoo",
+        "description": "Excellent, very good"
+      },
+      {
+        "georgian": "მშვენიერი",
+        "transliteration": "mshvenieri",
+        "description": "Beautiful, wonderful"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ცუდი",
+        "transliteration": "tsudi",
+        "description": "Bad, not good"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ეს კარგი წიგნია.",
+        "transliteration": "es k'argi ts'ignia.",
+        "english": "This is a good book."
+      },
+      {
+        "georgian": "კარგად ხარ?",
+        "transliteration": "k'argad khar?",
+        "english": "Are you well?"
+      }
+    ]
+  },
+  {
+    "english": "bad",
+    "georgian": "ცუდი",
+    "transliteration": "tsudi",
+    "word_type": "adjective",
+    "category": "Descriptive",
+    "definition_georgian": "რაიმე არასასურველი, უარყოფითი ან დაბალი ხარისხის მქონე.",
+    "description_english": "The word 'ცუდი' (tsudi) is a versatile adjective used to describe something negative or of poor quality. In Georgian, it can be applied more broadly than in English, covering contexts from moral judgment to simple dissatisfaction. It's commonly used in everyday speech and can describe anything from bad weather to poor performance or unethical behavior.",
+    "synonyms": [
+      {
+        "georgian": "მავნე",
+        "transliteration": "mavne",
+        "description": "Harmful or detrimental"
+      },
+      {
+        "georgian": "არაკარგი",
+        "transliteration": "arakarghi",
+        "description": "Not good"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "კარგი",
+        "transliteration": "karghi",
+        "description": "Good"
+      },
+      {
+        "georgian": "საუკეთესო",
+        "transliteration": "sauketeso",
+        "description": "Best"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ეს ცუდი დღეა.",
+        "transliteration": "es tsudi dghea.",
+        "english": "This is a bad day."
+      },
+      {
+        "georgian": "ცუდი ამინდია.",
+        "transliteration": "tsudi amindtia.",
+        "english": "The weather is bad."
+      },
+      {
+        "georgian": "ეს ცუდი იდეაა.",
+        "transliteration": "es tsudi ideatia.",
+        "english": "This is a bad idea."
+      }
+    ]
+  },
+  {
+    "english": "up",
+    "georgian": "ზემოთ",
+    "transliteration": "zemot",
+    "word_type": "adverb",
+    "category": "Directional",
+    "definition_georgian": "სივრცეში მაღლა მიმართული მიმართულება.",
+    "description_english": "In Georgian, 'ზემოთ' (zemot) is a directional adverb that indicates upward movement or position. It can be used both literally (physical direction) and metaphorically. Unlike English, Georgian tends to be more precise about spatial relationships, so context is crucial for understanding exact meaning.",
+    "synonyms": [
+      {
+        "georgian": "მაღლა",
+        "transliteration": "maghla",
+        "description": "Another way to say 'up', slightly more colloquial"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ქვემოთ",
+        "transliteration": "qvemot",
+        "description": "Downward direction, opposite of 'up'"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "წიგნი მაგიდის ზემოთ დევს.",
+        "transliteration": "ts'igni magidis zemot devs.",
+        "english": "The book is lying above the table."
+      },
+      {
+        "georgian": "ავედი ზემოთ კიბეზე.",
+        "transliteration": "avedi zemot kibeze.",
+        "english": "I went up the stairs."
+      }
+    ]
+  },
+  {
+    "english": "chair",
+    "georgian": "სკამი",
+    "transliteration": "skami",
+    "word_type": "noun",
+    "category": "Furniture",
+    "definition_georgian": "სხდომისთვის განკუთვნილი ავეჯის საგანი, რომელსაც აქვს ზურგი და ფეხები.",
+    "description_english": "In Georgian, 'სკამი' (skami) is a standard word for chair used in both formal and informal settings. Unlike English, Georgians tend to be more specific about chair types, distinguishing between dining chairs, office chairs, and armchairs. The word is universally understood across different regions and social contexts.",
+    "synonyms": [
+      {
+        "georgian": "დასაჯდომი",
+        "transliteration": "dasajdomi",
+        "description": "More generic term meaning 'something to sit on'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "იატაკი",
+        "transliteration": "iataki",
+        "description": "Floor, as a place of not sitting"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "გთხოვ, დაჯექი ამ სკამზე.",
+        "transliteration": "gt'xov, dajek'i am skami'ze.",
+        "english": "Please sit on this chair."
+      },
+      {
+        "georgian": "ეს სკამი მოხერხებულია.",
+        "transliteration": "es skami mokherkhebuli'a.",
+        "english": "This chair is comfortable."
+      }
+    ]
+  },
+  {
+    "english": "cold",
+    "georgian": "ცივი",
+    "transliteration": "tsivi",
+    "word_type": "adjective",
+    "category": "Temperature/Weather",
+    "definition_georgian": "დაბალი ტემპერატურის მქონე, გრილი, არაცხელი.",
+    "description_english": "In Georgian, 'ცივი' (tsivi) is used more broadly than in English. It can describe physical temperature, emotional distance, or even a person's demeanor. Unlike English, where 'cold' can have nuanced meanings, Georgian tends to use more specific words for emotional or metaphorical coldness.",
+    "synonyms": [
+      {
+        "georgian": "გრილი",
+        "transliteration": "grili",
+        "description": "Mild cold, slightly cool"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ცხელი",
+        "transliteration": "tskeli",
+        "description": "Hot, opposite of cold"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "დღეს ძალიან ცივი დღეა.",
+        "transliteration": "dghes dzalian tsivi dghea.",
+        "english": "Today is a very cold day."
+      },
+      {
+        "georgian": "ცივი წყალი სასმელად არ გამოდგება.",
+        "transliteration": "tsivi tskali sasmeli ar gamodgeba.",
+        "english": "Cold water is not good for drinking."
+      }
+    ]
+  },
+  {
+    "english": "world",
+    "georgian": "მსოფლიო",
+    "transliteration": "msop'lio",
+    "word_type": "noun",
+    "category": "Geography/Concept",
+    "definition_georgian": "დედამიწა მთლიანობაში, ყველა ქვეყანა, ადამიანი და მოვლენა.",
+    "description_english": "The word 'მსოფლიო' (msop'lio) is a formal and comprehensive term for 'world' that encompasses not just physical geography, but also the collective human experience, cultures, and interconnectedness. In Georgian, it often carries a more holistic and philosophical connotation compared to the English usage.",
+    "synonyms": [
+      {
+        "georgian": "დედამიწა",
+        "transliteration": "dedamitsa",
+        "description": "Literally means 'Earth', can be used more literally"
+      },
+      {
+        "georgian": "გლობუსი",
+        "transliteration": "globusi",
+        "description": "More literal term meaning 'globe'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ლოკალური",
+        "transliteration": "lokaluri",
+        "description": "Local, opposite of global/world-wide"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "მსოფლიო იცვლება ძალიან სწრაფად.",
+        "transliteration": "msop'lio itsvleba dzalian tsrap'ad.",
+        "english": "The world is changing very quickly."
+      },
+      {
+        "georgian": "მსოფლიოს მასშტაბით",
+        "transliteration": "msop'lios masshtabith",
+        "english": "On a world scale/globally"
+      }
+    ]
+  },
+  {
+    "english": "name",
+    "georgian": "სახელი",
+    "transliteration": "sakheli",
+    "word_type": "noun",
+    "category": "Language/Identity",
+    "definition_georgian": "პიროვნების ან საგნის საკუთარი აღმნიშვნელი სიტყვა.",
+    "description_english": "In Georgian, 'სახელი' is a fundamental word that means both 'name' and 'noun' grammatically. It carries significant cultural importance, as names are deeply meaningful in Georgian society. The word can refer to personal names, titles, or grammatical nouns, making it a versatile term with broader semantic range than its English counterpart.",
+    "synonyms": [
+      {
+        "georgian": "სახელწოდება",
+        "transliteration": "sakhelts'odeba",
+        "description": "More formal term for 'name' or 'title'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "გვარი",
+        "transliteration": "gvari",
+        "description": "Surname, as opposed to first name"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ჩემი სახელია გიორგი.",
+        "transliteration": "chemi sakhelia giorgi.",
+        "english": "My name is Giorgi."
+      },
+      {
+        "georgian": "რა სახელი გქვია?",
+        "transliteration": "ra sakheli gqvia?",
+        "english": "What is your name?"
+      }
+    ]
+  },
+  {
+    "english": "mouse",
+    "georgian": "თაგვი",
+    "transliteration": "t'agvi",
+    "word_type": "noun",
+    "category": "Animal",
+    "definition_georgian": "პატარა მღრღნელი ცხოველი, რომელიც ხშირად სახლებსა და მინდვრებში გვხვდება.",
+    "description_english": "In Georgian, 'თაგვი' (t'agvi) is a standard term for mouse, used both literally for the animal and metaphorically. Unlike English, Georgians might use this word more broadly to describe small, quick creatures. The word carries no significant negative connotation and is used neutrally in scientific and everyday contexts.",
+    "synonyms": [
+      {
+        "georgian": "მღრღნელი",
+        "transliteration": "mghrghgneli",
+        "description": "More general term meaning 'rodent'"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "კომპიუტერის მაუსი",
+        "transliteration": "k'ompiuteris mausi",
+        "description": "Computer mouse, a playful antonym"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "სახლში თაგვი გამოჩნდა.",
+        "transliteration": "sakhlshi t'agvi gamoch'nda.",
+        "english": "A mouse appeared in the house."
+      },
+      {
+        "georgian": "პატარა თაგვი ჩაიპარა.",
+        "transliteration": "p'atara t'agvi ch'aip'ara.",
+        "english": "A small mouse sneaked in."
+      }
+    ]
+  },
+  {
+    "english": "day",
+    "georgian": "დღე",
+    "transliteration": "dghe",
+    "word_type": "noun",
+    "category": "Time",
+    "definition_georgian": "დროის ერთეული, რომელიც 24 საათს მოიცავს",
+    "description_english": "In Georgian, 'დღე' (dghe) is a fundamental word used to describe a full day, from sunrise to sunset. It's used in various contexts, from daily routines to calendar references. Unlike English, Georgian has nuanced ways of expressing different types of days, such as working days, holidays, or specific times of day.",
+    "synonyms": [
+      {
+        "georgian": "დღისით",
+        "transliteration": "dghisit",
+        "description": "Daytime, during the day"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "ღამე",
+        "transliteration": "ghame",
+        "description": "Night, opposite of day"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "დღეს კარგი ამინდია.",
+        "transliteration": "dghe's kargi amindia.",
+        "english": "Today is a good day."
+      },
+      {
+        "georgian": "რამდენი დღე გაქვს შვებულება?",
+        "transliteration": "ramdeni dghe gaqvs shvebuleba?",
+        "english": "How many days of vacation do you have?"
+      }
+    ]
+  },
+  {
+    "english": "little",
+    "georgian": "პატარა",
+    "transliteration": "p'at'ara",
+    "word_type": "adjective",
+    "category": "Size/Quantity",
+    "definition_georgian": "რაიმე მცირე ზომის ან რაოდენობის, არაა დიდი.",
+    "description_english": "The word 'პატარა' (p'at'ara) is a versatile adjective used to describe something small in size or quantity. In Georgian, it can be used for physical objects, children, animals, or even abstract concepts. Unlike English, it has nuanced uses in emotional contexts, often carrying a sense of endearment or affection when describing people or things.",
+    "synonyms": [
+      {
+        "georgian": "მცირე",
+        "transliteration": "mtsire",
+        "description": "More formal, academic term for 'small'"
+      },
+      {
+        "georgian": "მოკლე",
+        "transliteration": "mokle",
+        "description": "Can mean 'short' in physical length"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "დიდი",
+        "transliteration": "didi",
+        "description": "Large, big"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ეს პატარა ძაღლი ძალიან ტკბილია.",
+        "transliteration": "es p'at'ara dzaghli dzalian t'kbilia.",
+        "english": "This little dog is very sweet."
+      },
+      {
+        "georgian": "პატარა ჭიქა წყლის გთხოვ.",
+        "transliteration": "p'at'ara ch'iq'a ts'qlis gth'xov.",
+        "english": "I'd like a little glass of water."
+      }
+    ]
+  },
+  {
+    "english": "heavy",
+    "georgian": "მძიმე",
+    "transliteration": "mdzime",
+    "word_type": "adjective",
+    "category": "Description",
+    "definition_georgian": "დიდი წონის, მძლავრი, რთულად გადასაადგილებელი.",
+    "description_english": "In Georgian, 'მძიმე' (mdzime) is used more broadly than in English. It can describe physical weight, emotional state, difficult situations, or even a serious tone. The word carries nuanced meanings beyond just physical heaviness, often implying complexity or emotional burden.",
+    "synonyms": [
+      {
+        "georgian": "სქელი",
+        "transliteration": "sk'eli",
+        "description": "Thick, can describe physical heaviness"
+      },
+      {
+        "georgian": "მოცულობითი",
+        "transliteration": "motsulob'iti",
+        "description": "Voluminous, bulky"
+      }
+    ],
+    "antonyms": [
+      {
+        "georgian": "მსუბუქი",
+        "transliteration": "msubuk'i",
+        "description": "Light, easy"
+      }
+    ],
+    "examples": [
+      {
+        "georgian": "ეს ჩანთა ძალიან მძიმეა.",
+        "transliteration": "es chanta dzalian mdzimea.",
+        "english": "This bag is very heavy."
+      },
+      {
+        "georgian": "მძიმე გადაწყვეტილება მაქვს მისაღები.",
+        "transliteration": "mdzime gadatsqvetileba makvs misagheb'i.",
+        "english": "I have a difficult decision to make."
+      }
+    ]
+  },
+  {
+    "english": "month",
+    "georgian": "თვე",
+    "transliteration": "t've",
+    "word_type": "noun",
+    "category": "Time",
+    "definition_georgian": "კალენდრის ერთ-ერთი დანაყოფი, რომელიც დაახლოებით 30 დღეს მოიცავს.",
+    "description_english": "In Georgian, 'თვე' (t've) is a standard word for 'month' used in both formal and informal contexts. Unlike English, Georgian does not have different words for lunar or calendar months. The word is used consistently across various time-related discussions and can refer to any specific month or a general period of approximately 30 days.",
+    "synonyms": [],
+    "antonyms": [],
+    "examples": [
+      {
+        "georgian": "გასული თვის განმავლობაში ბევრი რამ მოხდა.",
+        "transliteration": "gasuli t'vis ganamavlobashi bevri ram mokhda.",
+        "english": "A lot happened during the past month."
+      },
+      {
+        "georgian": "რამდენი თვისაა ეს ბავშვი?",
+        "transliteration": "ramdeni t'visaa es bavsHvi?",
+        "english": "How many months old is this child?"
+      }
+    ]
+  },
+  {
+    "english": "computer",
+    "georgian": "კომპიუტერი",
+    "transliteration": "k'omp'iut'eri",
+    "word_type": "noun",
+    "category": "Technology",
+    "definition_georgian": "ელექტრონული მოწყობილობა, რომელიც ინახავს, დამუშავებს და გამოაქვს ინფორმაცია.",
+    "description_english": "In Georgian, 'კომპიუტერი' is a direct loanword from English, widely used in both formal and informal contexts. It refers to electronic computing devices and is understood across all age groups and professional settings. The pronunciation closely mimics the English original, making it easily recognizable.",
+    "synonyms": [
+      {
+        "georgian": "ელექტრონული გამოთვლითი მანქანა",
+        "transliteration": "elektronuli gamot'vliti manq'ana",
+        "description": "More formal, technical term for computer"
+      }
+    ],
+    "antonyms": [],
+    "examples": [
+      {
+        "georgian": "მე ახალ კომპიუტერს ვყიდულობ.",
+        "transliteration": "me akhal k'omp'iut'ers vq'idulob.",
+        "english": "I am buying a new computer."
+      },
+      {
+        "georgian": "კომპიუტერზე მუშაობა მიყვარს.",
+        "transliteration": "k'omp'iut'erze mushaoba miq'vars.",
+        "english": "I like working on a computer."
+      }
+    ]
   }
 ]

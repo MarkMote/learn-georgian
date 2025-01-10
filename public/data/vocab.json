@@ -190,5 +190,205 @@
     "created": "2025-01-05 13:33:02",
     "ease": 0,
     "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "who",
+    "georgian": "ვინ",
+    "created": "2025-01-05 15:02:06",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "close (in proximity)",
+    "georgian": "ახლოა",
+    "created": "2025-01-06 10:48:14",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "in the house",
+    "georgian": "სახლში",
+    "created": "2025-01-06 10:48:33",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "down",
+    "georgian": "დაბლა",
+    "created": "2025-01-06 10:48:54",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "knowledge",
+    "georgian": "ცოდნა",
+    "created": "2025-01-07 08:48:12",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "good",
+    "georgian": "კარგი",
+    "created": "2025-01-07 08:48:32",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "bad",
+    "georgian": "ცუდი",
+    "created": "2025-01-07 08:48:55",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "up",
+    "georgian": "ზემოთ",
+    "created": "2025-01-07 08:49:19",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to know",
+    "georgian": "ცოდნა",
+    "created": "2025-01-07 08:50:01",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to learn",
+    "georgian": "სწავლა",
+    "created": "2025-01-07 08:50:24",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to have",
+    "georgian": "ქონა",
+    "created": "2025-01-07 09:01:46",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to walk",
+    "georgian": "სიარული",
+    "created": "2025-01-07 21:11:31",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "chair",
+    "georgian": "სკამი",
+    "created": "2025-01-07 21:11:54",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "cold",
+    "georgian": "ცივი",
+    "created": "2025-01-07 21:12:17",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "world",
+    "georgian": "მსოფლიო",
+    "created": "2025-01-07 21:12:44",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "phrase",
+    "english": "I don't want...",
+    "georgian": "მე არ მინდა...",
+    "created": "2025-01-09 20:40:21",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "verb",
+    "english": "to work",
+    "georgian": "მუშაობა",
+    "created": "2025-01-09 20:40:48",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "name",
+    "georgian": "სახელი",
+    "created": "2025-01-09 20:41:13",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "phrase",
+    "english": "where?",
+    "georgian": "სად?",
+    "created": "2025-01-09 20:41:48",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "mouse",
+    "georgian": "თაგვი",
+    "created": "2025-01-09 20:42:07",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "day",
+    "georgian": "დღე",
+    "created": "2025-01-09 20:42:31",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "little",
+    "georgian": "პატარა",
+    "created": "2025-01-09 20:42:53",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "heavy",
+    "georgian": "მძიმე",
+    "created": "2025-01-09 20:43:18",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "month",
+    "georgian": "თვე",
+    "created": "2025-01-09 20:43:35",
+    "ease": 0,
+    "last_seen_index": 0
+  },
+  {
+    "type": "word",
+    "english": "computer",
+    "georgian": "კომპიუტერი",
+    "created": "2025-01-09 20:43:54",
+    "ease": 0,
+    "last_seen_index": 0
   }
 ]

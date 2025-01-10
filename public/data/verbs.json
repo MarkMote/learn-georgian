@@ -108,5 +108,225 @@
         }
       }
     }
+  },
+  {
+    "english": "to know",
+    "georgian": "ცოდნა",
+    "transliteration": "ts'odna",
+    "word_type": "verb",
+    "category": "Mental Action",
+    "definition_georgian": "ცოდნა არის ინფორმაციის გაგებისა და აღქმის პროცესი.",
+    "description_english": "The Georgian verb 'ცოდნა' (ts'odna) means 'to know' and is more nuanced than its English counterpart. In Georgian, it implies a deeper understanding and can distinguish between different types of knowing - intellectual knowledge, familiarity, or personal experience. It's often used to express comprehension rather than just awareness.",
+    "examples": [
+      {
+        "georgian": "მე ვიცი ქართული ენა.",
+        "transliteration": "me vits'i k'art'uli ena",
+        "english": "I know the Georgian language."
+      },
+      {
+        "georgian": "იცი სად არის სასტუმრო?",
+        "transliteration": "its'i sad aris sastumro?",
+        "english": "Do you know where the hotel is?"
+      }
+    ],
+    "conjugation_examples": {
+      "present_tense": {
+        "first_person_singular": {
+          "georgian": "მე ვიცი",
+          "transliteration": "me vits'i",
+          "english": "I know"
+        },
+        "second_person_singular": {
+          "georgian": "შენ იცი",
+          "transliteration": "shen its'i",
+          "english": "You know"
+        },
+        "third_person_singular": {
+          "georgian": "ის იცის",
+          "transliteration": "is its'is",
+          "english": "He/She knows"
+        },
+        "first_person_plural": {
+          "georgian": "ჩვენ ვიცით",
+          "transliteration": "chven vits'it",
+          "english": "We know"
+        },
+        "second_person_plural": {
+          "georgian": "თქვენ იცით",
+          "transliteration": "tk'ven its'it",
+          "english": "You (plural) know"
+        },
+        "third_person_plural": {
+          "georgian": "ისინი იციან",
+          "transliteration": "isini its'ian",
+          "english": "They know"
+        }
+      }
+    }
+  },
+  {
+    "english": "to learn",
+    "georgian": "სწავლა",
+    "transliteration": "ts'avla",
+    "word_type": "verb",
+    "category": "Education/Cognitive",
+    "definition_georgian": "ახალი ცოდნის მიღების პროცესი",
+    "description_english": "The Georgian verb 'სწავლა' (ts'avla) means 'to learn' and is a fundamental verb in education. It can refer to learning in academic, personal, or skill-based contexts. In Georgian, it emphasizes the active process of acquiring knowledge, not just passive reception. The verb is commonly used in educational and personal development settings.",
+    "examples": [
+      {
+        "georgian": "მე ვსწავლობ ქართულ ენას.",
+        "transliteration": "me vstsavlob kartul enas.",
+        "english": "I am learning the Georgian language."
+      },
+      {
+        "georgian": "ის სწავლობს პიანინოზე დაკვრას.",
+        "transliteration": "is stsavlobs pianinozе dakvras.",
+        "english": "He/She is learning to play the piano."
+      }
+    ],
+    "conjugation_examples": {
+      "present_tense": {
+        "first_person_singular": {
+          "georgian": "მე ვსწავლობ",
+          "transliteration": "me vstsavlob",
+          "english": "I learn"
+        },
+        "second_person_singular": {
+          "georgian": "შენ სწავლობ",
+          "transliteration": "shen stsavlob",
+          "english": "You learn"
+        },
+        "third_person_singular": {
+          "georgian": "ის სწავლობს",
+          "transliteration": "is stsavlobs",
+          "english": "He/She learns"
+        },
+        "first_person_plural": {
+          "georgian": "ჩვენ ვსწავლობთ",
+          "transliteration": "chven vstsavlobt",
+          "english": "We learn"
+        },
+        "second_person_plural": {
+          "georgian": "თქვენ სწავლობთ",
+          "transliteration": "tkven stsavlobt",
+          "english": "You (plural) learn"
+        },
+        "third_person_plural": {
+          "georgian": "ისინი სწავლობენ",
+          "transliteration": "isini stsavloben",
+          "english": "They learn"
+        }
+      }
+    }
+  },
+  {
+    "english": "to have",
+    "georgian": "ქონა",
+    "transliteration": "k'ona",
+    "word_type": "verb",
+    "category": "Possession",
+    "definition_georgian": "რაიმეს ფლობა ან ფქონა.",
+    "description_english": "The verb 'ქონა' (k'ona) is a fundamental verb in Georgian that means 'to have'. Unlike English, Georgian uses this verb differently in various contexts, often implying possession, existence, or availability. It's an irregular verb with complex conjugations and is essential for expressing ownership, states of being, and possessive relationships.",
+    "examples": [
+      {
+        "georgian": "მე მაქვს მანქანა.",
+        "transliteration": "me maqvs mankana.",
+        "english": "I have a car."
+      },
+      {
+        "georgian": "მას აქვს წიგნი.",
+        "transliteration": "mas akvs ts'igni.",
+        "english": "He/She has a book."
+      }
+    ],
+    "conjugation_examples": {
+      "present_tense": {
+        "first_person_singular": {
+          "georgian": "მე მაქვს",
+          "transliteration": "me maqvs",
+          "english": "I have"
+        },
+        "second_person_singular": {
+          "georgian": "შენ გაქვს",
+          "transliteration": "shen gaqvs",
+          "english": "You have"
+        },
+        "third_person_singular": {
+          "georgian": "მას აქვს",
+          "transliteration": "mas akvs",
+          "english": "He/She has"
+        },
+        "first_person_plural": {
+          "georgian": "ჩვენ გვაქვს",
+          "transliteration": "chven gvaqvs",
+          "english": "We have"
+        },
+        "second_person_plural": {
+          "georgian": "თქვენ გაქვთ",
+          "transliteration": "tkven gaqvt",
+          "english": "You (plural) have"
+        },
+        "third_person_plural": {
+          "georgian": "მათ აქვთ",
+          "transliteration": "mat akvt",
+          "english": "They have"
+        }
+      }
+    }
+  },
+  {
+    "english": "to work",
+    "georgian": "მუშაობა",
+    "transliteration": "mushaoba",
+    "word_type": "verb",
+    "category": "Action",
+    "definition_georgian": "შრომა, საქმიანობა რაიმე სფეროში ან პროფესიაში.",
+    "description_english": "The Georgian verb 'მუშაობა' (mushaoba) means 'to work' and is a very common verb used across various contexts. It implies active engagement in professional or productive activities. Unlike English, Georgian emphasizes the continuous nature of work through its verb structure.",
+    "examples": [
+      {
+        "georgian": "მე ვმუშაობ კომპიუტერზე.",
+        "transliteration": "me vmushavob kompuitzerze.",
+        "english": "I am working on a computer."
+      },
+      {
+        "georgian": "იგი მუშაობს საავადმყოფოში.",
+        "transliteration": "igi mushavobs saavadmqoposhi.",
+        "english": "He/She works in a hospital."
+      }
+    ],
+    "conjugation_examples": {
+      "present_tense": {
+        "first_person_singular": {
+          "georgian": "მე ვმუშაობ",
+          "transliteration": "me vmushavob",
+          "english": "I work"
+        },
+        "second_person_singular": {
+          "georgian": "შენ მუშაობ",
+          "transliteration": "shen mushavob",
+          "english": "You work"
+        },
+        "third_person_singular": {
+          "georgian": "ის მუშაობს",
+          "transliteration": "is mushavobs",
+          "english": "He/She works"
+        },
+        "first_person_plural": {
+          "georgian": "ჩვენ ვმუშაობთ",
+          "transliteration": "chven vmushavobth",
+          "english": "We work"
+        },
+        "second_person_plural": {
+          "georgian": "თქვენ მუშაობთ",
+          "transliteration": "tkven mushavobth",
+          "english": "You (plural) work"
+        },
+        "third_person_plural": {
+          "georgian": "ისინი მუშაობენ",
+          "transliteration": "isini mushaveben",
+          "english": "They work"
+        }
+      }
+    }
   }
 ]

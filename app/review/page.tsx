@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 interface Example {
   georgian: string
@@ -71,6 +72,7 @@ export default function LearnPage() {
   const [phrases, setPhrases] = useState<Phrase[]>([])
   const [showTransliterations, setShowTransliterations] = useState<{ [key: string]: boolean }>({})
   const [showMeanings, setShowMeanings] = useState<{ [key: string]: boolean }>({})
+  const [imageExists, setImageExists] = useState<{ [key: string]: boolean }>({})
 
   useEffect(() => {
     Promise.all([
@@ -79,9 +81,31 @@ export default function LearnPage() {
       fetch('/data/phrases.json').then(res => res.json())
     ]).then(([wordsData, verbsData, phrasesData]) => {
       // Reverse the arrays before setting state
-      setWords([...wordsData].reverse())
-      setVerbs([...verbsData].reverse())
-      setPhrases([...phrasesData].reverse())
+      const reversedWords = [...wordsData].reverse()
+      const reversedVerbs = [...verbsData].reverse()
+      const reversedPhrases = [...phrasesData].reverse()
+
+      setWords(reversedWords)
+      setVerbs(reversedVerbs)
+      setPhrases(reversedPhrases)
+
+      // Check for image existence for all items
+      const allItems = [...reversedWords, ...reversedVerbs, ...reversedPhrases]
+      allItems.forEach(item => {
+        fetch(`/img/${item.georgian}.png`)
+          .then(response => {
+            setImageExists(prev => ({
+              ...prev,
+              [item.georgian]: response.ok
+            }))
+          })
+          .catch(() => {
+            setImageExists(prev => ({
+              ...prev,
+              [item.georgian]: false
+            }))
+          })
+      })
     })
   }, [])
 
@@ -115,7 +139,28 @@ export default function LearnPage() {
 
   const renderWordCard = (word: Word, index: number) => (
     <div key={createUniqueKey(word.georgian, index)} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-      <div className="text-xl font-medium text-gray-900">{word.georgian}</div>
+      <div className="flex items-start space-x-4">
+        {/* Image container */}
+        <div className="w-32 h-32 relative flex-shrink-0">
+          {imageExists[word.georgian] ? (
+            <Image
+              src={`/img/${encodeURIComponent(word.georgian)}.png`}
+              alt={word.english}
+              fill
+              className="object-contain rounded-lg"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+              <span className="text-gray-400 text-sm">No image</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex-grow">
+          <div className="text-xl font-medium text-gray-900">{word.georgian}</div>
+          <div className="text-sm text-gray-600">{word.category}</div>
+        </div>
+      </div>
       
       <div className="flex gap-4">
         <button
@@ -172,7 +217,28 @@ export default function LearnPage() {
 
   const renderVerbCard = (verb: Verb, index: number) => (
     <div key={createUniqueKey(verb.georgian, index)} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-      <div className="text-xl font-medium text-gray-900">{verb.georgian}</div>
+      <div className="flex items-start space-x-4">
+        {/* Image container */}
+        <div className="w-20 h-20 relative flex-shrink-0">
+          {imageExists[verb.georgian] ? (
+            <Image
+              src={`/img/${encodeURIComponent(verb.georgian)}.png`}
+              alt={verb.english}
+              fill
+              className="object-contain rounded-lg"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+              <span className="text-gray-400 text-sm">No image</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex-grow">
+          <div className="text-xl font-medium text-gray-900">{verb.georgian}</div>
+          <div className="text-sm text-gray-600">{verb.category}</div>
+        </div>
+      </div>
       
       <div className="flex gap-4">
         <button
@@ -238,7 +304,27 @@ export default function LearnPage() {
 
   const renderPhraseCard = (phrase: Phrase, index: number) => (
     <div key={createUniqueKey(phrase.georgian, index)} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-      <div className="text-xl font-medium text-gray-900">{phrase.georgian}</div>
+      <div className="flex items-start space-x-4">
+        {/* Image container */}
+        <div className="w-20 h-20 relative flex-shrink-0">
+          {imageExists[phrase.georgian] ? (
+            <Image
+              src={`/img/${encodeURIComponent(phrase.georgian)}.png`}
+              alt={phrase.english}
+              fill
+              className="object-contain rounded-lg"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+              <span className="text-gray-400 text-sm">No image</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex-grow">
+          <div className="text-xl font-medium text-gray-900">{phrase.georgian}</div>
+        </div>
+      </div>
       
       <div className="flex gap-4">
         <button
