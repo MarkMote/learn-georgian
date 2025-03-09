@@ -5,6 +5,7 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Image from "next/image";
 
 /**
  * CSV row structure.
@@ -519,12 +520,16 @@ export default function ReviewPage() {
       {/* Main Content */}
       <div className={mainAreaClasses}>
         <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
-          <img
+        <div className="relative h-[320px] w-full mb-3">
+          <Image
             src={`/img/${currentCard.data.img_key}.webp`}
             alt={EnglishWord}
-            className="max-h-[320px] object-contain mb-3"
+            fill
+            sizes="(max-width: 768px) 100vw, 320px"
+            className="object-contain"
             onClick={() => setShowEnglish((prev) => !prev)}
           />
+        </div>
 
           {showEnglish && (
             <p className="text-base font-semibold mb-3">
