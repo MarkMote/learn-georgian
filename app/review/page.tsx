@@ -169,24 +169,30 @@ export default function ReviewPage() {
   //  Disable viewport scaling for iOS Safari
   // ---------------------------
   useEffect(() => {
-    // Prevent scrolling/bouncing effect in iOS Safari
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-    document.body.style.height = '100%';
-    document.body.style.overflow = 'hidden';
+    // Only prevent scrolling when modal is closed
+    if (!isModalOpen) {
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      // Add touchmove prevention for the main page
+      const preventDefault = (e: Event) => e.preventDefault();
+      document.addEventListener('touchmove', preventDefault, { passive: false });
+      
+      return () => {
+        document.removeEventListener('touchmove', preventDefault);
+      };
+    }
     
-    // Also prevent touchmove/default behavior for the whole page
-    const preventDefault = (e: Event) => e.preventDefault();
-    document.addEventListener('touchmove', preventDefault, { passive: false });
-    
+    // When modal is open, restore scrolling
     return () => {
       document.body.style.position = '';
       document.body.style.width = '';
       document.body.style.height = '';
       document.body.style.overflow = '';
-      document.removeEventListener('touchmove', preventDefault);
     };
-  }, []);
+  }, [isModalOpen]);
 
   // ---------------------------
   //  Load CSV on mount
@@ -518,7 +524,7 @@ export default function ReviewPage() {
   const verbHint = getVerbHint(currentCard.data);
 
   return (
-    <div className={containerClasses} style={{ height: '100vh', overflow: 'hidden' }}>
+    <div className={containerClasses} style={{ height: '100vh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4">
         <button
@@ -620,7 +626,7 @@ export default function ReviewPage() {
             {/* Close button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-2 right-2 text-4xl text-gray-400 hover:text-gray-100"
+              className="absolute top-0 right-1 p-3 text-4xl text-gray-400 hover:text-gray-100"
             >
               ✕
             </button>
