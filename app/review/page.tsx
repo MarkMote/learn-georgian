@@ -227,9 +227,47 @@ export default function ReviewPage() {
     const candidates = allWords.filter((w) => !knownKeys.has(w.key));
     if (candidates.length === 0) return;
 
-    // Pick one at random
-    const randIndex = Math.floor(Math.random() * candidates.length);
-    const newWord = candidates[randIndex];
+    // Separate verb and non-verb candidates
+    const verbCandidates = candidates.filter(w => 
+      w.PartOfSpeech.toLowerCase().includes("verb")
+    );
+    const nonVerbCandidates = candidates.filter(w => 
+      !w.PartOfSpeech.toLowerCase().includes("verb")
+    );
+
+    // Handle empty categories
+    if (verbCandidates.length === 0 && nonVerbCandidates.length === 0) return;
+    
+    // Decide whether to introduce a verb (1/6 chance) or non-verb (5/6 chance)
+    let newWord: WordData;
+    const useVerb = Math.random() < 1/7 && verbCandidates.length > 0;
+    
+    if (useVerb) {
+      // For verbs, try to use priority verbs first
+      const priorityVerbs = [
+        "be_p1s", "have_inanimate_p1s", "want_p1s", "know_p1s", 
+        "have_animate_p1s", "speak_p1s", "work_p1s", "live_p1s", 
+        "understand_p1s", "like_p1s", "go_p1s"
+      ];
+      
+      // Try to find a priority verb that isn't known yet
+      let priorityVerb: WordData | undefined;
+      for (const verbKey of priorityVerbs) {
+        if (!knownKeys.has(verbKey)) {
+          priorityVerb = verbCandidates.find(w => w.key === verbKey);
+          if (priorityVerb) break;
+        }
+      }
+      
+      // Use a priority verb if found, otherwise pick a random verb
+      newWord = priorityVerb || verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
+    } else if (nonVerbCandidates.length > 0) {
+      // Pick a random non-verb
+      newWord = nonVerbCandidates[Math.floor(Math.random() * nonVerbCandidates.length)];
+    } else {
+      // If no non-verbs, fall back to verbs
+      newWord = verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
+    }
 
     let wordsToIntroduce: WordData[] = [newWord];
 
@@ -389,25 +427,8 @@ export default function ReviewPage() {
     introduceRandomKnownWord();
   }
 
-  // If no currentCard, we're either loading or have no data
+  // The current card or null if we don't have one
   const currentCard = knownWords[currentIndex];
-  if (!currentCard) {
-    return (
-      <div className="p-8 text-center">
-        <p>Loading or no cards available...</p>
-      </div>
-    );
-  }
-
-  // Decide what to display
-  const { EnglishWord, GeorgianWord } = currentCard.data;
-  const verbHint = getVerbHint(currentCard.data);
-
-  // Modal classes for dark theme
-  const modalBgClass =
-    "fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50";
-  const modalContentClass =
-    "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
 
   /**
    * Customized ReactMarkdown rendering:
@@ -454,6 +475,25 @@ export default function ReviewPage() {
       <strong className="font-semibold" {...props} />
     ),
   };
+
+  // Modal classes for dark theme
+  const modalBgClass =
+    "fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50";
+  const modalContentClass =
+    "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
+
+  // Loading or no data state
+  if (!currentCard) {
+    return (
+      <div className="p-8 text-center">
+        <p>Loading or no cards available...</p>
+      </div>
+    );
+  }
+
+  // Get what to display from the current card
+  const { EnglishWord, GeorgianWord } = currentCard.data;
+  const verbHint = getVerbHint(currentCard.data);
 
   return (
     <div className={containerClasses}>
