@@ -1,5 +1,3 @@
-// src/app/review/page.tsx
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -40,6 +38,7 @@ interface KnownWordState {
  * It assumes that the first row is the header and is skipped.
  */
 function parseCSV(csvText: string): WordData[] {
+  // Implementation unchanged
   const lines = csvText
     .split("\n")
     .map((l) => l.trim())
@@ -124,11 +123,41 @@ export default function ReviewPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lessonMarkdown, setLessonMarkdown] = useState("");
   const [isLessonLoading, setIsLessonLoading] = useState(false);
+  
+  // For Safari mobile viewport fix
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [isSafari, setIsSafari] = useState(false);
 
-  // Basic styling
-  const containerClasses = "relative w-full min-h-screen bg-black text-white";
-  const mainAreaClasses =
-    "min-h-[calc(100vh-120px)] flex flex-col items-center justify-center px-4";
+  // Basic styling - use the viewportHeight state for more stable sizing
+  const containerClasses = "relative w-full bg-black text-white flex flex-col";
+  
+  // ---------------------------
+  //  Set up Safari detection and viewport height
+  // ---------------------------
+  useEffect(() => {
+    // Detect Safari
+    const isSafariCheck = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    setIsSafari(isSafariCheck);
+    
+    // Set initial viewport height
+    updateViewportHeight();
+    
+    // Update on resize and orientation change
+    window.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('orientationchange', updateViewportHeight);
+    
+    return () => {
+      window.removeEventListener('resize', updateViewportHeight);
+      window.removeEventListener('orientationchange', updateViewportHeight);
+    };
+  }, []);
+  
+  // Function to update viewport height
+  function updateViewportHeight() {
+    setViewportHeight(window.innerHeight);
+    // Also set CSS variable for use in styling
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+  }
 
   // ---------------------------
   //  Handle Keyboard shortcuts
@@ -216,10 +245,9 @@ export default function ReviewPage() {
     }
   }, [knownWords, currentIndex]);
 
-  // ----------------------------------------------------
-  //  Introduce a new random word. If it is a verb,
-  //  also introduce all other conjugations with the same base.
-  // ----------------------------------------------------
+  // Other functions remain the same
+  // introduceRandomKnownWord, handleScore, computeOverallScore, calculateCardPriority, pickNextCard, handleGetLesson, handleClearProgress
+
   function introduceRandomKnownWord() {
     if (allWords.length === 0) return;
 
@@ -300,9 +328,6 @@ export default function ReviewPage() {
     setKnownWords((prev) => [...prev, ...newEntries]);
   }
 
-  // ----------------------------
-  //  Handle rating (SM-2 logic)
-  // ----------------------------
   function handleScore(diff: "easy" | "good" | "hard" | "fail") {
     setKnownWords((prev) => {
       const updated = [...prev];
@@ -343,14 +368,12 @@ export default function ReviewPage() {
     pickNextCard();
   }
 
-  /** Average rating/3 across known words. */
   function computeOverallScore(): number {
     if (knownWords.length === 0) return 0;
     const sum = knownWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
     return sum / knownWords.length;
   }
 
-  /** Priority for SM-2 scheduling: overdue cards get higher priority. */
   function calculateCardPriority(card: KnownWordState): number {
     const normalizedRating = card.rating / 3;
     const overdueFactor = card.lastSeen / card.interval;
@@ -363,7 +386,6 @@ export default function ReviewPage() {
     return 0.1 * overdueFactor * difficultyFactor;
   }
 
-  /** Pick the next card by the highest priority. */
   function pickNextCard() {
     setCardCounter((n) => n + 1);
 
@@ -390,9 +412,6 @@ export default function ReviewPage() {
     setShowEnglish(false);
   }
 
-  // --------------
-  //  "Get Lesson"
-  // --------------
   async function handleGetLesson() {
     if (!knownWords[currentIndex]) return;
     try {
@@ -415,9 +434,6 @@ export default function ReviewPage() {
     }
   }
 
-  // -----------------------------------
-  //  Button to clear progress
-  // -----------------------------------
   function handleClearProgress() {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
     setKnownWords([]);
@@ -431,48 +447,45 @@ export default function ReviewPage() {
   // The current card or null if we don't have one
   const currentCard = knownWords[currentIndex];
 
-  /**
-   * Customized ReactMarkdown rendering:
-   * - If you want to style code blocks, blockquotes, etc., you can expand further.
-   */
+  // Markdown components remain the same
   const markdownComponents = {
-    h1: ({ node, ...props }: any) => (
+    h1: (props: any) => (
       <h1
         className="text-3xl font-bold mb-3 mt-6 text-slate-300 font-light border-b pb-4"
         {...props}
       />
     ),
-    h2: ({ node, ...props }: any) => (
+    h2: (props: any) => (
       <h2 className="text-2xl text-slate-300 font-bold mb-2 mt-5" {...props} />
     ),
-    h3: ({ node, ...props }: any) => (
+    h3: (props: any) => (
       <h3
         className="text-xl text-slate-200 tracking-wide font-semibold mb-2 mt-4"
         {...props}
       />
     ),
-    p: ({ node, ...props }: any) => (
+    p: (props: any) => (
       <p
         className="mb-3 leading-relaxed text-slate-300 text-lg tracking-wide font-light"
         {...props}
       />
     ),
-    ul: ({ node, ...props }: any) => (
+    ul: (props: any) => (
       <ul
         className="list-disc list-inside mb-3 ml-4 text-slate-200 tracking-wide text-lg font-light"
         {...props}
       />
     ),
-    ol: ({ node, ...props }: any) => (
+    ol: (props: any) => (
       <ol
         className="list-decimal list-inside mb-3 ml-4 text-slate-200 font-light"
         {...props}
       />
     ),
-    li: ({ node, ...props }: any) => (
+    li: (props: any) => (
       <li className="mb-1 text-slate-200" {...props} />
     ),
-    strong: ({ node, ...props }: any) => (
+    strong: (props: any) => (
       <strong className="font-semibold" {...props} />
     ),
   };
@@ -496,10 +509,19 @@ export default function ReviewPage() {
   const { EnglishWord, GeorgianWord } = currentCard.data;
   const verbHint = getVerbHint(currentCard.data);
 
+  // Calculate dynamic heights
+  const contentHeight = viewportHeight - 140; // 140px for top and bottom bars
+
   return (
-    <div className={containerClasses}>
+    <div 
+      className={containerClasses} 
+      style={{ 
+        height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+        minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh'
+      }}
+    >
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between p-4 flex-shrink-0">
         <button
           onClick={handleClearProgress}
           className="px-3 py-2 border border-gray-400 rounded text-sm"
@@ -517,19 +539,20 @@ export default function ReviewPage() {
         </button>
       </div>
 
-      {/* Main Content */}
-      <div className={mainAreaClasses}>
+      {/* Main Content - using flex-grow to fill available space */}
+      <div className="flex-grow flex flex-col items-center justify-center px-4 overflow-auto">
         <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
-        <div className="relative h-[320px] w-full mb-3">
-          <Image
-            src={`/img/${currentCard.data.img_key}.webp`}
-            alt={EnglishWord}
-            fill
-            sizes="(max-width: 768px) 100vw, 320px"
-            className="object-contain"
-            onClick={() => setShowEnglish((prev) => !prev)}
-          />
-        </div>
+          <div className="relative h-[min(320px,_50vh)] w-full mb-3">
+            <Image
+              src={`/img/${currentCard.data.img_key}.webp`}
+              alt={EnglishWord}
+              fill
+              sizes="(max-width: 768px) 100vw, 320px"
+              className="object-contain"
+              onClick={() => setShowEnglish((prev) => !prev)}
+              priority
+            />
+          </div>
 
           {showEnglish && (
             <p className="text-base font-semibold mb-3">
@@ -543,10 +566,10 @@ export default function ReviewPage() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar - using absolute positioning for Safari and fixed for others */}
       {!isFlipped ? (
-        // Show FLIP button
-        <div className="fixed bottom-0 left-0 w-full flex text-white bg-black">
+        // Show FLIP button - using absolute for Safari
+        <div className={`${isSafari ? 'absolute' : 'fixed'} bottom-0 left-0 w-full flex text-white bg-black flex-shrink-0`}>
           <button
             onClick={() => setIsFlipped(true)}
             className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px]"
@@ -555,8 +578,8 @@ export default function ReviewPage() {
           </button>
         </div>
       ) : (
-        // Show RATING buttons
-        <div className="fixed bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
+        // Show RATING buttons - using absolute for Safari
+        <div className={`${isSafari ? 'absolute' : 'fixed'} bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black flex-shrink-0`}>
           <button
             onClick={() => handleScore("fail")}
             className="flex-1 py-3 text-center border-t-4 border-red-500/0 text-red-400 bg-red-800/0"
