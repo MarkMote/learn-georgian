@@ -38,7 +38,6 @@ interface KnownWordState {
  * It assumes that the first row is the header and is skipped.
  */
 function parseCSV(csvText: string): WordData[] {
-  // Implementation unchanged
   const lines = csvText
     .split("\n")
     .map((l) => l.trim())
@@ -123,41 +122,11 @@ export default function ReviewPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lessonMarkdown, setLessonMarkdown] = useState("");
   const [isLessonLoading, setIsLessonLoading] = useState(false);
-  
-  // For Safari mobile viewport fix
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const [isSafari, setIsSafari] = useState(false);
 
-  // Basic styling - use the viewportHeight state for more stable sizing
-  const containerClasses = "relative w-full bg-black text-white flex flex-col";
-  
-  // ---------------------------
-  //  Set up Safari detection and viewport height
-  // ---------------------------
-  useEffect(() => {
-    // Detect Safari
-    const isSafariCheck = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    setIsSafari(isSafariCheck);
-    
-    // Set initial viewport height
-    updateViewportHeight();
-    
-    // Update on resize and orientation change
-    window.addEventListener('resize', updateViewportHeight);
-    window.addEventListener('orientationchange', updateViewportHeight);
-    
-    return () => {
-      window.removeEventListener('resize', updateViewportHeight);
-      window.removeEventListener('orientationchange', updateViewportHeight);
-    };
-  }, []);
-  
-  // Function to update viewport height
-  function updateViewportHeight() {
-    setViewportHeight(window.innerHeight);
-    // Also set CSS variable for use in styling
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-  }
+  // Basic styling
+  const containerClasses = "relative w-full bg-black text-white";
+  const mainAreaClasses =
+    "flex items-center justify-center px-4";
 
   // ---------------------------
   //  Handle Keyboard shortcuts
@@ -195,6 +164,29 @@ export default function ReviewPage() {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [isFlipped, currentIndex]);
+
+  // ---------------------------
+  //  Disable viewport scaling for iOS Safari
+  // ---------------------------
+  useEffect(() => {
+    // Prevent scrolling/bouncing effect in iOS Safari
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'hidden';
+    
+    // Also prevent touchmove/default behavior for the whole page
+    const preventDefault = (e: Event) => e.preventDefault();
+    document.addEventListener('touchmove', preventDefault, { passive: false });
+    
+    return () => {
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.overflow = '';
+      document.removeEventListener('touchmove', preventDefault);
+    };
+  }, []);
 
   // ---------------------------
   //  Load CSV on mount
@@ -245,9 +237,10 @@ export default function ReviewPage() {
     }
   }, [knownWords, currentIndex]);
 
-  // Other functions remain the same
-  // introduceRandomKnownWord, handleScore, computeOverallScore, calculateCardPriority, pickNextCard, handleGetLesson, handleClearProgress
-
+  // ----------------------------------------------------
+  //  Introduce a new random word. If it is a verb,
+  //  also introduce all other conjugations with the same base.
+  // ----------------------------------------------------
   function introduceRandomKnownWord() {
     if (allWords.length === 0) return;
 
@@ -328,6 +321,9 @@ export default function ReviewPage() {
     setKnownWords((prev) => [...prev, ...newEntries]);
   }
 
+  // ----------------------------
+  //  Handle rating (SM-2 logic)
+  // ----------------------------
   function handleScore(diff: "easy" | "good" | "hard" | "fail") {
     setKnownWords((prev) => {
       const updated = [...prev];
@@ -368,12 +364,14 @@ export default function ReviewPage() {
     pickNextCard();
   }
 
+  /** Average rating/3 across known words. */
   function computeOverallScore(): number {
     if (knownWords.length === 0) return 0;
     const sum = knownWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
     return sum / knownWords.length;
   }
 
+  /** Priority for SM-2 scheduling: overdue cards get higher priority. */
   function calculateCardPriority(card: KnownWordState): number {
     const normalizedRating = card.rating / 3;
     const overdueFactor = card.lastSeen / card.interval;
@@ -386,6 +384,7 @@ export default function ReviewPage() {
     return 0.1 * overdueFactor * difficultyFactor;
   }
 
+  /** Pick the next card by the highest priority. */
   function pickNextCard() {
     setCardCounter((n) => n + 1);
 
@@ -412,6 +411,9 @@ export default function ReviewPage() {
     setShowEnglish(false);
   }
 
+  // --------------
+  //  "Get Lesson"
+  // --------------
   async function handleGetLesson() {
     if (!knownWords[currentIndex]) return;
     try {
@@ -434,6 +436,9 @@ export default function ReviewPage() {
     }
   }
 
+  // -----------------------------------
+  //  Button to clear progress
+  // -----------------------------------
   function handleClearProgress() {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
     setKnownWords([]);
@@ -447,7 +452,10 @@ export default function ReviewPage() {
   // The current card or null if we don't have one
   const currentCard = knownWords[currentIndex];
 
-  // Markdown components remain the same
+  /**
+   * Customized ReactMarkdown rendering:
+   * - If you want to style code blocks, blockquotes, etc., you can expand further.
+   */
   const markdownComponents = {
     h1: (props: any) => (
       <h1
@@ -509,19 +517,10 @@ export default function ReviewPage() {
   const { EnglishWord, GeorgianWord } = currentCard.data;
   const verbHint = getVerbHint(currentCard.data);
 
-  // Calculate dynamic heights
-  const contentHeight = viewportHeight - 140; // 140px for top and bottom bars
-
   return (
-    <div 
-      className={containerClasses} 
-      style={{ 
-        height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-        minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh'
-      }}
-    >
+    <div className={containerClasses} style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-4 flex-shrink-0">
+      <div className="flex items-center justify-between p-4">
         <button
           onClick={handleClearProgress}
           className="px-3 py-2 border border-gray-400 rounded text-sm"
@@ -539,10 +538,10 @@ export default function ReviewPage() {
         </button>
       </div>
 
-      {/* Main Content - using flex-grow to fill available space */}
-      <div className="flex-grow flex flex-col items-center justify-center px-4 overflow-auto">
+      {/* Main Content - Fixed height area */}
+      <div className={`${mainAreaClasses} h-[calc(100vh-140px)]`}>
         <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
-          <div className="relative h-[min(320px,_50vh)] w-full mb-3">
+          <div className="relative w-full mb-3" style={{ height: '280px' }}>
             <Image
               src={`/img/${currentCard.data.img_key}.webp`}
               alt={EnglishWord}
@@ -566,10 +565,10 @@ export default function ReviewPage() {
         </div>
       </div>
 
-      {/* Bottom Bar - using absolute positioning for Safari and fixed for others */}
+      {/* Bottom Bar */}
       {!isFlipped ? (
-        // Show FLIP button - using absolute for Safari
-        <div className={`${isSafari ? 'absolute' : 'fixed'} bottom-0 left-0 w-full flex text-white bg-black flex-shrink-0`}>
+        // Show FLIP button
+        <div className="absolute bottom-0 left-0 w-full flex text-white bg-black">
           <button
             onClick={() => setIsFlipped(true)}
             className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px]"
@@ -578,8 +577,8 @@ export default function ReviewPage() {
           </button>
         </div>
       ) : (
-        // Show RATING buttons - using absolute for Safari
-        <div className={`${isSafari ? 'absolute' : 'fixed'} bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black flex-shrink-0`}>
+        // Show RATING buttons
+        <div className="absolute bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
           <button
             onClick={() => handleScore("fail")}
             className="flex-1 py-3 text-center border-t-4 border-red-500/0 text-red-400 bg-red-800/0"
@@ -626,7 +625,7 @@ export default function ReviewPage() {
               ✕
             </button>
 
-            {/* Loading spinner or the lesson */}
+            {/* Loading spinner or the markdown */}
             {isLessonLoading ? (
               <div className="flex items-center justify-center mt-6 mb-6">
                 <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
