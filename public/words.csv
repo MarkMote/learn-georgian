@@ -1,0 +1,1103 @@
+key,img_key,EnglishWord,PartOfSpeech,GeorgianWord,hint
+dog,dog,dog,noun,ძაღლი,animal
+cat,cat,cat,noun,კატა,animal
+fish,fish,fish,noun,თევზი,animal
+bird,bird,bird,noun,ჩიტი,animal
+cow,cow,cow,noun,ძროხა,animal
+pig,pig,pig,noun,ღორი,animal
+mouse,mouse,mouse,noun,თაგვი,animal
+horse,horse,horse,noun,ცხენი,animal
+wing,wing,wing,noun,ფრთა,animal
+animal,animal,animal,noun,ცხოველი,category
+train,train,train,noun,მატარებელი,transportation
+plane,plane,plane,noun,თვითმფრინავი,transportation
+car,car,car,noun,მანქანა,transportation
+truck,truck,truck,noun,სატვირთო მანქანა,transportation
+bicycle,bicycle,bicycle,noun,ველოსიპედი,transportation
+bus,bus,bus,noun,ავტობუსი,transportation
+boat,boat,boat,noun,ნავი,transportation
+ship,ship,ship,noun,გემი,transportation
+tire,tire,tire,noun,საბურავი,transportation
+gasoline,gasoline,gasoline,noun,ბენზინი,transportation
+engine,engine,engine,noun,ძრავა,transportation
+train_ticket,train_ticket,train ticket,noun,ბილეთი,transportation
+transportation,transportation,transportation,noun,ტრანსპორტი,category
+city,city,city,noun,ქალაქი,location
+house,house,house,noun,სახლი,location
+apartment,apartment,apartment,noun,ბინა,location
+street,street,street/road,noun,ქუჩა,location
+airport,airport,airport,noun,აეროპორტი,location
+train_station,train_station,train station,noun,რკინიგზის სადგური,location
+bridge,bridge,bridge,noun,ხიდი,location
+hotel,hotel,hotel,noun,სასტუმრო,location
+restaurant,restaurant,restaurant,noun,რესტორანი,location
+farm,farm,farm,noun,ფერმა,location
+court,court,court,noun,სასამართლო,location
+school,school,school,noun,სკოლა,location
+office,office,office,noun,ოფისი,location
+room,room,room,noun,ოთახი,location
+town,town,town,noun,ქალაქი,location
+university,university,university,noun,უნივერსიტეტი,location
+club,club,club,noun,კლუბი,location
+bar,bar,bar,noun,ბარი,location
+park,park,park,noun,პარკი,location
+camp,camp,camp,noun,ბანაკი,location
+store,store,store/shop,noun,მაღაზია,location
+theater,theater,theater,noun,თეატრი,location
+library,library,library,noun,ბიბლიოთეკა,location
+hospital,hospital,hospital,noun,საავადმყოფო,location
+church,church,church,noun,ეკლესია,location
+market,market,market,noun,ბაზარი,location
+country,country,country,noun,ქვეყანა,location
+building,building,building,noun,შენობა,location
+ground,ground,ground,noun,მიწა,location
+space,space,space (outer space),noun,კოსმოსი,location
+bank,bank,bank,noun,ბანკი,location
+location,location,location,noun,ადგილმდებარეობა,category
+hat,hat,hat,noun,ქუდი,clothing
+dress,dress,dress,noun,კაბა,clothing
+suit,suit,suit,noun,კოსტუმი,clothing
+skirt,skirt,skirt,noun,ქვედაბოლო,clothing
+shirt,shirt,shirt,noun,პერანგი,clothing
+t_shirt,t_shirt,T-shirt,noun,მაისური,clothing
+pants,pants,pants,noun,შარვალი,clothing
+shoes,shoes,shoes,noun,ფეხსაცმელი,clothing
+pocket,pocket,pocket,noun,ჯიბე,clothing
+coat,coat,coat,noun,პალტო,clothing
+stain,stain,stain,noun,ლაქა,clothing
+clothing,clothing,clothing,noun,ტანსაცმელი,category
+red,red,red,adjective,წითელი,color
+green,green,green,adjective,მწვანე,color
+blue,blue,blue,adjective,ლურჯი,color
+yellow,yellow,yellow,adjective,ყვითელი,color
+brown,brown,brown,adjective,ყავისფერი,color
+pink,pink,pink,adjective,ვარდისფერი,color
+orange,orange,orange,adjective,ნარინჯისფერი,color
+black,black,black,adjective,შავი,color
+white,white,white,adjective,თეთრი,color
+gray,gray,gray,adjective,ნაცრისფერი,color
+color,color,color,noun,ფერი,category
+son,son,son,noun,ვაჟიშვილი,people
+daughter,daughter,daughter,noun,ქალიშვილი,people
+mother,mother,mother,noun,დედა,people
+father,father,father,noun,მამა,people
+parent,parent,parent,noun,მშობელი,people
+baby,baby,baby,noun,ჩვილი,people
+man,man,man,noun,კაცი,people
+woman,woman,woman,noun,ქალი,people
+brother,brother,brother,noun,ძმა,people
+sister,sister,sister,noun,და,people
+family,family,family,noun,ოჯახი,people
+grandfather,grandfather,grandfather,noun,ბაბუა,people
+grandmother,grandmother,grandmother,noun,ბებია,people
+husband,husband,husband,noun,ქმარი,people
+wife,wife,wife,noun,ცოლი,people
+king,king,king,noun,მეფე,people
+queen,queen,queen,noun,დედოფალი,people
+president,president,president,noun,პრეზიდენტი,people
+neighbor,neighbor,neighbor,noun,მეზობელი,people
+boy,boy,boy,noun,ბიჭი,people
+girl,girl,girl,noun,გოგო,people
+child,child,child,noun,ბავშვი,people
+adult,adult,adult,noun,ზრდასრული,people
+human,human,human,noun,ადამიანი,people
+friend,friend,friend,noun,მეგობარი,people
+victim,victim,victim,noun,მსხვერპლი,people
+player,player,player,noun,მოთამაშე,people
+fan,fan,fan,noun,გულშემატკივარი,people
+crowd,crowd,crowd,noun,ბრბო,people
+person,person,person,noun,პირი,category
+teacher,teacher,Teacher,noun,მასწავლებელი,job
+student,student,student,noun,სტუდენტი,job
+lawyer,lawyer,lawyer,noun,ადვოკატი,job
+doctor,doctor,doctor,noun,ექიმი,job
+patient,patient,patient,noun,პაციენტი,job
+waiter,waiter,waiter,noun,მიმტანი,job
+secretary,secretary,secretary,noun,მდივანი,job
+priest,priest,priest,noun,მღვდელი,job
+police,police,police,noun,პოლიცია,job
+army,army,army,noun,არმია,job
+soldier,soldier,soldier,noun,ჯარისკაცი,job
+artist,artist,artist,noun,მხატვარი,job
+author,author,author,noun,ავტორი,job
+manager,manager,manager,noun,მენეჯერი,job
+reporter,reporter,reporter,noun,რეპორტიორი,job
+actor,actor,actor,noun,მსახიობი,job
+job,job,job,noun,სამუშაო,category
+religion,religion,religion,noun,რელიგია,society
+heaven,heaven,heaven,noun,სამოთხე,society
+hell,hell,hell,noun,ჯოჯოხეთი,society
+death,death,death,noun,სიკვდილი,society
+medicine,medicine,medicine,noun,წამალი,society
+money,money,money,noun,ფული,society
+dollar,dollar,dollar,noun,დოლარი,society
+bill,bill,bill,noun,ანგარიში,society
+marriage,marriage,marriage,noun,ქორწინება,society
+wedding,wedding,wedding,noun,ქორწილი,society
+team,team,team,noun,გუნდი,society
+race_ethnicity,race_ethnicity,race (ethnicity),noun,რასა,society
+sex_gender,sex_gender,sex (gender),noun,სქესი,society
+murder,murder,murder,noun,მკვლელობა,society
+prison,prison,prison,noun,ციხე,society
+technology,technology,technology,noun,ტექნოლოგია,society
+energy,energy,energy,noun,ენერგია,society
+war,war,war,noun,ომი,society
+peace,peace,peace,noun,მშვიდობა,society
+attack,attack,attack,noun,თავდასხმა,society
+election,election,election,noun,არჩევნები,society
+magazine,magazine,magazine,noun,ჟურნალი,society
+newspaper,newspaper,newspaper,noun,გაზეთი,society
+poison,poison,poison,noun,შხამი,society
+gun,gun,gun,noun,იარაღი,society
+sport,sport,sport,noun,სპორტი,society
+race_sport,race_sport,race (sport),noun,რბოლა,society
+exercise,exercise,exercise,noun,ვარჯიში,society
+ball,ball,ball,noun,ბურთი,society
+game,game,game,noun,თამაში,society
+price,price,price,noun,ფასი,society
+contract,contract,contract,noun,კონტრაქტი,society
+drug,drug,drug,noun,ნარკოტიკი,society
+sign,sign,sign,noun,ნიშანი,society
+science,science,science,noun,მეცნიერება,society
+god,god,God,noun,ღმერთი,society
+band,band,band,noun,ბენდი,art
+song,song,song,noun,სიმღერა,art
+instrument,instrument,instrument (musical),noun,ინსტრუმენტი,art
+music,music,music,noun,მუსიკა,art
+movie,movie,movie,noun,ფილმი,art
+art,art,art,noun,ხელოვნება,category
+coffee,coffee,coffee,noun,ყავა,beverages
+tea,tea,tea,noun,ჩაი,beverages
+wine,wine,wine,noun,ღვინო,beverages
+beer,beer,beer,noun,ლუდი,beverages
+juice,juice,juice,noun,წვენი,beverages
+water,water,water,noun,წყალი,beverages
+milk,milk,milk,noun,რძე,beverages
+beverage,beverage,beverage,noun,სასმელი,category
+egg,egg,egg,noun,კვერცხი,food
+cheese,cheese,cheese,noun,ყველი,food
+bread,bread,bread,noun,პური,food
+soup,soup,soup,noun,სუპი,food
+cake,cake,cake,noun,ტორტი,food
+chicken,chicken,chicken,noun,ქათამი,food
+pork,pork,pork,noun,ღორის ხორცი,food
+beef,beef,beef,noun,საქონლის ხორცი,food
+apple,apple,apple,noun,ვაშლი,food
+banana,banana,banana,noun,ბანანი,food
+orange_fruit,orange_fruit,orange,noun,ფორთოხალი,food
+lemon,lemon,lemon,noun,ლიმონი,food
+corn,corn,corn,noun,სიმინდი,food
+rice,rice,rice,noun,ბრინჯი,food
+oil,oil,oil,noun,ზეთი,food
+seed,seed,seed,noun,თესლი,food
+knife,knife,knife,noun,დანა,food
+spoon,spoon,spoon,noun,კოვზი,food
+fork,fork,fork,noun,ჩანგალი,food
+plate,plate,plate,noun,თეფში,food
+cup,cup,cup,noun,ჭიქა,food
+breakfast,breakfast,breakfast,noun,საუზმე,food
+lunch,lunch,lunch,noun,სადილი,food
+dinner,dinner,dinner,noun,ვახშამი,food
+sugar,sugar,sugar,noun,შაქარი,food
+salt,salt,salt,noun,მარილი,food
+bottle,bottle,bottle,noun,ბოთლი,food
+food,food,food,noun,საჭმელი,category
+table,table,table,noun,მაგიდა,home
+chair,chair,chair,noun,სკამი,home
+bed,bed,bed,noun,საწოლი,home
+dream,dream,dream,noun,სიზმარი,home
+window,window,window,noun,ფანჯარა,home
+door,door,door,noun,კარი,home
+bedroom,bedroom,bedroom,noun,საძინებელი,home
+kitchen,kitchen,kitchen,noun,სამზარეულო,home
+bathroom,bathroom,bathroom,noun,აბაზანა,home
+pencil,pencil,pencil,noun,ფანქარი,home
+pen,pen,pen,noun,კალამი,home
+photograph,photograph,photograph,noun,ფოტო,home
+soap,soap,soap,noun,საპონი,home
+book,book,book,noun,წიგნი,home
+page,page,page,noun,გვერდი,home
+key_object,key_object,key,noun,გასაღები,home
+paint,paint,paint,noun,საღებავი,home
+letter,letter,letter,noun,წერილი,home
+note,note,note,noun,შენიშვნა,home
+wall,wall,wall,noun,კედელი,home
+paper,paper,paper,noun,ქაღალდი,home
+floor,floor,floor,noun,იატაკი,home
+ceiling,ceiling,ceiling,noun,ჭერი,home
+roof,roof,roof,noun,სახურავი,home
+pool,pool,pool,noun,აუზი,home
+lock,lock,lock,noun,ბოქლომი,home
+telephone,telephone,telephone,noun,ტელეფონი,home
+garden,garden,garden,noun,ბაღი,home
+yard,yard,yard,noun,ეზო,home
+needle,needle,needle,noun,ნემსი,home
+bag,bag,bag,noun,ჩანთა,home
+box,box,box,noun,ყუთი,home
+gift,gift,gift,noun,საჩუქარი,home
+card,card,card,noun,ბარათი,home
+ring,ring,ring,noun,ბეჭედი,home
+tool,tool,tool,noun,ხელსაწყო,home
+clock,clock,clock,noun,საათი,electronics
+lamp,lamp,lamp,noun,ნათურა,electronics
+fan_electronics,fan_electronics,fan,noun,ვენტილატორი,electronics
+cell_phone,cell_phone,cell phone,noun,მობილური ტელეფონი,electronics
+network,network,network,noun,ქსელი,electronics
+computer,computer,computer,noun,კომპიუტერი,electronics
+program,program,program (computer),noun,პროგრამა,electronics
+laptop,laptop,laptop,noun,ლეპტოპი,electronics
+screen,screen,screen,noun,ეკრანი,electronics
+camera,camera,camera,noun,კამერა,electronics
+television,television,television,noun,ტელევიზორი,electronics
+radio,radio,radio,noun,რადიო,electronics
+head,head,head,noun,თავი,body
+neck,neck,neck,noun,კისერი,body
+face,face,face,noun,სახე,body
+beard,beard,beard,noun,წვერი,body
+hair,hair,hair,noun,თმა,body
+eye,eye,eye,noun,თვალი,body
+mouth,mouth,mouth,noun,პირი,body
+lip,lip,lip,noun,ტუჩი,body
+nose,nose,nose,noun,ცხვირი,body
+tooth,tooth,tooth,noun,კბილი,body
+ear,ear,ear,noun,ყური,body
+tear,tear,tear (drop),noun,ცრემლი,body
+tongue,tongue,tongue,noun,ენა,body
+back_body,back_body,back,noun,ზურგი,body
+toe,toe,toe,noun,ფეხის თითი,body
+finger,finger,finger,noun,თითი,body
+foot,foot,foot,noun,ტერფი,body
+hand,hand,hand,noun,ხელი,body
+leg,leg,leg,noun,ფეხი,body
+arm,arm,arm,noun,მკლავი,body
+shoulder,shoulder,shoulder,noun,მხარი,body
+heart,heart,heart,noun,გული,body
+blood,blood,blood,noun,სისხლი,body
+brain,brain,brain,noun,ტვინი,body
+knee,knee,knee,noun,მუხლი,body
+sweat,sweat,sweat,noun,ოფლი,body
+disease,disease,disease,noun,დაავადება,body
+bone,bone,bone,noun,ძვალი,body
+voice,voice,voice,noun,ხმა,body
+skin,skin,skin,noun,კანი,body
+body,body,body,noun,სხეული,category
+sea,sea,sea,noun,ზღვა,nature
+ocean,ocean,ocean,noun,ოკეანე,nature
+river,river,river,noun,მდინარე,nature
+mountain,mountain,mountain,noun,მთა,nature
+rain,rain,rain,noun,წვიმა,nature
+snow,snow,snow,noun,თოვლი,nature
+tree,tree,tree,noun,ხე,nature
+sun,sun,sun,noun,მზე,nature
+moon,moon,moon,noun,მთვარე,nature
+world,world,world,noun,სამყარო,nature
+earth,earth,Earth,noun,დედამიწა,nature
+forest,forest,forest,noun,ტყე,nature
+sky,sky,sky,noun,ცა,nature
+plant,plant,plant,noun,მცენარე,nature
+wind,wind,wind,noun,ქარი,nature
+soil,soil,soil/earth,noun,ნიადაგი,nature
+flower,flower,flower,noun,ყვავილი,nature
+valley,valley,valley,noun,ველი,nature
+root,root,root,noun,ფესვი,nature
+lake,lake,lake,noun,ტბა,nature
+star,star,star,noun,ვარსკვლავი,nature
+grass,grass,grass,noun,ბალახი,nature
+leaf,leaf,leaf,noun,ფოთოლი,nature
+air,air,air,noun,ჰაერი,nature
+sand,sand,sand,noun,ქვიშა,nature
+beach,beach,beach,noun,სანაპირო,nature
+wave,wave,wave,noun,ტალღა,nature
+fire,fire,fire,noun,ცეცხლი,nature
+ice,ice,ice,noun,ყინული,nature
+island,island,island,noun,კუნძული,nature
+hill,hill,hill,noun,ბორცვი,nature
+heat,heat,heat,noun,სითბო,nature
+nature,nature,nature,noun,ბუნება,category
+glass,glass,glass,noun,მინა,materials
+metal,metal,metal,noun,ლითონი,materials
+plastic,plastic,plastic,noun,პლასტმასი,materials
+wood,wood,wood,noun,ხე,materials
+stone,stone,stone,noun,ქვა,materials
+diamond,diamond,diamond,noun,ბრილიანტი,materials
+clay,clay,clay,noun,თიხა,materials
+dust,dust,dust,noun,მტვერი,materials
+gold,gold,gold,noun,ოქრო,materials
+copper,copper,copper,noun,სპილენძი,materials
+silver,silver,silver,noun,ვერცხლი,materials
+material,material,material,noun,მასალა,category
+meter,meter,meter,noun,მეტრი,math_measurements
+centimeter,centimeter,centimeter,noun,სანტიმეტრი,math_measurements
+kilogram,kilogram,kilogram,noun,კილოგრამი,math_measurements
+inch,inch,inch,noun,ინჩი,math_measurements
+foot_measurement,foot_measurement,foot,noun,ფუტი,math_measurements
+pound,pound,pound,noun,ფუნტი,math_measurements
+half,half,half,noun,ნახევარი,math_measurements
+circle,circle,circle,noun,წრე,math_measurements
+square,square,square,noun,კვადრატი,math_measurements
+temperature,temperature,temperature,noun,ტემპერატურა,math_measurements
+date,date,date,noun,თარიღი,math_measurements
+weight,weight,weight,noun,წონა,math_measurements
+edge,edge,edge,noun,ზღვარი,math_measurements
+corner,corner,corner,noun,კუთხე,math_measurements
+map,map,map,noun,რუკა,misc_nouns
+dot,dot,dot,noun,წერტილი,misc_nouns
+consonant,consonant,consonant,noun,თანხმოვანი,misc_nouns
+vowel,vowel,vowel,noun,ხმოვანი,misc_nouns
+light,light,light,noun,სინათლე,misc_nouns
+sound,sound,sound,noun,ხმა,misc_nouns
+yes,yes,yes,noun,დიახ,misc_nouns
+no,no,no,noun,არა,misc_nouns
+piece,piece,piece,noun,ნაწილი,misc_nouns
+pain,pain,pain,noun,ტკივილი,misc_nouns
+injury,injury,injury,noun,დაზიანება,misc_nouns
+hole,hole,hole,noun,ხვრელი,misc_nouns
+image,image,image,noun,გამოსახულება,misc_nouns
+pattern,pattern,pattern,noun,ნიმუში,misc_nouns
+noun,noun,noun,noun,არსებითი სახელი,category
+verb,verb,verb,noun,ზმნა,category
+adjective,adjective,adjective,noun,ზედსართავი სახელი,category
+top,top,top,noun,ზედა,directions
+bottom,bottom,bottom,noun,ქვედა,directions
+side,side,side,noun,გვერდი,directions
+front,front,front,noun,წინა,directions
+back_direction,back_direction,back,noun,უკანა,directions
+outside,outside,outside,noun,გარეთა,directions
+inside,inside,inside,noun,შიდა,directions
+up,up,up,noun,ზემოთ,directions
+down,down,down,noun,ქვემოთ,directions
+left,left,left,noun,მარცხენა,directions
+right,right,right,noun,მარჯვენა,directions
+straight,straight,straight,noun,პირდაპირ,directions
+north,north,north,noun,ჩრდილოეთი,directions
+south,south,south,noun,სამხრეთი,directions
+east,east,east,noun,აღმოსავლეთი,directions
+west,west,west,noun,დასავლეთი,directions
+direction,direction,direction,noun,მიმართულება,category
+summer,summer,summer,noun,ზაფხული,seasons
+spring,spring,spring,noun,გაზაფხული,seasons
+winter,winter,winter,noun,ზამთარი,seasons
+fall,fall,fall,noun,შემოდგომა,seasons
+season,season,season,noun,სეზონი,category
+zero,zero,0,noun,ნული,numbers
+one,one,1,noun,ერთი,numbers
+two,two,2,noun,ორი,numbers
+three,three,3,noun,სამი,numbers
+four,four,4,noun,ოთხი,numbers
+five,five,5,noun,ხუთი,numbers
+six,six,6,noun,ექვსი,numbers
+seven,seven,7,noun,შვიდი,numbers
+eight,eight,8,noun,რვა,numbers
+nine,nine,9,noun,ცხრა,numbers
+ten,ten,10,noun,ათი,numbers
+eleven,eleven,11,noun,თერთმეტი,numbers
+twelve,twelve,12,noun,თორმეტი,numbers
+thirteen,thirteen,13,noun,ცამეტი,numbers
+fourteen,fourteen,14,noun,თოთხმეტი,numbers
+fifteen,fifteen,15,noun,თხუთმეტი,numbers
+sixteen,sixteen,16,noun,თექვსმეტი,numbers
+seventeen,seventeen,17,noun,ჩვიდმეტი,numbers
+eighteen,eighteen,18,noun,თვრამეტი,numbers
+nineteen,nineteen,19,noun,ცხრამეტი,numbers
+twenty,twenty,20,noun,ოცი,numbers
+january,january,January,noun,იანვარი,months
+february,february,February,noun,თებერვალი,months
+march,march,March,noun,მარტი,months
+april,april,April,noun,აპრილი,months
+may,may,May,noun,მაისი,months
+june,june,June,noun,ივნისი,months
+july,july,July,noun,ივლისი,months
+august,august,August,noun,აგვისტო,months
+september,september,September,noun,სექტემბერი,months
+october,october,October,noun,ოქტომბერი,months
+november,november,November,noun,ნოემბერი,months
+december,december,December,noun,დეკემბერი,months
+twenty_one,twenty_one,21,noun,ოცდაერთი,numbers
+twenty_two,twenty_two,22,noun,ოცდაორი,numbers
+thirty,thirty,30,noun,ოცდაათი,numbers
+thirty_one,thirty_one,31,noun,ოცდათერთმეტი,numbers
+thirty_two,thirty_two,32,noun,ოცდათორმეტი,numbers
+forty,forty,40,noun,ორმოცი,numbers
+forty_one,forty_one,41,noun,ორმოცდაერთი,numbers
+forty_two,forty_two,42,noun,ორმოცდაორი,numbers
+fifty,fifty,50,noun,ორმოცდაათი,numbers
+fifty_one,fifty_one,51,noun,ორმოცდათერთმეტი,numbers
+fifty_two,fifty_two,52,noun,ორმოცდათორმეტი,numbers
+sixty,sixty,60,noun,სამოცი,numbers
+sixty_one,sixty_one,61,noun,სამოცდაერთი,numbers
+sixty_two,sixty_two,62,noun,სამოცდაორი,numbers
+seventy,seventy,70,noun,სამოცდაათი,numbers
+seventy_one,seventy_one,71,noun,სამოცდათერთმეტი,numbers
+seventy_two,seventy_two,72,noun,სამოცდათორმეტი,numbers
+eighty,eighty,80,noun,ოთხმოცი,numbers
+eighty_one,eighty_one,81,noun,ოთხმოცდაერთი,numbers
+eighty_two,eighty_two,82,noun,ოთხმოცდაორი,numbers
+ninety,ninety,90,noun,ოთხმოცდაათი,numbers
+ninety_one,ninety_one,91,noun,ოთხმოცდათერთმეტი,numbers
+ninety_two,ninety_two,92,noun,ოთხმოცდათორმეტი,numbers
+one_hundred,one_hundred,100,noun,ასი,numbers
+monday,monday,Monday,noun,ორშაბათი,days_of_week
+tuesday,tuesday,Tuesday,noun,სამშაბათი,days_of_week
+wednesday,wednesday,Wednesday,noun,ოთხშაბათი,days_of_week
+thursday,thursday,Thursday,noun,ხუთშაბათი,days_of_week
+friday,friday,Friday,noun,პარასკევი,days_of_week
+saturday,saturday,Saturday,noun,შაბათი,days_of_week
+sunday,sunday,Sunday,noun,კვირა,days_of_week
+year,year,year,noun,წელი,time
+month,month,month,noun,თვე,time
+week,week,week,noun,კვირა,time
+day,day,day,noun,დღე,time
+hour,hour,hour,noun,საათი,time
+minute,minute,minute,noun,წუთი,time
+second,second,second,noun,წამი,time
+morning,morning,morning,noun,დილა,time
+afternoon,afternoon,afternoon,noun,ნაშუადღევი,time
+evening,evening,evening,noun,საღამო,time
+night,night,night,noun,ღამე,time
+time,time,time,noun,დრო,category
+be_p1s,be,I am,verb-p1s,მე ვარ,verb
+be_p2s,be,You are,verb-p2s,შენ ხარ,verb
+be_p3s,be,He/She/It is,verb-p3s,ის არის,verb
+be_p1p,be,We are,verb-p1p,ჩვენ ვართ,verb
+be_p2p,be,You (pl) are,verb-p2p,თქვენ ხართ,verb
+be_p3p,be,They are,verb-p3p,ისინი არიან,verb
+have_inanimate_p1s,have_inanimate,I have (inanimate),verb-p1s,მე მაქვს,verb
+have_inanimate_p2s,have_inanimate,You have (inanimate),verb-p2s,შენ გაქვს,verb
+have_inanimate_p3s,have_inanimate,He/She/It has (inanimate),verb-p3s,მას აქვს,verb
+have_inanimate_p1p,have_inanimate,We have (inanimate),verb-p1p,ჩვენ გვაქვს,verb
+have_inanimate_p2p,have_inanimate,You (pl) have (inanimate),verb-p2p,თქვენ გაქვთ,verb
+have_inanimate_p3p,have_inanimate,They have (inanimate),verb-p3p,მათ აქვთ,verb
+have_animate_p1s,have_animate,I have (animate),verb-p1s,მე მყავს,verb
+have_animate_p2s,have_animate,You have (animate),verb-p2s,შენ გყავს,verb
+have_animate_p3s,have_animate,He/She/It has (animate),verb-p3s,მას ჰყავს,verb
+have_animate_p1p,have_animate,We have (animate),verb-p1p,ჩვენ გვყავს,verb
+have_animate_p2p,have_animate,You (pl) have (animate),verb-p2p,თქვენ გყავთ,verb
+have_animate_p3p,have_animate,They have (animate),verb-p3p,მათ ჰყავთ,verb
+say_p1s,say,I say,verb-p1s,მე ვამბობ,verb
+say_p2s,say,You say,verb-p2s,შენ ამბობ,verb
+say_p3s,say,He/She/It says,verb-p3s,ის ამბობს,verb
+say_p1p,say,We say,verb-p1p,ჩვენ ვამბობთ,verb
+say_p2p,say,You (pl) say,verb-p2p,თქვენ ამბობთ,verb
+say_p3p,say,They say,verb-p3p,ისინი ამბობენ,verb
+want_p1s,want,I want,verb-p1s,მე მინდა,verb
+want_p2s,want,You want,verb-p2s,შენ გინდა,verb
+want_p3s,want,He/She/It wants,verb-p3s,მას უნდა,verb
+want_p1p,want,We want,verb-p1p,ჩვენ გვინდა,verb
+want_p2p,want,You (pl) want,verb-p2p,თქვენ გინდათ,verb
+want_p3p,want,They want,verb-p3p,მათ უნდათ,verb
+know_p1s,know,I know,verb-p1s,მე ვიცი,verb
+know_p2s,know,You know,verb-p2s,შენ იცი,verb
+know_p3s,know,He/She/It knows,verb-p3s,მან იცის,verb
+know_p1p,know,We know,verb-p1p,ჩვენ ვიცით,verb
+know_p2p,know,You (pl) know,verb-p2p,თქვენ იცით,verb
+know_p3p,know,They know,verb-p3p,მათ იციან,verb
+give_p1s,give,I give,verb-p1s,მე ვაძლევ,verb
+give_p2s,give,You give,verb-p2s,შენ აძლევ,verb
+give_p3s,give,He/She/It gives,verb-p3s,ის აძლევს,verb
+give_p1p,give,We give,verb-p1p,ჩვენ ვაძლევთ,verb
+give_p2p,give,You (pl) give,verb-p2p,თქვენ აძლევთ,verb
+give_p3p,give,They give,verb-p3p,ისინი აძლევენ,verb
+meet_p1s,meet,I meet,verb-p1s,მე ვხვდები,verb
+meet_p2s,meet,You meet,verb-p2s,შენ ხვდები,verb
+meet_p3s,meet,He/She/It meets,verb-p3s,ის ხვდება,verb
+meet_p1p,meet,We meet,verb-p1p,ჩვენ ვხვდებით,verb
+meet_p2p,meet,You (pl) meet,verb-p2p,თქვენ ხვდებით,verb
+meet_p3p,meet,They meet,verb-p3p,ისინი ხვდებიან,verb
+work_p1s,work,I work,verb-p1s,მე ვმუშაობ,verb
+work_p2s,work,You work,verb-p2s,შენ მუშაობ,verb
+work_p3s,work,He/She/It works,verb-p3s,ის მუშაობს,verb
+work_p1p,work,We work,verb-p1p,ჩვენ ვმუშაობთ,verb
+work_p2p,work,You (pl) work,verb-p2p,თქვენ მუშაობთ,verb
+work_p3p,work,They work,verb-p3p,ისინი მუშაობენ,verb
+play_p1s,play,I play,verb-p1s,მე ვთამაშობ,verb
+play_p2s,play,You play,verb-p2s,შენ თამაშობ,verb
+play_p3s,play,He/She/It plays,verb-p3s,ის თამაშობს,verb
+play_p1p,play,We play,verb-p1p,ჩვენ ვთამაშობთ,verb
+play_p2p,play,You (pl) play,verb-p2p,თქვენ თამაშობთ,verb
+play_p3p,play,They play,verb-p3p,ისინი თამაშობენ,verb
+walk_p1s,walk,I walk,verb-p1s,მე დავდივარ,verb
+walk_p2s,walk,You walk,verb-p2s,შენ დადიხარ,verb
+walk_p3s,walk,He/She/It walks,verb-p3s,ის დადის,verb
+walk_p1p,walk,We walk,verb-p1p,ჩვენ დავდივართ,verb
+walk_p2p,walk,You (pl) walk,verb-p2p,თქვენ დადიხართ,verb
+walk_p3p,walk,They walk,verb-p3p,ისინი დადიან,verb
+run_p1s,run,I run,verb-p1s,მე დავრბივარ,verb
+run_p2s,run,You run,verb-p2s,შენ დარბიხარ,verb
+run_p3s,run,He/She/It runs,verb-p3s,ის დარბის,verb
+run_p1p,run,We run,verb-p1p,ჩვენ დავრბივართ,verb
+run_p2p,run,You (pl) run,verb-p2p,თქვენ დარბიხართ,verb
+run_p3p,run,They run,verb-p3p,ისინი დარბიან,verb
+drive_p1s,drive,I drive,verb-p1s,მე ვმართავ,verb
+drive_p2s,drive,You drive,verb-p2s,შენ მართავ,verb
+drive_p3s,drive,He/She/It drives,verb-p3s,ის მართავს,verb
+drive_p1p,drive,We drive,verb-p1p,ჩვენ ვმართავთ,verb
+drive_p2p,drive,You (pl) drive,verb-p2p,თქვენ მართავთ,verb
+drive_p3p,drive,They drive,verb-p3p,ისინი მართავენ,verb
+need_p1s,need,I need,verb-p1s,მე მჭირდება,verb
+need_p2s,need,You need,verb-p2s,შენ გჭირდება,verb
+need_p3s,need,He/She/It needs,verb-p3s,მას სჭირდება,verb
+need_p1p,need,We need,verb-p1p,ჩვენ გვჭირდება,verb
+need_p2p,need,You (pl) need,verb-p2p,თქვენ გჭირდებათ,verb
+need_p3p,need,They need,verb-p3p,მათ სჭირდებათ,verb
+live_p1s,live,I live,verb-p1s,მე ვცხოვრობ,verb
+live_p2s,live,You live,verb-p2s,შენ ცხოვრობ,verb
+live_p3s,live,He/She/It lives,verb-p3s,ის ცხოვრობს,verb
+live_p1p,live,We live,verb-p1p,ჩვენ ვცხოვრობთ,verb
+live_p2p,live,You (pl) live,verb-p2p,თქვენ ცხოვრობთ,verb
+live_p3p,live,They live,verb-p3p,ისინი ცხოვრობენ,verb
+understand_p1s,understand,I understand,verb-p1s,მე მესმის,verb
+understand_p2s,understand,You understand,verb-p2s,შენ გესმის,verb
+understand_p3s,understand,He/She/It understands,verb-p3s,მას ესმის,verb
+understand_p1p,understand,We understand,verb-p1p,ჩვენ გვესმის,verb
+understand_p2p,understand,You (pl) understand,verb-p2p,თქვენ გესმით,verb
+understand_p3p,understand,They understand,verb-p3p,მათ ესმით,verb
+help_p1s,help,I help,verb-p1s,მე ვეხმარები,verb
+help_p2s,help,You help,verb-p2s,შენ ეხმარები,verb
+help_p3s,help,He/She/It helps,verb-p3s,ის ეხმარება,verb
+help_p1p,help,We help,verb-p1p,ჩვენ ვეხმარებით,verb
+help_p2p,help,You (pl) help,verb-p2p,თქვენ ეხმარებით,verb
+help_p3p,help,They help,verb-p3p,ისინი ეხმარებიან,verb
+like_p1s,like,I like,verb-p1s,მე მომწონს,verb
+like_p2s,like,You like,verb-p2s,შენ მოგწონს,verb
+like_p3s,like,He/She/It likes,verb-p3s,მას მოსწონს,verb
+like_p1p,like,We like,verb-p1p,ჩვენ მოგვწონს,verb
+like_p2p,like,You (pl) like,verb-p2p,თქვენ მოგწონთ,verb
+like_p3p,like,They like,verb-p3p,მათ მოსწონთ,verb
+try_p1s,try,I try,verb-p1s,მე ვცდილობ,verb
+try_p2s,try,You try,verb-p2s,შენ ცდილობ,verb
+try_p3s,try,He/She/It tries,verb-p3s,ის ცდილობს,verb
+try_p1p,try,We try,verb-p1p,ჩვენ ვცდილობთ,verb
+try_p2p,try,You (pl) try,verb-p2p,თქვენ ცდილობთ,verb
+try_p3p,try,They try,verb-p3p,ისინი ცდილობენ,verb
+fly_p1s,fly,I fly,verb-p1s,მე დავფრინავ,verb
+fly_p2s,fly,You fly,verb-p2s,შენ დაფრინავ,verb
+fly_p3s,fly,He/She/It flies,verb-p3s,ის დაფრინავს,verb
+fly_p1p,fly,We fly,verb-p1p,ჩვენ დავფრინავთ,verb
+fly_p2p,fly,You (pl) fly,verb-p2p,თქვენ დაფრინავთ,verb
+fly_p3p,fly,They fly,verb-p3p,ისინი დაფრინავენ,verb
+swim_p1s,swim,I swim,verb-p1s,მე ვცურავ,verb
+swim_p2s,swim,You swim,verb-p2s,შენ ცურავ,verb
+swim_p3s,swim,He/She/It swims,verb-p3s,ის ცურავს,verb
+swim_p1p,swim,We swim,verb-p1p,ჩვენ ვცურავთ,verb
+swim_p2p,swim,You (pl) swim,verb-p2p,თქვენ ცურავთ,verb
+swim_p3p,swim,They swim,verb-p3p,ისინი ცურავენ,verb
+go_p1s,go,I go,verb-p1s,მე მივდივარ,verb
+go_p2s,go,You go,verb-p2s,შენ მიდიხარ,verb
+go_p3s,go,He/She/It goes,verb-p3s,ის მიდის,verb
+go_p1p,go,We go,verb-p1p,ჩვენ მივდივართ,verb
+go_p2p,go,You (pl) go,verb-p2p,თქვენ მიდიხართ,verb
+go_p3p,go,They go,verb-p3p,ისინი მიდიან,verb
+stop_p1s,stop,I stop,verb-p1s,მე ვჩერდები,verb
+stop_p2s,stop,You stop,verb-p2s,შენ ჩერდები,verb
+stop_p3s,stop,He/She/It stops,verb-p3s,ის ჩერდება,verb
+stop_p1p,stop,We stop,verb-p1p,ჩვენ ვჩერდებით,verb
+stop_p2p,stop,You (pl) stop,verb-p2p,თქვენ ჩერდებით,verb
+stop_p3p,stop,They stop,verb-p3p,ისინი ჩერდებიან,verb
+follow_p1s,follow,I follow,verb-p1s,მე მივყვები,verb
+follow_p2s,follow,You follow,verb-p2s,შენ მიჰყვები,verb
+follow_p3s,follow,He/She/It follows,verb-p3s,ის მიჰყვება,verb
+follow_p1p,follow,We follow,verb-p1p,ჩვენ მივყვებით,verb
+follow_p2p,follow,You (pl) follow,verb-p2p,თქვენ მიჰყვებით,verb
+follow_p3p,follow,They follow,verb-p3p,ისინი მიჰყვებიან,verb
+think_p1s,think,I think,verb-p1s,მე ვფიქრობ,verb
+think_p2s,think,You think,verb-p2s,შენ ფიქრობ,verb
+think_p3s,think,He/She/It thinks,verb-p3s,ის ფიქრობს,verb
+think_p1p,think,We think,verb-p1p,ჩვენ ვფიქრობთ,verb
+think_p2p,think,You (pl) think,verb-p2p,თქვენ ფიქრობთ,verb
+think_p3p,think,They think,verb-p3p,ისინი ფიქრობენ,verb
+speak_p1s,speak,I speak,verb-p1s,მე ვლაპარაკობ,verb
+speak_p2s,speak,You speak,verb-p2s,შენ ლაპარაკობ,verb
+speak_p3s,speak,He/She/It speaks,verb-p3s,ის ლაპარაკობს,verb
+speak_p1p,speak,We speak,verb-p1p,ჩვენ ვლაპარაკობთ,verb
+speak_p2p,speak,You (pl) speak,verb-p2p,თქვენ ლაპარაკობთ,verb
+speak_p3p,speak,They speak,verb-p3p,ისინი ლაპარაკობენ,verb
+eat_p1s,eat,I eat,verb-p1s,მე ვჭამ,verb
+eat_p2s,eat,You eat,verb-p2s,შენ ჭამ,verb
+eat_p3s,eat,He/She/It eats,verb-p3s,ის ჭამს,verb
+eat_p1p,eat,We eat,verb-p1p,ჩვენ ვჭამთ,verb
+eat_p2p,eat,You (pl) eat,verb-p2p,თქვენ ჭამთ,verb
+eat_p3p,eat,They eat,verb-p3p,ისინი ჭამენ,verb
+drink_p1s,drink,I drink,verb-p1s,მე ვსვამ,verb
+drink_p2s,drink,You drink,verb-p2s,შენ სვამ,verb
+drink_p3s,drink,He/She/It drinks,verb-p3s,ის სვამს,verb
+drink_p1p,drink,We drink,verb-p1p,ჩვენ ვსვამთ,verb
+drink_p2p,drink,You (pl) drink,verb-p2p,თქვენ სვამთ,verb
+drink_p3p,drink,They drink,verb-p3p,ისინი სვამენ,verb
+kill_p1s,kill,I kill,verb-p1s,მე ვკლავ,verb
+kill_p2s,kill,You kill,verb-p2s,შენ კლავ,verb
+kill_p3s,kill,He/She/It kills,verb-p3s,ის კლავს,verb
+kill_p1p,kill,We kill,verb-p1p,ჩვენ ვკლავთ,verb
+kill_p2p,kill,You (pl) kill,verb-p2p,თქვენ კლავთ,verb
+kill_p3p,kill,They kill,verb-p3p,ისინი კლავენ,verb
+die_p1s,die,I die,verb-p1s,მე ვკვდები,verb
+die_p2s,die,You die,verb-p2s,შენ კვდები,verb
+die_p3s,die,He/She/It dies,verb-p3s,ის კვდება,verb
+die_p1p,die,We die,verb-p1p,ჩვენ ვკვდებით,verb
+die_p2p,die,You (pl) die,verb-p2p,თქვენ კვდებით,verb
+die_p3p,die,They die,verb-p3p,ისინი კვდებიან,verb
+smile_p1s,smile,I smile,verb-p1s,მე ვიღიმი,verb
+smile_p2s,smile,You smile,verb-p2s,შენ იღიმი,verb
+smile_p3s,smile,He/She/It smiles,verb-p3s,ის იღიმის,verb
+smile_p1p,smile,We smile,verb-p1p,ჩვენ ვიღიმით,verb
+smile_p2p,smile,You (pl) smile,verb-p2p,თქვენ იღიმით,verb
+smile_p3p,smile,They smile,verb-p3p,ისინი იღიმიან,verb
+laugh_p1s,laugh,I laugh,verb-p1s,მე ვიცინი,verb
+laugh_p2s,laugh,You laugh,verb-p2s,შენ იცინი,verb
+laugh_p3s,laugh,He/She/It laughs,verb-p3s,ის იცინის,verb
+laugh_p1p,laugh,We laugh,verb-p1p,ჩვენ ვიცინით,verb
+laugh_p2p,laugh,You (pl) laugh,verb-p2p,თქვენ იცინით,verb
+laugh_p3p,laugh,They laugh,verb-p3p,ისინი იცინიან,verb
+cry_p1s,cry,I cry,verb-p1s,მე ვტირი,verb
+cry_p2s,cry,You cry,verb-p2s,შენ ტირი,verb
+cry_p3s,cry,He/She/It cries,verb-p3s,ის ტირის,verb
+cry_p1p,cry,We cry,verb-p1p,ჩვენ ვტირით,verb
+cry_p2p,cry,You (pl) cry,verb-p2p,თქვენ ტირით,verb
+cry_p3p,cry,They cry,verb-p3p,ისინი ტირიან,verb
+buy_p1s,buy,I buy,verb-p1s,მე ვყიდულობ,verb
+buy_p2s,buy,You buy,verb-p2s,შენ ყიდულობ,verb
+buy_p3s,buy,He/She/It buys,verb-p3s,ის ყიდულობს,verb
+buy_p1p,buy,We buy,verb-p1p,ჩვენ ვყიდულობთ,verb
+buy_p2p,buy,You (pl) buy,verb-p2p,თქვენ ყიდულობთ,verb
+buy_p3p,buy,They buy,verb-p3p,ისინი ყიდულობენ,verb
+pay_p1s,pay,I pay,verb-p1s,მე ვიხდი,verb
+pay_p2s,pay,You pay,verb-p2s,შენ იხდი,verb
+pay_p3s,pay,He/She/It pays,verb-p3s,ის იხდის,verb
+pay_p1p,pay,We pay,verb-p1p,ჩვენ ვიხდით,verb
+pay_p2p,pay,You (pl) pay,verb-p2p,თქვენ იხდით,verb
+pay_p3p,pay,They pay,verb-p3p,ისინი იხდიან,verb
+sell_p1s,sell,I sell,verb-p1s,მე ვყიდი,verb
+sell_p2s,sell,You sell,verb-p2s,შენ ყიდი,verb
+sell_p3s,sell,He/She/It sells,verb-p3s,ის ყიდის,verb
+sell_p1p,sell,We sell,verb-p1p,ჩვენ ვყიდით,verb
+sell_p2p,sell,You (pl) sell,verb-p2p,თქვენ ყიდით,verb
+sell_p3p,sell,They sell,verb-p3p,ისინი ყიდიან,verb
+shoot_p1s,shoot,I shoot,verb-p1s,მე ვისვრი,verb
+shoot_p2s,shoot,You shoot,verb-p2s,შენ ისვრი,verb
+shoot_p3s,shoot,He/She/It shoots,verb-p3s,ის ისვრის,verb
+shoot_p1p,shoot,We shoot,verb-p1p,ჩვენ ვისვრით,verb
+shoot_p2p,shoot,You (pl) shoot,verb-p2p,თქვენ ისვრით,verb
+shoot_p3p,shoot,They shoot,verb-p3p,ისინი ისვრიან,verb
+learn_p1s,learn,I learn,verb-p1s,მე ვსწავლობ,verb
+learn_p2s,learn,You learn,verb-p2s,შენ სწავლობ,verb
+learn_p3s,learn,He/She/It learns,verb-p3s,ის სწავლობს,verb
+learn_p1p,learn,We learn,verb-p1p,ჩვენ ვსწავლობთ,verb
+learn_p2p,learn,You (pl) learn,verb-p2p,თქვენ სწავლობთ,verb
+learn_p3p,learn,They learn,verb-p3p,ისინი სწავლობენ,verb
+jump_p1s,jump,I jump,verb-p1s,მე ვხტები,verb
+jump_p2s,jump,You jump,verb-p2s,შენ ხტები,verb
+jump_p3s,jump,He/She/It jumps,verb-p3s,ის ხტება,verb
+jump_p1p,jump,We jump,verb-p1p,ჩვენ ვხტებით,verb
+jump_p2p,jump,You (pl) jump,verb-p2p,თქვენ ხტებით,verb
+jump_p3p,jump,They jump,verb-p3p,ისინი ხტებიან,verb
+smell_p1s,smell,I smell,verb-p1s,მე ვყნოსავ,verb
+smell_p2s,smell,You smell,verb-p2s,შენ ყნოსავ,verb
+smell_p3s,smell,He/She/It smells,verb-p3s,ის ყნოსავს,verb
+smell_p1p,smell,We smell,verb-p1p,ჩვენ ვყნოსავთ,verb
+smell_p2p,smell,You (pl) smell,verb-p2p,თქვენ ყნოსავთ,verb
+smell_p3p,smell,They smell,verb-p3p,ისინი ყნოსავენ,verb
+hear_p1s,hear,I hear,verb-p1s,მე მესმის,verb
+hear_p2s,hear,You hear,verb-p2s,შენ გესმის,verb
+hear_p3s,hear,He/She/It hears,verb-p3s,მას ესმის,verb
+hear_p1p,hear,We hear,verb-p1p,ჩვენ გვესმის,verb
+hear_p2p,hear,You (pl) hear,verb-p2p,თქვენ გესმით,verb
+hear_p3p,hear,They hear,verb-p3p,მათ ესმით,verb
+listen_p1s,listen,I listen,verb-p1s,მე ვუსმენ,verb
+listen_p2s,listen,You listen,verb-p2s,შენ უსმენ,verb
+listen_p3s,listen,He/She/It listens,verb-p3s,ის უსმენს,verb
+listen_p1p,listen,We listen,verb-p1p,ჩვენ ვუსმენთ,verb
+listen_p2p,listen,You (pl) listen,verb-p2p,თქვენ უსმენთ,verb
+listen_p3p,listen,They listen,verb-p3p,ისინი უსმენენ,verb
+taste_p1s,taste,I taste,verb-p1s,მე ვაგემოვნებ,verb
+taste_p2s,taste,You taste,verb-p2s,შენ აგემოვნებ,verb
+taste_p3s,taste,He/She/It tastes,verb-p3s,ის აგემოვნებს,verb
+taste_p1p,taste,We taste,verb-p1p,ჩვენ ვაგემოვნებთ,verb
+taste_p2p,taste,You (pl) taste,verb-p2p,თქვენ აგემოვნებთ,verb
+taste_p3p,taste,They taste,verb-p3p,ისინი აგემოვნებენ,verb
+touch_p1s,touch,I touch,verb-p1s,მე ვეხები,verb
+touch_p2s,touch,You touch,verb-p2s,შენ ეხები,verb
+touch_p3s,touch,He/She/It touches,verb-p3s,ის ეხება,verb
+touch_p1p,touch,We touch,verb-p1p,ჩვენ ვეხებით,verb
+touch_p2p,touch,You (pl) touch,verb-p2p,თქვენ ეხებით,verb
+touch_p3p,touch,They touch,verb-p3p,ისინი ეხებიან,verb
+see_p1s,see,I see,verb-p1s,მე ვხედავ,verb
+see_p2s,see,You see,verb-p2s,შენ ხედავ,verb
+see_p3s,see,He/She/It sees,verb-p3s,ის ხედავს,verb
+see_p1p,see,We see,verb-p1p,ჩვენ ვხედავთ,verb
+see_p2p,see,You (pl) see,verb-p2p,თქვენ ხედავთ,verb
+see_p3p,see,They see,verb-p3p,ისინი ხედავენ,verb
+watch_p1s,watch,I watch,verb-p1s,მე ვუყურებ,verb
+watch_p2s,watch,You watch,verb-p2s,შენ უყურებ,verb
+watch_p3s,watch,He/She/It watches,verb-p3s,ის უყურებს,verb
+watch_p1p,watch,We watch,verb-p1p,ჩვენ ვუყურებთ,verb
+watch_p2p,watch,You (pl) watch,verb-p2p,თქვენ უყურებთ,verb
+watch_p3p,watch,They watch,verb-p3p,ისინი უყურებენ,verb
+kiss_p1s,kiss,I kiss,verb-p1s,მე ვკოცნი,verb
+kiss_p2s,kiss,You kiss,verb-p2s,შენ კოცნი,verb
+kiss_p3s,kiss,He/She/It kisses,verb-p3s,ის კოცნის,verb
+kiss_p1p,kiss,We kiss,verb-p1p,ჩვენ ვკოცნით,verb
+kiss_p2p,kiss,You (pl) kiss,verb-p2p,თქვენ კოცნით,verb
+kiss_p3p,kiss,They kiss,verb-p3p,ისინი კოცნიან,verb
+burn_p1s,burn,I burn,verb-p1s,მე ვწვავ,verb
+burn_p2s,burn,You burn,verb-p2s,შენ წვავ,verb
+burn_p3s,burn,He/She/It burns,verb-p3s,ის წვავს,verb
+burn_p1p,burn,We burn,verb-p1p,ჩვენ ვწვავთ,verb
+burn_p2p,burn,You (pl) burn,verb-p2p,თქვენ წვავთ,verb
+burn_p3p,burn,They burn,verb-p3p,ისინი წვავენ,verb
+melt_p1s,melt,I melt,verb-p1s,მე ვადნობ,verb
+melt_p2s,melt,You melt,verb-p2s,შენ ადნობ,verb
+melt_p3s,melt,He/She/It melts,verb-p3s,ის ადნობს,verb
+melt_p1p,melt,We melt,verb-p1p,ჩვენ ვადნობთ,verb
+melt_p2p,melt,You (pl) melt,verb-p2p,თქვენ ადნობთ,verb
+melt_p3p,melt,They melt,verb-p3p,ისინი ადნობენ,verb
+dig_p1s,dig,I dig,verb-p1s,მე ვთხრი,verb
+dig_p2s,dig,You dig,verb-p2s,შენ თხრი,verb
+dig_p3s,dig,He/She/It digs,verb-p3s,ის თხრის,verb
+dig_p1p,dig,We dig,verb-p1p,ჩვენ ვთხრით,verb
+dig_p2p,dig,You (pl) dig,verb-p2p,თქვენ თხრით,verb
+dig_p3p,dig,They dig,verb-p3p,ისინი თხრიან,verb
+explode_p1s,explode,I explode,verb-p1s,მე ვფეთქდები,verb
+explode_p2s,explode,You explode,verb-p2s,შენ ფეთქდები,verb
+explode_p3s,explode,He/She/It explodes,verb-p3s,ის ფეთქდება,verb
+explode_p1p,explode,We explode,verb-p1p,ჩვენ ვფეთქდებით,verb
+explode_p2p,explode,You (pl) explode,verb-p2p,თქვენ ფეთქდებით,verb
+explode_p3p,explode,They explode,verb-p3p,ისინი ფეთქდებიან,verb
+sit_p1s,sit,I sit,verb-p1s,მე ვზივარ,verb
+sit_p2s,sit,You sit,verb-p2s,შენ ზიხარ,verb
+sit_p3s,sit,He/She/It sits,verb-p3s,ის ზის,verb
+sit_p1p,sit,We sit,verb-p1p,ჩვენ ვსხედვართ,verb
+sit_p2p,sit,You (pl) sit,verb-p2p,თქვენ სხედხართ,verb
+sit_p3p,sit,They sit,verb-p3p,ისინი სხედან,verb
+stand_p1s,stand,I stand,verb-p1s,მე ვდგავარ,verb
+stand_p2s,stand,You stand,verb-p2s,შენ დგახარ,verb
+stand_p3s,stand,He/She/It stands,verb-p3s,ის დგას,verb
+stand_p1p,stand,We stand,verb-p1p,ჩვენ ვდგავართ,verb
+stand_p2p,stand,You (pl) stand,verb-p2p,თქვენ დგახართ,verb
+stand_p3p,stand,They stand,verb-p3p,ისინი დგანან,verb
+love_p1s,love,I love,verb-p1s,მე მიყვარს,verb
+love_p2s,love,You love,verb-p2s,შენ გიყვარს,verb
+love_p3s,love,He/She/It loves,verb-p3s,მას უყვარს,verb
+love_p1p,love,We love,verb-p1p,ჩვენ გვიყვარს,verb
+love_p2p,love,You (pl) love,verb-p2p,თქვენ გიყვართ,verb
+love_p3p,love,They love,verb-p3p,მათ უყვართ,verb
+pass_by_p1s,pass_by,I pass by,verb-p1s,მე ჩავუვლი,verb
+pass_by_p2s,pass_by,You pass by,verb-p2s,შენ ჩაუვლი,verb
+pass_by_p3s,pass_by,He/She/It passes by,verb-p3s,ის ჩაუვლის,verb
+pass_by_p1p,pass_by,We pass by,verb-p1p,ჩვენ ჩავუვლით,verb
+pass_by_p2p,pass_by,You (pl) pass by,verb-p2p,თქვენ ჩაუვლით,verb
+pass_by_p3p,pass_by,They pass by,verb-p3p,ისინი ჩაუვლიან,verb
+cut_p1s,cut,I cut,verb-p1s,მე ვჭრი,verb
+cut_p2s,cut,You cut,verb-p2s,შენ ჭრი,verb
+cut_p3s,cut,He/She/It cuts,verb-p3s,ის ჭრის,verb
+cut_p1p,cut,We cut,verb-p1p,ჩვენ ვჭრით,verb
+cut_p2p,cut,You (pl) cut,verb-p2p,თქვენ ჭრით,verb
+cut_p3p,cut,They cut,verb-p3p,ისინი ჭრიან,verb
+fight_p1s,fight,I fight,verb-p1s,მე ვიბრძვი,verb
+fight_p2s,fight,You fight,verb-p2s,შენ იბრძვი,verb
+fight_p3s,fight,He/She/It fights,verb-p3s,ის იბრძვის,verb
+fight_p1p,fight,We fight,verb-p1p,ჩვენ ვიბრძვით,verb
+fight_p2p,fight,You (pl) fight,verb-p2p,თქვენ იბრძვით,verb
+fight_p3p,fight,They fight,verb-p3p,ისინი იბრძვიან,verb
+lie_down_p1s,lie_down,I lie down,verb-p1s,მე ვწვები,verb
+lie_down_p2s,lie_down,You lie down,verb-p2s,შენ წვები,verb
+lie_down_p3s,lie_down,He/She/It lies down,verb-p3s,ის წვება,verb
+lie_down_p1p,lie_down,We lie down,verb-p1p,ჩვენ ვწვებით,verb
+lie_down_p2p,lie_down,You (pl) lie down,verb-p2p,თქვენ წვებით,verb
+lie_down_p3p,lie_down,They lie down,verb-p3p,ისინი წვებიან,verb
+dance_p1s,dance,I dance,verb-p1s,მე ვცეკვავ,verb
+dance_p2s,dance,You dance,verb-p2s,შენ ცეკვავ,verb
+dance_p3s,dance,He/She/It dances,verb-p3s,ის ცეკვავს,verb
+dance_p1p,dance,We dance,verb-p1p,ჩვენ ვცეკვავთ,verb
+dance_p2p,dance,You (pl) dance,verb-p2p,თქვენ ცეკვავთ,verb
+dance_p3p,dance,They dance,verb-p3p,ისინი ცეკვავენ,verb
+sleep_p1s,sleep,I sleep,verb-p1s,მე მძინავს,verb
+sleep_p2s,sleep,You sleep,verb-p2s,შენ გძინავს,verb
+sleep_p3s,sleep,He/She/It sleeps,verb-p3s,მას ძინავს,verb
+sleep_p1p,sleep,We sleep,verb-p1p,ჩვენ გვძინავს,verb
+sleep_p2p,sleep,You (pl) sleep,verb-p2p,თქვენ გძინავთ,verb
+sleep_p3p,sleep,They sleep,verb-p3p,მათ ძინავთ,verb
+wake_up_p1s,wake_up,I wake up,verb-p1s,მე ვიღვიძებ,verb
+wake_up_p2s,wake_up,You wake up,verb-p2s,შენ იღვიძებ,verb
+wake_up_p3s,wake_up,He/She/It wakes up,verb-p3s,ის იღვიძებს,verb
+wake_up_p1p,wake_up,We wake up,verb-p1p,ჩვენ ვიღვიძებთ,verb
+wake_up_p2p,wake_up,You (pl) wake up,verb-p2p,თქვენ იღვიძებთ,verb
+wake_up_p3p,wake_up,They wake up,verb-p3p,ისინი იღვიძებენ,verb
+sing_p1s,sing,I sing,verb-p1s,მე ვმღერი,verb
+sing_p2s,sing,You sing,verb-p2s,შენ მღერი,verb
+sing_p3s,sing,He/She/It sings,verb-p3s,ის მღერის,verb
+sing_p1p,sing,We sing,verb-p1p,ჩვენ ვმღერით,verb
+sing_p2p,sing,You (pl) sing,verb-p2p,თქვენ მღერით,verb
+sing_p3p,sing,They sing,verb-p3p,ისინი მღერიან,verb
+count_p1s,count,I count,verb-p1s,მე ვითვლი,verb
+count_p2s,count,You count,verb-p2s,შენ ითვლი,verb
+count_p3s,count,He/She/It counts,verb-p3s,ის ითვლის,verb
+count_p1p,count,We count,verb-p1p,ჩვენ ვითვლით,verb
+count_p2p,count,You (pl) count,verb-p2p,თქვენ ითვლით,verb
+count_p3p,count,They count,verb-p3p,ისინი ითვლიან,verb
+marry_p1s,marry,I marry,verb-p1s,მე ვქორწინდები,verb
+marry_p2s,marry,You marry,verb-p2s,შენ ქორწინდები,verb
+marry_p3s,marry,He/She/It marries,verb-p3s,ის ქორწინდება,verb
+marry_p1p,marry,We marry,verb-p1p,ჩვენ ვქორწინდებით,verb
+marry_p2p,marry,You (pl) marry,verb-p2p,თქვენ ქორწინდებით,verb
+marry_p3p,marry,They marry,verb-p3p,ისინი ქორწინდებიან,verb
+pray_p1s,pray,I pray,verb-p1s,მე ვლოცულობ,verb
+pray_p2s,pray,You pray,verb-p2s,შენ ლოცულობ,verb
+pray_p3s,pray,He/She/It prays,verb-p3s,ის ლოცულობს,verb
+pray_p1p,pray,We pray,verb-p1p,ჩვენ ვლოცულობთ,verb
+pray_p2p,pray,You (pl) pray,verb-p2p,თქვენ ლოცულობთ,verb
+pray_p3p,pray,They pray,verb-p3p,ისინი ლოცულობენ,verb
+win_p1s,win,I win,verb-p1s,მე ვიგებ,verb
+win_p2s,win,You win,verb-p2s,შენ იგებ,verb
+win_p3s,win,He/She/It wins,verb-p3s,ის იგებს,verb
+win_p1p,win,We win,verb-p1p,ჩვენ ვიგებთ,verb
+win_p2p,win,You (pl) win,verb-p2p,თქვენ იგებთ,verb
+win_p3p,win,They win,verb-p3p,ისინი იგებენ,verb
+lose_p1s,lose,I lose,verb-p1s,მე ვაგებ,verb
+lose_p2s,lose,You lose,verb-p2s,შენ აგებ,verb
+lose_p3s,lose,He/She/It loses,verb-p3s,ის აგებს,verb
+lose_p1p,lose,We lose,verb-p1p,ჩვენ ვაგებთ,verb
+lose_p2p,lose,You (pl) lose,verb-p2p,თქვენ აგებთ,verb
+lose_p3p,lose,They lose,verb-p3p,ისინი აგებენ,verb
+mix_p1s,mix,I mix,verb-p1s,მე ვურევ,verb
+mix_p2s,mix,You mix,verb-p2s,შენ ურევ,verb
+mix_p3s,mix,He/She/It mixes,verb-p3s,ის ურევს,verb
+mix_p1p,mix,We mix,verb-p1p,ჩვენ ვურევთ,verb
+mix_p2p,mix,You (pl) mix,verb-p2p,თქვენ ურევთ,verb
+mix_p3p,mix,They mix,verb-p3p,ისინი ურევენ,verb
+bend_p1s,bend,I bend,verb-p1s,მე ვხრი,verb
+bend_p2s,bend,You bend,verb-p2s,შენ ხრი,verb
+bend_p3s,bend,He/She/It bends,verb-p3s,ის ხრის,verb
+bend_p1p,bend,We bend,verb-p1p,ჩვენ ვხრით,verb
+bend_p2p,bend,You (pl) bend,verb-p2p,თქვენ ხრით,verb
+bend_p3p,bend,They bend,verb-p3p,ისინი ხრიან,verb
+wash_p1s,wash,I wash,verb-p1s,მე ვრეცხავ,verb
+wash_p2s,wash,You wash,verb-p2s,შენ რეცხავ,verb
+wash_p3s,wash,He/She/It washes,verb-p3s,ის რეცხავს,verb
+wash_p1p,wash,We wash,verb-p1p,ჩვენ ვრეცხავთ,verb
+wash_p2p,wash,You (pl) wash,verb-p2p,თქვენ რეცხავთ,verb
+wash_p3p,wash,They wash,verb-p3p,ისინი რეცხავენ,verb
+cook_p1s,cook,I cook,verb-p1s,მე ვამზადებ,verb
+cook_p2s,cook,You cook,verb-p2s,შენ ამზადებ,verb
+cook_p3s,cook,He/She/It cooks,verb-p3s,ის ამზადებს,verb
+cook_p1p,cook,We cook,verb-p1p,ჩვენ ვამზადებთ,verb
+cook_p2p,cook,You (pl) cook,verb-p2p,თქვენ ამზადებთ,verb
+cook_p3p,cook,They cook,verb-p3p,ისინი ამზადებენ,verb
+open_p1s,open,I open,verb-p1s,მე ვაღებ,verb
+open_p2s,open,You open,verb-p2s,შენ აღებ,verb
+open_p3s,open,He/She/It opens,verb-p3s,ის აღებს,verb
+open_p1p,open,We open,verb-p1p,ჩვენ ვაღებთ,verb
+open_p2p,open,You (pl) open,verb-p2p,თქვენ აღებთ,verb
+open_p3p,open,They open,verb-p3p,ისინი აღებენ,verb
+close_p1s,close,I close,verb-p1s,მე ვკეტავ,verb
+close_p2s,close,You close,verb-p2s,შენ კეტავ,verb
+close_p3s,close,He/She/It closes,verb-p3s,ის კეტავს,verb
+close_p1p,close,We close,verb-p1p,ჩვენ ვკეტავთ,verb
+close_p2p,close,You (pl) close,verb-p2p,თქვენ კეტავთ,verb
+close_p3p,close,They close,verb-p3p,ისინი კეტავენ,verb
+write_p1s,write,I write,verb-p1s,მე ვწერ,verb
+write_p2s,write,You write,verb-p2s,შენ წერ,verb
+write_p3s,write,He/She/It writes,verb-p3s,ის წერს,verb
+write_p1p,write,We write,verb-p1p,ჩვენ ვწერთ,verb
+write_p2p,write,You (pl) write,verb-p2p,თქვენ წერთ,verb
+write_p3p,write,They write,verb-p3p,ისინი წერენ,verb
+call_p1s,call,I call,verb-p1s,მე ვრეკავ,verb
+call_p2s,call,You call,verb-p2s,შენ რეკავ,verb
+call_p3s,call,He/She/It calls,verb-p3s,ის რეკავს,verb
+call_p1p,call,We call,verb-p1p,ჩვენ ვრეკავთ,verb
+call_p2p,call,You (pl) call,verb-p2p,თქვენ რეკავთ,verb
+call_p3p,call,They call,verb-p3p,ისინი რეკავენ,verb
+turn_p1s,turn,I turn,verb-p1s,მე ვბრუნდები,verb
+turn_p2s,turn,You turn,verb-p2s,შენ ბრუნდები,verb
+turn_p3s,turn,He/She/It turns,verb-p3s,ის ბრუნდება,verb
+turn_p1p,turn,We turn,verb-p1p,ჩვენ ვბრუნდებით,verb
+turn_p2p,turn,You (pl) turn,verb-p2p,თქვენ ბრუნდებით,verb
+turn_p3p,turn,They turn,verb-p3p,ისინი ბრუნდებიან,verb
+build_p1s,build,I build,verb-p1s,მე ვაშენებ,verb
+build_p2s,build,You build,verb-p2s,შენ აშენებ,verb
+build_p3s,build,He/She/It builds,verb-p3s,ის აშენებს,verb
+build_p1p,build,We build,verb-p1p,ჩვენ ვაშენებთ,verb
+build_p2p,build,You (pl) build,verb-p2p,თქვენ აშენებთ,verb
+build_p3p,build,They build,verb-p3p,ისინი აშენებენ,verb
+teach_p1s,teach,I teach,verb-p1s,მე ვასწავლი,verb
+teach_p2s,teach,You teach,verb-p2s,შენ ასწავლი,verb
+teach_p3s,teach,He/She/It teaches,verb-p3s,ის ასწავლის,verb
+teach_p1p,teach,We teach,verb-p1p,ჩვენ ვასწავლით,verb
+teach_p2p,teach,You (pl) teach,verb-p2p,თქვენ ასწავლით,verb
+teach_p3p,teach,They teach,verb-p3p,ისინი ასწავლიან,verb
+grow_p1s,grow,I grow,verb-p1s,მე ვიზრდები,verb
+grow_p2s,grow,You grow,verb-p2s,შენ იზრდები,verb
+grow_p3s,grow,He/She/It grows,verb-p3s,ის იზრდება,verb
+grow_p1p,grow,We grow,verb-p1p,ჩვენ ვიზრდებით,verb
+grow_p2p,grow,You (pl) grow,verb-p2p,თქვენ იზრდებით,verb
+grow_p3p,grow,They grow,verb-p3p,ისინი იზრდებიან,verb
+draw_p1s,draw,I draw,verb-p1s,მე ვხატავ,verb
+draw_p2s,draw,You draw,verb-p2s,შენ ხატავ,verb
+draw_p3s,draw,He/She/It draws,verb-p3s,ის ხატავს,verb
+draw_p1p,draw,We draw,verb-p1p,ჩვენ ვხატავთ,verb
+draw_p2p,draw,You (pl) draw,verb-p2p,თქვენ ხატავთ,verb
+draw_p3p,draw,They draw,verb-p3p,ისინი ხატავენ,verb
+feed_p1s,feed,I feed,verb-p1s,მე ვკვებავ,verb
+feed_p2s,feed,You feed,verb-p2s,შენ კვებავ,verb
+feed_p3s,feed,He/She/It feeds,verb-p3s,ის კვებავს,verb
+feed_p1p,feed,We feed,verb-p1p,ჩვენ ვკვებავთ,verb
+feed_p2p,feed,You (pl) feed,verb-p2p,თქვენ კვებავთ,verb
+feed_p3p,feed,They feed,verb-p3p,ისინი კვებავენ,verb
+catch_p1s,catch,I catch,verb-p1s,მე ვიჭერ,verb
+catch_p2s,catch,You catch,verb-p2s,შენ იჭერ,verb
+catch_p3s,catch,He/She/It catches,verb-p3s,ის იჭერს,verb
+catch_p1p,catch,We catch,verb-p1p,ჩვენ ვიჭერთ,verb
+catch_p2p,catch,You (pl) catch,verb-p2p,თქვენ იჭერთ,verb
+catch_p3p,catch,They catch,verb-p3p,ისინი იჭერენ,verb
+throw_p1s,throw,I throw,verb-p1s,მე ვისვრი,verb
+throw_p2s,throw,You throw,verb-p2s,შენ ისვრი,verb
+throw_p3s,throw,He/She/It throws,verb-p3s,ის ისვრის,verb
+throw_p1p,throw,We throw,verb-p1p,ჩვენ ვისვრით,verb
+throw_p2p,throw,You (pl) throw,verb-p2p,თქვენ ისვრით,verb
+throw_p3p,throw,They throw,verb-p3p,ისინი ისვრიან,verb
+clean_p1s,clean,I clean,verb-p1s,მე ვასუფთავებ,verb
+clean_p2s,clean,You clean,verb-p2s,შენ ასუფთავებ,verb
+clean_p3s,clean,He/She/It cleans,verb-p3s,ის ასუფთავებს,verb
+clean_p1p,clean,We clean,verb-p1p,ჩვენ ვასუფთავებთ,verb
+clean_p2p,clean,You (pl) clean,verb-p2p,თქვენ ასუფთავებთ,verb
+clean_p3p,clean,They clean,verb-p3p,ისინი ასუფთავებენ,verb
+find_p1s,find,I find,verb-p1s,მე ვპოულობ,verb
+find_p2s,find,You find,verb-p2s,შენ პოულობ,verb
+find_p3s,find,He/She/It finds,verb-p3s,ის პოულობს,verb
+find_p1p,find,We find,verb-p1p,ჩვენ ვპოულობთ,verb
+find_p2p,find,You (pl) find,verb-p2p,თქვენ პოულობთ,verb
+find_p3p,find,They find,verb-p3p,ისინი პოულობენ,verb
+fall_p1s,fall,I fall,verb-p1s,მე ვვარდები,verb
+fall_p2s,fall,You fall,verb-p2s,შენ ვარდები,verb
+fall_p3s,fall,He/She/It falls,verb-p3s,ის ვარდება,verb
+fall_p1p,fall,We fall,verb-p1p,ჩვენ ვვარდებით,verb
+fall_p2p,fall,You (pl) fall,verb-p2p,თქვენ ვარდებით,verb
+fall_p3p,fall,They fall,verb-p3p,ისინი ვარდებიან,verb
+push_p1s,push,I push,verb-p1s,მე ვაწვები,verb
+push_p2s,push,You push,verb-p2s,შენ აწვები,verb
+push_p3s,push,He/She/It pushes,verb-p3s,ის აწვება,verb
+push_p1p,push,We push,verb-p1p,ჩვენ ვაწვებით,verb
+push_p2p,push,You (pl) push,verb-p2p,თქვენ აწვებით,verb
+push_p3p,push,They push,verb-p3p,ისინი აწვებიან,verb
+pull_p1s,pull,I pull,verb-p1s,მე ვქაჩავ,verb
+pull_p2s,pull,You pull,verb-p2s,შენ ქაჩავ,verb
+pull_p3s,pull,He/She/It pulls,verb-p3s,ის ქაჩავს,verb
+pull_p1p,pull,We pull,verb-p1p,ჩვენ ვქაჩავთ,verb
+pull_p2p,pull,You (pl) pull,verb-p2p,თქვენ ქაჩავთ,verb
+pull_p3p,pull,They pull,verb-p3p,ისინი ქაჩავენ,verb
+carry_p1s,carry,I carry,verb-p1s,მე ვატარებ,verb
+carry_p2s,carry,You carry,verb-p2s,შენ ატარებ,verb
+carry_p3s,carry,He/She/It carries,verb-p3s,ის ატარებს,verb
+carry_p1p,carry,We carry,verb-p1p,ჩვენ ვატარებთ,verb
+carry_p2p,carry,You (pl) carry,verb-p2p,თქვენ ატარებთ,verb
+carry_p3p,carry,They carry,verb-p3p,ისინი ატარებენ,verb
+break_p1s,break,I break,verb-p1s,მე ვამტვრევ,verb
+break_p2s,break,You break,verb-p2s,შენ ამტვრევ,verb
+break_p3s,break,He/She/It breaks,verb-p3s,ის ამტვრევს,verb
+break_p1p,break,We break,verb-p1p,ჩვენ ვამტვრევთ,verb
+break_p2p,break,You (pl) break,verb-p2p,თქვენ ამტვრევთ,verb
+break_p3p,break,They break,verb-p3p,ისინი ამტვრევენ,verb
+wear_p1s,wear,I wear,verb-p1s,მე მაცვია,verb
+wear_p2s,wear,You wear,verb-p2s,შენ გაცვია,verb
+wear_p3s,wear,He/She/It wears,verb-p3s,მას აცვია,verb
+wear_p1p,wear,We wear,verb-p1p,ჩვენ გვაცვია,verb
+wear_p2p,wear,You (pl) wear,verb-p2p,თქვენ გაცვიათ,verb
+wear_p3p,wear,They wear,verb-p3p,მათ აცვიათ,verb
+hang_p1s,hang,I hang,verb-p1s,მე ვკიდებ,verb
+hang_p2s,hang,You hang,verb-p2s,შენ კიდებ,verb
+hang_p3s,hang,He/She/It hangs,verb-p3s,ის კიდებს,verb
+hang_p1p,hang,We hang,verb-p1p,ჩვენ ვკიდებთ,verb
+hang_p2p,hang,You (pl) hang,verb-p2p,თქვენ კიდებთ,verb
+hang_p3p,hang,They hang,verb-p3p,ისინი კიდებენ,verb
+shake_p1s,shake,I shake,verb-p1s,მე ვანჯღრევ,verb
+shake_p2s,shake,You shake,verb-p2s,შენ ანჯღრევ,verb
+shake_p3s,shake,He/She/It shakes,verb-p3s,ის ანჯღრევს,verb
+shake_p1p,shake,We shake,verb-p1p,ჩვენ ვანჯღრევთ,verb
+shake_p2p,shake,You (pl) shake,verb-p2p,თქვენ ანჯღრევთ,verb
+shake_p3p,shake,They shake,verb-p3p,ისინი ანჯღრევენ,verb
+sign_p1s,sign,I sign,verb-p1s,მე ვაწერ ხელს,verb
+sign_p2s,sign,You sign,verb-p2s,შენ აწერ ხელს,verb
+sign_p3s,sign,He/She/It signs,verb-p3s,ის აწერს ხელს,verb
+sign_p1p,sign,We sign,verb-p1p,ჩვენ ვაწერთ ხელს,verb
+sign_p2p,sign,You (pl) sign,verb-p2p,თქვენ აწერთ ხელს,verb
+sign_p3p,sign,They sign,verb-p3p,ისინი აწერენ ხელს,verb
+long,long,long,adjective,გრძელი,adjective
+short_length,short_length,short (length),adjective,მოკლე,adjective
+tall,tall,tall,adjective,მაღალი,adjective
+short_height,short_height,short (height),adjective,დაბალი,adjective
+wide,wide,wide,adjective,ფართო,adjective
+narrow,narrow,narrow,adjective,ვიწრო,adjective
+big,big,big/large,adjective,დიდი,adjective
+small,small,small/little,adjective,პატარა,adjective
+slow,slow,slow,adjective,ნელი,adjective
+fast,fast,fast,adjective,სწრაფი,adjective
+hot,hot,hot,adjective,ცხელი,adjective
+cold,cold,cold,adjective,ცივი,adjective
+warm,warm,warm,adjective,თბილი,adjective
+cool,cool,cool,adjective,გრილი,adjective
+new,new,new,adjective,ახალი,adjective
+old_thing,old_thing,old (antonym to new),adjective,ძველი,adjective
+young,young,young,adjective,ახალგაზრდა,adjective
+old_age,old_age,old (antonym to young),adjective,მოხუცი,adjective
+good,good,good,adjective,კარგი,adjective
+bad,bad,bad,adjective,ცუდი,adjective
+wet,wet,wet,adjective,სველი,adjective
+dry,dry,dry,adjective,მშრალი,adjective
+sick,sick,sick,adjective,ავად,adjective
+healthy,healthy,healthy,adjective,ჯანმრთელი,adjective
+loud,loud,loud,adjective,ხმამაღალი,adjective
+quiet,quiet,quiet,adjective,ჩუმი,adjective
+happy,happy,happy,adjective,ბედნიერი,adjective
+sad,sad,sad,adjective,სევდიანი,adjective
+beautiful,beautiful,beautiful,adjective,ლამაზი,adjective
+ugly,ugly,ugly,adjective,მახინჯი,adjective
+deaf,deaf,deaf,adjective,ყრუ,adjective
+blind,blind,blind,adjective,ბრმა,adjective
+nice,nice,nice,adjective,კეთილი,adjective
+mean,mean,mean,adjective,ბოროტი,adjective
+rich,rich,rich,adjective,მდიდარი,adjective
+poor,poor,poor,adjective,ღარიბი,adjective
+thick,thick,thick,adjective,სქელი,adjective
+thin,thin,thin,adjective,თხელი,adjective
+expensive,expensive,expensive,adjective,ძვირი,adjective
+cheap,cheap,cheap,adjective,იაფი,adjective
+flat,flat,flat,adjective,ბრტყელი,adjective
+curved,curved,curved,adjective,მოხრილი,adjective
+male,male,male,adjective,მამრობითი,adjective
+female,female,female,adjective,მდედრობითი,adjective
+tight,tight,tight,adjective,მჭიდრო,adjective
+loose,loose,loose,adjective,ფართო,adjective
+high,high,high,adjective,მაღალი,adjective
+low,low,low,adjective,დაბალი,adjective
+soft,soft,soft,adjective,რბილი,adjective
+hard,hard,hard,adjective,მაგარი,adjective
+deep,deep,deep,adjective,ღრმა,adjective
+shallow,shallow,shallow,adjective,წყალმარჩხი,adjective
+clean_adj,clean_adj,clean,adjective,სუფთა,adjective
+dirty,dirty,dirty,adjective,ბინძური,adjective
+strong,strong,strong,adjective,ძლიერი,adjective
+weak,weak,weak,adjective,სუსტი,adjective
+dead,dead,dead,adjective,მკვდარი,adjective
+alive,alive,alive,adjective,ცოცხალი,adjective
+heavy,heavy,heavy,adjective,მძიმე,adjective
+light_weight,light_weight,light (weight),adjective,მსუბუქი,adjective
+dark,dark,dark,adjective,ბნელი,adjective
+light_brightness,light_brightness,light (brightness),adjective,ნათელი,adjective
+nuclear,nuclear,nuclear,adjective,ბირთვული,adjective
+famous,famous,famous,adjective,ცნობილი,adjective
+one_hundred_one,one_hundred_one,101,noun,ას ერთი,numbers
+one_hundred_two,one_hundred_two,102,noun,ას ორი,numbers
+one_hundred_ten,one_hundred_ten,110,noun,ას ათი,numbers
+one_thousand,one_thousand,1000,noun,ათასი,numbers
+one_thousand_one,one_thousand_one,1001,noun,ათას ერთი,numbers
+ten_thousand,ten_thousand,10000,noun,ათი ათასი,numbers
+million,million,million,noun,მილიონი,numbers
+billion,billion,billion,noun,მილიარდი,numbers
+first,first,1st,noun,პირველი,numbers
+second_ordinal,second_ordinal,2nd,noun,მეორე,numbers
+third,third,3rd,noun,მესამე,numbers
+fourth,fourth,4th,noun,მეოთხე,numbers
+fifth,fifth,5th,noun,მეხუთე,numbers
+number,number,number,noun,რიცხვი,category
+morning_time,morning_time,morning,noun,დილა,time
+afternoon_time,afternoon_time,afternoon,noun,შუადღე,time
+evening_time,evening_time,evening,noun,საღამო,time
+night_time,night_time,night,noun,ღამე,time

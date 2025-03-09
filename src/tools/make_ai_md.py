@@ -19,13 +19,6 @@ About: This document contains the NextJS project structure and source code files
 It provides a snapshot of the project's implementation and structure at the time
 of generation.
 
-## Project Context
-- The application is built by Roostr AI, a company specializing in AI-powered solutions for logistics.
-- This project is a frontend application for an AI-powered rate management system for freight forwarders.
-- The backend uses AI agents to talk with partner agents over emails to get rate information.
-- The frontend provides a way to review, edit, approve, and reject the rate information received.
-- It will also provide a way to configure the AI agents (digital workers) behavior. 
-
 ## Project Structure:
 - This is a NextJS 14 project using the App Router
 - Key directories processed:
@@ -33,35 +26,6 @@ of generation.
   - app/review: Frontend review interface components
 - We use a service called "Wristband" for authentication, we should not need to modify authentication code. 
 
-## Here are the environment variables we use:
-- NEXT_PUBLIC_API_URL
-- GOOGLE_CLIENT_EMAIL
-- GOOGLE_PRIVATE_KEY
-- SSOT_SHEET_ID
-- NEXT_PUBLIC_SKIP_AUTH
-- WRISTBAND_CLIENT_ID
-- WRISTBAND_CLIENT_SECRET
-- WRISTBAND_APP_DOMAIN
-- NEXT_PUBLIC_APP_URL
-- SESSION_SECRET
-- WRISTBAND_LOGIN_SECRET
-- METRIC_SHEET_ID
-- MONGO_URI
-- MONGO_DB
-
-## Additional Notes:
-- We're using typescript and tailwindcss in this project.
-- At the top of each file, you will see a comment with the file name and location. It's important to make sure this comment is present in all files.
-- User experience is important: use attractive and consistent styling. 
-- If we are restructuring and no longer need a certain file, please call it out to be removed.
-- It's best to keep files short, under 300 lines of code if possible. If a file is getting too long, consider breaking it up into smaller files.
-- IMPORTANT: if you are making updates to an existing script to add a new feature, please make sure you are not breaking any existing functionality. Make only the minimal changes necessary to add the new feature.
-
-## Meaning of the tabs in the /review page:
-- Pending: These are the rates that need to be reviewed. They show the rates in the staging_rates.json. 
-- Valid: These are the rates which have been accepted by the user, but have not expired yet. These rates come from accepted_rates.json.
-- Expired: These are the rates which have been accepted by the user, but have expired. These rates come from accepted_rates.json.
-- Rejected: These are the rates which have been rejected by the user. They are all the rates in the rejected_rates.json file.
 """
 
 def get_top_level_files(base_path: Path) -> str:

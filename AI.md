@@ -1,17 +1,10 @@
 
 # Project Information
-Generated on: 2025-01-07 12:32:22
+Generated on: 2025-03-09 10:46:14
 
 About: This document contains the NextJS project structure and source code files.
 It provides a snapshot of the project's implementation and structure at the time
 of generation.
-
-## Project Context
-- The application is built by Roostr AI, a company specializing in AI-powered solutions for logistics.
-- This project is a frontend application for an AI-powered rate management system for freight forwarders.
-- The backend uses AI agents to talk with partner agents over emails to get rate information.
-- The frontend provides a way to review, edit, approve, and reject the rate information received.
-- It will also provide a way to configure the AI agents (digital workers) behavior. 
 
 ## Project Structure:
 - This is a NextJS 14 project using the App Router
@@ -20,35 +13,6 @@ of generation.
   - app/review: Frontend review interface components
 - We use a service called "Wristband" for authentication, we should not need to modify authentication code. 
 
-## Here are the environment variables we use:
-- NEXT_PUBLIC_API_URL
-- GOOGLE_CLIENT_EMAIL
-- GOOGLE_PRIVATE_KEY
-- SSOT_SHEET_ID
-- NEXT_PUBLIC_SKIP_AUTH
-- WRISTBAND_CLIENT_ID
-- WRISTBAND_CLIENT_SECRET
-- WRISTBAND_APP_DOMAIN
-- NEXT_PUBLIC_APP_URL
-- SESSION_SECRET
-- WRISTBAND_LOGIN_SECRET
-- METRIC_SHEET_ID
-- MONGO_URI
-- MONGO_DB
-
-## Additional Notes:
-- We're using typescript and tailwindcss in this project.
-- At the top of each file, you will see a comment with the file name and location. It's important to make sure this comment is present in all files.
-- User experience is important: use attractive and consistent styling. 
-- If we are restructuring and no longer need a certain file, please call it out to be removed.
-- It's best to keep files short, under 300 lines of code if possible. If a file is getting too long, consider breaking it up into smaller files.
-- IMPORTANT: if you are making updates to an existing script to add a new feature, please make sure you are not breaking any existing functionality. Make only the minimal changes necessary to add the new feature.
-
-## Meaning of the tabs in the /review page:
-- Pending: These are the rates that need to be reviewed. They show the rates in the staging_rates.json. 
-- Valid: These are the rates which have been accepted by the user, but have not expired yet. These rates come from accepted_rates.json.
-- Expired: These are the rates which have been accepted by the user, but have expired. These rates come from accepted_rates.json.
-- Rejected: These are the rates which have been rejected by the user. They are all the rates in the rejected_rates.json file.
 
 
 # Top Level Configuration Files
@@ -135,9 +99,12 @@ Location: learn-georgian/package.json
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.33.1",
+    "@tailwindcss/typography": "^0.5.16",
     "next": "15.1.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.0.1",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -212,13 +179,11 @@ File not found.
 ```
 app
 ├── api
-│   └── generate-examples
+│   └── lesson
 │       └── route.ts
-├── dynamic-examples
-│   └── page.tsx
-├── examples
-│   └── page.tsx
 ├── review
+│   └── page.tsx
+├── review_v0
 │   └── page.tsx
 ├── favicon.ico
 ├── globals.css
@@ -234,106 +199,10 @@ app
 Location: app/page.tsx
 
 ```typescript
-import Image from "next/image";
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+  redirect('/review');
 }
 
 ```
@@ -371,9 +240,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-black bg-gray-50`}
       >
-        <Header />
+        {/* <Header /> */}
         <main>
           {children}
         </main>
@@ -385,174 +254,88 @@ export default function RootLayout({
 
 ## route.ts
 
-Location: generate-examples/route.ts
+Location: lesson/route.ts
 
 ```typescript
-import { NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-})
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+// (Optional) If using the openai npm package: npm install openai
+// Here we demonstrate a direct fetch call for clarity.
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const word = searchParams.get("word");
+  if (!word) {
+    return NextResponse.json(
+      { error: "No word provided." },
+      { status: 400 }
+    );
+  }
+
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "OPENAI_API_KEY not set" },
+      { status: 500 }
+    );
+  }
+
   try {
-    const { prompt } = await request.json()
+    const prompt = `Teach me about the Georgian word "${word}" by providing a short lesson. 
+    First, provide a list of 5 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
+    Next give 1-2 examples of when someone might use the word, adding quotations around the georgian word being used.
+    Then provide a short list of synoynms and related words, and their meanings.
+    Then provide a short list of antonyms and related words, and their meanings.
+    Then provide a short explanation of the word's meaning and usage, interesting etymology, notes on usage or grammar, etc.
 
-    const message = await anthropic.messages.create({
-      model: "claude-3-opus-20240229",
-      max_tokens: 1024,
-      temperature: 0.7,
-      messages: [{
-        role: "user",
-        content: prompt
-      }]
-    })
+    Avoid transliteration but feel free to include the English translation.
+    
+    Answer in **markdown** format, using headings, bullet points, etc. 
+    Write it as if for a language learner.`;
 
-    // Parse the response to extract the examples
-    const content = message.content[0].text
-    let examples
-    try {
-      // Try to parse the entire response as JSON first
-      examples = JSON.parse(content)
-    } catch {
-      // If that fails, try to extract JSON objects from the text
-      const jsonMatches = content.match(/\{[^}]+\}/g)
-      if (jsonMatches) {
-        examples = jsonMatches.map(match => JSON.parse(match))
-      } else {
-        throw new Error('Could not parse examples from response')
-      }
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful Georgian language tutor.",
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        temperature: 0.7,
+      }),
+    });
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: "OpenAI API error" },
+        { status: response.status }
+      );
     }
 
-    return NextResponse.json({ examples })
-  } catch (error) {
-    console.error('Error:', error)
+    const data = await response.json();
+    const lessonMarkdown = data.choices?.[0]?.message?.content || "No response";
+
+    return NextResponse.json({ lesson: lessonMarkdown });
+  } catch (err) {
+    console.error("Error calling OpenAI:", err);
     return NextResponse.json(
-      { error: 'Failed to generate examples' },
+      { error: "Failed to fetch lesson." },
       { status: 500 }
-    )
+    );
   }
 }
-```
 
-## page.tsx
-
-Location: examples/page.tsx
-
-```typescript
-'use client'
-import { useState, useEffect } from 'react'
-
-interface Phrase {
-  georgian_phrase: string
-  transliteration: string
-  english_phrase: string
-}
-
-interface VisibilityState {
-  transliteration: boolean
-  meaning: boolean
-}
-
-export default function PhrasesPage() {
-  const [phrases, setPhrases] = useState<Phrase[]>([])
-  const [visibleStates, setVisibleStates] = useState<{ [key: number]: VisibilityState }>({})
-
-  useEffect(() => {
-    fetch('/examples.json')
-      .then(response => response.json())
-      .then(data => setPhrases(data))
-      .catch(error => console.error('Error loading phrases:', error))
-  }, [])
-
-  const toggleTransliteration = (index: number) => {
-    setVisibleStates(prev => ({
-      ...prev,
-      [index]: {
-        ...prev[index] || { transliteration: false, meaning: false },
-        transliteration: !(prev[index]?.transliteration ?? false)
-      }
-    }))
-  }
-
-  const toggleMeaning = (index: number) => {
-    setVisibleStates(prev => ({
-      ...prev,
-      [index]: {
-        ...prev[index] || { transliteration: false, meaning: false },
-        meaning: !(prev[index]?.meaning ?? false)
-      }
-    }))
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Georgian Phrases
-        </h1>
-        
-        <div className="space-y-4">
-          {phrases.map((phrase, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6"
-            >
-              <div className="space-y-4">
-                {/* Georgian Phrase - Always visible */}
-                <div className="text-xl font-medium text-gray-900">
-                  {phrase.georgian_phrase}
-                </div>
-                
-                {/* Toggle Buttons */}
-                <div className="flex gap-4">
-                  <button 
-                    onClick={() => toggleTransliteration(index)}
-                    className="flex-1 py-2 px-4 border border-gray-300 rounded-md
-                             text-sm font-medium text-gray-700 bg-white
-                             hover:bg-gray-50 focus:outline-none focus:ring-2
-                             focus:ring-offset-2 focus:ring-indigo-500
-                             transition-colors"
-                  >
-                    {visibleStates[index]?.transliteration ? 'Hide Transliteration' : 'Show Transliteration'}
-                  </button>
-                  
-                  <button 
-                    onClick={() => toggleMeaning(index)}
-                    className="flex-1 py-2 px-4 border border-gray-300 rounded-md
-                             text-sm font-medium text-gray-700 bg-white
-                             hover:bg-gray-50 focus:outline-none focus:ring-2
-                             focus:ring-offset-2 focus:ring-indigo-500
-                             transition-colors"
-                  >
-                    {visibleStates[index]?.meaning ? 'Hide Meaning' : 'Show Meaning'}
-                  </button>
-                </div>
-                
-                {/* Transliteration - Conditionally visible */}
-                {visibleStates[index]?.transliteration && (
-                  <div className="text-gray-600">
-                    <span className="font-medium">Transliteration:</span>{' '}
-                    {phrase.transliteration}
-                  </div>
-                )}
-                
-                {/* English Meaning - Conditionally visible */}
-                {visibleStates[index]?.meaning && (
-                  <div className="text-gray-800">
-                    <span className="font-medium">English:</span>{' '}
-                    {phrase.english_phrase}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
 ```
 
 ## page.tsx
@@ -560,618 +343,1127 @@ export default function PhrasesPage() {
 Location: review/page.tsx
 
 ```typescript
-'use client'
+// src/app/review/page.tsx
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+"use client";
 
-interface Example {
-  georgian: string
-  transliteration: string
-  english: string
+import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+/**
+ * CSV row structure.
+ * Columns: key, img_key, EnglishWord, PartOfSpeech, GeorgianWord, hint
+ */
+type WordData = {
+  key: string;
+  img_key: string;
+  EnglishWord: string;
+  PartOfSpeech: string;
+  GeorgianWord: string;
+  hint: string;
+};
+
+/**
+ * Known card state with SM-2 properties:
+ *   rating: 0..3 → 0=fail,1=hard,2=good,3=easy
+ *   lastSeen: how many picks ago we last displayed it
+ *   interval, repetitions, easeFactor are used to schedule reviews
+ */
+interface KnownWordState {
+  data: WordData;
+  rating: number;
+  lastSeen: number;
+  interval: number;
+  repetitions: number;
+  easeFactor: number;
 }
 
-interface Synonym {
-  georgian: string
-  transliteration: string
-  description: string
+/**
+ * Parse CSV text into an array of WordData objects.
+ * It assumes that the first row is the header and is skipped.
+ */
+function parseCSV(csvText: string): WordData[] {
+  const lines = csvText
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+  // Skip the header line
+  const rows = lines.slice(1);
+
+  return rows.map((row) => {
+    const cols = row.split(",");
+    return {
+      key: cols[0],
+      img_key: cols[1],
+      EnglishWord: cols[2],
+      PartOfSpeech: cols[3],
+      GeorgianWord: cols[4],
+      hint: cols[5],
+    };
+  });
 }
 
-interface Word {
-  georgian: string
-  english: string
-  transliteration: string
-  word_type: string
-  category: string
-  definition_georgian: string
-  description_english: string
-  synonyms: Synonym[]
-  antonyms: Synonym[]
-  examples: Example[]
-}
-
-interface ConjugationForm {
-  georgian: string
-  transliteration: string
-  english: string
-}
-
-interface PresentTense {
-  first_person_singular: ConjugationForm
-  second_person_singular: ConjugationForm
-  third_person_singular: ConjugationForm
-  first_person_plural: ConjugationForm
-  second_person_plural: ConjugationForm
-  third_person_plural: ConjugationForm
-}
-
-interface Verb {
-  english: string
-  georgian: string
-  transliteration: string
-  word_type: string
-  category: string
-  definition_georgian: string
-  description_english: string
-  examples: Example[]
-  conjugation_examples: {
-    present_tense: PresentTense
+/** Convert difficulty label to a numeric score (0..3). */
+function difficultyToScore(difficulty: "easy" | "good" | "hard" | "fail"): number {
+  switch (difficulty) {
+    case "easy":
+      return 3;
+    case "good":
+      return 2;
+    case "hard":
+      return 1;
+    case "fail":
+      return 0;
   }
 }
 
-interface Phrase {
-  english: string
-  georgian: string
-  transliteration: string
-  description_english: string
-  examples: Example[]
+/**
+ * Returns a brief verb hint if PartOfSpeech includes "verb".
+ * Example: If GeorgianWord is "მე ვმუშაობ", we might show "მე ვმუშაობ ____" on the front.
+ */
+function getVerbHint(word: WordData): string | null {
+  if (!word.PartOfSpeech.toLowerCase().includes("verb")) {
+    return null;
+  }
+  const firstWord = word.GeorgianWord.split(" ")[0];
+  return `${firstWord} ____`;
 }
 
-export default function LearnPage() {
-  const [activeTab, setActiveTab] = useState<'words' | 'verbs' | 'phrases'>('words')
-  const [words, setWords] = useState<Word[]>([])
-  const [verbs, setVerbs] = useState<Verb[]>([])
-  const [phrases, setPhrases] = useState<Phrase[]>([])
-  const [showTransliterations, setShowTransliterations] = useState<{ [key: string]: boolean }>({})
-  const [showMeanings, setShowMeanings] = useState<{ [key: string]: boolean }>({})
-  const [imageExists, setImageExists] = useState<{ [key: string]: boolean }>({})
+/**
+ * Extract the "base" of a verb key so that we can group its various conjugations.
+ * E.g. "work_p1s" => "work", "play_p3p" => "play".
+ * If there's no "_p" suffix, just return the whole key (some verbs might be stored that way).
+ */
+function getVerbBaseKey(word: WordData): string | null {
+  if (!word.PartOfSpeech.toLowerCase().includes("verb")) {
+    return null;
+  }
+  const underscoreIdx = word.key.indexOf("_p");
+  if (underscoreIdx > -1) {
+    return word.key.slice(0, underscoreIdx);
+  }
+  // If no suffix => treat the entire key as the "base"
+  return word.key;
+}
 
+// Key for localStorage usage
+const LOCAL_STORAGE_KEY = "reviewState";
+
+export default function ReviewPage() {
+  const [allWords, setAllWords] = useState<WordData[]>([]);
+  const [knownWords, setKnownWords] = useState<KnownWordState[]>([]);
+
+  // Index of the current flashcard
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Flip states
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [showEnglish, setShowEnglish] = useState(false);
+
+  // Count how many total cards have been shown
+  const [cardCounter, setCardCounter] = useState(0);
+
+  // Modal state for AI lessons
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [lessonMarkdown, setLessonMarkdown] = useState("");
+  const [isLessonLoading, setIsLessonLoading] = useState(false);
+
+  // Basic styling
+  const containerClasses = "relative w-full min-h-screen bg-black text-white";
+  const mainAreaClasses =
+    "min-h-[calc(100vh-120px)] flex flex-col items-center justify-center px-4";
+
+  // ---------------------------
+  //  Handle Keyboard shortcuts
+  // ---------------------------
   useEffect(() => {
-    Promise.all([
-      fetch('/data/words.json').then(res => res.json()),
-      fetch('/data/verbs.json').then(res => res.json()),
-      fetch('/data/phrases.json').then(res => res.json())
-    ]).then(([wordsData, verbsData, phrasesData]) => {
-      // Reverse the arrays before setting state
-      const reversedWords = [...wordsData].reverse()
-      const reversedVerbs = [...verbsData].reverse()
-      const reversedPhrases = [...phrasesData].reverse()
+    function handleKey(e: KeyboardEvent) {
+      // If user is typing in an input/textarea, ignore
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
 
-      setWords(reversedWords)
-      setVerbs(reversedVerbs)
-      setPhrases(reversedPhrases)
+      switch (e.key) {
+        case " ":
+          e.preventDefault();
+          if (!isFlipped) setIsFlipped(true);
+          break;
+        case "i":
+          // Toggle English
+          setShowEnglish((prev) => !prev);
+          break;
+        case "r": // easy
+          if (isFlipped) handleScore("easy");
+          break;
+        case "e": // good
+          if (isFlipped) handleScore("good");
+          break;
+        case "w": // hard
+          if (isFlipped) handleScore("hard");
+          break;
+        case "q": // fail
+          if (isFlipped) handleScore("fail");
+          break;
+      }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isFlipped, currentIndex]);
 
-      // Check for image existence for all items
-      const allItems = [...reversedWords, ...reversedVerbs, ...reversedPhrases]
-      allItems.forEach(item => {
-        fetch(`/img/${item.georgian}.png`)
-          .then(response => {
-            setImageExists(prev => ({
-              ...prev,
-              [item.georgian]: response.ok
-            }))
-          })
-          .catch(() => {
-            setImageExists(prev => ({
-              ...prev,
-              [item.georgian]: false
-            }))
-          })
-      })
-    })
-  }, [])
+  // ---------------------------
+  //  Load CSV on mount
+  // ---------------------------
+  useEffect(() => {
+    fetch("/words.csv")
+      .then((res) => res.text())
+      .then((csv) => setAllWords(parseCSV(csv)));
+  }, []);
 
-  const createUniqueKey = (base: string, index: number) => `${base}-${index}`
+  // ----------------------------------------------------
+  //  Try restoring from local storage once CSV is loaded
+  // ----------------------------------------------------
+  useEffect(() => {
+    if (allWords.length === 0) return; // not loaded yet
 
-  const toggleTransliteration = (id: string) => {
-    setShowTransliterations(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }))
+    try {
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.knownWords && Array.isArray(parsed.knownWords) && parsed.knownWords.length > 0) {
+          setKnownWords(parsed.knownWords);
+          setCurrentIndex(parsed.currentIndex ?? 0);
+          return; // do not introduce new if we have stored data
+        }
+      }
+    } catch (err) {
+      console.error("Error loading local storage:", err);
+    }
+
+    // If no stored data, introduce a first word
+    if (knownWords.length === 0) {
+      introduceRandomKnownWord();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allWords]);
+
+  // ----------------------------------------------------
+  //  Whenever knownWords/currentIndex changes, store them
+  // ----------------------------------------------------
+  useEffect(() => {
+    if (knownWords.length > 0) {
+      const toSave = {
+        knownWords,
+        currentIndex,
+      };
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
+    }
+  }, [knownWords, currentIndex]);
+
+  // ----------------------------------------------------
+  //  Introduce a new random word. If it is a verb,
+  //  also introduce all other conjugations with the same base.
+  // ----------------------------------------------------
+  function introduceRandomKnownWord() {
+    if (allWords.length === 0) return;
+
+    // Filter out words that are already introduced
+    const knownKeys = new Set(knownWords.map((k) => k.data.key));
+    const candidates = allWords.filter((w) => !knownKeys.has(w.key));
+    if (candidates.length === 0) return;
+
+    // Pick one at random
+    const randIndex = Math.floor(Math.random() * candidates.length);
+    const newWord = candidates[randIndex];
+
+    let wordsToIntroduce: WordData[] = [newWord];
+
+    // If it's a verb, gather all of its conjugations by the same base
+    if (newWord.PartOfSpeech.toLowerCase().includes("verb")) {
+      const baseKey = getVerbBaseKey(newWord);
+      if (baseKey) {
+        // Collect all "sibling" forms that share the same base
+        const siblingForms = candidates.filter((w) => {
+          if (!w.PartOfSpeech.toLowerCase().includes("verb")) return false;
+          return getVerbBaseKey(w) === baseKey;
+        });
+        // Merge them, removing duplicates
+        wordsToIntroduce = [...new Set([...wordsToIntroduce, ...siblingForms])];
+      }
+    }
+
+    // Convert them to KnownWordState
+    const newEntries: KnownWordState[] = wordsToIntroduce.map((w) => ({
+      data: w,
+      rating: 0,
+      lastSeen: 0,
+      interval: 1,
+      repetitions: 0,
+      easeFactor: 2.5,
+    }));
+
+    // Add to knownWords
+    setKnownWords((prev) => [...prev, ...newEntries]);
   }
 
-  const toggleMeaning = (id: string) => {
-    setShowMeanings(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }))
+  // ----------------------------
+  //  Handle rating (SM-2 logic)
+  // ----------------------------
+  function handleScore(diff: "easy" | "good" | "hard" | "fail") {
+    setKnownWords((prev) => {
+      const updated = [...prev];
+      const cardState = updated[currentIndex];
+      const score = difficultyToScore(diff);
+      cardState.rating = score;
+
+      const normalizedScore = score / 3;
+      // Simple SM-2 approach
+      if (score === 0) {
+        cardState.repetitions = 0;
+        cardState.interval = 1;
+      } else {
+        cardState.repetitions += 1;
+        if (cardState.repetitions === 1) {
+          cardState.interval = 1;
+        } else if (cardState.repetitions === 2) {
+          cardState.interval = 6;
+        } else {
+          cardState.interval = Math.round(
+            cardState.interval * cardState.easeFactor
+          );
+        }
+      }
+      // Adjust ease factor
+      const easeChange = 0.1 - (1 - normalizedScore) * 0.8;
+      cardState.easeFactor = Math.max(1.3, cardState.easeFactor + easeChange);
+
+      cardState.lastSeen = 0;
+      return updated;
+    });
+
+    // Possibly introduce more cards if we have a high overall success
+    if (computeOverallScore() > 0.8) {
+      introduceRandomKnownWord();
+    }
+
+    pickNextCard();
   }
 
-  const TabButton = ({ tab, label }: { tab: 'words' | 'verbs' | 'phrases', label: string }) => (
-    <button
-      onClick={() => setActiveTab(tab)}
-      className={`px-4 py-2 font-medium rounded-lg transition-colors
-                ${activeTab === tab 
-                  ? 'bg-blue-500 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-    >
-      {label}
-    </button>
-  )
+  /** Average rating/3 across known words. */
+  function computeOverallScore(): number {
+    if (knownWords.length === 0) return 0;
+    const sum = knownWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
+    return sum / knownWords.length;
+  }
 
-  const renderWordCard = (word: Word, index: number) => (
-    <div key={createUniqueKey(word.georgian, index)} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-      <div className="flex items-start space-x-4">
-        {/* Image container */}
-        <div className="w-32 h-32 relative flex-shrink-0">
-          {imageExists[word.georgian] ? (
-            <Image
-              src={`/img/${encodeURIComponent(word.georgian)}.png`}
-              alt={word.english}
-              fill
-              className="object-contain rounded-lg"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-              <span className="text-gray-400 text-sm">No image</span>
-            </div>
-          )}
-        </div>
+  /** Priority for SM-2 scheduling: overdue cards get higher priority. */
+  function calculateCardPriority(card: KnownWordState): number {
+    const normalizedRating = card.rating / 3;
+    const overdueFactor = card.lastSeen / card.interval;
+    const difficultyFactor = 1 + (1 - normalizedRating) * 2;
 
-        <div className="flex-grow">
-          <div className="text-xl font-medium text-gray-900">{word.georgian}</div>
-          <div className="text-sm text-gray-600">{word.category}</div>
-        </div>
+    if (overdueFactor >= 1) {
+      return overdueFactor * difficultyFactor;
+    }
+    // Not overdue => a small fraction so that eventually it's surfaced
+    return 0.1 * overdueFactor * difficultyFactor;
+  }
+
+  /** Pick the next card by the highest priority. */
+  function pickNextCard() {
+    setCardCounter((n) => n + 1);
+
+    setKnownWords((prev) => {
+      const updated = prev.map((kw, i) =>
+        i === currentIndex ? kw : { ...kw, lastSeen: kw.lastSeen + 1 }
+      );
+
+      let bestIdx = 0;
+      let bestVal = -Infinity;
+      updated.forEach((kw, i) => {
+        const priority = calculateCardPriority(kw);
+        if (priority > bestVal) {
+          bestVal = priority;
+          bestIdx = i;
+        }
+      });
+
+      setCurrentIndex(bestIdx);
+      return updated;
+    });
+
+    setIsFlipped(false);
+    setShowEnglish(false);
+  }
+
+  // --------------
+  //  "Get Lesson"
+  // --------------
+  async function handleGetLesson() {
+    if (!knownWords[currentIndex]) return;
+    try {
+      setIsModalOpen(true);
+      setIsLessonLoading(true);
+      setLessonMarkdown("");
+
+      const word = knownWords[currentIndex].data.EnglishWord;
+      const res = await fetch(`/api/lesson?word=${encodeURIComponent(word)}`);
+      if (!res.ok) {
+        throw new Error("Failed to get lesson");
+      }
+      const data = await res.json();
+      setLessonMarkdown(data.lesson || "No lesson found");
+    } catch (error) {
+      console.error(error);
+      setLessonMarkdown("Error fetching lesson from the server.");
+    } finally {
+      setIsLessonLoading(false);
+    }
+  }
+
+  // -----------------------------------
+  //  Button to clear progress
+  // -----------------------------------
+  function handleClearProgress() {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    setKnownWords([]);
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    setShowEnglish(false);
+    setCardCounter(0);
+    introduceRandomKnownWord();
+  }
+
+  // If no currentCard, we’re either loading or have no data
+  const currentCard = knownWords[currentIndex];
+  if (!currentCard) {
+    return (
+      <div className="p-8 text-center">
+        <p>Loading or no cards available...</p>
       </div>
-      
-      <div className="flex gap-4">
-        <button
-          onClick={() => toggleTransliteration(createUniqueKey(word.georgian, index))}
-          className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                   text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-        >
-          {showTransliterations[createUniqueKey(word.georgian, index)] ? 'Hide Transliteration' : 'Show Transliteration'}
-        </button>
-        <button
-          onClick={() => toggleMeaning(createUniqueKey(word.georgian, index))}
-          className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                   text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-        >
-          {showMeanings[createUniqueKey(word.georgian, index)] ? 'Hide Details' : 'Show Details'}
-        </button>
-      </div>
+    );
+  }
 
-      {showTransliterations[createUniqueKey(word.georgian, index)] && (
-        <div className="text-gray-600">
-          <span className="font-medium">Transliteration:</span> {word.transliteration}
-        </div>
-      )}
+  // Decide what to display
+  const { EnglishWord, GeorgianWord } = currentCard.data;
+  const verbHint = getVerbHint(currentCard.data);
 
-      {showMeanings[createUniqueKey(word.georgian, index)] && (
-        <div className="space-y-3 pt-2">
-          <div>
-            <span className="font-medium">English:</span> {word.english}
-          </div>
-          <div>
-            <span className="font-medium">Category:</span> {word.category}
-          </div>
-          <div>
-            <span className="font-medium">Definition (Georgian):</span> {word.definition_georgian}
-          </div>
-          <div>
-            <span className="font-medium">Description:</span> {word.description_english}
-          </div>
-          {word.examples.length > 0 && (
-            <div>
-              <span className="font-medium">Examples:</span>
-              {word.examples.map((example, exampleIndex) => (
-                <div key={`${createUniqueKey(word.georgian, index)}-example-${exampleIndex}`} className="ml-4 mt-2">
-                  <div>{example.georgian}</div>
-                  <div className="text-gray-600">{example.english}</div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  )
+  // Modal classes for dark theme
+  const modalBgClass =
+    "fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50";
+  const modalContentClass =
+    "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
 
-  const renderVerbCard = (verb: Verb, index: number) => (
-    <div key={createUniqueKey(verb.georgian, index)} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-      <div className="flex items-start space-x-4">
-        {/* Image container */}
-        <div className="w-20 h-20 relative flex-shrink-0">
-          {imageExists[verb.georgian] ? (
-            <Image
-              src={`/img/${encodeURIComponent(verb.georgian)}.png`}
-              alt={verb.english}
-              fill
-              className="object-contain rounded-lg"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-              <span className="text-gray-400 text-sm">No image</span>
-            </div>
-          )}
-        </div>
-
-        <div className="flex-grow">
-          <div className="text-xl font-medium text-gray-900">{verb.georgian}</div>
-          <div className="text-sm text-gray-600">{verb.category}</div>
-        </div>
-      </div>
-      
-      <div className="flex gap-4">
-        <button
-          onClick={() => toggleTransliteration(createUniqueKey(verb.georgian, index))}
-          className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                   text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-        >
-          {showTransliterations[createUniqueKey(verb.georgian, index)] ? 'Hide Transliteration' : 'Show Transliteration'}
-        </button>
-        <button
-          onClick={() => toggleMeaning(createUniqueKey(verb.georgian, index))}
-          className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                   text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-        >
-          {showMeanings[createUniqueKey(verb.georgian, index)] ? 'Hide Details' : 'Show Details'}
-        </button>
-      </div>
-
-      {showTransliterations[createUniqueKey(verb.georgian, index)] && (
-        <div className="text-gray-600">
-          <span className="font-medium">Transliteration:</span> {verb.transliteration}
-        </div>
-      )}
-
-      {showMeanings[createUniqueKey(verb.georgian, index)] && (
-        <div className="space-y-3 pt-2">
-          <div>
-            <span className="font-medium">English:</span> {verb.english}
-          </div>
-          <div>
-            <span className="font-medium">Category:</span> {verb.category}
-          </div>
-          <div>
-            <span className="font-medium">Description:</span> {verb.description_english}
-          </div>
-          {verb.examples.length > 0 && (
-            <div>
-              <span className="font-medium">Examples:</span>
-              {verb.examples.map((example, exampleIndex) => (
-                <div key={`${createUniqueKey(verb.georgian, index)}-example-${exampleIndex}`} className="ml-4 mt-2">
-                  <div>{example.georgian}</div>
-                  <div className="text-gray-600">{example.english}</div>
-                </div>
-              ))}
-            </div>
-          )}
-          <div>
-            <span className="font-medium">Conjugation (Present Tense):</span>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-              {Object.entries(verb.conjugation_examples.present_tense).map(([person, form], conjugationIndex) => (
-                <div key={`${createUniqueKey(verb.georgian, index)}-conjugation-${conjugationIndex}`} className="border rounded p-2">
-                  <div className="font-medium">{form.english}</div>
-                  <div>{form.georgian}</div>
-                  <div className="text-gray-600 text-sm">{form.transliteration}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-
-  const renderPhraseCard = (phrase: Phrase, index: number) => (
-    <div key={createUniqueKey(phrase.georgian, index)} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-      <div className="flex items-start space-x-4">
-        {/* Image container */}
-        <div className="w-20 h-20 relative flex-shrink-0">
-          {imageExists[phrase.georgian] ? (
-            <Image
-              src={`/img/${encodeURIComponent(phrase.georgian)}.png`}
-              alt={phrase.english}
-              fill
-              className="object-contain rounded-lg"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-              <span className="text-gray-400 text-sm">No image</span>
-            </div>
-          )}
-        </div>
-
-        <div className="flex-grow">
-          <div className="text-xl font-medium text-gray-900">{phrase.georgian}</div>
-        </div>
-      </div>
-      
-      <div className="flex gap-4">
-        <button
-          onClick={() => toggleTransliteration(createUniqueKey(phrase.georgian, index))}
-          className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                   text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-        >
-          {showTransliterations[createUniqueKey(phrase.georgian, index)] ? 'Hide Transliteration' : 'Show Transliteration'}
-        </button>
-        <button
-          onClick={() => toggleMeaning(createUniqueKey(phrase.georgian, index))}
-          className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                   text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-        >
-          {showMeanings[createUniqueKey(phrase.georgian, index)] ? 'Hide Details' : 'Show Details'}
-        </button>
-      </div>
-
-      {showTransliterations[createUniqueKey(phrase.georgian, index)] && (
-        <div className="text-gray-600">
-          <span className="font-medium">Transliteration:</span> {phrase.transliteration}
-        </div>
-      )}
-
-      {showMeanings[createUniqueKey(phrase.georgian, index)] && (
-        <div className="space-y-3 pt-2">
-          <div>
-            <span className="font-medium">English:</span> {phrase.english}
-          </div>
-          <div>
-            <span className="font-medium">Description:</span> {phrase.description_english}
-          </div>
-          {phrase.examples.length > 0 && (
-            <div>
-              <span className="font-medium">Examples:</span>
-              {phrase.examples.map((example, exampleIndex) => (
-                <div key={`${createUniqueKey(phrase.georgian, index)}-example-${exampleIndex}`} className="ml-4 mt-2">
-                  <div>{example.georgian}</div>
-                  <div className="text-gray-600">{example.english}</div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  )
+  /**
+   * Customized ReactMarkdown rendering:
+   * - If you want to style code blocks, blockquotes, etc., you can expand further.
+   */
+  const markdownComponents = {
+    h1: ({ node, ...props }: any) => (
+      <h1
+        className="text-3xl font-bold mb-3 mt-6 text-slate-300 font-light border-b pb-4"
+        {...props}
+      />
+    ),
+    h2: ({ node, ...props }: any) => (
+      <h2 className="text-2xl text-slate-300 font-bold mb-2 mt-5" {...props} />
+    ),
+    h3: ({ node, ...props }: any) => (
+      <h3
+        className="text-xl text-slate-200 tracking-wide font-semibold mb-2 mt-4"
+        {...props}
+      />
+    ),
+    p: ({ node, ...props }: any) => (
+      <p
+        className="mb-3 leading-relaxed text-slate-300 text-lg tracking-wide font-light"
+        {...props}
+      />
+    ),
+    ul: ({ node, ...props }: any) => (
+      <ul
+        className="list-disc list-inside mb-3 ml-4 text-slate-200 tracking-wide text-lg font-light"
+        {...props}
+      />
+    ),
+    ol: ({ node, ...props }: any) => (
+      <ol
+        className="list-decimal list-inside mb-3 ml-4 text-slate-200 font-light"
+        {...props}
+      />
+    ),
+    li: ({ node, ...props }: any) => (
+      <li className="mb-1 text-slate-200" {...props} />
+    ),
+    strong: ({ node, ...props }: any) => (
+      <strong className="font-semibold" {...props} />
+    ),
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 text-black px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Learn Georgian
-        </h1>
+    <div className={containerClasses}>
+      {/* Top Bar */}
+      <div className="flex items-center justify-between p-4">
+        <button
+          onClick={handleClearProgress}
+          className="px-3 py-2 border border-gray-400 rounded text-sm"
+        >
+          Reset
+        </button>
 
-        <div className="flex gap-4 mb-8 justify-center">
-          <TabButton tab="words" label="Words" />
-          <TabButton tab="verbs" label="Verbs" />
-          <TabButton tab="phrases" label="Phrases" />
-        </div>
+        <div className="text-sm">Score: {knownWords.length}</div>
 
-        <div className="space-y-4">
-          {activeTab === 'words' && words.map((word, index) => renderWordCard(word, index))}
-          {activeTab === 'verbs' && verbs.map((verb, index) => renderVerbCard(verb, index))}
-          {activeTab === 'phrases' && phrases.map((phrase, index) => renderPhraseCard(phrase, index))}
+        <button
+          onClick={handleGetLesson}
+          className="px-3 py-2 border border-gray-400 rounded text-sm"
+        >
+          Get Lesson
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className={mainAreaClasses}>
+        <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
+          <img
+            src={`/img/${currentCard.data.img_key}.jpg`}
+            alt={EnglishWord}
+            className="max-h-[320px] object-contain mb-3"
+            onClick={() => setShowEnglish((prev) => !prev)}
+          />
+
+          {showEnglish && (
+            <p className="text-base font-semibold mb-3">
+              {EnglishWord}
+            </p>
+          )}
+
+          <p className="text-3xl tracking-wider mb-4">
+            {!isFlipped ? verbHint ?? "" : GeorgianWord}
+          </p>
         </div>
       </div>
+
+      {/* Bottom Bar */}
+      {!isFlipped ? (
+        // Show FLIP button
+        <div className="fixed bottom-0 left-0 w-full flex text-white bg-black">
+          <button
+            onClick={() => setIsFlipped(true)}
+            className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px]"
+          >
+            Flip
+          </button>
+        </div>
+      ) : (
+        // Show RATING buttons
+        <div className="fixed bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
+          <button
+            onClick={() => handleScore("fail")}
+            className="flex-1 py-3 text-center border-t-4 border-red-500/0 text-red-400 bg-red-800/0"
+          />
+          <button
+            onClick={() => handleScore("fail")}
+            className="flex-1 py-3 text-center border-t-4 border-red-500 text-red-400 bg-red-800/10"
+          >
+            Fail
+          </button>
+          <button
+            onClick={() => handleScore("hard")}
+            className="flex-1 py-3 text-center border-t-4 border-yellow-500 text-yellow-400 bg-yellow-700/10"
+          >
+            Hard
+          </button>
+          <button
+            onClick={() => handleScore("good")}
+            className="flex-1 py-3 text-center border-t-4 border-blue-500 text-blue-400 bg-blue-700/10"
+          >
+            Good
+          </button>
+          <button
+            onClick={() => handleScore("easy")}
+            className="flex-1 py-3 text-center border-t-4 border-green-500 text-green-400 bg-green-700/10"
+          >
+            Easy
+          </button>
+        </div>
+      )}
+
+      {/* Lesson Modal */}
+      {isModalOpen && (
+        <div className={modalBgClass} onClick={() => setIsModalOpen(false)}>
+          <div
+            className={modalContentClass}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-2 right-2 text-4xl text-gray-400 hover:text-gray-100"
+            >
+              ✕
+            </button>
+
+            {/* Loading spinner or the lesson */}
+            {isLessonLoading ? (
+              <div className="flex items-center justify-center mt-6 mb-6">
+                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+              </div>
+            ) : (
+              <div className="mt-6">
+                <h1 className="text-3xl font-bold mb-3">{GeorgianWord}</h1>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={markdownComponents}
+                >
+                  {lessonMarkdown}
+                </ReactMarkdown>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
+
 ```
 
 ## page.tsx
 
-Location: dynamic-examples/page.tsx
+Location: review_v0/page.tsx
 
 ```typescript
-'use client'
+// app/review/page.tsx
 
-import { useState, useEffect } from 'react'
+"use client";
 
-interface VocabItem {
-  type: string
-  english: string
-  georgian: string
-  created: string
-  ease: number
-  last_seen_index: number
+import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+/**
+ * CSV row structure.
+ * Columns: key, img_key, EnglishWord, PartOfSpeech, GeorgianWord, hint
+ */
+type WordData = {
+  key: string;
+  img_key: string;
+  EnglishWord: string;
+  PartOfSpeech: string;
+  GeorgianWord: string;
+  hint: string;
+};
+
+/**
+ * Known card state with SM-2 properties:
+ *   rating: 0..3 → 0=fail,1=hard,2=good,3=easy
+ *   lastSeen: how many picks ago we last displayed it
+ */
+interface KnownWordState {
+  data: WordData;
+  rating: number;
+  lastSeen: number;
+  interval: number;
+  repetitions: number;
+  easeFactor: number;
 }
 
-interface GeneratedExample {
-  georgian: string
-  english: string
-  transliteration: string
+/** Parse CSV text into WordData objects. */
+function parseCSV(csvText: string): WordData[] {
+  const lines = csvText.split("\n").map((l) => l.trim()).filter(Boolean);
+  // Skip the header line
+  const rows = lines.slice(1);
+
+  return rows.map((row) => {
+    const cols = row.split(",");
+    return {
+      key: cols[0],
+      img_key: cols[1],
+      EnglishWord: cols[2],
+      PartOfSpeech: cols[3],
+      GeorgianWord: cols[4],
+      hint: cols[5],
+    };
+  });
 }
 
-export default function DynamicExamplesPage() {
-  const [vocab, setVocab] = useState<VocabItem[]>([])
-  const [selectedWords, setSelectedWords] = useState<string[]>([])
-  const [examples, setExamples] = useState<GeneratedExample[]>([])
-  const [loading, setLoading] = useState(false)
-  const [showTransliterations, setShowTransliterations] = useState<{ [key: number]: boolean }>({})
-  const [showMeanings, setShowMeanings] = useState<{ [key: number]: boolean }>({})
+/** Convert difficulty label to a numeric score (0..3). */
+function difficultyToScore(difficulty: "easy" | "good" | "hard" | "fail"): number {
+  switch (difficulty) {
+    case "easy":
+      return 3;
+    case "good":
+      return 2;
+    case "hard":
+      return 1;
+    case "fail":
+      return 0;
+  }
+}
 
+/** If `PartOfSpeech` includes 'verb', return a pronoun-hint if key ends with _pXs. */
+function getVerbHint(word: WordData): string | null {
+  if (!word.PartOfSpeech.toLowerCase().includes("verb")) {
+    return null;
+  }
+  const firstWord = word.GeorgianWord.split(" ")[0];
+  return `${firstWord} ____`;
+}
+
+// -- ADD THIS KEY for local storage --
+const LOCAL_STORAGE_KEY = "reviewState";
+
+export default function ReviewPage() {
+  const [allWords, setAllWords] = useState<WordData[]>([]);
+  const [knownWords, setKnownWords] = useState<KnownWordState[]>([]);
+
+  // Index of the current flashcard
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Flip states
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [showEnglish, setShowEnglish] = useState(false);
+
+  // Count how many total cards have been shown
+  const [cardCounter, setCardCounter] = useState(0);
+
+  // Always dark mode
+  const containerClasses = "relative w-full min-h-screen bg-black text-white";
+  const mainAreaClasses =
+    "min-h-[calc(100vh-120px)] flex flex-col items-center justify-center px-4";
+
+  // Lesson Modal State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [lessonMarkdown, setLessonMarkdown] = useState("");
+  const [isLessonLoading, setIsLessonLoading] = useState(false);
+
+  // ---------------------------
+  //  Keyboard
+  // ---------------------------
   useEffect(() => {
-    fetch('/data/vocab.json')
-      .then(res => res.json())
-      .then(data => setVocab(data))
-      .catch(error => console.error('Error loading vocabulary:', error))
-  }, [])
+    function handleKey(e: KeyboardEvent) {
+      if (e.target instanceof HTMLInputElement) return;
+      switch (e.key) {
+        case " ":
+          e.preventDefault();
+          if (!isFlipped) setIsFlipped(true);
+          break;
+        case "i":
+          setShowEnglish((prev) => !prev);
+          break;
+        case "r": // easy
+          if (isFlipped) handleScore("easy");
+          break;
+        case "e": // good
+          if (isFlipped) handleScore("good");
+          break;
+        case "w": // hard
+          if (isFlipped) handleScore("hard");
+          break;
+        case "q": // fail
+          if (isFlipped) handleScore("fail");
+          break;
+      }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isFlipped, currentIndex]);
 
-  const toggleTransliteration = (index: number) => {
-    setShowTransliterations(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }))
-  }
+  // ---------------------------
+  //  Load CSV
+  // ---------------------------
+  useEffect(() => {
+    fetch("/words.csv")
+      .then((res) => res.text())
+      .then((csv) => setAllWords(parseCSV(csv)));
+  }, []);
 
-  const toggleMeaning = (index: number) => {
-    setShowMeanings(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }))
-  }
-
-  const handleWordSelect = (georgian: string) => {
-    setSelectedWords(prev => 
-      prev.includes(georgian)
-        ? prev.filter(word => word !== georgian)
-        : [...prev, georgian]
-    )
-  }
-
-  const selectAllWords = () => {
-    setSelectedWords(vocab.map(item => item.georgian))
-  }
-
-  const clearSelection = () => {
-    setSelectedWords([])
-  }
-
-  const generateExamples = async () => {
-    setLoading(true)
-    
-    // Create the prompt for the API
-    const selectedVocab = vocab.filter(item => selectedWords.includes(item.georgian))
-    const prompt = `Create 5 example sentences in Georgian that use these words: ${selectedVocab.map(item => 
-      `${item.georgian} (${item.english})`).join(', ')}. 
-
-      Use simple language and common vocabulary. Keep the sentences short and clear.
-      
-      For each sentence, provide:
-      1. The Georgian sentence
-      2. English translation
-      3. Latin transliteration
-      
-      Format each example as a JSON object with these properties:
-      {
-        "georgian": "Georgian sentence",
-        "english": "English translation",
-        "transliteration": "Latin transliteration"
-      }`
+  // ----------------------------------------------------
+  //  On CSV load, try restoring from local storage first
+  // ----------------------------------------------------
+  useEffect(() => {
+    if (allWords.length === 0) return; // not loaded yet?
 
     try {
-      const response = await fetch('/api/generate-examples', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt })
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to generate examples')
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.knownWords && Array.isArray(parsed.knownWords) && parsed.knownWords.length > 0) {
+          setKnownWords(parsed.knownWords);
+          setCurrentIndex(parsed.currentIndex ?? 0);
+          return; // do not introduce a new word if we have stored data
+        }
       }
+    } catch (err) {
+      console.error("Error loading local storage:", err);
+    }
 
-      const data = await response.json()
-      setExamples(data.examples)
+    // If no stored data or parse error, introduce first word
+    if (knownWords.length === 0) {
+      introduceRandomKnownWord();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allWords]);
+
+  // ----------------------------------------------------
+  //  Whenever knownWords/currentIndex changes, store them
+  // ----------------------------------------------------
+  useEffect(() => {
+    if (knownWords.length > 0) {
+      const toSave = {
+        knownWords,
+        currentIndex,
+      };
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
+    }
+  }, [knownWords, currentIndex]);
+
+  // ----------------------------
+  //  Introduce a new random word
+  // ----------------------------
+  function introduceRandomKnownWord() {
+    if (allWords.length === 0) return;
+    const knownKeys = new Set(knownWords.map((k) => k.data.key));
+    const candidates = allWords.filter((w) => !knownKeys.has(w.key));
+    if (candidates.length === 0) return;
+
+    const randIndex = Math.floor(Math.random() * candidates.length);
+    const newWord = candidates[randIndex];
+
+    setKnownWords((prev) => [
+      ...prev,
+      {
+        data: newWord,
+        rating: 0,
+        lastSeen: 0,
+        interval: 1,
+        repetitions: 0,
+        easeFactor: 2.5,
+      },
+    ]);
+  }
+
+  // ----------------------------
+  //  Handle rating for SM-2
+  // ----------------------------
+  function handleScore(diff: "easy" | "good" | "hard" | "fail") {
+    setKnownWords((prev) => {
+      const updated = [...prev];
+      const cardState = updated[currentIndex];
+      const score = difficultyToScore(diff);
+      cardState.rating = score;
+
+      const normalizedScore = score / 3;
+      // Simple SM-2 logic
+      if (score === 0) {
+        cardState.repetitions = 0;
+        cardState.interval = 1;
+      } else {
+        cardState.repetitions += 1;
+        if (cardState.repetitions === 1) {
+          cardState.interval = 1;
+        } else if (cardState.repetitions === 2) {
+          cardState.interval = 6;
+        } else {
+          cardState.interval = Math.round(
+            cardState.interval * cardState.easeFactor
+          );
+        }
+      }
+      // Adjust ease factor
+      const easeChange = 0.1 - (1 - normalizedScore) * 0.8;
+      cardState.easeFactor = Math.max(1.3, cardState.easeFactor + easeChange);
+      cardState.lastSeen = 0;
+      return updated;
+    });
+
+    // Possibly introduce more cards if overall is high
+    if (computeOverallScore() > 0.8) {
+      introduceRandomKnownWord();
+    }
+
+    pickNextCard();
+  }
+
+  /** Average rating/3 across known words. */
+  function computeOverallScore(): number {
+    if (knownWords.length === 0) return 0;
+    const sum = knownWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
+    return sum / knownWords.length;
+  }
+
+  /** Priority for SM-2 scheduling. */
+  function calculateCardPriority(card: KnownWordState): number {
+    const normalizedRating = card.rating / 3;
+    const overdueFactor = card.lastSeen / card.interval;
+    const difficultyFactor = 1 + (1 - normalizedRating) * 2;
+
+    if (overdueFactor >= 1) {
+      return overdueFactor * difficultyFactor;
+    }
+    return 0.1 * overdueFactor * difficultyFactor;
+  }
+
+  /** Pick next card by highest priority, reset flip. */
+  function pickNextCard() {
+    setCardCounter((n) => n + 1);
+
+    setKnownWords((prev) => {
+      const updated = prev.map((kw, i) =>
+        i !== currentIndex ? { ...kw, lastSeen: kw.lastSeen + 1 } : kw
+      );
+
+      let bestIdx = 0;
+      let bestVal = -Infinity;
+      updated.forEach((kw, i) => {
+        const priority = calculateCardPriority(kw);
+        if (priority > bestVal) {
+          bestVal = priority;
+          bestIdx = i;
+        }
+      });
+
+      setCurrentIndex(bestIdx);
+      return updated;
+    });
+
+    setIsFlipped(false);
+    setShowEnglish(false);
+  }
+
+  // --------------
+  //  "Get Lesson"
+  // --------------
+  async function handleGetLesson() {
+    try {
+      setIsModalOpen(true);
+      setIsLessonLoading(true);
+      setLessonMarkdown("");
+
+      const word = knownWords[currentIndex].data.EnglishWord;
+      const res = await fetch(`/api/lesson?word=${encodeURIComponent(word)}`);
+      if (!res.ok) {
+        throw new Error("Failed to get lesson");
+      }
+      const data = await res.json();
+      setLessonMarkdown(data.lesson || "No lesson found");
     } catch (error) {
-      console.error('Error generating examples:', error)
+      console.error(error);
+      setLessonMarkdown("Error fetching lesson from the server.");
     } finally {
-      setLoading(false)
+      setIsLessonLoading(false);
     }
   }
 
+  // -----------------------------------
+  // Optional: Button to clear progress
+  // -----------------------------------
+  function handleClearProgress() {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    setKnownWords([]);
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    setShowEnglish(false);
+    setCardCounter(0);
+    // Introduce one fresh card
+    introduceRandomKnownWord();
+  }
+
+  const currentCard = knownWords[currentIndex];
+  if (!currentCard) {
+    return (
+      <div className="p-8 text-center">
+        <p>Loading or no cards available...</p>
+      </div>
+    );
+  }
+
+  const { EnglishWord, GeorgianWord } = currentCard.data;
+  const verbHint = getVerbHint(currentCard.data);
+
+  // Modal classes for dark theme
+  const modalBgClass =
+    "fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50";
+  const modalContentClass =
+    "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
+
+  /**
+   * Customized ReactMarkdown rendering:
+   * - h1, h2, h3, p, ul, ol, li, strong, etc.
+   * - You can expand this mapping as needed.
+   */
+  const markdownComponents = {
+    h1: ({ node, ...props }: any) => (
+      <h1
+        className="text-3xl font-bold mb-3 mt-6 text-slate-300 font-light border-b pb-4"
+        {...props}
+      />
+    ),
+    h2: ({ node, ...props }: any) => (
+      <h2
+        className="text-2xl text-slate-300 font-bold mb-2 mt-5"
+        {...props}
+      />
+    ),
+    h3: ({ node, ...props }: any) => (
+      <h3
+        className="text-xl text-slate-200 tracking-wide font-semibold mb-2 mt-4"
+        {...props}
+      />
+    ),
+    p: ({ node, ...props }: any) => (
+      <p
+        className="mb-3 leading-relaxed text-slate-300 text-lg tracking-wide font-light"
+        {...props}
+      />
+    ),
+    ul: ({ node, ...props }: any) => (
+      <ul
+        className="list-disc list-inside mb-3 ml-4 text-slate-200 tracking-wide text-lg font-light"
+        {...props}
+      />
+    ),
+    ol: ({ node, ...props }: any) => (
+      <ol
+        className="list-decimal list-inside mb-3 ml-4 text-slate-200 font-light"
+        {...props}
+      />
+    ),
+    li: ({ node, ...props }: any) => (
+      <li
+        className="mb-1 text-slate-200"
+        {...props}
+      />
+    ),
+    strong: ({ node, ...props }: any) => (
+      <strong className="font-semibold" {...props} />
+    ),
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 text-black">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Generate Practice Examples
-        </h1>
+    <div className={containerClasses}>
+      {/* --- Top bar: Reset + Score + "Get Lesson" --- */}
+      <div className="flex items-center justify-between p-4">
+        <button
+          onClick={handleClearProgress}
+          className="px-3 py-2 border border-gray-400 rounded text-sm"
+        >
+          Reset
+        </button>
+        
+        <div className="text-sm">Score: {knownWords.length}</div>
 
-        {/* Word Selection */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <div className="flex justify-between mb-4">
-            <h2 className="text-xl font-medium">Select Words to Practice</h2>
-            <div className="space-x-4">
-              <button
-                onClick={selectAllWords}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-              >
-                Select All
-              </button>
-              <button
-                onClick={clearSelection}
-                className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
-              >
-                Clear
-              </button>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {vocab.map((item) => (
-              <button
-                key={`${item.georgian}-${item.english}`}
-                onClick={() => handleWordSelect(item.georgian)}
-                className={`p-2 rounded border text-left
-                          ${selectedWords.includes(item.georgian)
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-300 hover:border-blue-300'}`}
-              >
-                <div className="font-medium">{item.georgian}</div>
-                <div className="text-sm text-gray-600">{item.english}</div>
-              </button>
-            ))}
-          </div>
+        <button
+          onClick={handleGetLesson}
+          className="px-3 py-2 border border-gray-400 rounded text-sm"
+        >
+          Get Lesson
+        </button>
+      </div>
 
+      {/* --- Main area (image, hint or word) --- */}
+      <div className={mainAreaClasses}>
+        <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
+          <img
+            src={`/img/${currentCard.data.img_key}.jpg`}
+            alt={EnglishWord}
+            className="max-h-[320px] object-contain mb-3"
+            onClick={() => setShowEnglish((prev) => !prev)}
+          />
+
+          {showEnglish && (
+            <p className="text-base font-semibold mb-3">
+              {EnglishWord}
+            </p>
+          )}
+
+          <p className="text-3xl tracking-wider mb-4">
+            {!isFlipped ? (verbHint ?? "") : GeorgianWord}
+          </p>
+        </div>
+      </div>
+
+      {/* --- Bottom bar: EXACT original rating/flip buttons --- */}
+      {!isFlipped ? (
+        // Flip button
+        <div className="fixed bottom-0 left-0 w-full flex text-white bg-black">
           <button
-            onClick={generateExamples}
-            disabled={selectedWords.length === 0 || loading}
-            className={`mt-6 w-full py-3 rounded-md font-medium text-white
-                      ${selectedWords.length === 0 || loading
-                        ? 'bg-gray-400'
-                        : 'bg-green-500 hover:bg-green-600'}`}
+            onClick={() => setIsFlipped(true)}
+            className="flex-1 py-3 text-center border-t-4 border-gray-400 bg-none text-xl tracking-wide h-[70px]"
           >
-            {loading ? 'Generating...' : 'Generate Examples'}
+            Flip
           </button>
         </div>
+      ) : (
+        // Rating buttons
+        <div className="fixed bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
+          <button
+            onClick={() => handleScore("fail")}
+            className="flex-1 py-3 text-center border-t-4 border-red-500/0 text-red-400 bg-red-800/0"
+          />
+          <button
+            onClick={() => handleScore("fail")}
+            className="flex-1 py-3 text-center border-t-4 border-red-500 text-red-400 bg-red-800/10"
+          >
+            Fail
+          </button>
+          <button
+            onClick={() => handleScore("hard")}
+            className="flex-1 py-3 text-center border-t-4 border-yellow-500 text-yellow-400 bg-yellow-700/10"
+          >
+            Hard
+          </button>
+          <button
+            onClick={() => handleScore("good")}
+            className="flex-1 py-3 text-center border-t-4 border-blue-500 text-blue-400 bg-blue-700/10"
+          >
+            Good
+          </button>
+          <button
+            onClick={() => handleScore("easy")}
+            className="flex-1 py-3 text-center border-t-4 border-green-500 text-green-400 bg-green-700/10"
+          >
+            Easy
+          </button>
+        </div>
+      )}
 
-        {/* Generated Examples */}
-        {examples.length > 0 && (
-          <div className="space-y-4">
-            {examples.map((example, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-                <div className="text-xl font-medium text-gray-900">
-                  {example.georgian}
-                </div>
-                
-                <div className="flex gap-4">
-                  <button
-                    onClick={() => toggleTransliteration(index)}
-                    className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                             text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                  >
-                    {showTransliterations[index] ? 'Hide Transliteration' : 'Show Transliteration'}
-                  </button>
-                  <button
-                    onClick={() => toggleMeaning(index)}
-                    className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium
-                             text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                  >
-                    {showMeanings[index] ? 'Hide Meaning' : 'Show Meaning'}
-                  </button>
-                </div>
+      {/* --- LESSON MODAL --- */}
+      {isModalOpen && (
+        <div className={modalBgClass} onClick={() => setIsModalOpen(false)}>
+          <div
+            className={modalContentClass}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-2 right-2 text-4xl text-gray-400 hover:text-gray-100"
+            >
+              ✕
+            </button>
 
-                {showTransliterations[index] && (
-                  <div className="text-gray-600">
-                    <span className="font-medium">Transliteration:</span>{' '}
-                    {example.transliteration}
-                  </div>
-                )}
-
-                {showMeanings[index] && (
-                  <div className="text-gray-800">
-                    <span className="font-medium">English:</span>{' '}
-                    {example.english}
-                  </div>
-                )}
+            {/* Loading spinner or the markdown */}
+            {isLessonLoading ? (
+              <div className="flex items-center justify-center mt-6 mb-6">
+                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
               </div>
-            ))}
+            ) : (
+              <div className="mt-6">
+                <h1 className="text-3xl font-bold mb-3">{GeorgianWord}</h1>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={markdownComponents}
+                >
+                  {lessonMarkdown}
+                </ReactMarkdown>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
+
 ```
