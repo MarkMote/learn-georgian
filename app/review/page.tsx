@@ -80,6 +80,12 @@ function getVerbHint(word: WordData): string | null {
   if (!word.PartOfSpeech.toLowerCase().includes("verb")) {
     return null;
   }
+  // return ___ for infinitive forms
+  if (word.key.endsWith("_inf")) {
+    return "____";
+  }
+
+
   const firstWord = word.GeorgianWord.split(" ")[0];
   return `${firstWord} ____`;
 }
@@ -93,6 +99,12 @@ function getVerbBaseKey(word: WordData): string | null {
   if (!word.PartOfSpeech.toLowerCase().includes("verb")) {
     return null;
   }
+
+  // Fix #1: Also handle "_inf"
+  if (word.key.endsWith("_inf")) {
+    return word.key.slice(0, -4);
+  }
+
   const underscoreIdx = word.key.indexOf("_p");
   if (underscoreIdx > -1) {
     return word.key.slice(0, underscoreIdx);
@@ -268,7 +280,7 @@ export default function ReviewPage() {
     
     // Decide whether to introduce a verb (1/6 chance) or non-verb (5/6 chance)
     let newWord: WordData;
-    const useVerb = Math.random() < 1/7 && verbCandidates.length > 0;
+    const useVerb = Math.random() < 1/5 && verbCandidates.length > 0;
     
     if (useVerb) {
       // For verbs, try to use priority verbs first
@@ -524,7 +536,7 @@ export default function ReviewPage() {
   const verbHint = getVerbHint(currentCard.data);
 
   return (
-    <div className={containerClasses} style={{ height: '100vh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
+    <div className={containerClasses} style={{ height: '100dvh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4">
         <button

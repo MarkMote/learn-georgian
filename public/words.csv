@@ -455,78 +455,172 @@ afternoon,afternoon,afternoon,noun,ნაშუადღევი,time
 evening,evening,evening,noun,საღამო,time
 night,night,night,noun,ღამე,time
 time,time,time,noun,დრო,category
+need_inf,need,to need,verb-inf,საჭიროება,verb
+live_inf,live,to live,verb-inf,ცხოვრება,verb
+understand_inf,understand,to understand,verb-inf,გაგება,verb
+help_inf,help,to help,verb-inf,დახმარება,verb
+like_inf,like,to like,verb-inf,მოწონება,verb
+try_inf,try,to try,verb-inf,ცდა,verb
+fly_inf,fly,to fly,verb-inf,ფრენა,verb
+swim_inf,swim,to swim,verb-inf,ცურვა,verb
+go_inf,go,to go,verb-inf,სვლა,verb
+stop_inf,stop,to stop,verb-inf,გაჩერება,verb
+follow_inf,follow,to follow,verb-inf,მიყოლა,verb
+think_inf,think,to think,verb-inf,ფიქრი,verb
+speak_inf,speak,to speak,verb-inf,ლაპარაკი,verb
+eat_inf,eat,to eat,verb-inf,ჭამა,verb
+drink_inf,drink,to drink,verb-inf,სმა,verb
+kill_inf,kill,to kill,verb-inf,მოკვლა,verb
+die_inf,die,to die,verb-inf,კვდომა,verb
+smile_inf,smile,to smile,verb-inf,ღიმილი,verb
+laugh_inf,laugh,to laugh,verb-inf,სიცილი,verb
+cry_inf,cry,to cry,verb-inf,ტირილი,verb
+buy_inf,buy,to buy,verb-inf,ყიდვა,verb
+pay_inf,pay,to pay,verb-inf,გადახდა,verb
+sell_inf,sell,to sell,verb-inf,გაყიდვა,verb
+shoot_inf,shoot,to shoot,verb-inf,სროლა,verb
+learn_inf,learn,to learn,verb-inf,სწავლა,verb
+jump_inf,jump,to jump,verb-inf,ხტომა,verb
+smell_inf,smell,to smell,verb-inf,ყნოსვა,verb
+hear_inf,hear,to hear,verb-inf,გაგონება,verb
+listen_inf,listen,to listen,verb-inf,მოსმენა,verb
+taste_inf,taste,to taste,verb-inf,გასინჯვა,verb
+touch_inf,touch,to touch,verb-inf,შეხება,verb
+see_inf,see,to see,verb-inf,ნახვა,verb
+watch_inf,watch,to watch,verb-inf,ყურება,verb
+kiss_inf,kiss,to kiss,verb-inf,კოცნა,verb
+burn_inf,burn,to burn,verb-inf,წვვა,verb
+melt_inf,melt,to melt,verb-inf,დნობა,verb
+dig_inf,dig,to dig,verb-inf,თხრა,verb
+explode_inf,explode,to explode,verb-inf,ფეთქება,verb
+sit_inf,sit,to sit,verb-inf,ჯდომა,verb
+stand_inf,stand,to stand,verb-inf,დგომა,verb
+love_inf,love,to love,verb-inf,სიყვარული,verb
+pass_by_inf,pass_by,to pass by,verb-inf,ჩავლა,verb
+cut_inf,cut,to cut,verb-inf,ჭრა,verb
+fight_inf,fight,to fight,verb-inf,ბრძოლა,verb
+lie_down_inf,lie_down,to lie down,verb-inf,წოლა,verb
+dance_inf,dance,to dance,verb-inf,ცეკვა,verb
+sleep_inf,sleep,to sleep,verb-inf,ძილი,verb
+wake_up_inf,wake_up,to wake up,verb-inf,გაღვიძება,verb
+sing_inf,sing,to sing,verb-inf,მღერა,verb
+count_inf,count,to count,verb-inf,თვლა,verb
+marry_inf,marry,to marry,verb-inf,ქორწინება,verb
+pray_inf,pray,to pray,verb-inf,ლოცვა,verb
+win_inf,win,to win,verb-inf,მოგება,verb
+lose_inf,lose,to lose,verb-inf,წაგება,verb
+mix_inf,mix,to mix,verb-inf,არევა,verb
+bend_inf,bend,to bend,verb-inf,მოხრა,verb
+wash_inf,wash,to wash,verb-inf,რეცხვა,verb
+cook_inf,cook,to cook,verb-inf,მომზადება,verb
+open_inf,open,to open,verb-inf,გახსნა,verb
+close_inf,close,to close,verb-inf,დაკეტვა,verb
+write_inf,write,to write,verb-inf,წერა,verb
+call_inf,call,to call,verb-inf,დარეკვა,verb
+turn_inf,turn,to turn,verb-inf,შებრუნება,verb
+build_inf,build,to build,verb-inf,აშენება,verb
+teach_inf,teach,to teach,verb-inf,სწავლება,verb
+grow_inf,grow,to grow,verb-inf,ზრდა,verb
+draw_inf,draw,to draw,verb-inf,ხატვა,verb
+feed_inf,feed,to feed,verb-inf,კვება,verb
+catch_inf,catch,to catch,verb-inf,დაჭერა,verb
+throw_inf,throw,to throw,verb-inf,გადაგდება,verb
+clean_inf,clean,to clean,verb-inf,დასუფთავება,verb
+find_inf,find,to find,verb-inf,პოვნა,verb
+fall_inf,fall,to fall,verb-inf,ვარდნა,verb
+push_inf,push,to push,verb-inf,ბიძგება,verb
+pull_inf,pull,to pull,verb-inf,ქაჩვა,verb
+carry_inf,carry,to carry,verb-inf,ტარება,verb
+break_inf,break,to break,verb-inf,გატეხვა,verb
+wear_inf,wear,to wear,verb-inf,ჩაცმა,verb
+hang_inf,hang,to hang,verb-inf,დაკიდება,verb
+shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb
+sign_inf,sign,to sign,verb-inf,ხელის მოწერა,verb
+be_inf,be,to be,verb-inf,იყო,verb
 be_p1s,be,I am,verb-p1s,მე ვარ,verb
 be_p2s,be,You are,verb-p2s,შენ ხარ,verb
 be_p3s,be,He/She/It is,verb-p3s,ის არის,verb
 be_p1p,be,We are,verb-p1p,ჩვენ ვართ,verb
 be_p2p,be,You (pl) are,verb-p2p,თქვენ ხართ,verb
 be_p3p,be,They are,verb-p3p,ისინი არიან,verb
+have_inanimate_inf,have_inanimate,to have (inanimate),verb-inf,ქონა,verb
 have_inanimate_p1s,have_inanimate,I have (inanimate),verb-p1s,მე მაქვს,verb
 have_inanimate_p2s,have_inanimate,You have (inanimate),verb-p2s,შენ გაქვს,verb
 have_inanimate_p3s,have_inanimate,He/She/It has (inanimate),verb-p3s,მას აქვს,verb
 have_inanimate_p1p,have_inanimate,We have (inanimate),verb-p1p,ჩვენ გვაქვს,verb
 have_inanimate_p2p,have_inanimate,You (pl) have (inanimate),verb-p2p,თქვენ გაქვთ,verb
 have_inanimate_p3p,have_inanimate,They have (inanimate),verb-p3p,მათ აქვთ,verb
+have_animate_inf,have_animate,to have (animate),verb-inf,ყოლა,verb
 have_animate_p1s,have_animate,I have (animate),verb-p1s,მე მყავს,verb
 have_animate_p2s,have_animate,You have (animate),verb-p2s,შენ გყავს,verb
 have_animate_p3s,have_animate,He/She/It has (animate),verb-p3s,მას ჰყავს,verb
 have_animate_p1p,have_animate,We have (animate),verb-p1p,ჩვენ გვყავს,verb
 have_animate_p2p,have_animate,You (pl) have (animate),verb-p2p,თქვენ გყავთ,verb
 have_animate_p3p,have_animate,They have (animate),verb-p3p,მათ ჰყავთ,verb
+say_inf,say,to say,verb-inf,თქმა,verb
 say_p1s,say,I say,verb-p1s,მე ვამბობ,verb
 say_p2s,say,You say,verb-p2s,შენ ამბობ,verb
 say_p3s,say,He/She/It says,verb-p3s,ის ამბობს,verb
 say_p1p,say,We say,verb-p1p,ჩვენ ვამბობთ,verb
 say_p2p,say,You (pl) say,verb-p2p,თქვენ ამბობთ,verb
 say_p3p,say,They say,verb-p3p,ისინი ამბობენ,verb
+want_inf,want,to want,verb-inf,ნდომა,verb
 want_p1s,want,I want,verb-p1s,მე მინდა,verb
 want_p2s,want,You want,verb-p2s,შენ გინდა,verb
 want_p3s,want,He/She/It wants,verb-p3s,მას უნდა,verb
 want_p1p,want,We want,verb-p1p,ჩვენ გვინდა,verb
 want_p2p,want,You (pl) want,verb-p2p,თქვენ გინდათ,verb
 want_p3p,want,They want,verb-p3p,მათ უნდათ,verb
+know_inf,know,to know,verb-inf,ცოდნა,verb
 know_p1s,know,I know,verb-p1s,მე ვიცი,verb
 know_p2s,know,You know,verb-p2s,შენ იცი,verb
 know_p3s,know,He/She/It knows,verb-p3s,მან იცის,verb
 know_p1p,know,We know,verb-p1p,ჩვენ ვიცით,verb
 know_p2p,know,You (pl) know,verb-p2p,თქვენ იცით,verb
 know_p3p,know,They know,verb-p3p,მათ იციან,verb
+give_inf,give,to give,verb-inf,მიცემა,verb
 give_p1s,give,I give,verb-p1s,მე ვაძლევ,verb
 give_p2s,give,You give,verb-p2s,შენ აძლევ,verb
 give_p3s,give,He/She/It gives,verb-p3s,ის აძლევს,verb
 give_p1p,give,We give,verb-p1p,ჩვენ ვაძლევთ,verb
 give_p2p,give,You (pl) give,verb-p2p,თქვენ აძლევთ,verb
 give_p3p,give,They give,verb-p3p,ისინი აძლევენ,verb
+meet_inf,meet,to meet,verb-inf,შეხვედრა,verb
 meet_p1s,meet,I meet,verb-p1s,მე ვხვდები,verb
 meet_p2s,meet,You meet,verb-p2s,შენ ხვდები,verb
 meet_p3s,meet,He/She/It meets,verb-p3s,ის ხვდება,verb
 meet_p1p,meet,We meet,verb-p1p,ჩვენ ვხვდებით,verb
 meet_p2p,meet,You (pl) meet,verb-p2p,თქვენ ხვდებით,verb
 meet_p3p,meet,They meet,verb-p3p,ისინი ხვდებიან,verb
+work_inf,work,to work,verb-inf,მუშაობა,verb
 work_p1s,work,I work,verb-p1s,მე ვმუშაობ,verb
 work_p2s,work,You work,verb-p2s,შენ მუშაობ,verb
 work_p3s,work,He/She/It works,verb-p3s,ის მუშაობს,verb
 work_p1p,work,We work,verb-p1p,ჩვენ ვმუშაობთ,verb
 work_p2p,work,You (pl) work,verb-p2p,თქვენ მუშაობთ,verb
 work_p3p,work,They work,verb-p3p,ისინი მუშაობენ,verb
+play_inf,play,to play,verb-inf,თამაში,verb
 play_p1s,play,I play,verb-p1s,მე ვთამაშობ,verb
 play_p2s,play,You play,verb-p2s,შენ თამაშობ,verb
 play_p3s,play,He/She/It plays,verb-p3s,ის თამაშობს,verb
 play_p1p,play,We play,verb-p1p,ჩვენ ვთამაშობთ,verb
 play_p2p,play,You (pl) play,verb-p2p,თქვენ თამაშობთ,verb
 play_p3p,play,They play,verb-p3p,ისინი თამაშობენ,verb
+walk_inf,walk,to walk,verb-inf,სიარული,verb
 walk_p1s,walk,I walk,verb-p1s,მე დავდივარ,verb
 walk_p2s,walk,You walk,verb-p2s,შენ დადიხარ,verb
 walk_p3s,walk,He/She/It walks,verb-p3s,ის დადის,verb
 walk_p1p,walk,We walk,verb-p1p,ჩვენ დავდივართ,verb
 walk_p2p,walk,You (pl) walk,verb-p2p,თქვენ დადიხართ,verb
 walk_p3p,walk,They walk,verb-p3p,ისინი დადიან,verb
+run_inf,run,to run,verb-inf,სირბილი,verb
 run_p1s,run,I run,verb-p1s,მე დავრბივარ,verb
 run_p2s,run,You run,verb-p2s,შენ დარბიხარ,verb
 run_p3s,run,He/She/It runs,verb-p3s,ის დარბის,verb
 run_p1p,run,We run,verb-p1p,ჩვენ დავრბივართ,verb
 run_p2p,run,You (pl) run,verb-p2p,თქვენ დარბიხართ,verb
 run_p3p,run,They run,verb-p3p,ისინი დარბიან,verb
+drive_inf,drive,to drive,verb-inf,მართვა,verb
 drive_p1s,drive,I drive,verb-p1s,მე ვმართავ,verb
 drive_p2s,drive,You drive,verb-p2s,შენ მართავ,verb
 drive_p3s,drive,He/She/It drives,verb-p3s,ის მართავს,verb
