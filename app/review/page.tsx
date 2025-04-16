@@ -304,6 +304,20 @@ export default function ReviewPage() {
     knownWordsRef.current = knownWords;
   }, [knownWords]);
 
+  // Declare currentCard *before* the useEffect that uses it
+  const currentCard = knownWords[currentIndex];
+
+  // Moved this useEffect hook up before the conditional returns
+  // Attempt to recover by setting index to 0 if it becomes invalid
+  useEffect(() => {
+    // Add the condition *inside* the effect
+    if (!currentCard && knownWords.length > 0 && currentIndex !== 0) {
+        console.warn(`No current card (index ${currentIndex}), but ${knownWords.length} knownWords exist. Resetting index to 0.`);
+        setCurrentIndex(0);
+    }
+    // currentCard is now defined here
+  }, [currentCard, knownWords, currentIndex]); // Add currentIndex dependency
+
   // ----------------------------------------------------
   //  Introduce a new random word. If it is a verb,
   //  also introduce all other conjugations with the same base.
@@ -595,9 +609,6 @@ export default function ReviewPage() {
     }, 100); // Small delay to ensure state updates settle
   }
 
-  // The current card or null if we don't have one
-  const currentCard = knownWords[currentIndex];
-
   /**
    * Customized ReactMarkdown rendering:
    * - If you want to style code blocks, blockquotes, etc., you can expand further.
@@ -660,14 +671,7 @@ export default function ReviewPage() {
       );
   } else if (!currentCard && knownWords.length > 0) {
       // This might happen briefly if currentIndex is invalid after load/reset
-      console.warn(`No current card (index ${currentIndex}), but ${knownWords.length} knownWords exist. Resetting index to 0.`);
-      // Attempt to recover by setting index to 0 - use effect to avoid render loop
-      useEffect(() => {
-        if (!currentCard && knownWords.length > 0) {
-            setCurrentIndex(0);
-        }
-      }, [currentCard, knownWords]);
-
+      // The useEffect above will attempt to fix this, show a temporary message
       return (
           <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
               <p>Resetting view...</p>
