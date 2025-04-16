@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
+import { Menu, X } from 'lucide-react';
 
 /**
  * CSV row structure.
@@ -135,6 +136,13 @@ export default function ReviewPage() {
   const [lessonMarkdown, setLessonMarkdown] = useState("");
   const [isLessonLoading, setIsLessonLoading] = useState(false);
 
+  // Menu state
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Configuration state
+  const [randomizeVerbs, setRandomizeVerbs] = useState(false);
+  const [skipVerbs, setSkipVerbs] = useState(false);
+
   // Basic styling
   const containerClasses = "relative w-full bg-black text-white";
   const mainAreaClasses =
@@ -216,44 +224,85 @@ export default function ReviewPage() {
   }, []);
 
   // ----------------------------------------------------
-  //  Try restoring from local storage once CSV is loaded
+  //  Initialize state from localStorage or introduce first word
   // ----------------------------------------------------
   useEffect(() => {
-    if (allWords.length === 0) return; // not loaded yet
+    // This effect now handles all initialization logic based on allWords
+    if (allWords.length === 0) return; // Wait for CSV
 
+    let loadedState = false;
     try {
       const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
+        // Add more robust check: ensure knownWords is array and has items
         if (parsed.knownWords && Array.isArray(parsed.knownWords) && parsed.knownWords.length > 0) {
+          console.log("Loading state from localStorage. Word count:", parsed.knownWords.length);
           setKnownWords(parsed.knownWords);
-          setCurrentIndex(parsed.currentIndex ?? 0);
-          return; // do not introduce new if we have stored data
+          // Ensure currentIndex is valid for the loaded words, default to 0 otherwise
+          setCurrentIndex( (parsed.currentIndex >= 0 && parsed.currentIndex < parsed.knownWords.length) ? parsed.currentIndex : 0 );
+          setRandomizeVerbs(parsed.randomizeVerbs ?? false);
+          setSkipVerbs(parsed.skipVerbs ?? false);
+          loadedState = true;
+        } else {
+           console.log("localStorage found but invalid content. Clearing.");
+           localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear invalid state
         }
       }
     } catch (err) {
       console.error("Error loading local storage:", err);
+      localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear potentially corrupted state
     }
 
-    // If no stored data, introduce a first word
-    if (knownWords.length === 0) {
+    // If no valid state was loaded from localStorage AND knownWords is still empty
+    // Check knownWords.length directly as setKnownWords might not update immediately for this check
+    if (!loadedState && knownWords.length === 0) { // Use ref for immediate check
+      console.log("No valid saved state found. Introducing first word.");
       introduceRandomKnownWord();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allWords]);
+    // Depend on allWords to trigger this effect initially.
+  }, [allWords]); // Only depend on allWords
 
   // ----------------------------------------------------
   //  Whenever knownWords/currentIndex changes, store them
   // ----------------------------------------------------
   useEffect(() => {
-    if (knownWords.length > 0) {
+    // Only save if there's data to prevent overwriting on initial load errors
+    if (knownWords.length > 0 || currentIndex !== 0 || randomizeVerbs || skipVerbs) {
       const toSave = {
         knownWords,
         currentIndex,
+        randomizeVerbs,
+        skipVerbs,
       };
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
     }
-  }, [knownWords, currentIndex]);
+  }, [knownWords, currentIndex, randomizeVerbs, skipVerbs]);
+
+  // -----------------------------------
+  //  Close menu when clicking outside
+  // -----------------------------------
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      // Check if the click is outside the menu area (you might need a ref for more precise control)
+      // For simplicity, we assume any click outside the top bar closes the menu
+      const target = event.target as HTMLElement;
+      if (isMenuOpen && !target.closest('.top-bar-menu-area')) {
+        setIsMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // Ref to get immediate access to knownWords length for initialization check
+  const knownWordsRef = React.useRef(knownWords);
+  useEffect(() => {
+    knownWordsRef.current = knownWords;
+  }, [knownWords]);
 
   // ----------------------------------------------------
   //  Introduce a new random word. If it is a verb,
@@ -268,44 +317,47 @@ export default function ReviewPage() {
     if (candidates.length === 0) return;
 
     // Separate verb and non-verb candidates
-    const verbCandidates = candidates.filter(w => 
+    const verbCandidates = candidates.filter(w =>
       w.PartOfSpeech.toLowerCase().includes("verb")
     );
-    const nonVerbCandidates = candidates.filter(w => 
+    const nonVerbCandidates = candidates.filter(w =>
       !w.PartOfSpeech.toLowerCase().includes("verb")
     );
 
     // Handle empty categories
     if (verbCandidates.length === 0 && nonVerbCandidates.length === 0) return;
-    
+
     // Decide whether to introduce a verb (1/6 chance) or non-verb (5/6 chance)
     let newWord: WordData;
     const useVerb = Math.random() < 1/5 && verbCandidates.length > 0;
-    
+
     if (useVerb) {
-      // For verbs, try to use priority verbs first
-      const priorityVerbs = [
-        "be_p1s", "have_inanimate_p1s", "want_p1s", "know_p1s", 
-        "have_animate_p1s", "speak_p1s", "work_p1s", "live_p1s", 
-        "understand_p1s", "like_p1s", "go_p1s"
-      ];
-      
-      // Try to find a priority verb that isn't known yet
-      let priorityVerb: WordData | undefined;
-      for (const verbKey of priorityVerbs) {
-        if (!knownKeys.has(verbKey)) {
-          priorityVerb = verbCandidates.find(w => w.key === verbKey);
-          if (priorityVerb) break;
+      let chosenVerb: WordData | undefined;
+      // Only use priority list if randomizeVerbs is false
+      if (!randomizeVerbs) {
+        const priorityVerbs = [
+          "be_p1s", "have_inanimate_p1s", "want_p1s", "know_p1s",
+          "have_animate_p1s", "speak_p1s", "work_p1s", "live_p1s",
+          "understand_p1s", "like_p1s", "go_p1s"
+        ];
+
+        // Try to find a priority verb that isn't known yet
+        for (const verbKey of priorityVerbs) {
+          if (!knownKeys.has(verbKey)) {
+            chosenVerb = verbCandidates.find(w => w.key === verbKey);
+            if (chosenVerb) break;
+          }
         }
       }
-      
-      // Use a priority verb if found, otherwise pick a random verb
-      newWord = priorityVerb || verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
+
+      // Use the priority verb if found and not randomizing, otherwise pick a random verb
+      newWord = chosenVerb || verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
+
     } else if (nonVerbCandidates.length > 0) {
       // Pick a random non-verb
       newWord = nonVerbCandidates[Math.floor(Math.random() * nonVerbCandidates.length)];
     } else {
-      // If no non-verbs, fall back to verbs
+      // If no non-verbs, fall back to verbs (pick a random one)
       newWord = verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
     }
 
@@ -343,10 +395,19 @@ export default function ReviewPage() {
   //  Handle rating (SM-2 logic)
   // ----------------------------
   function handleScore(diff: "easy" | "good" | "hard" | "fail") {
+    let nextKnownWords: KnownWordState[] = []; // To store the updated state for score calculation
+
     setKnownWords((prev) => {
       const updated = [...prev];
+       // Ensure currentIndex is valid before accessing
+      if (currentIndex < 0 || currentIndex >= updated.length) {
+          console.error(`Invalid currentIndex ${currentIndex} for knownWords length ${updated.length}. Resetting index.`);
+          setCurrentIndex(0); // Simple recovery attempt
+          return prev; // Return previous state to avoid crash or unexpected updates
+      }
       const cardState = updated[currentIndex];
       const score = difficultyToScore(diff);
+      console.log(`Handling score for card index ${currentIndex}, word: ${cardState.data.key}, score: ${diff}(${score})`); // LOG 1
       cardState.rating = score;
 
       const normalizedScore = score / 3;
@@ -371,18 +432,47 @@ export default function ReviewPage() {
       cardState.easeFactor = Math.max(1.3, cardState.easeFactor + easeChange);
 
       cardState.lastSeen = 0;
+      nextKnownWords = updated; // Capture the updated state
       return updated;
     });
 
-    // Possibly introduce more cards if we have a high overall success
-    if (computeOverallScore() > 0.8) {
-      introduceRandomKnownWord();
-    }
+    // --- Introduction Trigger Logic ---
+    // Use a timeout to allow state update to potentially settle before calculating score
+    // Although capturing nextKnownWords should be sufficient, this adds robustness
+    setTimeout(() => {
+        let introductionTriggerScore = 0;
+        const currentKnownWords = knownWordsRef.current; // Use ref for the most current state
 
-    pickNextCard();
+        if (currentKnownWords.length > 0) {
+            const relevantWords = skipVerbs
+                ? currentKnownWords.filter(kw => !kw.data.PartOfSpeech.toLowerCase().includes("verb"))
+                : currentKnownWords;
+
+            if (relevantWords.length > 0) {
+                const sum = relevantWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
+                introductionTriggerScore = sum / relevantWords.length;
+                console.log(`Calculated trigger score: ${introductionTriggerScore.toFixed(3)} (sum: ${sum.toFixed(3)}, relevant count: ${relevantWords.length}, total count: ${currentKnownWords.length}, skipVerbs: ${skipVerbs})`); // LOG 2
+            } else {
+                console.log(`No relevant words found for trigger score calculation (total count: ${currentKnownWords.length}, skipVerbs: ${skipVerbs})`); // LOG 3
+            }
+        } else {
+            console.log("KnownWords is empty, cannot calculate trigger score."); // LOG 4
+        }
+
+
+        // Possibly introduce more cards if the score of *relevant* cards is high
+        if (introductionTriggerScore > 0.8) {
+          console.log("Threshold met. Attempting to introduce new word."); // LOG 5
+          introduceRandomKnownWord();
+        } else {
+          console.log(`Threshold (0.8) not met. Score: ${introductionTriggerScore.toFixed(3)}. Skipping word introduction.`); // LOG 6
+        }
+
+        pickNextCard();
+    }, 0); // Timeout 0 ms pushes execution to after the current call stack
   }
 
-  /** Average rating/3 across known words. */
+  /** Average rating/3 across ALL known words. */
   function computeOverallScore(): number {
     if (knownWords.length === 0) return 0;
     const sum = knownWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
@@ -407,22 +497,50 @@ export default function ReviewPage() {
     setCardCounter((n) => n + 1);
 
     setKnownWords((prev) => {
-      const updated = prev.map((kw, i) =>
+      // Increment lastSeen for all cards except the one just shown
+      const updatedLastSeen = prev.map((kw, i) =>
         i === currentIndex ? kw : { ...kw, lastSeen: kw.lastSeen + 1 }
       );
 
-      let bestIdx = 0;
+      let candidates = updatedLastSeen;
+
+      // If skipVerbs is true, try to filter out verbs
+      if (skipVerbs) {
+        const nonVerbCandidates = updatedLastSeen.filter(
+          kw => !kw.data.PartOfSpeech.toLowerCase().includes("verb")
+        );
+        // Only use the filtered list if it's not empty
+        if (nonVerbCandidates.length > 0) {
+          candidates = nonVerbCandidates;
+        }
+        // If only verbs are left, we'll proceed with the full list (candidates = updatedLastSeen)
+      }
+
+      // Find the highest priority card among the candidates
+      let bestIdx = -1; // Use -1 to indicate not found initially
       let bestVal = -Infinity;
-      updated.forEach((kw, i) => {
+      candidates.forEach((kw) => {
         const priority = calculateCardPriority(kw);
         if (priority > bestVal) {
           bestVal = priority;
-          bestIdx = i;
+          // Find the original index in updatedLastSeen
+          bestIdx = updatedLastSeen.findIndex(originalKw => originalKw.data.key === kw.data.key);
         }
       });
 
+      // If no suitable candidate was found (e.g., empty list, though unlikely), default to 0
+      if (bestIdx === -1 && updatedLastSeen.length > 0) {
+          console.warn("No suitable next card found, defaulting to index 0.");
+          bestIdx = 0;
+      } else if (bestIdx === -1) {
+          console.warn("Known words list is empty.");
+          // Cannot set index if list is empty
+          return updatedLastSeen; // Return unchanged list
+      }
+
+
       setCurrentIndex(bestIdx);
-      return updated;
+      return updatedLastSeen; // Return the list with updated lastSeen values
     });
 
     setIsFlipped(false);
@@ -439,7 +557,7 @@ export default function ReviewPage() {
       setIsLessonLoading(true);
       setLessonMarkdown("");
 
-      const word = knownWords[currentIndex].data.EnglishWord;
+      const word = knownWords[currentIndex].data.GeorgianWord;
       const res = await fetch(`/api/lesson?word=${encodeURIComponent(word)}`);
       if (!res.ok) {
         throw new Error("Failed to get lesson");
@@ -455,7 +573,7 @@ export default function ReviewPage() {
   }
 
   // -----------------------------------
-  //  Button to clear progress
+  //  Button to clear progress (now inside menu)
   // -----------------------------------
   function handleClearProgress() {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
@@ -464,7 +582,17 @@ export default function ReviewPage() {
     setIsFlipped(false);
     setShowEnglish(false);
     setCardCounter(0);
-    introduceRandomKnownWord();
+    setIsMenuOpen(false); // Close menu after resetting
+    setRandomizeVerbs(false); // <-- Reset config
+    setSkipVerbs(false);      // <-- Reset config
+
+    // Introduce the first word after clearing
+    // Need a slight delay or ensure allWords is ready
+    setTimeout(() => {
+        if (allWords.length > 0) {
+            introduceRandomKnownWord();
+        }
+    }, 100); // Small delay to ensure state updates settle
   }
 
   // The current card or null if we don't have one
@@ -523,12 +651,43 @@ export default function ReviewPage() {
     "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
 
   // Loading or no data state
-  if (!currentCard) {
-    return (
-      <div className="p-8 text-center">
-        <p>Loading or no cards available...</p>
-      </div>
-    );
+  if (knownWords.length === 0 && allWords.length > 0) {
+      // Waiting for the initialization useEffect to run
+      return (
+          <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+              <p>Initializing...</p>
+          </div>
+      );
+  } else if (!currentCard && knownWords.length > 0) {
+      // This might happen briefly if currentIndex is invalid after load/reset
+      console.warn(`No current card (index ${currentIndex}), but ${knownWords.length} knownWords exist. Resetting index to 0.`);
+      // Attempt to recover by setting index to 0 - use effect to avoid render loop
+      useEffect(() => {
+        if (!currentCard && knownWords.length > 0) {
+            setCurrentIndex(0);
+        }
+      }, [currentCard, knownWords]);
+
+      return (
+          <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+              <p>Resetting view...</p>
+          </div>
+      );
+  } else if (knownWords.length === 0 && allWords.length === 0) {
+       // Waiting for CSV to load
+      return (
+        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+          <p>Loading vocabulary...</p>
+        </div>
+      );
+  } else if (!currentCard) {
+      // Should ideally not be reached if logic above is correct, but acts as a fallback
+       console.warn("Reached unexpected state: No current card. Displaying loading.");
+       return (
+        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+          <p>Loading...</p>
+        </div>
+      );
   }
 
   // Get what to display from the current card
@@ -538,19 +697,64 @@ export default function ReviewPage() {
   return (
     <div className={containerClasses} style={{ height: '100dvh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-4">
-        <button
-          onClick={handleClearProgress}
-          className="px-3 py-2 border border-gray-400 rounded text-sm"
-        >
-          Reset
-        </button>
+      <div className="flex items-center justify-between p-4 relative top-bar-menu-area">
+        {/* Menu Button */}
+        <div className="relative w-[100px] ">
+          <button
+            onClick={() => setIsMenuOpen(prev => !prev)}
+            className="p-2 border border-gray-600 rounded  hover:bg-gray-700"
+            aria-label="Open menu"
+          >
+            <Menu size={20} />
+          </button>
+
+          {/* Dropdown Menu */}
+          {isMenuOpen && (
+            <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
+              <ul className="divide-y divide-gray-700">
+                {/* Randomize Verbs Toggle */}
+                <li>
+                  <button
+                    onClick={() => setRandomizeVerbs(prev => !prev)}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Randomize Verbs</span>
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${randomizeVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
+                      {randomizeVerbs ? 'ON' : 'OFF'}
+                    </span>
+                  </button>
+                </li>
+                {/* Skip Verbs Toggle */}
+                <li>
+                  <button
+                    onClick={() => setSkipVerbs(prev => !prev)}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Skip Verbs</span>
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${skipVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
+                      {skipVerbs ? 'ON' : 'OFF'}
+                    </span>
+                  </button>
+                </li>
+                {/* Reset Progress */}
+                <li>
+                  <button
+                    onClick={handleClearProgress}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
+                  >
+                    Reset Progress
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
 
         <div className="text-sm">Score: {knownWords.length}</div>
 
         <button
           onClick={handleGetLesson}
-          className="px-3 py-2 border border-gray-400 rounded text-sm"
+          className="px-3 py-2 border border-gray-600 rounded text-sm hover:bg-gray-700"
         >
           Get Lesson
         </button>
@@ -577,7 +781,7 @@ export default function ReviewPage() {
             </p>
           )}
 
-          <p className="text-3xl tracking-wider mb-4">
+          <p className="text-3xl tracking-wider mb-4 min-h-[40px]">
             {!isFlipped ? verbHint ?? "" : GeorgianWord}
           </p>
         </div>

@@ -1,8 +1,10 @@
-
 import { NextRequest, NextResponse } from "next/server";
 
 // (Optional) If using the openai npm package: npm install openai
 // Here we demonstrate a direct fetch call for clarity.
+
+// Set a timeout for the OpenAI API call (e.g., 15 seconds)
+const API_TIMEOUT_MS = 15000;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -21,6 +23,10 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
+
+  // AbortController for fetch timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
   try {
     const prompt = `Teach me about the Georgian word "${word}" by providing a short lesson. 
@@ -55,11 +61,19 @@ export async function GET(request: NextRequest) {
         ],
         temperature: 0.7,
       }),
+      // Add signal for timeout
+      signal: controller.signal,
     });
 
+    // Clear the timeout timer if the fetch completes successfully
+    clearTimeout(timeoutId);
+
     if (!response.ok) {
+      // Log the error response body from OpenAI for more details
+      const errorBody = await response.text(); // Use text() in case it's not JSON
+      console.error(`OpenAI API error: ${response.status} ${response.statusText}`, errorBody);
       return NextResponse.json(
-        { error: "OpenAI API error" },
+        { error: `OpenAI API error: ${response.statusText}`, details: errorBody },
         { status: response.status }
       );
     }
@@ -68,7 +82,20 @@ export async function GET(request: NextRequest) {
     const lessonMarkdown = data.choices?.[0]?.message?.content || "No response";
 
     return NextResponse.json({ lesson: lessonMarkdown });
-  } catch (err) {
+  } catch (err: any) { // Use 'any' or a more specific error type
+    // Clear timeout in case of fetch error (e.g., network issue)
+    clearTimeout(timeoutId);
+
+    // Check if the error was due to the timeout
+    if (err.name === 'AbortError') {
+        console.error("OpenAI API call timed out.");
+        return NextResponse.json(
+          { error: "The request to generate the lesson timed out." },
+          { status: 504 } // Gateway Timeout
+        );
+    }
+
+    // Log other errors
     console.error("Error calling OpenAI:", err);
     return NextResponse.json(
       { error: "Failed to fetch lesson." },
