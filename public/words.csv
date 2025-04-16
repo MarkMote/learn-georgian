@@ -212,14 +212,11 @@ bedroom,bedroom,bedroom,noun,საძინებელი,home
 kitchen,kitchen,kitchen,noun,სამზარეულო,home
 bathroom,bathroom,bathroom,noun,აბაზანა,home
 pencil,pencil,pencil,noun,ფანქარი,home
-pen,pen,pen,noun,კალამი,home
 photograph,photograph,photograph,noun,ფოტო,home
 soap,soap,soap,noun,საპონი,home
 book,book,book,noun,წიგნი,home
-page,page,page,noun,გვერდი,home
 key_object,key_object,key,noun,გასაღები,home
 paint,paint,paint,noun,საღებავი,home
-letter,letter,letter,noun,წერილი,home
 note,note,note,noun,შენიშვნა,home
 wall,wall,wall,noun,კედელი,home
 paper,paper,paper,noun,ქაღალდი,home
@@ -233,10 +230,7 @@ garden,garden,garden,noun,ბაღი,home
 yard,yard,yard,noun,ეზო,home
 needle,needle,needle,noun,ნემსი,home
 bag,bag,bag,noun,ჩანთა,home
-box,box,box,noun,ყუთი,home
 gift,gift,gift,noun,საჩუქარი,home
-card,card,card,noun,ბარათი,home
-ring,ring,ring,noun,ბეჭედი,home
 tool,tool,tool,noun,ხელსაწყო,home
 clock,clock,clock,noun,საათი,electronics
 lamp,lamp,lamp,noun,ნათურა,electronics

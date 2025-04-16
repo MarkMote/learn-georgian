@@ -329,7 +329,7 @@ export default function ReviewPage() {
 
     // Decide whether to introduce a verb (1/6 chance) or non-verb (5/6 chance)
     let newWord: WordData;
-    const useVerb = Math.random() < 1/5 && verbCandidates.length > 0;
+    const useVerb = Math.random() < 1/6 && verbCandidates.length > 0;
 
     if (useVerb) {
       let chosenVerb: WordData | undefined;
@@ -461,7 +461,7 @@ export default function ReviewPage() {
 
 
         // Possibly introduce more cards if the score of *relevant* cards is high
-        if (introductionTriggerScore > 0.8) {
+        if (introductionTriggerScore > 0.65) {
           console.log("Threshold met. Attempting to introduce new word."); // LOG 5
           introduceRandomKnownWord();
         } else {
