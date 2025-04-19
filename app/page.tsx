@@ -22,10 +22,7 @@ export default function HomePage() {
         </Link>
       </div>
 
-      {/* Optional: Add a footer or other elements later if needed */}
-      <footer className="absolute bottom-4 text-xs text-gray-500">
-        Info: It's a spaced repetition app based on SM-2 algorithm.
-      </footer>
+
     </div>
   );
 }

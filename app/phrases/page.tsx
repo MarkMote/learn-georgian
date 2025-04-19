@@ -794,7 +794,7 @@ export default function ReviewPage() {
                 {/* Examples */}
                 {ExampleGeorgian && (
                   <p className="text-xl text-slate-300 mt-4 mb-1 ">
-                    &quot;{ExampleGeorgian}&quot;
+                    {ExampleGeorgian};
                   </p>
                 )}
                 {ExampleEnglish && (
@@ -852,6 +852,8 @@ export default function ReviewPage() {
           </div>
         </div>
       )}
+
+
     </div>
   );
 }
