@@ -14,7 +14,7 @@ export default function HomePage() {
 
       <div className="flex flex-col space-y-6"> {/* Stack buttons vertically with space */}
         <Link href="/review" className={buttonClasses}>
-          Review Words (with images)
+          Review Words (with images!)
         </Link>
 
         <Link href="/phrases" className={buttonClasses}>

@@ -808,6 +808,11 @@ export default function ReviewPage() {
               {EnglishWord}
             </p>
           )}
+          {/* {!showEnglish && !isFlipped && (
+            <p className=" text-slate-700  mb-3">
+              click for translation
+            </p>
+          )} */}
 
           <p className="text-3xl tracking-wider mb-4 min-h-[40px]">
             {!isFlipped ? verbHint ?? "" : GeorgianWord}
