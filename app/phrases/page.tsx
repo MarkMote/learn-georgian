@@ -403,15 +403,14 @@ export default function ReviewPage() {
   function pickNextCard() {
     setCardCounter((n) => n + 1);
 
-    setKnownPhrases((prev) => { // Use setKnownPhrases
+    setKnownPhrases((prev) => {
       // Increment lastSeen for all cards except the one just shown
-      const updatedLastSeen = prev.map((kp, i) => // Use kp for knownPhrase
-        i === currentIndex ? kp : { ...kp, lastSeen: kp.lastSeen + 1 }
+      const updatedLastSeen = prev.map((kw, i) =>
+        i === currentIndex ? kw : { ...kw, lastSeen: kw.lastSeen + 1 }
       );
 
-      let candidates = updatedLastSeen;
-
-      // Removed skipVerbs logic
+      // Use const since candidates is not reassigned
+      const candidates = updatedLastSeen;
 
       // Find the highest priority card among the candidates
       let bestIdx = -1; // Use -1 to indicate not found initially
@@ -705,7 +704,7 @@ export default function ReviewPage() {
               {/* Examples */}
               {ExampleGeorgian && (
                 <p className="text-xl text-slate-300 mt-4 mb-1 ">
-                  "{ExampleGeorgian}"
+                  &quot;{ExampleGeorgian}&quot;
                 </p>
               )}
               {ExampleEnglish && (
