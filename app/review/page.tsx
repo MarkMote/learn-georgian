@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
 import { Menu, X, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import BottomBar from '../components/BottomBar';
 
 /**
  * CSV row structure.
@@ -123,26 +124,29 @@ export default function ReviewPage() {
   const [knownWords, setKnownWords] = useState<KnownWordState[]>([]);
 
   // Index of the current flashcard
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // Flip states
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [showEnglish, setShowEnglish] = useState(false);
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [showEnglish, setShowEnglish] = useState<boolean>(false);
 
   // Count how many total cards have been shown
-  const [cardCounter, setCardCounter] = useState(0);
+  const [cardCounter, setCardCounter] = useState<number>(0);
 
   // Modal state for AI lessons
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [lessonMarkdown, setLessonMarkdown] = useState("");
-  const [isLessonLoading, setIsLessonLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [lessonMarkdown, setLessonMarkdown] = useState<string>("");
+  const [isLessonLoading, setIsLessonLoading] = useState<boolean>(false);
 
   // Menu state
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   // Configuration state
-  const [randomizeVerbs, setRandomizeVerbs] = useState(false);
-  const [skipVerbs, setSkipVerbs] = useState(false);
+  const [randomizeVerbs, setRandomizeVerbs] = useState<boolean>(false);
+  const [skipVerbs, setSkipVerbs] = useState<boolean>(false);
+
+  // Add state for left-handed mode
+  const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
 
   // Basic styling
   const containerClasses = "relative w-full bg-black text-white";
@@ -246,6 +250,7 @@ export default function ReviewPage() {
           setCurrentIndex( (parsed.currentIndex >= 0 && parsed.currentIndex < parsed.knownWords.length) ? parsed.currentIndex : 0 );
           setRandomizeVerbs(parsed.randomizeVerbs ?? false);
           setSkipVerbs(parsed.skipVerbs ?? false);
+          setIsLeftHanded(parsed.isLeftHanded ?? false);
           loadedState = true;
         } else {
            console.log("localStorage found but invalid content. Clearing.");
@@ -271,16 +276,17 @@ export default function ReviewPage() {
   // ----------------------------------------------------
   useEffect(() => {
     // Only save if there's data to prevent overwriting on initial load errors
-    if (knownWords.length > 0 || currentIndex !== 0 || randomizeVerbs || skipVerbs) {
+    if (knownWords.length > 0 || currentIndex !== 0 || randomizeVerbs || skipVerbs || isLeftHanded) {
       const toSave = {
         knownWords,
         currentIndex,
         randomizeVerbs,
         skipVerbs,
+        isLeftHanded,
       };
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
     }
-  }, [knownWords, currentIndex, randomizeVerbs, skipVerbs]);
+  }, [knownWords, currentIndex, randomizeVerbs, skipVerbs, isLeftHanded]);
 
   // -----------------------------------
   //  Close menu when clicking outside
@@ -602,6 +608,7 @@ export default function ReviewPage() {
     setIsMenuOpen(false); // Close menu after resetting
     setRandomizeVerbs(false); // <-- Reset config
     setSkipVerbs(false);      // <-- Reset config
+    setIsLeftHanded(false);   // <-- Reset config
 
     // Introduce the first word after clearing
     // Need a slight delay or ensure allWords is ready
@@ -668,6 +675,16 @@ export default function ReviewPage() {
     "fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50";
   const modalContentClass =
     "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
+
+  // --- Helper functions for BottomBar props ---
+  const handleFlip = (): void => {
+    setIsFlipped(true);
+  };
+
+  const handleToggleHandedness = (): void => {
+    setIsLeftHanded(prev => !prev);
+  };
+  // --- End Helper functions ---
 
   // Loading or no data state
   if (knownWords.length === 0 && allWords.length > 0) {
@@ -820,50 +837,14 @@ export default function ReviewPage() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      {!isFlipped ? (
-        // Show FLIP button
-        <div className="absolute bottom-0 left-0 w-full flex text-white bg-black">
-          <button
-            onClick={() => setIsFlipped(true)}
-            className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px]"
-          >
-            Flip
-          </button>
-        </div>
-      ) : (
-        // Show RATING buttons
-        <div className="absolute bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
-          <button
-            onClick={() => handleScore("fail")}
-            className="flex-1 py-3 text-center border-t-4 border-red-500/0 text-red-400 bg-red-800/0"
-          />
-          <button
-            onClick={() => handleScore("fail")}
-            className="flex-1 py-3 text-center border-t-4 border-red-500 text-red-400 bg-red-800/10"
-          >
-            Fail
-          </button>
-          <button
-            onClick={() => handleScore("hard")}
-            className="flex-1 py-3 text-center border-t-4 border-yellow-500 text-yellow-400 bg-yellow-700/10"
-          >
-            Hard
-          </button>
-          <button
-            onClick={() => handleScore("good")}
-            className="flex-1 py-3 text-center border-t-4 border-blue-500 text-blue-400 bg-blue-700/10"
-          >
-            Good
-          </button>
-          <button
-            onClick={() => handleScore("easy")}
-            className="flex-1 py-3 text-center border-t-4 border-green-500 text-green-400 bg-green-700/10"
-          >
-            Easy
-          </button>
-        </div>
-      )}
+      {/* Bottom Bar - Replace existing JSX with the component */}
+      <BottomBar
+        isFlipped={isFlipped}
+        isLeftHanded={isLeftHanded}
+        onFlip={handleFlip}
+        onRate={handleScore} // Pass handleScore directly
+        onToggleHandedness={handleToggleHandedness}
+      />
 
       {/* Lesson Modal */}
       {isModalOpen && (
