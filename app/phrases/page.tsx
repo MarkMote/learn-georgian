@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Menu, X, Home } from 'lucide-react';
+import { Menu, X, Home, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 /**
@@ -33,33 +33,6 @@ interface KnownPhraseState {
   easeFactor: number;
 }
 
-/**
- * Parse CSV text into an array of PhraseData objects.
- * It assumes that the first row is the header and is skipped.
- */
-function parseCSV(csvText: string): PhraseData[] {
-  const lines = csvText
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean);
-  // Skip the header line
-  const rows = lines.slice(1);
-
-  return rows.map((row) => {
-    // Handle potential commas within quoted fields if necessary in the future
-    // For now, assuming simple comma separation without internal quotes/commas
-    const cols = row.split(",");
-    const georgianPhrase = cols[1]?.trim() || ""; // Use Georgian as key, ensure it's defined
-    return {
-      key: georgianPhrase, // Use Georgian phrase as the key
-      EnglishPhrase: cols[0]?.trim() || "",
-      GeorgianPhrase: georgianPhrase,
-      ExampleGeorgian: cols[2]?.trim() || "",
-      ExampleEnglish: cols[3]?.trim() || "",
-    };
-  }).filter(phrase => phrase.key); // Filter out rows where the key might be empty
-}
-
 /** Convert difficulty label to a numeric score (0..3). */
 function difficultyToScore(difficulty: "easy" | "good" | "hard" | "fail"): number {
   switch (difficulty) {
@@ -82,21 +55,25 @@ export default function ReviewPage() {
   const [knownPhrases, setKnownPhrases] = useState<KnownPhraseState[]>([]); // Renamed state
 
   // Index of the current flashcard
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0); // Explicitly type as number
 
   // Flip states
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState<boolean>(false); // Explicitly type as boolean
 
   // Count how many total cards have been shown
-  const [cardCounter, setCardCounter] = useState(0);
+  const [cardCounter, setCardCounter] = useState<number>(0); // Explicitly type as number
 
   // Modal state for AI lessons
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [lessonMarkdown, setLessonMarkdown] = useState("");
-  const [isLessonLoading, setIsLessonLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // Explicitly type as boolean
+  const [lessonMarkdown, setLessonMarkdown] = useState<string>(""); // Explicitly type as string
+  const [isLessonLoading, setIsLessonLoading] = useState<boolean>(false); // Explicitly type as boolean
 
   // Menu state
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); // Explicitly type as boolean
+
+  // Loading/Error state for phrases
+  const [isLoadingPhrases, setIsLoadingPhrases] = useState<boolean>(true); // New state for loading
+  const [loadingError, setLoadingError] = useState<string | null>(null); // New state for errors
 
   // Basic styling
   const containerClasses = "relative w-full bg-black text-white";
@@ -104,6 +81,8 @@ export default function ReviewPage() {
     "flex items-center justify-center px-4";
 
   const router = useRouter(); // Get the router instance
+
+  const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
 
   // ---------------------------
   //  Handle Keyboard shortcuts
@@ -136,7 +115,8 @@ export default function ReviewPage() {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [isFlipped, currentIndex]);
+    // Ensure dependencies are correct, including handleScore if it changes
+  }, [isFlipped, currentIndex, knownPhrases]); // Added knownPhrases dependency
 
   // ---------------------------
   //  Disable viewport scaling for iOS Safari
@@ -168,20 +148,54 @@ export default function ReviewPage() {
   }, [isModalOpen]);
 
   // ---------------------------
-  //  Load CSV on mount
+  //  Load Phrases from API on mount
   // ---------------------------
   useEffect(() => {
-    fetch("/phrases.csv") // Fetch phrases.csv
-      .then((res) => res.text())
-      .then((csv) => setAllPhrases(parseCSV(csv))); // Use setAllPhrases
-  }, []);
+    setIsLoadingPhrases(true); // Start loading
+    setLoadingError(null); // Reset error state
+
+    fetch("/api/phrases") // Fetch from the new API route
+      .then((res) => {
+        if (!res.ok) {
+          // Try to get error details from the response body
+          return res.json().then(errData => {
+             throw new Error(errData.error || `API request failed with status ${res.status}`);
+          }).catch(() => {
+             // Fallback if parsing error body fails
+             throw new Error(`API request failed with status ${res.status}`);
+          });
+        }
+        return res.json(); // Parse the JSON response
+      })
+      .then((data) => {
+        // The API returns { phrases: PhraseData[] }
+        if (!data || !Array.isArray(data.phrases)) {
+            console.error("Invalid data structure received from API:", data);
+            throw new Error("Received invalid data format from server.");
+        }
+        console.log(`Received ${data.phrases.length} phrases from API.`);
+        setAllPhrases(data.phrases); // Set the state with the phrases array
+      })
+      .catch(error => {
+        console.error("Error fetching phrases from API:", error);
+        setLoadingError(error.message || "An unknown error occurred while fetching phrases.");
+        setAllPhrases([]); // Clear phrases on error
+      })
+      .finally(() => {
+        setIsLoadingPhrases(false); // Stop loading regardless of success/failure
+      });
+  }, []); // Empty dependency array means this runs once on mount
 
   // ----------------------------------------------------
   //  Initialize state from localStorage or introduce first phrase
   // ----------------------------------------------------
   useEffect(() => {
     // This effect now handles all initialization logic based on allPhrases
-    if (allPhrases.length === 0) return; // Wait for CSV
+    // It should only run AFTER phrases are loaded and if there's no loading error
+    if (isLoadingPhrases || loadingError || allPhrases.length === 0) {
+        console.log("Initialization skipped: Still loading, error occurred, or no phrases available.");
+        return; // Wait for phrases to load successfully
+    }
 
     let loadedState = false;
     try {
@@ -189,13 +203,23 @@ export default function ReviewPage() {
       if (stored) {
         const parsed = JSON.parse(stored);
         // Add more robust check: ensure knownPhrases is array and has items
+        // Also, verify that the stored phrases still exist in the newly fetched `allPhrases`
         if (parsed.knownPhrases && Array.isArray(parsed.knownPhrases) && parsed.knownPhrases.length > 0) {
-          console.log("Loading state from localStorage. Phrase count:", parsed.knownPhrases.length);
-          setKnownPhrases(parsed.knownPhrases); // Use setKnownPhrases
-          // Ensure currentIndex is valid for the loaded phrases, default to 0 otherwise
-          setCurrentIndex( (parsed.currentIndex >= 0 && parsed.currentIndex < parsed.knownPhrases.length) ? parsed.currentIndex : 0 );
-          // Removed loading of randomizeVerbs/skipVerbs
-          loadedState = true;
+            const validStoredPhrases = parsed.knownPhrases.filter((kp: KnownPhraseState) =>
+                allPhrases.some(ap => ap.key === kp.data.key)
+            );
+
+            if (validStoredPhrases.length > 0) {
+                console.log(`Loading ${validStoredPhrases.length} valid phrases from localStorage.`);
+                setKnownPhrases(validStoredPhrases);
+                // Ensure currentIndex is valid for the loaded phrases, default to 0 otherwise
+                const newIndex = (parsed.currentIndex >= 0 && parsed.currentIndex < validStoredPhrases.length) ? parsed.currentIndex : 0;
+                setCurrentIndex(newIndex);
+                loadedState = true;
+            } else {
+                console.log("localStorage found but contained no phrases matching the current vocabulary. Clearing.");
+                localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear invalid state
+            }
         } else {
            console.log("localStorage found but invalid content. Clearing.");
            localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear invalid state
@@ -208,27 +232,27 @@ export default function ReviewPage() {
 
     // If no valid state was loaded from localStorage AND knownPhrases is still empty
     // Check knownPhrases.length directly as setKnownPhrases might not update immediately for this check
-    if (!loadedState && knownPhrases.length === 0) { // Use ref for immediate check
-      console.log("No valid saved state found. Introducing first phrase.");
+    if (!loadedState && knownPhrasesRef.current.length === 0) { // Use ref for immediate check
+      console.log("No valid saved state found or initial load. Introducing first phrase.");
       introduceRandomKnownPhrase(); // Call updated function
     }
-    // Depend on allPhrases to trigger this effect initially.
-  }, [allPhrases]); // Only depend on allPhrases
+    // Depend on allPhrases, isLoadingPhrases, and loadingError to trigger this effect correctly.
+  }, [allPhrases, isLoadingPhrases, loadingError]); // Added isLoadingPhrases, loadingError dependencies
 
   // ----------------------------------------------------
   //  Whenever knownPhrases/currentIndex changes, store them
   // ----------------------------------------------------
   useEffect(() => {
-    // Only save if there's data to prevent overwriting on initial load errors
-    if (knownPhrases.length > 0 || currentIndex !== 0) { // Removed randomizeVerbs/skipVerbs check
+    // Only save if there's data and phrases have loaded without error
+    if (!isLoadingPhrases && !loadingError && (knownPhrases.length > 0 || currentIndex !== 0)) {
       const toSave = {
-        knownPhrases, // Save knownPhrases
+        knownPhrases,
         currentIndex,
-        // Removed randomizeVerbs/skipVerbs from save data
       };
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
     }
-  }, [knownPhrases, currentIndex]); // Removed randomizeVerbs/skipVerbs dependencies
+    // Depend on loading state as well to prevent saving during initial load/error
+  }, [knownPhrases, currentIndex, isLoadingPhrases, loadingError]);
 
   // -----------------------------------
   //  Close menu when clicking outside
@@ -250,41 +274,53 @@ export default function ReviewPage() {
   }, [isMenuOpen]);
 
   // Ref to get immediate access to knownPhrases length for initialization check
-  const knownPhrasesRef = React.useRef(knownPhrases); // Renamed ref
+  const knownPhrasesRef = useRef(knownPhrases); // Use useRef
   useEffect(() => {
     knownPhrasesRef.current = knownPhrases; // Update ref
   }, [knownPhrases]); // Depend on knownPhrases
 
   // Declare currentCard *before* the useEffect that uses it
-  const currentCard = knownPhrases[currentIndex]; // Use knownPhrases
+  // Add checks for valid index and non-empty array
+  const currentCard = (knownPhrases.length > 0 && currentIndex >= 0 && currentIndex < knownPhrases.length)
+    ? knownPhrases[currentIndex]
+    : null; // Use null if index is invalid or array is empty
 
   // Moved this useEffect hook up before the conditional returns
   // Attempt to recover by setting index to 0 if it becomes invalid
   useEffect(() => {
     // Add the condition *inside* the effect
-    if (!currentCard && knownPhrases.length > 0 && currentIndex !== 0) { // Use knownPhrases
-        console.warn(`No current card (index ${currentIndex}), but ${knownPhrases.length} knownPhrases exist. Resetting index to 0.`); // Use knownPhrases
+    // Only reset if phrases are loaded, not loading, no error, and index is bad
+    if (!isLoadingPhrases && !loadingError && !currentCard && knownPhrases.length > 0 && currentIndex !== 0) {
+        console.warn(`No current card (index ${currentIndex}), but ${knownPhrases.length} knownPhrases exist. Resetting index to 0.`);
         setCurrentIndex(0);
     }
     // currentCard is now defined here
-  }, [currentCard, knownPhrases, currentIndex]); // Add knownPhrases dependency
+  }, [currentCard, knownPhrases, currentIndex, isLoadingPhrases, loadingError]); // Add loading dependencies
 
   // ----------------------------------------------------
   //  Introduce a new random phrase.
   // ----------------------------------------------------
-  function introduceRandomKnownPhrase() { // Renamed function
-    if (allPhrases.length === 0) return; // Use allPhrases
+  function introduceRandomKnownPhrase() {
+    // Ensure phrases are loaded and available
+    if (isLoadingPhrases || loadingError || allPhrases.length === 0) {
+        console.log("Cannot introduce phrase: Still loading, error occurred, or no phrases available.");
+        return;
+    }
 
     // Filter out phrases that are already introduced
-    const knownKeys = new Set(knownPhrases.map((k) => k.data.key)); // Use knownPhrases
-    const candidates = allPhrases.filter((p) => !knownKeys.has(p.key)); // Use allPhrases
-    if (candidates.length === 0) return;
+    const knownKeys = new Set(knownPhrasesRef.current.map((k) => k.data.key)); // Use ref for immediate check
+    const candidates = allPhrases.filter((p) => !knownKeys.has(p.key));
+    if (candidates.length === 0) {
+        console.log("No new phrases left to introduce.");
+        // Optionally display a message to the user here
+        return;
+    }
 
     // Pick a random candidate
     const newPhrase = candidates[Math.floor(Math.random() * candidates.length)];
 
     // Convert to KnownPhraseState
-    const newEntry: KnownPhraseState = { // Use KnownPhraseState
+    const newEntry: KnownPhraseState = {
       data: newPhrase,
       rating: 0,
       lastSeen: 0,
@@ -294,22 +330,33 @@ export default function ReviewPage() {
     };
 
     // Add to knownPhrases
-    setKnownPhrases((prev) => [...prev, newEntry]); // Use setKnownPhrases
+    setKnownPhrases((prev) => [...prev, newEntry]);
+    // Set the current index to the newly added phrase
+    setCurrentIndex(knownPhrasesRef.current.length); // Set index to the end (where the new one was added)
+    setIsFlipped(false); // Ensure the new card starts unflipped
+    console.log(`Introduced new phrase: ${newPhrase.key}`);
   }
 
   // ----------------------------
   //  Handle rating (SM-2 logic)
   // ----------------------------
   function handleScore(diff: "easy" | "good" | "hard" | "fail") {
+    // Ensure there is a current card to score
+    if (!currentCard) {
+        console.error("handleScore called but there is no current card.");
+        return;
+    }
+
     let nextKnownPhrases: KnownPhraseState[] = []; // To store the updated state for score calculation
 
-    setKnownPhrases((prev) => { // Use setKnownPhrases
+    setKnownPhrases((prev) => {
       const updated = [...prev];
-       // Ensure currentIndex is valid before accessing
+       // Double-check currentIndex validity (should be guaranteed by currentCard check, but safe)
       if (currentIndex < 0 || currentIndex >= updated.length) {
-          console.error(`Invalid currentIndex ${currentIndex} for knownPhrases length ${updated.length}. Resetting index.`);
-          setCurrentIndex(0); // Simple recovery attempt
-          return prev; // Return previous state to avoid crash or unexpected updates
+          console.error(`Invalid currentIndex ${currentIndex} in handleScore. This should not happen.`);
+          // Attempt recovery or simply return previous state
+          setCurrentIndex(0);
+          return prev;
       }
       const cardState = updated[currentIndex];
       const score = difficultyToScore(diff);
@@ -344,39 +391,42 @@ export default function ReviewPage() {
 
     // --- Introduction Trigger Logic ---
     // Use a timeout to allow state update to potentially settle before calculating score
-    // Although capturing nextKnownPhrases should be sufficient, this adds robustness
     setTimeout(() => {
         let introductionTriggerScore = 0;
         const currentKnownPhrases = knownPhrasesRef.current; // Use ref for the most current state
 
         if (currentKnownPhrases.length > 0) {
-            // Removed skipVerbs logic, calculate score based on all known phrases
-            const relevantPhrases = currentKnownPhrases;
+            const relevantPhrases = currentKnownPhrases; // Now considers all known phrases
 
             if (relevantPhrases.length > 0) {
                 const sum = relevantPhrases.reduce((acc, kp) => acc + kp.rating / 3, 0);
                 introductionTriggerScore = sum / relevantPhrases.length;
-                console.log(`Calculated trigger score: ${introductionTriggerScore.toFixed(3)} (sum: ${sum.toFixed(3)}, relevant count: ${relevantPhrases.length})`); // LOG 2 (simplified)
+                console.log(`Calculated trigger score: ${introductionTriggerScore.toFixed(3)} (sum: ${sum.toFixed(3)}, count: ${relevantPhrases.length})`); // LOG 2
             } else {
-                // This case should ideally not happen if currentKnownPhrases.length > 0
-                console.log(`No relevant phrases found for trigger score calculation.`); // LOG 3 (simplified)
+                console.log(`No relevant phrases found for trigger score calculation.`); // LOG 3
             }
         } else {
             console.log("KnownPhrases is empty, cannot calculate trigger score."); // LOG 4
         }
 
+        // Possibly introduce more cards if the score is high
+        // Check if there are still phrases left to introduce from allPhrases
+        const knownKeys = new Set(currentKnownPhrases.map(kp => kp.data.key));
+        const remainingPhrasesCount = allPhrases.filter(p => !knownKeys.has(p.key)).length;
 
-        // Possibly introduce more cards if the score of *relevant* cards is high
-        // Adjusted threshold slightly as phrases might be learned differently
-        if (introductionTriggerScore > 0.75) {
-          console.log("Threshold met. Attempting to introduce new phrase."); // LOG 5
+        if (introductionTriggerScore > 0.75 && remainingPhrasesCount > 0) {
+          console.log(`Threshold met (${introductionTriggerScore.toFixed(3)} > 0.75) and ${remainingPhrasesCount} phrases remaining. Attempting to introduce.`); // LOG 5
           introduceRandomKnownPhrase(); // Call updated function
         } else {
-          console.log(`Threshold (0.75) not met. Score: ${introductionTriggerScore.toFixed(3)}. Skipping phrase introduction.`); // LOG 6 (updated threshold)
+          if (remainingPhrasesCount === 0) {
+              console.log(`Threshold met but no new phrases left to introduce.`);
+          } else {
+              console.log(`Threshold (0.75) not met. Score: ${introductionTriggerScore.toFixed(3)}. Skipping phrase introduction.`); // LOG 6
+          }
+          // Only pick next card if not introducing (introduce handles picking next)
+          pickNextCard();
         }
-
-        pickNextCard();
-    }, 0); // Timeout 0 ms pushes execution to after the current call stack
+    }, 0); // Timeout 0 ms
   }
 
   /** Average rating/3 across ALL known phrases. */
@@ -401,53 +451,75 @@ export default function ReviewPage() {
 
   /** Pick the next card by the highest priority. */
   function pickNextCard() {
+    // Don't pick if still loading or error occurred
+    if (isLoadingPhrases || loadingError) return;
+
     setCardCounter((n) => n + 1);
 
     setKnownPhrases((prev) => {
-      // Increment lastSeen for all cards except the one just shown
+      // Ensure prev is not empty before proceeding
+      if (prev.length === 0) {
+          console.warn("pickNextCard called with empty knownPhrases.");
+          return prev; // Return unchanged empty array
+      }
+
+      // Increment lastSeen for all cards except the one just shown (if currentIndex is valid)
       const updatedLastSeen = prev.map((kw, i) =>
-        i === currentIndex ? kw : { ...kw, lastSeen: kw.lastSeen + 1 }
+        (currentIndex >= 0 && i === currentIndex) ? kw : { ...kw, lastSeen: kw.lastSeen + 1 }
       );
 
-      // Use const since candidates is not reassigned
       const candidates = updatedLastSeen;
 
       // Find the highest priority card among the candidates
-      let bestIdx = -1; // Use -1 to indicate not found initially
+      let bestIdx = -1;
       let bestVal = -Infinity;
-      candidates.forEach((kp) => { // Use kp for knownPhrase
-        const priority = calculateCardPriority(kp);
-        if (priority > bestVal) {
-          bestVal = priority;
-          // Find the original index in updatedLastSeen
-          bestIdx = updatedLastSeen.findIndex(originalKp => originalKp.data.key === kp.data.key);
-        }
+      // Use map to calculate priorities and find the best index
+      const priorities = candidates.map(kp => calculateCardPriority(kp));
+      priorities.forEach((priority, index) => {
+          if (priority > bestVal) {
+              bestVal = priority;
+              bestIdx = index; // Index directly corresponds to candidates/updatedLastSeen
+          }
       });
 
-      // If no suitable candidate was found (e.g., empty list, though unlikely), default to 0
+
+      // If no suitable candidate was found (e.g., all priorities are -Infinity or list empty), default to 0
       if (bestIdx === -1 && updatedLastSeen.length > 0) {
-          console.warn("No suitable next card found, defaulting to index 0.");
+          console.warn("No suitable next card found based on priority, defaulting to index 0.");
           bestIdx = 0;
       } else if (bestIdx === -1) {
-          console.warn("Known phrases list is empty."); // Updated warning
-          // Cannot set index if list is empty
+          // This case should only happen if updatedLastSeen is empty, handled above.
+          console.warn("Known phrases list is empty in pickNextCard.");
           return updatedLastSeen; // Return unchanged list
       }
 
+      // Only update state if the index actually changes or if it's the only card
+      if (bestIdx !== currentIndex || updatedLastSeen.length === 1) {
+          setCurrentIndex(bestIdx);
+      } else {
+          // If the same card is picked again, force a re-render by returning a new array instance
+          // This might happen if only one card is known or priorities lead back to the same card.
+          // However, usually, lastSeen increment prevents immediate repeats unless interval=1.
+          console.log(`Picking the same card index: ${bestIdx}`);
+          // No state update needed for knownPhrases if only index changes
+          // setCurrentIndex(bestIdx); // Already called above if needed
+      }
 
-      setCurrentIndex(bestIdx);
       return updatedLastSeen; // Return the list with updated lastSeen values
     });
 
     setIsFlipped(false);
-    // Removed setShowEnglish(false);
   }
 
   // --------------
   //  "Get Lesson"
   // --------------
   async function handleGetLesson() {
-    if (!knownPhrases[currentIndex]) return; // Use knownPhrases
+    // Use currentCard which already checks for validity
+    if (!currentCard) {
+        console.warn("Get Lesson clicked but no current card.");
+        return;
+    }
     let errorToDisplay = "Error fetching lesson from the server."; // Default error
 
     try {
@@ -455,14 +527,10 @@ export default function ReviewPage() {
       setIsLessonLoading(true);
       setLessonMarkdown(""); // Clear previous lesson/error
 
-      const phrase = knownPhrases[currentIndex].data.GeorgianPhrase; // Get GeorgianPhrase
-      // const englishPhrase = knownPhrases[currentIndex].data.EnglishPhrase; // No longer sending English
+      const phrase = currentCard.data.GeorgianPhrase; // Get GeorgianPhrase from currentCard
 
-      // --- CHANGE HERE: Revert API endpoint and parameter ---
       // Use the original /api/lesson endpoint
-      // Send the Georgian phrase as the 'word' parameter
       const res = await fetch(`/api/lesson?word=${encodeURIComponent(phrase)}`);
-      // --- END CHANGE ---
 
       if (!res.ok) {
         // Try to get more specific error from response body
@@ -507,21 +575,22 @@ export default function ReviewPage() {
   // -----------------------------------
   function handleClearProgress() {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
-    setKnownPhrases([]); // Use setKnownPhrases
+    setKnownPhrases([]);
     setCurrentIndex(0);
     setIsFlipped(false);
-    // Removed setShowEnglish(false);
     setCardCounter(0);
-    setIsMenuOpen(false); // Close menu after resetting
-    // Removed resetting randomizeVerbs/skipVerbs
+    setIsMenuOpen(false);
 
     // Introduce the first phrase after clearing
     // Need a slight delay or ensure allPhrases is ready
     setTimeout(() => {
-        if (allPhrases.length > 0) { // Use allPhrases
-            introduceRandomKnownPhrase(); // Call updated function
+        // Check loading/error state before introducing
+        if (!isLoadingPhrases && !loadingError && allPhrases.length > 0) {
+            introduceRandomKnownPhrase();
+        } else {
+            console.log("Clear progress: Cannot introduce first phrase yet (loading/error/no phrases).");
         }
-    }, 100); // Small delay to ensure state updates settle
+    }, 100); // Small delay
   }
 
   /**
@@ -579,54 +648,63 @@ export default function ReviewPage() {
   // Update the Home button click handler
   const handleHomeClick = () => {
     router.push('/'); // Navigate to the home page
-    // setIsMenuOpen(false); // Optional: close menu if open
   };
 
   // Loading or no data state
-  if (knownPhrases.length === 0 && allPhrases.length > 0) { // Use knownPhrases, allPhrases
-      // Waiting for the initialization useEffect to run
+  if (isLoadingPhrases) {
       return (
           <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-              <p>Initializing...</p>
+              <p>Loading vocabulary from Google Sheets...</p>
+              {/* Optional: Add a spinner here */}
           </div>
       );
-  } else if (!currentCard && knownPhrases.length > 0) { // Use knownPhrases
-      // This might happen briefly if currentIndex is invalid after load/reset
-      // The useEffect above will attempt to fix this, show a temporary message
+  }
+
+  if (loadingError) {
       return (
-          <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-              <p>Resetting view...</p>
+          <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+              <p className="text-red-500 font-semibold">Error loading vocabulary:</p>
+              <p className="text-red-400 mt-2">{loadingError}</p>
+              <p className="mt-4 text-sm text-gray-400">Please check the console for details and ensure the Google Sheet is accessible and correctly formatted.</p>
+              {/* Optionally add a retry button */}
           </div>
       );
-  } else if (knownPhrases.length === 0 && allPhrases.length === 0) { // Use knownPhrases, allPhrases
-       // Waiting for CSV to load
+  }
+
+  if (allPhrases.length === 0) {
+       // This means loading finished, no error, but sheet was empty or filtered out all rows
       return (
         <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-          <p>Loading vocabulary...</p>
-        </div>
-      );
-  } else if (!currentCard) {
-      // Should ideally not be reached if logic above is correct, but acts as a fallback
-       console.warn("Reached unexpected state: No current card. Displaying loading.");
-       return (
-        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-          <p>Loading...</p>
+          <p>No phrases found in the Google Sheet.</p>
+          <p className="mt-2 text-sm text-gray-400">Ensure the sheet 'Sheet1' exists, has data in columns A-D starting from row 2, and the Georgian phrase (column B) is not empty.</p>
         </div>
       );
   }
 
-  // Get what to display from the current card
-  const { EnglishPhrase, GeorgianPhrase, ExampleGeorgian, ExampleEnglish } = currentCard.data; // Destructure new fields
-  // Removed verbHint
+  // If initialization hasn't set knownPhrases yet (e.g., localStorage load pending or first intro pending)
+  // or if currentCard is somehow null despite checks (fallback)
+  if (knownPhrases.length === 0 || !currentCard) {
+      // This state should be brief as the initialization useEffect runs after loading
+       console.log("Waiting for initialization or current card...");
+       return (
+        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+          <p>Initializing review...</p>
+        </div>
+      );
+  }
+
+
+  // Get what to display from the current card (already checked for null)
+  const { EnglishPhrase, GeorgianPhrase, ExampleGeorgian, ExampleEnglish } = currentCard.data;
 
   return (
     <div className={containerClasses} style={{ height: '100dvh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 relative top-bar-menu-area">
         {/* Left Button Group */}
-        <div className="flex items-center space-x-2"> {/* Group buttons with spacing */}
+        <div className="flex items-center space-x-2">
           {/* Menu Button & Dropdown */}
-          <div className="relative"> {/* Keep dropdown relative to menu button */}
+          <div className="relative">
             <button
               onClick={() => setIsMenuOpen(prev => !prev)}
               className="p-2 border border-gray-600 rounded hover:bg-gray-700"
@@ -656,64 +734,66 @@ export default function ReviewPage() {
 
           {/* Home Button */}
           <button
-            onClick={handleHomeClick} // Uses the updated handler
-            className="p-2 border border-gray-600 rounded hover:bg-gray-700" // Similar styling
+            onClick={handleHomeClick}
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700"
             aria-label="Go to Home"
           >
-            <Home size={20} /> {/* Add Home icon */}
+            <Home size={20} />
           </button>
         </div>
 
-        {/* Center Score */}
-        <div className="text-sm">Score: {knownPhrases.length}</div> {/* Use knownPhrases */}
+        {/* Center Score: Show number of known phrases / total phrases */}
+        <div className="text-sm">
+            {knownPhrases.length} / {allPhrases.length} Phrases
+        </div>
 
         {/* Right Button */}
         <button
           onClick={handleGetLesson}
-          className="px-3 py-2 border border-gray-600 rounded text-sm hover:bg-gray-700"
+          disabled={!currentCard} // Disable if no current card
+          className="px-3 py-2 border border-gray-600 rounded text-sm hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Get Lesson
         </button>
       </div>
 
       {/* Main Content - Adjusted height and content */}
-      <div className={`${mainAreaClasses} h-[calc(100vh-140px)]`}> {/* Kept height for now, can adjust */}
-        <div className="flex flex-col items-center justify-center text-center w-full max-w-md px-2"> {/* Increased max-width slightly */}
-          {/* Removed Image container */}
+      <div className={`${mainAreaClasses} h-[calc(100vh-140px)]`}>
+        <div className="flex flex-col items-center justify-center text-center w-full max-w-md px-2">
 
           {/* Front of Card (English) */}
-          {/* {!isFlipped && ( */}
-            <p className="text-3xl tracking-wider mb-4 min-h-[20px] flex items-center justify-center"> {/* Added min-height */}
+          {/* Always show English for context, maybe smaller when flipped */}
+           <p className={`text-slate-100 mb-4 min-h-[20px] flex items-center justify-center transition-opacity duration-300 ${isFlipped ? 'text-xl opacity-60' : 'text-3xl tracking-wider'}`}>
               {EnglishPhrase}
             </p>
-          
 
-          {/* Back of Card (Georgian + Examples + English) */}
-          {isFlipped && (
-            <div className="flex flex-col items-center">
-              {/* Show English phrase again, maybe smaller/greyed out */}
-              {/* <p className="text-xl text-slate-400 mb-2">
-                {EnglishPhrase}
-              </p> */}
-              <div className="flex flex-col items-center mt-4 w-[90px] border-t border-slate-700 pb-8 h-[20px]">
+
+          {/* Back of Card (Georgian + Examples) */}
+          {/* Use opacity and height transition for smoother flip */}
+          <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isFlipped ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+            {isFlipped && ( // Render content only when flipped for performance
+              <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center mt-2 w-[90px] border-t border-slate-700 pb-6 h-[1px]">
+                  {/* Divider line */}
+                </div>
+                {/* Main Georgian Phrase */}
+                <p className="text-3xl tracking-wider mb-4 text-slate-50">
+                  {GeorgianPhrase}
+                </p>
+                {/* Examples */}
+                {ExampleGeorgian && (
+                  <p className="text-xl text-slate-300 mt-4 mb-1 ">
+                    &quot;{ExampleGeorgian}&quot;
+                  </p>
+                )}
+                {ExampleEnglish && (
+                  <p className="text-xl text-slate-400 mb-4">
+                    ({ExampleEnglish})
+                  </p>
+                )}
               </div>
-              {/* Main Georgian Phrase */}
-              <p className="text-3xl tracking-wider mb-4">
-                {GeorgianPhrase}
-              </p>
-              {/* Examples */}
-              {ExampleGeorgian && (
-                <p className="text-xl text-slate-300 mt-4 mb-1 ">
-                  &quot;{ExampleGeorgian}&quot;
-                </p>
-              )}
-              {ExampleEnglish && (
-                <p className="text-xl text-slate-400 mb-4">
-                  ({ExampleEnglish})
-                </p>
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
@@ -723,41 +803,47 @@ export default function ReviewPage() {
         <div className="absolute bottom-0 left-0 w-full flex text-white bg-black">
           <button
             onClick={() => setIsFlipped(true)}
-            className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px]"
+            className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px] hover:bg-gray-800 transition-colors"
           >
-            Flip
+            Flip (Space)
           </button>
         </div>
       ) : (
         // Show RATING buttons
-        <div className="absolute bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
+        <div className="absolute bottom-0 left-0 w-full 5 h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black">
+          {/* Added invisible spacer for consistent layout if needed, or adjust flex */}
+          {!isLeftHanded && (
+          <button className="flex-1 py-3 font-light text-center text-xs opacity-90 pointer-events-none md:hidden flex items-center justify-center"
+            onClick={() => setIsLeftHanded(prev => !prev)}
+          ><ChevronLeft /></button>
+          )}
           <button
             onClick={() => handleScore("fail")}
-            className="flex-1 py-3 text-center border-t-4 border-red-500/0 text-red-400 bg-red-800/0"
-          />
-          <button
-            onClick={() => handleScore("fail")}
-            className="flex-1 py-3 text-center border-t-4 border-red-500 text-red-400 bg-red-800/10"
+            className="flex-1 py-3 text-center border-t-4 border-red-500 text-red-400 bg-red-900/20 hover:bg-red-800/40 transition-colors"
+            title="Fail (Q)" // Add tooltips for shortcuts
           >
-            Fail
+            Fail <span className="hidden md:inline">(Q)</span>
           </button>
           <button
             onClick={() => handleScore("hard")}
-            className="flex-1 py-3 text-center border-t-4 border-yellow-500 text-yellow-400 bg-yellow-700/10"
+            className="flex-1 py-3 text-center border-t-4 border-yellow-500 text-yellow-400 bg-yellow-900/20 hover:bg-yellow-800/40 transition-colors"
+             title="Hard (W)"
           >
-            Hard
+            Hard <span className="hidden md:inline">(W)</span>
           </button>
           <button
             onClick={() => handleScore("good")}
-            className="flex-1 py-3 text-center border-t-4 border-blue-500 text-blue-400 bg-blue-700/10"
+            className="flex-1 py-3 text-center border-t-4 border-blue-500 text-blue-400 bg-blue-900/20 hover:bg-blue-800/40 transition-colors"
+             title="Good (E)"
           >
-            Good
+            Good <span className="hidden md:inline">(E)</span>
           </button>
           <button
             onClick={() => handleScore("easy")}
-            className="flex-1 py-3 text-center border-t-4 border-green-500 text-green-400 bg-green-700/10"
+            className="flex-1 py-3 text-center border-t-4 border-green-500 text-green-400 bg-green-900/20 hover:bg-green-800/40 transition-colors"
+             title="Easy (R)"
           >
-            Easy
+            Easy <span className="hidden md:inline">(R)</span>
           </button>
         </div>
       )}
@@ -772,7 +858,7 @@ export default function ReviewPage() {
             {/* Close button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-0 right-1 p-3 text-4xl text-gray-400 hover:text-gray-100"
+              className="absolute top-0 right-1 p-3 text-4xl text-gray-400 hover:text-gray-100 z-10" // Ensure button is clickable
             >
               ✕
             </button>
@@ -784,7 +870,8 @@ export default function ReviewPage() {
               </div>
             ) : (
               <div className="mt-6">
-                <h1 className="text-3xl font-bold mb-3">{GeorgianPhrase}</h1> {/* Show Georgian Phrase in modal title */}
+                 {/* Show Georgian Phrase in modal title only if currentCard exists */}
+                {currentCard && <h1 className="text-3xl font-bold mb-3">{currentCard.data.GeorgianPhrase}</h1>}
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents}
