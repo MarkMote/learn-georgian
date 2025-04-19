@@ -754,7 +754,7 @@ export default function ReviewPage() {
         </div>
 
         {/* Center Score: Show number of known phrases / total phrases */}
-        <div className="text-sm">
+        <div className="text-sm pl-3">
             {knownPhrases.length} / {allPhrases.length} Phrases
         </div>
 

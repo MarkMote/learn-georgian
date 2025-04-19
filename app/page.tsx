@@ -12,7 +12,7 @@ export default function HomePage() {
       <h1 className="text-4xl font-light mb-12 text-slate-300">Learn Georgian</h1>
       {/* <p className="text-sm text-slate-400 mb-12">Mark's Georgian Learning App. </p> */}
 
-      <div className="flex flex-col space-y-6"> {/* Stack buttons vertically with space */}
+      <div className="flex flex-col space-y-6 text-sm"> {/* Stack buttons vertically with space */}
         <Link href="/review" className={buttonClasses}>
           Words with Images
         </Link>
@@ -23,9 +23,9 @@ export default function HomePage() {
       </div>
 
       {/* Optional: Add a footer or other elements later if needed */}
-      {/* <footer className="absolute bottom-4 text-xs text-gray-500">
-        Footer text
-      </footer> */}
+      <footer className="absolute bottom-4 text-xs text-gray-500">
+        Info: It's a spaced repetition app based on SM-2 algorithm.
+      </footer>
     </div>
   );
 }
