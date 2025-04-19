@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 /**
  * CSV row structure.
@@ -147,6 +148,8 @@ export default function ReviewPage() {
   const containerClasses = "relative w-full bg-black text-white";
   const mainAreaClasses =
     "flex items-center justify-center px-4";
+
+  const router = useRouter();
 
   // ---------------------------
   //  Handle Keyboard shortcuts
@@ -609,6 +612,11 @@ export default function ReviewPage() {
     }, 100); // Small delay to ensure state updates settle
   }
 
+  // Add the Home button click handler
+  const handleHomeClick = () => {
+    router.push('/'); // Navigate to the home page
+  };
+
   /**
    * Customized ReactMarkdown rendering:
    * - If you want to style code blocks, blockquotes, etc., you can expand further.
@@ -702,60 +710,75 @@ export default function ReviewPage() {
     <div className={containerClasses} style={{ height: '100dvh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 relative top-bar-menu-area">
-        {/* Menu Button */}
-        <div className="relative w-[100px] ">
-          <button
-            onClick={() => setIsMenuOpen(prev => !prev)}
-            className="p-2 border border-gray-600 rounded  hover:bg-gray-700"
-            aria-label="Open menu"
-          >
-            <Menu size={20} />
-          </button>
+        {/* Left Button Group */}
+        <div className="flex items-center space-x-2"> {/* Group buttons with spacing */}
+          {/* Menu Button & Dropdown */}
+          <div className="relative"> {/* Keep dropdown relative to menu button */}
+            <button
+              onClick={() => setIsMenuOpen(prev => !prev)}
+              className="p-2 border border-gray-600 rounded hover:bg-gray-700"
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+            </button>
 
-          {/* Dropdown Menu */}
-          {isMenuOpen && (
-            <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
-              <ul className="divide-y divide-gray-700">
-                {/* Randomize Verbs Toggle */}
-                <li>
-                  <button
-                    onClick={() => setRandomizeVerbs(prev => !prev)}
-                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
-                  >
-                    <span>Randomize Verbs</span>
-                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${randomizeVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
-                      {randomizeVerbs ? 'ON' : 'OFF'}
-                    </span>
-                  </button>
-                </li>
-                {/* Skip Verbs Toggle */}
-                <li>
-                  <button
-                    onClick={() => setSkipVerbs(prev => !prev)}
-                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
-                  >
-                    <span>Skip Verbs</span>
-                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${skipVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
-                      {skipVerbs ? 'ON' : 'OFF'}
-                    </span>
-                  </button>
-                </li>
-                {/* Reset Progress */}
-                <li>
-                  <button
-                    onClick={handleClearProgress}
-                    className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
-                  >
-                    Reset Progress
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
+            {/* Dropdown Menu - Including existing items */}
+            {isMenuOpen && (
+              <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
+                <ul className="divide-y divide-gray-700">
+                  {/* Randomize Verbs Toggle - Keep this */}
+                  <li>
+                    <button
+                      onClick={() => setRandomizeVerbs(prev => !prev)} // Ensure setRandomizeVerbs exists
+                      className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                    >
+                      <span>Randomize Verbs</span>
+                      <span className={`ml-2 px-2 py-0.5 rounded text-xs ${randomizeVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
+                        {randomizeVerbs ? 'ON' : 'OFF'}
+                      </span>
+                    </button>
+                  </li>
+                  {/* Skip Verbs Toggle - Keep this */}
+                  <li>
+                    <button
+                      onClick={() => setSkipVerbs(prev => !prev)} // Ensure setSkipVerbs exists
+                      className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                    >
+                      <span>Skip Verbs</span>
+                      <span className={`ml-2 px-2 py-0.5 rounded text-xs ${skipVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
+                        {skipVerbs ? 'ON' : 'OFF'}
+                      </span>
+                    </button>
+                  </li>
+                  {/* Reset Progress - Keep this */}
+                  <li>
+                    <button
+                      onClick={handleClearProgress} // Ensure handleClearProgress exists
+                      className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
+                    >
+                      Reset Progress
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Home Button - Add this */}
+          <button
+            onClick={handleHomeClick}
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700"
+            aria-label="Go to Home"
+          >
+            <Home size={20} />
+          </button>
+          {/* End Home Button */}
         </div>
 
+        {/* Center Score - Keep this */}
         <div className="text-sm">Score: {knownWords.length}</div>
 
+        {/* Right Button - Keep this */}
         <button
           onClick={handleGetLesson}
           className="px-3 py-2 border border-gray-600 rounded text-sm hover:bg-gray-700"
@@ -763,6 +786,7 @@ export default function ReviewPage() {
           Get Lesson
         </button>
       </div>
+      {/* End Top Bar */}
 
       {/* Main Content - Fixed height area */}
       <div className={`${mainAreaClasses} h-[calc(100vh-140px)]`}>

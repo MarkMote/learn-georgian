@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 /**
  * CSV row structure for phrases.csv.
@@ -101,6 +102,8 @@ export default function ReviewPage() {
   const containerClasses = "relative w-full bg-black text-white";
   const mainAreaClasses =
     "flex items-center justify-center px-4";
+
+  const router = useRouter(); // Get the router instance
 
   // ---------------------------
   //  Handle Keyboard shortcuts
@@ -574,6 +577,12 @@ export default function ReviewPage() {
   const modalContentClass =
     "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
 
+  // Update the Home button click handler
+  const handleHomeClick = () => {
+    router.push('/'); // Navigate to the home page
+    // setIsMenuOpen(false); // Optional: close menu if open
+  };
+
   // Loading or no data state
   if (knownPhrases.length === 0 && allPhrases.length > 0) { // Use knownPhrases, allPhrases
       // Waiting for the initialization useEffect to run
@@ -615,37 +624,51 @@ export default function ReviewPage() {
     <div className={containerClasses} style={{ height: '100dvh', overflow: isModalOpen ? 'auto' : 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 relative top-bar-menu-area">
-        {/* Menu Button */}
-        <div className="relative w-[100px] ">
-          <button
-            onClick={() => setIsMenuOpen(prev => !prev)}
-            className="p-2 border border-gray-600 rounded  hover:bg-gray-700"
-            aria-label="Open menu"
-          >
-            <Menu size={20} />
-          </button>
+        {/* Left Button Group */}
+        <div className="flex items-center space-x-2"> {/* Group buttons with spacing */}
+          {/* Menu Button & Dropdown */}
+          <div className="relative"> {/* Keep dropdown relative to menu button */}
+            <button
+              onClick={() => setIsMenuOpen(prev => !prev)}
+              className="p-2 border border-gray-600 rounded hover:bg-gray-700"
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+            </button>
 
-          {/* Dropdown Menu */}
-          {isMenuOpen && (
-            <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
-              <ul className="divide-y divide-gray-700">
-                {/* Removed Randomize/Skip Verbs Toggles */}
-                {/* Reset Progress */}
-                <li>
-                  <button
-                    onClick={handleClearProgress}
-                    className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
-                  >
-                    Reset Progress
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
+            {/* Dropdown Menu */}
+            {isMenuOpen && (
+              <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
+                <ul className="divide-y divide-gray-700">
+                  {/* Reset Progress */}
+                  <li>
+                    <button
+                      onClick={handleClearProgress}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
+                    >
+                      Reset Progress
+                    </button>
+                  </li>
+                  {/* Add other menu items if needed */}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Home Button */}
+          <button
+            onClick={handleHomeClick} // Uses the updated handler
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700" // Similar styling
+            aria-label="Go to Home"
+          >
+            <Home size={20} /> {/* Add Home icon */}
+          </button>
         </div>
 
+        {/* Center Score */}
         <div className="text-sm">Score: {knownPhrases.length}</div> {/* Use knownPhrases */}
 
+        {/* Right Button */}
         <button
           onClick={handleGetLesson}
           className="px-3 py-2 border border-gray-600 rounded text-sm hover:bg-gray-700"
