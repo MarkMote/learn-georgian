@@ -1,4 +1,5 @@
 key,img_key,EnglishWord,PartOfSpeech,GeorgianWord,hint
+pen,pen,pen,noun,კალამი,object
 dog,dog,dog,noun,ძაღლი,animal
 cat,cat,cat,noun,კატა,animal
 fish,fish,fish,noun,თევზი,animal
@@ -521,7 +522,7 @@ catch_inf,catch,to catch,verb-inf,დაჭერა,verb
 throw_inf,throw,to throw,verb-inf,გადაგდება,verb
 clean_inf,clean,to clean,verb-inf,დასუფთავება,verb
 find_inf,find,to find,verb-inf,პოვნა,verb
-fall_inf,fall,to fall,verb-inf,ვარდნა,verb
+fall_inf,fall_inf,to fall,verb-inf,ვარდნა,verb
 push_inf,push,to push,verb-inf,ბიძგება,verb
 pull_inf,pull,to pull,verb-inf,ქაჩვა,verb
 carry_inf,carry,to carry,verb-inf,ტარება,verb

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Here we demonstrate a direct fetch call for clarity.
 
 // Set a timeout for the OpenAI API call (e.g., 15 seconds)
-const API_TIMEOUT_MS = 15000;
+const API_TIMEOUT_MS = 25000;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -29,8 +29,8 @@ export async function GET(request: NextRequest) {
   const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
   try {
-    const prompt = `Teach me about the Georgian word "${word}" by providing a short lesson. 
-    First, provide a list of 5 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
+    const prompt = `Teach me about the Georgian word or phrase "${word}" by providing a short lesson. 
+    First, provide a list of 3 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
     Next give 1-2 examples of when someone might use the word, adding quotations around the georgian word being used.
     Then provide a short list of synoynms and related words, and their meanings.
     Then provide a short list of antonyms and related words, and their meanings.
