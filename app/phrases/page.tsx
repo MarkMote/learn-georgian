@@ -664,9 +664,12 @@ export default function ReviewPage() {
   // Loading or no data state
   if (isLoadingPhrases) {
       return (
-          <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-              <p>Loading vocabulary from Google Sheets...</p>
-              {/* Optional: Add a spinner here */}
+          <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+              <div className=" mb-4">
+                <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+              </div>
+              <p className="text-lg animate-pulse">Loading vocabulary from Google Sheets...</p>
+              <p className="text-sm text-gray-400 mt-2 animate-pulse">Please wait while we fetch the latest phrases...</p>
           </div>
       );
   }
@@ -687,7 +690,7 @@ export default function ReviewPage() {
       return (
         <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
           <p>No phrases found in the Google Sheet.</p>
-          <p className="mt-2 text-sm text-gray-400">Ensure the sheet 'Sheet1' exists, has data in columns A-D starting from row 2, and the Georgian phrase (column B) is not empty.</p>
+          <p className="mt-2 text-sm text-gray-400">Ensure the sheet &apos;Sheet1&apos; exists, has data in columns A-D starting from row 2, and the Georgian phrase (column B) is not empty.</p>
         </div>
       );
   }
