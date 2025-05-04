@@ -484,7 +484,7 @@ export default function ReviewPage() {
 
 
         // Possibly introduce more cards if the score of *relevant* cards is high
-        if (introductionTriggerScore > 0.68) {
+        if (introductionTriggerScore > 0.75) {
           console.log("Threshold met. Attempting to introduce new word."); // LOG 5
           introduceRandomKnownWord();
         } else {

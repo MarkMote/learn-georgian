@@ -31,7 +31,8 @@ export async function GET(request: NextRequest) {
   try {
     const prompt = `Teach me about the Georgian word or phrase "${word}" by providing a short lesson. 
     First, provide a list of 3 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
-    Next give 1-2 examples of when someone might use the word, adding quotations around the georgian word being used.
+    If you are explaining a phrase, list the translation of each word in the phrase.
+    Next a short examle of when someone might use the word, adding quotations around the georgian word being used.
     Then provide a short list of synoynms and related words, and their meanings.
     Then provide a short list of antonyms and related words, and their meanings.
     Then provide a short explanation of the word's meaning and usage, interesting etymology, notes on usage or grammar, etc.
