@@ -120,7 +120,11 @@ export default function HomePage() {
         </Link>
       </div>
 
-
+      <div className="flex flex-co border-none space-y-6 text-md">
+        <Link href="/what-is-this" className="border-none my-10 px-4 py-1 border bg-gray-900/0 text-gray-300 hover:bg-gray-900/0 rounded-md">
+          what is this?
+        </Link>
+      </div>
     </div>
   );
 }
