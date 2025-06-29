@@ -209,7 +209,8 @@ export default function HomePage() {
       <div className="flex flex-col space-y-6 text-sm max-w-md w-full"> {/* Stack buttons vertically with space */}
         {/* Chunk Selection for Words with Images */}
         <div className="space-y-3">
-          <h2 className="text-xl text-center text-slate-300 mb-4">Words with Images</h2>
+          {/* <h2 className="text-xl text-center text-slate-300 mb-4">Words with Images</h2> */}
+          
           {chunkCount > 0 ? (
             <div className="grid grid-cols-2 gap-3">
               {Array.from({ length: chunkCount }, (_, index) => {
@@ -239,6 +240,16 @@ export default function HomePage() {
             Words and Phrases
           </Link>
         </div> */}
+      </div>
+
+      {/* About Link */}
+      <div className="mt-12 pt-8 border-t border-gray-800">
+        <Link 
+          href="/about" 
+          className="text-gray-400 hover:text-gray-200 text-sm transition-colors"
+        >
+          About this app
+        </Link>
       </div>
 
     </div>

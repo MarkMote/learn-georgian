@@ -14,8 +14,53 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Georgian Language Learning",
-  description: "Learn Georgian with interactive examples and practice",
+  title: {
+    default: "Learn Georgian",
+    template: "%s | Learn Georgian"
+  },
+  description: "Master Georgian vocabulary with spaced repetition flashcards and AI-powered lessons",
+  keywords: ["Georgian", "language learning", "flashcards", "spaced repetition", "vocabulary", "Georgia"],
+  authors: [{ name: "Mark" }],
+  creator: "Mark",
+  applicationName: "Learn Georgian",
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ],
+    other: [
+      { rel: "icon", url: "/favicon.ico" }
+    ]
+  },
+  manifest: "/site.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Learn Georgian"
+  },
+  formatDetection: {
+    telephone: false
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: "Learn Georgian",
+    description: "Master Georgian vocabulary with spaced repetition flashcards and AI-powered lessons",
+    siteName: "Learn Georgian"
+  },
+  twitter: {
+    card: "summary",
+    title: "Learn Georgian",
+    description: "Master Georgian vocabulary with spaced repetition flashcards and AI-powered lessons"
+  },
+  robots: {
+    index: true,
+    follow: true
+  },
+  category: "education"
 }
 
 export default function RootLayout({

@@ -870,7 +870,7 @@ export default function ReviewPage() {
               <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
                 <ul className="divide-y divide-gray-700">
                   {/* Randomize Verbs Toggle - Keep this */}
-                  <li>
+                  {/* <li>
                     <button
                       onClick={() => setRandomizeVerbs(prev => !prev)} // Ensure setRandomizeVerbs exists
                       className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
@@ -880,7 +880,7 @@ export default function ReviewPage() {
                         {randomizeVerbs ? 'ON' : 'OFF'}
                       </span>
                     </button>
-                  </li>
+                  </li> */}
                   {/* Skip Verbs Toggle - Keep this */}
                   <li>
                     <button
