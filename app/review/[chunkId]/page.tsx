@@ -770,18 +770,18 @@ export default function ReviewPage() {
     ),
     ul: (props: any) => (
       <ul
-        className="list-disc list-inside mb-3 ml-4 text-slate-200 tracking-wide text-lg font-light"
+        className="list-disc list-outside mb-3 ml-6 text-slate-200 tracking-wide text-lg font-light"
         {...props}
       />
     ),
     ol: (props: any) => (
       <ol
-        className="list-decimal list-inside mb-3 ml-4 text-slate-200 font-light"
+        className="list-decimal list-outside mb-3 ml-6 text-slate-200 font-light"
         {...props}
       />
     ),
     li: (props: any) => (
-      <li className="mb-1 text-slate-200" {...props} />
+      <li className="mb-2 text-slate-200 leading-relaxed" {...props} />
     ),
     strong: (props: any) => (
       <strong className="font-semibold" {...props} />
@@ -926,7 +926,7 @@ export default function ReviewPage() {
 
         {/* Right Button - Keep this */}
         <button
-          onClick={handleGetLesson}
+          onClick={() => handleGetLesson()}
           className="px-3 py-2 border border-gray-600 rounded text-sm hover:bg-gray-700"
         >
           Get Lesson
