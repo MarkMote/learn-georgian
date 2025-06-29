@@ -1,106 +1,172 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-// (Optional) If using the openai npm package: npm install openai
-// Here we demonstrate a direct fetch call for clarity.
-
-// Set a timeout for the OpenAI API call (e.g., 15 seconds)
-const API_TIMEOUT_MS = 25000;
-
+// Streaming response with better reliability and UX
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const word = searchParams.get("word");
+  
   if (!word) {
-    return NextResponse.json(
-      { error: "No word provided." },
-      { status: 400 }
+    return new Response(
+      JSON.stringify({ error: "No word provided." }),
+      { 
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      }
     );
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    return NextResponse.json(
-      { error: "OPENAI_API_KEY not set" },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({ error: "OPENAI_API_KEY not set" }),
+      { 
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      }
     );
   }
 
-  // AbortController for fetch timeout
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
+  // Create a ReadableStream for streaming response
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        const prompt = `Teach me about the Georgian word or phrase "${word}" by providing a short lesson. 
+        First, provide a list of 3 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
+        If you are explaining a phrase, list the translation of each word in the phrase.
+        Next a short examle of when someone might use the word, adding quotations around the georgian word being used.
+        Then provide a short list of synoynms and related words, and their meanings.
+        Then provide a short list of antonyms and related words, and their meanings.
+        Then provide a short explanation of the word's meaning and usage, interesting etymology, notes on usage or grammar, etc.
 
-  try {
-    const prompt = `Teach me about the Georgian word or phrase "${word}" by providing a short lesson. 
-    First, provide a list of 3 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
-    If you are explaining a phrase, list the translation of each word in the phrase.
-    Next a short examle of when someone might use the word, adding quotations around the georgian word being used.
-    Then provide a short list of synoynms and related words, and their meanings.
-    Then provide a short list of antonyms and related words, and their meanings.
-    Then provide a short explanation of the word's meaning and usage, interesting etymology, notes on usage or grammar, etc.
+        Avoid transliteration but feel free to include the English translation.
+        
+        Answer in **markdown** format, using headings, bullet points, etc. 
+        Write it as if for a language learner.`;
 
-    Avoid transliteration but feel free to include the English translation.
-    
-    Answer in **markdown** format, using headings, bullet points, etc. 
-    Write it as if for a language learner.`;
+        // Send initial status
+        controller.enqueue(new TextEncoder().encode('data: {"status":"connecting"}\n\n'));
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o",
-        messages: [
-          {
-            role: "system",
-            content: "You are a helpful Georgian language tutor.",
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
           },
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        temperature: 0.7,
-      }),
-      // Add signal for timeout
-      signal: controller.signal,
-    });
+          body: JSON.stringify({
+            model: "gpt-4o",
+            messages: [
+              {
+                role: "system",
+                content: "You are a helpful Georgian language tutor.",
+              },
+              {
+                role: "user",
+                content: prompt,
+              },
+            ],
+            temperature: 0.7,
+            stream: true, // Enable streaming
+          }),
+        });
 
-    // Clear the timeout timer if the fetch completes successfully
-    clearTimeout(timeoutId);
+        if (!response.ok) {
+          const errorBody = await response.text();
+          console.error(`OpenAI API error: ${response.status} ${response.statusText}`, errorBody);
+          
+          controller.enqueue(new TextEncoder().encode(
+            `data: ${JSON.stringify({ 
+              error: `OpenAI API error: ${response.statusText}`,
+              details: errorBody 
+            })}\n\n`
+          ));
+          controller.close();
+          return;
+        }
 
-    if (!response.ok) {
-      // Log the error response body from OpenAI for more details
-      const errorBody = await response.text(); // Use text() in case it's not JSON
-      console.error(`OpenAI API error: ${response.status} ${response.statusText}`, errorBody);
-      return NextResponse.json(
-        { error: `OpenAI API error: ${response.statusText}`, details: errorBody },
-        { status: response.status }
-      );
+        // Send status update
+        controller.enqueue(new TextEncoder().encode('data: {"status":"generating"}\n\n'));
+
+        // Process streaming response
+        const reader = response.body?.getReader();
+        if (!reader) {
+          controller.enqueue(new TextEncoder().encode(
+            'data: {"error":"Failed to get response stream"}\n\n'
+          ));
+          controller.close();
+          return;
+        }
+
+        let fullContent = "";
+        const decoder = new TextDecoder();
+
+        while (true) {
+          const { done, value } = await reader.read();
+          
+          if (done) {
+            // Send final complete lesson
+            controller.enqueue(new TextEncoder().encode(
+              `data: ${JSON.stringify({ 
+                status: "complete", 
+                lesson: fullContent 
+              })}\n\n`
+            ));
+            break;
+          }
+
+          const chunk = decoder.decode(value);
+          const lines = chunk.split('\n');
+
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              const data = line.slice(6);
+              if (data === '[DONE]') {
+                continue;
+              }
+
+              try {
+                const parsed = JSON.parse(data);
+                const content = parsed.choices?.[0]?.delta?.content;
+                
+                if (content) {
+                  fullContent += content;
+                  
+                  // Send incremental update
+                  controller.enqueue(new TextEncoder().encode(
+                    `data: ${JSON.stringify({ 
+                      status: "streaming", 
+                      content: content,
+                      fullContent: fullContent 
+                    })}\n\n`
+                  ));
+                }
+              } catch (e) {
+                // Skip malformed JSON
+                continue;
+              }
+            }
+          }
+        }
+
+      } catch (err: any) {
+        console.error("Error in streaming lesson:", err);
+        
+        controller.enqueue(new TextEncoder().encode(
+          `data: ${JSON.stringify({ 
+            error: "Failed to generate lesson",
+            details: err.message 
+          })}\n\n`
+        ));
+      } finally {
+        controller.close();
+      }
     }
+  });
 
-    const data = await response.json();
-    const lessonMarkdown = data.choices?.[0]?.message?.content || "No response";
-
-    return NextResponse.json({ lesson: lessonMarkdown });
-  } catch (err: any) { // Use 'any' or a more specific error type
-    // Clear timeout in case of fetch error (e.g., network issue)
-    clearTimeout(timeoutId);
-
-    // Check if the error was due to the timeout
-    if (err.name === 'AbortError') {
-        console.error("OpenAI API call timed out.");
-        return NextResponse.json(
-          { error: "The request to generate the lesson timed out." },
-          { status: 504 } // Gateway Timeout
-        );
-    }
-
-    // Log other errors
-    console.error("Error calling OpenAI:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch lesson." },
-      { status: 500 }
-    );
-  }
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+    },
+  });
 }

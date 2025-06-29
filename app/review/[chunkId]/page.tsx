@@ -620,26 +620,95 @@ export default function ReviewPage() {
   }
 
   // --------------
-  //  "Get Lesson"
+  //  "Get Lesson" with Streaming and Retry
   // --------------
-  async function handleGetLesson() {
+  async function handleGetLesson(retryCount = 0) {
     if (!knownWords[currentIndex]) return;
-    try {
-      setIsModalOpen(true);
-      setIsLessonLoading(true);
-      setLessonMarkdown("");
+    
+    setIsModalOpen(true);
+    setIsLessonLoading(true);
+    setLessonMarkdown("");
 
+    try {
       const word = knownWords[currentIndex].data.GeorgianWord;
-      const res = await fetch(`/api/lesson?word=${encodeURIComponent(word)}`);
-      if (!res.ok) {
-        throw new Error("Failed to get lesson");
+      const response = await fetch(`/api/lesson?word=${encodeURIComponent(word)}`);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to get lesson: ${response.statusText}`);
       }
-      const data = await res.json();
-      setLessonMarkdown(data.lesson || "No lesson found");
+
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error("Failed to get response stream");
+      }
+
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        
+        // Keep incomplete line in buffer
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6));
+              
+              if (data.error) {
+                console.error("Lesson error:", data.error);
+                setLessonMarkdown(`Error: ${data.error}`);
+                setIsLessonLoading(false);
+                return;
+              }
+
+              switch (data.status) {
+                case "connecting":
+                  setLessonMarkdown("🔗 Connecting to AI tutor...");
+                  break;
+                  
+                case "generating":
+                  setLessonMarkdown("🤔 AI is thinking about your word...");
+                  break;
+                  
+                case "streaming":
+                  // Update with the full content so far
+                  if (data.fullContent) {
+                    setLessonMarkdown(data.fullContent);
+                    setIsLessonLoading(false); // Stop loading spinner once text starts appearing
+                  }
+                  break;
+                  
+                case "complete":
+                  setLessonMarkdown(data.lesson || "No lesson found");
+                  setIsLessonLoading(false);
+                  break;
+              }
+            } catch (e) {
+              // Skip malformed JSON
+              continue;
+            }
+          }
+        }
+      }
     } catch (error) {
-      console.error(error);
-      setLessonMarkdown("Error fetching lesson from the server.");
-    } finally {
+      console.error("Lesson fetch error:", error);
+      
+      // Retry up to 2 times
+      if (retryCount < 2) {
+        console.log(`Retrying lesson request (attempt ${retryCount + 2}/3)...`);
+        setLessonMarkdown(`🔄 Connection failed, retrying (${retryCount + 2}/3)...`);
+        setTimeout(() => handleGetLesson(retryCount + 1), 2000);
+        return;
+      }
+      
+      setLessonMarkdown("❌ Error fetching lesson from the server. Please try again.");
       setIsLessonLoading(false);
     }
   }
@@ -921,22 +990,42 @@ export default function ReviewPage() {
               ✕
             </button>
 
-            {/* Loading spinner or the markdown */}
-            {isLessonLoading ? (
-              <div className="flex items-center justify-center mt-6 mb-6">
-                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
-              </div>
-            ) : (
-              <div className="mt-6">
-                <h1 className="text-3xl font-bold mb-3">{GeorgianWord}</h1>
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={markdownComponents}
-                >
-                  {lessonMarkdown}
-                </ReactMarkdown>
-              </div>
-            )}
+            {/* Lesson content with streaming support */}
+            <div className="mt-6">
+              <h1 className="text-3xl font-bold mb-3">{GeorgianWord}</h1>
+              
+              {/* Show loading spinner only during initial loading */}
+              {isLessonLoading && !lessonMarkdown && (
+                <div className="flex items-center justify-center mt-6 mb-6">
+                  <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white mr-3"></div>
+                  <span>Preparing lesson...</span>
+                </div>
+              )}
+              
+              {/* Show content as it streams in */}
+              {lessonMarkdown && (
+                <div className="relative">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={markdownComponents}
+                  >
+                    {lessonMarkdown}
+                  </ReactMarkdown>
+                  
+                  {/* Show typing indicator while still loading */}
+                  {isLessonLoading && (
+                    <div className="mt-4 flex items-center text-gray-400">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      </div>
+                      <span className="ml-2 text-sm">AI is writing...</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
