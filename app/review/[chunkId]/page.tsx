@@ -5,20 +5,23 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
 import { Menu, X, Home } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import BottomBar from '../components/BottomBar';
+import { useRouter, useParams } from 'next/navigation';
+import BottomBar from '../../components/BottomBar';
 
 /**
  * CSV row structure.
  * Columns: key, img_key, EnglishWord, PartOfSpeech, GeorgianWord, hint
  */
 type WordData = {
+  word_key: string;
   key: string;
   img_key: string;
   EnglishWord: string;
   PartOfSpeech: string;
   GeorgianWord: string;
   hint: string;
+  priority: string;
+  group: string;
 };
 
 /**
@@ -51,12 +54,15 @@ function parseCSV(csvText: string): WordData[] {
   return rows.map((row) => {
     const cols = row.split(",");
     return {
-      key: cols[0],
-      img_key: cols[1],
-      EnglishWord: cols[2],
-      PartOfSpeech: cols[3],
-      GeorgianWord: cols[4],
-      hint: cols[5],
+      word_key: cols[0],
+      key: cols[1],
+      img_key: cols[2],
+      EnglishWord: cols[3],
+      PartOfSpeech: cols[4],
+      GeorgianWord: cols[5],
+      hint: cols[6],
+      priority: cols[7] || "",
+      group: cols[8] || "",
     };
   });
 }
@@ -116,11 +122,53 @@ function getVerbBaseKey(word: WordData): string | null {
   return word.key;
 }
 
-// Key for localStorage usage
-const LOCAL_STORAGE_KEY = "reviewState";
+// Configurable chunk size
+const CHUNK_SIZE = 100;
+
+// Key for localStorage usage - now includes chunk ID
+function getLocalStorageKey(chunkId: string): string {
+  return `reviewState_${chunkId}`;
+}
+
+/**
+ * Get unique word keys in CSV order
+ */
+function getUniqueWordKeys(allWords: WordData[]): string[] {
+  const seen = new Set<string>();
+  const uniqueKeys: string[] = [];
+  
+  for (const word of allWords) {
+    if (!seen.has(word.word_key)) {
+      seen.add(word.word_key);
+      uniqueKeys.push(word.word_key);
+    }
+  }
+  
+  return uniqueKeys;
+}
+
+/**
+ * Get words for a specific chunk based on word_key
+ */
+function getWordsForChunk(allWords: WordData[], chunkId: string): WordData[] {
+  const chunkNumber = parseInt(chunkId, 10);
+  if (isNaN(chunkNumber) || chunkNumber < 1) {
+    return [];
+  }
+  
+  const uniqueWordKeys = getUniqueWordKeys(allWords);
+  const startIndex = (chunkNumber - 1) * CHUNK_SIZE;
+  const endIndex = startIndex + CHUNK_SIZE;
+  const chunkWordKeys = new Set(uniqueWordKeys.slice(startIndex, endIndex));
+  
+  return allWords.filter(word => chunkWordKeys.has(word.word_key));
+}
 
 export default function ReviewPage() {
+  const params = useParams();
+  const chunkId = params.chunkId as string;
   const [allWords, setAllWords] = useState<WordData[]>([]);
+  const [chunkWords, setChunkWords] = useState<WordData[]>([]);
   const [knownWords, setKnownWords] = useState<KnownWordState[]>([]);
 
   // Index of the current flashcard
@@ -222,24 +270,29 @@ export default function ReviewPage() {
   }, [isModalOpen]);
 
   // ---------------------------
-  //  Load CSV on mount
+  //  Load CSV on mount and filter for chunk
   // ---------------------------
   useEffect(() => {
     fetch("/words.csv")
       .then((res) => res.text())
-      .then((csv) => setAllWords(parseCSV(csv)));
-  }, []);
+      .then((csv) => {
+        const parsed = parseCSV(csv);
+        setAllWords(parsed);
+        const filtered = getWordsForChunk(parsed, chunkId);
+        setChunkWords(filtered);
+      });
+  }, [chunkId]);
 
   // ----------------------------------------------------
   //  Initialize state from localStorage or introduce first word
   // ----------------------------------------------------
   useEffect(() => {
-    // This effect now handles all initialization logic based on allWords
-    if (allWords.length === 0) return; // Wait for CSV
+    // This effect now handles all initialization logic based on chunkWords
+    if (chunkWords.length === 0) return; // Wait for CSV and chunk filtering
 
     let loadedState = false;
     try {
-      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const stored = localStorage.getItem(getLocalStorageKey(chunkId));
       if (stored) {
         const parsed = JSON.parse(stored);
         // Add more robust check: ensure knownWords is array and has items
@@ -254,22 +307,22 @@ export default function ReviewPage() {
           loadedState = true;
         } else {
            console.log("localStorage found but invalid content. Clearing.");
-           localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear invalid state
+           localStorage.removeItem(getLocalStorageKey(chunkId)); // Clear invalid state
         }
       }
     } catch (err) {
       console.error("Error loading local storage:", err);
-      localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear potentially corrupted state
+      localStorage.removeItem(getLocalStorageKey(chunkId)); // Clear potentially corrupted state
     }
 
     // If no valid state was loaded from localStorage AND knownWords is still empty
     // Check knownWords.length directly as setKnownWords might not update immediately for this check
     if (!loadedState && knownWords.length === 0) { // Use ref for immediate check
       console.log("No valid saved state found. Introducing first word.");
-      introduceRandomKnownWord();
+      introduceNextKnownWord();
     }
-    // Depend on allWords to trigger this effect initially.
-  }, [allWords]); // Only depend on allWords
+    // Depend on chunkWords to trigger this effect initially.
+  }, [chunkWords, chunkId]); // Depend on chunkWords and chunkId
 
   // ----------------------------------------------------
   //  Whenever knownWords/currentIndex changes, store them
@@ -284,9 +337,9 @@ export default function ReviewPage() {
         skipVerbs,
         isLeftHanded,
       };
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
+      localStorage.setItem(getLocalStorageKey(chunkId), JSON.stringify(toSave));
     }
-  }, [knownWords, currentIndex, randomizeVerbs, skipVerbs, isLeftHanded]);
+  }, [knownWords, currentIndex, randomizeVerbs, skipVerbs, isLeftHanded, chunkId]);
 
   // -----------------------------------
   //  Close menu when clicking outside
@@ -328,77 +381,27 @@ export default function ReviewPage() {
   }, [currentCard, knownWords, currentIndex]); // Add currentIndex dependency
 
   // ----------------------------------------------------
-  //  Introduce a new random word. If it is a verb,
+  //  Introduce next word in CSV order. If it is a verb,
   //  also introduce all other conjugations with the same base.
   // ----------------------------------------------------
-  function introduceRandomKnownWord() {
-    if (allWords.length === 0) return;
+  function introduceNextKnownWord() {
+    if (chunkWords.length === 0) return;
 
     // Filter out words that are already introduced
     const knownKeys = new Set(knownWords.map((k) => k.data.key));
-    const candidates = allWords.filter((w) => !knownKeys.has(w.key));
+    const candidates = chunkWords.filter((w) => !knownKeys.has(w.key));
     if (candidates.length === 0) return;
 
-    // Separate verb and non-verb candidates
-    const verbCandidates = candidates.filter(w =>
-      w.PartOfSpeech.toLowerCase().includes("verb")
-    );
-    const nonVerbCandidates = candidates.filter(w =>
-      !w.PartOfSpeech.toLowerCase().includes("verb")
-    );
+    // Get unique word keys in order and find the next one to introduce
+    const uniqueWordKeys = getUniqueWordKeys(chunkWords);
+    const knownWordKeys = new Set(knownWords.map(k => k.data.word_key));
+    
+    // Find the first word_key that hasn't been introduced yet
+    const nextWordKey = uniqueWordKeys.find(wordKey => !knownWordKeys.has(wordKey));
+    if (!nextWordKey) return;
 
-    // Handle empty categories
-    if (verbCandidates.length === 0 && nonVerbCandidates.length === 0) return;
-
-    // Decide whether to introduce a verb (1/6 chance) or non-verb (5/6 chance)
-    let newWord: WordData;
-    const useVerb = Math.random() < .1 && verbCandidates.length > 0;
-
-    if (useVerb) {
-      let chosenVerb: WordData | undefined;
-      // Only use priority list if randomizeVerbs is false
-      if (!randomizeVerbs) {
-        const priorityVerbs = [
-          "be_p1s", "have_inanimate_p1s", "want_p1s", "know_p1s",
-          "have_animate_p1s", "speak_p1s", "work_p1s", "live_p1s",
-          "understand_p1s", "like_p1s", "go_p1s"
-        ];
-
-        // Try to find a priority verb that isn't known yet
-        for (const verbKey of priorityVerbs) {
-          if (!knownKeys.has(verbKey)) {
-            chosenVerb = verbCandidates.find(w => w.key === verbKey);
-            if (chosenVerb) break;
-          }
-        }
-      }
-
-      // Use the priority verb if found and not randomizing, otherwise pick a random verb
-      newWord = chosenVerb || verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
-
-    } else if (nonVerbCandidates.length > 0) {
-      // Pick a random non-verb
-      newWord = nonVerbCandidates[Math.floor(Math.random() * nonVerbCandidates.length)];
-    } else {
-      // If no non-verbs, fall back to verbs (pick a random one)
-      newWord = verbCandidates[Math.floor(Math.random() * verbCandidates.length)];
-    }
-
-    let wordsToIntroduce: WordData[] = [newWord];
-
-    // If it's a verb, gather all of its conjugations by the same base
-    if (newWord.PartOfSpeech.toLowerCase().includes("verb")) {
-      const baseKey = getVerbBaseKey(newWord);
-      if (baseKey) {
-        // Collect all "sibling" forms that share the same base
-        const siblingForms = candidates.filter((w) => {
-          if (!w.PartOfSpeech.toLowerCase().includes("verb")) return false;
-          return getVerbBaseKey(w) === baseKey;
-        });
-        // Merge them, removing duplicates
-        wordsToIntroduce = [...new Set([...wordsToIntroduce, ...siblingForms])];
-      }
-    }
+    // Get all words (including verb conjugations) with this word_key
+    const wordsToIntroduce = chunkWords.filter(w => w.word_key === nextWordKey);
 
     // Convert them to KnownWordState
     const newEntries: KnownWordState[] = wordsToIntroduce.map((w) => ({
@@ -486,7 +489,7 @@ export default function ReviewPage() {
         // Possibly introduce more cards if the score of *relevant* cards is high
         if (introductionTriggerScore > 0.75) {
           console.log("Threshold met. Attempting to introduce new word."); // LOG 5
-          introduceRandomKnownWord();
+          introduceNextKnownWord();
         } else {
           console.log(`Threshold (0.8) not met. Score: ${introductionTriggerScore.toFixed(3)}. Skipping word introduction.`); // LOG 6
         }
@@ -500,6 +503,52 @@ export default function ReviewPage() {
     if (knownWords.length === 0) return 0;
     const sum = knownWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
     return sum / knownWords.length;
+  }
+
+  /** Calculate percentage score for current chunk */
+  function computePercentageScore(): number {
+    if (chunkWords.length === 0) return 0;
+    
+    // Get total possible unique word_keys in this chunk
+    const uniqueWordKeys = getUniqueWordKeys(chunkWords);
+    const totalPossibleWords = uniqueWordKeys.length;
+    
+    if (totalPossibleWords === 0) return 0;
+    
+    // Calculate sum of ratings for introduced words only
+    const knownWordKeys = new Set(knownWords.map(kw => kw.data.word_key));
+    let totalScore = 0;
+    let scoredWordCount = 0;
+    
+    // For each unique word_key that we've introduced, get its best rating
+    uniqueWordKeys.forEach(wordKey => {
+      if (knownWordKeys.has(wordKey)) {
+        const wordsWithThisKey = knownWords.filter(kw => kw.data.word_key === wordKey);
+        // Take the best rating among all conjugations of this word
+        const bestRating = Math.max(...wordsWithThisKey.map(kw => kw.rating));
+        totalScore += bestRating / 3; // Normalize to 0-1
+        scoredWordCount++;
+      }
+    });
+    
+    // Calculate percentage: (average score of introduced words) * (percentage of words introduced)
+    const averageScoreOfIntroduced = scoredWordCount > 0 ? totalScore / scoredWordCount : 0;
+    const wordCoverage = scoredWordCount / totalPossibleWords;
+    
+    return Math.round(averageScoreOfIntroduced * wordCoverage * 100);
+  }
+
+  /** Get the word progress for current chunk display */
+  function getWordProgress(): { unlocked: number; total: number } {
+    // Get total possible unique word_keys in this chunk
+    const uniqueWordKeys = getUniqueWordKeys(chunkWords);
+    const total = uniqueWordKeys.length;
+    
+    // Count how many unique word_keys have been introduced
+    const knownWordKeys = new Set(knownWords.map(kw => kw.data.word_key));
+    const unlocked = uniqueWordKeys.filter(wordKey => knownWordKeys.has(wordKey)).length;
+    
+    return { unlocked, total };
   }
 
   /** Priority for SM-2 scheduling: overdue cards get higher priority. */
@@ -599,7 +648,7 @@ export default function ReviewPage() {
   //  Button to clear progress (now inside menu)
   // -----------------------------------
   function handleClearProgress() {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    localStorage.removeItem(getLocalStorageKey(chunkId));
     setKnownWords([]);
     setCurrentIndex(0);
     setIsFlipped(false);
@@ -611,10 +660,10 @@ export default function ReviewPage() {
     setIsLeftHanded(false);   // <-- Reset config
 
     // Introduce the first word after clearing
-    // Need a slight delay or ensure allWords is ready
+    // Need a slight delay or ensure chunkWords is ready
     setTimeout(() => {
-        if (allWords.length > 0) {
-            introduceRandomKnownWord();
+        if (chunkWords.length > 0) {
+            introduceNextKnownWord();
         }
     }, 100); // Small delay to ensure state updates settle
   }
@@ -687,7 +736,14 @@ export default function ReviewPage() {
   // --- End Helper functions ---
 
   // Loading or no data state
-  if (knownWords.length === 0 && allWords.length > 0) {
+  if (chunkWords.length === 0) {
+      // Waiting for CSV and chunk filtering
+      return (
+        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+          <p>Loading vocabulary...</p>
+        </div>
+      );
+  } else if (knownWords.length === 0) {
       // Waiting for the initialization useEffect to run
       return (
           <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
@@ -701,13 +757,6 @@ export default function ReviewPage() {
           <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
               <p>Resetting view...</p>
           </div>
-      );
-  } else if (knownWords.length === 0 && allWords.length === 0) {
-       // Waiting for CSV to load
-      return (
-        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-          <p>Loading vocabulary...</p>
-        </div>
       );
   } else if (!currentCard) {
       // Should ideally not be reached if logic above is correct, but acts as a fallback
@@ -792,8 +841,11 @@ export default function ReviewPage() {
           {/* End Home Button */}
         </div>
 
-        {/* Center Score - Keep this */}
-        <div className="text-sm">Score: {knownWords.length}</div>
+        {/* Center Score and Word Progress Info */}
+        <div className="text-sm text-center">
+          <div>Words: {getWordProgress().unlocked}/{getWordProgress().total}</div>
+          <div>Score: {computePercentageScore()}%</div>
+        </div>
 
         {/* Right Button - Keep this */}
         <button
