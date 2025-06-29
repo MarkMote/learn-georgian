@@ -2,6 +2,7 @@
 
 import Link from 'next/link'; // Use Next.js Link for navigation
 import { useState, useEffect, useRef } from 'react'; // Import React hooks and useRef
+import { useRouter } from 'next/navigation';
 
 // Word data types
 type WordData = {
@@ -84,6 +85,8 @@ const initialDelay = 1000;
 // --- End Constants ---
 
 export default function HomePage() {
+  const router = useRouter();
+  
   // --- State for Animation ---
   // Tracks the index of the last character switched to targetText
   const [revealedIndex, setRevealedIndex] = useState<number>(-1);
@@ -155,6 +158,11 @@ export default function HomePage() {
   }, []);
   // --- End CSV Loading Effect ---
 
+  // Handle chunk navigation
+  const handleChunkClick = (chunkNumber: number) => {
+    router.push(`/review/${chunkNumber}`);
+  };
+
   // Basic styling consistent with other pages
   const containerClasses = "flex flex-col items-center justify-center min-h-screen bg-black text-white p-4";
   const buttonClasses = "px-8 py-4 w-[300px] text-center border border-gray-600 rounded text-lg hover:bg-gray-700 transition-colors duration-150 ease-in-out"; // Shared button style
@@ -210,13 +218,13 @@ export default function HomePage() {
                 const endWord = Math.min((index + 1) * CHUNK_SIZE, getUniqueWordKeys(allWords).length);
                 
                 return (
-                  <Link 
-                    key={chunkNumber} 
-                    href={`/review/${chunkNumber}`} 
-                    className="px-4 py-3 text-center border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+                  <button
+                    key={chunkNumber}
+                    onClick={() => handleChunkClick(chunkNumber)}
+                    className="px-4 py-3 text-center border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out cursor-pointer"
                   >
                     Words {startWord}-{endWord}
-                  </Link>
+                  </button>
                 );
               })}
             </div>
@@ -226,18 +234,13 @@ export default function HomePage() {
         </div>
 
         {/* Other Options */}
-        <div className="pt-6 border-t border-gray-700">
+        {/* <div className="pt-6 border-t border-gray-700">
           <Link href="/phrases" className={buttonClasses}>
             Words and Phrases
           </Link>
-        </div>
+        </div> */}
       </div>
 
-      <div className="flex flex-co border-none space-y-6 text-md">
-        <Link href="/what-is-this" className="border-none my-10 px-4 py-1 border bg-gray-900/0 text-gray-300 hover:bg-gray-900/0 rounded-md">
-          what is this?
-        </Link>
-      </div>
     </div>
   );
 }

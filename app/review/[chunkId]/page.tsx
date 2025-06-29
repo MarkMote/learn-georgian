@@ -735,19 +735,25 @@ export default function ReviewPage() {
   };
   // --- End Helper functions ---
 
-  // Loading or no data state
+  // Loading or no data state with improved loading indicators
   if (chunkWords.length === 0) {
       // Waiting for CSV and chunk filtering
       return (
-        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-          <p>Loading vocabulary...</p>
+        <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
+          <p className="text-lg">Loading vocabulary...</p>
+          <p className="text-sm text-gray-400 mt-2">Preparing word set {chunkId}</p>
         </div>
       );
   } else if (knownWords.length === 0) {
       // Waiting for the initialization useEffect to run
       return (
-          <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-              <p>Initializing...</p>
+          <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+              <div className="animate-pulse mb-4">
+                <div className="w-48 h-48 bg-gray-700 rounded-lg mb-4"></div>
+                <div className="h-6 bg-gray-700 rounded w-32 mx-auto"></div>
+              </div>
+              <p className="text-lg">Preparing your first word...</p>
           </div>
       );
   } else if (!currentCard && knownWords.length > 0) {
@@ -755,7 +761,8 @@ export default function ReviewPage() {
       // The useEffect above will attempt to fix this, show a temporary message
       return (
           <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
-              <p>Resetting view...</p>
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
+              <p>Preparing next card...</p>
           </div>
       );
   } else if (!currentCard) {
@@ -763,6 +770,7 @@ export default function ReviewPage() {
        console.warn("Reached unexpected state: No current card. Displaying loading.");
        return (
         <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
           <p>Loading...</p>
         </div>
       );
