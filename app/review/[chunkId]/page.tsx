@@ -196,6 +196,9 @@ export default function ReviewPage() {
   // Add state for left-handed mode
   const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
 
+  // Add state for showing initial hint
+  const [showImageHint, setShowImageHint] = useState<boolean>(true);
+
   // Basic styling
   const containerClasses = "relative w-full bg-black text-white";
   const mainAreaClasses =
@@ -282,6 +285,17 @@ export default function ReviewPage() {
         setChunkWords(filtered);
       });
   }, [chunkId]);
+
+  // ---------------------------
+  //  Hide image hint after 5 seconds
+  // ---------------------------
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowImageHint(false);
+    }, 5000); // 5 seconds
+
+    return () => clearTimeout(timer);
+  }, []); // Only run once on mount
 
   // ----------------------------------------------------
   //  Initialize state from localStorage or introduce first word
@@ -764,7 +778,7 @@ export default function ReviewPage() {
     ),
     p: (props: any) => (
       <p
-        className="mb-3 leading-relaxed text-slate-300 text-lg tracking-wide font-light"
+        className="mb-3 leading-relaxed text-slate-300 text-base tracking-wide font-light"
         {...props}
       />
     ),
@@ -937,17 +951,30 @@ export default function ReviewPage() {
       {/* Main Content - Fixed height area */}
       <div className={`${mainAreaClasses} h-[calc(100vh-140px)]`}>
         <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
+          {/* Hint text above image */}
+          
           <div className="relative w-full mb-3" style={{ height: '280px' }}>
             <Image
               src={`/img/${currentCard.data.img_key}.webp`}
               alt={EnglishWord}
               fill
               sizes="(max-width: 768px) 100vw, 320px"
-              className="object-contain"
-              onClick={() => setShowEnglish((prev) => !prev)}
+              className="object-contain cursor-pointer"
+              onClick={() => {
+                setShowEnglish((prev) => !prev);
+                setShowImageHint(false); // Hide hint when user clicks
+              }}
               priority
             />
           </div>
+
+          {showImageHint && (
+            <div className="mb-2">
+              <p className="text-sm text-gray-300">
+                👆 Tap/click image to see English word
+              </p>
+            </div>
+          )}
 
           {showEnglish && (
             <p className="text-base font-semibold mb-3">
@@ -1020,7 +1047,7 @@ export default function ReviewPage() {
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                       </div>
-                      <span className="ml-2 text-sm">AI is writing...</span>
+                      <span className="ml-2 text-sm">Writing...</span>
                     </div>
                   )}
                 </div>

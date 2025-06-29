@@ -4,7 +4,7 @@ thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,ph
 yes,yes,yes,yes,noun,დიახ,misc_nouns,1,phrases
 no,no,no,no,noun,არა,misc_nouns,1,phrases
 goodbye,goodbye,goodbye,Goodbye,phrase,ნახვამდის,greeting,1,phrases
-please,please,please,Please,phrase,გთხოვთ,phrase,1,phrases
+please,please,please,Please,phrase,თუ შეიძლება,phrase,1,phrases
 excuse_me,excuse_me,excuse_me,Excuse me,phrase,უკაცრავად,phrase,1,phrases
 nice_to_meet_you,nice_to_meet_you,nice_to_meet_you,Nice to meet you,phrase,სასიამოვნოა,phrase,1,phrases
 be,be_inf,be,to be,verb-inf,იყო,verb,1,verbs
