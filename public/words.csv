@@ -35,7 +35,7 @@ where_is,where_is,where_is,Where is…?,phrase,სად არის...?,questi
 toilet,toilet,toilet,toilet,noun,ტუალეტი,location,1,phrases
 how_are_you_informal,how_are_you_informal,how_are_you_informal,How are you? (informal),phrase,როგორ ხარ?,polite_phrases,1,phrases
 how_are_you_formal,how_are_you_formal,how_are_you_formal,How are you? (formal),phrase,როგორ ბრძანდებით?,polite_phrases,1,phrases
-im_fine_thank_you,im_fine_thank_you,im_fine_thank_you,"I'm fine, thank you.",phrase,"კარგად ვარ, გმადლობთ.",polite_phrases,1,phrases
+im_fine_thank_you,im_fine_thank_you,im_fine_thank_you,I'm fine thank you,phrase,კარგად ვარ გმადლობთ,polite_phrases,1,phrases
 i_dont_understand,i_dont_understand,i_dont_understand,I don't understand,phrase,არ მესმის,communication,1,phrases
 want,want_inf,want,to want,verb-inf,ნდომა,verb,1,verbs
 want,want_p1s,want,I want,verb-p1s,მე მინდა,verb,1,verbs
@@ -81,7 +81,7 @@ from_six_until_nine,from_six_until_nine,from_six_until_nine,from six o'clock unt
 stop_here,stop_here,stop_here,stop here,phrase,აქ გაჩერდი,phrase,1,phrases
 travel,travel,travel,travel,noun,მოგზაურობა,transportation,1,phrases
 traveller,traveller,traveller,traveller,noun,მოგზაური,people,1,phrases
-travel_p1s,travel_p1s,travel_p1s,I travel,verb-p1s,ვმოგზაურობ,verb,1,phrases
+travel_p1s,travel_p1s,travel_p1s,I travel,verb-p1s,მე ვმოგზაურობ,verb,1,verbs
 say,say_inf,say,to say,verb-inf,თქმა,verb,1,verbs
 say,say_p1s,say,I say,verb-p1s,მე ვამბობ,verb,1,verbs
 say,say_p2s,say,You say,verb-p2s,შენ ამბობ,verb,1,verbs
@@ -91,6 +91,7 @@ say,say_p2p,say,You (pl) say,verb-p2p,თქვენ ამბობთ,verb,1,
 say,say_p3p,say,They say,verb-p3p,ისინი ამბობენ,verb,1,verbs
 its_easy,its_easy,its_easy,it's easy,phrase,ადვილია,phrase,1,phrases
 its_hard,its_hard,its_hard,it's hard,phrase,რთულია,phrase,1,phrases
+not_yet,not_yet,yet,Not yet,phrase,ჯერ არა,time,1,phrases
 perhaps,perhaps,perhaps,perhaps,adverb,ალბათ,adverb,1,phrases
 im_sorry_didnt_hear,im_sorry_didnt_hear,im_sorry_didnt_hear,I’m sorry? (didn't hear),phrase,ბატონო?,phrase,1,phrases
 one_minute,one_minute,one_minute,one minute,phrase,ერთი წუთი,time,1,phrases
@@ -1091,7 +1092,6 @@ count,count_p3s,count,He/She/It counts,verb-p3s,ის ითვლის,verb,2
 count,count_p1p,count,We count,verb-p1p,ჩვენ ვითვლით,verb,2,verbs
 count,count_p2p,count,You (pl) count,verb-p2p,თქვენ ითვლით,verb,2,verbs
 count,count_p3p,count,They count,verb-p3p,ისინი ითვლიან,verb,2,verbs
-inside,inside,inside,inside,noun,შიდა,directions,2,general
 one_hundred_one,one_hundred_one,one_hundred_one,101,noun,ას ერთი,numbers,2,general
 hair,hair,hair,hair,noun,თმა,body,2,general
 star,star,star,star,noun,ვარსკვლავი,nature,2,general
@@ -1187,7 +1187,6 @@ right,right,right,right,noun,მარჯვენა,directions,2,general
 circle,circle,circle,circle,noun,წრე,math_measurements,2,general
 oil,oil,oil,oil,noun,ზეთი,food,2,general
 date,date,date,date,noun,თარიღი,math_measurements,2,general
-outside,outside,outside,outside,noun,გარეთა,directions,2,general
 dark,dark,dark,dark,adjective,ბნელი,adjective,2,general
 build,build_inf,build,to build,verb-inf,აშენება,verb,2,verbs
 build,build_p1s,build,I build,verb-p1s,მე ვაშენებ,verb,2,verbs
@@ -1241,7 +1240,7 @@ feed,feed_p3s,feed,He/She/It feeds,verb-p3s,ის კვებავს,verb,2,
 feed,feed_p1p,feed,We feed,verb-p1p,ჩვენ ვკვებავთ,verb,2,verbs
 feed,feed_p2p,feed,You (pl) feed,verb-p2p,თქვენ კვებავთ,verb,2,verbs
 feed,feed_p3p,feed,They feed,verb-p3p,ისინი კვებავენ,verb,2,verbs
-hard,hard,hard,hard,adjective,მაგარი,adjective,2,general
+hard,hard,hard,hard (also slang for cool),adjective,მაგარი,adjective,2,general
 weak,weak,weak,weak,adjective,სუსტი,adjective,2,general
 clay,clay,clay,clay,noun,თიხა,materials,2,general
 bedroom,bedroom,bedroom,bedroom,noun,საძინებელი,home,2,general

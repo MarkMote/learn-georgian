@@ -172,7 +172,7 @@ export default function HomePage() {
   return (
     <div className={containerClasses}>
       {/* Apply carved style and ensure consistent height/alignment */}
-      <h1 className={`text-4xl font-light mb-12 text-slate-300 h-12 flex items-center font-light justify-center ${carvedTextStyle}`}>
+      <h1 className={`text-4xl font-light mb-8 text-slate-300 h-12 flex items-center font-light justify-center ${carvedTextStyle}`}>
         {/* Map over the maximum possible length to render spans */}
         {Array.from({ length: maxLength }).map((_, index) => {
           // Determine if the character at this index should be from the target text
@@ -204,7 +204,7 @@ export default function HomePage() {
           );
         })}
       </h1>
-      {/* <p className="text-sm text-slate-400 mb-12">Mark's Georgian Learning App. </p> */}
+      
 
       <div className="flex flex-col space-y-6 text-sm max-w-md w-full"> {/* Stack buttons vertically with space */}
         {/* Chunk Selection for Words with Images */}
@@ -241,9 +241,20 @@ export default function HomePage() {
           </Link>
         </div> */}
       </div>
+      {/* Link to view all words */}
+      <div className="mt-4">
+      </div>
 
       {/* About Link */}
       <div className="mt-12 pt-8 border-t border-gray-800">
+        <Link
+          href="/all"
+          className="text-gray-400 hover:text-gray-200 text-sm transition-colors"
+        >
+          View all words
+        </Link>
+        {/* bullet here */}
+        <span className="mx-4">•</span>
         <Link 
           href="/about" 
           className="text-gray-400 hover:text-gray-200 text-sm transition-colors"
