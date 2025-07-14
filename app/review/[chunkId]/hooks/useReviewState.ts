@@ -247,6 +247,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
     // Handle word introduction separately after state settles
     setTimeout(() => {
       let introductionTriggerScore = 0;
+      let cognitiveLoad = 0;
       const currentKnownWords = knownWordsRef.current;
 
       if (currentKnownWords.length > 0) {
@@ -260,15 +261,28 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
         if (relevantWords.length > 0) {
           const sum = relevantWords.reduce((acc, kw) => acc + kw.rating / 3, 0);
           introductionTriggerScore = sum / relevantWords.length;
+          
+          // Calculate cognitive load: k = (3*N - sum(scores))/3
+          const scoreSum = relevantWords.reduce((acc, kw) => acc + kw.rating, 0);
+          cognitiveLoad = (3 * relevantWords.length - scoreSum) / 3;
+          
           console.log(`Calculated trigger score: ${introductionTriggerScore.toFixed(3)}`);
+          console.log(`Cognitive load k: ${cognitiveLoad.toFixed(2)} (equivalent to ${cognitiveLoad.toFixed(1)} failed cards)`);
         }
       }
 
-      if (introductionTriggerScore > 0.75) {
-        console.log("Threshold met. Attempting to introduce new word.");
+      // Both conditions must be met: average performance > 0.75 AND cognitive load < 5
+      if (introductionTriggerScore > 0.75 && cognitiveLoad < 5) {
+        console.log("Both thresholds met. Attempting to introduce new word.");
         introduceNextKnownWord();
       } else {
-        console.log(`Threshold (0.75) not met. Score: ${introductionTriggerScore.toFixed(3)}. Skipping word introduction.`);
+        if (introductionTriggerScore <= 0.75) {
+          console.log(`Average performance threshold (0.75) not met. Score: ${introductionTriggerScore.toFixed(3)}`);
+        }
+        if (cognitiveLoad >= 5) {
+          console.log(`Cognitive load threshold (k<5) not met. Current k: ${cognitiveLoad.toFixed(2)}`);
+        }
+        console.log("Skipping word introduction.");
       }
     }, 0);
   };
