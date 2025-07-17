@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { KnownWordState } from '../types';
 
 interface TopBarProps {
   onGetLesson: () => void;
@@ -11,6 +12,9 @@ interface TopBarProps {
   onToggleSkipVerbs: () => void;
   wordProgress: { unlocked: number; total: number };
   percentageScore: number;
+  cognitiveLoad: number;
+  knownWords: KnownWordState[];
+  onShowProgress: () => void;
 }
 
 export default function TopBar({
@@ -20,6 +24,9 @@ export default function TopBar({
   onToggleSkipVerbs,
   wordProgress,
   percentageScore,
+  cognitiveLoad,
+  knownWords,
+  onShowProgress,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
@@ -62,6 +69,17 @@ export default function TopBar({
           {isMenuOpen && (
             <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
               <ul className="divide-y divide-gray-700">
+                <li>
+                  <button
+                    onClick={() => {
+                      onShowProgress();
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    Progress Status
+                  </button>
+                </li>
                 <li>
                   <button
                     onClick={onToggleSkipVerbs}

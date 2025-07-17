@@ -6,6 +6,7 @@ import BottomBar from '../../components/BottomBar';
 import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
 import LessonModal from './components/LessonModal';
+import ProgressModal from './components/ProgressModal';
 import { useReviewState } from './hooks/useReviewState';
 import { useLessonModal } from './hooks/useLessonModal';
 import { WordData } from './types';
@@ -22,6 +23,7 @@ export default function ReviewPage() {
   const chunkId = params.chunkId as string;
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [chunkWords, setChunkWords] = useState<WordData[]>([]);
+  const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
 
   const {
     knownWords,
@@ -31,6 +33,7 @@ export default function ReviewPage() {
     skipVerbs,
     isLeftHanded,
     showImageHint,
+    cognitiveLoad,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
@@ -93,7 +96,7 @@ export default function ReviewPage() {
   }, [isFlipped, currentIndex, handleScore, setIsFlipped, setShowEnglish]);
 
   useEffect(() => {
-    if (!isModalOpen) {
+    if (!isModalOpen && !isProgressModalOpen) {
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
       document.body.style.height = '100%';
@@ -113,7 +116,7 @@ export default function ReviewPage() {
       document.body.style.height = '';
       document.body.style.overflow = '';
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, isProgressModalOpen]);
 
   const currentCard = knownWords[currentIndex];
 
@@ -195,7 +198,7 @@ export default function ReviewPage() {
   return (
     <div 
       className="relative w-full bg-black text-white" 
-      style={{ height: '100dvh', overflow: isModalOpen ? 'auto' : 'hidden' }}
+      style={{ height: '100dvh', overflow: (isModalOpen || isProgressModalOpen) ? 'auto' : 'hidden' }}
     >
       <TopBar
         onGetLesson={handleLessonRequest}
@@ -204,6 +207,9 @@ export default function ReviewPage() {
         onToggleSkipVerbs={handleToggleSkipVerbs}
         wordProgress={wordProgress}
         percentageScore={percentageScore}
+        cognitiveLoad={cognitiveLoad}
+        knownWords={knownWords}
+        onShowProgress={() => setIsProgressModalOpen(true)}
       />
 
       <div className="flex items-center justify-center px-4 h-[calc(100vh-140px)]">
@@ -231,6 +237,13 @@ export default function ReviewPage() {
         georgianWord={currentCard.data.GeorgianWord}
         lessonContent={lessonMarkdown}
         isLoading={isLessonLoading}
+      />
+
+      <ProgressModal
+        isOpen={isProgressModalOpen}
+        onClose={() => setIsProgressModalOpen(false)}
+        knownWords={knownWords}
+        skipVerbs={skipVerbs}
       />
     </div>
   );

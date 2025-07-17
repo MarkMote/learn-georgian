@@ -21,12 +21,35 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
   const [skipVerbs, setSkipVerbs] = useState<boolean>(false);
   const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
   const [showImageHint, setShowImageHint] = useState<boolean>(true);
+  const [cognitiveLoad, setCognitiveLoad] = useState<number>(0);
 
   const knownWordsRef = useRef(knownWords);
   
   useEffect(() => {
     knownWordsRef.current = knownWords;
   }, [knownWords]);
+
+  // Update cognitive load whenever knownWords or skipVerbs changes
+  useEffect(() => {
+    if (knownWords.length > 0) {
+      const relevantWords = skipVerbs
+        ? knownWords.filter(kw => {
+            const pos = kw.data.PartOfSpeech.toLowerCase();
+            return !pos.includes("verb") || pos.includes("adverb");
+          })
+        : knownWords;
+
+      if (relevantWords.length > 0) {
+        const scoreSum = relevantWords.reduce((acc, kw) => acc + kw.rating, 0);
+        const currentCognitiveLoad = (3 * relevantWords.length - scoreSum) / 3;
+        setCognitiveLoad(currentCognitiveLoad);
+      } else {
+        setCognitiveLoad(0);
+      }
+    } else {
+      setCognitiveLoad(0);
+    }
+  }, [knownWords, skipVerbs]);
 
   // Function to clean up corrupted data and remove ALL duplicates
   const cleanUpKnownWords = (words: KnownWordState[]): KnownWordState[] => {
@@ -265,6 +288,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
           // Calculate cognitive load: k = (3*N - sum(scores))/3
           const scoreSum = relevantWords.reduce((acc, kw) => acc + kw.rating, 0);
           cognitiveLoad = (3 * relevantWords.length - scoreSum) / 3;
+          setCognitiveLoad(cognitiveLoad);
           
           console.log(`Calculated trigger score: ${introductionTriggerScore.toFixed(3)}`);
           console.log(`Cognitive load k: ${cognitiveLoad.toFixed(2)} (equivalent to ${cognitiveLoad.toFixed(1)} failed cards)`);
@@ -314,6 +338,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
     skipVerbs,
     isLeftHanded,
     showImageHint,
+    cognitiveLoad,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
