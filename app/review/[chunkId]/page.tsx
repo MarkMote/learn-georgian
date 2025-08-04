@@ -14,6 +14,7 @@ import {
   parseCSV, 
   getWordsForChunk, 
   getVerbHint, 
+  getVerbTenseLabel,
   computePercentageScore, 
   getWordProgress 
 } from './utils/dataProcessing';
@@ -192,6 +193,7 @@ export default function ReviewPage() {
   }
 
   const verbHint = getVerbHint(currentCard.data);
+  const verbTenseLabel = getVerbTenseLabel(currentCard.data);
   const wordProgress = getWordProgress(knownWords, chunkWords);
   const percentageScore = computePercentageScore(knownWords, chunkWords);
 
@@ -219,6 +221,7 @@ export default function ReviewPage() {
           showEnglish={showEnglish}
           showImageHint={showImageHint}
           verbHint={verbHint}
+          verbTenseLabel={verbTenseLabel}
           onImageClick={handleImageClick}
         />
       </div>

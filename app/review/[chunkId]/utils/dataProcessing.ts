@@ -51,6 +51,32 @@ export function getVerbHint(word: WordData): string | null {
   return `${firstWord} ____`;
 }
 
+export function getVerbTenseLabel(word: WordData): string | null {
+  const pos = word.PartOfSpeech.toLowerCase();
+  if (!pos.includes("verb") || pos.includes("adverb")) {
+    return null;
+  }
+  
+  if (word.key.endsWith("_inf")) {
+    return "infinitive";
+  }
+  
+  if (pos.includes("past")) {
+    return "past tense verb";
+  }
+  
+  if (pos.includes("future")) {
+    return "future tense verb";
+  }
+  
+  if (pos.includes("present") || pos.includes("p1s") || pos.includes("p2s") || pos.includes("p3s") || 
+      pos.includes("p1p") || pos.includes("p2p") || pos.includes("p3p")) {
+    return "present tense verb";
+  }
+  
+  return null;
+}
+
 export function getVerbBaseKey(word: WordData): string | null {
   const pos = word.PartOfSpeech.toLowerCase();
   if (!pos.includes("verb") || pos.includes("adverb")) {

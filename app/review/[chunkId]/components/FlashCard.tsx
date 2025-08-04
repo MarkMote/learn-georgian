@@ -10,6 +10,7 @@ interface FlashCardProps {
   showEnglish: boolean;
   showImageHint: boolean;
   verbHint: string | null;
+  verbTenseLabel: string | null;
   onImageClick: () => void;
 }
 
@@ -19,6 +20,7 @@ export default function FlashCard({
   showEnglish,
   showImageHint,
   verbHint,
+  verbTenseLabel,
   onImageClick,
 }: FlashCardProps) {
   return (
@@ -33,6 +35,11 @@ export default function FlashCard({
           onClick={onImageClick}
           priority
         />
+        {verbTenseLabel && !isFlipped && verbHint && (
+          <div className="absolute w-[130px] bottom-[0px] right-[127px]  bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1">
+            {verbTenseLabel}
+          </div>
+        )}
       </div>
 
       {showImageHint && (

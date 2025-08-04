@@ -34,7 +34,7 @@ do_you_have,do_you_have,do_you_have,Do you have…?,phrase,გაქვთ...?,p
 where_is,where_is,where_is,Where is…?,phrase,სად არის...?,question_word,1,phrases
 toilet,toilet,toilet,toilet,noun,ტუალეტი,location,1,phrases
 how_are_you_informal,how_are_you_informal,how_are_you_informal,How are you? (informal),phrase,როგორ ხარ?,polite_phrases,1,phrases
-how_are_you_formal,how_are_you_formal,how_are_you_formal,How are you? (formal),phrase,როგორ ბრძანდებით?,polite_phrases,1,phrases
+how_are_you_formal,how_are_you_formal,how_are_you_formal,How are you? (formal),phrase,როგორ ხართ?,polite_phrases,1,phrases
 im_fine_thank_you,im_fine_thank_you,im_fine_thank_you,I'm fine thank you,phrase,კარგად ვარ გმადლობთ,polite_phrases,1,phrases
 i_dont_understand,i_dont_understand,i_dont_understand,I don't understand,phrase,არ მესმის,communication,1,phrases
 want,want_inf,want,to want,verb-inf,ნდომა,verb,1,verbs
@@ -76,7 +76,7 @@ know,know_p2p,know,You (pl) know,verb-p2p,თქვენ იცით,verb,1,ve
 know,know_p3p,know,They know,verb-p3p,მათ იციან,verb,1,verbs
 one_week_ago,one_week_ago,one_week_ago,one week ago,phrase,ერთი კვირის წინ,time,1,phrases
 one_year_ago,one_year_ago,one_year_ago,one year ago,phrase,ერთი წლის წინ,time,1,phrases
-i_lost_my_bag,i_lost_my_bag,i_lost_my_bag,I lost my bag,phrase,ჩემს ჩანთა დავკარგე,phrase,1,phrases
+i_lost_my_bag,i_lost_my_bag,i_lost_my_bag,I lost my bag,phrase,ჩემი ჩანთა დავკარგე,phrase,1,phrases
 from_six_until_nine,from_six_until_nine,from_six_until_nine,from six o'clock until nine o'clock,phrase,ექვსიდან ცხრამდე,time,1,phrases
 stop_here,stop_here,stop_here,stop here,phrase,აქ გაჩერდი,phrase,1,phrases
 travel,travel,travel,travel,noun,მოგზაურობა,transportation,1,phrases
@@ -113,7 +113,7 @@ look_here_is,look_here_is,look_here_is,look! / here is,interjection,აი,phras
 at_breakfast,at_breakfast,at_breakfast,at breakfast,phrase,საუზმეზე,food,1,phrases
 at_lunch,at_lunch,at_lunch,at lunch,phrase,სადილზე,food,1,phrases
 at_dinner,at_dinner,at_dinner,at dinner,phrase,ვახშამზე,food,1,phrases
-go,go_inf,go,to go,verb-inf,სვლა,verb,1,verbs
+go,go_inf,go,to go,verb-inf,წასვლა,verb,1,verbs
 go,go_p1s,go,I go,verb-p1s,მე მივდივარ,verb,1,verbs
 go,go_p2s,go,You go,verb-p2s,შენ მიდიხარ,verb,1,verbs
 go,go_p3s,go,He/She/It goes,verb-p3s,ის მიდის,verb,1,verbs
@@ -136,7 +136,7 @@ come,come_p1p,come,We come,verb-p1p,ჩვენ მოვდივართ,ver
 come,come_p2p,come,You (pl) come,verb-p2p,თქვენ მოდიხართ,verb,1,verbs
 come,come_p3p,come,They come,verb-p3p,ისინი მოდიან,verb,1,verbs
 lets_go_by_bus,lets_go_by_bus,lets_go_by_bus,let’s go by bus,phrase,ავტობუსით წავიდეთ,phrase,1,phrases
-one_moment_please,one_moment_please,one_moment_please,one moment please,phrase,ერთი წამით თუ შეგიძლია,phrase,1,phrases
+one_moment_please,one_moment_please,one_moment_please,one moment please,phrase,ერთი წუთით თუ შეგიძლია,phrase,1,phrases
 black,black,black,black,adjective,შავი,color,1,general
 restaurant,restaurant,restaurant,restaurant,noun,რესტორანი,location,1,general
 near,near,near,near,preposition,თან ახლოს,preposition,1,general
@@ -173,12 +173,12 @@ yet,yet,yet,yet,adverb,ჯერ,time,1,general
 brother,brother,brother,brother,noun,ძმა,people,1,general
 table,table,table,table,noun,მაგიდა,home,1,general
 what_do_you_recommend,what_do_you_recommend,what_do_you_recommend,what do you recommend?,phrase,რას მირჩევთ?,restaurant,2,phrases
-be_past,be_past_p1s,be,I was,verb-p1s-past,ვიყავი,verb,1,verbs
-be_past,be_past_p2s,be,you were,verb-p2s-past,იყავი,verb,1,verbs
-be_past,be_past_p3s,be,he/she/it was,verb-p3s-past,იყო,verb,1,verbs
-be_past,be_past_p1p,be,we were,verb-p1p-past,ვიყავით,verb,1,verbs
-be_past,be_past_p2p,be,you (pl) were,verb-p2p-past,იყავით,verb,1,verbs
-be_past,be_past_p3p,be,they were,verb-p3p-past,იყვნენ,verb,1,verbs
+be_past,be_past_p1s,be,I was,verb-p1s-past,მე ვიყავი,verb,1,verbs
+be_past,be_past_p2s,be,you were,verb-p2s-past,შენ იყავი,verb,1,verbs
+be_past,be_past_p3s,be,he/she/it was,verb-p3s-past,ის იყო,verb,1,verbs
+be_past,be_past_p1p,be,we were,verb-p1p-past,ჩვენ ვიყავით,verb,1,verbs
+be_past,be_past_p2p,be,you (pl) were,verb-p2p-past,თქვენ იყავით,verb,1,verbs
+be_past,be_past_p3p,be,they were,verb-p3p-past,ისინი იყვნენ,verb,1,verbs
 level,level,level,level,noun,დონე,misc_nouns,1,general
 fifteen,fifteen,fifteen,15,noun,თხუთმეტი,numbers,1,general
 airport,airport,airport,airport,noun,აეროპორტი,location,1,general
@@ -187,12 +187,12 @@ always,always,always,always,adverb,ყოველთვის,adverb,1,general
 monday,monday,monday,Monday,noun,ორშაბათი,days_of_week,1,general
 sixteen,sixteen,sixteen,16,noun,თექვსმეტი,numbers,1,general
 im_hungry,im_hungry,im_hungry,I’m hungry,phrase,მშია,phrase,2,phrases
-be_future,be_future_p1s,be,I will be,verb-p1s-future,ვიქნები,verb,1,verbs
-be_future,be_future_p2s,be,you will be,verb-p2s-future,იქნები,verb,1,verbs
-be_future,be_future_p3s,be,he/she/it will be,verb-p3s-future,იქნება,verb,1,verbs
-be_future,be_future_p1p,be,we will be,verb-p1p-future,ვიქნებით,verb,1,verbs
-be_future,be_future_p2p,be,you (pl) will be,verb-p2p-future,იქნებით,verb,1,verbs
-be_future,be_future_p3p,be,they will be,verb-p3p-future,იქნებიან,verb,1,verbs
+be_future,be_future_p1s,be,I will be,verb-p1s-future,მე ვიქნები,verb,1,verbs
+be_future,be_future_p2s,be,you will be,verb-p2s-future,შენ იქნები,verb,1,verbs
+be_future,be_future_p3s,be,he/she/it will be,verb-p3s-future,ის იქნება,verb,1,verbs
+be_future,be_future_p1p,be,we will be,verb-p1p-future,ჩვენ ვიქნებით,verb,1,verbs
+be_future,be_future_p2p,be,you (pl) will be,verb-p2p-future,თქვენ იქნებით,verb,1,verbs
+be_future,be_future_p3p,be,they will be,verb-p3p-future,ისინი იქნებიან,verb,1,verbs
 three,three,three,3,noun,სამი,numbers,1,general
 father,father,father,father,noun,მამა,people,1,general
 thirteen,thirteen,thirteen,13,noun,ცამეტი,numbers,1,general
@@ -365,7 +365,7 @@ four,four,four,4,noun,ოთხი,numbers,1,general
 fish,fish,fish,fish,noun,თევზი,animal,1,general
 minute,minute,minute,minute,noun,წუთი,time,1,general
 nine,nine,nine,9,noun,ცხრა,numbers,1,general
-again_still,again_still,again_still,again / still,adverb,კვლავ,adverb,2,phrases
+again_still,again_still,again_still,again / still,adverb,ისევ,adverb,2,phrases
 love,love_inf,love,to love,verb-inf,სიყვარული,verb,2,verbs
 love,love_p1s,love,I love,verb-p1s,მე მიყვარს,verb,2,verbs
 love,love_p2s,love,You love,verb-p2s,შენ გიყვარს,verb,2,verbs
@@ -514,7 +514,6 @@ cool,cool,cool,cool,adjective,გრილი,adjective,1,general
 also,also,also,also,adverb,ასევე,adverb,1,general
 on,on,on,on,preposition,ზე,preposition,1,general
 fifty_one,fifty_one,fifty_one,51,noun,ორმოცდათერთმეტი,numbers,1,general
-goodbye_polite,goodbye_polite,goodbye_polite,Be well / Goodbye (polite),phrase,კარგად ბრძანდებოდეთ!,phrase,2,phrases
 where,where,where,where,adverb,სად,adverb,1,general
 hear,hear_inf,hear,to hear,verb-inf,გაგონება,verb,2,verbs
 hear,hear_p1s,hear,I hear,verb-p1s,მე მესმის,verb,2,verbs
