@@ -31,12 +31,21 @@ export async function GET(request: NextRequest) {
     async start(controller) {
       try {
         const prompt = `Teach me about the Georgian word or phrase "${word}" by providing a short lesson. 
-        First, provide a list of 3 short usage examples, with english translations. They should be in simple Georgian, 2-3 words long.
+        First: provide a *short* description of what the word or phrase means, including other meanings if there are any.
+        Next, provide a list of 4 usage examples, with english translations. 
+          - The examples should demonstrate *typical* usage of the word or phrase.
+          - They should increase in complexity, from the simplest possible example to intermediate examples.
+          - Try to use simple vocabulary in the examples, but feel free to demonstrate different grammar tenses.
+          - Feel free to make examples build off of one another (recycle new vocab).
         If you are explaining a phrase, list the translation of each word in the phrase.
         Next a short examle of when someone might use the word, adding quotations around the georgian word being used.
         Then provide a short list of synoynms and related words, and their meanings.
         Then provide a short list of antonyms and related words, and their meanings.
-        Then provide a short explanation of the word's meaning and usage, interesting etymology, notes on usage or grammar, etc.
+        In the final section, write any other short notes that could be useful for the learner, for example *optional* sections include:
+          - is the word made up of or related to another word? is there interesting etymology? (if not leave out)
+          - does the learner need to know anything about context, or when to use vs similar words? (if not leave out)
+          - can you think of an interesting auditory mnemonic to help remember the word? (if not leave out) 
+          - is there anything else you think the learner should know? (if not leave out)
 
         Avoid transliteration but feel free to include the English translation.
         

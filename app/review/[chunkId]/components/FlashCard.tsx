@@ -36,7 +36,7 @@ export default function FlashCard({
           priority
         />
         {verbTenseLabel && !isFlipped && verbHint && (
-          <div className="absolute w-[130px] bottom-[0px] right-[127px]  bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded">
             {verbTenseLabel}
           </div>
         )}
@@ -45,7 +45,7 @@ export default function FlashCard({
       {showImageHint && (
         <div className="mb-2">
           <p className="text-sm text-gray-300">
-            👆 Tap/click image to see English word
+            <span className="animate-pulse">👆</span> Tap/click image to see English word
           </p>
         </div>
       )}

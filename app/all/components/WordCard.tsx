@@ -20,15 +20,6 @@ function getRatingColor(rating: number): string {
   }
 }
 
-function getRatingText(rating: number): string {
-  switch (rating) {
-    case 3: return "Easy";
-    case 2: return "Good";
-    case 1: return "Hard";
-    case 0: return "Fail";
-    default: return "Unknown";
-  }
-}
 
 export default function WordCard({ word, progress, isLazyLoaded }: WordCardProps) {
   const [imageError, setImageError] = useState(false);
@@ -66,12 +57,11 @@ export default function WordCard({ word, progress, isLazyLoaded }: WordCardProps
 
       {/* Word content */}
       <div className="flex-grow min-w-0">
-        <div className="flex items-center gap-3">
-          <h3 className="text-lg font-medium text-white truncate">
+        <div className="flex flex-col">
+          <h3 className="text-base font-medium text-white">
             {word.GeorgianWord}
           </h3>
-          <span className="text-gray-400">•</span>
-          <p className="text-gray-300 truncate">
+          <p className="text-gray-300 text-sm">
             {word.EnglishWord}
           </p>
         </div>
@@ -91,11 +81,8 @@ export default function WordCard({ word, progress, isLazyLoaded }: WordCardProps
       </div>
 
       {/* Progress indicator */}
-      <div className="flex-shrink-0 flex items-center gap-2">
+      <div className="flex-shrink-0">
         <div className={`w-3 h-3 rounded-full ${getRatingColor(rating)}`} />
-        <span className="text-xs text-gray-400 w-16 text-right">
-          {getRatingText(rating)}
-        </span>
       </div>
     </div>
   );

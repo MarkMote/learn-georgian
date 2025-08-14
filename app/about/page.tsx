@@ -43,6 +43,11 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold mb-4 text-slate-200">How It Works</h2>
             <div className="space-y-4">
               <p>
+                <strong>Your progress is automatically saved in your browser.</strong> You can close the app anytime 
+                and pick up right where you left off.
+              </p>
+              
+              <p>
                 This is a spaced repetition flashcard app designed specifically for learning Georgian vocabulary. 
                 The app uses an adaptive learning algorithm to help you memorize words efficiently by showing 
                 you cards at optimal intervals.
