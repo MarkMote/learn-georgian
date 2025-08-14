@@ -295,16 +295,23 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
         }
       }
 
-      // Both conditions must be met: average performance > 0.75 AND cognitive load < 5
-      if (introductionTriggerScore > 0.75 && cognitiveLoad < 5) {
-        console.log("Both thresholds met. Attempting to introduce new word.");
+      // Calculate adaptive cognitive load threshold
+      const numKnownWords = currentKnownWords.length;
+      let cognitiveLoadThreshold = 5;
+      if (numKnownWords > 50) {
+        cognitiveLoadThreshold = 5 + 0.04 * (numKnownWords - 50);
+      }
+      
+      // Both conditions must be met: average performance > 0.75 AND cognitive load < threshold
+      if (introductionTriggerScore > 0.75 && cognitiveLoad < cognitiveLoadThreshold) {
+        console.log(`Both thresholds met (k<${cognitiveLoadThreshold.toFixed(2)}). Attempting to introduce new word.`);
         introduceNextKnownWord();
       } else {
         if (introductionTriggerScore <= 0.75) {
           console.log(`Average performance threshold (0.75) not met. Score: ${introductionTriggerScore.toFixed(3)}`);
         }
-        if (cognitiveLoad >= 5) {
-          console.log(`Cognitive load threshold (k<5) not met. Current k: ${cognitiveLoad.toFixed(2)}`);
+        if (cognitiveLoad >= cognitiveLoadThreshold) {
+          console.log(`Cognitive load threshold (k<${cognitiveLoadThreshold.toFixed(2)}) not met. Current k: ${cognitiveLoad.toFixed(2)}`);
         }
         console.log("Skipping word introduction.");
       }
