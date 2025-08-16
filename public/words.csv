@@ -1,5 +1,5 @@
 word_key,key,img_key,EnglishWord,PartOfSpeech,GeorgianWord,hint,priority,group,ExampleEnglish1,ExampleGeorgian1
-hello,hello,hello,Hello,phrase,გამარჯობა,greeting,1,phrases,"Hello there","გამარჯობა שם"
+hello,hello,hello,Hello,phrase,გამარჯობა,greeting,1,phrases,"Hello, you!","გამარჯობა, შენ!"
 thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,phrases,"Thank you very much","დიდი მადლობა"
 yes,yes,yes,yes,noun,დიახ,misc_nouns,1,phrases,"Yes, please","დიახ, გეთაყვა"
 no,no,no,no,noun,არა,misc_nouns,1,phrases,"No, thank you","არა, გმადლობთ"
@@ -22,574 +22,574 @@ its_beautiful,its_beautiful,its_beautiful,It’s beautiful,phrase,ლამა�
 delicious,delicious,delicious,delicious,adjective,გემრიელი,food,1,phrases,"very delicious","ძალიან გემრიელია"
 cheers,cheers,cheers,Cheers!,phrase,გაუმარჯოს,phrase,1,phrases,"Cheers, my friend!","გაუმარჯოს, ჩემო მეგობარო!"
 i_dont_want,i_dont_want,i_dont_want,I don’t want,phrase,არ მინდა,phrase,1,phrases,"I don't want it","არ მინდა ეს"
-have_inanimate,have_inanimate_inf,have_inanimate,to have (inanimate),verb-inf,ქონა,verb,1,verbs
-have_inanimate,have_inanimate_p1s,have_inanimate,I have (inanimate),verb-p1s,მე მაქვს,verb,1,verbs
-have_inanimate,have_inanimate_p2s,have_inanimate,You have (inanimate),verb-p2s,შენ გაქვს,verb,1,verbs
-have_inanimate,have_inanimate_p3s,have_inanimate,He/She/It has (inanimate),verb-p3s,მას აქვს,verb,1,verbs
-have_inanimate,have_inanimate_p1p,have_inanimate,We have (inanimate),verb-p1p,ჩვენ გვაქვს,verb,1,verbs
-have_inanimate,have_inanimate_p2p,have_inanimate,You (pl) have (inanimate),verb-p2p,თქვენ გაქვთ,verb,1,verbs
-have_inanimate,have_inanimate_p3p,have_inanimate,They have (inanimate),verb-p3p,მათ აქვთ,verb,1,verbs
-lets_go,lets_go,lets_go,Let’s go,phrase,წავედით,phrase,1,phrases
-do_you_have,do_you_have,do_you_have,Do you have…?,phrase,გაქვთ...?,phrase,1,phrases
-where_is,where_is,where_is,Where is…?,phrase,სად არის...?,question_word,1,phrases
-toilet,toilet,toilet,toilet,noun,ტუალეტი,location,1,phrases
-how_are_you_informal,how_are_you_informal,how_are_you_informal,How are you? (informal),phrase,როგორ ხარ?,polite_phrases,1,phrases
-how_are_you_formal,how_are_you_formal,how_are_you_formal,How are you? (formal),phrase,როგორ ხართ?,polite_phrases,1,phrases
-im_fine_thank_you,im_fine_thank_you,im_fine_thank_you,I'm fine thank you,phrase,კარგად ვარ გმადლობთ,polite_phrases,1,phrases
-i_dont_understand,i_dont_understand,i_dont_understand,I don't understand,phrase,არ მესმის,communication,1,phrases
-want,want_inf,want,to want,verb-inf,ნდომა,verb,1,verbs
-want,want_p1s,want,I want,verb-p1s,მე მინდა,verb,1,verbs
-want,want_p2s,want,You want,verb-p2s,შენ გინდა,verb,1,verbs
-want,want_p3s,want,He/She/It wants,verb-p3s,მას უნდა,verb,1,verbs
-want,want_p1p,want,We want,verb-p1p,ჩვენ გვინდა,verb,1,verbs
-want,want_p2p,want,You (pl) want,verb-p2p,თქვენ გინდათ,verb,1,verbs
-want,want_p3p,want,They want,verb-p3p,მათ უნდათ,verb,1,verbs
-whats_your_name,whats_your_name,whats_your_name,What's your name?,phrase,რა გქვია?,introductions,1,phrases
-and_you_informal,and_you_informal,and_you_informal,And you? (informal),phrase,და შენ?,polite_phrases,1,phrases
-and_you_formal,and_you_formal,and_you_formal,And you? (formal),phrase,და თქვენ?,polite_phrases,1,phrases
-how_much_does_this_cost,how_much_does_this_cost,how_much_does_this_cost,How much does this cost?,phrase,რა ღირს ეს?,shopping,1,phrases
-im_from_america,im_from_america,im_from_america,I’m from America,phrase,მე ამერიკიდან ვარ,phrase,1,phrases
-im_learning_georgian,im_learning_georgian,im_learning_georgian,I’m learning Georgian,phrase,მე ვსწავლობ ქართულს,phrase,1,phrases
-as_you_wish,as_you_wish,as_you_wish,As you wish,phrase,როგორც გენებოთ,phrase,1,phrases
-i_am_ready,i_am_ready,i_am_ready,I am ready,phrase,მზად ვარ,phrase,1,phrases
-have_animate,have_animate_inf,have_animate,to have (animate),verb-inf,ყოლა,verb,1,verbs
-have_animate,have_animate_p1s,have_animate,I have (animate),verb-p1s,მე მყავს,verb,1,verbs
-have_animate,have_animate_p2s,have_animate,You have (animate),verb-p2s,შენ გყავს,verb,1,verbs
-have_animate,have_animate_p3s,have_animate,He/She/It has (animate),verb-p3s,მას ჰყავს,verb,1,verbs
-have_animate,have_animate_p1p,have_animate,We have (animate),verb-p1p,ჩვენ გვყავს,verb,1,verbs
-have_animate,have_animate_p2p,have_animate,You (pl) have (animate),verb-p2p,თქვენ გყავთ,verb,1,verbs
-have_animate,have_animate_p3p,have_animate,They have (animate),verb-p3p,მათ ჰყავთ,verb,1,verbs
-are_you_ready,are_you_ready,are_you_ready,Are you ready?,phrase,მზად ხარ?,phrase,1,phrases
-if_you_could,if_you_could,if_you_could,if you could,phrase,შეგიძლია,phrase,1,phrases
-let_it_be,let_it_be,let_it_be,let it be,phrase,იყოს,phrase,1,phrases
-in_general,in_general,in_general,in general,adverb,ზოგადად,adverb,1,phrases
-in_one_month,in_one_month,in_one_month,in one month,phrase,ერთ თვეში,time,1,phrases
-in_one_week,in_one_week,in_one_week,in one week,phrase,ერთ კვირაში,time,1,phrases
-in_one_year,in_one_year,in_one_year,in one year,phrase,ერთ წელიწადში,time,1,phrases
-one_month_ago,one_month_ago,one_month_ago,one month ago,phrase,ერთი თვის წინ,time,1,phrases
-know,know_inf,know,to know,verb-inf,ცოდნა,verb,1,verbs
-know,know_p1s,know,I know,verb-p1s,მე ვიცი,verb,1,verbs
-know,know_p2s,know,You know,verb-p2s,შენ იცი,verb,1,verbs
-know,know_p3s,know,He/She/It knows,verb-p3s,მან იცის,verb,1,verbs
-know,know_p1p,know,We know,verb-p1p,ჩვენ ვიცით,verb,1,verbs
-know,know_p2p,know,You (pl) know,verb-p2p,თქვენ იცით,verb,1,verbs
-know,know_p3p,know,They know,verb-p3p,მათ იციან,verb,1,verbs
-one_week_ago,one_week_ago,one_week_ago,one week ago,phrase,ერთი კვირის წინ,time,1,phrases
-one_year_ago,one_year_ago,one_year_ago,one year ago,phrase,ერთი წლის წინ,time,1,phrases
-i_lost_my_bag,i_lost_my_bag,i_lost_my_bag,I lost my bag,phrase,ჩემი ჩანთა დავკარგე,phrase,1,phrases
-from_six_until_nine,from_six_until_nine,from_six_until_nine,from six o'clock until nine o'clock,phrase,ექვსიდან ცხრამდე,time,1,phrases
-stop_here,stop_here,stop_here,stop here,phrase,აქ გაჩერდი,phrase,1,phrases
-travel,travel,travel,travel,noun,მოგზაურობა,transportation,1,phrases
-traveller,traveller,traveller,traveller,noun,მოგზაური,people,1,phrases
-travel_p1s,travel_p1s,travel_p1s,I travel,verb-p1s,მე ვმოგზაურობ,verb,1,verbs
-say,say_inf,say,to say,verb-inf,თქმა,verb,1,verbs
-say,say_p1s,say,I say,verb-p1s,მე ვამბობ,verb,1,verbs
-say,say_p2s,say,You say,verb-p2s,შენ ამბობ,verb,1,verbs
-say,say_p3s,say,He/She/It says,verb-p3s,ის ამბობს,verb,1,verbs
-say,say_p1p,say,We say,verb-p1p,ჩვენ ვამბობთ,verb,1,verbs
-say,say_p2p,say,You (pl) say,verb-p2p,თქვენ ამბობთ,verb,1,verbs
-say,say_p3p,say,They say,verb-p3p,ისინი ამბობენ,verb,1,verbs
-its_easy,its_easy,its_easy,it's easy,phrase,ადვილია,phrase,1,phrases
-its_hard,its_hard,its_hard,it's hard,phrase,რთულია,phrase,1,phrases
-not_yet,not_yet,yet,Not yet,phrase,ჯერ არა,time,1,phrases
-perhaps,perhaps,perhaps,perhaps,adverb,ალბათ,adverb,1,phrases
-im_sorry_didnt_hear,im_sorry_didnt_hear,im_sorry_didnt_hear,I’m sorry? (didn't hear),phrase,ბატონო?,phrase,1,phrases
-one_minute,one_minute,one_minute,one minute,phrase,ერთი წუთი,time,1,phrases
-of_course,of_course,of_course,of course,phrase,რა თქმა უნდა,phrase,1,phrases
-sure_no_rush,sure_no_rush,sure_no_rush,sure no rush,phrase,ჰო არ იჩქარო,phrase,1,phrases
-can_i_help_you_formal,can_i_help_you_formal,can_i_help_you_formal,Can I help you? (formal),phrase,რით შემიძლია დაგეხმაროთ?,phrase,1,phrases
-understand,understand_inf,understand,to understand,verb-inf,გაგება,verb,1,verbs
-understand,understand_p1s,understand,I understand,verb-p1s,მე მესმის,verb,1,verbs
-understand,understand_p2s,understand,You understand,verb-p2s,შენ გესმის,verb,1,verbs
-understand,understand_p3s,understand,He/She/It understands,verb-p3s,მას ესმის,verb,1,verbs
-understand,understand_p1p,understand,We understand,verb-p1p,ჩვენ გვესმის,verb,1,verbs
-understand,understand_p2p,understand,You (pl) understand,verb-p2p,თქვენ გესმით,verb,1,verbs
-understand,understand_p3p,understand,They understand,verb-p3p,მათ ესმით,verb,1,verbs
-what_would_you_like_to_drink_formal,what_would_you_like_to_drink_formal,what_would_you_like_to_drink_formal,What would you like to drink? (formal),phrase,რას დალევთ?,restaurant,1,phrases
-come_here,come_here,come_here,come here,phrase,მოდი აქ,phrase,1,phrases
-go_there,go_there,go_there,go there,phrase,მიდი იქ,phrase,1,phrases
-right_here,right_here,right_here,right here,phrase,აი აქ,directions,1,phrases
-look_here_is,look_here_is,look_here_is,look! / here is,interjection,აი,phrase,1,phrases
-at_breakfast,at_breakfast,at_breakfast,at breakfast,phrase,საუზმეზე,food,1,phrases
-at_lunch,at_lunch,at_lunch,at lunch,phrase,სადილზე,food,1,phrases
-at_dinner,at_dinner,at_dinner,at dinner,phrase,ვახშამზე,food,1,phrases
-go,go_inf,go,to go,verb-inf,წასვლა,verb,1,verbs
-go,go_p1s,go,I go,verb-p1s,მე მივდივარ,verb,1,verbs
-go,go_p2s,go,You go,verb-p2s,შენ მიდიხარ,verb,1,verbs
-go,go_p3s,go,He/She/It goes,verb-p3s,ის მიდის,verb,1,verbs
-go,go_p1p,go,We go,verb-p1p,ჩვენ მივდივართ,verb,1,verbs
-go,go_p2p,go,You (pl) go,verb-p2p,თქვენ მიდიხართ,verb,1,verbs
-go,go_p3p,go,They go,verb-p3p,ისინი მიდიან,verb,1,verbs
-we_go_to_dinner,we_go_to_dinner,we_go_to_dinner,we go to dinner,phrase,ვახშამზე მივდივართ,phrase,1,phrases
-in_one_hour,in_one_hour,in_one_hour,in one hour,phrase,ერთ საათში,time,1,phrases
-in_two_hours,in_two_hours,in_two_hours,in two hours,phrase,ორ საათში,time,1,phrases
-necessary,necessary,necessary,necessary,adjective,აუცილებელი,adjective,1,phrases
-lets_go_together,lets_go_together,lets_go_together,let’s go together,phrase,ერთად წავიდეთ,phrase,1,phrases
-i_see_it,i_see_it,i_see_it,I see it,phrase,მე ვხედავ მას,phrase,1,phrases
-can_i_help,can_i_help,can_i_help,Can I help?,phrase,შემიძლია დაგეხმარო?,phrase,1,phrases
-by_foot,by_foot,by_foot,by foot,phrase,ფეხით,transportation,1,phrases
-come,come_inf,come,to come,verb-inf,მოსვლა,verb,1,verbs
-come,come_p1s,come,I come,verb-p1s,მე მოვდივარ,verb,1,verbs
-come,come_p2s,come,You come,verb-p2s,შენ მოდიხარ,verb,1,verbs
-come,come_p3s,come,He/She/It comes,verb-p3s,ის მოდის,verb,1,verbs
-come,come_p1p,come,We come,verb-p1p,ჩვენ მოვდივართ,verb,1,verbs
-come,come_p2p,come,You (pl) come,verb-p2p,თქვენ მოდიხართ,verb,1,verbs
-come,come_p3p,come,They come,verb-p3p,ისინი მოდიან,verb,1,verbs
-lets_go_by_bus,lets_go_by_bus,lets_go_by_bus,let’s go by bus,phrase,ავტობუსით წავიდეთ,phrase,1,phrases
-one_moment_please,one_moment_please,one_moment_please,one moment please,phrase,ერთი წუთით თუ შეგიძლია,phrase,1,phrases
-black,black,black,black,adjective,შავი,color,1,general
-restaurant,restaurant,restaurant,restaurant,noun,რესტორანი,location,1,general
-near,near,near,near,preposition,თან ახლოს,preposition,1,general
-breakfast,breakfast,breakfast,breakfast,noun,საუზმე,food,1,general
-pen,pen,pen,pen,noun,კალამი,object,1,general
-i_got_it,i_got_it,i_got_it,I got it / understood,phrase,გავიგე,phrase,2,phrases
-live,live_inf,live,to live,verb-inf,ცხოვრება,verb,1,verbs
-live,live_p1s,live,I live,verb-p1s,მე ვცხოვრობ,verb,1,verbs
-live,live_p2s,live,You live,verb-p2s,შენ ცხოვრობ,verb,1,verbs
-live,live_p3s,live,He/She/It lives,verb-p3s,ის ცხოვრობს,verb,1,verbs
-live,live_p1p,live,We live,verb-p1p,ჩვენ ვცხოვრობთ,verb,1,verbs
-live,live_p2p,live,You (pl) live,verb-p2p,თქვენ ცხოვრობთ,verb,1,verbs
-live,live_p3p,live,They live,verb-p3p,ისინი ცხოვრობენ,verb,1,verbs
-ten,ten,ten,10,noun,ათი,numbers,1,general
-twelve,twelve,twelve,12,noun,თორმეტი,numbers,1,general
-partner,partner,partner,girlfriend/boyfriend,noun,შეყვარებული,people,1,general
-afternoon_time,afternoon_time,afternoon_time,afternoon,noun,შუადღე,time,1,general
-tomorrow,tomorrow,tomorrow,tomorrow,adverb,ხვალ,time,1,general
-this,this,this,this,pronoun,ეს,pronoun,1,general
-big,big,big,big/large,adjective,დიდი,adjective,1,general
-can_i_see_the_menu,can_i_see_the_menu,can_i_see_the_menu,can I see the menu?,phrase,შეიძლება მენიუ?,restaurant,2,phrases
-work,work_inf,work,to work,verb-inf,მუშაობა,verb,1,verbs
-work,work_p1s,work,I work,verb-p1s,მე ვმუშაობ,verb,1,verbs
-work,work_p2s,work,You work,verb-p2s,შენ მუშაობ,verb,1,verbs
-work,work_p3s,work,He/She/It works,verb-p3s,ის მუშაობს,verb,1,verbs
-work,work_p1p,work,We work,verb-p1p,ჩვენ ვმუშაობთ,verb,1,verbs
-work,work_p2p,work,You (pl) work,verb-p2p,თქვენ მუშაობთ,verb,1,verbs
-work,work_p3p,work,They work,verb-p3p,ისინი მუშაობენ,verb,1,verbs
-menu,menu,menu,menu,noun,მენიუ,restaurant,1,general
-in,in,in,in,preposition,ში,preposition,1,general
-happy,happy,happy,happy,adjective,ბედნიერი,adjective,1,general
-because,because,because,because,conjunction,რადგან,conjunction,1,general
-yet,yet,yet,yet,adverb,ჯერ,time,1,general
-brother,brother,brother,brother,noun,ძმა,people,1,general
-table,table,table,table,noun,მაგიდა,home,1,general
-what_do_you_recommend,what_do_you_recommend,what_do_you_recommend,what do you recommend?,phrase,რას მირჩევთ?,restaurant,2,phrases
-be_past,be_past_p1s,be,I was,verb-p1s-past,მე ვიყავი,verb,1,verbs
-be_past,be_past_p2s,be,you were,verb-p2s-past,შენ იყავი,verb,1,verbs
-be_past,be_past_p3s,be,he/she/it was,verb-p3s-past,ის იყო,verb,1,verbs
-be_past,be_past_p1p,be,we were,verb-p1p-past,ჩვენ ვიყავით,verb,1,verbs
-be_past,be_past_p2p,be,you (pl) were,verb-p2p-past,თქვენ იყავით,verb,1,verbs
-be_past,be_past_p3p,be,they were,verb-p3p-past,ისინი იყვნენ,verb,1,verbs
-level,level,level,level,noun,დონე,misc_nouns,1,general
-fifteen,fifteen,fifteen,15,noun,თხუთმეტი,numbers,1,general
-airport,airport,airport,airport,noun,აეროპორტი,location,1,general
-next_adv,next_adv,next_adv,next (in sequence),adverb,შემდეგ,adverb,1,general
-always,always,always,always,adverb,ყოველთვის,adverb,1,general
-monday,monday,monday,Monday,noun,ორშაბათი,days_of_week,1,general
-sixteen,sixteen,sixteen,16,noun,თექვსმეტი,numbers,1,general
-im_hungry,im_hungry,im_hungry,I’m hungry,phrase,მშია,phrase,2,phrases
-be_future,be_future_p1s,be,I will be,verb-p1s-future,მე ვიქნები,verb,1,verbs
-be_future,be_future_p2s,be,you will be,verb-p2s-future,შენ იქნები,verb,1,verbs
-be_future,be_future_p3s,be,he/she/it will be,verb-p3s-future,ის იქნება,verb,1,verbs
-be_future,be_future_p1p,be,we will be,verb-p1p-future,ჩვენ ვიქნებით,verb,1,verbs
-be_future,be_future_p2p,be,you (pl) will be,verb-p2p-future,თქვენ იქნებით,verb,1,verbs
-be_future,be_future_p3p,be,they will be,verb-p3p-future,ისინი იქნებიან,verb,1,verbs
-three,three,three,3,noun,სამი,numbers,1,general
-father,father,father,father,noun,მამა,people,1,general
-thirteen,thirteen,thirteen,13,noun,ცამეტი,numbers,1,general
-second,second,second,second,noun,წამი,time,1,general
-morning_time,morning_time,morning_time,morning,noun,დილა,time,1,general
-forty,forty,forty,40,noun,ორმოცი,numbers,1,general
-white,white,white,white,adjective,თეთრი,color,1,general
-im_thirsty,im_thirsty,im_thirsty,I’m thirsty,phrase,მწყურია,phrase,2,phrases
-think,think_inf,think,to think,verb-inf,ფიქრი,verb,1,verbs
-think,think_p1s,think,I think,verb-p1s,მე ვფიქრობ,verb,1,verbs
-think,think_p2s,think,You think,verb-p2s,შენ ფიქრობ,verb,1,verbs
-think,think_p3s,think,He/She/It thinks,verb-p3s,ის ფიქრობს,verb,1,verbs
-think,think_p1p,think,We think,verb-p1p,ჩვენ ვფიქრობთ,verb,1,verbs
-think,think_p2p,think,You (pl) think,verb-p2p,თქვენ ფიქრობთ,verb,1,verbs
-think,think_p3p,think,They think,verb-p3p,ისინი ფიქრობენ,verb,1,verbs
-plane,plane,plane,plane,noun,თვითმფრინავი,transportation,1,general
-at,at,at,at,preposition,თან,preposition,1,general
-sunday,sunday,sunday,Sunday,noun,კვირა,days_of_week,1,general
-nineteen,nineteen,nineteen,19,noun,ცხრამეტი,numbers,1,general
-red_wine,red_wine,red_wine,red wine,noun,წითელი ღვინო,beverages,1,general
-wine,wine,wine,wine,noun,ღვინო,beverages,1,general
-boy,boy,boy,boy,noun,ბიჭი,people,1,general
-stop_imperative,stop_imperative,stop_imperative,stop!,phrase,გაჩერდი,command,2,phrases
-speak,speak_inf,speak,to speak,verb-inf,ლაპარაკი,verb,1,verbs
-speak,speak_p1s,speak,I speak,verb-p1s,მე ვლაპარაკობ,verb,1,verbs
-speak,speak_p2s,speak,You speak,verb-p2s,შენ ლაპარაკობ,verb,1,verbs
-speak,speak_p3s,speak,He/She/It speaks,verb-p3s,ის ლაპარაკობს,verb,1,verbs
-speak,speak_p1p,speak,We speak,verb-p1p,ჩვენ ვლაპარაკობთ,verb,1,verbs
-speak,speak_p2p,speak,You (pl) speak,verb-p2p,თქვენ ლაპარაკობთ,verb,1,verbs
-speak,speak_p3p,speak,They speak,verb-p3p,ისინი ლაპარაკობენ,verb,1,verbs
-tea,tea,tea,tea,noun,ჩაი,beverages,1,general
-everything,everything,everything,everything,pronoun,ყველაფერი,pronoun,1,general
-salt,salt,salt,salt,noun,მარილი,food,1,general
-twenty,twenty,twenty,20,noun,ოცი,numbers,1,general
-train_station,train_station,train_station,train station,noun,რკინიგზის სადგური,location,1,general
-these,these,these,these,pronoun,ესენი,pronoun,1,general
-eighty,eighty,eighty,80,noun,ოთხმოცი,numbers,1,general
-shall_i_help_you,shall_i_help_you,shall_i_help_you,Shall I help you?,phrase,დაგეხმარები?,phrase,2,phrases
-eat,eat_inf,eat,to eat,verb-inf,ჭამა,verb,1,verbs
-eat,eat_p1s,eat,I eat,verb-p1s,მე ვჭამ,verb,1,verbs
-eat,eat_p2s,eat,You eat,verb-p2s,შენ ჭამ,verb,1,verbs
-eat,eat_p3s,eat,He/She/It eats,verb-p3s,ის ჭამს,verb,1,verbs
-eat,eat_p1p,eat,We eat,verb-p1p,ჩვენ ვჭამთ,verb,1,verbs
-eat,eat_p2p,eat,You (pl) eat,verb-p2p,თქვენ ჭამთ,verb,1,verbs
-eat,eat_p3p,eat,They eat,verb-p3p,ისინი ჭამენ,verb,1,verbs
-hour,hour,hour,hour,noun,საათი,time,1,general
-gasoline,gasoline,gasoline,gasoline,noun,ბენზინი,transportation,1,general
-year,year,year,year,noun,წელი,time,1,general
-which,which,which,which,pronoun,რომელი,pronoun,1,general
-why,why,why,why,adverb,რატომ,adverb,1,general
-brown,brown,brown,brown,adjective,ყავისფერი,color,1,general
-bridge,bridge,bridge,bridge,noun,ხიდი,location,1,general
-what_is_your_favorite_restaurant,what_is_your_favorite_restaurant,what_is_your_favorite_restaurant,What is your favorite restaurant?,phrase,შენი საყვარელი რესტორანი რომელია?,restaurant,2,phrases
-drink,drink_inf,drink,to drink,verb-inf,სმა,verb,1,verbs
-drink,drink_p1s,drink,I drink,verb-p1s,მე ვსვამ,verb,1,verbs
-drink,drink_p2s,drink,You drink,verb-p2s,შენ სვამ,verb,1,verbs
-drink,drink_p3s,drink,He/She/It drinks,verb-p3s,ის სვამს,verb,1,verbs
-drink,drink_p1p,drink,We drink,verb-p1p,ჩვენ ვსვამთ,verb,1,verbs
-drink,drink_p2p,drink,You (pl) drink,verb-p2p,თქვენ სვამთ,verb,1,verbs
-drink,drink_p3p,drink,They drink,verb-p3p,ისინი სვამენ,verb,1,verbs
-nobody,nobody,nobody,nobody,pronoun,არავინ,pronoun,1,general
-bad,bad,bad,bad,adjective,ცუდი,adjective,1,general
-animal,animal,animal,animal,noun,ცხოველი,category,1,general
-eight,eight,eight,8,noun,რვა,numbers,1,general
-horse,horse,horse,horse,noun,ცხენი,animal,1,general
-blue,blue,blue,blue,adjective,ლურჯი,color,1,general
-girl,girl,girl,girl,noun,გოგო,people,1,general
-my_favorite_food_is,my_favorite_food_is,my_favorite_food_is,My favorite food is ...,phrase,ჩემი საყვარელი საჭმელი არის ...,restaurant,2,phrases
-learn,learn_inf,learn,to learn,verb-inf,სწავლა,verb,1,verbs
-learn,learn_p1s,learn,I learn,verb-p1s,მე ვსწავლობ,verb,1,verbs
-learn,learn_p2s,learn,You learn,verb-p2s,შენ სწავლობ,verb,1,verbs
-learn,learn_p3s,learn,He/She/It learns,verb-p3s,ის სწავლობს,verb,1,verbs
-learn,learn_p1p,learn,We learn,verb-p1p,ჩვენ ვსწავლობთ,verb,1,verbs
-learn,learn_p2p,learn,You (pl) learn,verb-p2p,თქვენ სწავლობთ,verb,1,verbs
-learn,learn_p3p,learn,They learn,verb-p3p,ისინი სწავლობენ,verb,1,verbs
-that,that,that,that,pronoun,ის,pronoun,1,general
-know_person_inf,know_person_inf,know_person_inf,to know (a person),verb-inf,გაცნობა,verb,1,general
-ninety_one,ninety_one,ninety_one,91,noun,ოთხმოცდათერთმეტი,numbers,1,general
-ninety_two,ninety_two,ninety_two,92,noun,ოთხმოცდათორმეტი,numbers,1,general
-woman,woman,woman,woman,noun,ქალი,people,1,general
-bread,bread,bread,bread,noun,პური,food,1,general
-warm,warm,warm,warm,adjective,თბილი,adjective,1,general
-can_you_help_me_please,can_you_help_me_please,can_you_help_me_please,Can you help me please?,phrase,დამეხმარები გთხოვ?,phrase,2,phrases
-see,see_inf,see,to see,verb-inf,ნახვა,verb,1,verbs
-see,see_p1s,see,I see,verb-p1s,მე ვხედავ,verb,1,verbs
-see,see_p2s,see,You see,verb-p2s,შენ ხედავ,verb,1,verbs
-see,see_p3s,see,He/She/It sees,verb-p3s,ის ხედავს,verb,1,verbs
-see,see_p1p,see,We see,verb-p1p,ჩვენ ვხედავთ,verb,1,verbs
-see,see_p2p,see,You (pl) see,verb-p2p,თქვენ ხედავთ,verb,1,verbs
-see,see_p3p,see,They see,verb-p3p,ისინი ხედავენ,verb,1,verbs
-red,red,red,red,adjective,წითელი,color,1,general
-my_favorite,my_favorite,my_favorite,my favorite,phrase,ჩემი საყვარელი,phrase,1,general
-yellow,yellow,yellow,yellow,adjective,ყვითელი,color,1,general
-bed,bed,bed,bed,noun,საწოლი,home,1,general
-seventy,seventy,seventy,70,noun,სამოცდაათი,numbers,1,general
-sixty,sixty,sixty,60,noun,სამოცი,numbers,1,general
-somebody,somebody,somebody,somebody,pronoun,ვინმე,pronoun,1,general
-blank_is_ready,blank_is_ready,blank_is_ready,__ is ready,phrase,__ მზად არის,phrase,2,phrases
-like,like_inf,like,to like,verb-inf,მოწონება,verb,1,verbs
-like,like_p1s,like,I like,verb-p1s,მე მომწონს,verb,1,verbs
-like,like_p2s,like,You like,verb-p2s,შენ მოგწონს,verb,1,verbs
-like,like_p3s,like,He/She/It likes,verb-p3s,მას მოსწონს,verb,1,verbs
-like,like_p1p,like,We like,verb-p1p,ჩვენ მოგვწონს,verb,1,verbs
-like,like_p2p,like,You (pl) like,verb-p2p,თქვენ მოგწონთ,verb,1,verbs
-like,like_p3p,like,They like,verb-p3p,მათ მოსწონთ,verb,1,verbs
-sister,sister,sister,sister,noun,და,people,1,general
-knife,knife,knife,knife,noun,დანა,food,1,general
-house,house,house,house,noun,სახლი,location,1,general
-next,next,next,next,preposition,გვერდით,preposition,1,general
-transportation,transportation,transportation,transportation,noun,ტრანსპორტი,category,1,general
-forty_two,forty_two,forty_two,42,noun,ორმოცდაორი,numbers,1,general
-family,family,family,family,noun,ოჯახი,people,1,general
-we_have_a_reservation,we_have_a_reservation,we_have_a_reservation,we have a reservation,phrase,გვაქვს დაჯავშნა,restaurant,2,phrases
-help,help_inf,help,to help,verb-inf,დახმარება,verb,1,verbs
-help,help_p1s,help,I help,verb-p1s,მე ვეხმარები,verb,1,verbs
-help,help_p2s,help,You help,verb-p2s,შენ ეხმარები,verb,1,verbs
-help,help_p3s,help,He/She/It helps,verb-p3s,ის ეხმარება,verb,1,verbs
-help,help_p1p,help,We help,verb-p1p,ჩვენ ვეხმარებით,verb,1,verbs
-help,help_p2p,help,You (pl) help,verb-p2p,თქვენ ეხმარებით,verb,1,verbs
-help,help_p3p,help,They help,verb-p3p,ისინი ეხმარებიან,verb,1,verbs
-sixty_two,sixty_two,sixty_two,62,noun,სამოცდაორი,numbers,1,general
-below,below,below,below,preposition,ქვემოთ,preposition,1,general
-new,new,new,new,adjective,ახალი,adjective,1,general
-when,when,when,when,adverb,როდის,adverb,1,general
-gray,gray,gray,gray,adjective,ნაცრისფერი,color,1,general
-zero,zero,zero,0,noun,ნული,numbers,1,general
-week,week,week,week,noun,კვირა,time,1,general
-i_can_pay_with_cash,i_can_pay_with_cash,i_can_pay_with_cash,I can pay with cash,phrase,ნაღდი ფულით გადავიხდი,phrase,2,phrases
-try,try_inf,try,to try,verb-inf,ცდა,verb,2,verbs
-try,try_p1s,try,I try,verb-p1s,მე ვცდილობ,verb,2,verbs
-try,try_p2s,try,You try,verb-p2s,შენ ცდილობ,verb,2,verbs
-try,try_p3s,try,He/She/It tries,verb-p3s,ის ცდილობს,verb,2,verbs
-try,try_p1p,try,We try,verb-p1p,ჩვენ ვცდილობთ,verb,2,verbs
-try,try_p2p,try,You (pl) try,verb-p2p,თქვენ ცდილობთ,verb,2,verbs
-try,try_p3p,try,They try,verb-p3p,ისინი ცდილობენ,verb,2,verbs
-seventy_two,seventy_two,seventy_two,72,noun,სამოცდათორმეტი,numbers,1,general
-evening_time,evening_time,evening_time,evening,noun,საღამო,time,1,general
-eighty_one,eighty_one,eighty_one,81,noun,ოთხმოცდაერთი,numbers,1,general
-wednesday,wednesday,wednesday,Wednesday,noun,ოთხშაბათი,days_of_week,1,general
-twenty_two,twenty_two,twenty_two,22,noun,ოცდაორი,numbers,1,general
-mother,mother,mother,mother,noun,დედა,people,1,general
-cheese,cheese,cheese,cheese,noun,ყველი,food,1,general
-really_truly_indeed,really_truly_indeed,really_truly_indeed,really / truly / indeed,adverb,ნამდვილად,adverb,2,phrases
-give,give_inf,give,to give,verb-inf,მიცემა,verb,2,verbs
-give,give_p1s,give,I give,verb-p1s,მე ვაძლევ,verb,2,verbs
-give,give_p2s,give,You give,verb-p2s,შენ აძლევ,verb,2,verbs
-give,give_p3s,give,He/She/It gives,verb-p3s,ის აძლევს,verb,2,verbs
-give,give_p1p,give,We give,verb-p1p,ჩვენ ვაძლევთ,verb,2,verbs
-give,give_p2p,give,You (pl) give,verb-p2p,თქვენ აძლევთ,verb,2,verbs
-give,give_p3p,give,They give,verb-p3p,ისინი აძლევენ,verb,2,verbs
-two,two,two,2,noun,ორი,numbers,1,general
-hot,hot,hot,hot,adjective,ცხელი,adjective,1,general
-train_ticket,train_ticket,train_ticket,train ticket,noun,ბილეთი,transportation,1,general
-cow,cow,cow,cow,noun,ძროხა,animal,1,general
-never,never,never,never,adverb,არასოდეს,adverb,1,general
-street,street,street,street/road,noun,ქუჩა,location,1,general
-outside,outside,outside,outside,preposition,გარეთ,preposition,1,general
-pass_me,pass_me,pass_me,Pass me...,phrase,მომაწოდე,phrase,2,phrases
-meet,meet_inf,meet,to meet,verb-inf,შეხვედრა,verb,2,verbs
-meet,meet_p1s,meet,I meet,verb-p1s,მე ვხვდები,verb,2,verbs
-meet,meet_p2s,meet,You meet,verb-p2s,შენ ხვდები,verb,2,verbs
-meet,meet_p3s,meet,He/She/It meets,verb-p3s,ის ხვდება,verb,2,verbs
-meet,meet_p1p,meet,We meet,verb-p1p,ჩვენ ვხვდებით,verb,2,verbs
-meet,meet_p2p,meet,You (pl) meet,verb-p2p,თქვენ ხვდებით,verb,2,verbs
-meet,meet_p3p,meet,They meet,verb-p3p,ისინი ხვდებიან,verb,2,verbs
-seven,seven,seven,7,noun,შვიდი,numbers,1,general
-month,month,month,month,noun,თვე,time,1,general
-cold,cold,cold,cold,adjective,ცივი,adjective,1,general
-four,four,four,4,noun,ოთხი,numbers,1,general
-fish,fish,fish,fish,noun,თევზი,animal,1,general
-minute,minute,minute,minute,noun,წუთი,time,1,general
-nine,nine,nine,9,noun,ცხრა,numbers,1,general
-again_still,again_still,again_still,again / still,adverb,ისევ,adverb,2,phrases
-love,love_inf,love,to love,verb-inf,სიყვარული,verb,2,verbs
-love,love_p1s,love,I love,verb-p1s,მე მიყვარს,verb,2,verbs
-love,love_p2s,love,You love,verb-p2s,შენ გიყვარს,verb,2,verbs
-love,love_p3s,love,He/She/It loves,verb-p3s,მას უყვარს,verb,2,verbs
-love,love_p1p,love,We love,verb-p1p,ჩვენ გვიყვარს,verb,2,verbs
-love,love_p2p,love,You (pl) love,verb-p2p,თქვენ გიყვართ,verb,2,verbs
-love,love_p3p,love,They love,verb-p3p,მათ უყვართ,verb,2,verbs
-between,between,between,between,preposition,შორის,preposition,1,general
-thirty_two,thirty_two,thirty_two,32,noun,ოცდათორმეტი,numbers,1,general
-many_a_lot,many_a_lot,many_a_lot,many / a lot,adjective,ბევრი,quantity,1,general
-fourteen,fourteen,fourteen,14,noun,თოთხმეტი,numbers,1,general
-sixty_one,sixty_one,sixty_one,61,noun,სამოცდაერთი,numbers,1,general
-train,train,train,train,noun,მატარებელი,transportation,1,general
-white_wine,white_wine,white_wine,white wine,noun,თეთრი ღვინო,beverages,1,general
-waiter_synonym,waiter_synonym,waiter_synonym,waiter (service person),noun,მომსახურე,job,2,phrases
-open,open_inf,open,to open,verb-inf,გახსნა,verb,2,verbs
-open,open_p1s,open,I open,verb-p1s,მე ვაღებ,verb,2,verbs
-open,open_p2s,open,You open,verb-p2s,შენ აღებ,verb,2,verbs
-open,open_p3s,open,He/She/It opens,verb-p3s,ის აღებს,verb,2,verbs
-open,open_p1p,open,We open,verb-p1p,ჩვენ ვაღებთ,verb,2,verbs
-open,open_p2p,open,You (pl) open,verb-p2p,თქვენ აღებთ,verb,2,verbs
-open,open_p3p,open,They open,verb-p3p,ისინი აღებენ,verb,2,verbs
-small,small,small,small/little,adjective,პატარა,adjective,1,general
-bird,bird,bird,bird,noun,ჩიტი,animal,1,general
-eighteen,eighteen,eighteen,18,noun,თვრამეტი,numbers,1,general
-night_time,night_time,night_time,night,noun,ღამე,time,1,general
-car,car,car,car,noun,მანქანა,transportation,1,general
-cup,cup,cup,cup,noun,ჭიქა,food,1,general
-bon_appetit,bon_appetit,bon_appetit,Bon appétit!,phrase,გემრიელად მიირთვით!,restaurant,2,phrases
-saturday,saturday,saturday,Saturday,noun,შაბათი,days_of_week,1,general
-close,close_inf,close,to close,verb-inf,დაკეტვა,verb,2,verbs
-close,close_p1s,close,I close,verb-p1s,მე ვკეტავ,verb,2,verbs
-close,close_p2s,close,You close,verb-p2s,შენ კეტავ,verb,2,verbs
-close,close_p3s,close,He/She/It closes,verb-p3s,ის კეტავს,verb,2,verbs
-close,close_p1p,close,We close,verb-p1p,ჩვენ ვკეტავთ,verb,2,verbs
-close,close_p2p,close,You (pl) close,verb-p2p,თქვენ კეტავთ,verb,2,verbs
-close,close_p3p,close,They close,verb-p3p,ისინი კეტავენ,verb,2,verbs
-tire,tire,tire,tire,noun,საბურავი,transportation,1,general
-butter,butter,butter,butter,noun,კარაქი,food,1,general
-badly,badly,badly,badly,adverb,ცუდად,adverb,1,general
-nothing,nothing,nothing,nothing,pronoun,არაფერი,pronoun,1,general
-mine,mine,mine,mine,pronoun,ჩემი,pronoun,1,general
-what,what,what,what,pronoun,რა,pronoun,1,general
-what_would_you_like,what_would_you_like,what_would_you_like,What would you like?,phrase,რა გნებავთ?,restaurant,2,phrases
-apartment,apartment,apartment,apartment,noun,ბინა,location,1,general
-write,write_inf,write,to write,verb-inf,წერა,verb,2,verbs
-write,write_p1s,write,I write,verb-p1s,მე ვწერ,verb,2,verbs
-write,write_p2s,write,You write,verb-p2s,შენ წერ,verb,2,verbs
-write,write_p3s,write,He/She/It writes,verb-p3s,ის წერს,verb,2,verbs
-write,write_p1p,write,We write,verb-p1p,ჩვენ ვწერთ,verb,2,verbs
-write,write_p2p,write,You (pl) write,verb-p2p,თქვენ წერთ,verb,2,verbs
-write,write_p3p,write,They write,verb-p3p,ისინი წერენ,verb,2,verbs
-orange,orange,orange,orange,adjective,ნარინჯისფერი,color,1,general
-often,often,often,often,adverb,ხშირად,adverb,1,general
-those,those,those,those,pronoun,ისენი,pronoun,1,general
-baby,baby,baby,baby,noun,ჩვილი,people,1,general
-engine,engine,engine,engine,noun,ძრავა,transportation,1,general
-coffee,coffee,coffee,coffee,noun,ყავა,beverages,1,general
-here_you_are,here_you_are,here_you_are,Here you are!,phrase,ინებეთ!,phrase,2,phrases
-five,five,five,5,noun,ხუთი,numbers,1,general
-call,call_inf,call,to call,verb-inf,დარეკვა,verb,2,verbs
-call,call_p1s,call,I call,verb-p1s,მე ვრეკავ,verb,2,verbs
-call,call_p2s,call,You call,verb-p2s,შენ რეკავ,verb,2,verbs
-call,call_p3s,call,He/She/It calls,verb-p3s,ის რეკავს,verb,2,verbs
-call,call_p1p,call,We call,verb-p1p,ჩვენ ვრეკავთ,verb,2,verbs
-call,call_p2p,call,You (pl) call,verb-p2p,თქვენ რეკავთ,verb,2,verbs
-call,call_p3p,call,They call,verb-p3p,ისინი რეკავენ,verb,2,verbs
-eleven,eleven,eleven,11,noun,თერთმეტი,numbers,1,general
-fifty_two,fifty_two,fifty_two,52,noun,ორმოცდათორმეტი,numbers,1,general
-lunch,lunch,lunch,lunch,noun,სადილი,food,1,general
-seventeen,seventeen,seventeen,17,noun,ჩვიდმეტი,numbers,1,general
-good,good,good,good,adjective,კარგი,adjective,1,general
-boat,boat,boat,boat,noun,ნავი,transportation,1,general
-after_you_polite,after_you_polite,after_you_polite,You go first / After you (polite),phrase,მობრძანდით!,phrase,2,phrases
-food,food,food,food,noun,საჭმელი,category,1,general
-cook,cook_inf,cook,to cook,verb-inf,მომზადება,verb,2,verbs
-cook,cook_p1s,cook,I cook,verb-p1s,მე ვამზადებ,verb,2,verbs
-cook,cook_p2s,cook,You cook,verb-p2s,შენ ამზადებ,verb,2,verbs
-cook,cook_p3s,cook,He/She/It cooks,verb-p3s,ის ამზადებს,verb,2,verbs
-cook,cook_p1p,cook,We cook,verb-p1p,ჩვენ ვამზადებთ,verb,2,verbs
-cook,cook_p2p,cook,You (pl) cook,verb-p2p,თქვენ ამზადებთ,verb,2,verbs
-cook,cook_p3p,cook,They cook,verb-p3p,ისინი ამზადებენ,verb,2,verbs
-who,who,who,who,pronoun,ვინ,pronoun,1,general
-spoon,spoon,spoon,spoon,noun,კოვზი,food,1,general
-yesterday,yesterday,yesterday,yesterday,adverb,გუშინ,time,1,general
-mushroom,mushroom,mushroom,mushroom,noun,სოკო,food,1,general
-friday,friday,friday,Friday,noun,პარასკევი,days_of_week,1,general
-how_long,how_long,how_long,how long,phrase,რამდენი ხანი,question_word,1,general
-for_preposition,for_preposition,for_preposition,for,preposition,თვის,preposition,2,phrases
-sometimes,sometimes,sometimes,sometimes,adverb,ზოგჯერ,adverb,1,general
-win,win_inf,win,to win,verb-inf,მოგება,verb,2,verbs
-win,win_p1s,win,I win,verb-p1s,მე ვიგებ,verb,2,verbs
-win,win_p2s,win,You win,verb-p2s,შენ იგებ,verb,2,verbs
-win,win_p3s,win,He/She/It wins,verb-p3s,ის იგებს,verb,2,verbs
-win,win_p1p,win,We win,verb-p1p,ჩვენ ვიგებთ,verb,2,verbs
-win,win_p2p,win,You (pl) win,verb-p2p,თქვენ იგებთ,verb,2,verbs
-win,win_p3p,win,They win,verb-p3p,ისინი იგებენ,verb,2,verbs
-pig,pig,pig,pig,noun,ღორი,animal,1,general
-in_front_of,in_front_of,in_front_of,in front of,preposition,წინ,preposition,1,general
-thirty_one,thirty_one,thirty_one,31,noun,ოცდათერთმეტი,numbers,1,general
-thursday,thursday,thursday,Thursday,noun,ხუთშაბათი,days_of_week,1,general
-ship,ship,ship,ship,noun,გემი,transportation,1,general
-city,city,city,city,noun,ქალაქი,location,1,general
-come_in_polite,come_in_polite,come_in_polite,Come in (polite),phrase,მობრძანდით!,phrase,2,phrases
-wing,wing,wing,wing,noun,ფრთა,animal,1,general
-lose,lose_inf,lose,to lose,verb-inf,წაგება,verb,2,verbs
-lose,lose_p1s,lose,I lose,verb-p1s,მე ვაგებ,verb,2,verbs
-lose,lose_p2s,lose,You lose,verb-p2s,შენ აგებ,verb,2,verbs
-lose,lose_p3s,lose,He/She/It loses,verb-p3s,ის აგებს,verb,2,verbs
-lose,lose_p1p,lose,We lose,verb-p1p,ჩვენ ვაგებთ,verb,2,verbs
-lose,lose_p2p,lose,You (pl) lose,verb-p2p,თქვენ აგებთ,verb,2,verbs
-lose,lose_p3p,lose,They lose,verb-p3p,ისინი აგებენ,verb,2,verbs
-mouse,mouse,mouse,mouse,noun,თაგვი,animal,1,general
-everybody,everybody,everybody,everybody,pronoun,ყველა,pronoun,1,general
-six,six,six,6,noun,ექვსი,numbers,1,general
-seventy_one,seventy_one,seventy_one,71,noun,სამოცდათერთმეტი,numbers,1,general
-young,young,young,young,adjective,ახალგაზრდა,adjective,1,general
-plate,plate,plate,plate,noun,თეფში,food,1,general
-help_yourself,help_yourself,help_yourself,Help yourself!,phrase,მიირთვით!,phrase,2,phrases
-truck,truck,truck,truck,noun,სატვირთო მანქანა,transportation,1,general
-teach,teach_inf,teach,to teach,verb-inf,სწავლება,verb,2,verbs
-teach,teach_p1s,teach,I teach,verb-p1s,მე ვასწავლი,verb,2,verbs
-teach,teach_p2s,teach,You teach,verb-p2s,შენ ასწავლი,verb,2,verbs
-teach,teach_p3s,teach,He/She/It teaches,verb-p3s,ის ასწავლის,verb,2,verbs
-teach,teach_p1p,teach,We teach,verb-p1p,ჩვენ ვასწავლით,verb,2,verbs
-teach,teach_p2p,teach,You (pl) teach,verb-p2p,თქვენ ასწავლით,verb,2,verbs
-teach,teach_p3p,teach,They teach,verb-p3p,ისინი ასწავლიან,verb,2,verbs
-one,one,one,1,noun,ერთი,numbers,1,general
-behind,behind,behind,behind,preposition,უკან,preposition,1,general
-fork,fork,fork,fork,noun,ჩანგალი,food,1,general
-twenty_one,twenty_one,twenty_one,21,noun,ოცდაერთი,numbers,1,general
-dog,dog,dog,dog,noun,ძაღლი,animal,1,general
-hotel,hotel,hotel,hotel,noun,სასტუმრო,location,1,general
-have_a_seat_polite,have_a_seat_polite,have_a_seat_polite,Have a seat (polite),phrase,დაბრძანდით!,phrase,2,phrases
-eighty_two,eighty_two,eighty_two,82,noun,ოთხმოცდაორი,numbers,1,general
-watch,watch_inf,watch,to watch,verb-inf,ყურება,verb,2,verbs
-watch,watch_p1s,watch,I watch,verb-p1s,მე ვუყურებ,verb,2,verbs
-watch,watch_p2s,watch,You watch,verb-p2s,შენ უყურებ,verb,2,verbs
-watch,watch_p3s,watch,He/She/It watches,verb-p3s,ის უყურებს,verb,2,verbs
-watch,watch_p1p,watch,We watch,verb-p1p,ჩვენ ვუყურებთ,verb,2,verbs
-watch,watch_p2p,watch,You (pl) watch,verb-p2p,თქვენ უყურებთ,verb,2,verbs
-watch,watch_p3p,watch,They watch,verb-p3p,ისინი უყურებენ,verb,2,verbs
-yours,yours,yours,yours,pronoun,შენი,pronoun,1,general
-bus,bus,bus,bus,noun,ავტობუსი,transportation,1,general
-cool,cool,cool,cool,adjective,გრილი,adjective,1,general
-also,also,also,also,adverb,ასევე,adverb,1,general
-on,on,on,on,preposition,ზე,preposition,1,general
-fifty_one,fifty_one,fifty_one,51,noun,ორმოცდათერთმეტი,numbers,1,general
-where,where,where,where,adverb,სად,adverb,1,general
-hear,hear_inf,hear,to hear,verb-inf,გაგონება,verb,2,verbs
-hear,hear_p1s,hear,I hear,verb-p1s,მე მესმის,verb,2,verbs
-hear,hear_p2s,hear,You hear,verb-p2s,შენ გესმის,verb,2,verbs
-hear,hear_p3s,hear,He/She/It hears,verb-p3s,მას ესმის,verb,2,verbs
-hear,hear_p1p,hear,We hear,verb-p1p,ჩვენ გვესმის,verb,2,verbs
-hear,hear_p2p,hear,You (pl) hear,verb-p2p,თქვენ გესმით,verb,2,verbs
-hear,hear_p3p,hear,They hear,verb-p3p,მათ ესმით,verb,2,verbs
-bicycle,bicycle,bicycle,bicycle,noun,ველოსიპედი,transportation,1,general
-chair,chair,chair,chair,noun,სკამი,home,1,general
-besides,besides,besides,besides,adverb,გარდა ამისა,adverb,1,general
-forty_one,forty_one,forty_one,41,noun,ორმოცდაერთი,numbers,1,general
-fifty,fifty,fifty,50,noun,ორმოცდაათი,numbers,1,general
-above,above,above,above,preposition,ზემოთ,preposition,1,general
-goodbye_informal,goodbye_informal,goodbye_informal,Goodbye (informal),phrase,კარგად იყავი!,phrase,2,phrases
-sad,sad,sad,sad,adjective,სევდიანი,adjective,1,general
-listen,listen_inf,listen,to listen,verb-inf,მოსმენა,verb,2,verbs
-listen,listen_p1s,listen,I listen,verb-p1s,მე ვუსმენ,verb,2,verbs
-listen,listen_p2s,listen,You listen,verb-p2s,შენ უსმენ,verb,2,verbs
-listen,listen_p3s,listen,He/She/It listens,verb-p3s,ის უსმენს,verb,2,verbs
-listen,listen_p1p,listen,We listen,verb-p1p,ჩვენ ვუსმენთ,verb,2,verbs
-listen,listen_p2p,listen,You (pl) listen,verb-p2p,თქვენ უსმენთ,verb,2,verbs
-listen,listen_p3p,listen,They listen,verb-p3p,ისინი უსმენენ,verb,2,verbs
-green,green,green,green,adjective,მწვანე,color,1,general
-fast,fast,fast,fast,adjective,სწრაფი,adjective,1,general
-how,how,how,how,adverb,როგორ,adverb,1,general
-under,under,under,under,preposition,ქვეშ,preposition,1,general
-slow,slow,slow,slow,adjective,ნელი,adjective,1,general
-old_age,old_age,old_age,old (antonym to young),adjective,მოხუცი,adjective,1,general
-i_will_pay_by_card,i_will_pay_by_card,i_will_pay_by_card,I will pay via card,phrase,ბარათით გადავიხდი,phrase,2,phrases
-day,day,day,day,noun,დღე,time,1,general
-dance,dance_inf,dance,to dance,verb-inf,ცეკვა,verb,2,verbs
-dance,dance_p1s,dance,I dance,verb-p1s,მე ვცეკვავ,verb,2,verbs
-dance,dance_p2s,dance,You dance,verb-p2s,შენ ცეკვავ,verb,2,verbs
-dance,dance_p3s,dance,He/She/It dances,verb-p3s,ის ცეკვავს,verb,2,verbs
-dance,dance_p1p,dance,We dance,verb-p1p,ჩვენ ვცეკვავთ,verb,2,verbs
-dance,dance_p2p,dance,You (pl) dance,verb-p2p,თქვენ ცეკვავთ,verb,2,verbs
-dance,dance_p3p,dance,They dance,verb-p3p,ისინი ცეკვავენ,verb,2,verbs
-tuesday,tuesday,tuesday,Tuesday,noun,სამშაბათი,days_of_week,1,general
-man,man,man,man,noun,კაცი,people,1,general
-credit_card,credit_card,credit_card,(credit) card,noun,ბარათი,money,1,general
-cat,cat,cat,cat,noun,კატა,animal,1,general
-eventually,eventually,eventually,eventually,adverb,საბოლოოდ,adverb,1,general
-beer,beer,beer,beer,noun,ლუდი,beverages,1,general
-how_long_will_it_take,how_long_will_it_take,how_long_will_it_take,How long will it take?,phrase,რამდენი დრო დასჭირდება?,phrase,2,phrases
-thirty,thirty,thirty,30,noun,ოცდაათი,numbers,1,general
-sleep,sleep_inf,sleep,to sleep,verb-inf,ძილი,verb,2,verbs
-sleep,sleep_p1s,sleep,I sleep,verb-p1s,მე მძინავს,verb,2,verbs
-sleep,sleep_p2s,sleep,You sleep,verb-p2s,შენ გძინავს,verb,2,verbs
-sleep,sleep_p3s,sleep,He/She/It sleeps,verb-p3s,მას ძინავს,verb,2,verbs
-sleep,sleep_p1p,sleep,We sleep,verb-p1p,ჩვენ გვძინავს,verb,2,verbs
-sleep,sleep_p2p,sleep,You (pl) sleep,verb-p2p,თქვენ გძინავთ,verb,2,verbs
-sleep,sleep_p3p,sleep,They sleep,verb-p3p,მათ ძინავთ,verb,2,verbs
-pink,pink,pink,pink,adjective,ვარდისფერი,color,1,general
-old_thing,old_thing,old_thing,old (antonym to new),adjective,ძველი,adjective,1,general
-water,water,water,water,noun,წყალი,beverages,1,general
-inside,inside,inside,inside,preposition,შიგნით,preposition,1,general
-beautiful,beautiful,beautiful,beautiful,adjective,ლამაზი,adjective,1,general
-dinner,dinner,dinner,dinner,noun,ვახშამი,food,1,general
-what_kind_of_dish_is_this,what_kind_of_dish_is_this,what_kind_of_dish_is_this,What kind of dish is this?,phrase,ეს რა კერძია?,restaurant,2,phrases
-ninety,ninety,ninety,90,noun,ოთხმოცდაათი,numbers,1,general
-buy,buy_inf,buy,to buy,verb-inf,ყიდვა,verb,2,verbs
-buy,buy_p1s,buy,I buy,verb-p1s,მე ვყიდულობ,verb,2,verbs
-buy,buy_p2s,buy,You buy,verb-p2s,შენ ყიდულობ,verb,2,verbs
-buy,buy_p3s,buy,He/She/It buys,verb-p3s,ის ყიდულობს,verb,2,verbs
-buy,buy_p1p,buy,We buy,verb-p1p,ჩვენ ვყიდულობთ,verb,2,verbs
-buy,buy_p2p,buy,You (pl) buy,verb-p2p,თქვენ ყიდულობთ,verb,2,verbs
-buy,buy_p3p,buy,They buy,verb-p3p,ისინი ყიდულობენ,verb,2,verbs
-can_you_suggest_something,can_you_suggest_something,can_you_suggest_something,Can you suggest something?,phrase,შეგიძლიათ მირჩიოთ რამე?,restaurant,2,phrases
-august,august,august,August,noun,აგვისტო,months,2,general
-billion,billion,billion,billion,noun,მილიარდი,numbers,2,general
-needle,needle,needle,needle,noun,ნემსი,home,2,general
-door,door,door,door,noun,კარი,home,2,general
-drug,drug,drug,drug,noun,ნარკოტიკი,society,2,general
-author,author,author,author,noun,ავტორი,job,2,general
-poison,poison,poison,poison,noun,შხამი,society,2,general
+have_inanimate,have_inanimate_inf,have_inanimate,to have (inanimate),verb-inf,ქონა,verb,1,verbs,"to have a car","მანქანის ქონა"
+have_inanimate,have_inanimate_p1s,have_inanimate,I have (inanimate),verb-p1s,მე მაქვს,verb,1,verbs,"I have a question","მე მაქვს შეკითხვა"
+have_inanimate,have_inanimate_p2s,have_inanimate,You have (inanimate),verb-p2s,შენ გაქვს,verb,1,verbs,"You have time","შენ გაქვს დრო"
+have_inanimate,have_inanimate_p3s,have_inanimate,He/She/It has (inanimate),verb-p3s,მას აქვს,verb,1,verbs,"She has a book","მას აქვს წიგნი"
+have_inanimate,have_inanimate_p1p,have_inanimate,We have (inanimate),verb-p1p,ჩვენ გვაქვს,verb,1,verbs,"We have an idea","ჩვენ გვაქვს იდეა"
+have_inanimate,have_inanimate_p2p,have_inanimate,You (pl) have (inanimate),verb-p2p,თქვენ გაქვთ,verb,1,verbs,"You have money","თქვენ გაქვთ ფული"
+have_inanimate,have_inanimate_p3p,have_inanimate,They have (inanimate),verb-p3p,მათ აქვთ,verb,1,verbs,"They have problems","მათ აქვთ პრობლემები"
+lets_go,lets_go,lets_go,Let’s go,phrase,წავედით,phrase,1,phrases,"Let's go home","წავედით სახლში"
+do_you_have,do_you_have,do_you_have,Do you have…?,phrase,გაქვთ...?,phrase,1,phrases,"Do you have water?","წყალი გაქვთ?"
+where_is,where_is,where_is,Where is…?,phrase,სად არის...?,question_word,1,phrases,"Where is the toilet?","სად არის ტუალეტი?"
+toilet,toilet,toilet,toilet,noun,ტუალეტი,location,1,phrases,"toilet paper","ტუალეტის ქაღალდი"
+how_are_you_informal,how_are_you_informal,how_are_you_informal,How are you? (informal),phrase,როგორ ხარ?,polite_phrases,1,phrases,"How are you doing?","როგორ ხარ?"
+how_are_you_formal,how_are_you_formal,how_are_you_formal,How are you? (formal),phrase,როგორ ხართ?,polite_phrases,1,phrases,"How have you been?","როგორ ბრძანდებით?"
+im_fine_thank_you,im_fine_thank_you,im_fine_thank_you,I'm fine thank you,phrase,კარგად ვარ გმადლობთ,polite_phrases,1,phrases,"I'm fine, and you?","კარგად, თქვენ?"
+i_dont_understand,i_dont_understand,i_dont_understand,I don't understand,phrase,არ მესმის,communication,1,phrases,"I don't understand the question","არ მესმის შეკითხვა"
+want,want_inf,want,to want,verb-inf,ნდომა,verb,1,verbs,"to want to eat","ჭამა ნდომა"
+want,want_p1s,want,I want,verb-p1s,მე მინდა,verb,1,verbs,"I want water","მე მინდა წყალი"
+want,want_p2s,want,You want,verb-p2s,შენ გინდა,verb,1,verbs,"You want coffee","შენ გინდა ყავა"
+want,want_p3s,want,He/She/It wants,verb-p3s,მას უნდა,verb,1,verbs,"He wants to go","მას უნდა წასვლა"
+want,want_p1p,want,We want,verb-p1p,ჩვენ გვინდა,verb,1,verbs,"We want peace","ჩვენ გვინდა მშვიდობა"
+want,want_p2p,want,You (pl) want,verb-p2p,თქვენ გინდათ,verb,1,verbs,"You want food","თქვენ გინდათ საჭმელი"
+want,want_p3p,want,They want,verb-p3p,მათ უნდათ,verb,1,verbs,"They want to sleep","მათ უნდათ ძილი"
+whats_your_name,whats_your_name,whats_your_name,What's your name?,phrase,რა გქვია?,introductions,1,phrases,"My name is...","მე მქვია..."
+and_you_informal,and_you_informal,and_you_informal,And you? (informal),phrase,და შენ?,polite_phrases,1,phrases,"I'm fine. And you?","კარგად. და შენ?"
+and_you_formal,and_you_formal,and_you_formal,And you? (formal),phrase,და თქვენ?,polite_phrases,1,phrases,"I'm fine. And you?","კარგად. და თქვენ?"
+how_much_does_this_cost,how_much_does_this_cost,how_much_does_this_cost,How much does this cost?,phrase,რა ღირს ეს?,shopping,1,phrases,"Excuse me, how much does this cost?","უკაცრავად, რა ღირს ეს?"
+im_from_america,im_from_america,im_from_america,I’m from America,phrase,მე ამერიკიდან ვარ,phrase,1,phrases,"I'm from America, from New York","მე ამერიკიდან ვარ, ნიუ-იორკიდან"
+im_learning_georgian,im_learning_georgian,im_learning_georgian,I’m learning Georgian,phrase,მე ვსწავლობ ქართულს,phrase,1,phrases,"I'm learning the Georgian language","მე ვსწავლობ ქართულ ენას"
+as_you_wish,as_you_wish,as_you_wish,As you wish,phrase,როგორც გენებოთ,phrase,1,phrases,"Of course, as you wish","რა თქმა უნდა, როგორც გენებოთ"
+i_am_ready,i_am_ready,i_am_ready,I am ready,phrase,მზად ვარ,phrase,1,phrases,"I am ready to go","მზად ვარ წასასვლელად"
+have_animate,have_animate_inf,have_animate,to have (animate),verb-inf,ყოლა,verb,1,verbs,"to have a dog","ძაღლის ყოლა"
+have_animate,have_animate_p1s,have_animate,I have (animate),verb-p1s,მე მყავს,verb,1,verbs,"I have a brother","მე მყავს ძმა"
+have_animate,have_animate_p2s,have_animate,You have (animate),verb-p2s,შენ გყავს,verb,1,verbs,"You have a cat","შენ გყავს კატა"
+have_animate,have_animate_p3s,have_animate,He/She/It has (animate),verb-p3s,მას ჰყავს,verb,1,verbs,"She has a friend","მას ჰყავს მეგობარი"
+have_animate,have_animate_p1p,have_animate,We have (animate),verb-p1p,ჩვენ გვყავს,verb,1,verbs,"We have a child","ჩვენ გვყავს შვილი"
+have_animate,have_animate_p2p,have_animate,You (pl) have (animate),verb-p2p,თქვენ გყავთ,verb,1,verbs,"You have a guest","თქვენ გყავთ სტუმარი"
+have_animate,have_animate_p3p,have_animate,They have (animate),verb-p3p,მათ ჰყავთ,verb,1,verbs,"They have two dogs","მათ ჰყავთ ორი ძაღლი"
+are_you_ready,are_you_ready,are_you_ready,Are you ready?,phrase,მზად ხარ?,phrase,1,phrases,"Are you ready yet?","მზად ხარ უკვე?"
+if_you_could,if_you_could,if_you_could,if you could,phrase,შეგიძლია,phrase,1,phrases,"Can you help?","შეგიძლია დამეხმარო?"
+let_it_be,let_it_be,let_it_be,let it be,phrase,იყოს,phrase,1,phrases,"Okay, let it be","კარგი, იყოს"
+in_general,in_general,in_general,in general,adverb,ზოგადად,adverb,1,phrases,"In general, I agree","ზოგადად, ვეთანხმები"
+in_one_month,in_one_month,in_one_month,in one month,phrase,ერთ თვეში,time,1,phrases,"See you in one month","ერთ თვეში შევხვდებით"
+in_one_week,in_one_week,in_one_week,in one week,phrase,ერთ კვირაში,time,1,phrases,"in one week's time","ერთ კვირაში"
+in_one_year,in_one_year,in_one_year,in one year,phrase,ერთ წელიწადში,time,1,phrases,"I will return in one year","ერთ წელიწადში დავბრუნდები"
+one_month_ago,one_month_ago,one_month_ago,one month ago,phrase,ერთი თვის წინ,time,1,phrases,"I was here one month ago","ერთი თვის წინ ვიყავი აქ"
+know,know_inf,know,to know,verb-inf,ცოდნა,verb,1,verbs,"to know the answer","პასუხის ცოდნა"
+know,know_p1s,know,I know,verb-p1s,მე ვიცი,verb,1,verbs,"I know everything","მე ყველაფერი ვიცი"
+know,know_p2s,know,You know,verb-p2s,შენ იცი,verb,1,verbs,"You know the way","შენ იცი გზა"
+know,know_p3s,know,He/She/It knows,verb-p3s,მან იცის,verb,1,verbs,"He knows the truth","მან იცის სიმართლე"
+know,know_p1p,know,We know,verb-p1p,ჩვენ ვიცით,verb,1,verbs,"We know the secret","ჩვენ ვიცით საიდუმლო"
+know,know_p2p,know,You (pl) know,verb-p2p,თქვენ იცით,verb,1,verbs,"You know the rules","თქვენ იცით წესები"
+know,know_p3p,know,They know,verb-p3p,მათ იციან,verb,1,verbs,"They know the problem","მათ იციან პრობლემა"
+one_week_ago,one_week_ago,one_week_ago,one week ago,phrase,ერთი კვირის წინ,time,1,phrases,"I arrived one week ago","ერთი კვირის წინ ჩამოვედი"
+one_year_ago,one_year_ago,one_year_ago,one year ago,phrase,ერთი წლის წინ,time,1,phrases,"I moved here one year ago","ერთი წლის წინ გადმოვედი აქ"
+i_lost_my_bag,i_lost_my_bag,i_lost_my_bag,I lost my bag,phrase,ჩემი ჩანთა დავკარგე,phrase,1,phrases,"Help, I lost my bag!","დამეხმარეთ, ჩემი ჩანთა დავკარგე!"
+from_six_until_nine,from_six_until_nine,from_six_until_nine,from six o'clock until nine o'clock,phrase,ექვსიდან ცხრამდე,time,1,phrases,"Open from six until nine","ღიაა ექვსიდან ცხრამდე"
+stop_here,stop_here,stop_here,stop here,phrase,აქ გაჩერდი,phrase,1,phrases,"Stop here, please","აქ გააჩერეთ, თუ შეიძლება"
+travel,travel,travel,travel,noun,მოგზაურობა,transportation,1,phrases,"I love to travel","მე მიყვარს მოგზაურობა"
+traveller,traveller,traveller,traveller,noun,მოგზაური,people,1,phrases,"I am a traveller","მე ვარ მოგზაური"
+travel_p1s,travel_p1s,travel_p1s,I travel,verb-p1s,მე ვმოგზაურობ,verb,1,verbs,"I travel often","მე ხშირად ვმოგზაურობ"
+say,say_inf,say,to say,verb-inf,თქმა,verb,1,verbs,"to say something","რამის თქმა"
+say,say_p1s,say,I say,verb-p1s,მე ვამბობ,verb,1,verbs,"I say yes","მე ვამბობ დიახ"
+say,say_p2s,say,You say,verb-p2s,შენ ამბობ,verb,1,verbs,"You say no","შენ ამბობ არა"
+say,say_p3s,say,He/She/It says,verb-p3s,ის ამბობს,verb,1,verbs,"He says hello","ის ამბობს გამარჯობა"
+say,say_p1p,say,We say,verb-p1p,ჩვენ ვამბობთ,verb,1,verbs,"We say thank you","ჩვენ ვამბობთ მადლობა"
+say,say_p2p,say,You (pl) say,verb-p2p,თქვენ ამბობთ,verb,1,verbs,"What do you say?","რას ამბობთ?"
+say,say_p3p,say,They say,verb-p3p,ისინი ამბობენ,verb,1,verbs,"They say it's good","ისინი ამბობენ კარგია"
+its_easy,its_easy,its_easy,it's easy,phrase,ადვილია,phrase,1,phrases,"It's very easy","ძალიან ადვილია"
+its_hard,its_hard,its_hard,it's hard,phrase,რთულია,phrase,1,phrases,"It's very hard","ძალიან რთულია"
+not_yet,not_yet,yet,Not yet,phrase,ჯერ არა,time,1,phrases,"No, not yet","არა, ჯერ არა"
+perhaps,perhaps,perhaps,perhaps,adverb,ალბათ,adverb,1,phrases,"Perhaps tomorrow","ალბათ ხვალ"
+im_sorry_didnt_hear,im_sorry_didnt_hear,im_sorry_didnt_hear,I’m sorry? (didn't hear),phrase,ბატონო?,phrase,1,phrases,"I'm sorry, one more time","ბატონო, კიდევ ერთხელ"
+one_minute,one_minute,one_minute,one minute,phrase,ერთი წუთი,time,1,phrases,"One minute, please","ერთი წუთით, თუ შეიძლება"
+of_course,of_course,of_course,of course,phrase,რა თქმა უნდა,phrase,1,phrases,"Yes, of course","დიახ, რა თქმა უნდა"
+sure_no_rush,sure_no_rush,sure_no_rush,sure no rush,phrase,ჰო არ იჩქარო,phrase,1,phrases,"No problem, no rush","არაა პრობლემა, არ იჩქარო"
+can_i_help_you_formal,can_i_help_you_formal,can_i_help_you_formal,Can I help you? (formal),phrase,რით შემიძლია დაგეხმაროთ?,phrase,1,phrases,"Hello, can I help you?","გამარჯობა, რით შემიძლია დაგეხმაროთ?"
+understand,understand_inf,understand,to understand,verb-inf,გაგება,verb,1,verbs,"to understand the problem","პრობლემის გაგება"
+understand,understand_p1s,understand,I understand,verb-p1s,მე მესმის,verb,1,verbs,"Yes, I understand","დიახ, მე მესმის"
+understand,understand_p2s,understand,You understand,verb-p2s,შენ გესმის,verb,1,verbs,"Do you understand?","შენ გესმის?"
+understand,understand_p3s,understand,He/She/It understands,verb-p3s,მას ესმის,verb,1,verbs,"She understands Georgian","მას ესმის ქართული"
+understand,understand_p1p,understand,We understand,verb-p1p,ჩვენ გვესმის,verb,1,verbs,"We understand everything","ჩვენ ყველაფერი გვესმის"
+understand,understand_p2p,understand,You (pl) understand,verb-p2p,თქვენ გესმით,verb,1,verbs,"Do you understand me?","თქვენ გესმით ჩემი?"
+understand,understand_p3p,understand,They understand,verb-p3p,მათ ესმით,verb,1,verbs,"They don't understand","მათ არ ესმით"
+what_would_you_like_to_drink_formal,what_would_you_like_to_drink_formal,what_would_you_like_to_drink_formal,What would you like to drink? (formal),phrase,რას დალევთ?,restaurant,1,phrases,"Water, please.","წყალს, თუ შეიძლება."
+come_here,come_here,come_here,come here,phrase,მოდი აქ,phrase,1,phrases,"Come here for a moment.","მოდი აქ ერთი წუთით."
+go_there,go_there,go_there,go there,phrase,მიდი იქ,phrase,1,phrases,"Go there now.","მიდი იქ ახლა."
+right_here,right_here,right_here,right here,phrase,აი აქ,directions,1,phrases,"Stop right here.","გაჩერდი აი აქ."
+look_here_is,look_here_is,look_here_is,look! / here is,interjection,აი,phrase,1,phrases,"Look, here is the book!","აი, წიგნი!"
+at_breakfast,at_breakfast,at_breakfast,at breakfast,phrase,საუზმეზე,food,1,phrases,"What do you eat at breakfast?","რას ჭამ საუზმეზე?"
+at_lunch,at_lunch,at_lunch,at lunch,phrase,სადილზე,food,1,phrases,"I'll see you at lunch.","სადილზე გნახავ."
+at_dinner,at_dinner,at_dinner,at dinner,phrase,ვახშამზე,food,1,phrases,"We're going out at dinner.","ვახშამზე გავდივართ."
+go,go_inf,go,to go,verb-inf,წასვლა,verb,1,verbs,"It's time to go.","წასვლის დროა."
+go,go_p1s,go,I go,verb-p1s,მე მივდივარ,verb,1,verbs,"I go to work.","მე სამსახურში მივდივარ."
+go,go_p2s,go,You go,verb-p2s,შენ მიდიხარ,verb,1,verbs,"You go home.","შენ სახლში მიდიხარ."
+go,go_p3s,go,He/She/It goes,verb-p3s,ის მიდის,verb,1,verbs,"He goes to school.","ის სკოლაში მიდის."
+go,go_p1p,go,We go,verb-p1p,ჩვენ მივდივართ,verb,1,verbs,"We go together.","ჩვენ ერთად მივდივართ."
+go,go_p2p,go,You (pl) go,verb-p2p,თქვენ მიდიხართ,verb,1,verbs,"Where are you going?","სად მიდიხართ?"
+go,go_p3p,go,They go,verb-p3p,ისინი მიდიან,verb,1,verbs,"They go on vacation.","ისინი შვებულებაში მიდიან."
+we_go_to_dinner,we_go_to_dinner,we_go_to_dinner,we go to dinner,phrase,ვახშამზე მივდივართ,phrase,1,phrases,"We go to dinner at eight.","ვახშამზე რვაზე მივდივართ."
+in_one_hour,in_one_hour,in_one_hour,in one hour,phrase,ერთ საათში,time,1,phrases,"I'll be back in one hour.","ერთ საათში დავბრუნდები."
+in_two_hours,in_two_hours,in_two_hours,in two hours,phrase,ორ საათში,time,1,phrases,"The movie starts in two hours.","ფილმი ორ საათში იწყება."
+necessary,necessary,necessary,necessary,adjective,აუცილებელი,adjective,1,phrases,"Is it necessary?","ეს აუცილებელია?"
+lets_go_together,lets_go_together,lets_go_together,let’s go together,phrase,ერთად წავიდეთ,phrase,1,phrases,"Let's go to the cinema together.","კინოში ერთად წავიდეთ."
+i_see_it,i_see_it,i_see_it,I see it,phrase,მე ვხედავ მას,phrase,1,phrases,"Yes, I see it now.","დიახ, ახლა ვხედავ."
+can_i_help,can_i_help,can_i_help,Can I help?,phrase,შემიძლია დაგეხმარო?,phrase,1,phrases,"Yes, please.","დიახ, გეთაყვა."
+by_foot,by_foot,by_foot,by foot,phrase,ფეხით,transportation,1,phrases,"I came by foot.","ფეხით მოვედი."
+come,come_inf,come,to come,verb-inf,მოსვლა,verb,1,verbs,"I want to come.","მოსვლა მინდა."
+come,come_p1s,come,I come,verb-p1s,მე მოვდივარ,verb,1,verbs,"I come from far away.","მე შორიდან მოვდივარ."
+come,come_p2s,come,You come,verb-p2s,შენ მოდიხარ,verb,1,verbs,"Are you coming with us?","ჩვენთან ერთად მოდიხარ?"
+come,come_p3s,come,He/She/It comes,verb-p3s,ის მოდის,verb,1,verbs,"He comes home late.","ის სახლში გვიან მოდის."
+come,come_p1p,come,We come,verb-p1p,ჩვენ მოვდივართ,verb,1,verbs,"We come here every year.","ჩვენ აქ ყოველ წელს მოვდივართ."
+come,come_p2p,come,You (pl) come,verb-p2p,თქვენ მოდიხართ,verb,1,verbs,"When are you coming?","როდის მოდიხართ?"
+come,come_p3p,come,They come,verb-p3p,ისინი მოდიან,verb,1,verbs,"They come by car.","ისინი მანქანით მოდიან."
+lets_go_by_bus,lets_go_by_bus,lets_go_by_bus,let’s go by bus,phrase,ავტობუსით წავიდეთ,phrase,1,phrases,"Let's go by bus, it's cheaper.","ავტობუსით წავიდეთ, უფრო იაფია."
+one_moment_please,one_moment_please,one_moment_please,one moment please,phrase,ერთი წუთით თუ შეგიძლია,phrase,1,phrases,"One moment, please.","ერთი წუთით, თუ შეიძლება."
+black,black,black,black,adjective,შავი,color,1,general,"black coffee","შავი ყავა"
+restaurant,restaurant,restaurant,restaurant,noun,რესტორანი,location,1,general,"a Georgian restaurant","ქართული რესტორანი"
+near,near,near,near,preposition,თან ახლოს,preposition,1,general,"near the house","სახლთან ახლოს"
+breakfast,breakfast,breakfast,breakfast,noun,საუზმე,food,1,general,"Breakfast is ready.","საუზმე მზადაა."
+pen,pen,pen,pen,noun,კალამი,object,1,general,"a blue pen","ლურჯი კალამი"
+i_got_it,i_got_it,i_got_it,I got it / understood,phrase,გავიგე,phrase,2,phrases,"Ah, now I get it!","აა, ახლა გავიგე!"
+live,live_inf,live,to live,verb-inf,ცხოვრება,verb,1,verbs,"to live in Georgia","საქართველოში ცხოვრება"
+live,live_p1s,live,I live,verb-p1s,მე ვცხოვრობ,verb,1,verbs,"I live in Tbilisi","მე ვცხოვრობ თბილისში"
+live,live_p2s,live,You live,verb-p2s,შენ ცხოვრობ,verb,1,verbs,"Where do you live?","სად ცხოვრობ?"
+live,live_p3s,live,He/She/It lives,verb-p3s,ის ცხოვრობს,verb,1,verbs,"He lives with his parents","ის მშობლებთან ერთად ცხოვრობს"
+live,live_p1p,live,We live,verb-p1p,ჩვენ ვცხოვრობთ,verb,1,verbs,"We live here","ჩვენ აქ ვცხოვრობთ"
+live,live_p2p,live,You (pl) live,verb-p2p,თქვენ ცხოვრობთ,verb,1,verbs,"You live in a big house","თქვენ დიდ სახლში ცხოვრობთ"
+live,live_p3p,live,They live,verb-p3p,ისინი ცხოვრობენ,verb,1,verbs,"They live in a village","ისინი სოფელში ცხოვრობენ"
+ten,ten,ten,10,noun,ათი,numbers,1,general,"ten lari","ათი ლარი"
+twelve,twelve,twelve,12,noun,თორმეტი,numbers,1,general,"twelve o'clock","თორმეტი საათი"
+partner,partner,partner,girlfriend/boyfriend,noun,შეყვარებული,people,1,general,"my girlfriend/boyfriend","ჩემი შეყვარებული"
+afternoon_time,afternoon_time,afternoon_time,afternoon,noun,შუადღე,time,1,general,"in the afternoon","შუადღეს"
+tomorrow,tomorrow,tomorrow,tomorrow,adverb,ხვალ,time,1,general,"see you tomorrow","ხვალამდე"
+this,this,this,this,pronoun,ეს,pronoun,1,general,"this is good","ეს კარგია"
+big,big,big,big/large,adjective,დიდი,adjective,1,general,"a big house","დიდი სახლი"
+can_i_see_the_menu,can_i_see_the_menu,can_i_see_the_menu,can I see the menu?,phrase,შეიძლება მენიუ?,restaurant,2,phrases,"Of course, here you are.","რა თქმა უნდა, ინებეთ."
+work,work_inf,work,to work,verb-inf,მუშაობა,verb,1,verbs,"I need to work","უნდა ვიმუშაო"
+work,work_p1s,work,I work,verb-p1s,მე ვმუშაობ,verb,1,verbs,"I work a lot","მე ბევრს ვმუშაობ"
+work,work_p2s,work,You work,verb-p2s,შენ მუშაობ,verb,1,verbs,"Do you work here?","აქ მუშაობ?"
+work,work_p3s,work,He/She/It works,verb-p3s,ის მუშაობს,verb,1,verbs,"He works in a bank","ის ბანკში მუშაობს"
+work,work_p1p,work,We work,verb-p1p,ჩვენ ვმუშაობთ,verb,1,verbs,"We work together","ჩვენ ერთად ვმუშაობთ"
+work,work_p2p,work,You (pl) work,verb-p2p,თქვენ მუშაობთ,verb,1,verbs,"Where do you work?","სად მუშაობთ?"
+work,work_p3p,work,They work,verb-p3p,ისინი მუშაობენ,verb,1,verbs,"They work from home","ისინი სახლიდან მუშაობენ"
+menu,menu,menu,menu,noun,მენიუ,restaurant,1,general,"the restaurant menu","რესტორნის მენიუ"
+in,in,in,in,preposition,ში,preposition,1,general,"in the car","მანქანაში"
+happy,happy,happy,happy,adjective,ბედნიერი,adjective,1,general,"I am happy","მე ბედნიერი ვარ"
+because,because,because,because,conjunction,რადგან,conjunction,1,general,"because I know","რადგან ვიცი"
+yet,yet,yet,yet,adverb,ჯერ,time,1,general,"not yet","ჯერ არა"
+brother,brother,brother,brother,noun,ძმა,people,1,general,"my brother","ჩემი ძმა"
+table,table,table,table,noun,მაგიდა,home,1,general,"on the table","მაგიდაზე"
+what_do_you_recommend,what_do_you_recommend,what_do_you_recommend,what do you recommend?,phrase,რას მირჩევთ?,restaurant,2,phrases,"I recommend Khachapuri.","ხაჭაპურს გირჩევთ."
+be_past,be_past_p1s,be,I was,verb-p1s-past,მე ვიყავი,verb,1,verbs,"I was here","მე აქ ვიყავი"
+be_past,be_past_p2s,be,you were,verb-p2s-past,შენ იყავი,verb,1,verbs,"Where were you?","სად იყავი?"
+be_past,be_past_p3s,be,he/she/it was,verb-p3s-past,ის იყო,verb,1,verbs,"It was good","კარგი იყო"
+be_past,be_past_p1p,be,we were,verb-p1p-past,ჩვენ ვიყავით,verb,1,verbs,"We were together","ჩვენ ერთად ვიყავით"
+be_past,be_past_p2p,be,you (pl) were,verb-p2p-past,თქვენ იყავით,verb,1,verbs,"You were there","თქვენ იქ იყავით"
+be_past,be_past_p3p,be,they were,verb-p3p-past,ისინი იყვნენ,verb,1,verbs,"They were friends","ისინი მეგობრები იყვნენ"
+level,level,level,level,noun,დონე,misc_nouns,1,general,"a high level","მაღალი დონე"
+fifteen,fifteen,fifteen,15,noun,თხუთმეტი,numbers,1,general,"fifteen minutes","თხუთმეტი წუთი"
+airport,airport,airport,airport,noun,აეროპორტი,location,1,general,"at the airport","აეროპორტში"
+next_adv,next_adv,next_adv,next (in sequence),adverb,შემდეგ,adverb,1,general,"next week","შემდეგ კვირას"
+always,always,always,always,adverb,ყოველთვის,adverb,1,general,"I always remember","მე ყოველთვის მახსოვს"
+monday,monday,monday,Monday,noun,ორშაბათი,days_of_week,1,general,"on Monday","ორშაბათს"
+sixteen,sixteen,sixteen,16,noun,თექვსმეტი,numbers,1,general,"sixteen years old","თექვსმეტი წლის"
+im_hungry,im_hungry,im_hungry,I’m hungry,phrase,მშია,phrase,2,phrases,"Me too, let's eat!","მეც, წავიდეთ ვჭამოთ!"
+be_future,be_future_p1s,be,I will be,verb-p1s-future,მე ვიქნები,verb,1,verbs,"I will be there","მე იქ ვიქნები"
+be_future,be_future_p2s,be,you will be,verb-p2s-future,შენ იქნები,verb,1,verbs,"You will be happy","შენ ბედნიერი იქნები"
+be_future,be_future_p3s,be,he/she/it will be,verb-p3s-future,ის იქნება,verb,1,verbs,"It will be good","კარგი იქნება"
+be_future,be_future_p1p,be,we will be,verb-p1p-future,ჩვენ ვიქნებით,verb,1,verbs,"We will be friends","ჩვენ მეგობრები ვიქნებით"
+be_future,be_future_p2p,be,you (pl) will be,verb-p2p-future,თქვენ იქნებით,verb,1,verbs,"You will be ready","თქვენ მზად იქნებით"
+be_future,be_future_p3p,be,they will be,verb-p3p-future,ისინი იქნებიან,verb,1,verbs,"They will be here","ისინი აქ იქნებიან"
+three,three,three,3,noun,სამი,numbers,1,general,"three people","სამი ადამიანი"
+father,father,father,father,noun,მამა,people,1,general,"my father","ჩემი მამა"
+thirteen,thirteen,thirteen,13,noun,ცამეტი,numbers,1,general,"thirteen years","ცამეტი წელი"
+second,second,second,second,noun,წამი,time,1,general,"one second","ერთი წამი"
+morning_time,morning_time,morning_time,morning,noun,დილა,time,1,general,"in the morning","დილით"
+forty,forty,forty,40,noun,ორმოცი,numbers,1,general,"forty lari","ორმოცი ლარი"
+white,white,white,white,adjective,თეთრი,color,1,general,"white wine","თეთრი ღვინო"
+im_thirsty,im_thirsty,im_thirsty,I’m thirsty,phrase,მწყურია,phrase,2,phrases,"Me too, I want some water.","მეც, წყალი მინდა."
+think,think_inf,think,to think,verb-inf,ფიქრი,verb,1,verbs,"to think about you","შენზე ფიქრი"
+think,think_p1s,think,I think,verb-p1s,მე ვფიქრობ,verb,1,verbs,"I think so","მე ასე ვფიქრობ"
+think,think_p2s,think,You think,verb-p2s,შენ ფიქრობ,verb,1,verbs,"What do you think?","შენ რას ფიქრობ?"
+think,think_p3s,think,He/She/It thinks,verb-p3s,ის ფიქრობს,verb,1,verbs,"She thinks a lot","ის ბევრს ფიქრობს"
+think,think_p1p,think,We think,verb-p1p,ჩვენ ვფიქრობთ,verb,1,verbs,"We think it's a good idea","ჩვენ ვფიქრობთ, კარგი იდეაა"
+think,think_p2p,think,You (pl) think,verb-p2p,თქვენ ფიქრობთ,verb,1,verbs,"What do you think?","თქვენ რას ფიქრობთ?"
+think,think_p3p,think,They think,verb-p3p,ისინი ფიქრობენ,verb,1,verbs,"They think differently","ისინი სხვანაირად ფიქრობენ"
+plane,plane,plane,plane,noun,თვითმფრინავი,transportation,1,general,"by plane","თვითმფრინავით"
+at,at,at,at,preposition,თან,preposition,1,general,"at the table","მაგიდასთან"
+sunday,sunday,sunday,Sunday,noun,კვირა,days_of_week,1,general,"on Sunday","კვირას"
+nineteen,nineteen,nineteen,19,noun,ცხრამეტი,numbers,1,general,"nineteen years old","ცხრამეტი წლის"
+red_wine,red_wine,red_wine,red wine,noun,წითელი ღვინო,beverages,1,general,"a glass of red wine","ჭიქა წითელი ღვინო"
+wine,wine,wine,wine,noun,ღვინო,beverages,1,general,"Georgian wine","ქართული ღვინო"
+boy,boy,boy,boy,noun,ბიჭი,people,1,general,"a little boy","პატარა ბიჭი"
+stop_imperative,stop_imperative,stop_imperative,stop!,phrase,გაჩერდი,command,2,phrases,"Stop! I want to get out.","გაჩერდით! ჩასვლა მინდა."
+speak,speak_inf,speak,to speak,verb-inf,ლაპარაკი,verb,1,verbs,"to speak Georgian","ქართულად ლაპარაკი"
+speak,speak_p1s,speak,I speak,verb-p1s,მე ვლაპარაკობ,verb,1,verbs,"I speak English","მე ვლაპარაკობ ინგლისურად"
+speak,speak_p2s,speak,You speak,verb-p2s,შენ ლაპარაკობ,verb,1,verbs,"Do you speak Georgian?","შენ ლაპარაკობ ქართულად?"
+speak,speak_p3s,speak,He/She/It speaks,verb-p3s,ის ლაპარაკობს,verb,1,verbs,"She speaks quickly","ის სწრაფად ლაპარაკობს"
+speak,speak_p1p,speak,We speak,verb-p1p,ჩვენ ვლაპარაკობთ,verb,1,verbs,"We speak about everything","ჩვენ ყველაფერზე ვლაპარაკობთ"
+speak,speak_p2p,speak,You (pl) speak,verb-p2p,თქვენ ლაპარაკობთ,verb,1,verbs,"Do you speak English?","თქვენ ლაპარაკობთ ინგლისურად?"
+speak,speak_p3p,speak,They speak,verb-p3p,ისინი ლაპარაკობენ,verb,1,verbs,"They speak loudly","ისინი ხმამაღლა ლაპარაკობენ"
+tea,tea,tea,tea,noun,ჩაი,beverages,1,general,"hot tea","ცხელი ჩაი"
+everything,everything,everything,everything,pronoun,ყველაფერი,pronoun,1,general,"everything is good","ყველაფერი კარგადაა"
+salt,salt,salt,salt,noun,მარილი,food,1,general,"salt and pepper","მარილი და პილპილი"
+twenty,twenty,twenty,20,noun,ოცი,numbers,1,general,"twenty lari","ოცი ლარი"
+train_station,train_station,train_station,train station,noun,რკინიგზის სადგური,location,1,general,"at the train station","რკინიგზის სადგურზე"
+these,these,these,these,pronoun,ესენი,pronoun,1,general,"These are my friends","ესენი ჩემი მეგობრები არიან"
+eighty,eighty,eighty,80,noun,ოთხმოცი,numbers,1,general,"eighty years old","ოთხმოცი წლის"
+shall_i_help_you,shall_i_help_you,shall_i_help_you,Shall I help you?,phrase,დაგეხმარები?,phrase,2,phrases,"Yes please, if you can.","დიახ, თუ შეგიძლიათ."
+eat,eat_inf,eat,to eat,verb-inf,ჭამა,verb,1,verbs,"to eat khinkali","ხინკლის ჭამა"
+eat,eat_p1s,eat,I eat,verb-p1s,მე ვჭამ,verb,1,verbs,"I eat bread","მე პურს ვჭამ"
+eat,eat_p2s,eat,You eat,verb-p2s,შენ ჭამ,verb,1,verbs,"What do you eat?","რას ჭამ?"
+eat,eat_p3s,eat,He/She/It eats,verb-p3s,ის ჭამს,verb,1,verbs,"He eats meat","ის ხორცს ჭამს"
+eat,eat_p1p,eat,We eat,verb-p1p,ჩვენ ვჭამთ,verb,1,verbs,"We eat together","ჩვენ ერთად ვჭამთ"
+eat,eat_p2p,eat,You (pl) eat,verb-p2p,თქვენ ჭამთ,verb,1,verbs,"Where do you eat?","სად ჭამთ?"
+eat,eat_p3p,eat,They eat,verb-p3p,ისინი ჭამენ,verb,1,verbs,"They eat a lot","ისინი ბევრს ჭამენ"
+hour,hour,hour,hour,noun,საათი,time,1,general,"one hour","ერთი საათი"
+gasoline,gasoline,gasoline,gasoline,noun,ბენზინი,transportation,1,general,"gas station","ბენზინგასამართი სადგური"
+year,year,year,year,noun,წელი,time,1,general,"last year","გასულ წელს"
+which,which,which,which,pronoun,რომელი,pronoun,1,general,"which one?","რომელი?"
+why,why,why,why,adverb,რატომ,adverb,1,general,"why not?","რატომაც არა?"
+brown,brown,brown,brown,adjective,ყავისფერი,color,1,general,"brown hair","ყავისფერი თმა"
+bridge,bridge,bridge,bridge,noun,ხიდი,location,1,general,"over the bridge","ხიდზე"
+what_is_your_favorite_restaurant,what_is_your_favorite_restaurant,what_is_your_favorite_restaurant,What is your favorite restaurant?,phrase,შენი საყვარელი რესტორანი რომელია?,restaurant,2,phrases,"My favorite restaurant is...","ჩემი საყვარელი რესტორანია..."
+drink,drink_inf,drink,to drink,verb-inf,სმა,verb,1,verbs,"to drink wine","ღვინის სმა"
+drink,drink_p1s,drink,I drink,verb-p1s,მე ვსვამ,verb,1,verbs,"I drink water","მე წყალს ვსვამ"
+drink,drink_p2s,drink,You drink,verb-p2s,შენ სვამ,verb,1,verbs,"Do you drink coffee?","ყავას სვამ?"
+drink,drink_p3s,drink,He/She/It drinks,verb-p3s,ის სვამს,verb,1,verbs,"He drinks a lot","ის ბევრს სვამს"
+drink,drink_p1p,drink,We drink,verb-p1p,ჩვენ ვსვამთ,verb,1,verbs,"We drink tea","ჩვენ ჩაის ვსვამთ"
+drink,drink_p2p,drink,You (pl) drink,verb-p2p,თქვენ სვამთ,verb,1,verbs,"What do you drink?","რას სვამთ?"
+drink,drink_p3p,drink,They drink,verb-p3p,ისინი სვამენ,verb,1,verbs,"They drink wine","ისინი ღვინოს სვამენ"
+nobody,nobody,nobody,nobody,pronoun,არავინ,pronoun,1,general,"nobody knows","არავინ იცის"
+bad,bad,bad,bad,adjective,ცუდი,adjective,1,general,"bad weather","ცუდი ამინდი"
+animal,animal,animal,animal,noun,ცხოველი,category,1,general,"wild animal","გარეული ცხოველი"
+eight,eight,eight,8,noun,რვა,numbers,1,general,"eight o'clock","რვა საათი"
+horse,horse,horse,horse,noun,ცხენი,animal,1,general,"a white horse","თეთრი ცხენი"
+blue,blue,blue,blue,adjective,ლურჯი,color,1,general,"blue eyes","ლურჯი თვალები"
+girl,girl,girl,girl,noun,გოგო,people,1,general,"a beautiful girl","ლამაზი გოგო"
+my_favorite_food_is,my_favorite_food_is,my_favorite_food_is,My favorite food is ...,phrase,ჩემი საყვარელი საჭმელი არის ...,restaurant,2,phrases,"My favorite food is Khinkali.","ჩემი საყვარელი საჭმელი არის ხინკალი."
+learn,learn_inf,learn,to learn,verb-inf,სწავლა,verb,1,verbs,"to learn a language","ენის სწავლა"
+learn,learn_p1s,learn,I learn,verb-p1s,მე ვსწავლობ,verb,1,verbs,"I learn Georgian","მე ვსწავლობ ქართულს"
+learn,learn_p2s,learn,You learn,verb-p2s,შენ სწავლობ,verb,1,verbs,"What are you learning?","რას სწავლობ?"
+learn,learn_p3s,learn,He/She/It learns,verb-p3s,ის სწავლობს,verb,1,verbs,"He learns quickly","ის სწრაფად სწავლობს"
+learn,learn_p1p,learn,We learn,verb-p1p,ჩვენ ვსწავლობთ,verb,1,verbs,"We learn together","ჩვენ ერთად ვსწავლობთ"
+learn,learn_p2p,learn,You (pl) learn,verb-p2p,თქვენ სწავლობთ,verb,1,verbs,"You learn well","თქვენ კარგად სწავლობთ"
+learn,learn_p3p,learn,They learn,verb-p3p,ისინი სწავლობენ,verb,1,verbs,"They learn at school","ისინი სკოლაში სწავლობენ"
+that,that,that,that,pronoun,ის,pronoun,1,general,"That is my car","ის ჩემი მანქანაა"
+know_person_inf,know_person_inf,know_person_inf,to know (a person),verb-inf,გაცნობა,verb,1,general,"Nice to meet you","სასიამოვნოა თქვენი გაცნობა"
+ninety_one,ninety_one,ninety_one,91,noun,ოთხმოცდათერთმეტი,numbers,1,general,"ninety-one percent","ოთხმოცდათერთმეტი პროცენტი"
+ninety_two,ninety_two,ninety_two,92,noun,ოთხმოცდათორმეტი,numbers,1,general,"ninety-two lari","ოთხმოცდათორმეტი ლარი"
+woman,woman,woman,woman,noun,ქალი,people,1,general,"a beautiful woman","ლამაზი ქალი"
+bread,bread,bread,bread,noun,პური,food,1,general,"fresh bread","ახალი პური"
+warm,warm,warm,warm,adjective,თბილი,adjective,1,general,"warm weather","თბილი ამინდი"
+can_you_help_me_please,can_you_help_me_please,can_you_help_me_please,Can you help me please?,phrase,დამეხმარები გთხოვ?,phrase,2,phrases,"Of course, how can I help?","რა თქმა უნდა, რით შემიძლია დაგეხმარო?"
+see,see_inf,see,to see,verb-inf,ნახვა,verb,1,verbs,"to see a movie","ფილმის ნახვა"
+see,see_p1s,see,I see,verb-p1s,მე ვხედავ,verb,1,verbs,"I see a dog","მე ძაღლს ვხედავ"
+see,see_p2s,see,You see,verb-p2s,შენ ხედავ,verb,1,verbs,"Do you see that?","შენ ამას ხედავ?"
+see,see_p3s,see,He/She/It sees,verb-p3s,ის ხედავს,verb,1,verbs,"He sees his friend","ის თავის მეგობარს ხედავს"
+see,see_p1p,see,We see,verb-p1p,ჩვენ ვხედავთ,verb,1,verbs,"We see each other","ჩვენ ერთმანეთს ვხედავთ"
+see,see_p2p,see,You (pl) see,verb-p2p,თქვენ ხედავთ,verb,1,verbs,"What do you see?","რას ხედავთ?"
+see,see_p3p,see,They see,verb-p3p,ისინი ხედავენ,verb,1,verbs,"They see the birds","ისინი ჩიტებს ხედავენ"
+red,red,red,red,adjective,წითელი,color,1,general,"red apple","წითელი ვაშლი"
+my_favorite,my_favorite,my_favorite,my favorite,phrase,ჩემი საყვარელი,phrase,1,general,"my favorite color","ჩემი საყვარელი ფერი"
+yellow,yellow,yellow,yellow,adjective,ყვითელი,color,1,general,"yellow bus","ყვითელი ავტობუსი"
+bed,bed,bed,bed,noun,საწოლი,home,1,general,"in the bed","საწოლში"
+seventy,seventy,seventy,70,noun,სამოცდაათი,numbers,1,general,"seventy people","სამოცდაათი ადამიანი"
+sixty,sixty,sixty,60,noun,სამოცი,numbers,1,general,"sixty seconds","სამოცი წამი"
+somebody,somebody,somebody,somebody,pronoun,ვინმე,pronoun,1,general,"Is somebody here?","აქ ვინმეა?"
+blank_is_ready,blank_is_ready,blank_is_ready,__ is ready,phrase,__ მზად არის,phrase,2,phrases,"Dinner is ready.","ვახშამი მზად არის."
+like,like_inf,like,to like,verb-inf,მოწონება,verb,1,verbs,"I want you to like it","მინდა, მოგეწონოს"
+like,like_p1s,like,I like,verb-p1s,მე მომწონს,verb,1,verbs,"I like this wine","მე ეს ღვინო მომწონს"
+like,like_p2s,like,You like,verb-p2s,შენ მოგწონს,verb,1,verbs,"Do you like music?","მუსიკა მოგწონს?"
+like,like_p3s,like,He/She/It likes,verb-p3s,მას მოსწონს,verb,1,verbs,"She likes to read","მას კითხვა მოსწონს"
+like,like_p1p,like,We like,verb-p1p,ჩვენ მოგვწონს,verb,1,verbs,"We like your city","ჩვენ მოგვწონს თქვენი ქალაქი"
+like,like_p2p,like,You (pl) like,verb-p2p,თქვენ მოგწონთ,verb,1,verbs,"Do you like this place?","მოგწონთ ეს ადგილი?"
+like,like_p3p,like,They like,verb-p3p,მათ მოსწონთ,verb,1,verbs,"They like Georgian food","მათ მოსწონთ ქართული საჭმელი"
+sister,sister,sister,sister,noun,და,people,1,general,"my sister","ჩემი და"
+knife,knife,knife,knife,noun,დანა,food,1,general,"a fork and knife","ჩანგალი და დანა"
+house,house,house,house,noun,სახლი,location,1,general,"my house","ჩემი სახლი"
+next,next,next,next,preposition,გვერდით,preposition,1,general,"next to the car","მანქანის გვერდით"
+transportation,transportation,transportation,transportation,noun,ტრანსპორტი,category,1,general,"public transportation","საზოგადოებრივი ტრანსპორტი"
+forty_two,forty_two,forty_two,42,noun,ორმოცდაორი,numbers,1,general,"forty-two years old","ორმოცდაორი წლის"
+family,family,family,family,noun,ოჯახი,people,1,general,"my family","ჩემი ოჯახი"
+we_have_a_reservation,we_have_a_reservation,we_have_a_reservation,we have a reservation,phrase,გვაქვს დაჯავშნა,restaurant,2,phrases,"Hello, we have a reservation.","გამარჯობა, ჯავშანი გვაქვს."
+help,help_inf,help,to help,verb-inf,დახმარება,verb,1,verbs,"to help someone","ვინმეს დახმარება"
+help,help_p1s,help,I help,verb-p1s,მე ვეხმარები,verb,1,verbs,"I help my friends","მე ვეხმარები მეგობრებს"
+help,help_p2s,help,You help,verb-p2s,შენ ეხმარები,verb,1,verbs,"You help me a lot","შენ ძალიან მეხმარები"
+help,help_p3s,help,He/She/It helps,verb-p3s,ის ეხმარება,verb,1,verbs,"He helps everyone","ის ყველას ეხმარება"
+help,help_p1p,help,We help,verb-p1p,ჩვენ ვეხმარებით,verb,1,verbs,"We help each other","ჩვენ ერთმანეთს ვეხმარებით"
+help,help_p2p,help,You (pl) help,verb-p2p,თქვენ ეხმარებით,verb,1,verbs,"Can you help us?","შეგიძლიათ დაგვეხმაროთ?"
+help,help_p3p,help,They help,verb-p3p,ისინი ეხმარებიან,verb,1,verbs,"They help their parents","ისინი მშობლებს ეხმარებიან"
+sixty_two,sixty_two,sixty_two,62,noun,სამოცდაორი,numbers,1,general,"sixty-two years","სამოცდაორი წელი"
+below,below,below,below,preposition,ქვემოთ,preposition,1,general,"below the bridge","ხიდის ქვემოთ"
+new,new,new,new,adjective,ახალი,adjective,1,general,"a new car","ახალი მანქანა"
+when,when,when,when,adverb,როდის,adverb,1,general,"When are you coming?","როდის მოდიხარ?"
+gray,gray,gray,gray,adjective,ნაცრისფერი,color,1,general,"a gray sky","ნაცრისფერი ცა"
+zero,zero,zero,0,noun,ნული,numbers,1,general,"zero degrees","ნული გრადუსი"
+week,week,week,week,noun,კვირა,time,1,general,"last week","გასულ კვირას"
+i_can_pay_with_cash,i_can_pay_with_cash,i_can_pay_with_cash,I can pay with cash,phrase,ნაღდი ფულით გადავიხდი,phrase,2,phrases,"Okay, no problem.","კარგი, არაა პრობლემა."
+try,try_inf,try,to try,verb-inf,ცდა,verb,2,verbs,"to try again","ისევ ცდა"
+try,try_p1s,try,I try,verb-p1s,მე ვცდილობ,verb,2,verbs,"I try to understand","მე ვცდილობ გავიგო"
+try,try_p2s,try,You try,verb-p2s,შენ ცდილობ,verb,2,verbs,"You should try","შენ უნდა სცადო"
+try,try_p3s,try,He/She/It tries,verb-p3s,ის ცდილობს,verb,2,verbs,"She tries her best","ის მაქსიმალურად ცდილობს"
+try,try_p1p,try,We try,verb-p1p,ჩვენ ვცდილობთ,verb,2,verbs,"We try to learn","ჩვენ ვცდილობთ ვისწავლოთ"
+try,try_p2p,try,You (pl) try,verb-p2p,თქვენ ცდილობთ,verb,2,verbs,"You try hard","თქვენ ძალიან ცდილობთ"
+try,try_p3p,try,They try,verb-p3p,ისინი ცდილობენ,verb,2,verbs,"They try to win","ისინი მოგებას ცდილობენ"
+seventy_two,seventy_two,seventy_two,72,noun,სამოცდათორმეტი,numbers,1,general,"seventy-two lari","სამოცდათორმეტი ლარი"
+evening_time,evening_time,evening_time,evening,noun,საღამო,time,1,general,"in the evening","საღამოს"
+eighty_one,eighty_one,eighty_one,81,noun,ოთხმოცდაერთი,numbers,1,general,"eighty-one percent","ოთხმოცდაერთი პროცენტი"
+wednesday,wednesday,wednesday,Wednesday,noun,ოთხშაბათი,days_of_week,1,general,"on Wednesday","ოთხშაბათს"
+twenty_two,twenty_two,twenty_two,22,noun,ოცდაორი,numbers,1,general,"twenty-two kilometers","ოცდაორი კილომეტრი"
+mother,mother,mother,mother,noun,დედა,people,1,general,"my mother","ჩემი დედა"
+cheese,cheese,cheese,cheese,noun,ყველი,food,1,general,"Imeretian cheese","იმერული ყველი"
+really_truly_indeed,really_truly_indeed,really_truly_indeed,really / truly / indeed,adverb,ნამდვილად,adverb,2,phrases,"Is it really true?","ეს ნამდვილად მართალია?"
+give,give_inf,give,to give,verb-inf,მიცემა,verb,2,verbs,"to give a present","საჩუქრის მიცემა"
+give,give_p1s,give,I give,verb-p1s,მე ვაძლევ,verb,2,verbs,"I give you my word","მე გაძლევ სიტყვას"
+give,give_p2s,give,You give,verb-p2s,შენ აძლევ,verb,2,verbs,"You give me hope","შენ მაძლევ იმედს"
+give,give_p3s,give,He/She/It gives,verb-p3s,ის აძლევს,verb,2,verbs,"He gives a lesson","ის ატარებს გაკვეთილს"
+give,give_p1p,give,We give,verb-p1p,ჩვენ ვაძლევთ,verb,2,verbs,"We give presents","ჩვენ ვაძლევთ საჩუქრებს"
+give,give_p2p,give,You (pl) give,verb-p2p,თქვენ აძლევთ,verb,2,verbs,"You give good advice","თქვენ კარგ რჩევას იძლევით"
+give,give_p3p,give,They give,verb-p3p,ისინი აძლევენ,verb,2,verbs,"They give food","ისინი საჭმელს იძლევიან"
+two,two,two,2,noun,ორი,numbers,1,general,"two hands","ორი ხელი"
+hot,hot,hot,hot,adjective,ცხელი,adjective,1,general,"hot weather","ცხელი ამინდი"
+train_ticket,train_ticket,train_ticket,train ticket,noun,ბილეთი,transportation,1,general,"a train ticket","მატარებლის ბილეთი"
+cow,cow,cow,cow,noun,ძროხა,animal,1,general,"a brown cow","ყავისფერი ძროხა"
+never,never,never,never,adverb,არასოდეს,adverb,1,general,"never say never","არასოდეს თქვა არასოდეს"
+street,street,street,street/road,noun,ქუჩა,location,1,general,"on this street","ამ ქუჩაზე"
+outside,outside,outside,outside,preposition,გარეთ,preposition,1,general,"I am outside","გარეთ ვარ"
+pass_me,pass_me,pass_me,Pass me...,phrase,მომაწოდე,phrase,2,phrases,"Pass me the salt, please.","მარილი მომაწოდე, გთხოვ."
+meet,meet_inf,meet,to meet,verb-inf,შეხვედრა,verb,2,verbs,"to meet a friend","მეგობართან შეხვედრა"
+meet,meet_p1s,meet,I meet,verb-p1s,მე ვხვდები,verb,2,verbs,"I meet my friend","მე ვხვდები ჩემს მეგობარს"
+meet,meet_p2s,meet,You meet,verb-p2s,შენ ხვდები,verb,2,verbs,"When do you meet?","როდის ხვდები?"
+meet,meet_p3s,meet,He/She/It meets,verb-p3s,ის ხვდება,verb,2,verbs,"She meets him at work","ის მას სამსახურში ხვდება"
+meet,meet_p1p,meet,We meet,verb-p1p,ჩვენ ვხვდებით,verb,2,verbs,"We meet every week","ჩვენ ყოველ კვირას ვხვდებით"
+meet,meet_p2p,meet,You (pl) meet,verb-p2p,თქვენ ხვდებით,verb,2,verbs,"Where do you meet?","სად ხვდებით?"
+meet,meet_p3p,meet,They meet,verb-p3p,ისინი ხვდებიან,verb,2,verbs,"They meet secretly","ისინი საიდუმლოდ ხვდებიან"
+seven,seven,seven,7,noun,შვიდი,numbers,1,general,"seven brothers","შვიდი ძმა"
+month,month,month,month,noun,თვე,time,1,general,"this month","ამ თვეში"
+cold,cold,cold,cold,adjective,ცივი,adjective,1,general,"cold beer","ცივი ლუდი"
+four,four,four,4,noun,ოთხი,numbers,1,general,"four chairs","ოთხი სკამი"
+fish,fish,fish,fish,noun,თევზი,animal,1,general,"fresh fish","ახალი თევზი"
+minute,minute,minute,minute,noun,წუთი,time,1,general,"ten minutes","ათი წუთი"
+nine,nine,nine,9,noun,ცხრა,numbers,1,general,"nine o'clock","ცხრა საათი"
+again_still,again_still,again_still,again / still,adverb,ისევ,adverb,2,phrases,"Let's try again.","ისევ ვცადოთ."
+love,love_inf,love,to love,verb-inf,სიყვარული,verb,2,verbs,"to love someone","ვინმეს სიყვარული"
+love,love_p1s,love,I love,verb-p1s,მე მიყვარს,verb,2,verbs,"I love you","მე შენ მიყვარხარ"
+love,love_p2s,love,You love,verb-p2s,შენ გიყვარს,verb,2,verbs,"You love me","შენ მე გიყვარვარ"
+love,love_p3s,love,He/She/It loves,verb-p3s,მას უყვარს,verb,2,verbs,"She loves music","მას უყვარს მუსიკა"
+love,love_p1p,love,We love,verb-p1p,ჩვენ გვიყვარს,verb,2,verbs,"We love Georgia","ჩვენ გვიყვარს საქართველო"
+love,love_p2p,love,You (pl) love,verb-p2p,თქვენ გიყვართ,verb,2,verbs,"Do you love to travel?","მოგზაურობა გიყვართ?"
+love,love_p3p,love,They love,verb-p3p,მათ უყვართ,verb,2,verbs,"They love each other","მათ ერთმანეთი უყვართ"
+between,between,between,between,preposition,შორის,preposition,1,general,"between two cities","ორ ქალაქს შორის"
+thirty_two,thirty_two,thirty_two,32,noun,ოცდათორმეტი,numbers,1,general,"thirty-two teeth","ოცდათორმეტი კბილი"
+many_a_lot,many_a_lot,many_a_lot,many / a lot,adjective,ბევრი,quantity,1,general,"a lot of time","ბევრი დრო"
+fourteen,fourteen,fourteen,14,noun,თოთხმეტი,numbers,1,general,"fourteen years old","თოთხმეტი წლის"
+sixty_one,sixty_one,sixty_one,61,noun,სამოცდაერთი,numbers,1,general,"sixty-one lari","სამოცდაერთი ლარი"
+train,train,train,train,noun,მატარებელი,transportation,1,general,"by train","მატარებლით"
+white_wine,white_wine,white_wine,white wine,noun,თეთრი ღვინო,beverages,1,general,"a glass of white wine","ჭიქა თეთრი ღვინო"
+waiter_synonym,waiter_synonym,waiter_synonym,waiter (service person),noun,მომსახურე,job,2,phrases,"call the waiter","მომსახურეს დაუძახე"
+open,open_inf,open,to open,verb-inf,გახსნა,verb,2,verbs,"to open the door","კარის გახსნა"
+open,open_p1s,open,I open,verb-p1s,მე ვაღებ,verb,2,verbs,"I open the window","მე ფანჯარას ვაღებ"
+open,open_p2s,open,You open,verb-p2s,შენ აღებ,verb,2,verbs,"You open the book","შენ წიგნს აღებ"
+open,open_p3s,open,He/She/It opens,verb-p3s,ის აღებს,verb,2,verbs,"He opens the box","ის ყუთს აღებს"
+open,open_p1p,open,We open,verb-p1p,ჩვენ ვაღებთ,verb,2,verbs,"We open at nine","ჩვენ ცხრაზე ვიღებთ"
+open,open_p2p,open,You (pl) open,verb-p2p,თქვენ აღებთ,verb,2,verbs,"When do you open?","როდის იღებთ?"
+open,open_p3p,open,They open,verb-p3p,ისინი აღებენ,verb,2,verbs,"They open the gate","ისინი ჭიშკარს აღებენ"
+small,small,small,small/little,adjective,პატარა,adjective,1,general,"a small house","პატარა სახლი"
+bird,bird,bird,bird,noun,ჩიტი,animal,1,general,"a little bird","პატარა ჩიტი"
+eighteen,eighteen,eighteen,18,noun,თვრამეტი,numbers,1,general,"eighteen lari","თვრამეტი ლარი"
+night_time,night_time,night_time,night,noun,ღამე,time,1,general,"at night","ღამით"
+car,car,car,car,noun,მანქანა,transportation,1,general,"a fast car","სწრაფი მანქანა"
+cup,cup,cup,cup,noun,ჭიქა,food,1,general,"a cup of coffee","ჭიქა ყავა"
+bon_appetit,bon_appetit,bon_appetit,Bon appétit!,phrase,გემრიელად მიირთვით!,restaurant,2,phrases,"Thank you!","მადლობა!"
+saturday,saturday,saturday,Saturday,noun,შაბათი,days_of_week,1,general,"on Saturday","შაბათს"
+close,close_inf,close,to close,verb-inf,დაკეტვა,verb,2,verbs,"to close the window","ფანჯრის დაკეტვა"
+close,close_p1s,close,I close,verb-p1s,მე ვკეტავ,verb,2,verbs,"I close the door","მე კარს ვკეტავ"
+close,close_p2s,close,You close,verb-p2s,შენ კეტავ,verb,2,verbs,"You close the book","შენ წიგნს კეტავ"
+close,close_p3s,close,He/She/It closes,verb-p3s,ის კეტავს,verb,2,verbs,"He closes the shop","ის მაღაზიას კეტავს"
+close,close_p1p,close,We close,verb-p1p,ჩვენ ვკეტავთ,verb,2,verbs,"We close at five","ჩვენ ხუთზე ვიკეტებით"
+close,close_p2p,close,You (pl) close,verb-p2p,თქვენ კეტავთ,verb,2,verbs,"Why are you closing?","რატომ იკეტებით?"
+close,close_p3p,close,They close,verb-p3p,ისინი კეტავენ,verb,2,verbs,"They close the gate","ისინი ჭიშკარს კეტავენ"
+tire,tire,tire,tire,noun,საბურავი,transportation,1,general,"a flat tire","დაშვებული საბურავი"
+butter,butter,butter,butter,noun,კარაქი,food,1,general,"bread with butter","პური კარაქით"
+badly,badly,badly,badly,adverb,ცუდად,adverb,1,general,"I feel unwell","ცუდად ვარ"
+nothing,nothing,nothing,nothing,pronoun,არაფერი,pronoun,1,general,"nothing new","არაფერი ახალი"
+mine,mine,mine,mine,pronoun,ჩემი,pronoun,1,general,"This is mine.","ეს ჩემია."
+what,what,what,what,pronoun,რა,pronoun,1,general,"What is this?","ეს რა არის?"
+what_would_you_like,what_would_you_like,what_would_you_like,What would you like?,phrase,რა გნებავთ?,restaurant,2,phrases,"Water, please.","წყალი, თუ შეიძლება."
+apartment,apartment,apartment,apartment,noun,ბინა,location,1,general,"a new apartment","ახალი ბინა"
+write,write_inf,write,to write,verb-inf,წერა,verb,2,verbs,"to write a letter","წერილის წერა"
+write,write_p1s,write,I write,verb-p1s,მე ვწერ,verb,2,verbs,"I write a book","მე ვწერ წიგნს"
+write,write_p2s,write,You write,verb-p2s,შენ წერ,verb,2,verbs,"What are you writing?","რას წერ?"
+write,write_p3s,write,He/She/It writes,verb-p3s,ის წერს,verb,2,verbs,"She writes beautifully","ის ლამაზად წერს"
+write,write_p1p,write,We write,verb-p1p,ჩვენ ვწერთ,verb,2,verbs,"We write to each other","ჩვენ ერთმანეთს ვწერთ"
+write,write_p2p,write,You (pl) write,verb-p2p,თქვენ წერთ,verb,2,verbs,"You write a letter","თქვენ წერილს წერთ"
+write,write_p3p,write,They write,verb-p3p,ისინი წერენ,verb,2,verbs,"They write articles","ისინი სტატიებს წერენ"
+orange,orange,orange,orange,adjective,ნარინჯისფერი,color,1,general,"orange color","ნარინჯისფერი"
+often,often,often,often,adverb,ხშირად,adverb,1,general,"very often","ძალიან ხშირად"
+those,those,those,those,pronoun,ისენი,pronoun,1,general,"Those are my books","ისენი ჩემი წიგნებია"
+baby,baby,baby,baby,noun,ჩვილი,people,1,general,"a newborn baby","ახალშობილი ჩვილი"
+engine,engine,engine,engine,noun,ძრავა,transportation,1,general,"car engine","მანქანის ძრავა"
+coffee,coffee,coffee,coffee,noun,ყავა,beverages,1,general,"black coffee","შავი ყავა"
+here_you_are,here_you_are,here_you_are,Here you are!,phrase,ინებეთ!,phrase,2,phrases,"Thank you!","გმადლობთ!"
+five,five,five,5,noun,ხუთი,numbers,1,general,"five people","ხუთი ადამიანი"
+call,call_inf,call,to call,verb-inf,დარეკვა,verb,2,verbs,"to call a friend","მეგობართან დარეკვა"
+call,call_p1s,call,I call,verb-p1s,მე ვრეკავ,verb,2,verbs,"I call you","მე შენ გირეკავ"
+call,call_p2s,call,You call,verb-p2s,შენ რეკავ,verb,2,verbs,"You call me","შენ მე მირეკავ"
+call,call_p3s,call,He/She/It calls,verb-p3s,ის რეკავს,verb,2,verbs,"He calls every day","ის ყოველდღე რეკავს"
+call,call_p1p,call,We call,verb-p1p,ჩვენ ვრეკავთ,verb,2,verbs,"We call our parents","ჩვენ მშობლებს ვურეკავთ"
+call,call_p2p,call,You (pl) call,verb-p2p,თქვენ რეკავთ,verb,2,verbs,"Why are you calling?","რატომ რეკავთ?"
+call,call_p3p,call,They call,verb-p3p,ისინი რეკავენ,verb,2,verbs,"They call in the morning","ისინი დილით რეკავენ"
+eleven,eleven,eleven,11,noun,თერთმეტი,numbers,1,general,"eleven o'clock","თერთმეტი საათი"
+fifty_two,fifty_two,fifty_two,52,noun,ორმოცდათორმეტი,numbers,1,general,"fifty-two weeks","ორმოცდათორმეტი კვირა"
+lunch,lunch,lunch,lunch,noun,სადილი,food,1,general,"time for lunch","სადილის დროა"
+seventeen,seventeen,seventeen,17,noun,ჩვიდმეტი,numbers,1,general,"seventeen years old","ჩვიდმეტი წლის"
+good,good,good,good,adjective,კარგი,adjective,1,general,"a good day","კარგი დღე"
+boat,boat,boat,boat,noun,ნავი,transportation,1,general,"a small boat","პატარა ნავი"
+after_you_polite,after_you_polite,after_you_polite,You go first / After you (polite),phrase,მობრძანდით!,phrase,2,phrases,"Thank you.","გმადლობთ."
+food,food,food,food,noun,საჭმელი,category,1,general,"delicious food","გემრიელი საჭმელი"
+cook,cook_inf,cook,to cook,verb-inf,მომზადება,verb,2,verbs,"to cook dinner","ვახშმის მომზადება"
+cook,cook_p1s,cook,I cook,verb-p1s,მე ვამზადებ,verb,2,verbs,"I cook breakfast","მე ვამზადებ საუზმეს"
+cook,cook_p2s,cook,You cook,verb-p2s,შენ ამზადებ,verb,2,verbs,"You cook well","შენ კარგად ამზადებ"
+cook,cook_p3s,cook,He/She/It cooks,verb-p3s,ის ამზადებს,verb,2,verbs,"He cooks for his family","ის ოჯახისთვის ამზადებს"
+cook,cook_p1p,cook,We cook,verb-p1p,ჩვენ ვამზადებთ,verb,2,verbs,"We cook together","ჩვენ ერთად ვამზადებთ"
+cook,cook_p2p,cook,You (pl) cook,verb-p2p,თქვენ ამზადებთ,verb,2,verbs,"What are you cooking?","რას ამზადებთ?"
+cook,cook_p3p,cook,They cook,verb-p3p,ისინი ამზადებენ,verb,2,verbs,"They cook Georgian food","ისინი ქართულ საჭმელს ამზადებენ"
+who,who,who,who,pronoun,ვინ,pronoun,1,general,"Who is it?","ვინ არის?"
+spoon,spoon,spoon,spoon,noun,კოვზი,food,1,general,"a silver spoon","ვერცხლის კოვზი"
+yesterday,yesterday,yesterday,yesterday,adverb,გუშინ,time,1,general,"yesterday evening","გუშინ საღამოს"
+mushroom,mushroom,mushroom,mushroom,noun,სოკო,food,1,general,"mushroom soup","სოკოს სუპი"
+friday,friday,friday,Friday,noun,პარასკევი,days_of_week,1,general,"on Friday","პარასკევს"
+how_long,how_long,how_long,how long,phrase,რამდენი ხანი,question_word,1,general,"How long will it take?","რამდენი ხანი დასჭირდება?"
+for_preposition,for_preposition,for_preposition,for,preposition,თვის,preposition,2,phrases,"for you","შენთვის"
+sometimes,sometimes,sometimes,sometimes,adverb,ზოგჯერ,adverb,1,general,"Sometimes I go","ზოგჯერ დავდივარ"
+win,win_inf,win,to win,verb-inf,მოგება,verb,2,verbs,"to win the game","თამაშის მოგება"
+win,win_p1s,win,I win,verb-p1s,მე ვიგებ,verb,2,verbs,"I always win","მე ყოველთვის ვიგებ"
+win,win_p2s,win,You win,verb-p2s,შენ იგებ,verb,2,verbs,"This time you win","ამჯერად შენ იგებ"
+win,win_p3s,win,He/She/It wins,verb-p3s,ის იგებს,verb,2,verbs,"He often wins","ის ხშირად იგებს"
+win,win_p1p,win,We win,verb-p1p,ჩვენ ვიგებთ,verb,2,verbs,"We win together","ჩვენ ერთად ვიგებთ"
+win,win_p2p,win,You (pl) win,verb-p2p,თქვენ იგებთ,verb,2,verbs,"If you win...","თუ თქვენ იგებთ..."
+win,win_p3p,win,They win,verb-p3p,ისინი იგებენ,verb,2,verbs,"They always win","ისინი ყოველთვის იგებენ"
+pig,pig,pig,pig,noun,ღორი,animal,1,general,"a little pig","პატარა ღორი"
+in_front_of,in_front_of,in_front_of,in front of,preposition,წინ,preposition,1,general,"in front of the house","სახლის წინ"
+thirty_one,thirty_one,thirty_one,31,noun,ოცდათერთმეტი,numbers,1,general,"thirty-one days","ოცდათერთმეტი დღე"
+thursday,thursday,thursday,Thursday,noun,ხუთშაბათი,days_of_week,1,general,"on Thursday","ხუთშაბათს"
+ship,ship,ship,ship,noun,გემი,transportation,1,general,"a big ship","დიდი გემი"
+city,city,city,city,noun,ქალაქი,location,1,general,"the big city","დიდი ქალაქი"
+come_in_polite,come_in_polite,come_in_polite,Come in (polite),phrase,მობრძანდით!,phrase,2,phrases,"Thank you.","გმადლობთ."
+wing,wing,wing,wing,noun,ფრთა,animal,1,general,"bird's wing","ჩიტის ფრთა"
+lose,lose_inf,lose,to lose,verb-inf,წაგება,verb,2,verbs,"to lose the game","თამაშის წაგება"
+lose,lose_p1s,lose,I lose,verb-p1s,მე ვაგებ,verb,2,verbs,"I never lose","მე არასოდეს ვაგებ"
+lose,lose_p2s,lose,You lose,verb-p2s,შენ აგებ,verb,2,verbs,"This time you lose","ამჯერად შენ აგებ"
+lose,lose_p3s,lose,He/She/It loses,verb-p3s,ის აგებს,verb,2,verbs,"He always loses","ის ყოველთვის აგებს"
+lose,lose_p1p,lose,We lose,verb-p1p,ჩვენ ვაგებთ,verb,2,verbs,"We lose together","ჩვენ ერთად ვაგებთ"
+lose,lose_p2p,lose,You (pl) lose,verb-p2p,თქვენ აგებთ,verb,2,verbs,"If you lose...","თუ თქვენ აგებთ..."
+lose,lose_p3p,lose,They lose,verb-p3p,ისინი აგებენ,verb,2,verbs,"They never lose","ისინი არასოდეს აგებენ"
+mouse,mouse,mouse,mouse,noun,თაგვი,animal,1,general,"a small mouse","პატარა თაგვი"
+everybody,everybody,everybody,everybody,pronoun,ყველა,pronoun,1,general,"everybody knows","ყველამ იცის"
+six,six,six,6,noun,ექვსი,numbers,1,general,"six times","ექვსჯერ"
+seventy_one,seventy_one,seventy_one,71,noun,სამოცდათერთმეტი,numbers,1,general,"seventy-one years","სამოცდათერთმეტი წელი"
+young,young,young,young,adjective,ახალგაზრდა,adjective,1,general,"a young man","ახალგაზრდა კაცი"
+plate,plate,plate,plate,noun,თეფში,food,1,general,"an empty plate","ცარიელი თეფში"
+help_yourself,help_yourself,help_yourself,Help yourself!,phrase,მიირთვით!,phrase,2,phrases,"Thank you.","გმადლობთ."
+truck,truck,truck,truck,noun,სატვირთო მანქანა,transportation,1,general,"a big truck","დიდი სატვირთო"
+teach,teach_inf,teach,to teach,verb-inf,სწავლება,verb,2,verbs,"to teach a child","ბავშვის სწავლება"
+teach,teach_p1s,teach,I teach,verb-p1s,მე ვასწავლი,verb,2,verbs,"I teach English","მე ვასწავლი ინგლისურს"
+teach,teach_p2s,teach,You teach,verb-p2s,შენ ასწავლი,verb,2,verbs,"What do you teach?","რას ასწავლი?"
+teach,teach_p3s,teach,He/She/It teaches,verb-p3s,ის ასწავლის,verb,2,verbs,"She teaches math","ის მათემატიკას ასწავლის"
+teach,teach_p1p,teach,We teach,verb-p1p,ჩვენ ვასწავლით,verb,2,verbs,"We teach together","ჩვენ ერთად ვასწავლით"
+teach,teach_p2p,teach,You (pl) teach,verb-p2p,თქვენ ასწავლით,verb,2,verbs,"You teach well","თქვენ კარგად ასწავლით"
+teach,teach_p3p,teach,They teach,verb-p3p,ისინი ასწავლიან,verb,2,verbs,"They teach children","ისინი ბავშვებს ასწავლიან"
+one,one,one,1,noun,ერთი,numbers,1,general,"one more","კიდევ ერთი"
+behind,behind,behind,behind,preposition,უკან,preposition,1,general,"behind the door","კარის უკან"
+fork,fork,fork,fork,noun,ჩანგალი,food,1,general,"fork and spoon","ჩანგალი და კოვზი"
+twenty_one,twenty_one,twenty_one,21,noun,ოცდაერთი,numbers,1,general,"twenty-one years old","ოცდაერთი წლის"
+dog,dog,dog,dog,noun,ძაღლი,animal,1,general,"a big dog","დიდი ძაღლი"
+hotel,hotel,hotel,hotel,noun,სასტუმრო,location,1,general,"a good hotel","კარგი სასტუმრო"
+have_a_seat_polite,have_a_seat_polite,have_a_seat_polite,Have a seat (polite),phrase,დაბრძანდით!,phrase,2,phrases,"Thank you.","გმადლობთ."
+eighty_two,eighty_two,eighty_two,82,noun,ოთხმოცდაორი,numbers,1,general,"eighty-two lari","ოთხმოცდაორი ლარი"
+watch,watch_inf,watch,to watch,verb-inf,ყურება,verb,2,verbs,"to watch a film","ფილმის ყურება"
+watch,watch_p1s,watch,I watch,verb-p1s,მე ვუყურებ,verb,2,verbs,"I watch TV","მე ვუყურებ ტელევიზორს"
+watch,watch_p2s,watch,You watch,verb-p2s,შენ უყურებ,verb,2,verbs,"What are you watching?","რას უყურებ?"
+watch,watch_p3s,watch,He/She/It watches,verb-p3s,ის უყურებს,verb,2,verbs,"He watches football","ის ფეხბურთს უყურებს"
+watch,watch_p1p,watch,We watch,verb-p1p,ჩვენ ვუყურებთ,verb,2,verbs,"We watch together","ჩვენ ერთად ვუყურებთ"
+watch,watch_p2p,watch,You (pl) watch,verb-p2p,თქვენ უყურებთ,verb,2,verbs,"Do you watch movies?","ფილმებს უყურებთ?"
+watch,watch_p3p,watch,They watch,verb-p3p,ისინი უყურებენ,verb,2,verbs,"They watch the game","ისინი თამაშს უყურებენ"
+yours,yours,yours,yours,pronoun,შენი,pronoun,1,general,"Is this yours?","ეს შენია?"
+bus,bus,bus,bus,noun,ავტობუსი,transportation,1,general,"by bus","ავტობუსით"
+cool,cool,cool,cool,adjective,გრილი,adjective,1,general,"cool weather","გრილი ამინდი"
+also,also,also,also,adverb,ასევე,adverb,1,general,"Me too","მე ასევე"
+on,on,on,on,preposition,ზე,preposition,1,general,"on the table","მაგიდაზე"
+fifty_one,fifty_one,fifty_one,51,noun,ორმოცდათერთმეტი,numbers,1,general,"fifty-one lari","ორმოცდათერთმეტი ლარი"
+where,where,where,where,adverb,სად,adverb,1,general,"Where is it?","სად არის?"
+hear,hear_inf,hear,to hear,verb-inf,გაგონება,verb,2,verbs,"to hear a noise","ხმაურის გაგონება"
+hear,hear_p1s,hear,I hear,verb-p1s,მე მესმის,verb,2,verbs,"I hear you","მე მესმის შენი"
+hear,hear_p2s,hear,You hear,verb-p2s,შენ გესმის,verb,2,verbs,"Do you hear me?","გესმის ჩემი?"
+hear,hear_p3s,hear,He/She/It hears,verb-p3s,მას ესმის,verb,2,verbs,"He hears everything","მას ყველაფერი ესმის"
+hear,hear_p1p,hear,We hear,verb-p1p,ჩვენ გვესმის,verb,2,verbs,"We hear the music","ჩვენ გვესმის მუსიკა"
+hear,hear_p2p,hear,You (pl) hear,verb-p2p,თქვენ გესმით,verb,2,verbs,"Can you hear us?","ჩვენი გესმით?"
+hear,hear_p3p,hear,They hear,verb-p3p,მათ ესმით,verb,2,verbs,"They hear nothing","მათ არაფერი ესმით"
+bicycle,bicycle,bicycle,bicycle,noun,ველოსიპედი,transportation,1,general,"to ride a bicycle","ველოსიპედით სიარული"
+chair,chair,chair,chair,noun,სკამი,home,1,general,"an old chair","ძველი სკამი"
+besides,besides,besides,besides,adverb,გარდა ამისა,adverb,1,general,"Besides this, I want that","ამის გარდა, ისიც მინდა"
+forty_one,forty_one,forty_one,41,noun,ორმოცდაერთი,numbers,1,general,"forty-one years","ორმოცდაერთი წელი"
+fifty,fifty,fifty,50,noun,ორმოცდაათი,numbers,1,general,"fifty lari","ორმოცდაათი ლარი"
+above,above,above,above,preposition,ზემოთ,preposition,1,general,"above the table","მაგიდის ზემოთ"
+goodbye_informal,goodbye_informal,goodbye_informal,Goodbye (informal),phrase,კარგად იყავი!,phrase,2,phrases,"You too!","შენც ასევე!"
+sad,sad,sad,sad,adjective,სევდიანი,adjective,1,general,"a sad movie","სევდიანი ფილმი"
+listen,listen_inf,listen,to listen,verb-inf,მოსმენა,verb,2,verbs,"to listen to music","მუსიკის მოსმენა"
+listen,listen_p1s,listen,I listen,verb-p1s,მე ვუსმენ,verb,2,verbs,"I'm listening to you","მე გისმენ"
+listen,listen_p2s,listen,You listen,verb-p2s,შენ უსმენ,verb,2,verbs,"Are you listening?","მისმენ?"
+listen,listen_p3s,listen,He/She/It listens,verb-p3s,ის უსმენს,verb,2,verbs,"She listens carefully","ის ყურადღებით უსმენს"
+listen,listen_p1p,listen,We listen,verb-p1p,ჩვენ ვუსმენთ,verb,2,verbs,"We listen to the news","ჩვენ ვუსმენთ ახალ ამბებს"
+listen,listen_p2p,listen,You (pl) listen,verb-p2p,თქვენ უსმენთ,verb,2,verbs,"Listen to me","მომისმინეთ"
+listen,listen_p3p,listen,They listen,verb-p3p,ისინი უსმენენ,verb,2,verbs,"They listen to the radio","ისინი რადიოს უსმენენ"
+green,green,green,green,adjective,მწვანე,color,1,general,"green apple","მწვანე ვაშლი"
+fast,fast,fast,fast,adjective,სწრაფი,adjective,1,general,"a fast car","სწრაფი მანქანა"
+how,how,how,how,adverb,როგორ,adverb,1,general,"How are you?","როგორ ხარ?"
+under,under,under,under,preposition,ქვეშ,preposition,1,general,"under the table","მაგიდის ქვეშ"
+slow,slow,slow,slow,adjective,ნელი,adjective,1,general,"a slow car","ნელი მანქანა"
+old_age,old_age,old_age,old (antonym to young),adjective,მოხუცი,adjective,1,general,"an old man","მოხუცი კაცი"
+i_will_pay_by_card,i_will_pay_by_card,i_will_pay_by_card,I will pay via card,phrase,ბარათით გადავიხდი,phrase,2,phrases,"Okay, no problem.","კარგი, პრობლემა არ არის."
+day,day,day,day,noun,დღე,time,1,general,"a beautiful day","ლამაზი დღე"
+dance,dance_inf,dance,to dance,verb-inf,ცეკვა,verb,2,verbs,"to dance with you","შენთან ცეკვა"
+dance,dance_p1s,dance,I dance,verb-p1s,მე ვცეკვავ,verb,2,verbs,"I dance well","მე კარგად ვცეკვავ"
+dance,dance_p2s,dance,You dance,verb-p2s,შენ ცეკვავ,verb,2,verbs,"You dance beautifully","შენ ლამაზად ცეკვავ"
+dance,dance_p3s,dance,He/She/It dances,verb-p3s,ის ცეკვავს,verb,2,verbs,"She dances every day","ის ყოველდღე ცეკვავს"
+dance,dance_p1p,dance,We dance,verb-p1p,ჩვენ ვცეკვავთ,verb,2,verbs,"We dance together","ჩვენ ერთად ვცეკვავთ"
+dance,dance_p2p,dance,You (pl) dance,verb-p2p,თქვენ ცეკვავთ,verb,2,verbs,"Do you dance?","თქვენ ცეკვავთ?"
+dance,dance_p3p,dance,They dance,verb-p3p,ისინი ცეკვავენ,verb,2,verbs,"They dance at the party","ისინი წვეულებაზე ცეკვავენ"
+tuesday,tuesday,tuesday,Tuesday,noun,სამშაბათი,days_of_week,1,general,"on Tuesday","სამშაბათს"
+man,man,man,man,noun,კაცი,people,1,general,"a good man","კარგი კაცი"
+credit_card,credit_card,credit_card,(credit) card,noun,ბარათი,money,1,general,"pay by card","ბარათით გადახდა"
+cat,cat,cat,cat,noun,კატა,animal,1,general,"a black cat","შავი კატა"
+eventually,eventually,eventually,eventually,adverb,საბოლოოდ,adverb,1,general,"Eventually, he agreed","საბოლოოდ, ის დათანხმდა"
+beer,beer,beer,beer,noun,ლუდი,beverages,1,general,"a cold beer","ცივი ლუდი"
+how_long_will_it_take,how_long_will_it_take,how_long_will_it_take,How long will it take?,phrase,რამდენი დრო დასჭირდება?,phrase,2,phrases,"About five minutes.","დაახლოებით ხუთი წუთი."
+thirty,thirty,thirty,30,noun,ოცდაათი,numbers,1,general,"thirty days","ოცდაათი დღე"
+sleep,sleep_inf,sleep,to sleep,verb-inf,ძილი,verb,2,verbs,"I want to sleep","ძილი მინდა"
+sleep,sleep_p1s,sleep,I sleep,verb-p1s,მე მძინავს,verb,2,verbs,"I sleep here","მე აქ მძინავს"
+sleep,sleep_p2s,sleep,You sleep,verb-p2s,შენ გძინავს,verb,2,verbs,"Are you sleeping?","შენ გძინავს?"
+sleep,sleep_p3s,sleep,He/She/It sleeps,verb-p3s,მას ძინავს,verb,2,verbs,"The baby is sleeping","ბავშვს ძინავს"
+sleep,sleep_p1p,sleep,We sleep,verb-p1p,ჩვენ გვძინავს,verb,2,verbs,"We sleep well","ჩვენ კარგად გვძინავს"
+sleep,sleep_p2p,sleep,You (pl) sleep,verb-p2p,თქვენ გძინავთ,verb,2,verbs,"Do you sleep here?","თქვენ აქ გძინავთ?"
+sleep,sleep_p3p,sleep,They sleep,verb-p3p,მათ ძინავთ,verb,2,verbs,"They are sleeping","მათ ძინავთ"
+pink,pink,pink,pink,adjective,ვარდისფერი,color,1,general,"a pink car","ვარდისფერი მანქანა"
+old_thing,old_thing,old_thing,old (antonym to new),adjective,ძველი,adjective,1,general,"an old book","ძველი წიგნი"
+water,water,water,water,noun,წყალი,beverages,1,general,"a glass of water","ჭიქა წყალი"
+inside,inside,inside,inside,preposition,შიგნით,preposition,1,general,"inside the house","სახლის შიგნით"
+beautiful,beautiful,beautiful,beautiful,adjective,ლამაზი,adjective,1,general,"a beautiful woman","ლამაზი ქალი"
+dinner,dinner,dinner,dinner,noun,ვახშამი,food,1,general,"dinner is ready","ვახშამი მზადაა"
+what_kind_of_dish_is_this,what_kind_of_dish_is_this,what_kind_of_dish_is_this,What kind of dish is this?,phrase,ეს რა კერძია?,restaurant,2,phrases,"This is khinkali.","ეს არის ხინკალი."
+ninety,ninety,ninety,90,noun,ოთხმოცდაათი,numbers,1,general,"ninety lari","ოთხმოცდაათი ლარი"
+buy,buy_inf,buy,to buy,verb-inf,ყიდვა,verb,2,verbs,"to buy a ticket","ბილეთის ყიდვა"
+buy,buy_p1s,buy,I buy,verb-p1s,მე ვყიდულობ,verb,2,verbs,"I buy bread","მე პურს ვყიდულობ"
+buy,buy_p2s,buy,You buy,verb-p2s,შენ ყიდულობ,verb,2,verbs,"What are you buying?","რას ყიდულობ?"
+buy,buy_p3s,buy,He/She/It buys,verb-p3s,ის ყიდულობს,verb,2,verbs,"She buys a dress","ის კაბას ყიდულობს"
+buy,buy_p1p,buy,We buy,verb-p1p,ჩვენ ვყიდულობთ,verb,2,verbs,"We buy wine","ჩვენ ღვინოს ვყიდულობთ"
+buy,buy_p2p,buy,You (pl) buy,verb-p2p,თქვენ ყიდულობთ,verb,2,verbs,"What are you buying?","რას ყიდულობთ?"
+buy,buy_p3p,buy,They buy,verb-p3p,ისინი ყიდულობენ,verb,2,verbs,"They buy a house","ისინი სახლს ყიდულობენ"
+can_you_suggest_something,can_you_suggest_something,can_you_suggest_something,Can you suggest something?,phrase,შეგიძლიათ მირჩიოთ რამე?,restaurant,2,phrases,"I recommend the Khachapuri.","ხაჭაპურს გირჩევთ."
+august,august,august,August,noun,აგვისტო,months,2,general,"in August","აგვისტოში"
+billion,billion,billion,billion,noun,მილიარდი,numbers,2,general,"one billion","ერთი მილიარდი"
+needle,needle,needle,needle,noun,ნემსი,home,2,general,"a needle and thread","ნემსი და ძაფი"
+door,door,door,door,noun,კარი,home,2,general,"open the door","გააღე კარი"
+drug,drug,drug,drug,noun,ნარკოტიკი,society,2,general,"the drug problem","ნარკოტიკების პრობლემა"
+author,author,author,author,noun,ავტორი,job,2,general,"the author of the book","წიგნის ავტორი"
+poison,poison,poison,poison,noun,შხამი,society,2,general,"a deadly poison","სასიკვდილო შხამი"
 pay,pay_inf,pay,to pay,verb-inf,გადახდა,verb,2,verbs
 pay,pay_p1s,pay,I pay,verb-p1s,მე ვიხდი,verb,2,verbs
 pay,pay_p2s,pay,You pay,verb-p2s,შენ იხდი,verb,2,verbs

@@ -10,6 +10,8 @@ interface TopBarProps {
   onClearProgress: () => void;
   skipVerbs: boolean;
   onToggleSkipVerbs: () => void;
+  showExamples: boolean;
+  onToggleExamples: () => void;
   wordProgress: { unlocked: number; total: number };
   percentageScore: number;
   cognitiveLoad: number;
@@ -22,6 +24,8 @@ export default function TopBar({
   onClearProgress,
   skipVerbs,
   onToggleSkipVerbs,
+  showExamples,
+  onToggleExamples,
   wordProgress,
   percentageScore,
   cognitiveLoad,
@@ -88,6 +92,17 @@ export default function TopBar({
                     <span>Skip Verbs</span>
                     <span className={`ml-2 px-2 py-0.5 rounded text-xs ${skipVerbs ? 'bg-green-600' : 'bg-gray-600'}`}>
                       {skipVerbs ? 'ON' : 'OFF'}
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={onToggleExamples}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Show Examples</span>
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${showExamples ? 'bg-green-600' : 'bg-gray-600'}`}>
+                      {showExamples ? 'ON' : 'OFF'}
                     </span>
                   </button>
                 </li>

@@ -9,6 +9,7 @@ interface FlashCardProps {
   isFlipped: boolean;
   showEnglish: boolean;
   showImageHint: boolean;
+  showExamples: boolean;
   verbHint: string | null;
   verbTenseLabel: string | null;
   onImageClick: () => void;
@@ -19,6 +20,7 @@ export default function FlashCard({
   isFlipped,
   showEnglish,
   showImageHint,
+  showExamples,
   verbHint,
   verbTenseLabel,
   onImageClick,
@@ -68,15 +70,22 @@ export default function FlashCard({
       }`}>
         {!isFlipped ? verbHint ?? "" : word.GeorgianWord}
       </p>
-      
-      {isFlipped && (
-      <div className="flex flex-col items-center justify-center text-center w-full max-w-sm border py-2">
-        <div className="text-sm text-gray-200">
-          შენ მიდიხარ სკოლაში
-        </div>
-        <div className="text-sm text-gray-400">
-          You go to school
-        </div>
+
+      {isFlipped && showExamples && (word.ExampleGeorgian1 || word.ExampleEnglish1) && (
+      <div className="flex flex-col items-center justify-center text-center w-full max-w-sm py-2">
+        {word.ExampleGeorgian1 && (
+          <div className="text-lg text-gray-300">
+            {word.ExampleGeorgian1}
+          </div>
+        )}
+        {word.ExampleEnglish1 && (
+          <div className="text-gray-400">
+            {word.ExampleEnglish1}
+          </div>
+        )}
+
+
+
       </div>
       )}
     </div>

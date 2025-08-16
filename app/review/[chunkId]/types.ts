@@ -8,6 +8,8 @@ export type WordData = {
   hint: string;
   priority: string;
   group: string;
+  ExampleEnglish1?: string;
+  ExampleGeorgian1?: string;
 };
 
 export interface KnownWordState {

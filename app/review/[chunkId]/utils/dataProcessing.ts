@@ -1,27 +1,26 @@
+import Papa from "papaparse";
 import { WordData, KnownWordState, DifficultyRating } from "../types";
 
 export function parseCSV(csvText: string): WordData[] {
-  const lines = csvText
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean);
-  
-  const rows = lines.slice(1);
-
-  return rows.map((row) => {
-    const cols = row.split(",");
-    return {
-      word_key: cols[0],
-      key: cols[1],
-      img_key: cols[2],
-      EnglishWord: cols[3],
-      PartOfSpeech: cols[4],
-      GeorgianWord: cols[5],
-      hint: cols[6],
-      priority: cols[7] || "",
-      group: cols[8] || "",
-    };
+  const result = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true,
+    transform: (value) => value.trim() || undefined,
   });
+
+  return result.data.map((row: any) => ({
+    word_key: row.word_key,
+    key: row.key,
+    img_key: row.img_key,
+    EnglishWord: row.EnglishWord,
+    PartOfSpeech: row.PartOfSpeech,
+    GeorgianWord: row.GeorgianWord,
+    hint: row.hint,
+    priority: row.priority || "",
+    group: row.group || "",
+    ExampleEnglish1: row.ExampleEnglish1,
+    ExampleGeorgian1: row.ExampleGeorgian1,
+  }));
 }
 
 export function difficultyToScore(difficulty: DifficultyRating): number {

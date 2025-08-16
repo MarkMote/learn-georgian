@@ -21,6 +21,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
   const [skipVerbs, setSkipVerbs] = useState<boolean>(false);
   const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
   const [showImageHint, setShowImageHint] = useState<boolean>(true);
+  const [showExamples, setShowExamples] = useState<boolean>(true);
   const [cognitiveLoad, setCognitiveLoad] = useState<number>(0);
 
   const knownWordsRef = useRef(knownWords);
@@ -345,12 +346,14 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
     skipVerbs,
     isLeftHanded,
     showImageHint,
+    showExamples,
     cognitiveLoad,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
     setIsLeftHanded,
     setShowImageHint,
+    setShowExamples,
     setCurrentIndex,
     handleScore,
     clearProgress,

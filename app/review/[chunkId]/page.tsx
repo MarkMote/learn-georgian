@@ -34,12 +34,14 @@ export default function ReviewPage() {
     skipVerbs,
     isLeftHanded,
     showImageHint,
+    showExamples,
     cognitiveLoad,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
     setIsLeftHanded,
     setShowImageHint,
+    setShowExamples,
     setCurrentIndex,
     handleScore,
     clearProgress,
@@ -145,6 +147,10 @@ export default function ReviewPage() {
     setSkipVerbs(prev => !prev);
   };
 
+  const handleToggleExamples = () => {
+    setShowExamples(prev => !prev);
+  };
+
   const handleLessonRequest = () => {
     if (currentCard) {
       handleGetLesson(currentCard.data.GeorgianWord);
@@ -207,6 +213,8 @@ export default function ReviewPage() {
         onClearProgress={clearProgress}
         skipVerbs={skipVerbs}
         onToggleSkipVerbs={handleToggleSkipVerbs}
+        showExamples={showExamples}
+        onToggleExamples={handleToggleExamples}
         wordProgress={wordProgress}
         percentageScore={percentageScore}
         cognitiveLoad={cognitiveLoad}
@@ -220,6 +228,7 @@ export default function ReviewPage() {
           isFlipped={isFlipped}
           showEnglish={showEnglish}
           showImageHint={showImageHint}
+          showExamples={showExamples}
           verbHint={verbHint}
           verbTenseLabel={verbTenseLabel}
           onImageClick={handleImageClick}
