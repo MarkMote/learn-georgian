@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { WordData } from "../types";
 
@@ -9,10 +9,12 @@ interface FlashCardProps {
   isFlipped: boolean;
   showEnglish: boolean;
   showImageHint: boolean;
-  showExamples: boolean;
+  showExamples: "off" | "on" | "tap";
+  revealedExamples: Set<string>;
   verbHint: string | null;
   verbTenseLabel: string | null;
   onImageClick: () => void;
+  onRevealExamples: (wordKey: string) => void;
 }
 
 export default function FlashCard({
@@ -21,10 +23,20 @@ export default function FlashCard({
   showEnglish,
   showImageHint,
   showExamples,
+  revealedExamples,
   verbHint,
   verbTenseLabel,
   onImageClick,
+  onRevealExamples,
 }: FlashCardProps) {
+  const [justCopied, setJustCopied] = useState(false);
+
+  const handleCopyGeorgian = () => {
+    navigator.clipboard.writeText(word.GeorgianWord);
+    setJustCopied(true);
+    setTimeout(() => setJustCopied(false), 400);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
       <div className="relative w-full mb-3" style={{ height: '280px' }}>
@@ -58,7 +70,7 @@ export default function FlashCard({
         </p>
       )}
 
-      <p className={`tracking-wider mb-4 min-h-[40px] ${
+      <p className={`tracking-wider mb-4 min-h-[40px] transition-colors duration-200 ${
         (() => {
           const text = !isFlipped ? verbHint ?? "" : word.GeorgianWord;
           const length = text.length;
@@ -67,26 +79,38 @@ export default function FlashCard({
           if (length <= 24) return "text-xl";
           return "text-lg";
         })()
-      }`}>
+      } ${justCopied ? 'text-green-400' : ''}`}
+      onClick={isFlipped ? handleCopyGeorgian : undefined}
+      style={isFlipped ? { cursor: 'pointer' } : undefined}
+      title={isFlipped ? "Click to copy Georgian word" : undefined}
+      >
         {!isFlipped ? verbHint ?? "" : word.GeorgianWord}
       </p>
 
-      {isFlipped && showExamples && (word.ExampleGeorgian1 || word.ExampleEnglish1) && (
-      <div className="flex flex-col items-center justify-center text-center w-full max-w-sm py-2">
-        {word.ExampleGeorgian1 && (
-          <div className="text-lg text-gray-300">
-            {word.ExampleGeorgian1}
-          </div>
-        )}
-        {word.ExampleEnglish1 && (
-          <div className="text-gray-400">
-            {word.ExampleEnglish1}
-          </div>
-        )}
-
-
-
-      </div>
+      {isFlipped && showExamples !== "off" && (word.ExampleGeorgian1 || word.ExampleEnglish1) && (
+        <div className="flex flex-col items-center justify-center text-center w-full max-w-sm py-2">
+          {showExamples === "on" || revealedExamples.has(word.key) ? (
+            <>
+              {word.ExampleGeorgian1 && (
+                <div className="text-lg text-gray-300">
+                  {word.ExampleGeorgian1}
+                </div>
+              )}
+              {word.ExampleEnglish1 && (
+                <div className="text-gray-400">
+                  {word.ExampleEnglish1}
+                </div>
+              )}
+            </>
+          ) : (
+            <button
+              onClick={() => onRevealExamples(word.key)}
+              className="px-4 py-2 min-w-[80%] h-[52px] border border-gray-700 bg-gray-500/10 rounded text-sm text-gray-300 hover:bg-gray-700/20 hover:text-white transition-colors"
+            >
+              see example
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

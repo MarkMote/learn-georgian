@@ -35,6 +35,7 @@ export default function ReviewPage() {
     isLeftHanded,
     showImageHint,
     showExamples,
+    revealedExamples,
     cognitiveLoad,
     setIsFlipped,
     setShowEnglish,
@@ -42,6 +43,7 @@ export default function ReviewPage() {
     setIsLeftHanded,
     setShowImageHint,
     setShowExamples,
+    setRevealedExamples,
     setCurrentIndex,
     handleScore,
     clearProgress,
@@ -148,7 +150,15 @@ export default function ReviewPage() {
   };
 
   const handleToggleExamples = () => {
-    setShowExamples(prev => !prev);
+    setShowExamples(prev => {
+      if (prev === "off") return "on";
+      if (prev === "on") return "tap";
+      return "off";
+    });
+  };
+
+  const handleRevealExamples = (wordKey: string) => {
+    setRevealedExamples(prev => new Set([...prev, wordKey]));
   };
 
   const handleLessonRequest = () => {
@@ -229,9 +239,11 @@ export default function ReviewPage() {
           showEnglish={showEnglish}
           showImageHint={showImageHint}
           showExamples={showExamples}
+          revealedExamples={revealedExamples}
           verbHint={verbHint}
           verbTenseLabel={verbTenseLabel}
           onImageClick={handleImageClick}
+          onRevealExamples={handleRevealExamples}
         />
       </div>
 
