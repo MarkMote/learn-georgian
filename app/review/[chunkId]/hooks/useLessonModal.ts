@@ -6,11 +6,15 @@ export function useLessonModal() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [lessonMarkdown, setLessonMarkdown] = useState<string>("");
   const [isLessonLoading, setIsLessonLoading] = useState<boolean>(false);
+  const [isIncomplete, setIsIncomplete] = useState<boolean>(false);
+  const [currentWord, setCurrentWord] = useState<string>("");
 
   const handleGetLesson = async (georgianWord: string, retryCount = 0) => {
     setIsModalOpen(true);
     setIsLessonLoading(true);
     setLessonMarkdown("");
+    setIsIncomplete(false);
+    setCurrentWord(georgianWord);
 
     try {
       const response = await fetch(`/api/lesson?word=${encodeURIComponent(georgianWord)}`);
@@ -68,6 +72,13 @@ export function useLessonModal() {
                 case "complete":
                   setLessonMarkdown(data.lesson || "No lesson found");
                   setIsLessonLoading(false);
+                  setIsIncomplete(false);
+                  break;
+                  
+                case "incomplete":
+                  setLessonMarkdown(data.lesson || "No lesson found");
+                  setIsLessonLoading(false);
+                  setIsIncomplete(true);
                   break;
               }
             } catch (e) {
@@ -95,11 +106,19 @@ export function useLessonModal() {
     setIsModalOpen(false);
   };
 
+  const retryLesson = () => {
+    if (currentWord) {
+      handleGetLesson(currentWord);
+    }
+  };
+
   return {
     isModalOpen,
     lessonMarkdown,
     isLessonLoading,
+    isIncomplete,
     handleGetLesson,
     closeModal,
+    retryLesson,
   };
 }

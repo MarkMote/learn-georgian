@@ -53,8 +53,10 @@ export default function ReviewPage() {
     isModalOpen,
     lessonMarkdown,
     isLessonLoading,
+    isIncomplete,
     handleGetLesson,
     closeModal,
+    retryLesson,
   } = useLessonModal();
 
   useEffect(() => {

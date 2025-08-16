@@ -105,9 +105,23 @@ export default function FlashCard({
           ) : (
             <button
               onClick={() => onRevealExamples(word.key)}
-              className="px-4 py-2 min-w-[80%] h-[52px] border border-gray-700 bg-gray-500/10 rounded text-sm text-gray-300 hover:bg-gray-700/20 hover:text-white transition-colors"
+              className="px-4 py-0 min-w-[95%] h-[52px] rounded text-sm text-gray-300 bg-white/5 backdrop-blur-sm transition-colors rounded-lg"
             >
-              see example
+                <p className="text-xs text-gray-500">example</p>
+              {/* <div className="">
+              <>
+                {word.ExampleGeorgian1 && (
+                  <div className="text-lg text-gray-300">
+                    {word.ExampleGeorgian1}
+                  </div>
+                )}
+                {word.ExampleEnglish1 && (
+                  <div className="text-gray-400">
+                    {word.ExampleEnglish1}
+                  </div>
+                )}
+              </>
+              </div> */}
             </button>
           )}
         </div>
