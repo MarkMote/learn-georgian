@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { getCachedLesson, cacheLesson } from "../../../lib/lessonCache";
 
 // Streaming response with better reliability and UX
 export async function GET(request: NextRequest) {
@@ -13,6 +14,33 @@ export async function GET(request: NextRequest) {
         headers: { "Content-Type": "application/json" }
       }
     );
+  }
+
+  // Check cache first
+  const cachedLesson = getCachedLesson(word);
+  if (cachedLesson) {
+    // Return cached lesson immediately
+    const stream = new ReadableStream({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode('data: {"status":"connecting"}\n\n'));
+        controller.enqueue(new TextEncoder().encode('data: {"status":"generating"}\n\n'));
+        controller.enqueue(new TextEncoder().encode(
+          `data: ${JSON.stringify({ 
+            status: "complete",
+            lesson: cachedLesson
+          })}\n\n`
+        ));
+        controller.close();
+      }
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+      },
+    });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
@@ -126,6 +154,11 @@ export async function GET(request: NextRequest) {
           const { done, value } = await reader.read();
           
           if (done) {
+            // Cache the completed lesson
+            if (fullContent.trim()) {
+              cacheLesson(word, fullContent);
+            }
+            
             controller.enqueue(new TextEncoder().encode(
               `data: ${JSON.stringify({ 
                 status: "complete",
