@@ -157,12 +157,14 @@ export default function ReadPage() {
       </div>
 
       {/* Scrollable story context */}
-      <StoryContext
-        allLines={playData.lines}
-        knownLines={knownLines}
-        currentLineId={currentLine.data.id}
-        showEnglishFirst={showEnglishFirst}
-      />
+      <div className="flex-shrink-0">
+        <StoryContext
+          allLines={playData.lines}
+          knownLines={knownLines}
+          currentLineId={currentLine.data.id}
+          showEnglishFirst={showEnglishFirst}
+        />
+      </div>
 
       {/* Main content */}
       <div className="flex-1 flex items-center justify-center px-2 py-4">

@@ -1,27 +1,27 @@
-word_key,key,img_key,EnglishWord,PartOfSpeech,GeorgianWord,hint,priority,group
-hello,hello,hello,Hello,phrase,გამარჯობა,greeting,1,phrases
-thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,phrases
-yes,yes,yes,yes,noun,დიახ,misc_nouns,1,phrases
-no,no,no,no,noun,არა,misc_nouns,1,phrases
-goodbye,goodbye,goodbye,Goodbye,phrase,ნახვამდის,greeting,1,phrases
-please,please,please,Please,phrase,თუ შეიძლება,phrase,1,phrases
-excuse_me,excuse_me,excuse_me,Excuse me,phrase,უკაცრავად,phrase,1,phrases
-nice_to_meet_you,nice_to_meet_you,nice_to_meet_you,Nice to meet you,phrase,სასიამოვნოა,phrase,1,phrases
-be,be_inf,be,to be,verb-inf,იყო,verb,1,verbs
-be,be_p1s,be,I am,verb-p1s,მე ვარ,verb,1,verbs
-be,be_p2s,be,You are,verb-p2s,შენ ხარ,verb,1,verbs
-be,be_p3s,be,He/She/It is,verb-p3s,ის არის,verb,1,verbs
-be,be_p1p,be,We are,verb-p1p,ჩვენ ვართ,verb,1,verbs
-be,be_p2p,be,You (pl) are,verb-p2p,თქვენ ხართ,verb,1,verbs
-be,be_p3p,be,They are,verb-p3p,ისინი არიან,verb,1,verbs
-a_little,a_little,a_little,a little,adjective,ცოტა,quantity,1,phrases
-very,very,very,very,adverb,ძალიან,adverb,1,phrases
-here,here,here,here,adverb,აქ,location,1,phrases
-its_good,its_good,its_good,It’s good,phrase,კარგია,phrase,1,phrases
-its_beautiful,its_beautiful,its_beautiful,It’s beautiful,phrase,ლამაზია,phrase,1,phrases
-delicious,delicious,delicious,delicious,adjective,გემრიელი,food,1,phrases
-cheers,cheers,cheers,Cheers!,phrase,გაუმარჯოს,phrase,1,phrases
-i_dont_want,i_dont_want,i_dont_want,I don’t want,phrase,არ მინდა,phrase,1,phrases
+word_key,key,img_key,EnglishWord,PartOfSpeech,GeorgianWord,hint,priority,group,ExampleEnglish1,ExampleGeorgian1
+hello,hello,hello,Hello,phrase,გამარჯობა,greeting,1,phrases,"Hello there","გამარჯობა שם"
+thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,phrases,"Thank you very much","დიდი მადლობა"
+yes,yes,yes,yes,noun,დიახ,misc_nouns,1,phrases,"Yes, please","დიახ, გეთაყვა"
+no,no,no,no,noun,არა,misc_nouns,1,phrases,"No, thank you","არა, გმადლობთ"
+goodbye,goodbye,goodbye,Goodbye,phrase,ნახვამდის,greeting,1,phrases,"Goodbye for now","ნახვამდის"
+please,please,please,Please,phrase,თუ შეიძლება,phrase,1,phrases,"Yes, please","დიახ, გეთაყვა"
+excuse_me,excuse_me,excuse_me,Excuse me,phrase,უკაცრავად,phrase,1,phrases,"Excuse me, sir","უკაცრავად, ბატონო"
+nice_to_meet_you,nice_to_meet_you,nice_to_meet_you,Nice to meet you,phrase,სასიამოვნოა,phrase,1,phrases,"Nice to meet you too","ჩემთვისაც სასიამოვნოა"
+be,be_inf,be,to be,verb-inf,იყო,verb,1,verbs,"to be or not to be","ყოფნა არ ყოფნა"
+be,be_p1s,be,I am,verb-p1s,მე ვარ,verb,1,verbs,"I am a student","მე ვარ სტუდენტი"
+be,be_p2s,be,You are,verb-p2s,შენ ხარ,verb,1,verbs,"You are welcome","არაფრის"
+be,be_p3s,be,He/She/It is,verb-p3s,ის არის,verb,1,verbs,"It is good","კარგია"
+be,be_p1p,be,We are,verb-p1p,ჩვენ ვართ,verb,1,verbs,"We are family","ჩვენ ვართ ოჯახი"
+be,be_p2p,be,You (pl) are,verb-p2p,თქვენ ხართ,verb,1,verbs,"You are friends","თქვენ ხართ მეგობრები"
+be,be_p3p,be,They are,verb-p3p,ისინი არიან,verb,1,verbs,"They are here","ისინი აქ არიან"
+a_little,a_little,a_little,a little,adjective,ცოტა,quantity,1,phrases,"just a little","მხოლოდ ცოტა"
+very,very,very,very,adverb,ძალიან,adverb,1,phrases,"very good","ძალიან კარგი"
+here,here,here,here,adverb,აქ,location,1,phrases,"come here","მოდი აქ"
+its_good,its_good,its_good,It’s good,phrase,კარგია,phrase,1,phrases,"It's very good","ძალიან კარგია"
+its_beautiful,its_beautiful,its_beautiful,It’s beautiful,phrase,ლამაზია,phrase,1,phrases,"It's very beautiful","ძალიან ლამაზია"
+delicious,delicious,delicious,delicious,adjective,გემრიელი,food,1,phrases,"very delicious","ძალიან გემრიელია"
+cheers,cheers,cheers,Cheers!,phrase,გაუმარჯოს,phrase,1,phrases,"Cheers, my friend!","გაუმარჯოს, ჩემო მეგობარო!"
+i_dont_want,i_dont_want,i_dont_want,I don’t want,phrase,არ მინდა,phrase,1,phrases,"I don't want it","არ მინდა ეს"
 have_inanimate,have_inanimate_inf,have_inanimate,to have (inanimate),verb-inf,ქონა,verb,1,verbs
 have_inanimate,have_inanimate_p1s,have_inanimate,I have (inanimate),verb-p1s,მე მაქვს,verb,1,verbs
 have_inanimate,have_inanimate_p2s,have_inanimate,You have (inanimate),verb-p2s,შენ გაქვს,verb,1,verbs

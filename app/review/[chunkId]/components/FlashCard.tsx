@@ -56,9 +56,29 @@ export default function FlashCard({
         </p>
       )}
 
-      <p className="text-3xl tracking-wider mb-4 min-h-[40px]">
+      <p className={`tracking-wider mb-4 min-h-[40px] ${
+        (() => {
+          const text = !isFlipped ? verbHint ?? "" : word.GeorgianWord;
+          const length = text.length;
+          if (length <= 12) return "text-3xl";
+          if (length <= 18) return "text-2xl";
+          if (length <= 24) return "text-xl";
+          return "text-lg";
+        })()
+      }`}>
         {!isFlipped ? verbHint ?? "" : word.GeorgianWord}
       </p>
+      
+      {isFlipped && (
+      <div className="flex flex-col items-center justify-center text-center w-full max-w-sm border py-2">
+        <div className="text-sm text-gray-200">
+          შენ მიდიხარ სკოლაში
+        </div>
+        <div className="text-sm text-gray-400">
+          You go to school
+        </div>
+      </div>
+      )}
     </div>
   );
 }

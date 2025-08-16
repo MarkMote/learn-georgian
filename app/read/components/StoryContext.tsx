@@ -31,7 +31,14 @@ export default function StoryContext({
   };
 
   return (
-    <div className="max-h-48 overflow-y-auto px-4 py-2 border-b border-gray-800 overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+    <div 
+      className="h-[35vh] overflow-y-auto overflow-x-hidden px-4 py-2 border-b border-gray-800 overscroll-contain scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
+      style={{ 
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'thin',
+        msOverflowStyle: 'auto'
+      }}
+    >
       <div className="space-y-2">
         {allLines.map((line, index) => {
           const status = getLineStatus(line, index);
