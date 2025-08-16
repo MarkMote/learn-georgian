@@ -62,8 +62,7 @@ export default function StoryContext({
 
           const shouldShow = status === 'current' || 
                            status === 'learned' || 
-                           (status === 'past' && index >= currentLineIndex - 5) ||
-                           (status === 'future' && status === 'learned');
+                           (status === 'past' && index >= currentLineIndex - 5);
 
           if (!shouldShow) return null;
 
