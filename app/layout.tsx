@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     default: "Learn Georgian",
     template: "%s | Learn Georgian"
   },
-  description: "Master Georgian vocabulary with spaced repetition flashcards and AI-powered lessons",
-  keywords: ["Georgian", "language learning", "flashcards", "spaced repetition", "vocabulary", "Georgia"],
+  description: "A Spaced Repetition Flashcard App for Learning Georgian",
+  keywords: ["Georgian", "language learning", "flashcards", "free", "free online tool", "spaced repetition", "vocabulary", "Georgia"],
   authors: [{ name: "Mark" }],
   creator: "Mark",
   applicationName: "Learn Georgian",
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     title: "Learn Georgian",
-    description: "Master Georgian vocabulary with spaced repetition flashcards and AI-powered lessons",
+    description: "A Spaced Repetition Flashcard App for Learning Georgian",
     siteName: "Learn Georgian"
   },
   twitter: {
     card: "summary",
     title: "Learn Georgian",
-    description: "Master Georgian vocabulary with spaced repetition flashcards and AI-powered lessons"
+    description: "A Spaced Repetition Flashcard App for Learning Georgian"
   },
   robots: {
     index: true,

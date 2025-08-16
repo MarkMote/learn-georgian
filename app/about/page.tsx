@@ -46,7 +46,7 @@ export default function AboutPage() {
                 <strong>Your progress is automatically saved in your browser.</strong> You can close the app anytime 
                 and pick up right where you left off.
               </p>
-              
+
               <p>
                 This is a spaced repetition flashcard app designed specifically for learning Georgian vocabulary. 
                 The app uses an adaptive learning algorithm to help you memorize words efficiently by showing 
@@ -179,6 +179,16 @@ export default function AboutPage() {
               </ul>
             </div>
           </section>
+
+          {/* Credits */}
+          {/* <section>
+            <h2 className="text-2xl font-bold mb-4 text-slate-200">Contribute or Report Issues</h2>
+            <div className="space-y-4">
+              <p>
+                This app was created by <a href="https://markmote.com" target="_blank" rel="noopener noreferrer">Mark</a>. It is a work in progress and a bit of an experiment as I teach myself the language.
+              </p>
+            </div> */}
+          {/* </section> */}
 
           {/* Footer */}
           <section className="pt-8 border-t border-gray-700">
