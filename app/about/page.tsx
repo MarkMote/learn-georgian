@@ -43,7 +43,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold mb-4 text-slate-200">How It Works</h2>
             <div className="space-y-4">
               <p>
-                <strong>Your progress is automatically saved in your browser.</strong> You can close the app anytime 
+                Designed for mobile. No login required. <strong>Your progress is automatically saved in your browser.</strong> You can close the app anytime 
                 and pick up right where you left off.
               </p>
 
@@ -54,9 +54,7 @@ export default function AboutPage() {
               </p>
               
               <p>
-                Words are organized into <strong>chunks of 100</strong> based roughly on how likely you are to need them. 
-                Each chunk focuses on a specific set of vocabulary, allowing you to progress systematically 
-                through the Georgian language.
+                Words are organized into <strong>chunks of 100</strong>. We avoid breaking up words by category - learning similar meaning words at around the same time makes it easier to mix them up.
               </p>
             </div>
           </section>
@@ -72,7 +70,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section>
+          {/* <section>
             <h2 className="text-2xl font-bold mb-4 text-slate-200">Design Decisions</h2>
             <div className="space-y-4">
               In case its of interest, here are some design decisions that went into this app:
@@ -98,7 +96,7 @@ export default function AboutPage() {
                 • No authentication. Progress is saved locally in your browser. 
               </p>
             </div>
-          </section>
+          </section> */}
 
           {/* Learning System */}
           <section>
