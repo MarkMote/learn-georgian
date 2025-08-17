@@ -105,7 +105,7 @@ export default function FlashCard({
           ) : (
             <button
               onClick={() => onRevealExamples(word.key)}
-              className="px-4 py-0 min-w-[95%] h-[52px] rounded text-sm text-gray-300 bg-white/5 backdrop-blur-sm transition-colors rounded-lg"
+              className="px-4 py-0 min-w-[95%] h-[52px] rounded text-sm text-gray-300 bg-white/10 backdrop-blur-sm transition-colors rounded-lg"
             >
                 <p className="text-xs text-gray-500">example</p>
               {/* <div className="">
