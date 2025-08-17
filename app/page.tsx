@@ -209,7 +209,7 @@ export default function HomePage() {
       <div className="flex flex-col space-y-6 text-sm max-w-md w-full"> {/* Stack buttons vertically with space */}
         {/* Chunk Selection for Words with Images */}
         <div className="space-y-3">
-          {/* <h2 className="text-xl text-center text-slate-300 mb-4">Words with Images</h2> */}
+          <h2 className="text-sm text-center text-slate-400 mb-4">This is a spaced repetition flashcard app for learning Georgian. Progress is saved in your browser - you don&apos;t need an account and you can close the app anytime and pick up right where you left off.</h2>
           
           {chunkCount > 0 ? (
             <div className="grid grid-cols-2 gap-3">
