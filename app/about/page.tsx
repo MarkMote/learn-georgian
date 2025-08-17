@@ -77,6 +77,9 @@ export default function AboutPage() {
             <div className="space-y-4">
               In case its of interest, here are some design decisions that went into this app:
               <p>
+                • Based on spaced repetition. It is an incredibly effective way to get familiar with the basics of a language, and is also really easy to do. 
+              </p>
+              <p>
                 • Words are <strong>not</strong> broken up by category. Learning similar meaning words at around the same time makes it easier to  mix them up.
               </p>
               <p>
@@ -84,6 +87,15 @@ export default function AboutPage() {
               </p>
               <p>
                 • Transliteration is not used. Getting familiar with the alphabet is more work up front, but pays off in the long run.
+              </p>
+              <p>
+                • Audio is not used... yet. There isn&apos;t any good text-to-speech API for Georgian yet, but I will likely add audio once ElevenLabs releases their next API.
+              </p>
+              <p>
+                • Mobile optimized. The app is designed to be used on a phone. 
+              </p>
+              <p>
+                • No authentication. Progress is saved locally in your browser. 
               </p>
             </div>
           </section>
