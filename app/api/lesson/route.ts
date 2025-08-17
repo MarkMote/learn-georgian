@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
           - Feel free to make examples build off of one another (recycle new vocab).
         If you are explaining a phrase, list the translation of each word in the phrase 
           Exception: single pronoun (of form მე მან ის ჩვენ თქვენ ისინი მას მათ) + a verb does not need to be broken down.
-        Next a short examle of when someone might use the word, adding quotations around the georgian word being used.
+        Next a short examle of when someone might use the word, adding quotations around the georgian word being used. Also include the english translation.
         Then provide a short list of synoynms and related words, and their meanings.
         Then provide a short list of antonyms and related words, and their meanings.
         In the final section, write any other short notes that could be useful for the learner, for example *optional* sections include:
