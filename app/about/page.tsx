@@ -54,7 +54,7 @@ export default function AboutPage() {
               </p>
               
               <p>
-                Words are organized into <strong>chunks of 100</strong> based on their order in the curriculum. 
+                Words are organized into <strong>chunks of 100</strong> based roughly on how likely you are to need them. 
                 Each chunk focuses on a specific set of vocabulary, allowing you to progress systematically 
                 through the Georgian language.
               </p>
@@ -68,6 +68,22 @@ export default function AboutPage() {
               <p>
                 You just need to learn the alphabet. Georgian is a highly phonemic writing system, 
                 which means the words sound the way they are written. 
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4 text-slate-200">Design Decisions</h2>
+            <div className="space-y-4">
+              In case its of interest, here are some design decisions that went into this app:
+              <p>
+                • Words are <strong>not</strong> broken up by category. Learning similar meaning words at around the same time makes it easier to  mix them up.
+              </p>
+              <p>
+                • English translations are <strong>not</strong> shown by default. You can tap the image to see them. It is more natural to recall words without the help of translations.
+              </p>
+              <p>
+                • Transliteration is not used. Getting familiar with the alphabet is more work up front, but pays off in the long run.
               </p>
             </div>
           </section>
@@ -181,14 +197,17 @@ export default function AboutPage() {
           </section>
 
           {/* Credits */}
-          {/* <section>
+          <section>
             <h2 className="text-2xl font-bold mb-4 text-slate-200">Contribute or Report Issues</h2>
             <div className="space-y-4">
               <p>
-                This app was created by <a href="https://markmote.com" target="_blank" rel="noopener noreferrer">Mark</a>. It is a work in progress and a bit of an experiment as I teach myself the language.
+                The app is a work in progress and a bit of an experiment as I teach myself the language. 
+                If you want the code, to collaborate, or to give feeback on a translation, you can contact me on one of the links at <a href="https://markmote.com" className="underline text-blue-300" target="_blank" rel="noopener noreferrer">markmote.com</a>. 
+                {/* Everything is AI generated, so if you want to make this app for another language, contact me an I can  */}
+                {/* I will add audio one eleven labs releases the next version or their api, which supports Georgian. */}
               </p>
-            </div> */}
-          {/* </section> */}
+            </div>
+          </section>
 
           {/* Footer */}
           <section className="pt-8 border-t border-gray-700">
