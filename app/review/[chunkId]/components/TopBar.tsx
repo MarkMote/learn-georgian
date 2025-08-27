@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { KnownWordState } from '../types';
+import { KnownWordState, ReviewMode } from '../types';
 
 interface TopBarProps {
   onGetLesson: () => void;
@@ -17,6 +17,9 @@ interface TopBarProps {
   cognitiveLoad: number;
   knownWords: KnownWordState[];
   onShowProgress: () => void;
+  reviewMode: ReviewMode;
+  onModeChange: (mode: ReviewMode) => void;
+  hasExampleWords: boolean;
 }
 
 export default function TopBar({
@@ -31,9 +34,23 @@ export default function TopBar({
   cognitiveLoad,
   knownWords,
   onShowProgress,
+  reviewMode,
+  onModeChange,
+  hasExampleWords,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
   const router = useRouter();
+  
+  const getModeLabel = (mode: ReviewMode) => {
+    switch (mode) {
+      case 'normal': return 'Normal';
+      case 'reverse': return 'Reverse';
+      case 'examples': return 'Examples';
+      case 'examples-reverse': return 'Examples Rev';
+      default: return 'Normal';
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -111,6 +128,65 @@ export default function TopBar({
                        'OFF'}
                     </span>
                   </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setIsModeSelectorOpen(!isModeSelectorOpen);
+                    }}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Review Mode</span>
+                    <span className="ml-2 px-2 py-0.5 rounded text-xs bg-blue-600">
+                      {getModeLabel(reviewMode)}
+                    </span>
+                  </button>
+                  {isModeSelectorOpen && (
+                    <div className="bg-gray-900 mx-2 my-2 rounded-lg p-3">
+                      <div className="grid grid-cols-1 gap-2">
+                        {[
+                          { value: 'normal' as ReviewMode, label: 'Normal', description: 'English → Georgian' },
+                          { value: 'reverse' as ReviewMode, label: 'Reverse', description: 'Georgian → English' },
+                          { value: 'examples' as ReviewMode, label: 'Examples', description: 'Practice with examples', disabled: !hasExampleWords },
+                          { value: 'examples-reverse' as ReviewMode, label: 'Examples Reverse', description: 'Georgian examples → English', disabled: !hasExampleWords },
+                        ].map((mode) => (
+                          <button
+                            key={mode.value}
+                            onClick={() => {
+                              if (!mode.disabled) {
+                                onModeChange(mode.value);
+                                setIsModeSelectorOpen(false);
+                                setIsMenuOpen(false);
+                              }
+                            }}
+                            disabled={mode.disabled}
+                            className={`
+                              relative p-2 rounded-md border transition-all duration-200 text-left h-14 flex flex-col justify-center
+                              ${reviewMode === mode.value 
+                                ? 'bg-blue-600/20 border-blue-500/50 text-white' 
+                                : mode.disabled
+                                  ? 'bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed'
+                                  : 'bg-gray-800 border-gray-600 text-gray-200 hover:bg-gray-700 hover:border-gray-500'
+                              }
+                            `}
+                          >
+                            <div className="text-xs font-medium">{mode.label}</div>
+                            <div className="text-xs opacity-75">{mode.description}</div>
+                            {mode.disabled && (
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-xs bg-gray-900 px-2 py-1 rounded">
+                                  No examples
+                                </span>
+                              </div>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="mt-2 text-xs text-gray-400 text-center">
+                        Press M to cycle modes
+                      </div>
+                    </div>
+                  )}
                 </li>
                 <li>
                   <button

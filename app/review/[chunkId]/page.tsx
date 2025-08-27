@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import BottomBar from '../../components/BottomBar';
 import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
@@ -9,7 +9,7 @@ import LessonModal from './components/LessonModal';
 import ProgressModal from './components/ProgressModal';
 import { useReviewState } from './hooks/useReviewState';
 import { useLessonModal } from './hooks/useLessonModal';
-import { WordData } from './types';
+import { WordData, ReviewMode } from './types';
 import { 
   parseCSV, 
   getWordsForChunk, 
@@ -21,10 +21,15 @@ import {
 
 export default function ReviewPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const chunkId = params.chunkId as string;
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [chunkWords, setChunkWords] = useState<WordData[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
+  
+  // Get review mode from URL params
+  const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
 
   const {
     knownWords,
@@ -47,7 +52,7 @@ export default function ReviewPage() {
     setCurrentIndex,
     handleScore,
     clearProgress,
-  } = useReviewState(chunkId, chunkWords);
+  } = useReviewState(chunkId, chunkWords, reviewMode);
 
   const {
     isModalOpen,
@@ -95,6 +100,10 @@ export default function ReviewPage() {
           break;
         case "q":
           if (isFlipped) handleScore("fail");
+          break;
+        case "m":
+          e.preventDefault();
+          handleCycleMode();
           break;
       }
     }
@@ -158,6 +167,27 @@ export default function ReviewPage() {
       return "off";
     });
   };
+  
+  const handleModeChange = (newMode: ReviewMode) => {
+    // Update URL with new mode
+    const url = new URL(window.location.href);
+    url.searchParams.set('mode', newMode);
+    router.push(url.pathname + url.search);
+  };
+  
+  const handleCycleMode = () => {
+    const modes: ReviewMode[] = ['normal', 'reverse'];
+    const hasExamples = chunkWords.some(w => w.ExampleEnglish1 && w.ExampleGeorgian1);
+    if (hasExamples) {
+      modes.push('examples', 'examples-reverse');
+    }
+    
+    const currentModeIndex = modes.indexOf(reviewMode);
+    const nextMode = modes[(currentModeIndex + 1) % modes.length];
+    handleModeChange(nextMode);
+  };
+  
+  const hasExampleWords = chunkWords.some(w => w.ExampleEnglish1 && w.ExampleGeorgian1);
 
   const handleRevealExamples = (wordKey: string) => {
     setRevealedExamples(prev => new Set([...prev, wordKey]));
@@ -232,6 +262,9 @@ export default function ReviewPage() {
         cognitiveLoad={cognitiveLoad}
         knownWords={knownWords}
         onShowProgress={() => setIsProgressModalOpen(true)}
+        reviewMode={reviewMode}
+        onModeChange={handleModeChange}
+        hasExampleWords={hasExampleWords}
       />
 
       <div className="flex items-center justify-center px-4 h-[calc(100vh-140px)]">
@@ -244,6 +277,7 @@ export default function ReviewPage() {
           revealedExamples={revealedExamples}
           verbHint={verbHint}
           verbTenseLabel={verbTenseLabel}
+          reviewMode={reviewMode}
           onImageClick={handleImageClick}
           onRevealExamples={handleRevealExamples}
         />

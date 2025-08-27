@@ -1,3 +1,5 @@
+export type ReviewMode = "normal" | "reverse" | "examples" | "examples-reverse";
+
 export type WordData = {
   word_key: string;
   key: string;
@@ -19,6 +21,7 @@ export interface KnownWordState {
   interval: number;
   repetitions: number;
   easeFactor: number;
+  exampleIndex?: number; // For tracking which example is being shown
 }
 
 export type DifficultyRating = "easy" | "good" | "hard" | "fail";

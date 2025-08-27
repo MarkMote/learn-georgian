@@ -1,18 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { WordData, KnownWordState, DifficultyRating } from "../types";
+import { WordData, KnownWordState, DifficultyRating, ReviewMode } from "../types";
 import { 
   difficultyToScore, 
   getUniqueWordKeys, 
   calculateCardPriority 
 } from "../utils/dataProcessing";
 
-function getLocalStorageKey(chunkId: string): string {
-  return `reviewState_${chunkId}`;
+function getLocalStorageKey(chunkId: string, mode: ReviewMode = "normal"): string {
+  return `reviewState_${chunkId}_${mode}`;
 }
 
-export function useReviewState(chunkId: string, chunkWords: WordData[]) {
+export function useReviewState(chunkId: string, chunkWords: WordData[], reviewMode: ReviewMode = "normal") {
   const [knownWords, setKnownWords] = useState<KnownWordState[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
@@ -104,11 +104,25 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
 
     let loadedState = false;
     try {
-      const stored = localStorage.getItem(getLocalStorageKey(chunkId));
+      // Try to load mode-specific state first
+      let stored = localStorage.getItem(getLocalStorageKey(chunkId, reviewMode));
+      
+      // Migration: If no mode-specific state exists but old state does, migrate it
+      if (!stored && reviewMode === "normal") {
+        const oldKey = `reviewState_${chunkId}`;
+        const oldStored = localStorage.getItem(oldKey);
+        if (oldStored) {
+          console.log("Migrating old state to mode-specific state");
+          localStorage.setItem(getLocalStorageKey(chunkId, "normal"), oldStored);
+          localStorage.removeItem(oldKey);
+          stored = oldStored;
+        }
+      }
+      
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.knownWords && Array.isArray(parsed.knownWords) && parsed.knownWords.length > 0) {
-          console.log("Loading state from localStorage. Word count:", parsed.knownWords.length);
+          console.log(`Loading state for mode '${reviewMode}'. Word count:`, parsed.knownWords.length);
           const cleanedWords = cleanUpKnownWords(parsed.knownWords);
           console.log("After cleanup. Word count:", cleanedWords.length);
           setKnownWords(cleanedWords);
@@ -118,19 +132,19 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
           loadedState = true;
         } else {
           console.log("localStorage found but invalid content. Clearing.");
-          localStorage.removeItem(getLocalStorageKey(chunkId));
+          localStorage.removeItem(getLocalStorageKey(chunkId, reviewMode));
         }
       }
     } catch (err) {
       console.error("Error loading local storage:", err);
-      localStorage.removeItem(getLocalStorageKey(chunkId));
+      localStorage.removeItem(getLocalStorageKey(chunkId, reviewMode));
     }
 
     if (!loadedState && knownWords.length === 0) {
-      console.log("No valid saved state found. Introducing first word.");
+      console.log(`No valid saved state found for mode '${reviewMode}'. Introducing first word.`);
       introduceNextKnownWord();
     }
-  }, [chunkWords, chunkId]);
+  }, [chunkWords, chunkId, reviewMode]);
 
   useEffect(() => {
     if (knownWords.length > 0 || currentIndex !== 0 || skipVerbs || isLeftHanded) {
@@ -139,25 +153,38 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
         currentIndex,
         skipVerbs,
         isLeftHanded,
+        reviewMode,
       };
-      localStorage.setItem(getLocalStorageKey(chunkId), JSON.stringify(toSave));
+      localStorage.setItem(getLocalStorageKey(chunkId, reviewMode), JSON.stringify(toSave));
     }
-  }, [knownWords, currentIndex, skipVerbs, isLeftHanded, chunkId]);
+  }, [knownWords, currentIndex, skipVerbs, isLeftHanded, chunkId, reviewMode]);
 
   const introduceNextKnownWord = () => {
     if (chunkWords.length === 0) return;
 
     const knownKeys = new Set(knownWords.map((k) => k.data.key));
-    const candidates = chunkWords.filter((w) => !knownKeys.has(w.key));
+    
+    // Filter candidates based on mode
+    let candidates = chunkWords.filter((w) => !knownKeys.has(w.key));
+    
+    if (reviewMode === "examples" || reviewMode === "examples-reverse") {
+      // Only include words that have examples
+      candidates = candidates.filter(w => w.ExampleEnglish1 && w.ExampleGeorgian1);
+      if (candidates.length === 0) {
+        console.log("No more words with examples to introduce");
+        return;
+      }
+    }
+    
     if (candidates.length === 0) return;
 
-    const uniqueWordKeys = getUniqueWordKeys(chunkWords);
+    const uniqueWordKeys = getUniqueWordKeys(candidates);
     const knownWordKeys = new Set(knownWords.map(k => k.data.word_key));
     
     const nextWordKey = uniqueWordKeys.find(wordKey => !knownWordKeys.has(wordKey));
     if (!nextWordKey) return;
 
-    const wordsToIntroduce = chunkWords.filter(w => w.word_key === nextWordKey);
+    const wordsToIntroduce = candidates.filter(w => w.word_key === nextWordKey);
 
     const newEntries: KnownWordState[] = wordsToIntroduce.map((w) => ({
       data: w,
@@ -166,6 +193,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
       interval: 1,
       repetitions: 0,
       easeFactor: 2.5,
+      exampleIndex: 0,
     }));
 
     setKnownWords((prev) => [...prev, ...newEntries]);
@@ -322,7 +350,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
 
 
   const clearProgress = () => {
-    localStorage.removeItem(getLocalStorageKey(chunkId));
+    localStorage.removeItem(getLocalStorageKey(chunkId, reviewMode));
     setKnownWords([]);
     setCurrentIndex(0);
     setIsFlipped(false);
@@ -350,6 +378,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[]) {
     showImageHint,
     showExamples,
     cognitiveLoad,
+    reviewMode,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
