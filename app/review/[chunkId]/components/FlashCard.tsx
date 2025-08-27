@@ -127,19 +127,21 @@ export default function FlashCard({
       {!isFlipped ? (
         // Front of card
         reviewMode === 'normal' ? (
-          // Normal mode front (keep existing behavior)
+          // Normal mode front - only show verb hint, not the English word
           <div className="mb-4 min-h-[40px]">
-            <p className={`tracking-wider transition-colors duration-200 ${
-              (() => {
-                const length = frontContent.length;
-                if (length <= 12) return "text-3xl";
-                if (length <= 18) return "text-2xl";
-                if (length <= 24) return "text-xl";
-                return "text-lg";
-              })()
-            }`}>
-              {frontContent}
-            </p>
+            {verbHint && (
+              <p className={`tracking-wider transition-colors duration-200 ${
+                (() => {
+                  const length = verbHint.length;
+                  if (length <= 12) return "text-3xl";
+                  if (length <= 18) return "text-2xl";
+                  if (length <= 24) return "text-xl";
+                  return "text-lg";
+                })()
+              }`}>
+                {verbHint}
+              </p>
+            )}
           </div>
         ) : (
           // Other modes front: centered content
