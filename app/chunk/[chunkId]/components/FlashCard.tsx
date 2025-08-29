@@ -33,6 +33,13 @@ export default function FlashCard({
     setJustCopied(true);
     setTimeout(() => setJustCopied(false), 400);
   };
+
+  const formatDialog = (text: string): string => {
+    return text
+      .replace(/\? -/g, '?\n-')
+      .replace(/! -/g, '!\n-')
+      .replace(/\. -/g, '.\n-');
+  };
   
   const isReverse = reviewMode === 'reverse';
   const isExampleMode = reviewMode === 'examples';
@@ -56,7 +63,7 @@ export default function FlashCard({
       {!isFlipped ? (
         // Front of card - centered
         <div className="flex items-center justify-center py-8">
-          <p className={`tracking-wider transition-colors duration-200 ${
+          <p className={`tracking-wider transition-colors duration-200 whitespace-pre-line ${
             (() => {
               const length = frontContent.length;
               if (length <= 20) return "text-3xl";
@@ -65,7 +72,7 @@ export default function FlashCard({
               return "text-lg";
             })()
           }`}>
-            {frontContent}
+            {formatDialog(frontContent)}
           </p>
         </div>
       ) : (
@@ -75,7 +82,7 @@ export default function FlashCard({
           <div className="flex items-center justify-center">
             {reviewMode === 'normal' ? (
               <div className="space-y-3 text-center">
-                <p className={`tracking-wider transition-colors duration-200 ${
+                <p className={`tracking-wider transition-colors duration-200 whitespace-pre-line ${
                   (() => {
                     const length = chunk.chunk_ka.length;
                     if (length <= 20) return "text-2xl";
@@ -88,15 +95,15 @@ export default function FlashCard({
                 style={{ cursor: 'pointer' }}
                 title="Click to copy Georgian text"
                 >
-                  {chunk.chunk_ka}
+                  {formatDialog(chunk.chunk_ka)}
                 </p>
-                <p className="text-lg text-gray-300">
-                  {chunk.chunk_en}
+                <p className="text-lg text-gray-300 whitespace-pre-line">
+                  {formatDialog(chunk.chunk_en)}
                 </p>
               </div>
             ) : isReverse ? (
               <div className="space-y-3 text-center">
-                <p className={`tracking-wider transition-colors duration-200 ${
+                <p className={`tracking-wider transition-colors duration-200 whitespace-pre-line ${
                   (() => {
                     const length = chunk.chunk_en.length;
                     if (length <= 20) return "text-2xl";
@@ -105,39 +112,39 @@ export default function FlashCard({
                     return "text-base";
                   })()
                 }`}>
-                  {chunk.chunk_en}
+                  {formatDialog(chunk.chunk_en)}
                 </p>
-                <p className={`text-lg text-gray-300 ${justCopied ? 'text-green-400' : ''}`}
+                <p className={`text-lg text-gray-300 whitespace-pre-line ${justCopied ? 'text-green-400' : ''}`}
                 onClick={handleCopyGeorgian}
                 style={{ cursor: 'pointer' }}
                 title="Click to copy Georgian text"
                 >
-                  {chunk.chunk_ka}
+                  {formatDialog(chunk.chunk_ka)}
                 </p>
               </div>
             ) : isExampleMode ? (
               <div className="flex flex-col items-center justify-center text-center space-y-3">
                 {chunk.example_ka && (
-                  <p className="text-xl tracking-wide text-gray-200">
-                    {chunk.example_ka}
+                  <p className="text-xl tracking-wide text-gray-200 whitespace-pre-line">
+                    {formatDialog(chunk.example_ka)}
                   </p>
                 )}
                 {chunk.example_en && (
-                  <p className="text-lg tracking-wide text-gray-400">
-                    {chunk.example_en}
+                  <p className="text-lg tracking-wide text-gray-400 whitespace-pre-line">
+                    {formatDialog(chunk.example_en)}
                   </p>
                 )}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center text-center space-y-3">
                 {chunk.example_en && (
-                  <p className="text-xl tracking-wide text-gray-200">
-                    {chunk.example_en}
+                  <p className="text-xl tracking-wide text-gray-200 whitespace-pre-line">
+                    {formatDialog(chunk.example_en)}
                   </p>
                 )}
                 {chunk.example_ka && (
-                  <p className="text-lg tracking-wide text-gray-400">
-                    {chunk.example_ka}
+                  <p className="text-lg tracking-wide text-gray-400 whitespace-pre-line">
+                    {formatDialog(chunk.example_ka)}
                   </p>
                 )}
               </div>
@@ -172,13 +179,13 @@ export default function FlashCard({
               {(showExamples === "on" || revealedExamples.has(chunk.chunk_key)) ? (
                 <div className="text-center space-y-1">
                   {chunk.example_ka && (
-                    <div className="text-base text-gray-300">
-                      {chunk.example_ka}
+                    <div className="text-base text-gray-300 whitespace-pre-line">
+                      {formatDialog(chunk.example_ka)}
                     </div>
                   )}
                   {chunk.example_en && (
-                    <div className="text-sm text-gray-400">
-                      {chunk.example_en}
+                    <div className="text-sm text-gray-400 whitespace-pre-line">
+                      {formatDialog(chunk.example_en)}
                     </div>
                   )}
                 </div>
