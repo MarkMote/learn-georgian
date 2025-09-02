@@ -164,6 +164,8 @@ export default function ReviewPage() {
     setShowExamples(prev => {
       if (prev === "off") return "on";
       if (prev === "on") return "tap";
+      if (prev === "tap") return "tap-en";
+      if (prev === "tap-en") return "tap-ka";
       return "off";
     });
   };

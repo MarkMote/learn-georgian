@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { WordData, KnownWordState, DifficultyRating, ReviewMode } from "../types";
+import { WordData, KnownWordState, DifficultyRating, ReviewMode, ExampleMode } from "../types";
 import { 
   difficultyToScore, 
   getUniqueWordKeys, 
@@ -21,7 +21,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[], reviewMo
   const [skipVerbs, setSkipVerbs] = useState<boolean>(false);
   const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
   const [showImageHint, setShowImageHint] = useState<boolean>(true);
-  const [showExamples, setShowExamples] = useState<"off" | "on" | "tap">("tap");
+  const [showExamples, setShowExamples] = useState<ExampleMode>("tap-ka");
   const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
   const [cognitiveLoad, setCognitiveLoad] = useState<number>(0);
 

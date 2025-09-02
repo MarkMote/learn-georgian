@@ -1,5 +1,7 @@
 export type ReviewMode = "normal" | "reverse" | "examples" | "examples-reverse";
 
+export type ExampleMode = "off" | "on" | "tap" | "tap-en" | "tap-ka";
+
 export type WordData = {
   word_key: string;
   key: string;

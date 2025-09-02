@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { KnownWordState, ReviewMode } from '../types';
+import { KnownWordState, ReviewMode, ExampleMode } from '../types';
 
 interface TopBarProps {
   onGetLesson: () => void;
   onClearProgress: () => void;
   skipVerbs: boolean;
   onToggleSkipVerbs: () => void;
-  showExamples: "off" | "on" | "tap";
+  showExamples: ExampleMode;
   onToggleExamples: () => void;
   wordProgress: { unlocked: number; total: number };
   percentageScore: number;
@@ -121,10 +121,14 @@ export default function TopBar({
                     <span className={`ml-2 px-2 py-0.5 rounded text-xs ${
                       showExamples === 'on' ? 'bg-green-600' : 
                       showExamples === 'tap' ? 'bg-yellow-600' : 
+                      showExamples === 'tap-en' ? 'bg-blue-600' :
+                      showExamples === 'tap-ka' ? 'bg-purple-600' :
                       'bg-gray-600'
                     }`}>
                       {showExamples === 'on' ? 'ON' : 
-                       showExamples === 'tap' ? 'TAP' : 
+                       showExamples === 'tap' ? 'TAP' :
+                       showExamples === 'tap-en' ? 'TAP-EN' :
+                       showExamples === 'tap-ka' ? 'TAP-KA' :
                        'OFF'}
                     </span>
                   </button>

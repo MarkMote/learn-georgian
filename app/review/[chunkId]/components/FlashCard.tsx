@@ -2,14 +2,14 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { WordData, ReviewMode } from "../types";
+import { WordData, ReviewMode, ExampleMode } from "../types";
 
 interface FlashCardProps {
   word: WordData;
   isFlipped: boolean;
   showEnglish: boolean;
   showImageHint: boolean;
-  showExamples: "off" | "on" | "tap";
+  showExamples: ExampleMode;
   revealedExamples: Set<string>;
   verbHint: string | null;
   verbTenseLabel: string | null;
@@ -261,12 +261,18 @@ export default function FlashCard({
               )}
             </>
           ) : (
-            showExamples === "tap" && (
+            (showExamples === "tap" || showExamples === "tap-en" || showExamples === "tap-ka") && (
               <button
                 onClick={() => onRevealExamples(word.key)}
                 className="px-4 py-0 min-w-[95%] h-[52px] rounded text-sm text-gray-300 bg-white/10 backdrop-blur-sm transition-colors rounded-lg"
               >
+                {showExamples === "tap" ? (
                   <p className="text-base text-gray-500 font-mono font-light">example</p>
+                ) : showExamples === "tap-en" ? (
+                  <p className="text-base text-gray-300 font-normal">{word.ExampleEnglish1}</p>
+                ) : (
+                  <p className="text-base text-gray-300 font-normal">{word.ExampleGeorgian1}</p>
+                )}
               </button>
             )
           )}
