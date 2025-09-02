@@ -109,7 +109,7 @@ export default function FlashCard({
         <div className="flex items-center justify-center" style={{ minHeight: isFlipped ? '100px' : '280px' }} />
       )}
 
-      {showImageHint && ((showImageOnFront && !isFlipped) || (isReverse && isFlipped)) && (
+      {showImageHint && (showImageOnFront || (isReverse && isFlipped)) && (
         <div className="mb-2">
           <p className="text-sm text-gray-300">
             <span className="animate-pulse">👆</span> Tap/click image to see English word
@@ -117,7 +117,7 @@ export default function FlashCard({
         </div>
       )}
 
-      {showEnglish && ((showImageOnFront && !isFlipped) || (isReverse && isFlipped)) && (
+      {showEnglish && (showImageOnFront || (isReverse && isFlipped)) && (
         <p className="text-base font-semibold mb-3">
           {word.EnglishWord}
         </p>
