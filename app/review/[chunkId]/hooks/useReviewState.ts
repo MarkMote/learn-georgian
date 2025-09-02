@@ -293,6 +293,7 @@ export function useReviewState(chunkId: string, chunkWords: WordData[], reviewMo
       setCurrentIndex(bestIdx);
       setIsFlipped(false);
       setShowEnglish(false);
+      setRevealedExamples(new Set());
       
       return updatedLastSeen;
     });
