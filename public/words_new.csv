@@ -4,99 +4,6 @@ do,do_p2s_pres,do,You do,verb-p2s,აკეთებ,present,2,verbs,You do the 
 do,do_p3s_pres,do,He/She does,verb-p3s,აკეთებს,present,2,verbs,He does sports on weekends,ის შაბათ-კვირას აკეთებს სპორტს
 do,do_p1p_pres,do,We do,verb-p1p,ვაკეთებთ,present,2,verbs,We do coffee together in the morning,ჩვენ დილით ერთად ვაკეთებთ ყავას
 do,do_p3p_pres,do,They do,verb-p3p,აკეთებენ,present,2,verbs,They do important jobs at the office,ისინი ოფისში მნიშვნელოვან საქმეებს აკეთებენ
-do,do_p1s_past,do,I did,verb-p1s,გავაკეთე,past,2,verbs,I did all the shopping yesterday,მე გუშინ ყველა საყიდლები გავაკეთე
-do,do_p2s_past,do,You did,verb-p2s,გააკეთე,past,2,verbs,You did the cooking for the whole family,შენ მთელი ოჯახისათვის გააკეთე საჭმელი
-do,do_p3s_past,do,He/She did,verb-p3s,გააკეთა,past,2,verbs,She did the cleaning very carefully,მან ძალიან ყურადღებით გააკეთა დასუფთავება
-do,do_p1p_past,do,We did,verb-p1p,გავაკეთეთ,past,2,verbs,We did our homework on time,ჩვენ დროზე გავაკეთეთ დავალება
-do,do_p3p_past,do,They did,verb-p3p,გააკეთეს,past,2,verbs,They did hard work in the garden,მათ ბაღში მძიმე საქმე გააკეთეს
-do,do_p1s_fut,do,I will do,verb-p1s,გავაკეთებ,future,2,verbs,I will do the laundry tomorrow,მე ხვალ გავაკეთებ სარეცხს
-do,do_p2s_fut,do,You will do,verb-p2s,გააკეთებ,future,2,verbs,You will do the project next week,შენ მომავალ კვირას გააკეთებ პროექტს
-do,do_p3s_fut,do,He/She will do,verb-p3s,გააკეთებს,future,2,verbs,He will do the repair of the car,ის მანქანის შეკეთებას გააკეთებს
-do,do_p1p_fut,do,We will do,verb-p1p,გავაკეთებთ,future,2,verbs,We will do a big party for friends,ჩვენ მეგობრებისთვის დიდ წვეულებას გავაკეთებთ
-do,do_p3p_fut,do,They will do,verb-p3p,გააკეთებენ,future,2,verbs,They will do the job together,ისინი ერთად გააკეთებენ საქმეს
-go,go_p1s_past,go,I went,verb-p1s,წავედი,past,2,verbs,I went to school in the morning,მე დილით სკოლაში წავედი
-go,go_p2s_past,go,You went,verb-p2s,წახვედი,past,2,verbs,You went to church on Sunday,შენ კვირას ეკლესიაში წახვედი
-go,go_p3s_past,go,He/She went,verb-p3s,წავიდა,past,2,verbs,He went to the market to buy fruit,ის წავიდა ბაზარში ხილის საყიდლად
-go,go_p1p_past,go,We went,verb-p1p,წავედით,past,2,verbs,We went to the park after lunch,ჩვენ სადილის შემდეგ პარკში წავედით
-go,go_p3p_past,go,They went,verb-p3p,წავიდნენ,past,2,verbs,They went home very late,ისინი ძალიან გვიან წავიდნენ სახლში
-go,go_p1s_fut,go,I will go,verb-p1s,წავალ,future,2,verbs,I will go to the shop tomorrow,მე ხვალ მაღაზიაში წავალ
-go,go_p2s_fut,go,You will go,verb-p2s,წახვალ,future,2,verbs,You will go to the beach in summer,შენ ზაფხულში ზღვაზე წახვალ
-go,go_p3s_fut,go,He/She will go,verb-p3s,წავა,future,2,verbs,She will go to the café with friends,ის მეგობრებთან ერთად წავა კაფეში
-go,go_p1p_fut,go,We will go,verb-p1p,წავალთ,future,2,verbs,We will go to the cinema tonight,ჩვენ დღეს საღამოს კინოში წავალთ
-go,go_p3p_fut,go,They will go,verb-p3p,წავლენ,future,2,verbs,They will go to the mountains soon,ისინი მალე მთებში წავლენ
-come,come_p1s_past,come,I came,verb-p1s,მოვედი,past,2,verbs,I came home very tired,მე სახლში ძალიან დაღლილი მოვედი
-come,come_p2s_past,come,You came,verb-p2s,მოხვედი,past,2,verbs,You came to the station on time,შენ სადგურში დროზე მოხვედი
-come,come_p3s_past,come,He/She came,verb-p3s,მოვიდა,past,2,verbs,He came to class early,ის ადრე მოვიდა კლასში
-come,come_p1p_past,come,We came,verb-p1p,მოვედით,past,2,verbs,We came to the party together,ჩვენ ერთად მოვედით წვეულებაზე
-come,come_p3p_past,come,They came,verb-p3p,მოვიდნენ,past,2,verbs,They came home very late,ისინი ძალიან გვიან მოვიდნენ სახლში
-come,come_p1s_fut,come,I will come,verb-p1s,მოვალ,future,2,verbs,I will come tomorrow in the morning,მე ხვალ დილით მოვალ
-come,come_p2s_fut,come,You will come,verb-p2s,მოხვალ,future,2,verbs,You will come to the café later,შენ მერე მოხვალ კაფეში
-come,come_p3s_fut,come,He/She will come,verb-p3s,მოვა,future,2,verbs,He will come to the meeting soon,ის მალე მოვა შეხვედრაზე
-come,come_p1p_fut,come,We will come,verb-p1p,მოვალთ,future,2,verbs,We will come to church together,ჩვენ ერთად მოვალთ ეკლესიაში
-come,come_p3p_fut,come,They will come,verb-p3p,მოვლენ,future,2,verbs,They will come soon in the evening,ისინი საღამოს მალე მოვლენ
-have_inanimate,have_inanimate_p1s_past,have_inanimate,I had,verb-p1s,მე მქონდა,past,2,verbs,I had a new car last year,მე შარშან ახალი მანქანა მქონდა
-have_inanimate,have_inanimate_p2s_past,have_inanimate,You had,verb-p2s,შენ გქონდა,past,2,verbs,You had a big bag with you,შენ დიდი ჩანთა გქონდა
-have_inanimate,have_inanimate_p3s_past,have_inanimate,He/She had,verb-p3s,მას ჰქონდა,past,2,verbs,She had a very interesting book,მას ძალიან საინტერესო წიგნი ჰქონდა
-have_inanimate,have_inanimate_p1p_past,have_inanimate,We had,verb-p1p,ჩვენ გვქონდა,past,2,verbs,We had a clear plan for the trip,ჩვენ მოგზაურობისთვის მკაფიო გეგმა გვქონდა
-have_inanimate,have_inanimate_p2p_past,have_inanimate,You (pl) had,verb-p2p,თქვენ გქონდათ,past,2,verbs,You had tickets for the concert,თქვენ კონცერტის ბილეთები გქონდათ
-have_inanimate,have_inanimate_p3p_past,have_inanimate,They had,verb-p3p,მათ ჰქონდათ,past,2,verbs,They had two big houses in the city,მათ ქალაქში ორი დიდი სახლი ჰქონდათ
-have_inanimate,have_inanimate_p1s_fut,have_inanimate,I will have,verb-p1s,მე მექნება,future,2,verbs,I will have time to help you tomorrow,მე ხვალ გიშველო დრო მექნება
-have_inanimate,have_inanimate_p2s_fut,have_inanimate,You will have,verb-p2s,შენ გექნება,future,2,verbs,You will have enough money soon,შენ მალე საკმარისი ფული გექნება
-have_inanimate,have_inanimate_p3s_fut,have_inanimate,He/She will have,verb-p3s,მას ექნება,future,2,verbs,He will have a private room,მას პირადი ოთახი ექნება
-have_inanimate,have_inanimate_p1p_fut,have_inanimate,We will have,verb-p1p,ჩვენ გვექნება,future,2,verbs,We will have delicious food at the party,ჩვენ წვეულებაზე გემრიელი საჭმელი გვექნება
-have_inanimate,have_inanimate_p2p_fut,have_inanimate,You (pl) will have,verb-p2p,თქვენ გექნებათ,future,2,verbs,You will have drinks at the table,თქვენ მაგიდაზე სასმელები გექნებათ
-have_inanimate,have_inanimate_p3p_fut,have_inanimate,They will have,verb-p3p,მათ ექნებათ,future,2,verbs,They will have new houses next year,მათ მომავალ წელს ახალი სახლები ექნებათ
-have_animate,have_animate_p1s_past,have_animate,I had,verb-p1s,მე მყავდა,past,2,verbs,I had a dog when I was a child,მე ბავშვობაში ძაღლი მყავდა
-have_animate,have_animate_p2s_past,have_animate,You had,verb-p2s,შენ გყავდა,past,2,verbs,You had a black cat at home,შენ სახლში შავი კატა გყავდა
-have_animate,have_animate_p3s_past,have_animate,He/She had,verb-p3s,მას ჰყავდა,past,2,verbs,He had a very close friend,მას ძალიან ახლო მეგობარი ჰყავდა
-have_animate,have_animate_p1p_past,have_animate,We had,verb-p1p,ჩვენ გვყავდა,past,2,verbs,We had good teachers at school,ჩვენ სკოლაში კარგი მასწავლებლები გვყავდა
-have_animate,have_animate_p2p_past,have_animate,You (pl) had,verb-p2p,თქვენ გყავდათ,past,2,verbs,You had many guests at the party,თქვენ წვეულებაზე ბევრი სტუმარი გყავდათ
-have_animate,have_animate_p3p_past,have_animate,They had,verb-p3p,მათ ჰყავდათ,past,2,verbs,They had three children,მათ სამი ბავშვი ჰყავდათ
-have_animate,have_animate_p1s_fut,have_animate,I will have,verb-p1s,მე მეყოლება,future,2,verbs,I will have a son in the future,მე მომავალში შვილი მეყოლება
-have_animate,have_animate_p2s_fut,have_animate,You will have,verb-p2s,შენ გეყოლება,future,2,verbs,You will have many friends soon,შენ მალე ბევრი მეგობარი გეყოლება
-have_animate,have_animate_p3s_fut,have_animate,He/She will have,verb-p3s,მას ეყოლება,future,2,verbs,She will have a baby next year,მას მომავალ წელს ბავშვი ეყოლება
-have_animate,have_animate_p1p_fut,have_animate,We will have,verb-p1p,ჩვენ გვეყოლება,future,2,verbs,We will have important guests tomorrow,ჩვენ ხვალ მნიშვნელოვანი სტუმრები გვეყოლება
-have_animate,have_animate_p2p_fut,have_animate,You (pl) will have,verb-p2p,თქვენ გეყოლებათ,future,2,verbs,You will have new workers soon,თქვენ მალე ახალი მუშები გეყოლებათ
-have_animate,have_animate_p3p_fut,have_animate,They will have,verb-p3p,მათ ეყოლებათ,future,2,verbs,They will have many friends in the city,მათ ქალაქში ბევრი მეგობარი ეყოლებათ
-take,take_p1s_pres,take,I take,verb-p1s,ვიღებ,present,2,verbs,I take a cup of coffee every morning,მე ყოველ დილით ვიღებ ყავას
-take,take_p2s_pres,take,You take,verb-p2s,იღებ,present,2,verbs,You take bread from the table,შენ მაგიდიდან იღებ პურს
-take,take_p3s_pres,take,He/She takes,verb-p3s,იღებს,present,2,verbs,He takes money from his wallet,ის საფულიდან იღებს ფულს
-take,take_p1p_pres,take,We take,verb-p1p,ვიღებთ,present,2,verbs,We take books from the library,ჩვენ ბიბლიოთეკიდან ვიღებთ წიგნებს
-take,take_p2p_pres,take,You (pl) take,verb-p2p,იღებთ,present,2,verbs,You take pictures of the city,თქვენ ქალაქის ფოტოებს იღებთ
-take,take_p3p_pres,take,They take,verb-p3p,იღებენ,present,2,verbs,They take apples from the basket,ისინი კალათიდან იღებენ ვაშლებს
-take,take_p1s_past,take,I took,verb-p1s,ავიღე,past,2,verbs,I took the bread from the shop,მე მაღაზიიდან ავიღე პური
-take,take_p2s_past,take,You took,verb-p2s,აიღე,past,2,verbs,You took the keys from the table,შენ მაგიდიდან აიღე გასაღებები
-take,take_p3s_past,take,He/She took,verb-p3s,აიღო,past,2,verbs,She took the phone quickly,მან სწრაფად აიღო ტელეფონი
-take,take_p1p_past,take,We took,verb-p1p,ავიღეთ,past,2,verbs,We took chairs from the hall,ჩვენ დარბაზიდან ავიღეთ სკამები
-take,take_p2p_past,take,You (pl) took,verb-p2p,აიღეთ,past,2,verbs,You took the tickets at the station,თქვენ სადგურში აიღეთ ბილეთები
-take,take_p3p_past,take,They took,verb-p3p,აიღეს,past,2,verbs,They took bags from the car,მათ მანქანიდან აიღეს ჩანთები
-take,take_p1s_fut,take,I will take,verb-p1s,ავიღებ,future,2,verbs,I will take a taxi tomorrow morning,მე ხვალ დილით ტაქსს ავიღებ
-take,take_p2s_fut,take,You will take,verb-p2s,აიღებ,future,2,verbs,You will take a bus to school,შენ სკოლაში ავტობუსს აიღებ
-take,take_p3s_fut,take,He/She will take,verb-p3s,აიღებს,future,2,verbs,He will take the new job next month,ის მომავალ თვეში ახალ სამსახურს აიღებს
-take,take_p1p_fut,take,We will take,verb-p1p,ავიღებთ,future,2,verbs,We will take books for the exam,ჩვენ გამოცდისთვის წიგნებს ავიღებთ
-take,take_p2p_fut,take,You (pl) will take,verb-p2p,აიღებთ,future,2,verbs,You will take orders at the restaurant,თქვენ რესტორანში შეკვეთებს აიღებთ
-take,take_p3p_fut,take,They will take,verb-p3p,აიღებენ,future,2,verbs,They will take their seats,ისინი ადგილებს აიღებენ
-show,show_p1s_pres,show,I show,verb-p1s,ვაჩვენებ,present,2,verbs,I show the picture to my friend,მე ჩემს მეგობარს ვაჩვენებ სურათს
-show,show_p2s_pres,show,You show,verb-p2s,აჩვენებ,present,2,verbs,You show the way to the tourists,შენ ტურისტებს აჩვენებ გზას
-show,show_p3s_pres,show,He/She shows,verb-p3s,აჩვენებს,present,2,verbs,He shows a new movie at the cinema,ის კინოში ახალ ფილმს აჩვენებს
-show,show_p1p_pres,show,We show,verb-p1p,ვაჩვენებთ,present,2,verbs,We show our house to the guests,ჩვენ სტუმრებს ვაჩვენებთ სახლს
-show,show_p2p_pres,show,You (pl) show,verb-p2p,აჩვენებთ,present,2,verbs,You show old photos to children,თქვენ ბავშვებს აჩვენებთ ძველ ფოტოებს
-show,show_p3p_pres,show,They show,verb-p3p,აჩვენებენ,present,2,verbs,They show interesting books to students,ისინი სტუდენტებს აჩვენებენ საინტერესო წიგნებს
-show,show_p1s_past,show,I showed,verb-p1s,ვაჩვენე,past,2,verbs,I showed the letter to my teacher,მე ჩემს მასწავლებელს ვაჩვენე წერილი
-show,show_p2s_past,show,You showed,verb-p2s,აჩვენე,past,2,verbs,You showed the map to your brother,შენ შენს ძმას აჩვენე რუკა
-show,show_p3s_past,show,He/She showed,verb-p3s,აჩვენა,past,2,verbs,She showed her dress to her friend,მან თავის მეგობარს აჩვენა კაბა
-show,show_p1p_past,show,We showed,verb-p1p,ვაჩვენეთ,past,2,verbs,We showed the project to our boss,ჩვენ ჩვენს უფროსს ვაჩვენეთ პროექტი
-show,show_p2p_past,show,You (pl) showed,verb-p2p,აჩვენეთ,past,2,verbs,You showed the tickets to the guard,თქვენ მცველს აჩვენეთ ბილეთები
-show,show_p3p_past,show,They showed,verb-p3p,აჩვენეს,past,2,verbs,They showed their photos to the class,მათ კლასს აჩვენეს ფოტოები
-show,show_p1s_fut,show,I will show,verb-p1s,ვაჩვენებ,future,2,verbs,I will show the plan tomorrow,მე ხვალ გეგმას ვაჩვენებ
-show,show_p2s_fut,show,You will show,verb-p2s,აჩვენებ,future,2,verbs,You will show the place later,შენ მერე ადგილს აჩვენებ
-show,show_p3s_fut,show,He/She will show,verb-p3s,აჩვენებს,future,2,verbs,He will show the photo to everyone,ის ყველას ფოტოს აჩვენებს
-show,show_p1p_fut,show,We will show,verb-p1p,ვაჩვენებთ,future,2,verbs,We will show our room to the guests,ჩვენ სტუმრებს ოთახს ვაჩვენებთ
-show,show_p2p_fut,show,You (pl) will show,verb-p2p,აჩვენებთ,future,2,verbs,You will show the film at school,თქვენ სკოლაში ფილმს აჩვენებთ
-show,show_p3p_fut,show,They will show,verb-p3p,აჩვენებენ,future,2,verbs,They will show the city to tourists,ისინი ტურისტებს ქალაქს აჩვენებენ
-how_much,how_much,how_much,How much?,question_word,რამდენი?,phrase,2,phrases,How much does this cost?,ეს რამდენი ღირს?
-for_example,for_example,for_example,For example,phrase,მაგალითად,phrase,2,phrases,For example, bread is on the table,მაგალითად, პური მაგიდაზეა
-in_my_opinion,in_my_opinion,in_my_opinion,In my opinion,phrase,ჩემი აზრით,phrase,2,phrases,In my opinion, this is true,ჩემი აზრით, ეს მართალია
 what_does_this_mean,what_does_this_mean,what_does_this_mean,What does this mean?,phrase,რას ნიშნავს ეს?,phrase,2,phrases,What does this mean?,რას ნიშნავს ეს?
 repeat_that,repeat_that,repeat_that,Can you repeat that?,phrase,შეგიძლიათ გაიმეოროთ?,phrase,2,phrases,Please repeat again,გაიმეორეთ კიდევ
 come_here_formal,come_here_formal,come_here_formal,Come here (formal),verb,მოდით,command,2,phrases,Come here please,მოდით აქ გთხოვთ
@@ -105,8 +12,12 @@ sunrise,sunrise,sunrise,Sunrise,noun,მზის ამოსვლა,nature,2
 medicine,medicine,medicine,Medicine,noun,წამალი,object,2,things,I need medicine,მჭირდება წამალი
 nearby,nearby,nearby,Nearby,adverb,ახლოს,adverb,2,phrases,The shop is nearby,მაღაზია ახლოსაა
 backpack,backpack,backpack,Backpack,noun,ზურგჩანთა,object,2,phrases,Backpack is heavy,ზურგჩანთა მძიმეა
-repeat_formal,repeat_formal,repeat_formal,Repeat! (formal),verb,გაიმეორეთ!,command,2,phrases,Please repeat the phrase,გთხოვთ გაიმეორეთ ფრაზა
-promise,promise,promise,Promise,noun,დაპირება,noun,2,phrases,He always keeps promises,ის ყოველთვის ინახავს დაპირებას
+take,take_p1s_pres,take,I take,verb-p1s,ვიღებ,present,2,verbs,I take a cup of coffee every morning,მე ყოველ დილით ვიღებ ყავას
+take,take_p2s_pres,take,You take,verb-p2s,იღებ,present,2,verbs,You take bread from the table,შენ მაგიდიდან იღებ პურს
+take,take_p3s_pres,take,He/She takes,verb-p3s,იღებს,present,2,verbs,He takes money from his wallet,ის საფულიდან იღებს ფულს
+take,take_p1p_pres,take,We take,verb-p1p,ვიღებთ,present,2,verbs,We take books from the library,ჩვენ ბიბლიოთეკიდან ვიღებთ წიგნებს
+take,take_p2p_pres,take,You (pl) take,verb-p2p,იღებთ,present,2,verbs,You take pictures of the city,თქვენ ქალაქის ფოტოებს იღებთ
+take,take_p3p_pres,take,They take,verb-p3p,იღებენ,present,2,verbs,They take apples from the basket,ისინი კალათიდან იღებენ ვაშლებს
 there,there,there,There,adverb,იქ,location,2,phrases,The keys are there,გასაღებები იქ არის
 quite,quite,quite,Quite / rather,adverb,საკმაოდ,adverb,2,phrases,The book is quite interesting,ეს წიგნი საკმაოდ საინტერესოა
 cash,cash,cash,Cash,noun,ნაღდი ფული,object,2,phrases,She has cash,მას აქვს ნაღდი ფული
@@ -115,13 +26,11 @@ first_aid,first_aid,first_aid,First aid,noun,პირველი დახმ�
 before,before,before,Before (earlier),adverb,ადრე,adverb,2,phrases,I arrived before,მე ადრე მოვედი
 angry,angry,angry,Angry,adjective,გაბრაზებული,emotion,2,phrases,He is angry,ის გაბრაზებულია
 both,both,both,Both,adjective,ორივე,adjective,2,phrases,Both doors are closed,ორივე კარი დაკეტილია
-pizza,pizza,pizza,Pizza,noun,პიცა,food,2,phrases,We ordered pizza,ჩვენ შევუკვეთეთ პიცა
-often,often,often,often,adverb,ხშირად,adverb,2,phrases,She often visits us,ის ხშირად გვესტუმრება
-news,news,news,News,noun,სიახლე,noun,2,phrases,That is good news,ეს კარგი სიახლეა
-wait_formal,wait_formal,wait_formal,Wait (formal),verb,მოიცადეთ,command,2,phrases,Please wait outside,გთხოვთ გარეთ მოიცადეთ
-nail,nail,nail,Nail (metal),noun,ლურსმანი,object,2,phrases,The nail is bent,ლურსმანი გადაღუნულია
-everyone,everyone,everyone,Everyone,pronoun,ყველა,pronoun,2,phrases,Everyone is here,ყველა აქ არის
-closed,closed,closed,Closed,adjective,დახურული,adjective,2,phrases,The closed shop was dark,დახურული მაღაზია ბნელი იყო
+do,do_p1s_past,do,I did,verb-p1s,გავაკეთე,past,2,verbs,I did all the shopping yesterday,მე გუშინ ყველა საყიდლები გავაკეთე
+do,do_p2s_past,do,You did,verb-p2s,გააკეთე,past,2,verbs,You did the cooking for the whole family,შენ მთელი ოჯახისათვის გააკეთე საჭმელი
+do,do_p3s_past,do,He/She did,verb-p3s,გააკეთა,past,2,verbs,She did the cleaning very carefully,მან ძალიან ყურადღებით გააკეთა დასუფთავება
+do,do_p1p_past,do,We did,verb-p1p,გავაკეთეთ,past,2,verbs,We did our homework on time,ჩვენ დროზე გავაკეთეთ დავალება
+do,do_p3p_past,do,They did,verb-p3p,გააკეთეს,past,2,verbs,They did hard work in the garden,მათ ბაღში მძიმე საქმე გააკეთეს
 and,and,and,And,conjunction,და,phrase,2,phrases,Bread and cheese are ready,პური და ყველი მზადაა
 usually,usually,usually,Usually,adverb,ჩვეულებრივ,adverb,2,phrases,We usually eat bread,ჩვეულებრივ ჩვენ პურს ვჭამთ
 ice_cream,ice_cream,ice_cream,Ice cream,noun,ნაყინი,food,2,phrases,I love ice cream,მე მიყვარს ნაყინი
@@ -130,38 +39,110 @@ beard,beard,beard,Beard,noun,წვერი,body,2,phrases,His beard grew,მ�
 stop_formal,stop_formal,stop_formal,Stop! (formal),verb,გაჩერდით!,command,2,phrases,Please stop here,გაჩერდით აქ გთხოვთ
 stop_button,stop_button,stop_button,Stop (button),noun,სტოპ,object,2,phrases,Press stop now,დააჭირე სტოპს
 ankle,ankle,ankle,Ankle,noun,კოჭი,body,2,phrases,His ankle swelled,მისი კოჭი გასივდა
+go,go_p1s_past,go,I went,verb-p1s,წავედი,past,2,verbs,I went to school in the morning,მე დილით სკოლაში წავედი
+go,go_p2s_past,go,You went,verb-p2s,წახვედი,past,2,verbs,You went to church on Sunday,შენ კვირას ეკლესიაში წახვედი
+go,go_p3s_past,go,He/She went,verb-p3s,წავიდა,past,2,verbs,He went to the market to buy fruit,ის წავიდა ბაზარში ხილის საყიდლად
+go,go_p1p_past,go,We went,verb-p1p,წავედით,past,2,verbs,We went to the park after lunch,ჩვენ სადილის შემდეგ პარკში წავედით
+go,go_p3p_past,go,They went,verb-p3p,წავიდნენ,past,2,verbs,They went home very late,ისინი ძალიან გვიან წავიდნენ სახლში
+repeat_formal,repeat_formal,repeat_formal,Repeat! (formal),verb,გაიმეორეთ!,command,2,phrases,Please repeat the phrase,გთხოვთ გაიმეორეთ ფრაზა
+promise,promise,promise,Promise,noun,დაპირება,noun,2,phrases,He always keeps promises,ის ყოველთვის ინახავს დაპირებას
+pizza,pizza,pizza,Pizza,noun,პიცა,food,2,phrases,We ordered pizza,ჩვენ შევუკვეთეთ პიცა
+often,often,often,often,adverb,ხშირად,adverb,2,phrases,She often visits us,ის ხშირად გვესტუმრება
+news,news,news,News,noun,სიახლე,noun,2,phrases,That is good news,ეს კარგი სიახლეა
+wait_formal,wait_formal,wait_formal,Wait (formal),verb,მოიცადეთ,command,2,phrases,Please wait outside,გთხოვთ გარეთ მოიცადეთ
+nail,nail,nail,Nail (metal),noun,ლურსმანი,object,2,phrases,The nail is bent,ლურსმანი გადაღუნულია
+everyone,everyone,everyone,Everyone,pronoun,ყველა,pronoun,2,phrases,Everyone is here,ყველა აქ არის
+closed,closed,closed,Closed,adjective,დახურული,adjective,2,phrases,The closed shop was dark,დახურული მაღაზია ბნელი იყო
+do,do_p1s_fut,do,I will do,verb-p1s,გავაკეთებ,future,2,verbs,I will do the laundry tomorrow,მე ხვალ გავაკეთებ სარეცხს
+do,do_p2s_fut,do,You will do,verb-p2s,გააკეთებ,future,2,verbs,You will do the project next week,შენ მომავალ კვირას გააკეთებ პროექტს
+do,do_p3s_fut,do,He/She will do,verb-p3s,გააკეთებს,future,2,verbs,He will do the repair of the car,ის მანქანის შეკეთებას გააკეთებს
+do,do_p1p_fut,do,We will do,verb-p1p,გავაკეთებთ,future,2,verbs,We will do a big party for friends,ჩვენ მეგობრებისთვის დიდ წვეულებას გავაკეთებთ
+do,do_p3p_fut,do,They will do,verb-p3p,გააკეთებენ,future,2,verbs,They will do the job together,ისინი ერთად გააკეთებენ საქმეს
+how_much,how_much,how_much,How much?,question_word,რამდენი?,phrase,2,phrases,How much does this cost?,ეს რამდენი ღირს?
+for_example,for_example,for_example,For example,phrase,მაგალითად,phrase,2,phrases,For example, bread is on the table,მაგალითად, პური მაგიდაზეა
+in_my_opinion,in_my_opinion,in_my_opinion,In my opinion,phrase,ჩემი აზრით,phrase,2,phrases,In my opinion, this is true,ჩემი აზრით, ეს მართალია
 mirror,mirror,mirror,Mirror,noun,სარკე,object,2,things,The mirror broke,სარკე დაიმტვრა
 soft,soft,soft,Soft,adjective,რბილი,adjective,2,phrases,The bed is soft,საწოლი რბილია
 reservation,reservation,reservation,Reservation,noun,დაჯავშნა,travel,2,phrases,I made a reservation,მე დავჯავშნე მაგიდა
 hot_body,hot_body,hot_body,Hot (I am hot),phrase,მცხელა,emotion,2,phrases,I am hot,მე მცხელა ახლა
-compass,compass,compass,Compass,noun,კომპასი,object,2,phrases,Use the compass,გამოიყენე კომპასი
-address,address,address,Address,noun,მისამართი,noun,2,phrases,Write your address here,აქ დაწერე შენი მისამართი
-glove,glove,glove,Glove,noun,ხელთათმანი,clothing,2,phrases,I lost one glove,მე დავკარგე ერთი ხელთათმანი
+come,come_p1s_past,come,I came,verb-p1s,მოვედი,past,2,verbs,I came home very tired,მე სახლში ძალიან დაღლილი მოვედი
+come,come_p2s_past,come,You came,verb-p2s,მოხვედი,past,2,verbs,You came to the station on time,შენ სადგურში დროზე მოხვედი
+come,come_p3s_past,come,He/She came,verb-p3s,მოვიდა,past,2,verbs,He came to class early,ის ადრე მოვიდა კლასში
+come,come_p1p_past,come,We came,verb-p1p,მოვედით,past,2,verbs,We came to the party together,ჩვენ ერთად მოვედით წვეულებაზე
+come,come_p3p_past,come,They came,verb-p3p,მოვიდნენ,past,2,verbs,They came home very late,ისინი ძალიან გვიან მოვიდნენ სახლში
 stapler,stapler,stapler,Stapler,noun,სტეპლერი,object,2,phrases,Where is the stapler?,სად არის სტეპლერი
 enough,enough,enough,Enough,adjective,საკმარისი,adjective,2,phrases,We have enough money,ჩვენ გვაქვს საკმარისი ფული
 i_cant,i_cant,i_cant,I can’t,phrase,არ შემიძლია,phrase,2,phrases,I can’t go today,მე ვერ წავედი დღეს
 baggage,baggage,baggage,Baggage,noun,ბარგი,object,2,phrases,The baggage is heavy,ბარგი ძალიან მძიმეა
 camera,camera,camera,Camera,noun,კამერა,object,2,phrases,The camera works,კამერა მუშაობს
 sunset,sunset,sunset,Sunset,noun,მზის ჩასვლა,nature,2,phrases,Sunset was red,მზის ჩასვლა წითელი იყო
+come,come_p1s_fut,come,I will come,verb-p1s,მოვალ,future,2,verbs,I will come tomorrow in the morning,მე ხვალ დილით მოვალ
+come,come_p2s_fut,come,You will come,verb-p2s,მოხვალ,future,2,verbs,You will come to the café later,შენ მერე მოხვალ კაფეში
+come,come_p3s_fut,come,He/She will come,verb-p3s,მოვა,future,2,verbs,He will come to the meeting soon,ის მალე მოვა შეხვედრაზე
+come,come_p1p_fut,come,We will come,verb-p1p,მოვალთ,future,2,verbs,We will come to church together,ჩვენ ერთად მოვალთ ეკლესიაში
+come,come_p3p_fut,come,They will come,verb-p3p,მოვლენ,future,2,verbs,They will come soon in the evening,ისინი საღამოს მალე მოვლენ
+compass,compass,compass,Compass,noun,კომპასი,object,2,phrases,Use the compass,გამოიყენე კომპასი
+address,address,address,Address,noun,მისამართი,noun,2,phrases,Write your address here,აქ დაწერე შენი მისამართი
+glove,glove,glove,Glove,noun,ხელთათმანი,clothing,2,phrases,I lost one glove,მე დავკარგე ერთი ხელთათმანი
 different,different,different,Different,adjective,განსხვავებული,adjective,2,phrases,This idea is different,ეს აზრი განსხვავებულია
 side,side,side,Side,noun,მხარე,noun,2,phrases,This is your side,ეს შენი მხარეა
 rule,rule,rule,Rule,noun,წესი,noun,2,phrases,This is a new rule,ეს ახალი წესია
 listen,listen,listen,Listen,verb,მოუსმინე,command,2,phrases,Listen to me,მოუსმინე მე
-same,same,same,Same,adjective,იგივე,adjective,2,phrases,It is the same problem,ეს იგივე პრობლემაა
-quantity,quantity,quantity,Quantity,noun,რაოდენობა,noun,2,phrases,They ordered a large quantity,მათ შეუკვეთეს დიდი რაოდენობა
-fridge,fridge,fridge,Fridge,noun,მაცივარი,object,2,phrases,Fridge is empty,მაცივარი ცარიელია
+have_inanimate,have_inanimate_p1s_past,have_inanimate,I had,verb-p1s,მე მქონდა,past,2,verbs,I had a new car last year,მე შარშან ახალი მანქანა მქონდა
+have_inanimate,have_inanimate_p2s_past,have_inanimate,You had,verb-p2s,შენ გქონდა,past,2,verbs,You had a big bag with you,შენ დიდი ჩანთა გქონდა
+have_inanimate,have_inanimate_p3s_past,have_inanimate,He/She had,verb-p3s,მას ჰქონდა,past,2,verbs,She had a very interesting book,მას ძალიან საინტერესო წიგნი ჰქონდა
+have_inanimate,have_inanimate_p1p_past,have_inanimate,We had,verb-p1p,ჩვენ გვქონდა,past,2,verbs,We had a clear plan for the trip,ჩვენ მოგზაურობისთვის მკაფიო გეგმა გვქონდა
+have_inanimate,have_inanimate_p2p_past,have_inanimate,You (pl) had,verb-p2p,თქვენ გქონდათ,past,2,verbs,You had tickets for the concert,თქვენ კონცერტის ბილეთები გქონდათ
+have_inanimate,have_inanimate_p3p_past,have_inanimate,They had,verb-p3p,მათ ჰქონდათ,past,2,verbs,They had two big houses in the city,მათ ქალაქში ორი დიდი სახლი ჰქონდათ
 somewhere,somewhere,somewhere,Somewhere,adverb,სადღაც,adverb,2,phrases,He went somewhere,ის სადღაც წავიდა
 low_battery,low_battery,low_battery,Low battery,phrase,დაბალი დატენვა,tech,2,phrases,The battery is low,ელემენტი დაბალია
 exit,exit,exit,Exit,noun,გასასვლელი,noun,2,phrases,Where is the nearest exit?,სად არის ყველაზე ახლო გასასვლელი?
 turn_right,turn_right,turn_right,Turn right,verb,მარჯვნივ შეუხვიე,command,2,phrases,Turn right now,ახლა მარჯვნივ შეუხვიე
 turn_left,turn_left,turn_left,Turn left,verb,მარცხნივ შეუხვიე,command,2,phrases,Turn left here,აქ მარცხნივ შეუხვიე
 on_the_way,on_the_way,on_the_way,On the way,phrase,გზაში,phrase,2,phrases,I am on the way,მე უკვე გზაში ვარ
-info,info,info,Info,noun,ინფო,object,2,phrases,I need info,მე მჭირდება ინფო
-pause_button,pause_button,pause_button,Pause (button),noun,პაუზა,object,2,phrases,Hit pause now,დააჭირე პაუზას
-story,story,story,Story / news,noun,ამბავი,noun,2,phrases,It is an interesting story,ეს საინტერესო ამბავია
-business,business,business,Business / matter,noun,საქმე,noun,2,phrases,This is important business,ეს მნიშვნელოვანი საქმეა
-up,up,up,Up,adverb,ზემოთ,adverb,2,phrases,Look up now,ახლა ზემოთ შეხედე
-hospital,hospital,hospital,Hospital,noun,საავადმყოფო,location,2,phrases,Hospital is big,საავადმყოფო დიდია
+show,show_p1s_pres,show,I show,verb-p1s,ვაჩვენებ,present,2,verbs,I show the picture to my friend,მე ჩემს მეგობარს ვაჩვენებ სურათს
+show,show_p2s_pres,show,You show,verb-p2s,აჩვენებ,present,2,verbs,You show the way to the tourists,შენ ტურისტებს აჩვენებ გზას
+show,show_p3s_pres,show,He/She shows,verb-p3s,აჩვენებს,present,2,verbs,He shows a new movie at the cinema,ის კინოში ახალ ფილმს აჩვენებს
+show,show_p1p_pres,show,We show,verb-p1p,ვაჩვენებთ,present,2,verbs,We show our house to the guests,ჩვენ სტუმრებს ვაჩვენებთ სახლს
+show,show_p2p_pres,show,You (pl) show,verb-p2p,აჩვენებთ,present,2,verbs,You show old photos to children,თქვენ ბავშვებს აჩვენებთ ძველ ფოტოებს
+show,show_p3p_pres,show,They show,verb-p3p,აჩვენებენ,present,2,verbs,They show interesting books to students,ისინი სტუდენტებს აჩვენებენ საინტერესო წიგნებს
+elbow,elbow,elbow,Elbow,noun,იდაყვი,body,2,phrases,He hurt elbow,მან დაიზიანა იდაყვი
+again,again,again,Again,adverb,კიდევ,adverb,2,phrases,Please say it again,გთხოვ კიდევ თქვი
+listen_informal,listen_informal,listen_informal,Listen (informal),verb,მომისმინე,command,2,phrases,Listen to me,მომისმინე მე
+right_now,right_now,right_now,Right now,phrase,ახლავე,phrase,2,phrases,Do it right now,გააკეთე ეს ახლავე
+cold,cold,cold,Cold (object),adjective,ცივი,adjective,2,phrases,The water is cold,წყალი ძალიან ცივია
+noise,noise,noise,Noise,noun,ხმაური,noun,2,phrases,The loud noise woke us,ძლიერმა ხმაურმა გაგვაღვიძა
+kitchen,kitchen,kitchen,Kitchen,noun,სამზარეულო,location,2,phrases,Kitchen is small,სამზარეულო პატარაა
+go,go_p1s_fut,go,I will go,verb-p1s,წავალ,future,2,verbs,I will go to the shop tomorrow,მე ხვალ მაღაზიაში წავალ
+go,go_p2s_fut,go,You will go,verb-p2s,წახვალ,future,2,verbs,You will go to the beach in summer,შენ ზაფხულში ზღვაზე წახვალ
+go,go_p3s_fut,go,He/She will go,verb-p3s,წავა,future,2,verbs,She will go to the café with friends,ის მეგობრებთან ერთად წავა კაფეში
+go,go_p1p_fut,go,We will go,verb-p1p,წავალთ,future,2,verbs,We will go to the cinema tonight,ჩვენ დღეს საღამოს კინოში წავალთ
+go,go_p3p_fut,go,They will go,verb-p3p,წავლენ,future,2,verbs,They will go to the mountains soon,ისინი მალე მთებში წავლენ
+you_are_welcome,you_are_welcome,you_are_welcome,You’re welcome,phrase,არაფერს,phrase,2,phrases,Thank you – you’re welcome,გმადლობ – არაფერს
+tradition,tradition,tradition,Tradition,noun,ტრადიცია,noun,2,phrases,This is an old tradition,ეს ძველი ტრადიციაა
+bigger,bigger,bigger,Bigger,adjective,უფრო დიდი,adjective,2,phrases,This room is bigger,ეს ოთახი უფრო დიდია
+future,future,future,Future,noun,მომავალი,noun,2,phrases,She hopes for a bright future,ის იმედოვნებს ნათელ მომავალზე
+wallet,wallet,wallet,Wallet,noun,საფულე,object,2,things,My wallet is empty,ჩემი საფულე ცარიელია
+usage,usage,usage,Usage / application,noun,გამოყენება,noun,2,phrases,Daily phone usage increased,ყოველდღიური ტელეფონის გამოყენება გაიზარდა
+tip,tip,tip,Tip,noun,ჩაის ფული,object,2,phrases,Leave the tip,დატოვე ჩაის ფული
+have_animate,have_animate_p1s_past,have_animate,I had,verb-p1s,მე მყავდა,past,2,verbs,I had a dog when I was a child,მე ბავშვობაში ძაღლი მყავდა
+have_animate,have_animate_p2s_past,have_animate,You had,verb-p2s,შენ გყავდა,past,2,verbs,You had a black cat at home,შენ სახლში შავი კატა გყავდა
+have_animate,have_animate_p3s_past,have_animate,He/She had,verb-p3s,მას ჰყავდა,past,2,verbs,He had a very close friend,მას ძალიან ახლო მეგობარი ჰყავდა
+have_animate,have_animate_p1p_past,have_animate,We had,verb-p1p,ჩვენ გვყავდა,past,2,verbs,We had good teachers at school,ჩვენ სკოლაში კარგი მასწავლებლები გვყავდა
+have_animate,have_animate_p2p_past,have_animate,You (pl) had,verb-p2p,თქვენ გყავდათ,past,2,verbs,You had many guests at the party,თქვენ წვეულებაზე ბევრი სტუმარი გყავდათ
+have_animate,have_animate_p3p_past,have_animate,They had,verb-p3p,მათ ჰყავდათ,past,2,verbs,They had three children,მათ სამი ბავშვი ჰყავდათ
+until,until,until,Until,preposition,მდე,phrase,2,phrases,Wait until tomorrow,დაიცადე ხვალამდე
+still,still,still,Still,adverb,ჯერ კიდევ,adverb,2,phrases,I still don’t know,მე ჯერ კიდევ არ ვიცი
+smell,smell,smell,Smell / scent,noun,სუნი,abstract,2,phrases,The smell is strong,სუნი ძლიერია
+bitter,bitter,bitter,Bitter,adjective,მწარე,adjective,2,phrases,The tea was bitter,ჩაი მწარე იყო
+banana,banana,banana,Banana,noun,ბანანი,food,2,phrases,He bought bananas,მან იყიდა ბანანები
+tram,tram,tram,Tram,noun,ტრამვაი,object,2,phrases,The tram arrived,ტრამვაი მოვიდა
+have_animate,have_animate_p1s_fut,have_animate,I will have,verb-p1s,მე მეყოლება,future,2,verbs,I will have a son in the future,მე მომავალში შვილი მეყოლება
+have_animate,have_animate_p2s_fut,have_animate,You will have,verb-p2s,შენ გეყოლება,future,2,verbs,You will have many friends soon,შენ მალე ბევრი მეგობარი გეყოლება
+have_animate,have_animate_p3s_fut,have_animate,He/She will have,verb-p3s,მას ეყოლება,future,2,verbs,She will have a baby next year,მას მომავალ წელს ბავშვი ეყოლება
+have_animate,have_animate_p1p_fut,have_animate,We will have,verb-p1p,ჩვენ გვეყოლება,future,2,verbs,We will have important guests tomorrow,ჩვენ ხვალ მნიშვნელოვანი სტუმრები გვეყოლება
+have_animate,have_animate_p2p_fut,have_animate,You (pl) will have,verb-p2p,თქვენ გეყოლებათ,future,2,verbs,You will have new workers soon,თქვენ მალე ახალი მუშები გეყოლებათ
+have_animate,have_animate_p3p_fut,have_animate,They will have,verb-p3p,მათ ეყოლებათ,future,2,verbs,They will have many friends in the city,მათ ქალაქში ბევრი მეგობარი ეყოლებათ
 washing_machine,washing_machine,washing_machine,Washing machine,noun,სარეცხი მანქანა,object,2,phrases,Washing machine works,სარეცხი მანქანა მუშაობს
 culture,culture,culture,Culture,noun,კულტურა,noun,2,phrases,Georgian culture is rich,ქართული კულტურა მდიდარია
 smooth,smooth,smooth,Smooth,adjective,გლუვი,adjective,2,phrases,The stone is smooth,ქვა ძალიან გლუვია
@@ -170,15 +151,12 @@ soap,soap,soap,Soap,noun,საპონი,object,2,things,The soap fell,სა
 key,key,key,Key,noun,გასაღები,object,2,things,Where is the key?,სად არის გასაღები?
 playground,playground,playground,Playground,noun,სათამაშო მოედანი,location,2,phrases,Children fill playground,ბავშვები ავსებენ მოედანს
 knife,knife,knife,Knife,noun,დანა,object,2,phrases,The knife is sharp,დანა ბასრია
-elbow,elbow,elbow,Elbow,noun,იდაყვი,body,2,phrases,He hurt elbow,მან დაიზიანა იდაყვი
-again,again,again,Again,adverb,კიდევ,adverb,2,phrases,Please say it again,გთხოვ კიდევ თქვი
-listen_informal,listen_informal,listen_informal,Listen (informal),verb,მომისმინე,command,2,phrases,Listen to me,მომისმინე მე
-right_now,right_now,right_now,Right now,phrase,ახლავე,phrase,2,phrases,Do it right now,გააკეთე ეს ახლავე
-cold,cold,cold,Cold (object),adjective,ცივი,adjective,2,phrases,The water is cold,წყალი ძალიან ცივია
-noise,noise,noise,Noise,noun,ხმაური,noun,2,phrases,The loud noise woke us,ძლიერმა ხმაურმა გაგვაღვიძა
-kitchen,kitchen,kitchen,Kitchen,noun,სამზარეულო,location,2,phrases,Kitchen is small,სამზარეულო პატარაა
-lock,lock,lock,Lock,noun,ბოქლომი,object,2,phrases,The lock broke,ბოქლომი გატყდა
-grapes,grapes,grapes,Grapes,noun,ყურძენი,food,2,phrases,We picked grapes,ჩვენ მოვკრიფეთ ყურძენი
+take,take_p1s_past,take,I took,verb-p1s,ავიღე,past,2,verbs,I took the bread from the shop,მე მაღაზიიდან ავიღე პური
+take,take_p2s_past,take,You took,verb-p2s,აიღე,past,2,verbs,You took the keys from the table,შენ მაგიდიდან აიღე გასაღებები
+take,take_p3s_past,take,He/She took,verb-p3s,აიღო,past,2,verbs,She took the phone quickly,მან სწრაფად აიღო ტელეფონი
+take,take_p1p_past,take,We took,verb-p1p,ავიღეთ,past,2,verbs,We took chairs from the hall,ჩვენ დარბაზიდან ავიღეთ სკამები
+take,take_p2p_past,take,You (pl) took,verb-p2p,აიღეთ,past,2,verbs,You took the tickets at the station,თქვენ სადგურში აიღეთ ბილეთები
+take,take_p3p_past,take,They took,verb-p3p,აიღეს,past,2,verbs,They took bags from the car,მათ მანქანიდან აიღეს ჩანთები
 less,less,less,Less,adjective,ნაკლები,adjective,2,phrases,She eats less sugar,ის ნაკლებ შაქარს ჭამს
 rope,rope,rope,Rope / string,noun,თოკი,object,2,phrases,Tie it with rope,შეიკარი თოკით
 danger,danger,danger,Danger,noun,საფრთხე,abstract,2,phrases,Danger is near,საფრთხე ახლოსაა
@@ -186,15 +164,57 @@ history,history,history,History,noun,ისტორია,noun,2,phrases,The ci
 writer,writer,writer,Writer,noun,მწერალი,people,2,things,The writer reads,მწერალი კითხულობს
 good_luck,good_luck,good_luck,Good luck,phrase,წარმატებებს,phrase,2,phrases,Good luck tomorrow,ხვალ წარმატებებს გისურვებ
 socks,socks,socks,Socks,noun,წინდები,object,2,phrases,These socks are dirty,ეს წინდები ბინძურია
+take,take_p1s_fut,take,I will take,verb-p1s,ავიღებ,future,2,verbs,I will take a taxi tomorrow morning,მე ხვალ დილით ტაქსს ავიღებ
+take,take_p2s_fut,take,You will take,verb-p2s,აიღებ,future,2,verbs,You will take a bus to school,შენ სკოლაში ავტობუსს აიღებ
+take,take_p3s_fut,take,He/She will take,verb-p3s,აიღებს,future,2,verbs,He will take the new job next month,ის მომავალ თვეში ახალ სამსახურს აიღებს
+take,take_p1p_fut,take,We will take,verb-p1p,ავიღებთ,future,2,verbs,We will take books for the exam,ჩვენ გამოცდისთვის წიგნებს ავიღებთ
+take,take_p2p_fut,take,You (pl) will take,verb-p2p,აიღებთ,future,2,verbs,You will take orders at the restaurant,თქვენ რესტორანში შეკვეთებს აიღებთ
+take,take_p3p_fut,take,They will take,verb-p3p,აიღებენ,future,2,verbs,They will take their seats,ისინი ადგილებს აიღებენ
+worker,worker,worker,Worker,noun,მუშა,noun,2,phrases,Many workers came early,ბევრი მუშა ადრე მოვიდა
+id_card,id_card,id_card,ID card,noun,პირადობის ბარათი,object,2,phrases,I lost my ID,მე დავკარგე პირადობა
+hope,hope,hope,Hope,noun,იმედი,noun,2,phrases,There is still hope,ჯერ კიდევ იმედი არის
+sink,sink,sink,Sink,noun,ნიჟარა,object,2,phrases,Sink is full,ნიჟარა სავსეა
+charging,charging,charging,Charging,noun,დამუხტვა,tech,2,phrases,The phone is charging,ტელეფონი იტენება ახლა
+post_office,post_office,post_office,Post office,noun,ფოსტა,location,2,phrases,Post office opened,ფოსტა გაიხსნა
+subway,subway,subway,Subway,noun,მეტრო,transport,2,phrases,The subway is full,მეტრო სავსეა
+show,show_p1s_past,show,I showed,verb-p1s,ვაჩვენე,past,2,verbs,I showed the letter to my teacher,მე ჩემს მასწავლებელს ვაჩვენე წერილი
+show,show_p2s_past,show,You showed,verb-p2s,აჩვენე,past,2,verbs,You showed the map to your brother,შენ შენს ძმას აჩვენე რუკა
+show,show_p3s_past,show,He/She showed,verb-p3s,აჩვენა,past,2,verbs,She showed her dress to her friend,მან თავის მეგობარს აჩვენა კაბა
+show,show_p1p_past,show,We showed,verb-p1p,ვაჩვენეთ,past,2,verbs,We showed the project to our boss,ჩვენ ჩვენს უფროსს ვაჩვენეთ პროექტი
+show,show_p2p_past,show,You (pl) showed,verb-p2p,აჩვენეთ,past,2,verbs,You showed the tickets to the guard,თქვენ მცველს აჩვენეთ ბილეთები
+show,show_p3p_past,show,They showed,verb-p3p,აჩვენეს,past,2,verbs,They showed their photos to the class,მათ კლასს აჩვენეს ფოტოები
+look_formal,look_formal,look_formal,Look / See (formal),verb,ნახეთ,command,2,phrases,Please look here,გთხოვთ აქ ნახეთ
+everywhere,everywhere,everywhere,Everywhere,adverb,ყველგან,adverb,2,phrases,I looked everywhere,მე ყველგან ვეძებე
+people,people,people,People,noun,ხალხი,people,2,things,Many people came,ბევრი ხალხი მოვიდა
+flag,flag,flag,Flag,noun,დროშა,object,2,phrases,Raise the flag,აწიე დროშა
+correct,correct,correct,Correct,adjective,სწორია,adjective,2,phrases,Your answer is correct,შენი პასუხი სწორია
+garlic,garlic,garlic,Garlic,noun,ნიორი,food,2,phrases,She cut garlic,მან დაჭრა ნიორი
+happiness,happiness,happiness,Happiness,noun,ბედნიერება,noun,2,phrases,True happiness lasts forever,ნამდვილი ბედნიერება სამუდამოდ გრძელდება
+have_inanimate,have_inanimate_p1s_fut,have_inanimate,I will have,verb-p1s,მე მექნება,future,2,verbs,I will have time to help you tomorrow,მე ხვალ გიშველო დრო მექნება
+have_inanimate,have_inanimate_p2s_fut,have_inanimate,You will have,verb-p2s,შენ გექნება,future,2,verbs,You will have enough money soon,შენ მალე საკმარისი ფული გექნება
+have_inanimate,have_inanimate_p3s_fut,have_inanimate,He/She will have,verb-p3s,მას ექნება,future,2,verbs,He will have a private room,მას პირადი ოთახი ექნება
+have_inanimate,have_inanimate_p1p_fut,have_inanimate,We will have,verb-p1p,ჩვენ გვექნება,future,2,verbs,We will have delicious food at the party,ჩვენ წვეულებაზე გემრიელი საჭმელი გვექნება
+have_inanimate,have_inanimate_p2p_fut,have_inanimate,You (pl) will have,verb-p2p,თქვენ გექნებათ,future,2,verbs,You will have drinks at the table,თქვენ მაგიდაზე სასმელები გექნებათ
+have_inanimate,have_inanimate_p3p_fut,have_inanimate,They will have,verb-p3p,მათ ექნებათ,future,2,verbs,They will have new houses next year,მათ მომავალ წელს ახალი სახლები ექნებათ
+quantity,quantity,quantity,Quantity,noun,რაოდენობა,noun,2,phrases,They ordered a large quantity,მათ შეუკვეთეს დიდი რაოდენობა
+fridge,fridge,fridge,Fridge,noun,მაცივარი,object,2,phrases,Fridge is empty,მაცივარი ცარიელია
+info,info,info,Info,noun,ინფო,object,2,phrases,I need info,მე მჭირდება ინფო
+pause_button,pause_button,pause_button,Pause (button),noun,პაუზა,object,2,phrases,Hit pause now,დააჭირე პაუზას
+story,story,story,Story / news,noun,ამბავი,noun,2,phrases,It is an interesting story,ეს საინტერესო ამბავია
+business,business,business,Business / matter,noun,საქმე,noun,2,phrases,This is important business,ეს მნიშვნელოვანი საქმეა
+up,up,up,Up,adverb,ზემოთ,adverb,2,phrases,Look up now,ახლა ზემოთ შეხედე
+hospital,hospital,hospital,Hospital,noun,საავადმყოფო,location,2,phrases,Hospital is big,საავადმყოფო დიდია
+show,show_p1s_fut,show,I will show,verb-p1s,ვაჩვენებ,future,2,verbs,I will show the plan tomorrow,მე ხვალ გეგმას ვაჩვენებ
+show,show_p2s_fut,show,You will show,verb-p2s,აჩვენებ,future,2,verbs,You will show the place later,შენ მერე ადგილს აჩვენებ
+show,show_p3s_fut,show,He/She will show,verb-p3s,აჩვენებს,future,2,verbs,He will show the photo to everyone,ის ყველას ფოტოს აჩვენებს
+show,show_p1p_fut,show,We will show,verb-p1p,ვაჩვენებთ,future,2,verbs,We will show our room to the guests,ჩვენ სტუმრებს ოთახს ვაჩვენებთ
+show,show_p2p_fut,show,You (pl) will show,verb-p2p,აჩვენებთ,future,2,verbs,You will show the film at school,თქვენ სკოლაში ფილმს აჩვენებთ
+show,show_p3p_fut,show,They will show,verb-p3p,აჩვენებენ,future,2,verbs,They will show the city to tourists,ისინი ტურისტებს ქალაქს აჩვენებენ
+same,same,same,Same,adjective,იგივე,adjective,2,phrases,It is the same problem,ეს იგივე პრობლემაა
+lock,lock,lock,Lock,noun,ბოქლომი,object,2,phrases,The lock broke,ბოქლომი გატყდა
+grapes,grapes,grapes,Grapes,noun,ყურძენი,food,2,phrases,We picked grapes,ჩვენ მოვკრიფეთ ყურძენი
 toothbrush,toothbrush,toothbrush,Toothbrush,noun,კბილის ჯაგრისი,object,2,phrases,The toothbrush is new,კბილის ჯაგრისი ახალია
 wait,wait,wait,Wait,verb,დაიცადე,command,2,phrases,Please wait here,გთხოვ აქ დაიცადე
-you_are_welcome,you_are_welcome,you_are_welcome,You’re welcome,phrase,არაფერს,phrase,2,phrases,Thank you – you’re welcome,გმადლობ – არაფერს
-tradition,tradition,tradition,Tradition,noun,ტრადიცია,noun,2,phrases,This is an old tradition,ეს ძველი ტრადიციაა
-bigger,bigger,bigger,Bigger,adjective,უფრო დიდი,adjective,2,phrases,This room is bigger,ეს ოთახი უფრო დიდია
-future,future,future,Future,noun,მომავალი,noun,2,phrases,She hopes for a bright future,ის იმედოვნებს ნათელ მომავალზე
-wallet,wallet,wallet,Wallet,noun,საფულე,object,2,things,My wallet is empty,ჩემი საფულე ცარიელია
-usage,usage,usage,Usage / application,noun,გამოყენება,noun,2,phrases,Daily phone usage increased,ყოველდღიური ტელეფონის გამოყენება გაიზარდა
-tip,tip,tip,Tip,noun,ჩაის ფული,object,2,phrases,Leave the tip,დატოვე ჩაის ფული
 vegetable,vegetable,vegetable,Vegetable,noun,ბოსტნეული,food,2,phrases,Vegetables are healthy,ბოსტნეული ჯანსაღია
 approximately,approximately,approximately,Approximately,adverb,დაახლოებით,adverb,2,phrases,The house is approximately ten years old,ეს სახლი დაახლოებით ათი წლისაა
 or,or,or,Or,conjunction,ან,phrase,2,phrases,Do you want tea or coffee?,გინდა ჩაი თუ ყავა?
@@ -203,29 +223,9 @@ plug,plug,plug,Plug,noun,შტეფსელი,object,2,phrases,Insert the pl
 name,name,name,Name,noun,სახელი,noun,2,phrases,What is your name?,რა არის შენი სახელი?
 skill,skill,skill,Skill / ability,noun,უნარი,noun,2,phrases,He learned a new skill,მან ისწავლა ახალი უნარი
 mute,mute,mute,Mute,noun,დადუმება,tech,2,phrases,Please mute the TV,გთხოვ დადუმე ტელევიზორი
-look_formal,look_formal,look_formal,Look / See (formal),verb,ნახეთ,command,2,phrases,Please look here,გთხოვთ აქ ნახეთ
-everywhere,everywhere,everywhere,Everywhere,adverb,ყველგან,adverb,2,phrases,I looked everywhere,მე ყველგან ვეძებე
-people,people,people,People,noun,ხალხი,people,2,things,Many people came,ბევრი ხალხი მოვიდა
-flag,flag,flag,Flag,noun,დროშა,object,2,phrases,Raise the flag,აწიე დროშა
-correct,correct,correct,Correct,adjective,სწორია,adjective,2,phrases,Your answer is correct,შენი პასუხი სწორია
-garlic,garlic,garlic,Garlic,noun,ნიორი,food,2,phrases,She cut garlic,მან დაჭრა ნიორი
-happiness,happiness,happiness,Happiness,noun,ბედნიერება,noun,2,phrases,True happiness lasts forever,ნამდვილი ბედნიერება სამუდამოდ გრძელდება
-until,until,until,Until,preposition,მდე,phrase,2,phrases,Wait until tomorrow,დაიცადე ხვალამდე
-still,still,still,Still,adverb,ჯერ კიდევ,adverb,2,phrases,I still don’t know,მე ჯერ კიდევ არ ვიცი
-smell,smell,smell,Smell / scent,noun,სუნი,abstract,2,phrases,The smell is strong,სუნი ძლიერია
-bitter,bitter,bitter,Bitter,adjective,მწარე,adjective,2,phrases,The tea was bitter,ჩაი მწარე იყო
-banana,banana,banana,Banana,noun,ბანანი,food,2,phrases,He bought bananas,მან იყიდა ბანანები
-tram,tram,tram,Tram,noun,ტრამვაი,object,2,phrases,The tram arrived,ტრამვაი მოვიდა
 carefully,carefully,carefully,Carefully,adverb,ყურადღებით,adverb,2,phrases,Listen carefully please,გთხოვ ყურადღებით მოუსმინე
 living_room,living_room,living_room,Living room,noun,მისაღები ოთახი,location,2,phrases,Living room is clean,მისაღები ოთახი სუფთაა
 look_informal,look_informal,look_informal,Look / See (informal),verb,ნახე,command,2,phrases,Look at this,ნახე ეს
-worker,worker,worker,Worker,noun,მუშა,noun,2,phrases,Many workers came early,ბევრი მუშა ადრე მოვიდა
-id_card,id_card,id_card,ID card,noun,პირადობის ბარათი,object,2,phrases,I lost my ID,მე დავკარგე პირადობა
-hope,hope,hope,Hope,noun,იმედი,noun,2,phrases,There is still hope,ჯერ კიდევ იმედი არის
-sink,sink,sink,Sink,noun,ნიჟარა,object,2,phrases,Sink is full,ნიჟარა სავსეა
-charging,charging,charging,Charging,noun,დამუხტვა,tech,2,phrases,The phone is charging,ტელეფონი იტენება ახლა
-post_office,post_office,post_office,Post office,noun,ფოსტა,location,2,phrases,Post office opened,ფოსტა გაიხსნა
-subway,subway,subway,Subway,noun,მეტრო,transport,2,phrases,The subway is full,მეტრო სავსეა
 pharmacy,pharmacy,pharmacy,Pharmacy,noun,აფთიაქი,location,2,phrases,Pharmacy is closed,აფთიაქი დახურულია
 careful_formal,careful_formal,careful_formal,Be careful! (formal),phrase,ფრთხილად იყავით!,phrase,2,phrases,Please be careful,გთხოვთ ფრთხილად იყავით
 suitcase,suitcase,suitcase,Suitcase,noun,ჩემოდანი,object,2,phrases,Open the suitcase,გახსენი ჩემოდანი
