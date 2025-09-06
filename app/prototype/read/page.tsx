@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import BottomBar from '../components/BottomBar';
+import BottomBar from '../../components/BottomBar';
 import LineCard from './components/LineCard';
 import StoryContext from './components/StoryContext';
 import { useReadState } from './hooks/useReadState';

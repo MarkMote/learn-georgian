@@ -84,7 +84,7 @@ export default function ChunkHomePage() {
         </h1>
         
         <p className="text-sm sm:text-base text-gray-400 mb-8 sm:mb-10 text-center max-w-md px-4">
-          Practice with 50-phrase sets. Text-based flashcards with spaced repetition, examples, and explanations.
+          The below phrases are generated from high-frequency <Link href="https://en.wikipedia.org/wiki/N-gram" className="underline hover:text-gray-200 transition-colors whitespace-nowrap" target="_blank">n-grams</Link> of Georgian text. i.e. I found a large dataset of Georgian text and extracted the most common 1-4 word combinations.
         </p>
 
         <div className="flex flex-col space-y-6 w-full max-w-md px-4 sm:px-0">
@@ -116,7 +116,7 @@ export default function ChunkHomePage() {
           <div className="pt-6 border-t border-gray-700">
             <Link 
               href="/chunks/all" 
-              className="block px-6 py-4 w-full text-center border-2 border-blue-600 rounded-lg text-base sm:text-lg hover:bg-blue-900/20 transition-all duration-150 ease-in-out text-blue-400 font-medium active:scale-98"
+              className="block px-6 py-4 w-full text-center border border-slate-400 rounded-lg text-base sm:text-lg hover:bg-blue-600/10 transition-all duration-150 ease-in-out text-slate-300/90 font-medium active:scale-98"
             >
               Review All Phrases
             </Link>

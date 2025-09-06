@@ -209,7 +209,7 @@ export default function ChunkAllPage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-4">
               <Link 
-                href="/chunk" 
+                href="/chunks" 
                 className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
                 aria-label="Back to chunk home"
               >
@@ -259,7 +259,7 @@ export default function ChunkAllPage() {
           <div className="text-center py-12">
             <p className="text-gray-400 mb-4">No words found</p>
             <Link 
-              href="/chunk" 
+              href="/chunks" 
               className="text-blue-400 hover:text-blue-300 transition-colors"
             >
               Go back to chunks

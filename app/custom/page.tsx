@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Home } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import BottomBar from '../components/BottomBar';
 import CustomFlashCard from './components/CustomFlashCard';
 import CustomTopBar from './components/CustomTopBar';
@@ -20,7 +20,7 @@ import {
 
 type PageState = 'empty' | 'upload' | 'manager' | 'review' | 'add-more';
 
-export default function CustomPage() {
+function CustomPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [customWords, setCustomWords] = useState<CustomWord[]>([]);
@@ -160,17 +160,21 @@ export default function CustomPage() {
   };
 
   const handleToggleHandedness = () => {
-    setIsLeftHanded(prev => !prev);
+    setIsLeftHanded(!isLeftHanded);
   };
 
   const handleToggleExamples = () => {
-    setShowExamples(prev => {
-      if (prev === "off") return "on";
-      if (prev === "on") return "tap";
-      if (prev === "tap") return "tap-en";
-      if (prev === "tap-en") return "tap-ka";
-      return "off";
-    });
+    if (showExamples === "off") {
+      setShowExamples("on");
+    } else if (showExamples === "on") {
+      setShowExamples("tap");
+    } else if (showExamples === "tap") {
+      setShowExamples("tap-en");
+    } else if (showExamples === "tap-en") {
+      setShowExamples("tap-ka");
+    } else {
+      setShowExamples("off");
+    }
   };
   
   const handleModeChange = (newMode: CustomReviewMode) => {
@@ -194,7 +198,7 @@ export default function CustomPage() {
   const hasExampleWords = customWords.some(w => w.examplePreview || w.exampleRevealed);
 
   const handleRevealExamples = (wordKey: string) => {
-    setRevealedExamples(prev => new Set([...prev, wordKey]));
+    setRevealedExamples(new Set([...revealedExamples, wordKey]));
   };
 
   const wordProgress = knownWords.length > 0 
@@ -208,17 +212,21 @@ export default function CustomPage() {
   // Render different states
   if (pageState === 'empty' || pageState === 'upload') {
     return (
-      <div className="min-h-screen bg-black text-white relative">
-        <div className="fixed top-4 left-4 z-10">
-          <Link 
-            href="/" 
-            className="p-2 border border-gray-600 rounded hover:bg-gray-700 inline-flex items-center"
-            aria-label="Go to Home"
-          >
-            <Home size={20} />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center min-h-screen p-4 pt-20">
+      <div className="min-h-screen bg-black text-white">
+        {/* Header */}
+        <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-sm font-medium">Back to Home</span>
+            </Link>
+          </div>
+        </header>
+
+        <div className="flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
           <UploadForm onUpload={handleUpload} />
         </div>
       </div>
@@ -227,17 +235,21 @@ export default function CustomPage() {
 
   if (pageState === 'add-more') {
     return (
-      <div className="min-h-screen bg-black text-white relative">
-        <div className="fixed top-4 left-4 z-10">
-          <Link 
-            href="/" 
-            className="p-2 border border-gray-600 rounded hover:bg-gray-700 inline-flex items-center"
-            aria-label="Go to Home"
-          >
-            <Home size={20} />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center min-h-screen p-4 pt-20">
+      <div className="min-h-screen bg-black text-white">
+        {/* Header */}
+        <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-sm font-medium">Back to Home</span>
+            </Link>
+          </div>
+        </header>
+
+        <div className="flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
           <UploadForm 
             onUpload={handleAddMore} 
             isAddMode={true}
@@ -250,17 +262,21 @@ export default function CustomPage() {
 
   if (pageState === 'manager') {
     return (
-      <div className="min-h-screen bg-black text-white relative">
-        <div className="fixed top-4 left-4 z-10">
-          <Link 
-            href="/" 
-            className="p-2 border border-gray-600 rounded hover:bg-gray-700 inline-flex items-center"
-            aria-label="Go to Home"
-          >
-            <Home size={20} />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center min-h-screen p-4 pt-20">
+      <div className="min-h-screen bg-black text-white">
+        {/* Header */}
+        <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-sm font-medium">Back to Home</span>
+            </Link>
+          </div>
+        </header>
+
+        <div className="flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
           <DeckManager
             words={customWords}
             onAddMore={() => setPageState('add-more')}
@@ -319,5 +335,13 @@ export default function CustomPage() {
         onToggleHandedness={handleToggleHandedness}
       />
     </div>
+  );
+}
+
+export default function CustomPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center">Loading...</div>}>
+      <CustomPageContent />
+    </Suspense>
   );
 }

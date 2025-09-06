@@ -65,7 +65,7 @@ export default function TopBar({
   }, [isMenuOpen]);
 
   const handleHomeClick = () => {
-    router.push('/chunk');
+    router.push('/chunks');
   };
 
   const handleClearProgressClick = () => {
