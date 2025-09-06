@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Menu, X, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import BottomBar from '../components/BottomBar'; // Import the new component
+import BottomBar from '../../components/BottomBar'; // Import the new component
 
 /**
  * CSV row structure for phrases.csv.
