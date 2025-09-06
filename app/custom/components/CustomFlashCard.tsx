@@ -47,12 +47,12 @@ export default function CustomFlashCard({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-center w-full max-w-sm h-full">
+    <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
       {/* Main content display */}
       {!isFlipped ? (
         // Front of card
-        <div className="flex items-center justify-center h-[280px] w-full">
-          <p className={`tracking-wider transition-colors duration-200 text-center px-4 ${
+        <div className="flex items-center justify-center" style={{ minHeight: '280px' }}>
+          <p className={`tracking-wider transition-colors duration-200 ${
             (() => {
               const length = frontContent.length;
               if (length <= 12) return "text-3xl";
@@ -66,80 +66,77 @@ export default function CustomFlashCard({
         </div>
       ) : (
         // Back of card
-        <div className="space-y-4">
-          {/* Main back content */}
-          {reviewMode === 'normal' ? (
-            // Normal mode back - show back content
-            <div className="mb-4">
-              <p className={`tracking-wider transition-colors duration-200 ${
-                (() => {
-                  const length = word.back.length;
-                  if (length <= 12) return "text-3xl";
-                  if (length <= 18) return "text-2xl"; 
-                  if (length <= 24) return "text-xl";
-                  return "text-lg";
-                })()
-              } ${justCopied ? 'text-green-400' : ''}`}
-              onClick={() => handleCopyContent(word.back)}
-              style={{ cursor: 'pointer' }}
-              title="Click to copy"
-              >
-                {word.back}
-              </p>
+        reviewMode === 'normal' ? (
+          // Normal mode back - show back content
+          <div className="mb-4">
+            <p className={`tracking-wider transition-colors duration-200 ${
+              (() => {
+                const length = word.back.length;
+                if (length <= 12) return "text-3xl";
+                if (length <= 18) return "text-2xl"; 
+                if (length <= 24) return "text-xl";
+                return "text-lg";
+              })()
+            } ${justCopied ? 'text-green-400' : ''}`}
+            onClick={() => handleCopyContent(word.back)}
+            style={{ cursor: 'pointer' }}
+            title="Click to copy"
+            >
+              {word.back}
+            </p>
+          </div>
+        ) : isReverse ? (
+          // Reverse mode back - show front content
+          <div className="space-y-2 mb-4">
+            <p className={`tracking-wider transition-colors duration-200 ${
+              (() => {
+                const length = word.front.length;
+                if (length <= 12) return "text-2xl";
+                if (length <= 18) return "text-xl"; 
+                if (length <= 24) return "text-lg";
+                return "text-base";
+              })()
+            } ${justCopied ? 'text-green-400' : ''}`}
+            onClick={() => handleCopyContent(word.front)}
+            style={{ cursor: 'pointer' }}
+            title="Click to copy"
+            >
+              {word.front}
+            </p>
+          </div>
+        ) : isExampleMode ? (
+          // Example mode back - show both preview and revealed
+          <div className="flex items-center justify-center h-[100px] w-full">
+            <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
+              {word.exampleRevealed && (
+                <p className="text-xl tracking-wide text-gray-200">
+                  {word.exampleRevealed}
+                </p>
+              )}
+              {word.examplePreview && (
+                <p className="text-lg tracking-wide text-gray-400">
+                  {word.examplePreview}
+                </p>
+              )}
             </div>
-          ) : isReverse ? (
-            // Reverse mode back - show front content
-            <div className="mb-4">
-              <p className={`tracking-wider transition-colors duration-200 ${
-                (() => {
-                  const length = word.front.length;
-                  if (length <= 12) return "text-2xl";
-                  if (length <= 18) return "text-xl"; 
-                  if (length <= 24) return "text-lg";
-                  return "text-base";
-                })()
-              } ${justCopied ? 'text-green-400' : ''}`}
-              onClick={() => handleCopyContent(word.front)}
-              style={{ cursor: 'pointer' }}
-              title="Click to copy"
-              >
-                {word.front}
-              </p>
+          </div>
+        ) : (
+          // Example-reverse mode back - show both in reverse order
+          <div className="flex items-center justify-center h-[100px] w-full">
+            <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
+              {word.examplePreview && (
+                <p className="text-xl tracking-wide text-gray-200">
+                  {word.examplePreview}
+                </p>
+              )}
+              {word.exampleRevealed && (
+                <p className="text-lg tracking-wide text-gray-400">
+                  {word.exampleRevealed}
+                </p>
+              )}
             </div>
-          ) : isExampleMode ? (
-            // Example mode back - show both preview and revealed
-            <div className="flex items-center justify-center h-[100px] w-full">
-              <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
-                {word.exampleRevealed && (
-                  <p className="text-xl tracking-wide text-gray-200">
-                    {word.exampleRevealed}
-                  </p>
-                )}
-                {word.examplePreview && (
-                  <p className="text-lg tracking-wide text-gray-400">
-                    {word.examplePreview}
-                  </p>
-                )}
-              </div>
-            </div>
-          ) : (
-            // Example-reverse mode back - show both in reverse order
-            <div className="flex items-center justify-center h-[100px] w-full">
-              <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
-                {word.examplePreview && (
-                  <p className="text-xl tracking-wide text-gray-200">
-                    {word.examplePreview}
-                  </p>
-                )}
-                {word.exampleRevealed && (
-                  <p className="text-lg tracking-wide text-gray-400">
-                    {word.exampleRevealed}
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+          </div>
+        )
       )}
 
       {/* Examples section - only for normal and reverse modes when examples exist */}

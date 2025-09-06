@@ -1,6 +1,7 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Menu, ArrowLeft } from 'lucide-react';
 import { CustomReviewMode, CustomExampleMode } from '../types';
 
 interface CustomTopBarProps {
@@ -28,10 +29,28 @@ export default function CustomTopBar({
   hasExampleWords,
   onBackToManager,
 }: CustomTopBarProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as HTMLElement;
+      if (isMenuOpen && !target.closest('.top-bar-menu-area')) {
+        setIsMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   const handleClearProgress = () => {
     if (confirm('Clear your progress for this custom deck?')) {
       onClearProgress();
     }
+    setIsMenuOpen(false);
   };
 
   const getModeLabel = (mode: CustomReviewMode) => {
@@ -39,73 +58,141 @@ export default function CustomTopBar({
       case 'normal': return 'Normal';
       case 'reverse': return 'Reverse';
       case 'examples': return 'Examples';
-      case 'examples-reverse': return 'Ex-Rev';
+      case 'examples-reverse': return 'Examples Rev';
       default: return 'Normal';
     }
   };
 
   const getExampleModeLabel = (mode: CustomExampleMode) => {
     switch (mode) {
-      case 'off': return 'Ex: Off';
-      case 'on': return 'Ex: On';
-      case 'tap': return 'Ex: Tap';
-      case 'tap-en': return 'Ex: EN';
-      case 'tap-ka': return 'Ex: KA';
-      default: return 'Ex: Off';
+      case 'off': return 'OFF';
+      case 'on': return 'ON';
+      case 'tap': return 'TAP';
+      case 'tap-en': return 'TAP-EN';
+      case 'tap-ka': return 'TAP-KA';
+      default: return 'OFF';
     }
   };
 
   return (
-    <div className="flex items-center justify-between p-4 bg-black text-white">
-      <div className="flex items-center gap-4">
+    <div className="flex items-center justify-between p-4 relative top-bar-menu-area">
+      <div className="flex items-center space-x-2">
+        <div className="relative">
+          <button
+            onClick={() => setIsMenuOpen(prev => !prev)}
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700"
+            aria-label="Open menu"
+          >
+            <Menu size={20} />
+          </button>
+
+          {isMenuOpen && (
+            <div className="absolute left-0 mt-2 w-56 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-10">
+              <ul className="divide-y divide-gray-700">
+                <li>
+                  <button
+                    onClick={onToggleExamples}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Show Examples</span>
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${
+                      showExamples === 'on' ? 'bg-green-600' : 
+                      showExamples === 'tap' ? 'bg-yellow-600' : 
+                      showExamples === 'tap-en' ? 'bg-blue-600' :
+                      showExamples === 'tap-ka' ? 'bg-purple-600' :
+                      'bg-gray-600'
+                    }`}>
+                      {getExampleModeLabel(showExamples)}
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setIsModeSelectorOpen(!isModeSelectorOpen);
+                    }}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Review Mode</span>
+                    <span className="ml-2 px-2 py-0.5 rounded text-xs bg-blue-600">
+                      {getModeLabel(reviewMode)}
+                    </span>
+                  </button>
+                  {isModeSelectorOpen && (
+                    <div className="bg-gray-900 mx-2 my-2 rounded-lg p-3">
+                      <div className="grid grid-cols-1 gap-2">
+                        {[
+                          { value: 'normal' as CustomReviewMode, label: 'Normal', description: 'Front → Back' },
+                          { value: 'reverse' as CustomReviewMode, label: 'Reverse', description: 'Back → Front' },
+                          { value: 'examples' as CustomReviewMode, label: 'Examples', description: 'Practice with examples', disabled: !hasExampleWords },
+                          { value: 'examples-reverse' as CustomReviewMode, label: 'Examples Reverse', description: 'Reverse example practice', disabled: !hasExampleWords },
+                        ].map((mode) => (
+                          <button
+                            key={mode.value}
+                            onClick={() => {
+                              if (!mode.disabled) {
+                                onModeChange(mode.value);
+                                setIsModeSelectorOpen(false);
+                                setIsMenuOpen(false);
+                              }
+                            }}
+                            disabled={mode.disabled}
+                            className={`
+                              relative p-2 rounded-md border transition-all duration-200 text-left h-14 flex flex-col justify-center
+                              ${reviewMode === mode.value 
+                                ? 'bg-blue-600/20 border-blue-500/50 text-white' 
+                                : mode.disabled
+                                  ? 'bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed'
+                                  : 'bg-gray-800 border-gray-600 text-gray-200 hover:bg-gray-700 hover:border-gray-500'
+                              }
+                            `}
+                          >
+                            <div className="text-xs font-medium">{mode.label}</div>
+                            <div className="text-xs opacity-75">{mode.description}</div>
+                            {mode.disabled && (
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-xs bg-gray-900 px-2 py-1 rounded">
+                                  No examples
+                                </span>
+                              </div>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="mt-2 text-xs text-gray-400 text-center">
+                        Press M to cycle modes
+                      </div>
+                    </div>
+                  )}
+                </li>
+                <li>
+                  <button
+                    onClick={handleClearProgress}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
+                  >
+                    Reset Progress
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+
         <button
           onClick={onBackToManager}
-          className="text-blue-400 hover:text-blue-300 transition-colors"
+          className="p-2 border border-gray-600 rounded hover:bg-gray-700"
+          aria-label="Back to Deck Manager"
         >
-          ← Back to Deck
-        </button>
-        
-        <div className="text-sm text-gray-400">
-          Custom Deck • {wordProgress}
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3">
-        {/* Progress Stats */}
-        <div className="text-sm text-gray-400">
-          {percentageScore}% • Load: {cognitiveLoad}%
-        </div>
-
-        {/* Mode Selection */}
-        <select
-          value={reviewMode}
-          onChange={(e) => onModeChange(e.target.value as CustomReviewMode)}
-          className="bg-gray-800 text-white px-3 py-1 rounded text-sm"
-        >
-          <option value="normal">Normal</option>
-          <option value="reverse">Reverse</option>
-          {hasExampleWords && <option value="examples">Examples</option>}
-          {hasExampleWords && <option value="examples-reverse">Ex-Reverse</option>}
-        </select>
-
-        {/* Example Mode Toggle */}
-        {(reviewMode === 'normal' || reviewMode === 'reverse') && (
-          <button
-            onClick={onToggleExamples}
-            className="px-3 py-1 bg-gray-800 hover:bg-gray-700 text-white rounded text-sm transition-colors"
-          >
-            {getExampleModeLabel(showExamples)}
-          </button>
-        )}
-
-        {/* Clear Progress */}
-        <button
-          onClick={handleClearProgress}
-          className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-sm transition-colors"
-        >
-          Reset
+          <ArrowLeft size={20} />
         </button>
       </div>
+
+      <div className="text-sm text-center">
+        <div>Words: {wordProgress}</div>
+        <div>Score: {percentageScore}%</div>
+      </div>
+
+      <div className="w-20"></div> {/* Spacer for balance */}
     </div>
   );
 }
