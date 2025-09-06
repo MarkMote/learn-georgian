@@ -2,6 +2,8 @@
 
 An interactive Georgian language learning application built with Next.js. This app uses spaced repetition flashcards with AI-generated lessons to help users learn Georgian vocabulary and grammar.
 
+Flashcards are stored in `public/words.csv`. You can easily convert this app to the language of your choice by modifying the columns of this file.
+
 ## Features
 
 - **Spaced Repetition Learning**: Smart flashcard system using the SM-2 algorithm
@@ -26,7 +28,7 @@ An interactive Georgian language learning application built with Next.js. This a
 npm install
 ```
 
-3. Set up environment variables:
+3. Set up environment variables: 
 ```bash
 cp .env.example .env.local
 ```
@@ -41,6 +43,9 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to start learning!
+
+Note: most api keys are optional. e.g. we ElevenLabs is only used for a prototype feature. We're waiting for their text-to-speech to get better at pronouncing Georgian.
+
 
 ## Usage
 

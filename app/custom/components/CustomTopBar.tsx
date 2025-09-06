@@ -187,12 +187,12 @@ export default function CustomTopBar({
         </button>
       </div>
 
+      <div className="w-20"></div> {/* Spacer for balance */}
+
       <div className="text-sm text-center">
         <div>Words: {wordProgress}</div>
         <div>Score: {percentageScore}%</div>
       </div>
-
-      <div className="w-20"></div> {/* Spacer for balance */}
     </div>
   );
 }

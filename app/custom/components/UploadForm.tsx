@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { Eye, Upload, X, Edit3 } from 'lucide-react';
 import { CustomWord } from '../types';
 import { parseCustomCSV } from '../utils';
 
@@ -56,11 +57,11 @@ dog,ძაღლი,The dog is big,ძაღლი დიდია
 house,სახლი,My house is small,ჩემი სახლი პატარაა`;
 
   return (
-    <div className="bg-black text-white p-6 rounded-lg max-w-2xl w-full">
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">
+    <div className="text-white p-6 max-w-2xl w-full">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-light mb-4 text-slate-300">
           {isAddMode ? 'Add More Words' : 'Upload Custom Deck'}
-        </h2>
+        </h1>
         <p className="text-gray-400 text-sm">
           Paste your CSV content below. Format: front,back,examplePreview,exampleRevealed
         </p>
@@ -85,21 +86,21 @@ house,სახლი,My house is small,ჩემი სახლი პატ�
         )}
 
         {preview.length > 0 && (
-          <div className="bg-gray-800 p-4 rounded">
+          <div className="bg-gray-800 border border-gray-600 p-4 rounded">
             <h3 className="text-lg font-medium mb-3">Preview ({preview.length} words)</h3>
             <div className="space-y-2 max-h-40 overflow-y-auto">
               {preview.slice(0, 5).map((word, index) => (
-                <div key={word.key} className="flex justify-between text-sm">
-                  <span className="text-gray-300">{word.front}</span>
-                  <span className="text-white">→</span>
-                  <span className="text-gray-300">{word.back}</span>
-                  {word.examplePreview && (
-                    <span className="text-gray-500 text-xs">+ examples</span>
+                <div key={word.key} className="flex items-center justify-between text-sm py-1">
+                  <span className="text-gray-300 truncate flex-1">{word.front}</span>
+                  <span className="text-gray-500 mx-2">→</span>
+                  <span className="text-gray-300 truncate flex-1 text-right">{word.back}</span>
+                  {(word.examplePreview || word.exampleRevealed) && (
+                    <span className="text-green-500 text-xs ml-2">ex</span>
                   )}
                 </div>
               ))}
               {preview.length > 5 && (
-                <div className="text-gray-500 text-sm">
+                <div className="text-gray-500 text-sm pt-2 border-t border-gray-700">
                   ... and {preview.length - 5} more words
                 </div>
               )}
@@ -107,45 +108,53 @@ house,სახლი,My house is small,ჩემი სახლი პატ�
           </div>
         )}
 
-        <div className="flex gap-3">
+        <div className="flex flex-col space-y-4 max-w-md w-full mx-auto">
           {preview.length === 0 ? (
             <button
               onClick={handlePreview}
               disabled={isProcessing || !csvText.trim()}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 rounded transition-colors"
+              className="flex items-center justify-center gap-3 px-8 py-4 w-full border border-gray-600 hover:bg-gray-700 disabled:hover:bg-transparent disabled:opacity-50 rounded text-lg transition-colors"
             >
-              {isProcessing ? 'Processing...' : 'Preview'}
+              <Eye className="w-5 h-5 text-gray-400" />
+              <span>{isProcessing ? 'Processing...' : 'Preview'}</span>
             </button>
           ) : (
             <button
               onClick={handleUpload}
-              className="px-6 py-2 bg-green-600 hover:bg-green-700 rounded transition-colors"
+              className="flex items-center justify-center gap-3 px-8 py-4 w-full border border-gray-600 hover:bg-gray-700 rounded text-lg transition-colors"
             >
-              {isAddMode ? 'Add Words' : 'Upload Deck'}
+              <Upload className="w-5 h-5 text-gray-400" />
+              <span>{isAddMode ? 'Add Words' : 'Upload Deck'}</span>
             </button>
           )}
           
-          {(isAddMode || preview.length > 0) && onCancel && (
-            <button
-              onClick={onCancel}
-              className="px-6 py-2 bg-gray-600 hover:bg-gray-700 rounded transition-colors"
-            >
-              Cancel
-            </button>
-          )}
+          {((isAddMode || preview.length > 0) && onCancel) || preview.length > 0 ? (
+            <div className="grid grid-cols-2 gap-3">
+              {(isAddMode || preview.length > 0) && onCancel && (
+                <button
+                  onClick={onCancel}
+                  className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-600 hover:bg-gray-700 rounded transition-colors text-sm"
+                >
+                  <X className="w-4 h-4" />
+                  <span>Cancel</span>
+                </button>
+              )}
 
-          {preview.length > 0 && (
-            <button
-              onClick={() => {
-                setPreview([]);
-                setCsvText('');
-                setError('');
-              }}
-              className="px-6 py-2 bg-gray-600 hover:bg-gray-700 rounded transition-colors"
-            >
-              Edit
-            </button>
-          )}
+              {preview.length > 0 && (
+                <button
+                  onClick={() => {
+                    setPreview([]);
+                    setCsvText('');
+                    setError('');
+                  }}
+                  className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-600 hover:bg-gray-700 rounded transition-colors text-sm"
+                >
+                  <Edit3 className="w-4 h-4" />
+                  <span>Edit</span>
+                </button>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
 

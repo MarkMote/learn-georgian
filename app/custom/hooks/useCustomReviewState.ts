@@ -31,6 +31,7 @@ export function useCustomReviewState(
   const [isLeftHanded, setIsLeftHanded] = useState(false);
 
   const progressKey = getCustomProgressKey();
+  const reviewStateKey = 'custom-deck-review-state';
 
   // Initialize known words from custom words
   useEffect(() => {
@@ -65,7 +66,7 @@ export function useCustomReviewState(
     setKnownWords(wordData);
   }, [customWords, progressKey]);
 
-  // Load settings from localStorage
+  // Load settings and review state from localStorage
   useEffect(() => {
     const leftHanded = localStorage.getItem('isLeftHanded') === 'true';
     const examples = localStorage.getItem('showExamples') as CustomExampleMode || 'off';
@@ -73,6 +74,23 @@ export function useCustomReviewState(
     setIsLeftHanded(leftHanded);
     setShowExamples(examples);
   }, []);
+
+  // Load review state after words are loaded
+  useEffect(() => {
+    if (knownWords.length === 0) return;
+
+    const storedReviewState = localStorage.getItem(reviewStateKey);
+    if (storedReviewState) {
+      try {
+        const { currentIndex: savedIndex } = JSON.parse(storedReviewState);
+        if (typeof savedIndex === 'number' && savedIndex >= 0 && savedIndex < knownWords.length) {
+          setCurrentIndex(savedIndex);
+        }
+      } catch {
+        // Invalid stored state, ignore
+      }
+    }
+  }, [knownWords.length, reviewStateKey]);
 
   // Save settings to localStorage
   useEffect(() => {
@@ -82,6 +100,17 @@ export function useCustomReviewState(
   useEffect(() => {
     localStorage.setItem('showExamples', showExamples);
   }, [showExamples]);
+
+  // Save review state when current index changes
+  useEffect(() => {
+    if (knownWords.length > 0) {
+      const reviewState = {
+        currentIndex,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(reviewStateKey, JSON.stringify(reviewState));
+    }
+  }, [currentIndex, knownWords.length, reviewStateKey]);
 
   // Reset flip state when index changes
   useEffect(() => {
@@ -159,12 +188,13 @@ export function useCustomReviewState(
 
   const clearProgress = useCallback(() => {
     localStorage.removeItem(progressKey);
+    localStorage.removeItem(reviewStateKey);
     const resetWords = customWords.map(createCustomWordData);
     setKnownWords(resetWords);
     setCurrentIndex(0);
     setIsFlipped(false);
     setRevealedExamples(new Set());
-  }, [customWords, progressKey]);
+  }, [customWords, progressKey, reviewStateKey]);
 
   // Calculate cognitive load (simplified)
   const cognitiveLoad = knownWords.length > 0 

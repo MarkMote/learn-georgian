@@ -67,8 +67,8 @@ export default function CustomFlashCard({
       ) : (
         // Back of card
         reviewMode === 'normal' ? (
-          // Normal mode back - show back content
-          <div className="mb-4">
+          // Normal mode back - show back content + front hint
+          <div className="space-y-3 mb-4">
             <p className={`tracking-wider transition-colors duration-200 ${
               (() => {
                 const length = word.back.length;
@@ -84,10 +84,13 @@ export default function CustomFlashCard({
             >
               {word.back}
             </p>
+            <p className="text-base font-semibold text-gray-300">
+              ({word.front})
+            </p>
           </div>
         ) : isReverse ? (
-          // Reverse mode back - show front content
-          <div className="space-y-2 mb-4">
+          // Reverse mode back - show front content + back hint
+          <div className="space-y-3 mb-4">
             <p className={`tracking-wider transition-colors duration-200 ${
               (() => {
                 const length = word.front.length;
@@ -102,6 +105,9 @@ export default function CustomFlashCard({
             title="Click to copy"
             >
               {word.front}
+            </p>
+            <p className="text-base font-semibold text-gray-300">
+              ({word.back})
             </p>
           </div>
         ) : isExampleMode ? (

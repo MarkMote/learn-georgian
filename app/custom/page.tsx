@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Home } from 'lucide-react';
 import BottomBar from '../components/BottomBar';
 import CustomFlashCard from './components/CustomFlashCard';
 import CustomTopBar from './components/CustomTopBar';
@@ -206,33 +208,66 @@ export default function CustomPage() {
   // Render different states
   if (pageState === 'empty' || pageState === 'upload') {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-        <UploadForm onUpload={handleUpload} />
+      <div className="min-h-screen bg-black text-white relative">
+        <div className="fixed top-4 left-4 z-10">
+          <Link 
+            href="/" 
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700 inline-flex items-center"
+            aria-label="Go to Home"
+          >
+            <Home size={20} />
+          </Link>
+        </div>
+        <div className="flex items-center justify-center min-h-screen p-4 pt-20">
+          <UploadForm onUpload={handleUpload} />
+        </div>
       </div>
     );
   }
 
   if (pageState === 'add-more') {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-        <UploadForm 
-          onUpload={handleAddMore} 
-          isAddMode={true}
-          onCancel={() => setPageState('manager')}
-        />
+      <div className="min-h-screen bg-black text-white relative">
+        <div className="fixed top-4 left-4 z-10">
+          <Link 
+            href="/" 
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700 inline-flex items-center"
+            aria-label="Go to Home"
+          >
+            <Home size={20} />
+          </Link>
+        </div>
+        <div className="flex items-center justify-center min-h-screen p-4 pt-20">
+          <UploadForm 
+            onUpload={handleAddMore} 
+            isAddMode={true}
+            onCancel={() => setPageState('manager')}
+          />
+        </div>
       </div>
     );
   }
 
   if (pageState === 'manager') {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-        <DeckManager
-          words={customWords}
-          onAddMore={() => setPageState('add-more')}
-          onClearAll={handleClearAll}
-          onStartReview={handleStartReview}
-        />
+      <div className="min-h-screen bg-black text-white relative">
+        <div className="fixed top-4 left-4 z-10">
+          <Link 
+            href="/" 
+            className="p-2 border border-gray-600 rounded hover:bg-gray-700 inline-flex items-center"
+            aria-label="Go to Home"
+          >
+            <Home size={20} />
+          </Link>
+        </div>
+        <div className="flex items-center justify-center min-h-screen p-4 pt-20">
+          <DeckManager
+            words={customWords}
+            onAddMore={() => setPageState('add-more')}
+            onClearAll={handleClearAll}
+            onStartReview={handleStartReview}
+          />
+        </div>
       </div>
     );
   }

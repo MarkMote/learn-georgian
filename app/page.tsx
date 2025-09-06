@@ -3,6 +3,7 @@
 import Link from 'next/link'; // Use Next.js Link for navigation
 import { useState, useEffect, useRef } from 'react'; // Import React hooks and useRef
 import { useRouter } from 'next/navigation';
+import { Github, Star, ExternalLink, Upload, MessageCircle } from 'lucide-react';
 
 // Word data types
 type WordData = {
@@ -172,7 +173,7 @@ export default function HomePage() {
   return (
     <div className={containerClasses}>
       {/* Apply carved style and ensure consistent height/alignment */}
-      <h1 className={`text-4xl font-light mb-8 text-slate-300 h-12 flex items-center font-light justify-center ${carvedTextStyle}`}>
+      <h1 className={`text-4xl font-light my-8 py-8 text-slate-300 h-12 flex items-center font-light justify-center ${carvedTextStyle}`}>
         {/* Map over the maximum possible length to render spans */}
         {Array.from({ length: maxLength }).map((_, index) => {
           // Determine if the character at this index should be from the target text
@@ -234,30 +235,54 @@ export default function HomePage() {
           )}
         </div>
 
-        {/* Other Options */}
-        {/* <div className="pt-6 border-t border-gray-700">
-          <Link href="/phrases" className={buttonClasses}>
-            Words and Phrases
+        {/* Custom Deck Option */}
+        <div className="pt-6 border-t border-gray-700 space-y-3">
+          <Link 
+            href="/chunks" 
+            className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+          >
+            <MessageCircle className="w-4 h-4 text-gray-400" />
+            <span>Colloquial Georgian</span>
           </Link>
-        </div> */}
+          <Link 
+            href="/custom" 
+            className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+          >
+            <Upload className="w-4 h-4 text-gray-400" />
+            <span>Create Custom Deck</span>
+          </Link>
+        </div>
       </div>
       {/* Link to view all words */}
       <div className="mt-4">
       </div>
 
-      {/* About Link */}
-      <div className="mt-12 pt-8 border-t border-gray-800">
+      {/* GitHub Button */}
+      <div className="mt-8">
+        <a
+          href="https://github.com/MarkMote/learn-georgian"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 hover:bg-gray-800 border border-gray-700 hover:border-gray-600 rounded-lg transition-all duration-200 group"
+        >
+          <Github className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+          <span className="text-gray-300 group-hover:text-white font-medium text-sm">View on GitHub</span>
+          <Star className="w-4 h-4 text-gray-500 group-hover:text-yellow-400 transition-colors" />
+        </a>
+      </div>
+
+      {/* Footer Links */}
+      <div className="mt-8 pt-6 border-t border-gray-800 flex items-center gap-6 text-sm">
         <Link
           href="/all"
-          className="text-gray-400 hover:text-gray-200 text-sm transition-colors"
+          className="text-gray-400 hover:text-gray-200 transition-colors"
         >
           View all words
         </Link>
-        {/* bullet here */}
-        <span className="mx-4">•</span>
+        <span className="text-gray-600">•</span>
         <Link 
           href="/about" 
-          className="text-gray-400 hover:text-gray-200 text-sm transition-colors"
+          className="text-gray-400 hover:text-gray-200 transition-colors"
         >
           About this app
         </Link>
