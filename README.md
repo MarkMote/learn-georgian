@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Learn Georgian
+
+An interactive Georgian language learning application built with Next.js. This app uses spaced repetition flashcards with AI-generated lessons to help users learn Georgian vocabulary and grammar.
+
+## Features
+
+- **Spaced Repetition Learning**: Smart flashcard system using the SM-2 algorithm
+- **Visual Flashcards**: Image-based vocabulary learning
+- **AI-Powered Lessons**: Get detailed explanations for words using OpenAI
+- **Verb Conjugation Groups**: Automatically introduces related verb forms together
+- **Progress Tracking**: Local storage saves your learning progress
+- **Mobile Optimized**: Touch-friendly interface for learning on the go
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+Fill in your API keys in `.env.local`:
+- `OPENAI_API_KEY`: For AI-generated lessons
+- `ELEVENLABS_API_KEY`: For audio pronunciation (optional)
+- Google Sheets credentials for vocabulary data (optional)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to start learning!
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+- **Space bar**: Flip cards to reveal answers
+- **Q/W/E/R keys**: Rate difficulty (Fail/Hard/Good/Easy)  
+- **I key**: Toggle English translation
+- **Get Lesson button**: Generate AI explanations for vocabulary
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technology Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **AI Integration**: OpenAI API, Anthropic Claude
+- **Data**: Google Sheets API, CSV processing
+- **Audio**: ElevenLabs TTS API
