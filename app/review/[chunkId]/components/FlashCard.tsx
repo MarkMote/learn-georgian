@@ -67,7 +67,7 @@ export default function FlashCard({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
+    <div className="flex flex-col items-center justify-center text-center w-full max-w-sm h-full">
       {/* Image display logic based on mode */}
       {reviewMode === 'normal' ? (
         // Normal mode: always show image
@@ -145,15 +145,15 @@ export default function FlashCard({
           </div>
         ) : (
           // Other modes front: centered content
-          <div className="flex items-center justify-center" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '90%' }}>
+          <div className="flex items-center justify-center h-[280px] w-full">
             {isExampleMode || isExampleReverse ? (
               // For example modes, show the full sentence
-              <p className="text-xl tracking-wide">
+              <p className="text-xl tracking-wide text-center px-4">
                 {frontContent}
               </p>
             ) : (
               // For reverse mode, show Georgian word
-              <p className={`tracking-wider transition-colors duration-200 ${
+              <p className={`tracking-wider transition-colors duration-200 text-center px-4 ${
                 (() => {
                   const length = frontContent.length;
                   if (length <= 12) return "text-3xl";
@@ -210,8 +210,8 @@ export default function FlashCard({
           </div>
         ) : isExampleMode ? (
           // Example mode back: show both sentences (centered)
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '90%' }}>
-            <div className="flex flex-col items-center justify-center text-center space-y-3">
+          <div className="flex items-center justify-center h-[100px] w-full">
+            <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
               {word.ExampleGeorgian1 && (
                 <p className="text-xl tracking-wide text-gray-200">
                   {word.ExampleGeorgian1}
@@ -226,8 +226,8 @@ export default function FlashCard({
           </div>
         ) : (
           // Example-reverse mode back: show both sentences (centered)
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '90%' }}>
-            <div className="flex flex-col items-center justify-center text-center space-y-3">
+          <div className="flex items-center justify-center h-[100px] w-full">
+            <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
               {word.ExampleEnglish1 && (
                 <p className="text-xl tracking-wide text-gray-200">
                   {word.ExampleEnglish1}

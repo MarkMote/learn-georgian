@@ -269,7 +269,7 @@ export default function ReviewPage() {
         hasExampleWords={hasExampleWords}
       />
 
-      <div className="flex items-center justify-center px-4 h-[calc(100vh-140px)]">
+      <div className="flex items-center justify-center px-4" style={{ height: 'calc(100svh - 140px)' }}>
         <FlashCard
           word={currentCard.data}
           isFlipped={isFlipped}
