@@ -72,7 +72,7 @@ export default function ChunkHomePage() {
             className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-medium">Back to Home</span>
+            <span className="text-sm font-medium pt-1">Back to Home</span>
           </Link>
         </div>
       </header>
