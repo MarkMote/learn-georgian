@@ -3,7 +3,7 @@ hello,hello,hello,Hello,phrase,გამარჯობა,greeting,1,phrases,"H
 thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,phrases,"Thank you very much","დიდი მადლობა"
 yes,yes,yes,Yes,noun,დიახ,misc_nouns,1,phrases,"Yes, it's true.","დიახ, მართალია."
 no,no,no,no,noun,არა,misc_nouns,1,phrases,"No, thank you","არა, გმადლობთ"
-goodbye,goodbye,goodbye,Goodbye,phrase,ნახვამდის,greeting,1,phrases,"Goodbye for now","ნახვამდის"
+goodbye,goodbye,goodbye,Goodbye,phrase,ნახვამდის,greeting,1,phrases,"Goodbye, see you later!","ნახვამდის, დროებით!"
 please,please,please,Please,phrase,თუ შეიძლება,phrase,1,phrases,"One coffee, please.","ერთი ყავა, თუ შეიძლება."
 excuse_me,excuse_me,excuse_me,Excuse me,phrase,უკაცრავად,phrase,1,phrases,"Excuse me, sir","უკაცრავად, ბატონო"
 nice_to_meet_you,nice_to_meet_you,nice_to_meet_you,Nice to meet you,phrase,სასიამოვნოა,phrase,1,phrases,"Nice to meet you too","ჩემთვისაც სასიამოვნოა"

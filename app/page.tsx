@@ -285,7 +285,7 @@ export default function HomePage() {
       </div>
 
       {/* Footer Links */}
-      <div className="mt-8 pt-6 border-t border-gray-800 flex items-center gap-6 text-sm">
+      <div className="mt-8 pt-6 pb-3 border-t border-gray-800 flex items-center gap-6 text-sm">
         <Link
           href="/all"
           className="text-gray-400 hover:text-gray-200 transition-colors"
