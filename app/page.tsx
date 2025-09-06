@@ -3,7 +3,8 @@
 import Link from 'next/link'; // Use Next.js Link for navigation
 import { useState, useEffect, useRef } from 'react'; // Import React hooks and useRef
 import { useRouter } from 'next/navigation';
-import { Github, Star, ExternalLink, Upload, MessageCircle } from 'lucide-react';
+import { Github, Star, ExternalLink, Upload, MessageCircle, MessageSquare } from 'lucide-react';
+import FeedbackModal from './components/FeedbackModal';
 
 // Word data types
 type WordData = {
@@ -101,6 +102,10 @@ export default function HomePage() {
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [chunkCount, setChunkCount] = useState<number>(0);
   // --- End Chunk State ---
+
+  // --- State for Feedback Modal ---
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState<boolean>(false);
+  // --- End Feedback State ---
 
   // --- Effects for Animation ---
   // Effect 1: Set a timer to start the animation after initialDelay
@@ -257,18 +262,26 @@ export default function HomePage() {
       <div className="mt-4">
       </div>
 
-      {/* GitHub Button */}
-      <div className="mt-8">
+      {/* GitHub and Feedback Buttons */}
+      <div className="mt-8 grid grid-cols-2 gap-3 max-w-md w-full">
         <a
           href="https://github.com/MarkMote/learn-georgian"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 hover:bg-gray-800 border border-gray-700 hover:border-gray-600 rounded-lg transition-all duration-200 group"
+          className="flex items-center justify-center gap-2 px-4 py-3 text-center border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out group"
         >
-          <Github className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-          <span className="text-gray-300 group-hover:text-white font-medium text-sm">View on GitHub</span>
-          <Star className="w-4 h-4 text-gray-500 group-hover:text-yellow-400 transition-colors" />
+          <Github className="w-4 h-4 text-gray-400" />
+          <span className="text-white">GitHub</span>
+          <Star className="w-3 h-3 text-gray-500 group-hover:text-yellow-400 transition-colors" />
         </a>
+        
+        <button
+          onClick={() => setIsFeedbackModalOpen(true)}
+          className="flex items-center justify-center gap-2 px-4 py-3 text-center border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+        >
+          <MessageSquare className="w-4 h-4 text-gray-400" />
+          <span className="text-white">Feedback</span>
+        </button>
       </div>
 
       {/* Footer Links */}
@@ -287,6 +300,12 @@ export default function HomePage() {
           About this app
         </Link>
       </div>
+
+      {/* Feedback Modal */}
+      <FeedbackModal 
+        isOpen={isFeedbackModalOpen}
+        onClose={() => setIsFeedbackModalOpen(false)}
+      />
 
     </div>
   );
