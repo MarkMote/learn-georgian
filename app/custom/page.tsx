@@ -201,9 +201,7 @@ function CustomPageContent() {
     setRevealedExamples(new Set([...revealedExamples, wordKey]));
   };
 
-  const wordProgress = knownWords.length > 0 
-    ? `${currentIndex + 1} / ${knownWords.length}` 
-    : '0 / 0';
+  const wordProgress = `${knownWords.length} / ${customWords.length}`;
     
   const percentageScore = knownWords.length > 0
     ? Math.round((knownWords.filter(w => w.easinessFactor >= 2.5).length / knownWords.length) * 100)
