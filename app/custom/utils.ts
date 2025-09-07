@@ -26,8 +26,8 @@ export function parseCustomCSV(csvText: string): CustomWord[] {
     const line = lines[i].trim();
     if (!line) continue;
 
-    // Simple CSV parsing - split by comma and handle basic quotes
-    const columns = line.split(',').map(col => col.trim().replace(/^"|"$/g, ''));
+    // Proper CSV parsing that handles quoted fields with commas
+    const columns = parseCSVLine(line);
     
     if (columns.length < 2) continue; // Need at least front and back
     
@@ -43,6 +43,44 @@ export function parseCustomCSV(csvText: string): CustomWord[] {
   }
   
   return words;
+}
+
+// Proper CSV line parsing that handles quoted fields with commas
+function parseCSVLine(line: string): string[] {
+  const columns: string[] = [];
+  let current = '';
+  let inQuotes = false;
+  let i = 0;
+  
+  while (i < line.length) {
+    const char = line[i];
+    
+    if (char === '"') {
+      if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+        // Escaped quote ("") -> single quote
+        current += '"';
+        i += 2;
+      } else {
+        // Toggle quote state
+        inQuotes = !inQuotes;
+        i++;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // End of column
+      columns.push(current.trim());
+      current = '';
+      i++;
+    } else {
+      // Regular character
+      current += char;
+      i++;
+    }
+  }
+  
+  // Don't forget the last column
+  columns.push(current.trim());
+  
+  return columns;
 }
 
 // Save custom words to localStorage
