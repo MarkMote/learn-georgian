@@ -200,8 +200,8 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
               <span>10 (Rare)</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Forces introduction of a new card after this many consecutive "Easy" ratings,
-              even if risk threshold hasn't been reached. Prevents getting stuck on one card.
+              Forces introduction of a new card after this many consecutive &quot;Easy&quot; ratings,
+              even if risk threshold hasn&apos;t been reached. Prevents getting stuck on one card.
             </p>
           </div>
 

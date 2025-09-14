@@ -13,10 +13,16 @@ export interface UserConfigOverride {
 const CONFIG_STORAGE_KEY = 'srs_config_override';
 
 export function saveUserConfig(config: UserConfigOverride): void {
-  localStorage.setItem(CONFIG_STORAGE_KEY, JSON.stringify(config));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(CONFIG_STORAGE_KEY, JSON.stringify(config));
+  }
 }
 
 export function loadUserConfig(): UserConfigOverride | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   try {
     const stored = localStorage.getItem(CONFIG_STORAGE_KEY);
     if (!stored) return null;
@@ -28,7 +34,9 @@ export function loadUserConfig(): UserConfigOverride | null {
 }
 
 export function clearUserConfig(): void {
-  localStorage.removeItem(CONFIG_STORAGE_KEY);
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(CONFIG_STORAGE_KEY);
+  }
 }
 
 export function getMergedConfig(): SRSConfig {

@@ -75,7 +75,7 @@ function CustomPageContent() {
           if (!isFlipped) setIsFlipped(true);
           break;
         case "i":
-          setShowEnglish((prev) => !prev);
+          setShowEnglish(!showEnglish);
           break;
         case "r":
           if (isFlipped) handleScore("easy");
