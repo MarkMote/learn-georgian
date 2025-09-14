@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, Home } from 'lucide-react';
+import { Menu, X, Home, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { KnownWordState, ReviewMode, ExampleMode } from '../types';
 
@@ -20,6 +20,7 @@ interface TopBarProps {
   reviewMode: ReviewMode;
   onModeChange: (mode: ReviewMode) => void;
   hasExampleWords: boolean;
+  onOpenSRSSettings: () => void;
 }
 
 export default function TopBar({
@@ -37,6 +38,7 @@ export default function TopBar({
   reviewMode,
   onModeChange,
   hasExampleWords,
+  onOpenSRSSettings,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
@@ -191,6 +193,15 @@ export default function TopBar({
                       </div>
                     </div>
                   )}
+                </li>
+                <li>
+                  <button
+                    onClick={onOpenSRSSettings}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <Settings size={16} />
+                    SRS Settings
+                  </button>
                 </li>
                 <li>
                   <button

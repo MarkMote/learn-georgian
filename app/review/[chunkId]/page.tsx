@@ -8,6 +8,7 @@ import TopBar from './components/TopBar';
 import LessonModal from './components/LessonModal';
 import ProgressModal from './components/ProgressModal';
 import HybridDebugPanel from './components/HybridDebugPanel';
+import SRSConfigPanel from './components/SRSConfigPanel';
 import { useReviewState } from './hooks/useReviewState';
 import { useUIState } from './hooks/useUIState';
 import { useLessonModal } from './hooks/useLessonModal';
@@ -30,6 +31,7 @@ export default function ReviewPage() {
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [chunkWords, setChunkWords] = useState<WordData[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
+  const [isSRSConfigOpen, setIsSRSConfigOpen] = useState(false);
   
   // Get review mode and debug flag from URL params
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
@@ -207,6 +209,14 @@ export default function ReviewPage() {
       return "off";
     });
   };
+
+  const handleSRSConfigChange = () => {
+    // Config will be automatically picked up by useReviewState on next render
+    // Just close the modal and the component will re-render with new config
+    setIsSRSConfigOpen(false);
+    // Force a re-render by updating state
+    window.location.reload();
+  };
   
   const handleModeChange = (newMode: ReviewMode) => {
     // Update URL with new mode
@@ -318,6 +328,7 @@ export default function ReviewPage() {
         reviewMode={reviewMode}
         onModeChange={handleModeChange}
         hasExampleWords={hasExampleWords}
+        onOpenSRSSettings={() => setIsSRSConfigOpen(true)}
       />
 
       <div className="flex items-center justify-center px-4" style={{ height: 'calc(100svh - 140px)' }}>
@@ -361,6 +372,11 @@ export default function ReviewPage() {
         globalStep={globalStep}
       />
 
+      <SRSConfigPanel
+        isOpen={isSRSConfigOpen}
+        onClose={() => setIsSRSConfigOpen(false)}
+        onConfigChange={handleSRSConfigChange}
+      />
 
       </div>
     </div>

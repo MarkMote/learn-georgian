@@ -9,12 +9,12 @@ export const DEFAULT_CONFIG: SRSConfig = {
 
   // Stability multipliers for different grades (how much memory strength changes)
   hardGrowth: 0.1,    // Hard: slight increase in stability (20% growth)
-  goodGrowth: 0.5,    // Good: moderate increase in stability (60% growth)
+  goodGrowth: 0.4,    // Good: moderate increase in stability (60% growth)
   easyGrowth: 1,    // Easy: large increase in stability (100% growth)
   failShrink: 0.4,    // Fail: reduce stability by half (40% of original)
 
   // Card introduction thresholds
-  riskThreshold: 0.5,      // Introduce new card when highest risk drops below 45%
+  riskThreshold: 0.45,      // Introduce new card when highest risk drops below 45%
   maxConsecutiveEasy: 5,   // Introduce new card after 5 consecutive easy grades
 
   // Stability bounds (in days)

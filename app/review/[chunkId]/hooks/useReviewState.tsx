@@ -11,6 +11,7 @@ import {
   calculateDeckStats,
   DEFAULT_CONFIG
 } from "../../../../lib/spacedRepetition";
+import { getMergedConfig } from "../../../../lib/spacedRepetition/lib/configManager";
 
 // Convert difficulty rating to grade
 function difficultyToGrade(difficulty: DifficultyRating): Grade {
@@ -80,6 +81,8 @@ export function useReviewState(
   reviewMode: string = "normal",
   filterPredicate?: (word: WordData) => boolean
 ): UseReviewStateReturn {
+  // Get user-configured or default SRS config
+  const config = useMemo(() => getMergedConfig(), []);
 
   // Filter words based on review mode
   const availableWords = useMemo(() => {
@@ -116,17 +119,17 @@ export function useReviewState(
       setCardStates(saved.cardStates);
       setDeckState(prev => ({
         ...saved.deckState,
-        stats: calculateDeckStats(saved.cardStates, saved.deckState, DEFAULT_CONFIG)
+        stats: calculateDeckStats(saved.cardStates, saved.deckState, config)
       }));
     } else {
-      const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords, DEFAULT_CONFIG);
+      const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords, config);
       setCardStates(initialCards);
       setDeckState({
         ...initialDeck,
-        stats: calculateDeckStats(initialCards, initialDeck, DEFAULT_CONFIG)
+        stats: calculateDeckStats(initialCards, initialDeck, config)
       });
     }
-  }, [chunkId, reviewMode, availableWords.length]);
+  }, [chunkId, reviewMode, availableWords.length, config]);
 
   // Save state when it changes
   useEffect(() => {
@@ -158,7 +161,7 @@ export function useReviewState(
       currentCardState,
       deckState,
       grade,
-      DEFAULT_CONFIG
+      config
     );
 
     // Update card states
@@ -170,7 +173,7 @@ export function useReviewState(
       newCardStates,
       updatedDeck,
       availableWords,
-      DEFAULT_CONFIG,
+      config,
       filterPredicate
     );
 
@@ -182,7 +185,7 @@ export function useReviewState(
         newCardStates,
         updatedDeck,
         availableWords,
-        DEFAULT_CONFIG
+        config
       );
 
       if (newCardKey) {
@@ -206,7 +209,7 @@ export function useReviewState(
     }
 
     // Calculate updated stats
-    const newStats = calculateDeckStats(finalCardStates, finalDeckState, DEFAULT_CONFIG);
+    const newStats = calculateDeckStats(finalCardStates, finalDeckState, config);
     finalDeckState.stats = newStats;
 
     // Debug logging
@@ -220,7 +223,7 @@ export function useReviewState(
     // Update state
     setCardStates(finalCardStates);
     setDeckState(finalDeckState);
-  }, [currentCardState, deckState, cardStates, availableWords, filterPredicate]);
+  }, [currentCardState, deckState, cardStates, availableWords, filterPredicate, config]);
 
   // Clear progress
   const clearProgress = useCallback(() => {
@@ -230,13 +233,13 @@ export function useReviewState(
       console.warn("Failed to clear stored state:", error);
     }
 
-    const { cardStates: freshCards, deckState: freshDeck } = initializeDeck(availableWords, DEFAULT_CONFIG);
+    const { cardStates: freshCards, deckState: freshDeck } = initializeDeck(availableWords, config);
     setCardStates(freshCards);
     setDeckState({
       ...freshDeck,
-      stats: calculateDeckStats(freshCards, freshDeck, DEFAULT_CONFIG)
+      stats: calculateDeckStats(freshCards, freshDeck, config)
     });
-  }, [chunkId, reviewMode, availableWords]);
+  }, [chunkId, reviewMode, availableWords, config]);
 
   // Legacy compatibility - convert to old format for existing UI
   const knownWords = useMemo(() => {
