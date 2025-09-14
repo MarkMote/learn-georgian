@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { ChunkData, KnownChunkState, DifficultyRating, ReviewMode } from "../../../app/chunks/[chunkId]/types";
-import { ReviewCard, SpacedRepetitionConfig } from "../types";
-import { configPresets, mergeConfig } from "../config";
-import { 
+import { ReviewCard, SpacedRepetitionConfig } from "../legacy/config";
+import { configPresets, mergeConfig } from "../legacy";
+import {
   calculateCognitiveLoad,
   shouldIntroduceNewCard,
   selectNextCard,
   updateCardWithSM2,
   updateLastSeenCounters
-} from "../algorithm";
+} from "../legacy";
 
 // Convert between legacy KnownChunkState and generic ReviewCard
 function knownChunkToReviewCard(kc: KnownChunkState): ReviewCard<ChunkData> {

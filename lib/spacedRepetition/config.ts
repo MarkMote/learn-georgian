@@ -1,72 +1,21 @@
-import { SpacedRepetitionConfig, CardPriorityParams } from "./types";
+// lib/spacedRepetition/config.ts
 
-// Default configuration matching the original /review route behavior
-export const defaultConfig: SpacedRepetitionConfig = {
-  // Ease factor bounds (from original code)
-  minEaseFactor: 1.3,
-  maxEaseFactor: 3.0,
-  initialEaseFactor: 2.5,
-  
-  // Interval bounds
-  minInterval: 1,
-  maxInterval: 365, // Max 1 year
-  
-  // Cognitive load settings (from original code)
-  cognitiveLoadThreshold: 5,
-  cognitiveLoadScalingFactor: 0.04,
-  cognitiveLoadBaseThreshold: 50, // Start scaling after 50 cards
-  
-  // Introduction triggers
-  performanceThreshold: 0.75, // 75% average performance needed
-  
-  // Ease factor adjustments per rating
-  easeAdjustments: {
-    fail: 0, // No adjustment, reset to initial
-    hard: -0.15, // Reduce ease factor
-    good: 0, // No adjustment
-    easy: 0.15, // Increase ease factor
-  },
-  
-  // Interval multipliers
-  intervalMultipliers: {
-    easy: 1.3, // Additional multiplier for easy cards
-  },
+import { SRSConfig } from './types';
+
+export const DEFAULT_CONFIG: SRSConfig = {
+  // Memory decay parameters
+  beta: 1.0,           // Exponential decay curve
+  minStability: 1,     // Minimum 1 step stability
+
+  // Stability growth factors
+  hardGrowth: 0.15,    // 15% growth for "hard"
+  goodGrowth: 0.45,    // 45% growth for "good"
+  easyGrowth: 8,       // 800% growth for "easy"
+
+  // Failure parameters
+  failShrink: 0.7,     // 70% reduction on failure
+
+  // Card introduction
+  introRiskThreshold: 0.30,       // Introduce when avg risk < 30%
+  consecutiveEasyThreshold: 4      // Introduce after 4 easy grades
 };
-
-// Card priority calculation weights (from original calculateCardPriority)
-export const defaultPriorityParams: CardPriorityParams = {
-  lastSeenWeight: 1.0,
-  intervalWeight: 1.0,
-  ratingWeight: 1.0,
-};
-
-// Configuration presets for different routes
-export const configPresets = {
-  review: defaultConfig,
-  custom: {
-    ...defaultConfig,
-    // Custom route doesn't use cognitive load thresholds for introduction
-    cognitiveLoadThreshold: Infinity,
-    performanceThreshold: Infinity,
-  },
-  chunks: defaultConfig,
-} as const;
-
-// Merge partial config with defaults
-export function mergeConfig(
-  partial: Partial<SpacedRepetitionConfig>,
-  base: SpacedRepetitionConfig = defaultConfig
-): SpacedRepetitionConfig {
-  return {
-    ...base,
-    ...partial,
-    easeAdjustments: {
-      ...base.easeAdjustments,
-      ...(partial.easeAdjustments || {}),
-    },
-    intervalMultipliers: {
-      ...base.intervalMultipliers,
-      ...(partial.intervalMultipliers || {}),
-    },
-  };
-}

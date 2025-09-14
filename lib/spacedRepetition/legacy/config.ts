@@ -1,4 +1,41 @@
-import { SpacedRepetitionConfig, CardPriorityParams } from "./types";
+// lib/spacedRepetition/legacy/config.ts
+
+export interface SpacedRepetitionConfig {
+  minEaseFactor: number;
+  maxEaseFactor: number;
+  initialEaseFactor: number;
+  minInterval: number;
+  maxInterval: number;
+  cognitiveLoadThreshold: number;
+  cognitiveLoadScalingFactor: number;
+  cognitiveLoadBaseThreshold: number;
+  performanceThreshold: number;
+  easeAdjustments: {
+    fail: number;
+    hard: number;
+    good: number;
+    easy: number;
+  };
+  intervalMultipliers: {
+    easy: number;
+  };
+}
+
+export interface CardPriorityParams {
+  lastSeenWeight: number;
+  intervalWeight: number;
+  ratingWeight: number;
+}
+
+export interface ReviewCard<T = any> {
+  data: T;
+  rating: number;
+  lastSeen: number;
+  interval: number;
+  repetitions: number;
+  easeFactor: number;
+  exampleIndex?: number;
+}
 
 // Default configuration matching the original /review route behavior
 export const defaultConfig: SpacedRepetitionConfig = {

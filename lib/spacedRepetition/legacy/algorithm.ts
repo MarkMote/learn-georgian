@@ -1,10 +1,14 @@
-import { 
-  DifficultyRating, 
-  ReviewCard, 
+// lib/spacedRepetition/legacy/algorithm.ts
+
+import {
+  ReviewCard,
   SpacedRepetitionConfig,
-  CardPriorityParams 
-} from "./types";
-import { defaultConfig, defaultPriorityParams } from "./config";
+  CardPriorityParams,
+  defaultConfig,
+  defaultPriorityParams
+} from "./config";
+
+export type DifficultyRating = "fail" | "hard" | "good" | "easy";
 
 /**
  * Convert difficulty rating to numeric score (0-3)

@@ -32,7 +32,7 @@ export default function AlgorithmTester({
   const [isVisible, setIsVisible] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const runTest = async (
     testName: string,

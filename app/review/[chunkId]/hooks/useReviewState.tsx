@@ -1,8 +1,10 @@
+// app/review/[chunkId]/hooks/useReviewState.tsx
+
 import { useCallback, useMemo } from "react";
 import { WordData, DifficultyRating, ReviewMode } from "../types";
 import { useSpacedRepetition } from "../../../../lib/spacedRepetition/adapters/reviewAdapter";
 import { useUIState } from "./useUIState";
-import { Grade } from "../../../../lib/spacedRepetition/algorithm";
+import { Grade } from "../../../../lib/spacedRepetition/types";
 
 // Convert difficulty rating to SRS grade
 function difficultyToGrade(difficulty: DifficultyRating): Grade {
@@ -79,9 +81,9 @@ export function useReviewState(
     return deck.cards.map((card, idx) => ({
       data: card.data,
       rating: 2, // Default for compatibility
-      lastSeen: deck.globalStep - card.lastStep,
+      lastSeen: deck.currentStep - card.lastReviewStep,
       interval: Math.round(card.stability),
-      repetitions: card.seen,
+      repetitions: card.reviewCount,
       easeFactor: 2.5, // Legacy field
       exampleIndex: 0
     }));
@@ -96,7 +98,7 @@ export function useReviewState(
 
     // Statistics
     cognitiveLoad: stats.averageRisk,
-    globalStep: deck.globalStep,
+    globalStep: deck.currentStep,
     consecutiveEasyCount: consecutiveEasy,
 
     // UI state (delegated)
@@ -105,6 +107,7 @@ export function useReviewState(
     // Actions
     handleScore,
     clearProgress,
+    setCurrentIndex: (_: number) => {}, // No-op - card selection is managed by the session
 
     // Debug/info
     reviewMode,

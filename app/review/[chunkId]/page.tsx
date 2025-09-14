@@ -10,7 +10,7 @@ import ProgressModal from './components/ProgressModal';
 import DebugPanel from './components/DebugPanel';
 import { useReviewState } from './hooks/useReviewState';
 import { useLessonModal } from './hooks/useLessonModal';
-import { DEFAULT_CONFIG } from '../../../lib/spacedRepetition/algorithm';
+import { DEFAULT_CONFIG } from '../../../lib/spacedRepetition';
 import { WordData, ReviewMode } from './types';
 import { 
   parseCSV, 
@@ -34,6 +34,7 @@ export default function ReviewPage() {
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
   const showDebug = searchParams.get('debug') !== null;
 
+  // Core Algorithm State Management Function
   const {
     knownWords,
     currentIndex,

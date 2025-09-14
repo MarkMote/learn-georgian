@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Deck, SRSConfig, forgettingRisk } from "../../../../lib/spacedRepetition/algorithm";
+import { Card, Deck, SRSConfig, forgettingRisk } from "../../../../lib/spacedRepetition";
 import { WordData } from "../types";
 
 interface DebugPanelProps {
@@ -21,8 +21,8 @@ export default function DebugPanel({
 }: DebugPanelProps) {
   // Calculate stats for each card
   const cardStats = deck.cards.map((card, idx) => {
-    const risk = forgettingRisk(card, deck.globalStep, config);
-    const stepsSince = deck.globalStep - card.lastStep;
+    const risk = forgettingRisk(card, deck.currentStep, config);
+    const stepsSince = deck.currentStep - card.lastReviewStep;
     return { card, risk, stepsSince, index: idx };
   });
 
@@ -35,7 +35,7 @@ export default function DebugPanel({
         <h2 className="text-lg font-bold mb-2">Debug Panel</h2>
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
-            <span className="text-gray-400">Step:</span> {deck.globalStep}
+            <span className="text-gray-400">Step:</span> {deck.currentStep}
           </div>
           <div>
             <span className="text-gray-400">Cards:</span> {deck.cards.length}
@@ -59,11 +59,11 @@ export default function DebugPanel({
         <h3 className="text-sm font-semibold mb-2 text-gray-300">Config</h3>
         <div className="grid grid-cols-2 gap-1 text-xs mb-4">
           <div><span className="text-gray-500">Beta:</span> {config.beta}</div>
-          <div><span className="text-gray-500">sMin:</span> {config.sMin}</div>
-          <div><span className="text-gray-500">gHard:</span> {config.gHard}</div>
-          <div><span className="text-gray-500">gGood:</span> {config.gGood}</div>
-          <div><span className="text-gray-500">gEasy:</span> {config.gEasy}</div>
-          <div><span className="text-gray-500">kFail:</span> {config.kFail}</div>
+          <div><span className="text-gray-500">minStability:</span> {config.minStability}</div>
+          <div><span className="text-gray-500">hardGrowth:</span> {config.hardGrowth}</div>
+          <div><span className="text-gray-500">goodGrowth:</span> {config.goodGrowth}</div>
+          <div><span className="text-gray-500">easyGrowth:</span> {config.easyGrowth}</div>
+          <div><span className="text-gray-500">failShrink:</span> {config.failShrink}</div>
         </div>
 
         <h3 className="text-sm font-semibold mb-2 text-gray-300">Cards (by risk)</h3>
@@ -90,11 +90,8 @@ export default function DebugPanel({
                 const displayWord = word.length > 20 ? word.slice(0, 18) + "..." : word;
                 // Calculate when card should be reviewed next (at 50% recall)
                 const nextReview = Math.round(card.stability * Math.pow(-Math.log(0.5), 1/config.beta));
-                // Convert grade to display
-                const gradeDisplay = card.lastGrade === 0 ? "F" :
-                                    card.lastGrade === 1 ? "H" :
-                                    card.lastGrade === 2 ? "G" :
-                                    card.lastGrade === 3 ? "E" : "-";
+                // Grade display not available in new system
+                const gradeDisplay = "-";
 
                 return (
                   <tr
@@ -106,7 +103,7 @@ export default function DebugPanel({
                     `}
                   >
                     <td className="py-1 px-1 text-gray-500">
-                      {card.introOrder !== undefined ? card.introOrder : "-"}
+                      {card.introducedAtStep || "-"}
                     </td>
                     <td className="py-1 px-1">
                       {isCurrent ? "→" : ""}{index}
@@ -121,19 +118,13 @@ export default function DebugPanel({
                       {card.stability.toFixed(1)}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {card.seen}
+                      {card.reviewCount}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {card.lapses}
+                      {card.lapseCount}
                     </td>
                     <td className="text-center py-1 px-1">
-                      <span className={
-                        gradeDisplay === "F" ? "text-red-500 font-bold" :
-                        gradeDisplay === "H" ? "text-orange-400" :
-                        gradeDisplay === "G" ? "text-green-400" :
-                        gradeDisplay === "E" ? "text-blue-400 font-bold" :
-                        "text-gray-600"
-                      }>
+                      <span className="text-gray-600">
                         {gradeDisplay}
                       </span>
                     </td>
@@ -161,15 +152,15 @@ export default function DebugPanel({
             </div>
             <div>
               <span className="text-gray-500">New Cards (seen &lt; 2):</span>{" "}
-              {deck.cards.filter(c => c.seen < 2).length}
+              {deck.cards.filter(c => c.reviewCount < 2).length}
             </div>
             <div>
               <span className="text-gray-500">Mature Cards:</span>{" "}
-              {deck.cards.filter(c => c.seen >= 2).length}
+              {deck.cards.filter(c => c.reviewCount >= 2).length}
             </div>
             <div>
               <span className="text-gray-500">Failed Cards:</span>{" "}
-              {deck.cards.filter(c => c.lapses > 0).length}
+              {deck.cards.filter(c => c.lapseCount > 0).length}
             </div>
           </div>
         </div>

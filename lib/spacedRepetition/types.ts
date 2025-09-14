@@ -1,59 +1,67 @@
-export type DifficultyRating = "fail" | "hard" | "good" | "easy";
+// lib/spacedRepetition/types.ts
 
-export interface ReviewCard<T = any> {
+// Core types for spaced repetition system
+export type Grade = 0 | 1 | 2 | 3; // fail, hard, good, easy
+
+export interface Card<T = any> {
+  id: string;
   data: T;
-  rating: number; // 0-3 score
-  lastSeen: number;
-  interval: number;
-  repetitions: number;
-  easeFactor: number;
-  exampleIndex?: number; // For cards with multiple examples
+  stability: number;    // S >= 1, represents memory strength
+  lastReviewStep: number;
+  reviewCount: number;
+  lapseCount: number;
+  introducedAtStep: number;
 }
 
-export interface SpacedRepetitionConfig {
-  // Ease factor bounds
-  minEaseFactor: number;
-  maxEaseFactor: number;
-  initialEaseFactor: number;
-  
-  // Interval bounds
-  minInterval: number;
-  maxInterval: number;
-  
-  // Cognitive load settings
-  cognitiveLoadThreshold: number;
-  cognitiveLoadScalingFactor: number;
-  cognitiveLoadBaseThreshold: number;
-  
-  // Introduction triggers
-  performanceThreshold: number; // Average score needed to introduce new cards
-  
-  // Ease factor adjustments per rating
-  easeAdjustments: {
-    fail: number;
-    hard: number;
-    good: number;
-    easy: number;
-  };
-  
-  // Interval multipliers
-  intervalMultipliers: {
-    easy: number;
-  };
+export interface Deck<T = any> {
+  cards: Card<T>[];
+  currentStep: number;
 }
 
-export interface CardPriorityParams {
-  lastSeenWeight: number;
-  intervalWeight: number;
-  ratingWeight: number;
+export interface SRSConfig {
+  // Memory decay parameters
+  beta: number;         // 0.9-1.0, decay curve shape
+  minStability: number; // minimum stability value
+
+  // Stability growth factors
+  hardGrowth: number;   // growth factor for "hard" grade
+  goodGrowth: number;   // growth factor for "good" grade
+  easyGrowth: number;   // growth factor for "easy" grade
+
+  // Failure parameters
+  failShrink: number;   // shrink factor on failure (0-1)
+
+  // Card introduction
+  introRiskThreshold: number;  // max average risk for introducing new cards
+  consecutiveEasyThreshold: number; // consecutive easy grades to force introduction
 }
 
-export interface ReviewSessionState<T> {
-  cards: ReviewCard<T>[];
-  currentIndex: number;
-  sessionStats?: {
-    cardsReviewed: number;
-    correctCount: number;
-    failCount: number;
-  };
+export interface ReviewResult<T> {
+  updatedCard: Card<T>;
+  shouldIntroduceNew: boolean;
+  nextCardId: string | null;
 }
+
+export interface DeckStats {
+  totalCards: number;
+  averageRisk: number;
+  cardsAtRisk: number; // cards with >50% forgetting risk
+}
+
+// Session types for managing review state
+export interface ReviewSession<T> {
+  deck: Deck<T>;
+  config: SRSConfig;
+  currentCardId: string | null;
+  consecutiveEasyCount: number;
+  availableItems: T[]; // items not yet in deck
+  stats: DeckStats;
+}
+
+// Actions for state updates
+export type SessionAction<T> =
+  | { type: 'GRADE_CARD'; grade: Grade }
+  | { type: 'INTRODUCE_CARD'; item: T }
+  | { type: 'SELECT_NEXT_CARD' }
+  | { type: 'RESET_SESSION' }
+  | { type: 'LOAD_SESSION'; session: ReviewSession<T> };

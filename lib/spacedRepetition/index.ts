@@ -1,10 +1,37 @@
-// Core algorithm exports
-export * from './algorithm';
-export * from './types';
-export * from './config';
-export * from './state';
+// lib/spacedRepetition/index.ts
 
-// Adapter exports
-export { useReviewState } from './adapters/reviewAdapter';
-export { useCustomReviewState } from './adapters/customAdapter';
-export { useChunkState } from './adapters/chunksAdapter';
+// Main public API for spaced repetition system
+
+// Export types
+export type {
+  Grade,
+  Card,
+  Deck,
+  SRSConfig,
+  ReviewSession,
+  SessionAction,
+  DeckStats,
+  ReviewResult
+} from './types';
+
+// Export configuration
+export { DEFAULT_CONFIG } from './config';
+
+// Export core algorithm functions
+export {
+  reviewCard,
+  createCard,
+  processReview,
+  calculateDeckStats,
+  selectNextCard,
+  forgettingRisk
+} from './lib/algorithm';
+
+// Export session management
+export {
+  initializeSession,
+  processSessionAction,
+  saveSession,
+  loadSession,
+  clearSession
+} from './lib/session';
