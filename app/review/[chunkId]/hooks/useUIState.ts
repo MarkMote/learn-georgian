@@ -16,7 +16,7 @@ export function useUIState({ chunkId, mode }: UIStateOptions) {
   const [isLeftHanded, setIsLeftHanded] = useState(false);
   const [skipVerbs, setSkipVerbs] = useState(false);
   const [showImageHint, setShowImageHint] = useState(true);
-  const [showExamples, setShowExamples] = useState<ExampleMode>("tap");
+  const [showExamples, setShowExamples] = useState<ExampleMode>("tap-ka");
 
   // Example reveal state
   const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
@@ -32,7 +32,7 @@ export function useUIState({ chunkId, mode }: UIStateOptions) {
         const prefs = JSON.parse(stored);
         setIsLeftHanded(prefs.isLeftHanded ?? false);
         setSkipVerbs(prefs.skipVerbs ?? false);
-        setShowExamples(prefs.showExamples ?? "tap");
+        setShowExamples(prefs.showExamples ?? "tap-ka");
       } catch (err) {
         console.error("Failed to load UI preferences:", err);
       }

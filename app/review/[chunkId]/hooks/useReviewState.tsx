@@ -119,7 +119,7 @@ export function useReviewState(
         stats: calculateDeckStats(saved.cardStates, saved.deckState, DEFAULT_CONFIG)
       }));
     } else {
-      const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords);
+      const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords, DEFAULT_CONFIG);
       setCardStates(initialCards);
       setDeckState({
         ...initialDeck,
@@ -181,7 +181,8 @@ export function useReviewState(
       const { cardStates: cardsWithNew, newCardKey } = introduceNewCard(
         newCardStates,
         updatedDeck,
-        availableWords
+        availableWords,
+        DEFAULT_CONFIG
       );
 
       if (newCardKey) {
@@ -208,6 +209,14 @@ export function useReviewState(
     const newStats = calculateDeckStats(finalCardStates, finalDeckState, DEFAULT_CONFIG);
     finalDeckState.stats = newStats;
 
+    // Debug logging
+    console.log('Grade applied:', difficulty, 'grade:', grade);
+    console.log('Updated card:', updatedCard);
+    console.log('Final deck state:', {
+      currentStep: finalDeckState.currentStep,
+      currentCardKey: finalDeckState.currentCardKey
+    });
+
     // Update state
     setCardStates(finalCardStates);
     setDeckState(finalDeckState);
@@ -221,7 +230,7 @@ export function useReviewState(
       console.warn("Failed to clear stored state:", error);
     }
 
-    const { cardStates: freshCards, deckState: freshDeck } = initializeDeck(availableWords);
+    const { cardStates: freshCards, deckState: freshDeck } = initializeDeck(availableWords, DEFAULT_CONFIG);
     setCardStates(freshCards);
     setDeckState({
       ...freshDeck,
@@ -239,7 +248,7 @@ export function useReviewState(
         data: wordData,
         rating: 2, // Default for compatibility
         lastSeen: deckState.currentStep - cardState.lastReviewStep,
-        interval: Math.round(cardState.stability),
+        interval: cardState.stability,
         repetitions: cardState.reviewCount,
         easeFactor: 2.5 // Legacy field
       };

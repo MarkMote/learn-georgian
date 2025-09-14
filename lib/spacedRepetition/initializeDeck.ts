@@ -1,11 +1,11 @@
 // lib/spacedRepetition/initializeDeck.ts
 
-import { WordData, CardState, DeckState } from './types';
+import { WordData, CardState, DeckState, SRSConfig } from './types';
 
 /**
  * Initialize deck with first card
  */
-export function initializeDeck(availableWords: WordData[]): { cardStates: Map<string, CardState>; deckState: DeckState } {
+export function initializeDeck(availableWords: WordData[], config: SRSConfig): { cardStates: Map<string, CardState>; deckState: DeckState } {
   const cardStates = new Map<string, CardState>();
 
   // Start with first word if available
@@ -13,7 +13,7 @@ export function initializeDeck(availableWords: WordData[]): { cardStates: Map<st
     const firstWord = availableWords[0];
     cardStates.set(firstWord.key, {
       key: firstWord.key,
-      stability: 1.0, // Initial stability of 1 day
+      stability: config.initialStability,
       lastReviewStep: 0,
       reviewCount: 0,
       lapseCount: 0,

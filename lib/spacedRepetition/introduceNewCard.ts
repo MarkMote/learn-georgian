@@ -1,6 +1,6 @@
 // lib/spacedRepetition/introduceNewCard.ts
 
-import { CardState, DeckState, WordData } from './types';
+import { CardState, DeckState, WordData, SRSConfig } from './types';
 
 /**
  * Introduce a new card to the deck
@@ -8,7 +8,8 @@ import { CardState, DeckState, WordData } from './types';
 export function introduceNewCard(
   cardStates: Map<string, CardState>,
   deckState: DeckState,
-  availableWords: WordData[]
+  availableWords: WordData[],
+  config: SRSConfig
 ): { cardStates: Map<string, CardState>; newCardKey: string | null } {
 
   // Find next word to introduce
@@ -22,7 +23,7 @@ export function introduceNewCard(
   // Create new card state
   const newCardState: CardState = {
     key: nextWord.key,
-    stability: 1.0,
+    stability: config.initialStability,
     lastReviewStep: deckState.currentStep,
     reviewCount: 0,
     lapseCount: 0,

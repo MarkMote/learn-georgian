@@ -2,6 +2,7 @@
 
 import React from "react";
 import { CardState, DeckState, SRSConfig } from "../../../../lib/spacedRepetition/types";
+import { calculateRisk } from "../../../../lib/spacedRepetition/lib/calculateRisk";
 import { WordData } from "../types";
 
 interface HybridDebugPanelProps {
@@ -15,11 +16,7 @@ interface HybridDebugPanelProps {
   currentIndex: number;
 }
 
-// Calculate forgetting risk (matching the algorithm)
-function calculateRisk(stability: number, daysSinceReview: number, beta: number): number {
-  if (daysSinceReview <= 0) return 0;
-  return 1 - Math.exp(-Math.pow(daysSinceReview / stability, beta));
-}
+// Using imported calculateRisk function from core library
 
 export default function HybridDebugPanel({
   deckState,
@@ -37,6 +34,19 @@ export default function HybridDebugPanel({
     const stepsSince = knownWord.lastSeen;
     const stability = knownWord.interval; // Using interval as stability approximation
     const risk = calculateRisk(stability, stepsSince, config.beta);
+
+    // Debug logging - show current card being reviewed
+    if (knownWord.data.key === deckState.currentCardKey) {
+      console.log('Debug - CURRENT card:', {
+        word: knownWord.data.GeorgianWord,
+        key: knownWord.data.key,
+        stepsSince,
+        stability,
+        risk: (risk * 100).toFixed(1) + '%',
+        deckStep: deckState.currentStep,
+        cardLastReview: currentCardState?.lastReviewStep
+      });
+    }
 
     return {
       word: knownWord,

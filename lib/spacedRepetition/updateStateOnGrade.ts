@@ -13,19 +13,19 @@ export function updateStateOnGrade(
   config: SRSConfig
 ): { cardState: CardState; deckState: DeckState } {
 
-  // Update card
+  // Update card - reviewed at current step
   const updatedCard: CardState = {
     ...cardState,
     stability: updateStability(cardState, grade, config),
-    lastReviewStep: deckState.currentStep,
+    lastReviewStep: deckState.currentStep, // Card reviewed at current step
     reviewCount: cardState.reviewCount + 1,
     lapseCount: grade === 0 ? cardState.lapseCount + 1 : cardState.lapseCount
   };
 
-  // Update deck
+  // Update deck - advance to next step
   const updatedDeck: DeckState = {
     ...deckState,
-    currentStep: deckState.currentStep + 1,
+    currentStep: deckState.currentStep + 1, // Advance deck step
     consecutiveEasyCount: grade === 3 ? deckState.consecutiveEasyCount + 1 : 0,
     stats: { ...deckState.stats } // Will be recalculated by caller
   };

@@ -132,19 +132,11 @@ export default function ChunkPage() {
   };
 
   const handleToggleExamples = () => {
-    setShowExamples(prev => {
-      if (prev === "off") return "on";
-      if (prev === "on") return "tap";
-      return "off";
-    });
+    // Chunks route disabled
   };
 
   const handleToggleExplanation = () => {
-    setShowExplanation(prev => {
-      if (prev === "off") return "on";
-      if (prev === "on") return "tap";
-      return "off";
-    });
+    // Chunks route disabled
   };
   
   const handleModeChange = (newMode: ReviewMode) => {
@@ -168,11 +160,11 @@ export default function ChunkPage() {
   const hasExampleChunks = chunkSet.some(c => c.example_en && c.example_ka);
 
   const handleRevealExamples = (chunkKey: string) => {
-    setRevealedExamples(prev => new Set([...prev, chunkKey]));
+    // Chunks route disabled
   };
 
   const handleRevealExplanation = (chunkKey: string) => {
-    setRevealedExplanations(prev => new Set([...prev, chunkKey]));
+    // Chunks route disabled
   };
 
   if (chunkSet.length === 0) {

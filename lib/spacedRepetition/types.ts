@@ -56,6 +56,7 @@ export interface SRSConfig {
   // Limits
   minStability: number;   // Minimum card stability (default: 0.1)
   maxStability: number;   // Maximum card stability (default: 365)
+  initialStability: number; // Starting stability for new cards (default: 1.0)
 }
 
 export type Grade = 0 | 1 | 2 | 3; // fail | hard | good | easy
