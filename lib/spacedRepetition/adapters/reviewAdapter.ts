@@ -1,389 +1,273 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { WordData, KnownWordState, DifficultyRating, ReviewMode, ExampleMode } from "../../../app/review/[chunkId]/types";
-import { ReviewCard, SpacedRepetitionConfig } from "../types";
-import { createReviewStateManager } from "../state";
-import { configPresets, mergeConfig } from "../config";
-import { 
-  calculateCognitiveLoad,
-  shouldIntroduceNewCard,
+import { useState, useEffect, useCallback } from "react";
+import {
+  Card,
+  Deck,
+  Grade,
+  SRSConfig,
+  DEFAULT_CONFIG,
+  createCard,
+  reviewCard,
   selectNextCard,
-  updateCardWithSM2,
-  updateLastSeenCounters
+  getDeckStats,
+  forgettingRisk
 } from "../algorithm";
 
-// Convert between legacy KnownWordState and generic ReviewCard
-function knownWordToReviewCard(kw: KnownWordState): ReviewCard<WordData> {
-  return {
-    data: kw.data,
-    rating: kw.rating,
-    lastSeen: kw.lastSeen,
-    interval: kw.interval,
-    repetitions: kw.repetitions,
-    easeFactor: kw.easeFactor,
-    exampleIndex: kw.exampleIndex
-  };
+// Threshold for introducing new cards
+const INTRO_RISK_THRESHOLD = 0.30;
+
+interface ReviewAdapterOptions<T> {
+  chunkId: string;
+  mode: string;
+  availableItems: T[];
+  getItemKey: (item: T) => string;
+  config?: Partial<SRSConfig>;
+  filterPredicate?: (item: T) => boolean;
 }
 
-function reviewCardToKnownWord(card: ReviewCard<WordData>): KnownWordState {
-  return {
-    data: card.data,
-    rating: card.rating,
-    lastSeen: card.lastSeen,
-    interval: card.interval,
-    repetitions: card.repetitions,
-    easeFactor: card.easeFactor,
-    exampleIndex: card.exampleIndex || 0
-  };
-}
+export function useSpacedRepetition<T>({
+  chunkId,
+  mode,
+  availableItems,
+  getItemKey,
+  config: userConfig,
+  filterPredicate
+}: ReviewAdapterOptions<T>) {
+  const config: SRSConfig = { ...DEFAULT_CONFIG, ...userConfig };
 
-function getLocalStorageKey(chunkId: string, mode: ReviewMode = "normal"): string {
-  return `reviewState_${chunkId}_${mode}`;
-}
-
-// Get unique word keys (for grouping related words)
-function getUniqueWordKeys(words: WordData[]): string[] {
-  const uniqueKeys = new Set<string>();
-  words.forEach(w => uniqueKeys.add(w.word_key));
-  return Array.from(uniqueKeys);
-}
-
-export function useReviewState(
-  chunkId: string, 
-  chunkWords: WordData[], 
-  reviewMode: ReviewMode = "normal",
-  customConfig?: Partial<SpacedRepetitionConfig>
-) {
-  const [knownWords, setKnownWords] = useState<KnownWordState[]>([]);
+  // Core SRS state
+  const [deck, setDeck] = useState<Deck<T>>({ cards: [], globalStep: 0 });
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [showEnglish, setShowEnglish] = useState<boolean>(false);
-  const [cardCounter, setCardCounter] = useState<number>(0);
-  const [skipVerbs, setSkipVerbs] = useState<boolean>(false);
-  const [isLeftHanded, setIsLeftHanded] = useState<boolean>(false);
-  const [showImageHint, setShowImageHint] = useState<boolean>(true);
-  const [showExamples, setShowExamples] = useState<ExampleMode>("tap-ka");
-  const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
-  const [cognitiveLoad, setCognitiveLoad] = useState<number>(0);
 
-  const knownWordsRef = useRef(knownWords);
-  
-  // Memoize config to prevent infinite loops
-  const config = useMemo(() => {
-    return mergeConfig(customConfig || {}, configPresets.review);
-  }, [customConfig]);
-  
+  // Card introduction state
+  const [consecutiveEasy, setConsecutiveEasy] = useState(0);
+
+  // Storage key
+  const storageKey = `srs_${chunkId}_${mode}_v3`;
+
+  // Load state from localStorage
   useEffect(() => {
-    knownWordsRef.current = knownWords;
-  }, [knownWords]);
+    if (availableItems.length === 0) return;
 
-  // Update cognitive load whenever knownWords or skipVerbs changes
-  useEffect(() => {
-    if (knownWords.length > 0) {
-      const relevantWords = skipVerbs
-        ? knownWords.filter(kw => {
-            const pos = kw.data.PartOfSpeech.toLowerCase();
-            return !pos.includes("verb") || pos.includes("adverb");
-          })
-        : knownWords;
-
-      if (relevantWords.length > 0) {
-        const cards = relevantWords.map(knownWordToReviewCard);
-        const currentCognitiveLoad = calculateCognitiveLoad(cards);
-        setCognitiveLoad(currentCognitiveLoad);
-      } else {
-        setCognitiveLoad(0);
-      }
-    } else {
-      setCognitiveLoad(0);
-    }
-  }, [knownWords, skipVerbs]);
-
-  // Function to clean up corrupted data and remove ALL duplicates
-  const cleanUpKnownWords = (words: KnownWordState[]): KnownWordState[] => {
-    console.log("🧹 CLEANUP: Starting with", words.length, "words");
-    
-    const cleaned = words.map(word => ({
-      ...word,
-      interval: Math.min(Math.max(word.interval || 1, 1), 365),
-      lastSeen: Math.max(word.lastSeen || 0, 0),
-      rating: Math.min(Math.max(word.rating || 0, 0), 3),
-      repetitions: Math.max(word.repetitions || 0, 0),
-      easeFactor: Math.min(Math.max(word.easeFactor || 2.5, 1.3), 3.0)
-    }));
-
-    // Identify all duplicates first
-    const keyCount = new Map<string, number>();
-    const duplicateKeys = new Set<string>();
-    
-    cleaned.forEach(word => {
-      const count = keyCount.get(word.data.key) || 0;
-      keyCount.set(word.data.key, count + 1);
-      if (count > 0) {
-        duplicateKeys.add(word.data.key);
-      }
-    });
-
-    if (duplicateKeys.size > 0) {
-      console.log("🔍 CLEANUP: Found duplicate keys:", Array.from(duplicateKeys));
-      console.log("🗑️ CLEANUP: Removing ALL instances of duplicate keys");
-    }
-
-    // Remove ALL instances of duplicate keys
-    const result = cleaned.filter(word => !duplicateKeys.has(word.data.key));
-    
-    console.log("🧹 CLEANUP: Finished with", result.length, "words. Removed", words.length - result.length, "words (including all duplicates)");
-
-    return result;
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowImageHint(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const introduceNextKnownWord = useCallback(() => {
-    if (chunkWords.length === 0) return;
-
-    const knownKeys = new Set(knownWords.map((k) => k.data.key));
-    
-    // Filter candidates based on mode
-    let candidates = chunkWords.filter((w) => !knownKeys.has(w.key));
-    
-    if (reviewMode === "examples" || reviewMode === "examples-reverse") {
-      // Only include words that have examples
-      candidates = candidates.filter(w => w.ExampleEnglish1 && w.ExampleGeorgian1);
-      if (candidates.length === 0) {
-        console.log("No more words with examples to introduce");
-        return;
-      }
-    }
-    
-    if (candidates.length === 0) return;
-
-    const uniqueWordKeys = getUniqueWordKeys(candidates);
-    const knownWordKeys = new Set(knownWords.map(k => k.data.word_key));
-    
-    const nextWordKey = uniqueWordKeys.find(wordKey => !knownWordKeys.has(wordKey));
-    if (!nextWordKey) return;
-
-    const wordsToIntroduce = candidates.filter(w => w.word_key === nextWordKey);
-
-    const newEntries: KnownWordState[] = wordsToIntroduce.map((w) => ({
-      data: w,
-      rating: 0,
-      lastSeen: 0,
-      interval: 1,
-      repetitions: 0,
-      easeFactor: 2.5,
-      exampleIndex: 0,
-    }));
-
-    setKnownWords((prev) => [...prev, ...newEntries]);
-  }, [chunkWords, knownWords, reviewMode]);
-
-  useEffect(() => {
-    if (chunkWords.length === 0) return;
-
-    let loadedState = false;
-    try {
-      // Try to load mode-specific state first
-      let stored = localStorage.getItem(getLocalStorageKey(chunkId, reviewMode));
-      
-      // Migration: If no mode-specific state exists but old state does, migrate it
-      if (!stored && reviewMode === "normal") {
-        const oldKey = `reviewState_${chunkId}`;
-        const oldStored = localStorage.getItem(oldKey);
-        if (oldStored) {
-          console.log("Migrating old state to mode-specific state");
-          localStorage.setItem(getLocalStorageKey(chunkId, "normal"), oldStored);
-          localStorage.removeItem(oldKey);
-          stored = oldStored;
-        }
-      }
-      
-      if (stored) {
+    const stored = localStorage.getItem(storageKey);
+    if (stored) {
+      try {
         const parsed = JSON.parse(stored);
-        if (parsed.knownWords && Array.isArray(parsed.knownWords) && parsed.knownWords.length > 0) {
-          console.log(`Loading state for mode '${reviewMode}'. Word count:`, parsed.knownWords.length);
-          const cleanedWords = cleanUpKnownWords(parsed.knownWords);
-          console.log("After cleanup. Word count:", cleanedWords.length);
-          setKnownWords(cleanedWords);
-          setCurrentIndex((parsed.currentIndex >= 0 && parsed.currentIndex < cleanedWords.length) ? parsed.currentIndex : 0);
-          setSkipVerbs(parsed.skipVerbs ?? false);
-          setIsLeftHanded(parsed.isLeftHanded ?? false);
-          loadedState = true;
-        } else {
-          console.log("localStorage found but invalid content. Clearing.");
-          localStorage.removeItem(getLocalStorageKey(chunkId, reviewMode));
+        if (parsed.cards && Array.isArray(parsed.cards)) {
+          setDeck({
+            cards: parsed.cards,
+            globalStep: parsed.globalStep || 0
+          });
+          setCurrentIndex(parsed.currentIndex || 0);
+          setConsecutiveEasy(parsed.consecutiveEasy || 0);
+          return;
         }
+      } catch (err) {
+        console.error("Failed to load state:", err);
+        localStorage.removeItem(storageKey);
       }
-    } catch (err) {
-      console.error("Error loading local storage:", err);
-      localStorage.removeItem(getLocalStorageKey(chunkId, reviewMode));
     }
 
-    if (!loadedState && knownWords.length === 0) {
-      console.log(`No valid saved state found for mode '${reviewMode}'. Introducing first word.`);
-      introduceNextKnownWord();
+    // Initialize with first card if no saved state
+    if (availableItems.length > 0) {
+      const firstCard = createCard(availableItems[0], 0);
+      firstCard.introOrder = 0;
+      setDeck({ cards: [firstCard], globalStep: 0 });
+      setCurrentIndex(0);
     }
-  }, [chunkWords, chunkId, reviewMode]);
+  }, [availableItems, storageKey]);
 
+  // Save state to localStorage
   useEffect(() => {
-    if (knownWords.length > 0 || currentIndex !== 0 || skipVerbs || isLeftHanded) {
+    if (deck.cards.length > 0) {
       const toSave = {
-        knownWords,
+        cards: deck.cards,
+        globalStep: deck.globalStep,
         currentIndex,
-        skipVerbs,
-        isLeftHanded,
-        reviewMode,
+        consecutiveEasy
       };
-      localStorage.setItem(getLocalStorageKey(chunkId, reviewMode), JSON.stringify(toSave));
+      localStorage.setItem(storageKey, JSON.stringify(toSave));
     }
-  }, [knownWords, currentIndex, skipVerbs, isLeftHanded, chunkId, reviewMode]);
+  }, [deck, currentIndex, consecutiveEasy, storageKey]);
 
-  const handleScore = (diff: DifficultyRating) => {
-    setKnownWords((prev) => {
-      const updated = [...prev];
-      if (currentIndex < 0 || currentIndex >= updated.length) {
-        console.error(`Invalid currentIndex ${currentIndex} for knownWords length ${updated.length}. Resetting index.`);
-        setCurrentIndex(0);
+  // Get filtered cards for selection
+  const getFilteredDeck = useCallback((): Deck<T> => {
+    if (!filterPredicate) return deck;
+
+    return {
+      ...deck,
+      cards: deck.cards.filter(c => filterPredicate(c.data))
+    };
+  }, [deck, filterPredicate]);
+
+  // Introduce new card
+  const introduceCard = useCallback(() => {
+    setDeck(prev => {
+      // Use prev state to ensure we have the latest cards
+      const knownKeys = new Set(prev.cards.map(c => getItemKey(c.data)));
+      const candidates = availableItems.filter(item => !knownKeys.has(getItemKey(item)));
+
+      if (candidates.length === 0) return prev;
+
+      // Check one more time that this card isn't already in the deck
+      const candidateKey = getItemKey(candidates[0]);
+      if (knownKeys.has(candidateKey)) {
+        console.warn(`Attempted to add duplicate card: ${candidateKey}`);
         return prev;
       }
-      
-      const cardState = updated[currentIndex];
-      
-      // Convert to ReviewCard, update with algorithm, convert back
-      const reviewCard = knownWordToReviewCard(cardState);
-      const updatedCard = updateCardWithSM2(reviewCard, diff, config);
-      updated[currentIndex] = reviewCardToKnownWord(updatedCard);
-      
-      console.log(`Handling score for card index ${currentIndex}, word: ${cardState.data.key}, score: ${diff}(${updatedCard.rating})`);
-      
-      // Now do the card picking logic in the same state update to avoid race conditions
-      setCardCounter((n) => n + 1);
-      
-      // Update lastSeen for all other cards
-      const cards = updated.map(knownWordToReviewCard);
-      const updatedCards = updateLastSeenCounters(cards, currentIndex);
-      const updatedLastSeen = updatedCards.map(reviewCardToKnownWord);
 
-      let candidates = updatedLastSeen;
+      const newCard = createCard(candidates[0], prev.globalStep);
+      // Add introduction order based on how many cards are already in the deck
+      newCard.introOrder = prev.cards.length;
+      console.log(`Introducing card: ${candidateKey} (order: ${newCard.introOrder})`);
 
-      if (skipVerbs) {
-        const nonVerbCandidates = updatedLastSeen.filter(
-          kw => {
-            const pos = kw.data.PartOfSpeech.toLowerCase();
-            return !pos.includes("verb") || pos.includes("adverb");
-          }
-        );
-        if (nonVerbCandidates.length > 0) {
-          candidates = nonVerbCandidates;
-        }
-      }
+      return {
+        ...prev,
+        cards: [...prev.cards, newCard]
+      };
+    });
+  }, [availableItems, getItemKey]);
 
-      // Use the centralized card selection
-      const candidateCards = candidates.map(knownWordToReviewCard);
-      const allCards = updatedLastSeen.map(knownWordToReviewCard);
-      
-      const filterFn = skipVerbs ? (card: ReviewCard<WordData>) => {
-        const pos = card.data.PartOfSpeech.toLowerCase();
-        return !pos.includes("verb") || pos.includes("adverb");
-      } : undefined;
-      
-      const bestIdx = selectNextCard(allCards, currentIndex, undefined, filterFn);
-      
-      console.log(`Selected card index: ${bestIdx}`);
+  // Check if we should introduce a new card
+  const shouldIntroduceCard = useCallback((deck: Deck<T>, consecutiveEasyCount: number): boolean => {
+    const stats = getDeckStats(deck, config);
 
-      if (bestIdx === -1) {
-        console.warn("No suitable next card found.");
-        return updatedLastSeen;
-      }
+    // Condition 1: Average risk below threshold
+    const lowRisk = stats.averageRisk < INTRO_RISK_THRESHOLD;
 
-      const selectedCard = updatedLastSeen[bestIdx];
-      console.log(`🎯 SELECTED: "${selectedCard?.data.EnglishWord}" (${selectedCard?.data.key}) at index ${bestIdx}`);
+    // Condition 2: 4 consecutive easy grades
+    const consecutiveEasyThreshold = consecutiveEasyCount >= 4;
 
-      setCurrentIndex(bestIdx);
-      setIsFlipped(false);
-      setShowEnglish(false);
-      setRevealedExamples(new Set());
-      
-      return updatedLastSeen;
+    return lowRisk || consecutiveEasyThreshold;
+  }, [config]);
+
+  // Handle card review
+  const handleReview = useCallback((grade: Grade) => {
+    setDeck(prev => {
+      if (currentIndex >= prev.cards.length) return prev;
+
+      // Update current card
+      const updatedCard = reviewCard(
+        prev.cards[currentIndex],
+        grade,
+        prev.globalStep,
+        config
+      );
+
+      const newCards = [...prev.cards];
+      newCards[currentIndex] = updatedCard;
+      const updatedDeck = { cards: newCards, globalStep: prev.globalStep + 1 };
+
+      return updatedDeck;
     });
 
-    // Handle word introduction separately after state settles
-    setTimeout(() => {
-      const currentKnownWords = knownWordsRef.current;
+    // Update consecutive easy count
+    setConsecutiveEasy(prev => {
+      const newCount = grade === 3 ? prev + 1 : 0;
 
-      if (currentKnownWords.length > 0) {
-        const relevantWords = skipVerbs
-          ? currentKnownWords.filter(kw => {
-              const pos = kw.data.PartOfSpeech.toLowerCase();
-              return !pos.includes("verb") || pos.includes("adverb");
-            })
-          : currentKnownWords;
+      // Check introduction conditions with the new count
+      setTimeout(() => {
+        setDeck(currentDeck => {
+          // Single atomic decision: should we introduce a card?
+          if (shouldIntroduceCard(currentDeck, newCount)) {
+            console.log(`Introduction triggered - avgRisk: ${getDeckStats(currentDeck, config).averageRisk.toFixed(3)}, consecutiveEasy: ${newCount}`);
 
-        if (relevantWords.length > 0) {
-          const cards = relevantWords.map(knownWordToReviewCard);
-          const shouldIntroduce = shouldIntroduceNewCard(cards, config);
-          const cognitiveLoad = calculateCognitiveLoad(cards);
-          setCognitiveLoad(cognitiveLoad);
-          
-          console.log(`Cognitive load k: ${cognitiveLoad.toFixed(2)} (equivalent to ${cognitiveLoad.toFixed(1)} failed cards)`);
-          
-          if (shouldIntroduce) {
-            console.log(`Thresholds met. Attempting to introduce new word.`);
-            introduceNextKnownWord();
+            // Introduce one card and reset consecutive counter
+            const knownKeys = new Set(currentDeck.cards.map(c => getItemKey(c.data)));
+            const candidates = availableItems.filter(item => !knownKeys.has(getItemKey(item)));
+
+            if (candidates.length > 0) {
+              const newCard = createCard(candidates[0], currentDeck.globalStep);
+              newCard.introOrder = currentDeck.cards.length;
+              console.log(`Introduced card: ${getItemKey(candidates[0])}`);
+
+              // Reset consecutive easy count and update deck
+              setConsecutiveEasy(0);
+
+              const newDeck = {
+                ...currentDeck,
+                cards: [...currentDeck.cards, newCard]
+              };
+
+              // Select next card
+              const filteredDeck = filterPredicate
+                ? { ...newDeck, cards: newDeck.cards.filter(c => filterPredicate(c.data)) }
+                : newDeck;
+
+              const nextIndex = selectNextCard(filteredDeck, config);
+
+              // Map back to unfiltered index if needed
+              if (filterPredicate && nextIndex !== -1) {
+                const selectedCard = filteredDeck.cards[nextIndex];
+                const actualIndex = newDeck.cards.findIndex(c => c === selectedCard);
+                setCurrentIndex(actualIndex);
+              } else {
+                setCurrentIndex(nextIndex);
+              }
+
+              return newDeck;
+            }
           } else {
-            console.log("Skipping word introduction.");
+            // No introduction, just select next card
+            const filteredDeck = filterPredicate
+              ? { ...currentDeck, cards: currentDeck.cards.filter(c => filterPredicate(c.data)) }
+              : currentDeck;
+
+            const nextIndex = selectNextCard(filteredDeck, config);
+
+            if (filterPredicate && nextIndex !== -1) {
+              const selectedCard = filteredDeck.cards[nextIndex];
+              const actualIndex = currentDeck.cards.findIndex(c => c === selectedCard);
+              setCurrentIndex(actualIndex);
+            } else {
+              setCurrentIndex(nextIndex);
+            }
           }
-        }
-      }
-    }, 0);
-  };
 
-  const clearProgress = () => {
-    localStorage.removeItem(getLocalStorageKey(chunkId, reviewMode));
-    setKnownWords([]);
+          return currentDeck;
+        });
+      }, 0);
+
+      return newCount;
+    });
+  }, [currentIndex, config, filterPredicate, availableItems, getItemKey, shouldIntroduceCard]);
+
+  // Reset progress
+  const resetProgress = useCallback(() => {
+    localStorage.removeItem(storageKey);
+    setDeck({ cards: [], globalStep: 0 });
     setCurrentIndex(0);
-    setIsFlipped(false);
-    setShowEnglish(false);
-    setCardCounter(0);
-    setSkipVerbs(false);
-    setIsLeftHanded(false);
-    setRevealedExamples(new Set());
+    setConsecutiveEasy(0);
 
-    setTimeout(() => {
-      if (chunkWords.length > 0) {
-        introduceNextKnownWord();
-      }
-    }, 100);
-  };
+    // Initialize with first card
+    if (availableItems.length > 0) {
+      const firstCard = createCard(availableItems[0], 0);
+      firstCard.introOrder = 0;
+      setDeck({ cards: [firstCard], globalStep: 0 });
+    }
+  }, [availableItems, storageKey]);
+
+  // Get current card
+  const currentCard = currentIndex >= 0 && currentIndex < deck.cards.length
+    ? deck.cards[currentIndex]
+    : null;
+
+  // Get deck statistics
+  const stats = getDeckStats(deck, config);
 
   return {
-    knownWords,
+    // Core state
+    currentCard,
+    deck,
     currentIndex,
-    isFlipped,
-    showEnglish,
-    cardCounter,
-    skipVerbs,
-    isLeftHanded,
-    showImageHint,
-    showExamples,
-    cognitiveLoad,
-    reviewMode,
-    setIsFlipped,
-    setShowEnglish,
-    setSkipVerbs,
-    setIsLeftHanded,
-    setShowImageHint,
-    setShowExamples,
-    revealedExamples,
-    setRevealedExamples,
-    setCurrentIndex,
-    handleScore,
-    clearProgress,
+
+    // Statistics
+    stats,
+
+    // Actions
+    handleReview,
+    resetProgress,
+
+    // Debug info
+    consecutiveEasy
   };
 }

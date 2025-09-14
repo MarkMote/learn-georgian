@@ -7,8 +7,10 @@ import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
 import LessonModal from './components/LessonModal';
 import ProgressModal from './components/ProgressModal';
+import DebugPanel from './components/DebugPanel';
 import { useReviewState } from './hooks/useReviewState';
 import { useLessonModal } from './hooks/useLessonModal';
+import { DEFAULT_CONFIG } from '../../../lib/spacedRepetition/algorithm';
 import { WordData, ReviewMode } from './types';
 import { 
   parseCSV, 
@@ -28,8 +30,9 @@ export default function ReviewPage() {
   const [chunkWords, setChunkWords] = useState<WordData[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   
-  // Get review mode from URL params
+  // Get review mode and debug flag from URL params
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
+  const showDebug = searchParams.get('debug') !== null;
 
   const {
     knownWords,
@@ -42,6 +45,7 @@ export default function ReviewPage() {
     showExamples,
     revealedExamples,
     cognitiveLoad,
+    globalStep,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
@@ -52,6 +56,9 @@ export default function ReviewPage() {
     setCurrentIndex,
     handleScore,
     clearProgress,
+    deck,
+    srsCurrentIndex,
+    consecutiveEasyCount,
   } = useReviewState(chunkId, chunkWords, reviewMode);
 
   const {
@@ -248,10 +255,21 @@ export default function ReviewPage() {
   const percentageScore = computePercentageScore(knownWords, chunkWords);
 
   return (
-    <div 
-      className="relative w-full bg-black text-white" 
-      style={{ height: '100dvh', overflow: (isModalOpen || isProgressModalOpen) ? 'auto' : 'hidden' }}
-    >
+    <div className="flex w-full">
+      {showDebug && (
+        <DebugPanel
+          deck={deck}
+          currentIndex={srsCurrentIndex}
+          config={DEFAULT_CONFIG}
+          consecutiveEasy={consecutiveEasyCount}
+          isIntroducing={false}
+          skipVerbs={skipVerbs}
+        />
+      )}
+      <div
+        className={`relative bg-black text-white ${showDebug ? 'w-1/2 ml-auto' : 'w-full'}`}
+        style={{ height: '100dvh', overflow: (isModalOpen || isProgressModalOpen) ? 'auto' : 'hidden' }}
+      >
       <TopBar
         onGetLesson={handleLessonRequest}
         onClearProgress={clearProgress}
@@ -306,7 +324,12 @@ export default function ReviewPage() {
         onClose={() => setIsProgressModalOpen(false)}
         knownWords={knownWords}
         skipVerbs={skipVerbs}
+        currentIndex={currentIndex}
+        globalStep={globalStep}
       />
+
+
+      </div>
     </div>
   );
 }

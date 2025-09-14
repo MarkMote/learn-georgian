@@ -6,6 +6,7 @@ import { CustomWord, CustomReviewMode, CustomExampleMode } from "../types";
 interface CustomFlashCardProps {
   word: CustomWord;
   isFlipped: boolean;
+  showEnglish: boolean;
   reviewMode: CustomReviewMode;
   showExamples: CustomExampleMode;
   revealedExamples: Set<string>;
@@ -15,6 +16,7 @@ interface CustomFlashCardProps {
 export default function CustomFlashCard({
   word,
   isFlipped,
+  showEnglish,
   reviewMode,
   showExamples,
   revealedExamples,
@@ -48,6 +50,13 @@ export default function CustomFlashCard({
 
   return (
     <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
+      {/* Show English hint when enabled */}
+      {showEnglish && !isFlipped && (
+        <p className="text-base font-semibold mb-3 text-gray-300">
+          {isReverse ? word.back : word.front}
+        </p>
+      )}
+      
       {/* Main content display */}
       {!isFlipped ? (
         // Front of card

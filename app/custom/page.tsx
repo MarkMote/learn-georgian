@@ -33,11 +33,13 @@ function CustomPageContent() {
     knownWords,
     currentIndex,
     isFlipped,
+    showEnglish,
     showExamples,
     revealedExamples,
     isLeftHanded,
     cognitiveLoad,
     setIsFlipped,
+    setShowEnglish,
     setShowExamples,
     setRevealedExamples,
     setCurrentIndex,
@@ -72,6 +74,9 @@ function CustomPageContent() {
           e.preventDefault();
           if (!isFlipped) setIsFlipped(true);
           break;
+        case "i":
+          setShowEnglish((prev) => !prev);
+          break;
         case "r":
           if (isFlipped) handleScore("easy");
           break;
@@ -92,7 +97,7 @@ function CustomPageContent() {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [pageState, isFlipped, handleScore, setIsFlipped]);
+  }, [pageState, isFlipped, handleScore, setIsFlipped, setShowEnglish]);
 
   // Prevent scrolling during review
   useEffect(() => {
@@ -318,6 +323,7 @@ function CustomPageContent() {
         <CustomFlashCard
           word={currentCard.data}
           isFlipped={isFlipped}
+          showEnglish={showEnglish}
           reviewMode={reviewMode}
           showExamples={showExamples}
           revealedExamples={revealedExamples}
