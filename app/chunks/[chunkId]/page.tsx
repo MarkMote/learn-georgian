@@ -128,7 +128,7 @@ export default function ChunkPage() {
   };
 
   const handleToggleHandedness = () => {
-    setIsLeftHanded(prev => !prev);
+    // Chunks route disabled
   };
 
   const handleToggleExamples = () => {

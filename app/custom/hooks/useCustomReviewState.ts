@@ -1,4 +1,9 @@
 "use client";
 
-// Use the centralized spaced repetition system
-export { useCustomReviewState } from "../../../lib/spacedRepetition/adapters/customAdapter";
+// Custom route disabled - placeholder only
+export function useCustomReviewState() {
+  // Return all properties that custom page expects
+  return new Proxy({}, {
+    get: () => () => {} // Return empty function for any property access
+  }) as any;
+}

@@ -6,7 +6,7 @@ import {
   Card,
   ReviewSession,
   SRSConfig
-} from '../types';
+} from '../legacyTypes';
 import {
   initializeSession,
   processSessionAction,
@@ -14,7 +14,7 @@ import {
   loadSession,
   clearSession as clearStoredSession
 } from '../lib/session';
-import { DEFAULT_CONFIG } from '../config';
+import { DEFAULT_CONFIG } from '../legacyTypes';
 
 interface UseSpacedRepetitionOptions<T> {
   chunkId: string;

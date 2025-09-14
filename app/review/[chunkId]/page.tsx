@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import BottomBar from '../../components/BottomBar';
 import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
 import LessonModal from './components/LessonModal';
 import ProgressModal from './components/ProgressModal';
-import DebugPanel from './components/DebugPanel';
+import HybridDebugPanel from './components/HybridDebugPanel';
 import { useReviewState } from './hooks/useReviewState';
+import { useUIState } from './hooks/useUIState';
 import { useLessonModal } from './hooks/useLessonModal';
 import { DEFAULT_CONFIG } from '../../../lib/spacedRepetition';
-import { WordData, ReviewMode } from './types';
+import { WordData, ReviewMode, DifficultyRating } from './types';
 import { 
   parseCSV, 
   getWordsForChunk, 
@@ -34,10 +35,8 @@ export default function ReviewPage() {
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
   const showDebug = searchParams.get('debug') !== null;
 
-  // Core Algorithm State Management Function
+  // UI State Management (preferences, display flags)
   const {
-    knownWords,
-    currentIndex,
     isFlipped,
     showEnglish,
     skipVerbs,
@@ -45,8 +44,6 @@ export default function ReviewPage() {
     showImageHint,
     showExamples,
     revealedExamples,
-    cognitiveLoad,
-    globalStep,
     setIsFlipped,
     setShowEnglish,
     setSkipVerbs,
@@ -54,13 +51,44 @@ export default function ReviewPage() {
     setShowImageHint,
     setShowExamples,
     setRevealedExamples,
-    setCurrentIndex,
-    handleScore,
-    clearProgress,
-    deck,
-    srsCurrentIndex,
+    resetCardDisplay
+  } = useUIState({ chunkId, mode: reviewMode });
+
+  // Create filter predicate based on UI preferences
+  const filterPredicate = useMemo(() => {
+    if (skipVerbs) {
+      return (word: WordData) => {
+        const pos = (word.PartOfSpeech || "").toLowerCase();
+        return !pos.includes("verb") || pos.includes("adverb");
+      };
+    }
+    return undefined;
+  }, [skipVerbs]);
+
+  // SRS State Management (cards, algorithm, progress)
+  const {
+    knownWords,
+    currentIndex,
+    cognitiveLoad,
+    globalStep,
     consecutiveEasyCount,
-  } = useReviewState(chunkId, chunkWords, reviewMode);
+    handleScore: srsHandleScore,
+    clearProgress: srsClearProgress,
+    currentWord,
+    currentCardState,
+    deckState,
+  } = useReviewState(chunkId, chunkWords, reviewMode, filterPredicate);
+
+  // Combined actions that coordinate both systems
+  const handleScore = useCallback((difficulty: DifficultyRating) => {
+    srsHandleScore(difficulty);
+    resetCardDisplay(); // Reset UI when card changes
+  }, [srsHandleScore, resetCardDisplay]);
+
+  const clearProgress = useCallback(() => {
+    srsClearProgress();
+    resetCardDisplay(); // Reset UI when progress cleared
+  }, [srsClearProgress, resetCardDisplay]);
 
   const {
     isModalOpen,
@@ -144,12 +172,14 @@ export default function ReviewPage() {
 
   const currentCard = knownWords[currentIndex];
 
-  useEffect(() => {
-    if (!currentCard && knownWords.length > 0 && currentIndex !== 0) {
-      console.warn(`No current card (index ${currentIndex}), but ${knownWords.length} knownWords exist. Resetting index to 0.`);
-      setCurrentIndex(0);
-    }
-  }, [currentCard, knownWords, currentIndex]);
+  // Note: Card selection is now managed internally by SRS system
+  // This effect is no longer needed with clean separation
+  // useEffect(() => {
+  //   if (!currentCard && knownWords.length > 0 && currentIndex !== 0) {
+  //     console.warn(`No current card (index ${currentIndex}), but ${knownWords.length} knownWords exist.`);
+  //     // Card selection handled by SRS internally
+  //   }
+  // }, [currentCard, knownWords, currentIndex]);
 
   const handleImageClick = () => {
     setShowEnglish((prev) => !prev);
@@ -258,13 +288,15 @@ export default function ReviewPage() {
   return (
     <div className="flex w-full">
       {showDebug && (
-        <DebugPanel
-          deck={deck}
-          currentIndex={srsCurrentIndex}
+        <HybridDebugPanel
+          deckState={deckState}
+          currentCardState={currentCardState}
           config={DEFAULT_CONFIG}
           consecutiveEasy={consecutiveEasyCount}
           isIntroducing={false}
           skipVerbs={skipVerbs}
+          knownWords={knownWords}
+          currentIndex={currentIndex}
         />
       )}
       <div

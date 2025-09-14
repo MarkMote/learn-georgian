@@ -1,6 +1,6 @@
 // lib/spacedRepetition/lib/algorithm/index.ts
 
-import { Card, Deck, Grade, SRSConfig, ReviewResult } from '../../types';
+import { Card, Deck, Grade, SRSConfig, ReviewResult } from '../../legacyTypes';
 import { updateStability } from './lib/stability';
 import { selectNextCard } from './lib/selection';
 import { calculateDeckStats } from './lib/stats';

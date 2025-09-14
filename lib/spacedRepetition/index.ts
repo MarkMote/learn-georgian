@@ -1,37 +1,25 @@
 // lib/spacedRepetition/index.ts
 
-// Main public API for spaced repetition system
-
 // Export types
 export type {
-  Grade,
-  Card,
-  Deck,
+  WordData,
+  CardState,
+  DeckState,
   SRSConfig,
-  ReviewSession,
-  SessionAction,
-  DeckStats,
-  ReviewResult
+  Grade,
+  DifficultyRating
 } from './types';
 
 // Export configuration
 export { DEFAULT_CONFIG } from './config';
 
-// Export core algorithm functions
-export {
-  reviewCard,
-  createCard,
-  processReview,
-  calculateDeckStats,
-  selectNextCard,
-  forgettingRisk
-} from './lib/algorithm';
+// Export main SRS functions
+export { initializeDeck } from './initializeDeck';
+export { updateStateOnGrade } from './updateStateOnGrade';
+export { selectNextCard } from './selectNextCard';
+export { introduceNewCard } from './introduceNewCard';
+export { calculateDeckStats } from './calculateDeckStats';
 
-// Export session management
-export {
-  initializeSession,
-  processSessionAction,
-  saveSession,
-  loadSession,
-  clearSession
-} from './lib/session';
+// Export shared utility functions
+export { calculateRisk } from './lib/calculateRisk';
+export { updateStability } from './lib/updateStability';

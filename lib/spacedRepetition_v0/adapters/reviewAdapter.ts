@@ -1,7 +1,7 @@
 // lib/spacedRepetition/adapters/reviewAdapter.ts
 
 import { useSpacedRepetition as useCoreSRS } from './useSpacedRepetition';
-import type { SRSConfig, Grade } from '../types';
+import type { SRSConfig, Grade } from '../legacyTypes';
 
 interface ReviewAdapterOptions<T> {
   chunkId: string;
@@ -47,7 +47,7 @@ export function useSpacedRepetition<T>({
 
   // Find index of current card in deck
   const currentIndex = currentCard
-    ? session.deck.cards.findIndex(c => c.id === currentCard.id)
+    ? session.deck.cards.findIndex((c: any) => c.id === currentCard.id)
     : -1;
 
   return {

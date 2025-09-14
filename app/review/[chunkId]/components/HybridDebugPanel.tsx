@@ -1,29 +1,50 @@
+// app/review/[chunkId]/components/HybridDebugPanel.tsx
+
 import React from "react";
-import { Card, Deck, SRSConfig, forgettingRisk } from "../../../../lib/spacedRepetition";
+import { CardState, DeckState, SRSConfig } from "../../../../lib/spacedRepetition/types";
 import { WordData } from "../types";
 
-interface DebugPanelProps {
-  deck: Deck<WordData>;
-  currentIndex: number;
+interface HybridDebugPanelProps {
+  deckState: DeckState;
+  currentCardState: CardState | null;
   config: SRSConfig;
   consecutiveEasy: number;
   isIntroducing: boolean;
   skipVerbs: boolean;
+  knownWords: Array<{ data: WordData; rating: number; lastSeen: number; interval: number; repetitions: number; easeFactor: number; }>;
+  currentIndex: number;
 }
 
-export default function DebugPanel({
-  deck,
-  currentIndex,
+// Calculate forgetting risk (matching the algorithm)
+function calculateRisk(stability: number, daysSinceReview: number, beta: number): number {
+  if (daysSinceReview <= 0) return 0;
+  return 1 - Math.exp(-Math.pow(daysSinceReview / stability, beta));
+}
+
+export default function HybridDebugPanel({
+  deckState,
+  currentCardState,
   config,
   consecutiveEasy,
   isIntroducing,
-  skipVerbs
-}: DebugPanelProps) {
-  // Calculate stats for each card
-  const cardStats = deck.cards.map((card, idx) => {
-    const risk = forgettingRisk(card, deck.currentStep, config);
-    const stepsSince = deck.currentStep - card.lastReviewStep;
-    return { card, risk, stepsSince, index: idx };
+  skipVerbs,
+  knownWords,
+  currentIndex
+}: HybridDebugPanelProps) {
+
+  // Calculate stats for each card (from knownWords compatibility layer)
+  const cardStats = knownWords.map((knownWord, idx) => {
+    const stepsSince = knownWord.lastSeen;
+    const stability = knownWord.interval; // Using interval as stability approximation
+    const risk = calculateRisk(stability, stepsSince, config.beta);
+
+    return {
+      word: knownWord,
+      risk,
+      stepsSince,
+      index: idx,
+      stability
+    };
   });
 
   // Sort by risk (highest first)
@@ -35,10 +56,10 @@ export default function DebugPanel({
         <h2 className="text-lg font-bold mb-2">Debug Panel</h2>
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
-            <span className="text-gray-400">Step:</span> {deck.currentStep}
+            <span className="text-gray-400">Step:</span> {deckState.currentStep}
           </div>
           <div>
-            <span className="text-gray-400">Cards:</span> {deck.cards.length}
+            <span className="text-gray-400">Cards:</span> {knownWords.length}
           </div>
           <div>
             <span className="text-gray-400">Current:</span> {currentIndex}
@@ -52,6 +73,12 @@ export default function DebugPanel({
           <div>
             <span className="text-gray-400">Introducing:</span> {isIntroducing ? "Yes" : "No"}
           </div>
+          <div>
+            <span className="text-gray-400">Avg Risk:</span> {(deckState.stats.averageRisk * 100).toFixed(1)}%
+          </div>
+          <div>
+            <span className="text-gray-400">Cards at Risk:</span> {deckState.stats.cardsAtRisk}
+          </div>
         </div>
       </div>
 
@@ -64,34 +91,45 @@ export default function DebugPanel({
           <div><span className="text-gray-500">goodGrowth:</span> {config.goodGrowth}</div>
           <div><span className="text-gray-500">easyGrowth:</span> {config.easyGrowth}</div>
           <div><span className="text-gray-500">failShrink:</span> {config.failShrink}</div>
+          <div><span className="text-gray-500">riskThreshold:</span> {config.riskThreshold}</div>
+          <div><span className="text-gray-500">maxConsecutiveEasy:</span> {config.maxConsecutiveEasy}</div>
         </div>
+
+        {currentCardState && (
+          <>
+            <h3 className="text-sm font-semibold mb-2 text-gray-300">Current Card State</h3>
+            <div className="grid grid-cols-2 gap-1 text-xs mb-4">
+              <div><span className="text-gray-500">Key:</span> {currentCardState.key}</div>
+              <div><span className="text-gray-500">Stability:</span> {currentCardState.stability.toFixed(1)}</div>
+              <div><span className="text-gray-500">Reviews:</span> {currentCardState.reviewCount}</div>
+              <div><span className="text-gray-500">Lapses:</span> {currentCardState.lapseCount}</div>
+              <div><span className="text-gray-500">Last Review:</span> {currentCardState.lastReviewStep}</div>
+              <div><span className="text-gray-500">Steps Since:</span> {deckState.currentStep - currentCardState.lastReviewStep}</div>
+            </div>
+          </>
+        )}
 
         <h3 className="text-sm font-semibold mb-2 text-gray-300">Cards (by risk)</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-gray-700">
-                <th className="text-left py-1 px-1">#</th>
                 <th className="text-left py-1 px-1">Idx</th>
                 <th className="text-left py-1 px-1">Word</th>
                 <th className="text-right py-1 px-1">Risk</th>
                 <th className="text-right py-1 px-1">S</th>
                 <th className="text-right py-1 px-1">Seen</th>
-                <th className="text-right py-1 px-1">Fail</th>
-                <th className="text-center py-1 px-1">Last</th>
                 <th className="text-right py-1 px-1">Since</th>
                 <th className="text-right py-1 px-1">Next</th>
               </tr>
             </thead>
             <tbody>
-              {sortedStats.map(({ card, risk, stepsSince, index }) => {
+              {sortedStats.map(({ word, risk, stepsSince, index, stability }) => {
                 const isCurrent = index === currentIndex;
-                const word = card.data.EnglishWord || card.data.GeorgianWord;
-                const displayWord = word.length > 20 ? word.slice(0, 18) + "..." : word;
+                const wordText = word.data.EnglishWord || word.data.GeorgianWord;
+                const displayWord = wordText.length > 20 ? wordText.slice(0, 18) + "..." : wordText;
                 // Calculate when card should be reviewed next (at 50% recall)
-                const nextReview = Math.round(card.stability * Math.pow(-Math.log(0.5), 1/config.beta));
-                // Grade display not available in new system
-                const gradeDisplay = "-";
+                const nextReview = Math.round(stability * Math.pow(-Math.log(0.5), 1/config.beta));
 
                 return (
                   <tr
@@ -102,31 +140,20 @@ export default function DebugPanel({
                       ${risk > 0.5 ? "text-red-400" : risk > 0.3 ? "text-yellow-400" : "text-green-400"}
                     `}
                   >
-                    <td className="py-1 px-1 text-gray-500">
-                      {card.introducedAtStep || "-"}
-                    </td>
                     <td className="py-1 px-1">
                       {isCurrent ? "→" : ""}{index}
                     </td>
-                    <td className="py-1 px-1" title={word}>
+                    <td className="py-1 px-1" title={wordText}>
                       {displayWord}
                     </td>
                     <td className="text-right py-1 px-1">
                       {(risk * 100).toFixed(0)}%
                     </td>
                     <td className="text-right py-1 px-1">
-                      {card.stability.toFixed(1)}
+                      {stability.toFixed(1)}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {card.reviewCount}
-                    </td>
-                    <td className="text-right py-1 px-1">
-                      {card.lapseCount}
-                    </td>
-                    <td className="text-center py-1 px-1">
-                      <span className="text-gray-600">
-                        {gradeDisplay}
-                      </span>
+                      {word.repetitions}
                     </td>
                     <td className="text-right py-1 px-1">
                       {stepsSince}
@@ -146,21 +173,21 @@ export default function DebugPanel({
           <div className="text-xs space-y-1">
             <div>
               <span className="text-gray-500">Avg Risk:</span>{" "}
-              {deck.cards.length > 0
+              {knownWords.length > 0
                 ? (sortedStats.reduce((sum, s) => sum + s.risk, 0) / sortedStats.length * 100).toFixed(1) + "%"
                 : "0%"}
             </div>
             <div>
               <span className="text-gray-500">New Cards (seen &lt; 2):</span>{" "}
-              {deck.cards.filter(c => c.reviewCount < 2).length}
+              {knownWords.filter(w => w.repetitions < 2).length}
             </div>
             <div>
               <span className="text-gray-500">Mature Cards:</span>{" "}
-              {deck.cards.filter(c => c.reviewCount >= 2).length}
+              {knownWords.filter(w => w.repetitions >= 2).length}
             </div>
             <div>
-              <span className="text-gray-500">Failed Cards:</span>{" "}
-              {deck.cards.filter(c => c.lapseCount > 0).length}
+              <span className="text-gray-500">Current Card Key:</span>{" "}
+              {deckState.currentCardKey || "none"}
             </div>
           </div>
         </div>

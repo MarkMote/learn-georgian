@@ -1,12 +1,18 @@
 // app/review/[chunkId]/hooks/useReviewState.tsx
+// Clean SRS state management
 
-import { useCallback, useMemo } from "react";
-import { WordData, DifficultyRating, ReviewMode } from "../types";
-import { useSpacedRepetition } from "../../../../lib/spacedRepetition/adapters/reviewAdapter";
-import { useUIState } from "./useUIState";
-import { Grade } from "../../../../lib/spacedRepetition/types";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { WordData, CardState, DeckState, DifficultyRating, Grade } from "../../../../lib/spacedRepetition/types";
+import {
+  initializeDeck,
+  updateStateOnGrade,
+  selectNextCard,
+  introduceNewCard,
+  calculateDeckStats,
+  DEFAULT_CONFIG
+} from "../../../../lib/spacedRepetition";
 
-// Convert difficulty rating to SRS grade
+// Convert difficulty rating to grade
 function difficultyToGrade(difficulty: DifficultyRating): Grade {
   switch (difficulty) {
     case "fail": return 0;
@@ -16,104 +22,247 @@ function difficultyToGrade(difficulty: DifficultyRating): Grade {
   }
 }
 
-// Check if word is a verb
-function isVerb(word: WordData): boolean {
-  const pos = (word.PartOfSpeech || "").toLowerCase();
-  return pos.includes("verb") && !pos.includes("adverb");
+// Storage helpers
+function getStorageKey(chunkId: string, mode: string): string {
+  return `srs_simple_${chunkId}_${mode}`;
+}
+
+function saveState(chunkId: string, mode: string, cardStates: Map<string, CardState>, deckState: DeckState) {
+  try {
+    const data = {
+      cardStates: Object.fromEntries(cardStates),
+      deckState
+    };
+    localStorage.setItem(getStorageKey(chunkId, mode), JSON.stringify(data));
+  } catch (error) {
+    console.warn("Failed to save SRS state:", error);
+  }
+}
+
+function loadState(chunkId: string, mode: string): { cardStates: Map<string, CardState>; deckState: DeckState } | null {
+  try {
+    const stored = localStorage.getItem(getStorageKey(chunkId, mode));
+    if (!stored) return null;
+
+    const data = JSON.parse(stored);
+    return {
+      cardStates: new Map(Object.entries(data.cardStates)),
+      deckState: data.deckState
+    };
+  } catch (error) {
+    console.warn("Failed to load SRS state:", error);
+    return null;
+  }
+}
+
+// Hook interface
+export interface UseReviewStateReturn {
+  // Current state
+  currentWord: WordData | null;
+  currentCardState: CardState | null;
+  deckState: DeckState;
+
+  // Legacy compatibility (for existing UI)
+  knownWords: Array<{ data: WordData; rating: number; lastSeen: number; interval: number; repetitions: number; easeFactor: number; }>;
+  currentIndex: number;
+  cognitiveLoad: number;
+  globalStep: number;
+  consecutiveEasyCount: number;
+
+  // Actions
+  handleScore: (difficulty: DifficultyRating) => void;
+  clearProgress: () => void;
 }
 
 export function useReviewState(
   chunkId: string,
   chunkWords: WordData[],
-  reviewMode: ReviewMode = "normal"
-) {
-  // UI state (completely separate from SRS logic)
-  const uiState = useUIState({ chunkId, mode: reviewMode });
+  reviewMode: string = "normal",
+  filterPredicate?: (word: WordData) => boolean
+): UseReviewStateReturn {
 
-  // Filter function based on UI preferences
-  const filterPredicate = useMemo(() => {
-    if (uiState.skipVerbs) {
-      return (word: WordData) => !isVerb(word);
-    }
-    return undefined;
-  }, [uiState.skipVerbs]);
-
-  // Mode-specific filtering
+  // Filter words based on review mode
   const availableWords = useMemo(() => {
+    let filtered = chunkWords;
+
+    // Mode-specific filtering
     if (reviewMode === "examples" || reviewMode === "examples-reverse") {
-      return chunkWords.filter(w => w.ExampleEnglish1 && w.ExampleGeorgian1);
+      filtered = filtered.filter(w => w.ExampleEnglish1 && w.ExampleGeorgian1);
     }
-    return chunkWords;
-  }, [chunkWords, reviewMode]);
 
-  // Spaced repetition state
-  const {
-    currentCard,
-    deck,
-    currentIndex: srsCurrentIndex,
-    stats,
-    handleReview: srsHandleReview,
-    resetProgress: srsResetProgress,
-    consecutiveEasy
-  } = useSpacedRepetition({
-    chunkId,
-    mode: reviewMode,
-    availableItems: availableWords,
-    getItemKey: (word: WordData) => word.key,
-    filterPredicate
-  });
+    // Additional filter predicate
+    if (filterPredicate) {
+      filtered = filtered.filter(filterPredicate);
+    }
 
-  // Handle score and update UI
+    return filtered;
+  }, [chunkWords, reviewMode, filterPredicate]);
+
+  // Core state
+  const [cardStates, setCardStates] = useState<Map<string, CardState>>(new Map());
+  const [deckState, setDeckState] = useState<DeckState>(() => ({
+    currentStep: 0,
+    currentCardKey: null,
+    consecutiveEasyCount: 0,
+    stats: { averageRisk: 0, cardsAtRisk: 0 }
+  }));
+
+  // Initialize or load saved state
+  useEffect(() => {
+    if (availableWords.length === 0) return;
+
+    const saved = loadState(chunkId, reviewMode);
+    if (saved) {
+      setCardStates(saved.cardStates);
+      setDeckState(prev => ({
+        ...saved.deckState,
+        stats: calculateDeckStats(saved.cardStates, saved.deckState, DEFAULT_CONFIG)
+      }));
+    } else {
+      const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords);
+      setCardStates(initialCards);
+      setDeckState({
+        ...initialDeck,
+        stats: calculateDeckStats(initialCards, initialDeck, DEFAULT_CONFIG)
+      });
+    }
+  }, [chunkId, reviewMode, availableWords.length]);
+
+  // Save state when it changes
+  useEffect(() => {
+    if (cardStates.size > 0) {
+      saveState(chunkId, reviewMode, cardStates, deckState);
+    }
+  }, [cardStates, deckState, chunkId, reviewMode]);
+
+  // Get current word data
+  const currentWord = useMemo(() => {
+    if (!deckState.currentCardKey) return null;
+    return availableWords.find(w => w.key === deckState.currentCardKey) || null;
+  }, [deckState.currentCardKey, availableWords]);
+
+  // Get current card state
+  const currentCardState = useMemo(() => {
+    if (!deckState.currentCardKey) return null;
+    return cardStates.get(deckState.currentCardKey) || null;
+  }, [deckState.currentCardKey, cardStates]);
+
+  // Handle scoring (main action)
   const handleScore = useCallback((difficulty: DifficultyRating) => {
+    if (!currentCardState) return;
+
     const grade = difficultyToGrade(difficulty);
-    srsHandleReview(grade);
-    uiState.resetCardDisplay();
-  }, [srsHandleReview, uiState]);
+
+    // Update card and deck
+    const { cardState: updatedCard, deckState: updatedDeck } = updateStateOnGrade(
+      currentCardState,
+      deckState,
+      grade,
+      DEFAULT_CONFIG
+    );
+
+    // Update card states
+    const newCardStates = new Map(cardStates);
+    newCardStates.set(updatedCard.key, updatedCard);
+
+    // Check if we should introduce a new card
+    const { nextCardKey, shouldIntroduceNew } = selectNextCard(
+      newCardStates,
+      updatedDeck,
+      availableWords,
+      DEFAULT_CONFIG,
+      filterPredicate
+    );
+
+    let finalCardStates = newCardStates;
+    let finalDeckState = updatedDeck;
+
+    if (shouldIntroduceNew) {
+      const { cardStates: cardsWithNew, newCardKey } = introduceNewCard(
+        newCardStates,
+        updatedDeck,
+        availableWords
+      );
+
+      if (newCardKey) {
+        finalCardStates = cardsWithNew;
+        finalDeckState = {
+          ...updatedDeck,
+          currentCardKey: newCardKey,
+          consecutiveEasyCount: 0 // Reset after introducing new card
+        };
+      } else {
+        finalDeckState = {
+          ...updatedDeck,
+          currentCardKey: nextCardKey
+        };
+      }
+    } else {
+      finalDeckState = {
+        ...updatedDeck,
+        currentCardKey: nextCardKey
+      };
+    }
+
+    // Calculate updated stats
+    const newStats = calculateDeckStats(finalCardStates, finalDeckState, DEFAULT_CONFIG);
+    finalDeckState.stats = newStats;
+
+    // Update state
+    setCardStates(finalCardStates);
+    setDeckState(finalDeckState);
+  }, [currentCardState, deckState, cardStates, availableWords, filterPredicate]);
 
   // Clear progress
   const clearProgress = useCallback(() => {
-    srsResetProgress();
-    uiState.resetCardDisplay();
-  }, [srsResetProgress, uiState]);
+    try {
+      localStorage.removeItem(getStorageKey(chunkId, reviewMode));
+    } catch (error) {
+      console.warn("Failed to clear stored state:", error);
+    }
 
-  // Convert to legacy format for UI (temporary compatibility layer)
+    const { cardStates: freshCards, deckState: freshDeck } = initializeDeck(availableWords);
+    setCardStates(freshCards);
+    setDeckState({
+      ...freshDeck,
+      stats: calculateDeckStats(freshCards, freshDeck, DEFAULT_CONFIG)
+    });
+  }, [chunkId, reviewMode, availableWords]);
+
+  // Legacy compatibility - convert to old format for existing UI
   const knownWords = useMemo(() => {
-    return deck.cards.map((card, idx) => ({
-      data: card.data,
-      rating: 2, // Default for compatibility
-      lastSeen: deck.currentStep - card.lastReviewStep,
-      interval: Math.round(card.stability),
-      repetitions: card.reviewCount,
-      easeFactor: 2.5, // Legacy field
-      exampleIndex: 0
-    }));
-  }, [deck]);
+    return Array.from(cardStates.entries()).map(([key, cardState]) => {
+      const wordData = availableWords.find(w => w.key === key);
+      if (!wordData) return null;
 
-  const currentIndex = deck.cards.findIndex(c => c === currentCard);
+      return {
+        data: wordData,
+        rating: 2, // Default for compatibility
+        lastSeen: deckState.currentStep - cardState.lastReviewStep,
+        interval: Math.round(cardState.stability),
+        repetitions: cardState.reviewCount,
+        easeFactor: 2.5 // Legacy field
+      };
+    }).filter(item => item !== null);
+  }, [cardStates, availableWords, deckState.currentStep]);
+
+  const currentIndex = knownWords.findIndex(item => item.data.key === deckState.currentCardKey);
 
   return {
-    // Core data
+    // Current state
+    currentWord,
+    currentCardState,
+    deckState,
+
+    // Legacy compatibility
     knownWords,
-    currentIndex: currentIndex >= 0 ? currentIndex : 0,
-
-    // Statistics
-    cognitiveLoad: stats.averageRisk,
-    globalStep: deck.currentStep,
-    consecutiveEasyCount: consecutiveEasy,
-
-    // UI state (delegated)
-    ...uiState,
+    currentIndex: Math.max(0, currentIndex),
+    cognitiveLoad: deckState.stats.averageRisk,
+    globalStep: deckState.currentStep,
+    consecutiveEasyCount: deckState.consecutiveEasyCount,
 
     // Actions
     handleScore,
-    clearProgress,
-    setCurrentIndex: (_: number) => {}, // No-op - card selection is managed by the session
-
-    // Debug/info
-    reviewMode,
-
-    // Raw SRS state for debug panel
-    deck,
-    srsCurrentIndex
+    clearProgress
   };
 }
