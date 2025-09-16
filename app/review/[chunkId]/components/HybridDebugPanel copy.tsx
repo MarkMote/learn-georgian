@@ -16,6 +16,8 @@ interface HybridDebugPanelProps {
   currentIndex: number;
 }
 
+// Using imported calculateRisk function from core library
+
 export default function HybridDebugPanel({
   deckState,
   currentCardState,
@@ -27,6 +29,7 @@ export default function HybridDebugPanel({
   currentIndex
 }: HybridDebugPanelProps) {
   const [isVisible, setIsVisible] = useState(true);
+
 
   // Calculate stats for each card (from knownWords compatibility layer)
   const cardStats = knownWords.map((knownWord, idx) => {
@@ -72,22 +75,37 @@ export default function HybridDebugPanel({
   }
 
   return (
-    <div
-      className="fixed left-0 top-0 h-full w-full md:w-1/2 bg-gray-900 text-gray-100 overflow-y-auto z-50 shadow-xl"
-      style={{
-        WebkitOverflowScrolling: 'touch',
-        touchAction: 'pan-y'
-      }}
-    >
+    <div className="fixed inset-0 z-50 bg-black/80">
+      {/* Backdrop that closes on tap; separate from the panel */}
       <button
+        aria-label="Close debug panel"
         onClick={() => setIsVisible(false)}
-        className="absolute top-2 right-2 p-2 text-2xl text-gray-400 hover:text-gray-100 z-10 bg-gray-800 rounded-full"
-      >
-        ✕
-      </button>
+        className="absolute inset-0"
+      />
 
-      <div className="p-4 border-b border-gray-700">
-        <h2 className="text-lg font-bold">Debug Panel</h2>
+      <div className="relative flex h-full w-full items-center justify-center p-2">
+        <div
+          className="
+            bg-gray-900 text-gray-100 rounded-xl w-[95%] md:w-1/2
+            h-[85dvh] md:max-h-[90vh]
+            overflow-y-auto overscroll-contain
+            shadow-xl
+          "
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-y'
+          }}
+        >
+          <button
+            onClick={() => setIsVisible(false)}
+            className="absolute top-0 right-1 p-3 text-4xl text-gray-400 hover:text-gray-100 md:hidden"
+          >
+            ✕
+          </button>
+
+          <div className="p-4 border-b border-gray-700">
+          <h2 className="text-lg font-bold">Debug Panel</h2>
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
             <span className="text-gray-400">Step:</span> {deckState.currentStep}
@@ -225,7 +243,9 @@ export default function HybridDebugPanel({
             </div>
           </div>
         </div>
+        </div>
       </div>
+    </div>
     </div>
   );
 }

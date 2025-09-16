@@ -150,27 +150,27 @@ export default function ReviewPage() {
   }, [isFlipped, currentIndex, handleScore, setIsFlipped, setShowEnglish]);
 
   useEffect(() => {
-    if (!isModalOpen && !isProgressModalOpen) {
+    if (!isModalOpen && !isProgressModalOpen && !showDebug) {
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
       document.body.style.height = '100%';
       document.body.style.overflow = 'hidden';
-      
+
       const preventDefault = (e: Event) => e.preventDefault();
       document.addEventListener('touchmove', preventDefault, { passive: false });
-      
+
       return () => {
         document.removeEventListener('touchmove', preventDefault);
       };
     }
-    
+
     return () => {
       document.body.style.position = '';
       document.body.style.width = '';
       document.body.style.height = '';
       document.body.style.overflow = '';
     };
-  }, [isModalOpen, isProgressModalOpen]);
+  }, [isModalOpen, isProgressModalOpen, showDebug]);
 
   const currentCard = knownWords[currentIndex];
 
