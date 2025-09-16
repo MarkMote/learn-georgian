@@ -32,7 +32,7 @@ export default function ReviewPage() {
   const [chunkWords, setChunkWords] = useState<WordData[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   const [isSRSConfigOpen, setIsSRSConfigOpen] = useState(false);
-  
+
   // Get review mode and debug flag from URL params
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
   const showDebug = searchParams.get('debug') !== null;
@@ -310,8 +310,8 @@ export default function ReviewPage() {
         />
       )}
       <div
-        className={`relative bg-black text-white ${showDebug ? 'w-1/2 ml-auto' : 'w-full'}`}
-        style={{ height: '100dvh', overflow: (isModalOpen || isProgressModalOpen) ? 'auto' : 'hidden' }}
+        className={`relative bg-black text-white ${showDebug ? 'md:w-1/2 md:ml-auto w-full' : 'w-full'}`}
+        style={{ height: '100dvh', overflow: 'auto' }}
       >
       <TopBar
         onGetLesson={handleLessonRequest}

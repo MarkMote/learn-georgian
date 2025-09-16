@@ -1,6 +1,6 @@
 // app/review/[chunkId]/components/HybridDebugPanel.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import { CardState, DeckState, SRSConfig } from "../../../../lib/spacedRepetition/types";
 import { calculateRisk } from "../../../../lib/spacedRepetition/lib/calculateRisk";
 import { WordData } from "../types";
@@ -28,6 +28,7 @@ export default function HybridDebugPanel({
   knownWords,
   currentIndex
 }: HybridDebugPanelProps) {
+  const [isVisible, setIsVisible] = useState(true);
 
   // Calculate stats for each card (from knownWords compatibility layer)
   const cardStats = knownWords.map((knownWord, idx) => {
@@ -60,10 +61,30 @@ export default function HybridDebugPanel({
   // Sort by risk (highest first)
   const sortedStats = [...cardStats].sort((a, b) => b.risk - a.risk);
 
+  if (!isVisible) {
+    return (
+      <button
+        onClick={() => setIsVisible(true)}
+        className="fixed right-2 top-1/2 -translate-y-1/2 bg-gray-900 text-gray-100 px-1 py-3 rounded-l-md z-40 shadow-lg text-xs md:hidden"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+      >
+        DBG
+      </button>
+    );
+  }
+
   return (
-    <div className="fixed left-0 top-0 h-full w-1/2 bg-gray-900 text-gray-100 overflow-y-auto z-50 shadow-xl">
+    <div className="fixed left-0 top-0 h-full w-full md:w-1/2 bg-gray-900 text-gray-100 overflow-y-auto z-50 shadow-xl">
       <div className="p-4 border-b border-gray-700">
-        <h2 className="text-lg font-bold mb-2">Debug Panel</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg font-bold">Debug Panel</h2>
+          <button
+            onClick={() => setIsVisible(false)}
+            className="text-gray-400 hover:text-white text-xl font-bold md:hidden"
+          >
+            ×
+          </button>
+        </div>
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
             <span className="text-gray-400">Step:</span> {deckState.currentStep}
