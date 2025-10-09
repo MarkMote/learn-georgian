@@ -41,7 +41,9 @@ export function selectNextCard(
   cardRisks.sort((a, b) => b.risk - a.risk);
 
   const highestRisk = cardRisks[0].risk;
-  const shouldIntroduceNew =
+
+  // Always introduce new cards until we have at least 3
+  const shouldIntroduceNew = cardStates.size < 3 ||
     highestRisk < config.riskThreshold ||
     deckState.consecutiveEasyCount >= config.maxConsecutiveEasy;
 

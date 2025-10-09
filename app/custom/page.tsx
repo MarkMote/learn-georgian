@@ -107,7 +107,13 @@ function CustomPageContent() {
       document.body.style.height = '100%';
       document.body.style.overflow = 'hidden';
       
-      const preventDefault = (e: Event) => e.preventDefault();
+      const preventDefault = (e: TouchEvent) => {
+        // Only prevent default on document body, not on buttons or interactive elements
+        const target = e.target as HTMLElement;
+        if (!target.closest('button') && !target.closest('a') && !target.closest('[role="button"]')) {
+          e.preventDefault();
+        }
+      };
       document.addEventListener('touchmove', preventDefault, { passive: false });
       
       return () => {

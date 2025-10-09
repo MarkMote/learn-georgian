@@ -69,7 +69,7 @@ export default function LessonModal({
       onClick={onClose}
     >
       <div
-        className="bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700"
+        className="bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90dvh] overflow-auto relative border-2 border-gray-700"
         onClick={(e) => e.stopPropagation()}
       >
         <button
