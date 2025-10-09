@@ -21,6 +21,7 @@ interface TopBarProps {
   onModeChange: (mode: ReviewMode) => void;
   hasExampleWords: boolean;
   onOpenSRSSettings: () => void;
+  showDebug: boolean;
 }
 
 export default function TopBar({
@@ -39,6 +40,7 @@ export default function TopBar({
   onModeChange,
   hasExampleWords,
   onOpenSRSSettings,
+  showDebug,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
@@ -194,15 +196,17 @@ export default function TopBar({
                     </div>
                   )}
                 </li>
-                <li>
-                  <button
-                    onClick={onOpenSRSSettings}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
-                  >
-                    <Settings size={16} />
-                    SRS Settings
-                  </button>
-                </li>
+                {showDebug && (
+                  <li>
+                    <button
+                      onClick={onOpenSRSSettings}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                    >
+                      <Settings size={16} />
+                      SRS Settings
+                    </button>
+                  </li>
+                )}
                 <li>
                   <button
                     onClick={handleClearProgressClick}

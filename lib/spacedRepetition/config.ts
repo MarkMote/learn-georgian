@@ -15,7 +15,7 @@ export const DEFAULT_CONFIG: SRSConfig = {
 
   // Card introduction thresholds
   riskThreshold: 0.45,      // Introduce new card when highest risk drops below 45%
-  maxConsecutiveEasy: 4,   // Introduce new card after 5 consecutive easy grades
+  maxConsecutiveEasy: 3,   // Introduce new card after 5 consecutive easy grades
 
   // Stability bounds (in days)
   minStability: 1,  // Minimum interval between reviews (0.1 days = 2.4 hours)

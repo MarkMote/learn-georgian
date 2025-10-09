@@ -11,6 +11,7 @@ interface ProgressModalProps {
   skipVerbs: boolean;
   currentIndex?: number;
   globalStep?: number;
+  showDebug?: boolean;
 }
 
 // Calculate risk for a card using the new algorithm
@@ -28,6 +29,7 @@ export default function ProgressModal({
   skipVerbs,
   currentIndex,
   globalStep = 0,
+  showDebug = false,
 }: ProgressModalProps) {
   if (!isOpen) return null;
 
@@ -104,7 +106,7 @@ export default function ProgressModal({
                         {difficultyLabels[word.rating]}
                       </span>
                       <div className="flex gap-2 text-gray-500">
-                        <span title="Stability (steps)">S:{word.interval}</span>
+                        <span title="Stability (steps)">S:{word.interval.toFixed(2)}</span>
                         <span title="Times seen">seen:{word.repetitions}</span>
                         <span title="Last seen (steps ago)">last:{word.lastSeen}</span>
                       </div>
@@ -115,63 +117,65 @@ export default function ProgressModal({
             </div>
           </div>
 
-          <div className="border-t border-gray-700 pt-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Algorithm Status (New System)</h3>
-            <div className="bg-gray-800 rounded-lg p-4 space-y-3">
-              <div className="text-gray-300">
-                <p className="mb-2">New Algorithm: Recall-based Spaced Repetition</p>
-                <p className="text-sm text-gray-400 mb-4">Cards are selected based on forgetting risk (higher risk = needs review)</p>
-              </div>
-              
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Total words:</span>
-                  <span className="text-white font-medium">{relevantWords.length}</span>
+          {showDebug && (
+            <div className="border-t border-gray-700 pt-6">
+              <h3 className="text-lg font-semibold text-white mb-4">Algorithm Status (New System)</h3>
+              <div className="bg-gray-800 rounded-lg p-4 space-y-3">
+                <div className="text-gray-300">
+                  <p className="mb-2">New Algorithm: Recall-based Spaced Repetition</p>
+                  <p className="text-sm text-gray-400 mb-4">Cards are selected based on forgetting risk (higher risk = needs review)</p>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Average rating:</span>
-                  <span className="text-white font-medium">
-                    {relevantWords.length > 0 ? (scoreSum / relevantWords.length).toFixed(1) : 0}
-                  </span>
-                </div>
-                <div className="border-t border-gray-700 pt-2 flex justify-between">
-                  <span className="text-gray-400">Average Risk (cognitive load proxy):</span>
-                  <span className="text-white font-bold text-lg">
-                    {cognitiveLoad.toFixed(3)}
-                  </span>
-                </div>
-              </div>
 
-              <div className="mt-4 text-sm">
-                {cognitiveLoad < 0.22 ? (
-                  <p className="text-green-400">✓ Risk below 0.22 - Introducing new cards</p>
-                ) : cognitiveLoad < 0.28 ? (
-                  <p className="text-yellow-400">⚡ Risk between 0.22-0.28 - May introduce cards</p>
-                ) : (
-                  <p className="text-orange-400">⚠ Risk above 0.28 - Focus on current cards</p>
-                )}
-              </div>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Total words:</span>
+                    <span className="text-white font-medium">{relevantWords.length}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Average rating:</span>
+                    <span className="text-white font-medium">
+                      {relevantWords.length > 0 ? (scoreSum / relevantWords.length).toFixed(1) : 0}
+                    </span>
+                  </div>
+                  <div className="border-t border-gray-700 pt-2 flex justify-between">
+                    <span className="text-gray-400">Average Risk (cognitive load proxy):</span>
+                    <span className="text-white font-bold text-lg">
+                      {cognitiveLoad.toFixed(3)}
+                    </span>
+                  </div>
+                </div>
 
-              <div className="mt-4 p-3 bg-gray-900 rounded text-xs text-gray-400">
-                <p className="font-semibold mb-1">Card Parameters:</p>
-                <ul className="space-y-1">
-                  <li><span className="text-red-400 font-bold">Risk %:</span> Probability of forgetting (higher = needs review)</li>
-                  <li><span className="text-gray-500">S:</span> Stability (steps until 50% recall)</li>
-                  <li><span className="text-gray-500">seen:</span> Total times reviewed</li>
-                  <li><span className="text-gray-500">last:</span> Steps since last review</li>
-                </ul>
-                <div className="mt-2 pt-2 border-t border-gray-700">
-                  <p className="font-semibold">Risk Colors:</p>
-                  <div className="flex gap-3 mt-1">
-                    <span className="text-green-400">0-20% Fresh</span>
-                    <span className="text-yellow-400">20-40% Due</span>
-                    <span className="text-orange-400">40-70% Overdue</span>
-                    <span className="text-red-400">70%+ Urgent</span>
+                <div className="mt-4 text-sm">
+                  {cognitiveLoad < 0.22 ? (
+                    <p className="text-green-400">✓ Risk below 0.22 - Introducing new cards</p>
+                  ) : cognitiveLoad < 0.28 ? (
+                    <p className="text-yellow-400">⚡ Risk between 0.22-0.28 - May introduce cards</p>
+                  ) : (
+                    <p className="text-orange-400">⚠ Risk above 0.28 - Focus on current cards</p>
+                  )}
+                </div>
+
+                <div className="mt-4 p-3 bg-gray-900 rounded text-xs text-gray-400">
+                  <p className="font-semibold mb-1">Card Parameters:</p>
+                  <ul className="space-y-1">
+                    <li><span className="text-red-400 font-bold">Risk %:</span> Probability of forgetting (higher = needs review)</li>
+                    <li><span className="text-gray-500">S:</span> Stability (steps until 50% recall)</li>
+                    <li><span className="text-gray-500">seen:</span> Total times reviewed</li>
+                    <li><span className="text-gray-500">last:</span> Steps since last review</li>
+                  </ul>
+                  <div className="mt-2 pt-2 border-t border-gray-700">
+                    <p className="font-semibold">Risk Colors:</p>
+                    <div className="flex gap-3 mt-1">
+                      <span className="text-green-400">0-20% Fresh</span>
+                      <span className="text-yellow-400">20-40% Due</span>
+                      <span className="text-orange-400">40-70% Overdue</span>
+                      <span className="text-red-400">70%+ Urgent</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           {skipVerbs && knownWords.length !== relevantWords.length && (
             <div className="mt-4 p-3 bg-blue-900 bg-opacity-50 rounded-lg text-sm text-blue-300">

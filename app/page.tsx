@@ -108,6 +108,18 @@ export default function HomePage() {
   // --- End Feedback State ---
 
   // --- Effects for Animation ---
+  // Ensure scrolling is enabled (in case review page disabled it)
+  useEffect(() => {
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+    document.body.style.overflow = '';
+
+    return () => {
+      // Don't restore anything on unmount
+    };
+  }, []);
+
   // Effect 1: Set a timer to start the animation after initialDelay
   useEffect(() => {
     const delayTimer = setTimeout(() => {

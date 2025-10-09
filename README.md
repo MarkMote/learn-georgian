@@ -1,6 +1,6 @@
 # Learn Georgian
 
-An interactive Georgian language learning application built with Next.js. This app uses spaced repetition flashcards with AI-generated lessons to help users learn Georgian vocabulary and grammar.
+An interactive Georgian language learning application built with Next.js. This app uses spaced repetition flashcards with examples and lessons to help users learn Georgian vocabulary and grammar.
 
 Flashcards are stored in `public/words.csv`. You can easily convert this app to the language of your choice by modifying the columns of this file.
 

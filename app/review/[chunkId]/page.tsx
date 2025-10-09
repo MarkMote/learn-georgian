@@ -329,6 +329,7 @@ export default function ReviewPage() {
         onModeChange={handleModeChange}
         hasExampleWords={hasExampleWords}
         onOpenSRSSettings={() => setIsSRSConfigOpen(true)}
+        showDebug={showDebug}
       />
 
       <div className="flex items-center justify-center px-4" style={{ height: 'calc(100svh - 140px)' }}>
@@ -370,6 +371,7 @@ export default function ReviewPage() {
         skipVerbs={skipVerbs}
         currentIndex={currentIndex}
         globalStep={globalStep}
+        showDebug={showDebug}
       />
 
       <SRSConfigPanel

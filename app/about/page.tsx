@@ -48,13 +48,13 @@ export default function AboutPage() {
               </p>
 
               <p>
-                This is a spaced repetition flashcard app designed specifically for learning Georgian vocabulary. 
+                This is a spaced repetition flashcard app for learning Georgian vocabulary. 
                 The app uses an adaptive learning algorithm to help you memorize words efficiently by showing 
                 you cards at optimal intervals.
               </p>
               
               <p>
-                Words are organized into <strong>chunks of 100</strong>. We avoid breaking up words by category - learning similar meaning words at around the same time makes it easier to mix them up.
+                Words are organized into <strong>chunks of 100</strong>. We avoid breaking up words by category with the reasoning that learning similar meaning words at around the same time makes it easier to mix them up.
               </p>
             </div>
           </section>
@@ -212,7 +212,7 @@ export default function AboutPage() {
             <div className="space-y-4">
               <p>
                 The app is a work in progress and a bit of an experiment as I teach myself the language. 
-                If you want the code, to collaborate, or to give feeback on a translation, you can contact me on one of the links at <a href="https://markmote.com" className="underline text-blue-300" target="_blank" rel="noopener noreferrer">markmote.com</a>. 
+                If you want the code, to collaborate, or to give feeback on a translation, just write something in the feedback button on the home page. 
                 {/* Everything is AI generated, so if you want to make this app for another language, contact me an I can  */}
                 {/* I will add audio one eleven labs releases the next version or their api, which supports Georgian. */}
               </p>
