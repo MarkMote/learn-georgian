@@ -94,10 +94,10 @@ export interface UseChunkStateReturn {
   // Setters
   setIsFlipped: (value: boolean) => void;
   setIsLeftHanded: (value: boolean) => void;
-  setShowExamples: (value: ExampleMode) => void;
-  setShowExplanation: (value: ExplanationMode) => void;
-  setRevealedExamples: (value: Set<string>) => void;
-  setRevealedExplanations: (value: Set<string>) => void;
+  setShowExamples: (value: ExampleMode | ((prev: ExampleMode) => ExampleMode)) => void;
+  setShowExplanation: (value: ExplanationMode | ((prev: ExplanationMode) => ExplanationMode)) => void;
+  setRevealedExamples: (value: Set<string> | ((prev: Set<string>) => Set<string>)) => void;
+  setRevealedExplanations: (value: Set<string> | ((prev: Set<string>) => Set<string>)) => void;
   setCurrentIndex: (value: number) => void;
 
   // Actions

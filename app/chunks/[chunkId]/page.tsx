@@ -7,7 +7,7 @@ import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
 import ProgressModal from './components/ProgressModal';
 import { useChunkState } from './hooks/useChunkState';
-import { ChunkData, ReviewMode } from './types';
+import { ChunkData, ReviewMode, ExampleMode, ExplanationMode } from './types';
 import { 
   parseCSV, 
   getChunksForSet,
@@ -132,7 +132,7 @@ export default function ChunkPage() {
   };
 
   const handleToggleExamples = () => {
-    setShowExamples(prev => {
+    setShowExamples((prev: ExampleMode) => {
       if (prev === "off") return "on";
       if (prev === "on") return "tap";
       if (prev === "tap") return "tap-en";
@@ -142,7 +142,7 @@ export default function ChunkPage() {
   };
 
   const handleToggleExplanation = () => {
-    setShowExplanation(prev => prev === "off" ? "on" : "off");
+    setShowExplanation((prev: ExplanationMode) => prev === "off" ? "on" : "off");
   };
   
   const handleModeChange = (newMode: ReviewMode) => {
