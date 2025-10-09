@@ -132,11 +132,17 @@ export default function ChunkPage() {
   };
 
   const handleToggleExamples = () => {
-    // Chunks route disabled
+    setShowExamples(prev => {
+      if (prev === "off") return "on";
+      if (prev === "on") return "tap";
+      if (prev === "tap") return "tap-en";
+      if (prev === "tap-en") return "tap-ka";
+      return "off";
+    });
   };
 
   const handleToggleExplanation = () => {
-    // Chunks route disabled
+    setShowExplanation(prev => prev === "off" ? "on" : "off");
   };
   
   const handleModeChange = (newMode: ReviewMode) => {
@@ -160,11 +166,11 @@ export default function ChunkPage() {
   const hasExampleChunks = chunkSet.some(c => c.example_en && c.example_ka);
 
   const handleRevealExamples = (chunkKey: string) => {
-    // Chunks route disabled
+    setRevealedExamples(prev => new Set([...prev, chunkKey]));
   };
 
   const handleRevealExplanation = (chunkKey: string) => {
-    // Chunks route disabled
+    setRevealedExplanations(prev => new Set([...prev, chunkKey]));
   };
 
   if (chunkSet.length === 0) {

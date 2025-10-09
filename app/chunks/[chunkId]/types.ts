@@ -1,4 +1,6 @@
 export type ReviewMode = "normal" | "reverse" | "examples" | "examples-reverse";
+export type ExampleMode = "off" | "on" | "tap" | "tap-en" | "tap-ka";
+export type ExplanationMode = "off" | "on";
 
 export type ChunkData = {
   chunk_key: string; // Unique identifier

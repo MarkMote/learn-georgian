@@ -1,7 +1,7 @@
 // app/chunks/[chunkId]/hooks/useChunkState.ts
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { ChunkData, KnownChunkState, DifficultyRating, ReviewMode } from "../types";
+import { ChunkData, KnownChunkState, DifficultyRating, ReviewMode, ExampleMode, ExplanationMode } from "../types";
 import { WordData, CardState, DeckState, Grade } from "../../../../lib/spacedRepetition/types";
 import {
   initializeDeck,
@@ -86,16 +86,16 @@ export interface UseChunkStateReturn {
   // UI state
   isFlipped: boolean;
   isLeftHanded: boolean;
-  showExamples: "off" | "on" | "tap";
-  showExplanation: "off" | "on" | "tap";
+  showExamples: ExampleMode;
+  showExplanation: ExplanationMode;
   revealedExamples: Set<string>;
   revealedExplanations: Set<string>;
 
   // Setters
   setIsFlipped: (value: boolean) => void;
   setIsLeftHanded: (value: boolean) => void;
-  setShowExamples: (value: "off" | "on" | "tap") => void;
-  setShowExplanation: (value: "off" | "on" | "tap") => void;
+  setShowExamples: (value: ExampleMode) => void;
+  setShowExplanation: (value: ExplanationMode) => void;
   setRevealedExamples: (value: Set<string>) => void;
   setRevealedExplanations: (value: Set<string>) => void;
   setCurrentIndex: (value: number) => void;
@@ -137,8 +137,8 @@ export function useChunkState(
   // UI state
   const [isFlipped, setIsFlipped] = useState(false);
   const [isLeftHanded, setIsLeftHanded] = useState(false);
-  const [showExamples, setShowExamples] = useState<"off" | "on" | "tap">("off");
-  const [showExplanation, setShowExplanation] = useState<"off" | "on" | "tap">("off");
+  const [showExamples, setShowExamples] = useState<ExampleMode>("tap-ka");
+  const [showExplanation, setShowExplanation] = useState<ExplanationMode>("on");
   const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
   const [revealedExplanations, setRevealedExplanations] = useState<Set<string>>(new Set());
 

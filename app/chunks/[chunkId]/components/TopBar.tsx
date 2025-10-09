@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { KnownChunkState, ReviewMode } from '../types';
+import { KnownChunkState, ReviewMode, ExampleMode, ExplanationMode } from '../types';
 
 interface TopBarProps {
   onClearProgress: () => void;
-  showExamples: "off" | "on" | "tap";
+  showExamples: ExampleMode;
   onToggleExamples: () => void;
-  showExplanation: "off" | "on" | "tap";
+  showExplanation: ExplanationMode;
   onToggleExplanation: () => void;
   chunkProgress: { unlocked: number; total: number };
   percentageScore: number;
@@ -106,13 +106,9 @@ export default function TopBar({
                   >
                     <span>Show Explanation</span>
                     <span className={`ml-2 px-2 py-0.5 rounded text-xs ${
-                      showExplanation === 'on' ? 'bg-green-600' : 
-                      showExplanation === 'tap' ? 'bg-yellow-600' : 
-                      'bg-gray-600'
+                      showExplanation === 'on' ? 'bg-green-600' : 'bg-gray-600'
                     }`}>
-                      {showExplanation === 'on' ? 'ON' : 
-                       showExplanation === 'tap' ? 'TAP' : 
-                       'OFF'}
+                      {showExplanation === 'on' ? 'ON' : 'OFF'}
                     </span>
                   </button>
                 </li>
@@ -123,12 +119,16 @@ export default function TopBar({
                   >
                     <span>Show Examples</span>
                     <span className={`ml-2 px-2 py-0.5 rounded text-xs ${
-                      showExamples === 'on' ? 'bg-green-600' : 
-                      showExamples === 'tap' ? 'bg-yellow-600' : 
+                      showExamples === 'on' ? 'bg-green-600' :
+                      showExamples === 'tap' ? 'bg-yellow-600' :
+                      showExamples === 'tap-en' ? 'bg-blue-600' :
+                      showExamples === 'tap-ka' ? 'bg-purple-600' :
                       'bg-gray-600'
                     }`}>
-                      {showExamples === 'on' ? 'ON' : 
-                       showExamples === 'tap' ? 'TAP' : 
+                      {showExamples === 'on' ? 'ON' :
+                       showExamples === 'tap' ? 'TAP' :
+                       showExamples === 'tap-en' ? 'TAP-EN' :
+                       showExamples === 'tap-ka' ? 'TAP-KA' :
                        'OFF'}
                     </span>
                   </button>

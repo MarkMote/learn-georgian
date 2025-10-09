@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChunkData, ReviewMode } from "../types";
+import { ChunkData, ReviewMode, ExampleMode, ExplanationMode } from "../types";
 
 interface FlashCardProps {
   chunk: ChunkData;
   isFlipped: boolean;
-  showExamples: "off" | "on" | "tap";
-  showExplanation: "off" | "on" | "tap";
+  showExamples: ExampleMode;
+  showExplanation: ExplanationMode;
   revealedExamples: Set<string>;
   revealedExplanations: Set<string>;
   reviewMode: ReviewMode;
@@ -102,7 +102,7 @@ export default function FlashCard({
                 </p>
               </div>
             ) : isReverse ? (
-              <div className="space-y-3 text-center">
+              <div className="space-y-3 text-center ">
                 <p className={`tracking-wider transition-colors duration-200 whitespace-pre-line ${
                   (() => {
                     const length = chunk.chunk_en.length;
@@ -152,24 +152,13 @@ export default function FlashCard({
           </div>
 
           {/* Explanation section - only when in normal or reverse modes */}
-          {chunk.explanation && (reviewMode === 'normal' || isReverse) && (
+          {chunk.explanation && showExplanation === "on" && (reviewMode === 'normal' || isReverse) && (
             <div className="w-full max-w-sm">
-              {(showExplanation === "on" || revealedExplanations.has(chunk.chunk_key)) ? (
-                <div className="bg-gray-800/50 rounded-lg p-3">
-                  <p className="text-sm text-gray-300">
-                    {chunk.explanation}
-                  </p>
-                </div>
-              ) : (
-                showExplanation === "tap" && (
-                  <button
-                    onClick={() => onRevealExplanation(chunk.chunk_key)}
-                    className="w-full py-3 rounded-lg text-sm text-gray-300 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/20"
-                  >
-                    <p className="text-base text-gray-500 font-mono font-light">explanation</p>
-                  </button>
-                )
-              )}
+              <div className="border-y my-2 border-gray-600 p-3">
+                <p className="text-sm text-gray-300">
+                  {chunk.explanation}
+                </p>
+              </div>
             </div>
           )}
 
@@ -190,12 +179,18 @@ export default function FlashCard({
                   )}
                 </div>
               ) : (
-                showExamples === "tap" && (
+                (showExamples === "tap" || showExamples === "tap-en" || showExamples === "tap-ka") && (
                   <button
                     onClick={() => onRevealExamples(chunk.chunk_key)}
                     className="w-full py-3 rounded-lg text-sm text-gray-300 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/20"
                   >
-                    <p className="text-base text-gray-500 font-mono font-light">example</p>
+                    {showExamples === "tap" ? (
+                      <p className="text-base text-gray-500 font-mono font-light">example</p>
+                    ) : showExamples === "tap-en" ? (
+                      <p className="text-base text-gray-300 font-normal whitespace-pre-line">{formatDialog(chunk.example_en)}</p>
+                    ) : (
+                      <p className="text-base text-gray-300 font-normal whitespace-pre-line">{formatDialog(chunk.example_ka)}</p>
+                    )}
                   </button>
                 )
               )}
