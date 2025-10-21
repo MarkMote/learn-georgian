@@ -7,8 +7,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Allow up to 5 minutes for image generation locally, 60s on Vercel (hobby plan limit)
-export const maxDuration = process.env.VERCEL ? 60 : 300;
+// Allow up to 5 minutes for image generation (localhost only - excluded from Vercel via .vercelignore)
+export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
   try {

@@ -1,0 +1,2 @@
+# Exclude admin routes that require longer maxDuration than Vercel hobby plan allows
+app/api/admin/generate-image
