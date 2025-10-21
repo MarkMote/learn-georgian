@@ -123,6 +123,16 @@ export default function ImageRow({ word, onImageGenerated }: ImageRowProps) {
           <div className="text-xs text-gray-500 mt-1">
             {word.PartOfSpeech} • {word.img_key}
           </div>
+          {(word.ExampleGeorgian1 || word.ExampleEnglish1) && (
+            <div className="mt-2 text-xs">
+              {word.ExampleGeorgian1 && (
+                <p className="text-gray-400">{word.ExampleGeorgian1}</p>
+              )}
+              {word.ExampleEnglish1 && (
+                <p className="text-gray-500">{word.ExampleEnglish1}</p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Action buttons */}

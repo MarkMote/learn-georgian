@@ -30,9 +30,17 @@ export async function POST(request: NextRequest) {
       prompt: prompt,
       size: '1024x1024',
       n: 1,
-      style: style || 'natural', // Default to 'natural' for educational images
+      style: style || 'vivid', // Default to 'natural' for educational images
     });
     console.log('[Image Gen] OpenAI API response received');
+
+    if (!response.data || response.data.length === 0) {
+      console.error('[Image Gen] No data in response');
+      return NextResponse.json(
+        { error: 'No image data returned from OpenAI' },
+        { status: 500 }
+      );
+    }
 
     const imageUrl = response.data[0].url;
     console.log('[Image Gen] Image URL:', imageUrl);
