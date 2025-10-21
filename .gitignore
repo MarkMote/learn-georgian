@@ -48,4 +48,7 @@ backup/
 _old/
 dev/
 
+# high-res original images (keep locally, not in git)
+/originals
+
 CLAUDE.md
