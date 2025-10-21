@@ -7,10 +7,12 @@ import { WordData } from '@/lib/spacedRepetition/types';
  */
 export function generateDefaultPrompt(word: WordData): string {
   // If there's an example sentence, use that for more context
-  if (word.ExampleEnglish1 && word.ExampleGeorgian1) {
-    return `A simple, clear illustration depicting: ${word.ExampleEnglish1}`;
-  }
+  // if (word.ExampleEnglish1 && word.ExampleGeorgian1) {
+  //   return `A simple, clear illustration depicting: ${word.ExampleEnglish1}`;
+  // }
 
   // Otherwise, use the word itself with Georgian translation
-  return `A simple, clear illustration of ${word.EnglishWord} (${word.GeorgianWord})`;
+  // return `A vivid, clear illustration of ${word.EnglishWord} (${word.GeorgianWord}).`;
+
+  return `A vivid, clear illustration of the word ${word.EnglishWord} (${word.GeorgianWord}). Example: ${word.ExampleEnglish1}. Do not include any text in the image.`;
 }

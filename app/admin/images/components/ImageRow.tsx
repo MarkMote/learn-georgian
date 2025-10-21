@@ -18,6 +18,7 @@ export default function ImageRow({ word, onImageGenerated }: ImageRowProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [showCustomPrompt, setShowCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
+  const [customStyle, setCustomStyle] = useState<"natural" | "vivid">("natural");
 
   const handleRefresh = async () => {
     setIsGenerating(true);
@@ -26,7 +27,7 @@ export default function ImageRow({ word, onImageGenerated }: ImageRowProps) {
       const response = await fetch("/api/admin/generate-image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: defaultPrompt }),
+        body: JSON.stringify({ prompt: defaultPrompt, style: "natural" }),
       });
 
       if (!response.ok) {
@@ -59,7 +60,7 @@ export default function ImageRow({ word, onImageGenerated }: ImageRowProps) {
       const response = await fetch("/api/admin/generate-image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: customPrompt }),
+        body: JSON.stringify({ prompt: customPrompt, style: customStyle }),
       });
 
       if (!response.ok) {
@@ -146,7 +147,7 @@ export default function ImageRow({ word, onImageGenerated }: ImageRowProps) {
       {/* Custom prompt input */}
       {showCustomPrompt && (
         <div className="mt-4 pt-4 border-t border-gray-700">
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-2">
             <input
               type="text"
               value={customPrompt}
@@ -159,6 +160,18 @@ export default function ImageRow({ word, onImageGenerated }: ImageRowProps) {
                 }
               }}
             />
+          </div>
+          <div className="flex gap-2 items-center">
+            <label className="text-sm text-gray-400">Style:</label>
+            <select
+              value={customStyle}
+              onChange={(e) => setCustomStyle(e.target.value as "natural" | "vivid")}
+              className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
+            >
+              <option value="natural">Natural</option>
+              <option value="vivid">Vivid</option>
+            </select>
+            <div className="flex-grow"></div>
             <button
               onClick={handleCustomPromptSubmit}
               disabled={isGenerating || !customPrompt.trim()}

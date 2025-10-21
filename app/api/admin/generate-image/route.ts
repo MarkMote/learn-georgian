@@ -12,8 +12,9 @@ export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt } = await request.json();
+    const { prompt, style } = await request.json();
     console.log('[Image Gen] Starting generation with prompt:', prompt);
+    console.log('[Image Gen] Style:', style || 'natural (default)');
 
     if (!prompt || typeof prompt !== 'string') {
       return NextResponse.json(
@@ -29,6 +30,7 @@ export async function POST(request: NextRequest) {
       prompt: prompt,
       size: '1024x1024',
       n: 1,
+      style: style || 'natural', // Default to 'natural' for educational images
     });
     console.log('[Image Gen] OpenAI API response received');
 
