@@ -145,7 +145,31 @@ export function useCustomReviewState(
     if (availableWords.length === 0) return;
 
     const saved = loadState(reviewMode);
+    let shouldUseSaved = false;
+
     if (saved) {
+      // Validate that saved state has at least one card that exists in current availableWords
+      const availableWordKeys = new Set(availableWords.map(w => w.key));
+      const hasValidCards = Array.from(saved.cardStates.keys()).some(key =>
+        availableWordKeys.has(key)
+      );
+
+      shouldUseSaved = hasValidCards;
+
+      if (!hasValidCards) {
+        console.log('Saved SRS state is incompatible with current words, reinitializing...');
+        // Clear the invalid saved state
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.removeItem(getStorageKey(reviewMode));
+          } catch (error) {
+            console.warn("Failed to clear invalid SRS state:", error);
+          }
+        }
+      }
+    }
+
+    if (shouldUseSaved && saved) {
       setCardStates(saved.cardStates);
       setDeckState(prev => ({
         ...saved.deckState,

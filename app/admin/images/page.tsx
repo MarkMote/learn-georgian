@@ -48,6 +48,24 @@ export default function AdminImagesPage() {
     setPreviewImage(null);
   };
 
+  const handleWordUpdated = (imgKey: string, updates: Partial<WordData>) => {
+    // Update both allWords and uniqueWords state
+    setAllWords((prevWords) =>
+      prevWords.map((word) =>
+        word.img_key === imgKey
+          ? { ...word, ...updates }
+          : word
+      )
+    );
+    setUniqueWords((prevWords) =>
+      prevWords.map((word) =>
+        word.img_key === imgKey
+          ? { ...word, ...updates }
+          : word
+      )
+    );
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -63,33 +81,34 @@ export default function AdminImagesPage() {
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
       <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
-        <div className="max-w-6xl mx-auto p-4">
+        <div className="max-w-6xl mx-auto px-3 py-3 md:p-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
               <Link
                 href="/"
-                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                className="p-2 hover:bg-gray-800 rounded-lg transition-colors touch-manipulation"
                 aria-label="Go to Home"
               >
                 <Home size={20} />
               </Link>
-              <h1 className="text-2xl font-light">Image Admin</h1>
+              <h1 className="text-xl md:text-2xl font-light">Image Admin</h1>
             </div>
-            <div className="text-sm text-gray-400">
-              {uniqueWords.length} unique images
+            <div className="text-xs md:text-sm text-gray-400">
+              {uniqueWords.length} images
             </div>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-6xl mx-auto p-4">
-        <div className="space-y-2">
+      <div className="max-w-6xl mx-auto px-3 py-3 md:p-4">
+        <div className="space-y-2 md:space-y-3">
           {uniqueWords.map((word) => (
             <ImageRow
               key={word.img_key}
               word={word}
               onImageGenerated={handleImageGenerated}
+              onWordUpdated={handleWordUpdated}
             />
           ))}
         </div>

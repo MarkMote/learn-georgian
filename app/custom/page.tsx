@@ -297,8 +297,29 @@ function CustomPageContent() {
     );
   }
 
-  // Review state
+  // Review state - check if deck is loading or has an issue
   if (knownWords.length === 0 || !currentCard) {
+    // If we have custom words but no known words, there might be an issue
+    const hasCustomWords = customWords.length > 0;
+    const isExamplesMode = reviewMode === 'examples' || reviewMode === 'examples-reverse';
+    const noExampleWords = isExamplesMode && !customWords.some(w => w.examplePreview && w.exampleRevealed);
+
+    if (hasCustomWords && noExampleWords) {
+      // User is in examples mode but has no words with examples
+      return (
+        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center flex-col gap-4">
+          <p className="text-lg">No words with examples available</p>
+          <p className="text-sm text-gray-400">Switch to normal mode or add words with examples</p>
+          <button
+            onClick={() => handleModeChange('normal')}
+            className="px-6 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700"
+          >
+            Switch to Normal Mode
+          </button>
+        </div>
+      );
+    }
+
     return (
       <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>

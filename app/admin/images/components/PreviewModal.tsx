@@ -74,20 +74,20 @@ export default function PreviewModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4">
+      <div className="bg-gray-900 rounded-lg max-w-2xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-gray-900 border-b border-gray-700 p-4">
-          <h2 className="text-xl font-semibold text-white">Preview Generated Image</h2>
-          <p className="text-sm text-gray-400 mt-1">
+        <div className="sticky top-0 bg-gray-900 border-b border-gray-700 p-3 md:p-4">
+          <h2 className="text-lg md:text-xl font-semibold text-white">Preview Generated Image</h2>
+          <p className="text-xs md:text-sm text-gray-400 mt-1">
             {generatedImage.imgKey}
           </p>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           {/* Image preview */}
-          <div className="bg-gray-800 rounded-lg p-4 mb-4">
+          <div className="bg-gray-800 rounded-lg p-2 md:p-4 mb-3 md:mb-4">
             <img
               src={`data:image/png;base64,${generatedImage.imageBase64}`}
               alt="Generated preview"
@@ -96,33 +96,33 @@ export default function PreviewModal({
           </div>
 
           {/* Prompt display */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-400 mb-2">Prompt:</h3>
-            <p className="text-white bg-gray-800 rounded p-3 text-sm">
+          <div className="mb-4 md:mb-6">
+            <h3 className="text-xs md:text-sm font-medium text-gray-400 mb-2">Prompt:</h3>
+            <p className="text-white bg-gray-800 rounded p-2.5 md:p-3 text-xs md:text-sm">
               {generatedImage.prompt}
             </p>
           </div>
 
           {/* Action buttons */}
-          <div className="flex gap-3">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-3">
             <button
               onClick={handleSave}
               disabled={isSaving || isRegenerating}
-              className="flex-1 px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+              className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors touch-manipulation"
             >
               {isSaving ? "Saving..." : "Save"}
             </button>
             <button
               onClick={handleTryAgain}
               disabled={isSaving || isRegenerating}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+              className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors touch-manipulation"
             >
               {isRegenerating ? "Regenerating..." : "Try Again"}
             </button>
             <button
               onClick={onClose}
               disabled={isSaving || isRegenerating}
-              className="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+              className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors touch-manipulation"
             >
               Cancel
             </button>

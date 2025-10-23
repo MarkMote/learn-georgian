@@ -49,18 +49,11 @@ export default function CustomFlashCard({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-center w-full max-w-sm">
-      {/* Show English hint when enabled */}
-      {showEnglish && !isFlipped && (
-        <p className="text-base font-semibold mb-3 text-gray-300">
-          {isReverse ? word.back : word.front}
-        </p>
-      )}
-      
+    <div className="flex flex-col items-center justify-center text-center w-full max-w-4xl px-4">
       {/* Main content display */}
       {!isFlipped ? (
         // Front of card
-        <div className="flex items-center justify-center" style={{ minHeight: '280px' }}>
+        <div className="flex items-center justify-center w-full" style={{ minHeight: '280px' }}>
           <p className={`tracking-wider transition-colors duration-200 ${
             (() => {
               const length = frontContent.length;
@@ -156,7 +149,7 @@ export default function CustomFlashCard({
 
       {/* Examples section - only for normal and reverse modes when examples exist */}
       {isFlipped && (word.examplePreview || word.exampleRevealed) && (reviewMode === 'normal' || isReverse) && (
-        <div className="flex flex-col items-center justify-center text-center w-full max-w-sm py-2">
+        <div className="flex flex-col items-center justify-center text-center w-full py-2">
           {(showExamples === "on" || revealedExamples.has(word.key)) ? (
             <>
               {word.exampleRevealed && (
