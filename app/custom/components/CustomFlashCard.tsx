@@ -49,12 +49,12 @@ export default function CustomFlashCard({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-center w-full max-w-4xl px-4">
+    <div className="flex flex-col items-center justify-center text-center w-[95%] max-w-full">
       {/* Main content display */}
       {!isFlipped ? (
         // Front of card
         <div className="flex items-center justify-center w-full" style={{ minHeight: '280px' }}>
-          <p className={`tracking-wider transition-colors duration-200 ${
+          <p className={`tracking-wider transition-colors duration-200 break-words ${
             (() => {
               const length = frontContent.length;
               if (length <= 12) return "text-3xl";
@@ -70,12 +70,12 @@ export default function CustomFlashCard({
         // Back of card
         reviewMode === 'normal' ? (
           // Normal mode back - show back content + front hint
-          <div className="space-y-3 mb-4">
-            <p className={`tracking-wider transition-colors duration-200 ${
+          <div className="space-y-3 mb-4 w-full">
+            <p className={`tracking-wider transition-colors duration-200 break-words ${
               (() => {
                 const length = word.back.length;
                 if (length <= 12) return "text-3xl";
-                if (length <= 18) return "text-2xl"; 
+                if (length <= 18) return "text-2xl";
                 if (length <= 24) return "text-xl";
                 return "text-lg";
               })()
@@ -86,18 +86,18 @@ export default function CustomFlashCard({
             >
               {word.back}
             </p>
-            <p className="text-base font-semibold text-gray-300">
+            <p className="text-base font-semibold text-gray-300 break-words">
               ({word.front})
             </p>
           </div>
         ) : isReverse ? (
           // Reverse mode back - show front content + back hint
-          <div className="space-y-3 mb-4">
-            <p className={`tracking-wider transition-colors duration-200 ${
+          <div className="space-y-3 mb-4 w-full">
+            <p className={`tracking-wider transition-colors duration-200 break-words ${
               (() => {
                 const length = word.front.length;
                 if (length <= 12) return "text-2xl";
-                if (length <= 18) return "text-xl"; 
+                if (length <= 18) return "text-xl";
                 if (length <= 24) return "text-lg";
                 return "text-base";
               })()
@@ -108,21 +108,21 @@ export default function CustomFlashCard({
             >
               {word.front}
             </p>
-            <p className="text-base font-semibold text-gray-300">
+            <p className="text-base font-semibold text-gray-300 break-words">
               ({word.back})
             </p>
           </div>
         ) : isExampleMode ? (
           // Example mode back - show both preview and revealed
-          <div className="flex items-center justify-center h-[100px] w-full">
-            <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
+          <div className="flex items-center justify-center min-h-[100px] w-full">
+            <div className="flex flex-col items-center justify-center text-center space-y-3 w-full">
               {word.exampleRevealed && (
-                <p className="text-xl tracking-wide text-gray-200">
+                <p className="text-xl tracking-wide text-gray-200 break-words">
                   {word.exampleRevealed}
                 </p>
               )}
               {word.examplePreview && (
-                <p className="text-lg tracking-wide text-gray-400">
+                <p className="text-lg tracking-wide text-gray-400 break-words">
                   {word.examplePreview}
                 </p>
               )}
@@ -130,15 +130,15 @@ export default function CustomFlashCard({
           </div>
         ) : (
           // Example-reverse mode back - show both in reverse order
-          <div className="flex items-center justify-center h-[100px] w-full">
-            <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
+          <div className="flex items-center justify-center min-h-[100px] w-full">
+            <div className="flex flex-col items-center justify-center text-center space-y-3 w-full">
               {word.examplePreview && (
-                <p className="text-xl tracking-wide text-gray-200">
+                <p className="text-xl tracking-wide text-gray-200 break-words">
                   {word.examplePreview}
                 </p>
               )}
               {word.exampleRevealed && (
-                <p className="text-lg tracking-wide text-gray-400">
+                <p className="text-lg tracking-wide text-gray-400 break-words">
                   {word.exampleRevealed}
                 </p>
               )}
