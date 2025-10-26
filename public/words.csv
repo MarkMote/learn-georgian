@@ -95,24 +95,24 @@ perhaps,perhaps,perhaps,perhaps/ probably,adverb,ალბათ,adverb,1,phrase
 im_sorry_didnt_hear,im_sorry_didnt_hear,im_sorry_didnt_hear,I’m sorry? (didn't hear),phrase,ბატონო?,phrase,1,phrases,"I'm sorry, one more time","ბატონო, კიდევ ერთხელ","ბატონო means sir, and ქალბატონო madam. While you generally need to distinguish, ბატონო can be used for ""pardon?"" when addressing either sex.   "
 one_minute,one_minute,one_minute,one minute,phrase,ერთი წუთი,time,1,phrases,"One minute, please","ერთი წუთით, თუ შეიძლება",
 of_course,of_course,of_course,of course,phrase,რა თქმა უნდა,phrase,1,phrases,"Yes, of course","დიახ, რა თქმა უნდა",
-sure_no_rush,sure_no_rush,sure_no_rush,"No rush",phrase,არ იჩქარო,phrase,1,phrases,"No rush, take your time","არ იჩქარო, ნელა ნელა",
-understand,understand_inf,understand,understanding,verb-inf,გაგება,verb,1,verbs,understanding the problem is hard,პრობლემის გაგება ძნელია,
-understand,understand_p1s,understand,I understand,verb-p1s,მე მესმის,verb,1,verbs,"Yes, I understand","დიახ, მე მესმის",
-understand,understand_p2s,understand,You understand,verb-p2s,შენ გესმის,verb,1,verbs,Do you understand?,შენ გესმის?,
-understand,understand_p3s,understand,He/She/It understands,verb-p3s,მას ესმის,verb,1,verbs,She understands Georgian,მას ესმის ქართული,
-understand,understand_p1p,understand,We understand,verb-p1p,ჩვენ გვესმის,verb,1,verbs,We understand everything,ჩვენ ყველაფერი გვესმის,
-understand,understand_p2p,understand,You (pl) understand,verb-p2p,თქვენ გესმით,verb,1,verbs,Do you understand me?,თქვენ გესმით ჩემი?,
-understand,understand_p3p,understand,They understand,verb-p3p,მათ ესმით,verb,1,verbs,They don't understand,მათ არ ესმით,
+sure_no_rush,sure_no_rush,sure_no_rush,No rush,phrase,არ იჩქარო,phrase,1,phrases,"No rush, take your time","არ იჩქარო, ნელა ნელა",
+understand,understand_inf,understand,understanding/ to understand,verb-inf,გაგება,verb,1,verbs,Thank you for your understanding,მადლობა გაგებისთვის,"Use გაგება when you mean understanding ideas, meaning, or content. Don’t confuse it with მესმის, which literally means I hear and is used when you mean I hear you / I catch what you’re saying."
+understand,understand_p1s,understand,I understand,verb-p1s,მე ვიგებ,verb,1,verbs,I understand Georgian,მე ვიგებ ქართულს,"მე ვიგებ is used to say you understand something in general. To say that you understand what someone just said, you use გავიგე (I understood) or მესმის (I hear)"
+understand,understand_p2s,understand,You understand,verb-p2s,შენ იგებ,verb,1,verbs,You understand everything very quickly.,შენ იგებ ყველაფერს ძალიან სწრაფად?,
+understand,understand_p3s,understand,He/She/It understands,verb-p3s,ის იგებს,verb,1,verbs,She understands Georgian,ის ქართულს იგებს,
+understand,understand_p1p,understand,We understand,verb-p1p,ჩვენ ვიგებთ,verb,1,verbs,We understand the situation,ჩვენ ვიგებთ სიტუაციას.,
+understand,understand_p2p,understand,You (pl) understand,verb-p2p,თქვენ იგებთ,verb,1,verbs,Do you understand me?,თქვენ მე იგებთ?,
+understand,understand_p3p,understand,They understand,verb-p3p,ისინი იგებენ,verb,1,verbs,They don't understand,ისინი არ იგებენ,
 what_would_you_like_to_drink_formal,what_would_you_like_to_drink_formal,what_would_you_like_to_drink_formal,What would you like to drink? (formal),phrase,რას დალევთ?,restaurant,1,phrases,"Water, please.","წყალს, თუ შეიძლება.",
-come_here,come_here,come_here,come here,phrase,მოდი აქ,phrase,1,phrases,Come here for a moment.,მოდი აქ ერთი წუთით.,
-go_there,go_there,go_there,go there,phrase,მიდი იქ,phrase,1,phrases,Go there now.,მიდი იქ ახლა.,
+come_here,come_here,come_here,come here,phrase,მოდი აქ,phrase,1,phrases,Come here for a moment.,მოდი აქ ერთი წუთით.,მო- = toward the speaker
+go_there,go_there,go_there,go there,phrase,მიდი იქ,phrase,1,phrases,Go there now.,მიდი იქ ახლა.,მი- = away or to something
 right_here,right_here,right_here,right here,phrase,აი აქ,directions,1,phrases,Stop right here.,გაჩერდი აი აქ.,
-look_here_is,look_here_is,look_here_is,look! / here is,interjection,აი,phrase,1,phrases,"Look, here is the book!","აი, წიგნი!",
-at_breakfast,at_breakfast,at_breakfast,at breakfast,phrase,საუზმეზე,food,1,phrases,What do you eat at breakfast?,რას ჭამ საუზმეზე?,
-at_lunch,at_lunch,at_lunch,at lunch,phrase,სადილზე,food,1,phrases,I'll see you at lunch.,სადილზე გნახავ.,
+look_here_is,look_here_is,look_here_is,look! / here is,interjection,აი,phrase,1,phrases,"Look, here is the book!","აი, წიგნი!","აი draws attention to something you’re showing, giving, or pointing at — like English “here,” “look,” “see,” “there you go.”"
+at_breakfast,at_breakfast,at_breakfast,at breakfast,phrase,საუზმეზე,food,1,phrases,What do you eat at breakfast?,რას ჭამ საუზმეზე?,"სა- = time/place of, უზმ- = root: fasting/meal, -ზე = at/on. Roughly ""at the time after fasting"""
+at_lunch,at_lunch,at_lunch,at lunch,phrase,სადილზე,food,1,phrases,I'll see you at lunch.,სადილზე გნახავ.,"სა- = time/place of, დილ- root for morning (დილა), -ზე = on/at"
 at_dinner,at_dinner,at_dinner,at dinner,phrase,ვახშამზე,food,1,phrases,We're going out at dinner.,ვახშამზე გავდივართ.,
-go,go_inf,go,going,verb-inf,წასვლა,verb,1,verbs,it's time for going home,სახლში წასვლის დროა,
-go,go_p1s,go,I go,verb-p1s,მე მივდივარ,verb,1,verbs,I go to work.,მე სამსახურში მივდივარ.,
+go,go_inf,go,going,verb-inf,წასვლა,verb,1,verbs,it's time for going home,სახლში წასვლის დროა,"წა- = away from speaker, სვლა = movement"
+go,go_p1s,go,I go,verb-p1s,მე მივდივარ,verb,1,verbs,I go to work.,მე სამსახურში მივდივარ.,მი- is a preverb that usually indicates motion away from the speaker or toward some distant target
 go,go_p2s,go,You go,verb-p2s,შენ მიდიხარ,verb,1,verbs,You go home.,შენ სახლში მიდიხარ.,
 go,go_p3s,go,He/She/It goes,verb-p3s,ის მიდის,verb,1,verbs,He goes to school.,ის სკოლაში მიდის.,
 go,go_p1p,go,We go,verb-p1p,ჩვენ მივდივართ,verb,1,verbs,We go together.,ჩვენ ერთად მივდივართ.,
@@ -121,12 +121,12 @@ go,go_p3p,go,They go,verb-p3p,ისინი მიდიან,verb,1,verbs,Th
 we_go_to_dinner,we_go_to_dinner,we_go_to_dinner,we go to dinner,phrase,ვახშამზე მივდივართ,phrase,1,phrases,We go to dinner at eight.,ვახშამზე რვაზე მივდივართ.,
 in_one_hour,in_one_hour,in_one_hour,in one hour,phrase,ერთ საათში,time,1,phrases,I'll be back in one hour.,ერთ საათში დავბრუნდები.,
 in_two_hours,in_two_hours,in_two_hours,in two hours,phrase,ორ საათში,time,1,phrases,The movie starts in two hours.,ფილმი ორ საათში იწყება.,
-necessary,necessary,necessary,necessary,adjective,აუცილებელი,adjective,1,phrases,Is it necessary?,ეს აუცილებელია?,
+necessary,necessary,necessary,necessary/ essential,adjective,აუცილებელი,adjective,1,phrases,Is it necessary?,ეს აუცილებელია?,
 lets_go_together,lets_go_together,lets_go_together,let’s go together,phrase,ერთად წავიდეთ,phrase,1,phrases,Let's go to the cinema together.,კინოში ერთად წავიდეთ.,
 i_see_it,i_see_it,i_see_it,I see it,phrase,მე ვხედავ მას,phrase,1,phrases,"Yes, I see it now.","დიახ, ახლა ვხედავ.",
 can_i_help,can_i_help,can_i_help,Can I help? (you),phrase,შემიძლია დაგეხმარო?,phrase,1,phrases,Can I help you clean the table?,შემიძლია მაგიდის გაწმენდაში დაგეხმარო?,
 by_foot,by_foot,by_foot,by foot,phrase,ფეხით,transportation,1,phrases,I came by foot.,ფეხით მოვედი.,
-come,come_inf,come,coming,verb-inf,მოსვლა,verb,1,verbs,coming early is better,ადრიან მოსვლა ჯობს,
+come,come_inf,come,coming,verb-inf,მოსვლა,verb,1,verbs,coming early is better,ადრიან მოსვლა ჯობს,"მო- = toward speaker, სვლა = movement"
 come,come_p1s,come,I come,verb-p1s,მე მოვდივარ,verb,1,verbs,I come from far away.,მე შორიდან მოვდივარ.,
 come,come_p2s,come,You come,verb-p2s,შენ მოდიხარ,verb,1,verbs,Are you coming with us?,ჩვენთან ერთად მოდიხარ?,
 come,come_p3s,come,He/She/It comes,verb-p3s,ის მოდის,verb,1,verbs,He comes home late.,ის სახლში გვიან მოდის.,
@@ -138,10 +138,10 @@ one_moment_please,one_moment_please,one_moment_please,one moment please,phrase,�
 black,black,black,black,adjective,შავი,color,1,general,Do you want black coffee?,შავი ყავა გინდა?,
 restaurant,restaurant,restaurant,restaurant,noun,რესტორანი,location,1,general,a Georgian restaurant,ქართული რესტორანი,
 near,near,near,near,preposition,თან ახლოს,preposition,1,general,near the house,სახლთან ახლოს,
-breakfast,breakfast,breakfast,breakfast,noun,საუზმე,food,1,general,Breakfast is ready.,საუზმე მზადაა.,
+breakfast,breakfast,breakfast,breakfast,noun,საუზმე,food,1,general,Breakfast is ready.,საუზმე მზადაა.,"Root: უზმ- (fasting), Prefix: სა- (“time/place of”). Literal meaning: time after fasting"
 pen,pen,pen,pen,noun,კალამი,object,1,general,a blue pen,ლურჯი კალამი,
 i_got_it,i_got_it,i_got_it,I got it / understood,phrase,გავიგე,phrase,2,phrases,"Ah, now I get it!","აა, ახლა გავიგე!",
-live,live_inf,live,living,verb-inf,ცხოვრება,verb,1,verbs,living in Georgia is interesting,საქართველოში ცხოვრება საინტერესოა,
+live,live_inf,live,living/ life/ existence,verb-inf,ცხოვრება,verb,1,verbs,living in Georgia is interesting,საქართველოში ცხოვრება საინტერესოა,"ცხოვრ- is a common root meaning to live or exist, -ება suffixes often turn roots into verbal nouns (similar to -ing, or -ness in English)"
 live,live_p1s,live,I live,verb-p1s,მე ვცხოვრობ,verb,1,verbs,I live in Tbilisi,მე ვცხოვრობ თბილისში,
 live,live_p2s,live,You live,verb-p2s,შენ ცხოვრობ,verb,1,verbs,Where do you live?,სად ცხოვრობ?,
 live,live_p3s,live,He/She/It lives,verb-p3s,ის ცხოვრობს,verb,1,verbs,He lives with his parents,ის მშობლებთან ერთად ცხოვრობს,
