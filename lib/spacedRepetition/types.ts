@@ -13,6 +13,7 @@ export interface WordData {
   group: string;
   ExampleEnglish1?: string;
   ExampleGeorgian1?: string;
+  tips?: string;
 }
 
 // Individual card SRS state

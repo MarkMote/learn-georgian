@@ -10,7 +10,7 @@ import { GeneratedImage } from "../types";
 interface ImageRowProps {
   word: WordData;
   onImageGenerated: (generatedImage: GeneratedImage) => void;
-  onWordUpdated?: (imgKey: string, updates: Partial<WordData>) => void;
+  onWordUpdated?: (key: string, updates: Partial<WordData>) => void;
 }
 
 export default function ImageRow({ word, onImageGenerated, onWordUpdated }: ImageRowProps) {
@@ -27,6 +27,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
     GeorgianWord: word.GeorgianWord,
     ExampleEnglish1: word.ExampleEnglish1 || "",
     ExampleGeorgian1: word.ExampleGeorgian1 || "",
+    tips: word.tips || "",
   });
 
   const handleRefresh = async () => {
@@ -100,7 +101,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          imgKey: word.img_key,
+          key: word.key,
           updates: editedWord,
         }),
       });
@@ -110,7 +111,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
         throw new Error(errorData.error || "Failed to update word");
       }
 
-      onWordUpdated?.(word.img_key, editedWord);
+      onWordUpdated?.(word.key, editedWord);
       setIsEditing(false);
       alert("Word updated successfully!");
     } catch (error: any) {
@@ -127,6 +128,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
       GeorgianWord: word.GeorgianWord,
       ExampleEnglish1: word.ExampleEnglish1 || "",
       ExampleGeorgian1: word.ExampleGeorgian1 || "",
+      tips: word.tips || "",
     });
     setIsEditing(false);
   };
@@ -135,7 +137,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
     <div className="bg-gray-900 rounded-lg p-3 md:p-4">
       <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
         {/* Image thumbnail */}
-        <div className="flex-shrink-0 w-full md:w-[300px] h-[200px] md:h-[300px] bg-gray-700 rounded-lg overflow-hidden relative">
+        <div className="flex-shrink-0 w-full md:w-[200px] mx-auto h-[200px] w-[200px] h-[200px] md:h-[200px] bg-gray-700 rounded-lg overflow-hidden relative">
           {!imageError && (
             <Image
               src={`/img/${word.img_key}.webp`}
@@ -199,78 +201,94 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
                   className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
                 />
               </div>
+              <div>
+                <label className="text-xs text-gray-400 block mb-1">Tips</label>
+                <input
+                  type="text"
+                  value={editedWord.tips}
+                  onChange={(e) => setEditedWord({ ...editedWord, tips: e.target.value })}
+                  placeholder="Optional tips or explanation"
+                  className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
+                />
+              </div>
             </div>
           ) : (
             <>
               <div className="flex flex-col">
-                <h3 className="text-base font-medium text-white">
+                <h3 className="text-base font-medium text-white pb-1">
                   {word.GeorgianWord}
                 </h3>
-                <p className="text-gray-300 text-sm">{word.EnglishWord}</p>
+                <p className="text-gray-300 text-base">{word.EnglishWord}</p>
               </div>
               <div className="text-xs text-gray-500 mt-1">
-                {word.PartOfSpeech} • {word.img_key}
+                {word.PartOfSpeech} • {word.key}
               </div>
               {(word.ExampleGeorgian1 || word.ExampleEnglish1) && (
-                <div className="mt-2 text-xs">
+                <div className="mt-2 text-base text-gray-200">
                   {word.ExampleGeorgian1 && (
-                    <p className="text-gray-400">{word.ExampleGeorgian1}</p>
+                    <p className="text-gray-200">{word.ExampleGeorgian1}</p>
                   )}
                   {word.ExampleEnglish1 && (
-                    <p className="text-gray-500">{word.ExampleEnglish1}</p>
+                    <p className="text-gray-200">{word.ExampleEnglish1}</p>
                   )}
+                </div>
+              )}
+              {word.tips && (
+                <div className="mt-2 text-sm text-blue-400 italic">
+                  💡 {word.tips}
                 </div>
               )}
             </>
           )}
+          {/* Action buttons */}
+          <div className="flex-shrink-0 flex flex-wrap gap-2 w-full mt-4 md:w-auto">
+            {isEditing ? (
+              <>
+                <button
+                  onClick={handleSaveEdits}
+                  disabled={isSaving}
+                  className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
+                >
+                  {isSaving ? "Saving..." : "Save"}
+                </button>
+                <button
+                  onClick={handleCancelEdit}
+                  disabled={isSaving}
+                  className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleRefresh}
+                  disabled={isGenerating}
+                  className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
+                >
+                  {isGenerating ? "Generating..." : "Refresh"}
+                </button>
+                <button
+                  onClick={() => setShowCustomPrompt(!showCustomPrompt)}
+                  disabled={isGenerating}
+                  className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
+                >
+                  Custom
+                </button>
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg transition-colors touch-manipulation"
+                >
+                  Edit
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
-        {/* Action buttons */}
-        <div className="flex-shrink-0 flex flex-wrap gap-2 w-full md:w-auto">
-          {isEditing ? (
-            <>
-              <button
-                onClick={handleSaveEdits}
-                disabled={isSaving}
-                className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                {isSaving ? "Saving..." : "Save"}
-              </button>
-              <button
-                onClick={handleCancelEdit}
-                disabled={isSaving}
-                className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                Cancel
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={handleRefresh}
-                disabled={isGenerating}
-                className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                {isGenerating ? "Generating..." : "Refresh"}
-              </button>
-              <button
-                onClick={() => setShowCustomPrompt(!showCustomPrompt)}
-                disabled={isGenerating}
-                className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                Custom
-              </button>
-              <button
-                onClick={() => setIsEditing(true)}
-                className="flex-1 md:flex-none px-4 py-2 md:py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                Edit
-              </button>
-            </>
-          )}
         </div>
-      </div>
 
+        
       {/* Custom prompt input */}
       {showCustomPrompt && (
         <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-700">

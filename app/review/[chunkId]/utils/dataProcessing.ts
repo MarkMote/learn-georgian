@@ -20,6 +20,7 @@ export function parseCSV(csvText: string): WordData[] {
     group: row.group || "",
     ExampleEnglish1: row.ExampleEnglish1,
     ExampleGeorgian1: row.ExampleGeorgian1,
+    tips: row.tips,
   }));
 }
 

@@ -9,11 +9,11 @@ export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   try {
-    const { imgKey, updates } = await request.json();
+    const { key, updates } = await request.json();
 
-    if (!imgKey || typeof imgKey !== 'string') {
+    if (!key || typeof key !== 'string') {
       return NextResponse.json(
-        { error: 'Valid imgKey is required' },
+        { error: 'Valid key is required' },
         { status: 400 }
       );
     }
@@ -59,10 +59,10 @@ export async function POST(request: NextRequest) {
       console.warn('[Update Word] Field mismatch warnings:', fieldMismatchWarnings);
     }
 
-    // Update all rows with matching img_key
+    // Update the row with matching key
     let updatedCount = 0;
     const updatedData = parseResult.data.map((row: any) => {
-      if (row.img_key === imgKey) {
+      if (row.key === key) {
         updatedCount++;
         return {
           ...row,
@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
           GeorgianWord: updates.GeorgianWord ?? row.GeorgianWord,
           ExampleEnglish1: updates.ExampleEnglish1 ?? row.ExampleEnglish1,
           ExampleGeorgian1: updates.ExampleGeorgian1 ?? row.ExampleGeorgian1,
+          tips: updates.tips ?? row.tips,
         };
       }
       return row;
@@ -77,7 +78,7 @@ export async function POST(request: NextRequest) {
 
     if (updatedCount === 0) {
       return NextResponse.json(
-        { error: `No rows found with img_key: ${imgKey}` },
+        { error: `No row found with key: ${key}` },
         { status: 404 }
       );
     }
@@ -94,7 +95,7 @@ export async function POST(request: NextRequest) {
     // Write back to file
     await fs.writeFile(csvPath, csv, 'utf-8');
 
-    console.log(`[Update Word] Updated ${updatedCount} rows with img_key: ${imgKey}`);
+    console.log(`[Update Word] Updated word with key: ${key}`);
 
     return NextResponse.json({
       success: true,

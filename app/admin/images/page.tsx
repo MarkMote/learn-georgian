@@ -12,7 +12,6 @@ import { GeneratedImage } from "./types";
 
 export default function AdminImagesPage() {
   const [allWords, setAllWords] = useState<WordData[]>([]);
-  const [uniqueWords, setUniqueWords] = useState<WordData[]>([]);
   const [loading, setLoading] = useState(true);
   const [previewImage, setPreviewImage] = useState<GeneratedImage | null>(null);
 
@@ -22,16 +21,6 @@ export default function AdminImagesPage() {
       .then((csv) => {
         const parsed = parseCSV(csv);
         setAllWords(parsed);
-
-        // Get unique words by img_key (since multiple word forms share the same image)
-        const uniqueByImgKey = new Map<string, WordData>();
-        for (const word of parsed) {
-          if (!uniqueByImgKey.has(word.img_key)) {
-            uniqueByImgKey.set(word.img_key, word);
-          }
-        }
-
-        setUniqueWords(Array.from(uniqueByImgKey.values()));
         setLoading(false);
       })
       .catch((error) => {
@@ -48,18 +37,11 @@ export default function AdminImagesPage() {
     setPreviewImage(null);
   };
 
-  const handleWordUpdated = (imgKey: string, updates: Partial<WordData>) => {
-    // Update both allWords and uniqueWords state
+  const handleWordUpdated = (key: string, updates: Partial<WordData>) => {
+    // Update the specific word by key
     setAllWords((prevWords) =>
       prevWords.map((word) =>
-        word.img_key === imgKey
-          ? { ...word, ...updates }
-          : word
-      )
-    );
-    setUniqueWords((prevWords) =>
-      prevWords.map((word) =>
-        word.img_key === imgKey
+        word.key === key
           ? { ...word, ...updates }
           : word
       )
@@ -94,7 +76,7 @@ export default function AdminImagesPage() {
               <h1 className="text-xl md:text-2xl font-light">Image Admin</h1>
             </div>
             <div className="text-xs md:text-sm text-gray-400">
-              {uniqueWords.length} images
+              {allWords.length} words
             </div>
           </div>
         </div>
@@ -103,9 +85,9 @@ export default function AdminImagesPage() {
       {/* Content */}
       <div className="max-w-6xl mx-auto px-3 py-3 md:p-4">
         <div className="space-y-2 md:space-y-3">
-          {uniqueWords.map((word) => (
+          {allWords.map((word) => (
             <ImageRow
-              key={word.img_key}
+              key={word.key}
               word={word}
               onImageGenerated={handleImageGenerated}
               onWordUpdated={handleWordUpdated}
