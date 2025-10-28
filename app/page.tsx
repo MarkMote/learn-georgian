@@ -297,17 +297,17 @@ export default function HomePage() {
       </div>
 
       {/* Footer Links */}
-      <div className="mt-8 pt-6 pb-3 border-t border-gray-800 flex items-center gap-6 text-sm">
+      <div className="mt-8 pt-6 pb-3 border-t border-gray-800 flex items-center gap-6 text-base">
         <Link
           href="/getting-started"
-          className="text-white hover:text-gray-200 transition-colors"
+          className="text-slate-100 hover:text-gray-200 transition-colors"
         >
-          👋 Read this first
+          Read this first
         </Link>
         <span className="text-gray-300">•</span>
         <Link
           href="/all"
-          className="text-gray-100 hover:text-gray-200 transition-colors"
+          className="text-slate-100 hover:text-gray-200 transition-colors"
         >
           View all words
         </Link>

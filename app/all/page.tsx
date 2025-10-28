@@ -107,7 +107,7 @@ export default function AllWordsPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+        <div className="mb-4">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl font-bold">All Words</h1>
             <Link 
@@ -121,6 +121,20 @@ export default function AllWordsPage() {
           <p className="text-gray-400">
             {allWords.length} total words • {wordsWithProgress.filter(w => w.progress).length} learned
           </p>
+        </div>
+
+        <div className="mb-8 text-slate-200 text-sm">
+        You can find the complete as CSV files in the GitHub repository.
+        <br />
+        • 
+        <Link href="https://github.com/MarkMote/learn-georgian/blob/main/public/words.csv" target="_blank" className="text-blue-300 px-2 underline hover:text-gray-200 transition-colors">
+         Base set of words
+        </Link>
+        <br />
+        • 
+        <Link href="https://github.com/MarkMote/learn-georgian/blob/main/public/chunks.csv" target="_blank" className="text-blue-300 px-2 underline hover:text-gray-200 transition-colors">
+          Colloquial phrases
+        </Link>
         </div>
         
         <div className="space-y-2">
