@@ -9,6 +9,7 @@ import LessonModal from './components/LessonModal';
 import ProgressModal from './components/ProgressModal';
 import HybridDebugPanel from './components/HybridDebugPanel';
 import SRSConfigPanel from './components/SRSConfigPanel';
+import TipSuggestionModal from './components/TipSuggestionModal';
 import { useReviewState } from './hooks/useReviewState';
 import { useUIState } from './hooks/useUIState';
 import { useLessonModal } from './hooks/useLessonModal';
@@ -32,6 +33,7 @@ export default function ReviewPage() {
   const [chunkWords, setChunkWords] = useState<WordData[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   const [isSRSConfigOpen, setIsSRSConfigOpen] = useState(false);
+  const [isTipSuggestionModalOpen, setIsTipSuggestionModalOpen] = useState(false);
 
   // Get review mode and debug flag from URL params
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
@@ -45,6 +47,7 @@ export default function ReviewPage() {
     isLeftHanded,
     showImageHint,
     showExamples,
+    showTips,
     revealedExamples,
     setIsFlipped,
     setShowEnglish,
@@ -52,6 +55,7 @@ export default function ReviewPage() {
     setIsLeftHanded,
     setShowImageHint,
     setShowExamples,
+    setShowTips,
     setRevealedExamples,
     resetCardDisplay
   } = useUIState({ chunkId, mode: reviewMode });
@@ -216,6 +220,10 @@ export default function ReviewPage() {
     });
   };
 
+  const handleToggleTips = () => {
+    setShowTips(prev => !prev);
+  };
+
   const handleSRSConfigChange = () => {
     // Config will be automatically picked up by useReviewState on next render
     // Just close the modal and the component will re-render with new config
@@ -326,6 +334,8 @@ export default function ReviewPage() {
         onToggleSkipVerbs={handleToggleSkipVerbs}
         showExamples={showExamples}
         onToggleExamples={handleToggleExamples}
+        showTips={showTips}
+        onToggleTips={handleToggleTips}
         wordProgress={wordProgress}
         percentageScore={percentageScore}
         cognitiveLoad={cognitiveLoad}
@@ -335,6 +345,7 @@ export default function ReviewPage() {
         onModeChange={handleModeChange}
         hasExampleWords={hasExampleWords}
         onOpenSRSSettings={() => setIsSRSConfigOpen(true)}
+        onOpenTipSuggestion={() => setIsTipSuggestionModalOpen(true)}
         showDebug={showDebug}
       />
 
@@ -345,6 +356,7 @@ export default function ReviewPage() {
           showEnglish={showEnglish}
           showImageHint={showImageHint}
           showExamples={showExamples}
+          showTips={showTips}
           revealedExamples={revealedExamples}
           verbHint={verbHint}
           verbTenseLabel={verbTenseLabel}
@@ -384,6 +396,12 @@ export default function ReviewPage() {
         isOpen={isSRSConfigOpen}
         onClose={() => setIsSRSConfigOpen(false)}
         onConfigChange={handleSRSConfigChange}
+      />
+
+      <TipSuggestionModal
+        isOpen={isTipSuggestionModalOpen}
+        onClose={() => setIsTipSuggestionModalOpen(false)}
+        word={currentCard.data}
       />
 
       </div>

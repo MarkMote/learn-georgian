@@ -12,6 +12,8 @@ interface TopBarProps {
   onToggleSkipVerbs: () => void;
   showExamples: ExampleMode;
   onToggleExamples: () => void;
+  showTips: boolean;
+  onToggleTips: () => void;
   wordProgress: { unlocked: number; total: number };
   percentageScore: number;
   cognitiveLoad: number;
@@ -21,6 +23,7 @@ interface TopBarProps {
   onModeChange: (mode: ReviewMode) => void;
   hasExampleWords: boolean;
   onOpenSRSSettings: () => void;
+  onOpenTipSuggestion: () => void;
   showDebug: boolean;
 }
 
@@ -31,6 +34,8 @@ export default function TopBar({
   onToggleSkipVerbs,
   showExamples,
   onToggleExamples,
+  showTips,
+  onToggleTips,
   wordProgress,
   percentageScore,
   cognitiveLoad,
@@ -40,6 +45,7 @@ export default function TopBar({
   onModeChange,
   hasExampleWords,
   onOpenSRSSettings,
+  onOpenTipSuggestion,
   showDebug,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -123,18 +129,40 @@ export default function TopBar({
                   >
                     <span>Show Examples</span>
                     <span className={`ml-2 px-2 py-0.5 rounded text-xs ${
-                      showExamples === 'on' ? 'bg-green-600' : 
-                      showExamples === 'tap' ? 'bg-yellow-600' : 
+                      showExamples === 'on' ? 'bg-green-600' :
+                      showExamples === 'tap' ? 'bg-yellow-600' :
                       showExamples === 'tap-en' ? 'bg-blue-600' :
                       showExamples === 'tap-ka' ? 'bg-purple-600' :
                       'bg-gray-600'
                     }`}>
-                      {showExamples === 'on' ? 'ON' : 
+                      {showExamples === 'on' ? 'ON' :
                        showExamples === 'tap' ? 'TAP' :
                        showExamples === 'tap-en' ? 'TAP-EN' :
                        showExamples === 'tap-ka' ? 'TAP-KA' :
                        'OFF'}
                     </span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={onToggleTips}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Show Tips</span>
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${showTips ? 'bg-green-600' : 'bg-gray-600'}`}>
+                      {showTips ? 'ON' : 'OFF'}
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      onOpenTipSuggestion();
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    Suggest Tip
                   </button>
                 </li>
                 <li>

@@ -17,6 +17,7 @@ export function useUIState({ chunkId, mode }: UIStateOptions) {
   const [skipVerbs, setSkipVerbs] = useState(false);
   const [showImageHint, setShowImageHint] = useState(true);
   const [showExamples, setShowExamples] = useState<ExampleMode>("tap-ka");
+  const [showTips, setShowTips] = useState(true);
 
   // Example reveal state
   const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
@@ -33,6 +34,7 @@ export function useUIState({ chunkId, mode }: UIStateOptions) {
         setIsLeftHanded(prefs.isLeftHanded ?? false);
         setSkipVerbs(prefs.skipVerbs ?? false);
         setShowExamples(prefs.showExamples ?? "tap-ka");
+        setShowTips(prefs.showTips ?? true);
       } catch (err) {
         console.error("Failed to load UI preferences:", err);
       }
@@ -44,10 +46,11 @@ export function useUIState({ chunkId, mode }: UIStateOptions) {
     const prefs = {
       isLeftHanded,
       skipVerbs,
-      showExamples
+      showExamples,
+      showTips
     };
     localStorage.setItem(prefsKey, JSON.stringify(prefs));
-  }, [isLeftHanded, skipVerbs, showExamples, prefsKey]);
+  }, [isLeftHanded, skipVerbs, showExamples, showTips, prefsKey]);
 
   // Auto-hide image hint after 5 seconds
   useEffect(() => {
@@ -80,6 +83,8 @@ export function useUIState({ chunkId, mode }: UIStateOptions) {
     setShowImageHint,
     showExamples,
     setShowExamples,
+    showTips,
+    setShowTips,
 
     // Example management
     revealedExamples,

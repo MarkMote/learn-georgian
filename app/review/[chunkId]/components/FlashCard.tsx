@@ -14,6 +14,7 @@ interface FlashCardProps {
   verbHint: string | null;
   verbTenseLabel: string | null;
   reviewMode: ReviewMode;
+  showTips: boolean;
   onImageClick: () => void;
   onRevealExamples: (wordKey: string) => void;
 }
@@ -28,6 +29,7 @@ export default function FlashCard({
   verbHint,
   verbTenseLabel,
   reviewMode,
+  showTips,
   onImageClick,
   onRevealExamples,
 }: FlashCardProps) {
@@ -276,6 +278,15 @@ export default function FlashCard({
               </button>
             )
           )}
+        </div>
+      )}
+
+      {/* Tips section - show when flipped and tips are enabled */}
+      {isFlipped && showTips && word.tips && (
+        <div className="flex flex-col items-center justify-center text-center w-full max-w-sm pt-1">
+          <div className="text-xs text-blue-400 italic">
+            💡 {word.tips}
+          </div>
         </div>
       )}
     </div>
