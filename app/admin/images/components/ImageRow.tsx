@@ -11,9 +11,10 @@ interface ImageRowProps {
   word: WordData;
   onImageGenerated: (generatedImage: GeneratedImage) => void;
   onWordUpdated?: (key: string, updates: Partial<WordData>) => void;
+  suggestedTips?: Array<{ timestamp: string; tip: string }>;
 }
 
-export default function ImageRow({ word, onImageGenerated, onWordUpdated }: ImageRowProps) {
+export default function ImageRow({ word, onImageGenerated, onWordUpdated, suggestedTips = [] }: ImageRowProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -338,6 +339,34 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated }: Imag
                 Cancel
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Suggested tips */}
+      {!isEditing && suggestedTips.length > 0 && (
+        <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-700">
+          <h4 className="text-sm font-medium text-yellow-400 mb-2">💡 Suggested Tips ({suggestedTips.length})</h4>
+          <div className="space-y-2">
+            {suggestedTips.map((suggestion, index) => (
+              <div key={index} className="bg-gray-800 p-3 rounded-lg">
+                <p className="text-sm text-gray-200 mb-2">{suggestion.tip}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-500">
+                    {new Date(suggestion.timestamp).toLocaleDateString()}
+                  </span>
+                  <button
+                    onClick={() => {
+                      setEditedWord({ ...editedWord, tips: suggestion.tip });
+                      setIsEditing(true);
+                    }}
+                    className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded transition-colors"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

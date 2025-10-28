@@ -73,7 +73,7 @@ export default function FlashCard({
       {/* Image display logic based on mode */}
       {reviewMode === 'normal' ? (
         // Normal mode: always show image
-        <div className="relative w-full mb-3" style={{ height: '280px' }}>
+        <div className="relative w-full mb-3 h-[270px] md:h-[350px]">
           <Image
             src={`/img/${word.img_key}.webp`}
             alt={word.EnglishWord}
@@ -283,8 +283,8 @@ export default function FlashCard({
 
       {/* Tips section - show when flipped and tips are enabled */}
       {isFlipped && showTips && word.tips && (
-        <div className="flex flex-col items-center justify-center text-center w-full max-w-sm pt-1">
-          <div className="text-xs text-blue-400 italic">
+        <div className="flex flex-col items-center justify-center text-center w-full max-w-lg py-1">
+          <div className="text-xs md:text-sm text-neutral-300 ">
             💡 {word.tips}
           </div>
         </div>

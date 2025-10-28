@@ -55,3 +55,49 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export async function GET() {
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    const spreadsheetId = '1Xf-oPppBkZbCN0dFQfkCEVFSNeFKSJTEgeWKQHkv4bc';
+
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: 'TipSuggestions!A:C',
+    });
+
+    const rows = response.data.values || [];
+
+    // Skip header row if it exists
+    const dataRows = rows.length > 0 && rows[0][0] === 'Timestamp' ? rows.slice(1) : rows;
+
+    // Group suggestions by word key
+    const suggestionsByWord: Record<string, Array<{ timestamp: string; tip: string }>> = {};
+
+    for (const row of dataRows) {
+      const [timestamp, wordKey, tip] = row;
+      if (wordKey && tip) {
+        if (!suggestionsByWord[wordKey]) {
+          suggestionsByWord[wordKey] = [];
+        }
+        suggestionsByWord[wordKey].push({ timestamp, tip });
+      }
+    }
+
+    return NextResponse.json({ suggestions: suggestionsByWord });
+  } catch (error) {
+    console.error('Error fetching tip suggestions:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch tip suggestions' },
+      { status: 500 }
+    );
+  }
+}

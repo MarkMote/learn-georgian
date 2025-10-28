@@ -14,8 +14,10 @@ export default function AdminImagesPage() {
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [loading, setLoading] = useState(true);
   const [previewImage, setPreviewImage] = useState<GeneratedImage | null>(null);
+  const [tipSuggestions, setTipSuggestions] = useState<Record<string, Array<{ timestamp: string; tip: string }>>>({});
 
   useEffect(() => {
+    // Load words
     fetch("/words.csv")
       .then((res) => res.text())
       .then((csv) => {
@@ -26,6 +28,16 @@ export default function AdminImagesPage() {
       .catch((error) => {
         console.error("Error loading words:", error);
         setLoading(false);
+      });
+
+    // Load tip suggestions
+    fetch("/api/tip-suggestions")
+      .then((res) => res.json())
+      .then((data) => {
+        setTipSuggestions(data.suggestions || {});
+      })
+      .catch((error) => {
+        console.error("Error loading tip suggestions:", error);
       });
   }, []);
 
@@ -91,6 +103,7 @@ export default function AdminImagesPage() {
               word={word}
               onImageGenerated={handleImageGenerated}
               onWordUpdated={handleWordUpdated}
+              suggestedTips={tipSuggestions[word.key] || []}
             />
           ))}
         </div>
