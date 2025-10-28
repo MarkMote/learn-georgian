@@ -3,7 +3,7 @@
 import Link from 'next/link'; // Use Next.js Link for navigation
 import { useState, useEffect, useRef } from 'react'; // Import React hooks and useRef
 import { useRouter } from 'next/navigation';
-import { Github, Star, ExternalLink, Upload, MessageCircle, MessageSquare } from 'lucide-react';
+import { Github, Star, ExternalLink, Upload, MessageCircle, MessageSquare, Sparkles } from 'lucide-react';
 import FeedbackModal from './components/FeedbackModal';
 
 // Word data types
@@ -299,18 +299,25 @@ export default function HomePage() {
       {/* Footer Links */}
       <div className="mt-8 pt-6 pb-3 border-t border-gray-800 flex items-center gap-6 text-sm">
         <Link
+          href="/getting-started"
+          className="text-white hover:text-gray-200 transition-colors"
+        >
+          👋 Read this first
+        </Link>
+        <span className="text-gray-300">•</span>
+        <Link
           href="/all"
-          className="text-gray-400 hover:text-gray-200 transition-colors"
+          className="text-gray-100 hover:text-gray-200 transition-colors"
         >
           View all words
         </Link>
-        <span className="text-gray-600">•</span>
-        <Link 
-          href="/about" 
+        {/* <span className="text-gray-600">•</span> */}
+        {/* <Link
+          href="/about"
           className="text-gray-400 hover:text-gray-200 transition-colors"
         >
           About this app
-        </Link>
+        </Link> */}
       </div>
 
       {/* Feedback Modal */}

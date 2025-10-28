@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { Sparkles } from "lucide-react";
 import { WordData, ReviewMode, ExampleMode } from "../types";
 
 interface FlashCardProps {
@@ -283,8 +284,9 @@ export default function FlashCard({
       {/* Tips section - show when flipped and tips are enabled */}
       {isFlipped && showTips && word.tips && (
         <div className={`flex flex-col items-center justify-center text-center w-full max-w-lg py-3 ${(isExampleMode || isExampleReverse) ? 'mt-6' : ''}`}>
-          <div className="text-xs md:text-sm text-slate-300 ">
-            💡 {word.tips}
+          <div className="flex items-center gap-2 text-xs md:text-sm text-slate-300">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 flex-shrink-0" />
+            <span>{word.tips}</span>
           </div>
         </div>
       )}

@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { Sparkles } from "lucide-react";
 import { WordData } from "@/lib/spacedRepetition/types";
 import { generateDefaultPrompt } from "../lib/promptGeneration";
 import { GeneratedImage } from "../types";
@@ -235,8 +236,9 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
                 </div>
               )}
               {word.tips && (
-                <div className="mt-2 text-sm text-blue-400 italic">
-                  💡 {word.tips}
+                <div className="mt-2 text-sm text-blue-400 italic flex items-center gap-2">
+                  <Sparkles className="w-3 h-3 text-yellow-400 flex-shrink-0" />
+                  <span>{word.tips}</span>
                 </div>
               )}
             </>
@@ -346,7 +348,10 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
       {/* Suggested tips */}
       {!isEditing && suggestedTips.length > 0 && (
         <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-700">
-          <h4 className="text-sm font-medium text-yellow-400 mb-2">💡 Suggested Tips ({suggestedTips.length})</h4>
+          <h4 className="text-sm font-medium text-yellow-400 mb-2 flex items-center gap-2">
+            <Sparkles className="w-4 h-4" />
+            <span>Suggested Tips ({suggestedTips.length})</span>
+          </h4>
           <div className="space-y-2">
             {suggestedTips.map((suggestion, index) => (
               <div key={index} className="bg-gray-800 p-3 rounded-lg">
