@@ -30,11 +30,11 @@ export default function GettingStartedPage() {
             This is a spaced repetition app for learning the Georgian language. Progress is saved in the browser so there is no login or download required. It looks best on mobile, but works on desktop too.
           </p>
 
-          <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What You Will and Won't Learn</h2>
+          <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What You Will and Won&apos;t Learn</h2>
           <p className="text-gray-300 mb-4">
             <span className="font-semibold pr-1 text-slate-100">No app is going to teach you Georgian — this one included.</span>
-            You'll need to practice speaking, reading, and listening to gain fluency.
-            The problem is, those things are nearly impossible when you're just starting out.
+            You&apos;ll need to practice speaking, reading, and listening to gain fluency.
+            The problem is, those things are nearly impossible when you&apos;re just starting out.
           </p>
           <p className="text-gray-300 mb-4">
             The purpose of this app is to give you an extremely efficient way to get from 0 → 1:
@@ -49,7 +49,7 @@ export default function GettingStartedPage() {
             Once you reach that point, real-world reading, listening, and speaking become learnable.
           </p>
 
-          {/* <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What You'll Learn</h2> */}
+          {/* <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What You&apos;ll Learn</h2> */}
           <h2 className="text-2xl font-semibold text-white mt-12 mb-4">Prerequisites</h2>
           <ul className="list-disc list-inside text-gray-300 space-y-2 mb-4">
             <li>Learn the alphabet and sounds before starting</li>
