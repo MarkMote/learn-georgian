@@ -106,10 +106,9 @@ export default function FlashCard({
         ) : (
           <div className="flex items-center justify-center" style={{ minHeight: '280px' }} />
         )
-      ) : (
-        // Example modes: no image at all
-        <div className="flex items-center justify-center" style={{ minHeight: isFlipped ? '100px' : '280px' }} />
-      )}
+      ) : null
+      // Example modes: no image - removed placeholder for better centering
+      }
 
       {showImageHint && (showImageOnFront || (isReverse && isFlipped)) && (
         <div className="mb-2">
@@ -147,7 +146,7 @@ export default function FlashCard({
           </div>
         ) : (
           // Other modes front: centered content
-          <div className="flex items-center justify-center h-[280px] w-full">
+          <div className="flex items-center justify-center w-full">
             {isExampleMode || isExampleReverse ? (
               // For example modes, show the full sentence
               <p className="text-xl tracking-wide text-center px-4">
@@ -212,7 +211,7 @@ export default function FlashCard({
           </div>
         ) : isExampleMode ? (
           // Example mode back: show both sentences (centered)
-          <div className="flex items-center justify-center h-[100px] w-full">
+          <div className="flex items-center justify-center w-full">
             <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
               {word.ExampleGeorgian1 && (
                 <p className="text-xl tracking-wide text-gray-200">
@@ -228,7 +227,7 @@ export default function FlashCard({
           </div>
         ) : (
           // Example-reverse mode back: show both sentences (centered)
-          <div className="flex items-center justify-center h-[100px] w-full">
+          <div className="flex items-center justify-center w-full">
             <div className="flex flex-col items-center justify-center text-center space-y-3 px-4">
               {word.ExampleEnglish1 && (
                 <p className="text-xl tracking-wide text-gray-200">
@@ -283,8 +282,8 @@ export default function FlashCard({
 
       {/* Tips section - show when flipped and tips are enabled */}
       {isFlipped && showTips && word.tips && (
-        <div className="flex flex-col items-center justify-center text-center w-full max-w-lg py-1">
-          <div className="text-xs md:text-sm text-neutral-300 ">
+        <div className={`flex flex-col items-center justify-center text-center w-full max-w-lg py-3 ${(isExampleMode || isExampleReverse) ? 'mt-6' : ''}`}>
+          <div className="text-xs md:text-sm text-slate-300 ">
             💡 {word.tips}
           </div>
         </div>

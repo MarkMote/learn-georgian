@@ -1,6 +1,6 @@
 word_key,key,img_key,EnglishWord,PartOfSpeech,GeorgianWord,hint,priority,group,ExampleEnglish1,ExampleGeorgian1,tips
 hello,hello,hello,Hello,phrase,გამარჯობა,greeting,1,phrases,"Hello, how are you today?","გამარჯობა, როგორ ხარ დღეს?",
-thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,phrases,Thank you very much,დიდი მადლობა,
+thank_you,thank_you,thank_you,Thank you,phrase,მადლობა,phrase,1,phrases,Thank you very much,დიდი მადლობა,"Comes from მადლი = grace/ favor/ blessing, and -ობა which is a common suffix that turns words into abstract nouns, similar to ""-ness"" or ""-ship"" in English."
 yes,yes,yes,Yes (polite /formal),noun,დიახ,misc_nouns,1,phrases,"Yes, it's true.","დიახ, მართალია.","Other ways to say yes: კი (neutral), ჰო (casual), კი ბატონო (yes sir)"
 no,no,no,no,noun,არა,misc_nouns,1,phrases,"No, thank you","არა, გმადლობთ",
 goodbye,goodbye,goodbye,Goodbye,phrase,ნახვამდის,greeting,1,phrases,"Goodbye, see you later!","ნახვამდის, დროებით!",
