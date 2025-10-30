@@ -1,34 +1,34 @@
-georgianLetter,englishLetter,ipaSymbol,explanation,georgianExample,englishExample
-ა,a,/a/,equivalent to the `a` sound in father or car,მამა (mama),father car spa
-ბ,b,/b/,equivalent to the `b` sound in boy or book,ბავშვი (bavshvi),boy book baby
-გ,g,/ɡ/,equivalent to the `g` sound in go or game,გოგო (gogo),go game give
-დ,d,/d/,equivalent to the `d` sound in dog or day,დღეს (dghes),dog day did
-ე,e,/ɛ/,equivalent to the `e` sound in egg or desk,ენა (ena),egg desk desk
-ვ,v,/v/,equivalent to the `v` sound in very or love,ვაშლი (vashli),very love have
-ზ,z,/z/,equivalent to the `z` sound in zoo or buzz,ზღვა (zghva),zoo buzz zero
-თ,t,/tʰ/,aspirated `t` sound like the `t` in 'top' or 'tap' but softer,თოვლი (tovli),top tea tap
-ი,i,/i/,equivalent to the `ee` sound in bee or see,ისინი (isini),bee see three
-კ,k,/kʼ/,ejective `k` sound - similar to the `k` sound `bake` or `take`,კაცი (katsi),
-ლ,l,/l/,equivalent to the `l` sound in love or ball,ლამაზი (lamazi),love ball hello
-მ,m,/m/,equivalent to the `m` sound in mother or home,მზე (mze),mother home make
-ნ,n,/n/,equivalent to the `n` sound in no or fun,ნამდვილი (namdvili),no fun name
-ო,o,/ɔ/,equivalent to the `o` sound in home or `oa` sound in 'boat',ოჯახი (ojahi),boat goat home
-პ,p,/pʼ/,ejective `p` sound - similar to the `p` sound `port` or `pp` sound in `pepper`,პური (puri),
-ჟ,zh,/ʒ/,equivalent to the `s` sound in measure or vision,ჟუღა (zhugha),measure vision beige
-რ,r,/r/,rolled `r` sound like Spanish rr,რძე (rdze),
-ს,s,/s/,equivalent to the `s` sound in sun or pass,სახლი (sahli),sun pass see
-ტ,t,/tʼ/,ejective `t` sound - similar to the `t` sound `stop` or `tt` sound in `tattoo`,ტყე (tye),
-უ,u,/u/,equivalent to the `oo` sound in moon or boot,უსაფრთხო (usaprtkho),moon boot zoo
-ფ,p,/pʰ/,aspirated `p` sound - similar to the `p` sound `p` or `pp` sound in `pepper`,ფული (puli),pot pink phone
-ქ,k,/kʰ/,aspirated `k` sound - similar to the `c` sound in cat or `k` sound in book,ქალი (kali),cat key kind
-ღ,gh,/ɣ/,voiced velar fricative - like gargling softly. Similar to the French r sound.,ღამე (ghame),
-ყ,q,/qʼ/,ejective uvular stop - no equivalent in English. Much deeper than English k,ყველა (qvela),
-შ,sh,/ʃ/,equivalent to the `sh` sound in shoe or wish,შინ (shin),shoe wish ship
-ჩ,ch,/tʃ/,equivalent to the `ch` sound in church or batch,ჩემი (chemi),church batch chair
-ც,ts,/ts/,equivalent to the `ts` sound in tsunami or bits,ცხოვრება (tskhovreba),tsunami bits pizza
-ძ,dz,/dz/,equivalent to the `ds` sound in beds or hands,ძაღლი (dzaghli),beds hands
-წ,ts,/tsʼ/,ejective `ts` sound - more forceful than English ts,წყალი (tsqali),
-ჭ,ch,/tʃʼ/,ejective `ch` sound - more forceful than English ch,ჭიანჭველა (chianch'vela),
-ხ,kh,/x/,equivalent to the `ch` sound in Scottish loch or German ach,ხელი (kheli),loch ach
-ჯ,j,/dʒ/,equivalent to the `j` sound in judge or bridge,ჯანმრთელობა (janmrteloba),judge bridge jump
-ჰ,h,/h/,equivalent to the `h` sound in house or hello,ჰაერი (haeri),house hello have
+georgianLetter,englishLetter,ipaSymbol,explanation,georgianExample,englishExample,translation,englishEquivalent
+ა,a,/ɑ/,like 'a' in father or car,მამა (mama),"father, car, spa",father,yes
+ბ,b,/b/,like 'b' in boy or book,ბავშვი (bavshvi),"boy, book, baby",child,yes
+გ,g,/ɡ/,like 'g' in go or game,გოგო (gogo),"go, game, give",girl,yes
+დ,d,/d/,like 'd' in dog or day,დღეს (dghes),"dog, day, did",today,yes
+ე,e,/ɛ/,like 'e' in egg or desk,ენა (ena),"egg, desk, red",language,yes
+ვ,v,/v/,like 'v' in very or love,ვაშლი (vashli),"very, love, have",apple,yes
+ზ,z,/z/,like 'z' in zoo or buzz,ზღვა (zghva),"zoo, buzz, zero",sea,yes
+თ,t,/tʰ/,"aspirated 't' like in top or tap (stronger puff of air)",თოვლი (tovli),"top, tea, tap",snow,similar
+ი,i,/i/,like 'ee' in see or bee,ისინი (isini),"bee, see, three",they,yes
+კ,k',/kʼ/,ejective k (no air),კაცი (k’atsi),,man,similar
+ლ,l,/l/,like 'l' in love or ball,ლამაზი (lamazi),"love, ball, hello",beautiful,yes
+მ,m,/m/,like 'm' in mother or home,მზე (mze),"mother, home, make",sun,yes
+ნ,n,/n/,like 'n' in no or fun,ნამდვილი (namdvili),"no, fun, name",real,yes
+ო,o,/ɔ/,like 'o' in more or boat,ოჯახი (ojakhi),"boat, goat, home",family,yes
+პ,p',/pʼ/,ejective p (no air),პური (p’uri),,bread,similar
+ჟ,zh,/ʒ/,like 's' in measure,ჟურნალი (zhurnali),"measure, vision, beige",magazine,yes
+რ,r,/r/,rolled r (like Spanish rr),რძე (rdze),,milk,similar
+ს,s,/s/,like 's' in sun or pass,სახლი (sakhli),"sun, pass, see",house,yes
+ტ,t',/tʼ/,ejective t (no air),ტყე (tk’e),,forest,similar
+უ,u,/u/,like 'oo' in moon or boot,უსაფრთხო (usafrto),"moon, boot, zoo",safe,yes
+ფ,p,/pʰ/,"aspirated p like in pot or paper (stronger puff of air)",ფული (puli),"pot, pink, phone",money,similar
+ქ,k,/kʰ/,"aspirated k like in cat or key (stronger puff of air)",ქალი (kali),"cat, key, kind",woman,similar
+ღ,gh,/ɣ/,"voiced velar fricative (soft gargle, French r)",ღამე (ghame),,night,no
+ყ,q',/qʼ/,ejective uvular stop (deep k),ყველა (qvela),,everyone,no
+შ,sh,/ʃ/,like 'sh' in shoe or wish,შინ (shin),"shoe, wish, ship",home,yes
+ჩ,ch,/tʃʰ/,like 'ch' in church,ჩემი (chemi),"church, batch, chair",my,yes
+ც,ts,/t͡sʰ/,like 'ts' in bits or cats,ცივი (tsivi),"tsunami, bits, pizza",cold,similar
+ძ,dz,/d͡z/,like 'ds' in beds or hands,ძაღლი (dzaghli),"beds, hands",dog,similar
+წ,ts',/t͡sʼ/,"ejective ts, more forceful",წყალი (ts’qali),,water,no
+ჭ,ch',/t͡ʃʼ/,"ejective ch, more forceful",ჭიქა (ch’ika),,cup,no
+ხ,kh,/x/,"like German 'ch', closest ch in loch or Bach",ხელი (kheli),"loch, ach",hand,no
+ჯ,j,/d͡ʒ/,like 'j' in judge or bridge,ჯამი (jami),"judge, bridge, jump",bowl,yes
+ჰ,h,/h/,like 'h' in house or hello,ჰაერი (haeri),"house, hello, have",air,yes

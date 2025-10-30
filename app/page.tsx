@@ -3,7 +3,7 @@
 import Link from 'next/link'; // Use Next.js Link for navigation
 import { useState, useEffect, useRef } from 'react'; // Import React hooks and useRef
 import { useRouter } from 'next/navigation';
-import { Github, Star, ExternalLink, Upload, MessageCircle, MessageSquare, Sparkles } from 'lucide-react';
+import { Github, Star, ExternalLink, Upload, MessageCircle, MessageSquare, Sparkles, Languages } from 'lucide-react';
 import FeedbackModal from './components/FeedbackModal';
 
 // Word data types
@@ -254,15 +254,22 @@ export default function HomePage() {
 
         {/* Custom Deck Option */}
         <div className="pt-6 border-t border-gray-700 space-y-3">
-          <Link 
-            href="/chunks" 
+          <Link
+            href="/alphabet"
+            className="flex items-center justify-center gap-3 px-4 py-3 w-full  border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+          >
+            <Languages className="w-4 h-4 text-gray-400" />
+            <span>Alphabet</span>
+          </Link>
+          <Link
+            href="/chunks"
             className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
           >
             <MessageCircle className="w-4 h-4 text-gray-400" />
             <span>Colloquial Georgian</span>
           </Link>
-          <Link 
-            href="/custom" 
+          <Link
+            href="/custom"
             className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
           >
             <Upload className="w-4 h-4 text-gray-400" />
