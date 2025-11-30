@@ -23,9 +23,10 @@ Your goal is to create memorable, visually interesting images that help learners
 
 IMPORTANT STYLE RULES:
 - AVOID cartoon, clipart, flat illustration, vector art, or typical "flashcard" styles - these are boring and forgettable
-- PREFER: realistic photography, cinematic shots, oil paintings, watercolors, charcoal sketches, polaroid, vintage photographs, film stills, documentary style, fine art, surrealist art, Renaissance style, impressionist paintings, abstract, or anything not flashcard style.
-- Each image should feel unique and memorable, not like a generic educational graphic
+- PREFER: realistic photography, cinematic shots, oil paintings, watercolors, charcoal sketches, polaroid, vintage photographs, film stills, documentary style, fine art, surrealist art, Renaissance style, impressionist paintings, abstract, concept art, detailed digital illustration, or anything not flashcard style.
+- Each image should feel unique and memorable, but still educational
 - Each image should perfectly and uniquely describe the word
+- include the word or phrase in the prompt
 
 Guidelines:
 - Make the image memorable and distinctive
@@ -37,6 +38,7 @@ Guidelines:
 - NEVER include any text, letters, or writing in the image
 - Vary your approach - pick a different style for each word
 - If a word needs multiple examples, you can consider composite images 
+- Keep things simple! we dont need a complex prompt or image, just something that communicates the word concept
 - remember: the core purpose is to create a prompt for an image that will represent the word. the image shouldnt be able to be confused with any other word. 
 Return ONLY the image prompt, nothing else.`;
 
@@ -55,7 +57,7 @@ Generate a creative, memorable image prompt:`;
         { role: 'user', content: userPrompt },
       ],
       max_tokens: 150,
-      temperature: 1.0, // Higher temperature for more variety
+      temperature: 0.7, // Higher temperature for more variety
     });
 
     const generatedPrompt = response.choices[0]?.message?.content?.trim();
