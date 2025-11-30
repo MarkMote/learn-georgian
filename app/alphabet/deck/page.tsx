@@ -88,7 +88,7 @@ export default function AlphabetDeckPage() {
   }
 
   return (
-    <div className="flex flex-col bg-black text-white" style={{ height: '100dvh', overflow: 'hidden' }}>
+    <div className="flex flex-col bg-black text-slate-100" style={{ height: '100dvh', overflow: 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <button

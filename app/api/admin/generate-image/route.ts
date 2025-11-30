@@ -12,9 +12,8 @@ export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt, style } = await request.json();
+    const { prompt } = await request.json();
     console.log('[Image Gen] Starting generation with prompt:', prompt);
-    console.log('[Image Gen] Style:', style || 'natural (default)');
 
     if (!prompt || typeof prompt !== 'string') {
       return NextResponse.json(
@@ -23,14 +22,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate image using dall-e-3
+    // Generate image using gpt-image-1
     console.log('[Image Gen] Calling OpenAI API...');
     const response = await openai.images.generate({
-      model: 'dall-e-3',
+      model: 'gpt-image-1',
       prompt: prompt,
       size: '1024x1024',
       n: 1,
-      style: style || 'vivid', // Default to 'natural' for educational images
     });
     console.log('[Image Gen] OpenAI API response received');
 
@@ -42,27 +40,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const imageUrl = response.data[0].url;
-    console.log('[Image Gen] Image URL:', imageUrl);
+    const imageBase64 = response.data[0].b64_json;
+    console.log('[Image Gen] Base64 received, length:', imageBase64?.length);
 
-    if (!imageUrl) {
-      console.error('[Image Gen] No image URL in response');
+    if (!imageBase64) {
+      console.error('[Image Gen] No base64 data in response');
       return NextResponse.json(
-        { error: 'No image URL returned from OpenAI' },
+        { error: 'No image data returned from OpenAI' },
         { status: 500 }
       );
     }
-
-    // Fetch the image and convert to base64
-    console.log('[Image Gen] Fetching image from URL...');
-    const imageResponse = await fetch(imageUrl);
-    console.log('[Image Gen] Image fetch response status:', imageResponse.status);
-
-    const imageBuffer = await imageResponse.arrayBuffer();
-    console.log('[Image Gen] Image buffer size:', imageBuffer.byteLength);
-
-    const imageBase64 = Buffer.from(imageBuffer).toString('base64');
-    console.log('[Image Gen] Converted to base64, length:', imageBase64.length);
 
     return NextResponse.json({
       image: imageBase64,

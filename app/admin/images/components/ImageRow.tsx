@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { WordData } from "@/lib/spacedRepetition/types";
-import { generateDefaultPrompt } from "../lib/promptGeneration";
 import { GeneratedImage } from "../types";
 
 interface ImageRowProps {
@@ -21,7 +20,6 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
   const [isGenerating, setIsGenerating] = useState(false);
   const [showCustomPrompt, setShowCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
-  const [customStyle, setCustomStyle] = useState<"natural" | "vivid">("natural");
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editedWord, setEditedWord] = useState({
@@ -35,11 +33,31 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
   const handleRefresh = async () => {
     setIsGenerating(true);
     try {
-      const defaultPrompt = generateDefaultPrompt(word);
+      // First, generate a creative prompt using the LLM
+      const promptResponse = await fetch("/api/admin/generate-prompt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          englishWord: word.EnglishWord,
+          georgianWord: word.GeorgianWord,
+          exampleEnglish: word.ExampleEnglish1,
+          partOfSpeech: word.PartOfSpeech,
+        }),
+      });
+
+      if (!promptResponse.ok) {
+        const errorData = await promptResponse.json();
+        throw new Error(errorData.error || "Failed to generate prompt");
+      }
+
+      const promptData = await promptResponse.json();
+      const generatedPrompt = promptData.prompt;
+
+      // Now generate the image with the LLM-created prompt
       const response = await fetch("/api/admin/generate-image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: defaultPrompt, style: "natural" }),
+        body: JSON.stringify({ prompt: generatedPrompt }),
       });
 
       if (!response.ok) {
@@ -50,7 +68,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
       const data = await response.json();
       onImageGenerated({
         imageBase64: data.image,
-        prompt: data.prompt,
+        prompt: generatedPrompt,
         imgKey: word.img_key,
       });
     } catch (error: any) {
@@ -72,7 +90,7 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
       const response = await fetch("/api/admin/generate-image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: customPrompt, style: customStyle }),
+        body: JSON.stringify({ prompt: customPrompt }),
       });
 
       if (!response.ok) {
@@ -310,37 +328,23 @@ export default function ImageRow({ word, onImageGenerated, onWordUpdated, sugges
               }}
             />
           </div>
-          <div className="flex flex-col md:flex-row gap-2 md:items-center">
-            <div className="flex items-center gap-2">
-              <label className="text-sm text-gray-400">Style:</label>
-              <select
-                value={customStyle}
-                onChange={(e) => setCustomStyle(e.target.value as "natural" | "vivid")}
-                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
-              >
-                <option value="natural">Natural</option>
-                <option value="vivid">Vivid</option>
-              </select>
-            </div>
-            <div className="hidden md:block flex-grow"></div>
-            <div className="flex gap-2">
-              <button
-                onClick={handleCustomPromptSubmit}
-                disabled={isGenerating || !customPrompt.trim()}
-                className="flex-1 md:flex-none px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                Generate
-              </button>
-              <button
-                onClick={() => {
-                  setShowCustomPrompt(false);
-                  setCustomPrompt("");
-                }}
-                className="flex-1 md:flex-none px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded-lg transition-colors touch-manipulation"
-              >
-                Cancel
-              </button>
-            </div>
+          <div className="flex gap-2">
+            <button
+              onClick={handleCustomPromptSubmit}
+              disabled={isGenerating || !customPrompt.trim()}
+              className="flex-1 md:flex-none px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors touch-manipulation"
+            >
+              Generate
+            </button>
+            <button
+              onClick={() => {
+                setShowCustomPrompt(false);
+                setCustomPrompt("");
+              }}
+              className="flex-1 md:flex-none px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded-lg transition-colors touch-manipulation"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       )}

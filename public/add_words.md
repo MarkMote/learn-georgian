@@ -9,6 +9,13 @@ to take: present and past and future
 to show: present and past and future
 
 
+To add: 
+- but 
+- or 
+- 
+
+
+
 
 | **English**              | **Georgian**            |
 | ------------------------ | ----------------------- |

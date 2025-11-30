@@ -6,9 +6,9 @@ import { Home } from 'lucide-react';
 
 export default function GettingStartedPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#0d1117] text-slate-200">
       {/* Header */}
-      <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+      <div className="sticky top-0 bg-[#0d1117] backdrop-blur-sm border-b border-gray-800 z-10">
         <div className="max-w-3xl mx-auto px-4 py-4">
           <div className="flex items-center space-x-4">
             <Link
@@ -30,14 +30,19 @@ export default function GettingStartedPage() {
             This is a spaced repetition app for learning the Georgian language. Progress is saved in the browser so there is no login or download required. It looks best on mobile, but works on desktop too.
           </p>
 
+          <h2 className="text-2xl font-semibold text-white mt-12 mb-4">How it works</h2>
+          <p className="text-gray-300 mb-4">
+            Each deck starts you out with around 3 cards. You unlock more as the existing set becomes easy for you, until you have built up to the full deck. More difficult cards are shown more frequently, and cards you know well are shown less frequently. To reinforce learning, most flashcards have examples. 
+          </p>
+
           <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What You Will and Won&apos;t Learn</h2>
           <p className="text-gray-300 mb-4">
-            <span className="font-semibold pr-1 text-slate-100">No app is going to teach you Georgian — this one included.</span>
+            <span className="">No app is going to teach you Georgian — this one included.</span>
             You&apos;ll need to practice speaking, reading, and listening to gain fluency.
             The problem is, those things are nearly impossible when you&apos;re just starting out.
           </p>
           <p className="text-gray-300 mb-4">
-            The purpose of this app is to give you an extremely efficient way to get from 0 → 1:
+            The purpose of this app is to give you an efficient way to get from 0 → 1:
             to build the intuitive foundation around grammar and a base of vocabulary that makes Georgian comprehensible.
           </p>
           <ul className="list-disc list-inside text-gray-300 space-y-2 mb-4">

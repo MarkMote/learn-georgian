@@ -1,9 +1,9 @@
 // app/admin/images/page.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import { Home } from "lucide-react";
+import { Home, AlertTriangle } from "lucide-react";
 import { WordData } from "@/lib/spacedRepetition/types";
 import { parseCSV } from "@/app/review/[chunkId]/utils/dataProcessing";
 import ImageRow from "./components/ImageRow";
@@ -60,6 +60,22 @@ export default function AdminImagesPage() {
     );
   };
 
+  // Find duplicate keys
+  const duplicates = useMemo(() => {
+    const keyCount: Record<string, WordData[]> = {};
+    allWords.forEach((word) => {
+      if (!keyCount[word.key]) {
+        keyCount[word.key] = [];
+      }
+      keyCount[word.key].push(word);
+    });
+
+    // Return only keys that appear more than once
+    return Object.entries(keyCount)
+      .filter(([, words]) => words.length > 1)
+      .map(([key, words]) => ({ key, words, count: words.length }));
+  }, [allWords]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -93,6 +109,48 @@ export default function AdminImagesPage() {
           </div>
         </div>
       </div>
+
+      {/* Duplicates Warning */}
+      {duplicates.length > 0 && (
+        <div className="max-w-6xl mx-auto px-3 pt-3 md:px-4 md:pt-4">
+          <div className="bg-amber-900/30 border border-amber-600/50 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle className="text-amber-500" size={20} />
+              <h2 className="text-amber-400 font-medium">
+                Duplicate Keys Found ({duplicates.length})
+              </h2>
+            </div>
+            <p className="text-amber-200/70 text-sm mb-4">
+              The following word keys appear multiple times. Keys should be unique.
+            </p>
+            <div className="space-y-3">
+              {duplicates.map(({ key, words, count }) => (
+                <div key={key} className="bg-black/30 rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-amber-300">{key}</span>
+                    <span className="text-xs text-amber-500">{count} occurrences</span>
+                  </div>
+                  <div className="space-y-1">
+                    {words.map((word, idx) => (
+                      <div key={idx} className="text-sm text-gray-300 flex gap-2">
+                        <span className="text-gray-500">#{idx + 1}</span>
+                        <span>{word.georgian}</span>
+                        <span className="text-gray-500">→</span>
+                        <span>{word.english}</span>
+                        {word.chunk && (
+                          <span className="text-gray-600 text-xs">
+                            (chunk: {word.chunk})
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-3 py-3 md:p-4">

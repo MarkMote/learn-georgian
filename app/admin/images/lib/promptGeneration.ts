@@ -14,5 +14,5 @@ export function generateDefaultPrompt(word: WordData): string {
   // Otherwise, use the word itself with Georgian translation
   // return `A vivid, clear illustration of ${word.EnglishWord} (${word.GeorgianWord}).`;
 
-  return `A vivid, clear illustration of the word ${word.EnglishWord} (${word.GeorgianWord}). Example: ${word.ExampleEnglish1}. Do not include any text in the image.`;
+  return `A creative depiction representing the concept "${word.EnglishWord}" (${word.GeorgianWord}). Example: ${word.ExampleEnglish1}. Do not include any text in the image. Use any style other than cartoon/ flashcard style.`;
 }
