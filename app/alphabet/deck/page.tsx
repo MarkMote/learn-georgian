@@ -78,7 +78,7 @@ export default function AlphabetDeckPage() {
 
   if (!currentLetter || allLetters.length === 0) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4 mx-auto"></div>
           <p className="text-lg">Loading alphabet...</p>
@@ -88,7 +88,7 @@ export default function AlphabetDeckPage() {
   }
 
   return (
-    <div className="flex flex-col bg-black text-slate-100" style={{ height: '100dvh', overflow: 'hidden' }}>
+    <div className="flex flex-col bg-neutral-950 text-slate-100" style={{ height: '100dvh', overflow: 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <button

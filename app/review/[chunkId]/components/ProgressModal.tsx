@@ -58,7 +58,7 @@ export default function ProgressModal({
     : 0;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center top-0 bottom-0 p-0">
+    <div className="fixed inset-0 bg-neutral-950 bg-opacity-90 z-50 flex items-center justify-center top-0 bottom-0 p-0">
       <div className="bg-gray-900 w-full h-full flex flex-col">
         <div className="flex justify-between items-center p-3 border-b border-gray-700">
           <h2 className="text-2xl font-bold text-white">Progress Status</h2>

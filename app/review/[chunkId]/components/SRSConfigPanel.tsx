@@ -65,7 +65,7 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
   const actualEasyGrowth = (1.0 * config.stabilityMultiplier).toFixed(2);
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-neutral-950/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex justify-between items-center">
           <h2 className="text-xl font-semibold">SRS Algorithm Settings</h2>

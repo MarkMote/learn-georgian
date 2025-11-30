@@ -192,7 +192,7 @@ export default function ChunkAllPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4 mx-auto"></div>
           <p className="text-lg">Loading all chunk words...</p>
@@ -202,9 +202,9 @@ export default function ChunkAllPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
-      <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+      <div className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
         <div className="max-w-4xl mx-auto p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-4">

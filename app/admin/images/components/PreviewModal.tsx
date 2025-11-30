@@ -74,7 +74,7 @@ export default function PreviewModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4">
+    <div className="fixed inset-0 bg-neutral-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4">
       <div className="bg-gray-900 rounded-lg max-w-2xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-gray-900 border-b border-gray-700 p-3 md:p-4">

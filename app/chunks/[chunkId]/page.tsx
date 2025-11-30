@@ -181,7 +181,7 @@ export default function ChunkPage() {
 
   if (chunkSet.length === 0) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
         <p className="text-lg">Loading chunks...</p>
         <p className="text-sm text-gray-400 mt-2">Preparing chunk set {chunkId}</p>
@@ -191,7 +191,7 @@ export default function ChunkPage() {
 
   if (knownChunks.length === 0) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
         <div className="animate-pulse mb-4">
           <div className="w-48 h-48 bg-gray-700 rounded-lg mb-4"></div>
           <div className="h-6 bg-gray-700 rounded w-32 mx-auto"></div>
@@ -203,7 +203,7 @@ export default function ChunkPage() {
 
   if (!currentCard && knownChunks.length > 0) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
         <p>Preparing next chunk...</p>
       </div>
@@ -213,7 +213,7 @@ export default function ChunkPage() {
   if (!currentCard) {
     console.warn("Reached unexpected state: No current card. Displaying loading.");
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
         <p>Loading...</p>
       </div>
@@ -225,7 +225,7 @@ export default function ChunkPage() {
 
   return (
     <div 
-      className="relative w-full bg-black text-white" 
+      className="relative w-full bg-neutral-950 text-white" 
       style={{ height: '100dvh', overflow: isProgressModalOpen ? 'auto' : 'hidden' }}
     >
       <TopBar

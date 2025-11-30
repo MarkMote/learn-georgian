@@ -65,11 +65,11 @@ export default function LessonModal({
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50" 
+      className="fixed inset-0 flex items-center justify-center bg-neutral-950 bg-opacity-80 z-50" 
       onClick={onClose}
     >
       <div
-        className="bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90dvh] overflow-auto relative border-2 border-gray-700"
+        className="bg-neutral-950/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90dvh] overflow-auto relative border-2 border-gray-700"
         onClick={(e) => e.stopPropagation()}
       >
         <button

@@ -5,7 +5,7 @@ import { Home } from 'lucide-react';
 import { useEffect } from 'react';
 
 export default function AboutPage() {
-  const containerClasses = "min-h-screen bg-black text-white p-6 overflow-y-auto";
+  const containerClasses = "min-h-screen bg-neutral-950 text-white p-6 overflow-y-auto";
   const contentClasses = "max-w-4xl mx-auto pb-12";
   
   // Ensure scrolling is enabled (in case review page disabled it)

@@ -54,7 +54,7 @@ export default function AlphabetPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
-      <div className="sticky top-0 bg-black/90 backdrop-blur-sm border-b border-gray-800 z-10">
+      <div className="sticky top-0 bg-neutral-950/90 backdrop-blur-sm border-b border-gray-800 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Link
@@ -77,7 +77,8 @@ export default function AlphabetPage() {
           </p>
           <Link
             href="/alphabet/deck"
-            className="flex items-center justify-center gap-2 w-full sm:w-auto sm:mx-auto px-6 py-3 bg-indigo-700 hover:bg-indigo-800 rounded-lg transition-colors"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto sm:mx-auto px-6 py-3 
+            bg-indigo-900/50 border-indigo-700 border hover:bg-indigo-900/80 rounded-lg transition-colors text-indigo-100"
           >
             <BookOpen size={18} />
             <span>Practice Georgian Alphabet</span>
@@ -103,7 +104,7 @@ export default function AlphabetPage() {
         </div>
 
         {/* Alphabet Table */}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto ">
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b border-gray-700">
@@ -129,12 +130,12 @@ export default function AlphabetPage() {
                     <td className="py-3 sm:py-4 px-2 sm:px-4 text-center">
                       {getEquivalentIcon(letter.englishEquivalent)}
                     </td>
-                    <td className="py-3 sm:py-4 px-2 sm:px-4">
-                      <span className="text-3xl sm:text-4xl">{letter.georgianLetter}</span>
+                    <td className="py-3 sm:py-4 px-2 sm:px-4 py-4">
+                      <span className="text-3xl sm:text-5xl py-6">{letter.georgianLetter}</span>
                     </td>
-                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-sm sm:text-base">{letter.englishLetter}</td>
-                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-xs sm:text-sm text-gray-300">{letter.ipaSymbol}</td>
-                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-xs sm:text-sm text-gray-300 max-w-md">{letter.explanation}</td>
+                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-sm sm:text-lg">{letter.englishLetter}</td>
+                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-sm sm:text-lg text-gray-200">{letter.ipaSymbol}</td>
+                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-sm sm:text-lg text-gray-200 max-w-md">{letter.explanation}</td>
                     <td className="py-3 sm:py-4 px-2 sm:px-4">
                       {letter.georgianExample && (
                         <div className="space-y-1">
@@ -153,14 +154,14 @@ export default function AlphabetPage() {
         </div>
 
         {/* Back to Home Link */}
-        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800">
+        {/* <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800">
           <Link
             href="/"
             className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg transition-colors text-sm sm:text-base"
           >
             ← Back to Home
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

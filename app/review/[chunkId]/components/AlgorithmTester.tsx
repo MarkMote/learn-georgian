@@ -195,7 +195,7 @@ export default function AlgorithmTester({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-neutral-950 bg-opacity-90 z-50 flex items-center justify-center">
       <div className="bg-gray-900 rounded-lg p-6 max-w-4xl max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-white">Algorithm Debug Tests</h2>

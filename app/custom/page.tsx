@@ -221,9 +221,9 @@ function CustomPageContent() {
   // Render different states
   if (pageState === 'empty' || pageState === 'upload') {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-neutral-950 text-white">
         {/* Header */}
-        <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+        <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
             <Link 
               href="/" 
@@ -244,9 +244,9 @@ function CustomPageContent() {
 
   if (pageState === 'add-more') {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-neutral-950 text-white">
         {/* Header */}
-        <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+        <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
             <Link 
               href="/" 
@@ -271,9 +271,9 @@ function CustomPageContent() {
 
   if (pageState === 'manager') {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-neutral-950 text-white">
         {/* Header */}
-        <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+        <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
             <Link 
               href="/" 
@@ -307,7 +307,7 @@ function CustomPageContent() {
     if (hasCustomWords && noExampleWords) {
       // User is in examples mode but has no words with examples
       return (
-        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center flex-col gap-4">
+        <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center flex-col gap-4">
           <p className="text-lg">No words with examples available</p>
           <p className="text-sm text-gray-400">Switch to normal mode or add words with examples</p>
           <button
@@ -321,7 +321,7 @@ function CustomPageContent() {
     }
 
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
         <p>Loading custom deck...</p>
       </div>
@@ -330,7 +330,7 @@ function CustomPageContent() {
 
   return (
     <div 
-      className="relative w-full bg-black text-white" 
+      className="relative w-full bg-neutral-950 text-white" 
       style={{ height: '100dvh', overflow: 'hidden' }}
     >
       <CustomTopBar
@@ -371,7 +371,7 @@ function CustomPageContent() {
 
 export default function CustomPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">Loading...</div>}>
       <CustomPageContent />
     </Suspense>
   );

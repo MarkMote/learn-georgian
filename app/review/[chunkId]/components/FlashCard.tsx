@@ -85,7 +85,7 @@ export default function FlashCard({
             priority
           />
           {verbTenseLabel && !isFlipped && verbHint && (
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded">
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-neutral-950/80 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded">
               {verbTenseLabel}
             </div>
           )}

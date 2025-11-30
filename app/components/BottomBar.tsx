@@ -21,7 +21,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
         <>
             {!isFlipped ? (
                 // Show FLIP button
-                <div className="absolute bottom-0 left-0 w-full flex text-white bg-black">
+                <div className="absolute bottom-0 left-0 w-full flex text-white bg-neutral-950">
                     <button
                         onClick={onFlip} // Use prop function
                         className="flex-1 py-3 text-center border-t-4 border-gray-400 text-xl tracking-wide h-[70px] transition-colors"
@@ -31,7 +31,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 </div>
             ) : (
                 // Show RATING buttons with Left/Right Handed Mode Toggle
-                <div className="absolute bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-black items-stretch"> {/* Use items-stretch */}
+                <div className="absolute bottom-0 left-0 w-full h-[70px] text-xl font-semibold tracking-wide flex text-white bg-neutral-950 items-stretch"> {/* Use items-stretch */}
 
                     {!isLeftHanded ? (
                         // Right-Handed Layout (Default)

@@ -51,7 +51,7 @@ export default function FeedbackModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-neutral-950 bg-opacity-90 z-50 flex items-center justify-center p-4">
       <div className="bg-gray-900 w-full max-w-md rounded-lg">
         <div className="flex justify-between items-center p-4 border-b border-gray-700">
           <h2 className="text-xl font-bold text-white">Send Feedback</h2>

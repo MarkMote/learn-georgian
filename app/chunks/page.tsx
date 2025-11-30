@@ -63,9 +63,9 @@ export default function ChunkHomePage() {
   const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
-      <header className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+      <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
           <Link 
             href="/" 

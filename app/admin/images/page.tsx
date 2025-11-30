@@ -224,7 +224,7 @@ export default function AdminImagesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4 mx-auto"></div>
           <p className="text-lg">Loading words...</p>
@@ -234,9 +234,9 @@ export default function AdminImagesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
-      <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+      <div className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
         <div className="max-w-6xl mx-auto px-3 py-3 md:p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 md:space-x-4">
@@ -341,7 +341,7 @@ export default function AdminImagesPage() {
             </p>
             <div className="space-y-3">
               {duplicates.map(({ key, words, count }) => (
-                <div key={key} className="bg-black/30 rounded-lg p-3">
+                <div key={key} className="bg-neutral-950/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-mono text-amber-300">{key}</span>
                     <span className="text-xs text-amber-500">{count} occurrences</span>

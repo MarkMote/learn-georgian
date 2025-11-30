@@ -77,7 +77,7 @@ export default function ReviewPage() {
   const [loadingError, setLoadingError] = useState<string | null>(null); // New state for errors
 
   // Basic styling
-  const containerClasses = "relative w-full bg-black text-white";
+  const containerClasses = "relative w-full bg-neutral-950 text-white";
   const mainAreaClasses =
     "flex items-center justify-center px-4";
 
@@ -642,9 +642,9 @@ export default function ReviewPage() {
 
   // Modal classes for dark theme
   const modalBgClass =
-    "fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50";
+    "fixed inset-0 flex items-center justify-center bg-neutral-950 bg-opacity-80 z-50";
   const modalContentClass =
-    "bg-black/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
+    "bg-neutral-950/70 backdrop-blur-lg text-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[90vh] overflow-auto relative border-2 border-gray-700";
 
   // Update the Home button click handler
   const handleHomeClick = () => {
@@ -664,7 +664,7 @@ export default function ReviewPage() {
   // Loading or no data state
   if (isLoadingPhrases) {
       return (
-          <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+          <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
               <div className=" mb-4">
                 <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
               </div>
@@ -676,7 +676,7 @@ export default function ReviewPage() {
 
   if (loadingError) {
       return (
-          <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+          <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
               <p className="text-red-500 font-semibold">Error loading vocabulary:</p>
               <p className="text-red-400 mt-2">{loadingError}</p>
               <p className="mt-4 text-sm text-gray-400">Please check the console for details and ensure the Google Sheet is accessible and correctly formatted.</p>
@@ -688,7 +688,7 @@ export default function ReviewPage() {
   if (allPhrases.length === 0) {
        // This means loading finished, no error, but sheet was empty or filtered out all rows
       return (
-        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+        <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
           <p>No phrases found in the Google Sheet.</p>
           <p className="mt-2 text-sm text-gray-400">Ensure the sheet &apos;Sheet1&apos; exists, has data in columns A-D starting from row 2, and the Georgian phrase (column B) is not empty.</p>
         </div>
@@ -701,7 +701,7 @@ export default function ReviewPage() {
       // This state should be brief as the initialization useEffect runs after loading
        console.log("Waiting for initialization or current card...");
        return (
-        <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+        <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
           <p>Initializing review...</p>
         </div>
       );

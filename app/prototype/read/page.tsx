@@ -89,7 +89,7 @@ export default function ReadPage() {
 
   if (isLoading) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
         <p className="text-lg">Loading play...</p>
       </div>
@@ -98,7 +98,7 @@ export default function ReadPage() {
 
   if (!playData) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
         <p className="text-lg">Error loading play data</p>
       </div>
     );
@@ -106,7 +106,7 @@ export default function ReadPage() {
 
   if (knownLines.length === 0) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex flex-col items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
         <div className="animate-pulse mb-4">
           <div className="w-96 h-32 bg-gray-700 rounded-lg mb-4"></div>
           <div className="h-6 bg-gray-700 rounded w-48 mx-auto"></div>
@@ -119,7 +119,7 @@ export default function ReadPage() {
   const currentLine = knownLines[currentIndex];
   if (!currentLine) {
     return (
-      <div className="p-8 text-center text-white bg-black h-screen flex items-center justify-center">
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
         <p>Loading next line...</p>
       </div>
@@ -134,7 +134,7 @@ export default function ReadPage() {
 
   return (
     <div 
-      className="relative w-full bg-black text-white flex flex-col" 
+      className="relative w-full bg-neutral-950 text-white flex flex-col" 
       style={{ height: '100dvh' }}
     >
       {/* Compact top bar */}

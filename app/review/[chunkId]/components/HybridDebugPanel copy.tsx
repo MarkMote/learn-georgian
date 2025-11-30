@@ -75,7 +75,7 @@ export default function HybridDebugPanel({
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80">
+    <div className="fixed inset-0 z-50 bg-neutral-950/80">
       {/* Backdrop that closes on tap; separate from the panel */}
       <button
         aria-label="Close debug panel"
