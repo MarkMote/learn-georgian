@@ -27,7 +27,8 @@ export function introduceNewCard(
     lastReviewStep: deckState.currentStep,
     reviewCount: 0,
     lapseCount: 0,
-    introducedAtStep: deckState.currentStep
+    introducedAtStep: deckState.currentStep,
+    lastGrade: 2 // Default to "good" for new cards
   };
 
   // Add to card states

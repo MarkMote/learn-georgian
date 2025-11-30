@@ -19,7 +19,8 @@ export function updateStateOnGrade(
     stability: updateStability(cardState, grade, config),
     lastReviewStep: deckState.currentStep, // Card reviewed at current step
     reviewCount: cardState.reviewCount + 1,
-    lapseCount: grade === 0 ? cardState.lapseCount + 1 : cardState.lapseCount
+    lapseCount: grade === 0 ? cardState.lapseCount + 1 : cardState.lapseCount,
+    lastGrade: grade
   };
 
   // Update deck - advance to next step

@@ -24,6 +24,7 @@ export interface CardState {
   reviewCount: number;
   lapseCount: number;
   introducedAtStep: number;
+  lastGrade?: Grade;     // Last grade given (0-3), optional for backwards compatibility
 }
 
 // Deck aggregate state

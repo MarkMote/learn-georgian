@@ -52,28 +52,19 @@ export default function AlphabetPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
-      <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-10">
+      <div className="sticky top-0 bg-black/90 backdrop-blur-sm border-b border-gray-800 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <Link
-                href="/"
-                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-                aria-label="Go to Home"
-              >
-                <Home size={20} />
-              </Link>
-              <h1 className="text-lg sm:text-2xl font-light">Georgian Alphabet</h1>
-            </div>
+          <div className="flex items-center space-x-2 sm:space-x-4">
             <Link
-              href="/alphabet/deck"
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-indigo-700 hover:bg-indigo-800 rounded-lg transition-colors whitespace-nowrap"
+              href="/"
+              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+              aria-label="Go to Home"
             >
-              <BookOpen size={16} />
-              <span className="text-sm">Practice Deck</span>
+              <Home size={20} />
             </Link>
+            <h1 className="text-lg sm:text-2xl font-light">Georgian Alphabet</h1>
           </div>
         </div>
       </div>
@@ -81,12 +72,16 @@ export default function AlphabetPage() {
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm sm:text-base text-gray-300 mb-3">
+          <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 text-center">
             The Georgian alphabet has 33 letters. Each letter always represents the same sound and each letter of a word is always pronounced.
           </p>
-          <p className="text-sm text-gray-400">
-            Click &quot;Practice Deck&quot; above to start learning the alphabet with flashcards.
-          </p>
+          <Link
+            href="/alphabet/deck"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto sm:mx-auto px-6 py-3 bg-indigo-700 hover:bg-indigo-800 rounded-lg transition-colors"
+          >
+            <BookOpen size={18} />
+            <span>Practice Georgian Alphabet</span>
+          </Link>
         </div>
 
         {/* Legend */}

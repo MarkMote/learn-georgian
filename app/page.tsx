@@ -1,78 +1,9 @@
-"use client"; // Required for onClick handlers if using useRouter, good practice for Link too
+"use client";
 
-import Link from 'next/link'; // Use Next.js Link for navigation
-import { useState, useEffect, useRef } from 'react'; // Import React hooks and useRef
-import { useRouter } from 'next/navigation';
-import { Github, Star, ExternalLink, Upload, MessageCircle, MessageSquare, Sparkles, Languages } from 'lucide-react';
+import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
+import { Github, Star, Upload, MessageCircle, MessageSquare, Languages } from 'lucide-react';
 import FeedbackModal from './components/FeedbackModal';
-
-// Word data types
-type WordData = {
-  word_key: string;
-  key: string;
-  img_key: string;
-  EnglishWord: string;
-  PartOfSpeech: string;
-  GeorgianWord: string;
-  hint: string;
-  priority: string;
-  group: string;
-};
-
-// Configurable chunk size (should match review page)
-const CHUNK_SIZE = 100;
-
-/**
- * Parse CSV text into an array of WordData objects.
- */
-function parseCSV(csvText: string): WordData[] {
-  const lines = csvText
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean);
-  // Skip the header line
-  const rows = lines.slice(1);
-
-  return rows.map((row) => {
-    const cols = row.split(",");
-    return {
-      word_key: cols[0],
-      key: cols[1],
-      img_key: cols[2],
-      EnglishWord: cols[3],
-      PartOfSpeech: cols[4],
-      GeorgianWord: cols[5],
-      hint: cols[6],
-      priority: cols[7] || "",
-      group: cols[8] || "",
-    };
-  });
-}
-
-/**
- * Get unique word keys in CSV order
- */
-function getUniqueWordKeys(allWords: WordData[]): string[] {
-  const seen = new Set<string>();
-  const uniqueKeys: string[] = [];
-  
-  for (const word of allWords) {
-    if (!seen.has(word.word_key)) {
-      seen.add(word.word_key);
-      uniqueKeys.push(word.word_key);
-    }
-  }
-  
-  return uniqueKeys;
-}
-
-/**
- * Calculate the number of chunks needed
- */
-function getChunkCount(allWords: WordData[]): number {
-  const uniqueWordKeys = getUniqueWordKeys(allWords);
-  return Math.ceil(uniqueWordKeys.length / CHUNK_SIZE);
-}
 
 // --- Constants for Animation ---
 // Start with Georgian, end with English
@@ -87,8 +18,6 @@ const initialDelay = 1000;
 // --- End Constants ---
 
 export default function HomePage() {
-  const router = useRouter();
-  
   // --- State for Animation ---
   // Tracks the index of the last character switched to targetText
   const [revealedIndex, setRevealedIndex] = useState<number>(-1);
@@ -97,11 +26,6 @@ export default function HomePage() {
   // Ref to hold the interval ID for cleanup
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   // --- End State ---
-
-  // --- State for Chunks ---
-  const [allWords, setAllWords] = useState<WordData[]>([]);
-  const [chunkCount, setChunkCount] = useState<number>(0);
-  // --- End Chunk State ---
 
   // --- State for Feedback Modal ---
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState<boolean>(false);
@@ -161,28 +85,8 @@ export default function HomePage() {
   }, [startAnimation]); // Removed revealedIndex dependency as interval handles increments
   // --- End Effects ---
 
-  // --- Effect for Loading CSV and Calculating Chunks ---
-  useEffect(() => {
-    fetch("/words.csv")
-      .then((res) => res.text())
-      .then((csv) => {
-        const parsed = parseCSV(csv);
-        setAllWords(parsed);
-        setChunkCount(getChunkCount(parsed));
-      })
-      .catch((error) => {
-        console.error("Error loading CSV:", error);
-      });
-  }, []);
-  // --- End CSV Loading Effect ---
-
-  // Handle chunk navigation
-  const handleChunkClick = (chunkNumber: number) => {
-    router.push(`/review/${chunkNumber}`);
-  };
-
   // Basic styling consistent with other pages
-  const containerClasses = "flex flex-col items-center justify-center min-h-screen bg-black text-white p-4";
+  const containerClasses = "flex flex-col items-center justify-center min-h-screen bg-neutral-950 text-white p-4";
   const buttonClasses = "px-8 py-4 w-[300px] text-center border border-gray-600 rounded text-lg hover:bg-gray-700 transition-colors duration-150 ease-in-out"; // Shared button style
   // Carved text effect using text-shadow: dark shadow below/right, light highlight above/left
   const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
@@ -225,48 +129,28 @@ export default function HomePage() {
       
 
       <div className="flex flex-col space-y-6 text-sm max-w-md w-full"> {/* Stack buttons vertically with space */}
-        {/* Chunk Selection for Words with Images */}
+        {/* Main Learning Options */}
         <div className="space-y-3">
-          {/* <h2 className="text-sm text-center text-slate-400 mb-4">This is a spaced repetition flashcard app for learning Georgian. Progress is saved in your browser - you don&apos;t need an account and you can close the app anytime and pick up right where you left off.</h2> */}
-          
-          {chunkCount > 0 ? (
-            <div className="grid grid-cols-2 gap-3">
-              {Array.from({ length: chunkCount }, (_, index) => {
-                const chunkNumber = index + 1;
-                const startWord = index * CHUNK_SIZE + 1;
-                const endWord = Math.min((index + 1) * CHUNK_SIZE, getUniqueWordKeys(allWords).length);
-                
-                return (
-                  <button
-                    key={chunkNumber}
-                    onClick={() => handleChunkClick(chunkNumber)}
-                    className="px-4 py-3 text-center border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out cursor-pointer"
-                  >
-                    Words {startWord}-{endWord}
-                  </button>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-center text-gray-400">Loading chunks...</div>
-          )}
-        </div>
-
-        {/* Custom Deck Option */}
-        <div className="pt-6 border-t border-gray-700 space-y-3">
           <Link
             href="/alphabet"
             className="flex items-center justify-center gap-3 px-4 py-3 w-full  border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
           >
             <Languages className="w-4 h-4 text-gray-400" />
-            <span>Alphabet</span>
+            <span>Learn the Alphabet</span>
+          </Link>
+          <Link
+            href="/review"
+            className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+          >
+            <Star className="w-4 h-4 text-gray-400" />
+            <span>Learn Core Vocabulary</span>
           </Link>
           <Link
             href="/chunks"
             className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
           >
             <MessageCircle className="w-4 h-4 text-gray-400" />
-            <span>Colloquial Georgian</span>
+            <span>Learn Colloquial Georgian (advanced)</span>
           </Link>
           <Link
             href="/custom"

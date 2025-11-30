@@ -109,7 +109,7 @@ export function getUniqueWordKeys(allWords: WordData[]): string[] {
   return uniqueKeys;
 }
 
-export function getWordsForChunk(allWords: WordData[], chunkId: string, chunkSize: number = 100): WordData[] {
+export function getWordsForChunk(allWords: WordData[], chunkId: string, chunkSize: number = 50): WordData[] {
   const chunkNumber = parseInt(chunkId, 10);
   if (isNaN(chunkNumber) || chunkNumber < 1) {
     return [];
@@ -167,16 +167,18 @@ export function computePercentageScore(knownWords: KnownWordState[], chunkWords:
   uniqueWordKeys.forEach(wordKey => {
     if (knownWordKeys.has(wordKey)) {
       const wordsWithThisKey = knownWords.filter(kw => kw.data.word_key === wordKey);
+      // Use the best rating (lastGrade) for this word
       const bestRating = Math.max(...wordsWithThisKey.map(kw => kw.rating));
-      totalScore += bestRating / 3;
+      // Convert rating to percentage: fail(0)=0, hard(1)=0, good(2)=50, easy(3)=100
+      const ratingAsPercent = bestRating <= 1 ? 0 : (bestRating - 1) * 50;
+      totalScore += ratingAsPercent;
       scoredWordCount++;
     }
   });
-  
-  const averageScoreOfIntroduced = scoredWordCount > 0 ? totalScore / scoredWordCount : 0;
-  const wordCoverage = scoredWordCount / totalPossibleWords;
-  
-  return Math.round(averageScoreOfIntroduced * wordCoverage * 100);
+
+  const averageScore = scoredWordCount > 0 ? totalScore / scoredWordCount : 0;
+
+  return Math.round(averageScore);
 }
 
 export function getWordProgress(knownWords: KnownWordState[], chunkWords: WordData[]): { unlocked: number; total: number } {

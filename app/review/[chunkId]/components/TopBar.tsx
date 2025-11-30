@@ -77,7 +77,7 @@ export default function TopBar({
   }, [isMenuOpen]);
 
   const handleHomeClick = () => {
-    router.push('/');
+    router.push('/review');
   };
 
   const handleClearProgressClick = () => {

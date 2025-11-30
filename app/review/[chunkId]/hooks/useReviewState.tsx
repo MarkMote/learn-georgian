@@ -249,7 +249,7 @@ export function useReviewState(
 
       return {
         data: wordData,
-        rating: 2, // Default for compatibility
+        rating: cardState.lastGrade ?? 2, // Use stored lastGrade, default to 2 for backwards compatibility
         lastSeen: deckState.currentStep - cardState.lastReviewStep,
         interval: cardState.stability,
         repetitions: cardState.reviewCount,
