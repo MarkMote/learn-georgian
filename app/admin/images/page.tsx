@@ -142,6 +142,22 @@ export default function AdminImagesPage() {
     };
   };
 
+  // Save image directly (for batch processing)
+  const saveImage = async (generatedImage: GeneratedImage): Promise<void> => {
+    const response = await fetch("/api/admin/save-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        imageBase64: generatedImage.imageBase64,
+        imgKey: generatedImage.imgKey,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save image");
+    }
+  };
+
   // Start batch generation
   const startBatchGeneration = async () => {
     if (missingImages.length === 0) return;
@@ -166,11 +182,14 @@ export default function AdminImagesPage() {
 
       try {
         const generatedImage = await generateImageForWord(word);
-        // Show in preview modal so user can save
-        setPreviewImage(generatedImage);
+        // Auto-save the image without showing modal
+        await saveImage(generatedImage);
 
-        // Wait a bit between generations to avoid rate limits
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // Remove from missing images list
+        setMissingImages((prev) => prev.filter((w) => w.img_key !== word.img_key));
+
+        // Small delay between generations to avoid rate limits
+        await new Promise((resolve) => setTimeout(resolve, 500));
       } catch (error: any) {
         setBatchProgress((prev) => prev ? {
           ...prev,

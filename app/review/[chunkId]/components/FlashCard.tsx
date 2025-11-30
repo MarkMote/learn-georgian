@@ -90,23 +90,19 @@ export default function FlashCard({
             </div>
           )}
         </div>
-      ) : isReverse ? (
+      ) : isReverse && isFlipped ? (
         // Reverse mode: show image on back only
-        isFlipped ? (
-          <div className="relative w-full mb-3" style={{ height: '280px' }}>
-            <Image
-              src={`/img/${word.img_key}.webp`}
-              alt={word.EnglishWord}
-              fill
-              sizes="(max-width: 768px) 100vw, 320px"
-              className="object-contain cursor-pointer"
-              onClick={onImageClick}
-              priority
-            />
-          </div>
-        ) : (
-          <div className="flex items-center justify-center" style={{ minHeight: '280px' }} />
-        )
+        <div className="relative w-full mb-3" style={{ height: '280px' }}>
+          <Image
+            src={`/img/${word.img_key}.webp`}
+            alt={word.EnglishWord}
+            fill
+            sizes="(max-width: 768px) 100vw, 320px"
+            className="object-contain cursor-pointer"
+            onClick={onImageClick}
+            priority
+          />
+        </div>
       ) : null
       // Example modes: no image - removed placeholder for better centering
       }
@@ -266,7 +262,7 @@ export default function FlashCard({
             (showExamples === "tap" || showExamples === "tap-en" || showExamples === "tap-ka") && (
               <button
                 onClick={() => onRevealExamples(word.key)}
-                className="px-4 py-0 min-w-[95%] h-[52px] rounded text-sm text-gray-300 bg-white/10 backdrop-blur-sm transition-colors rounded-lg"
+                className="px-4 py-0 min-w-[95%] min-h-[52px] py-2 rounded text-sm text-gray-300 bg-white/10 backdrop-blur-sm transition-colors rounded-lg"
               >
                 {showExamples === "tap" ? (
                   <p className="text-base text-gray-500 font-mono font-light">example</p>
@@ -284,8 +280,8 @@ export default function FlashCard({
       {/* Tips section - show when flipped and tips are enabled */}
       {isFlipped && showTips && word.tips && (
         <div className={`flex flex-col items-center justify-center text-center w-full max-w-lg py-3 ${(isExampleMode || isExampleReverse) ? 'mt-6' : ''}`}>
-          <div className="flex items-center gap-2 text-xs md:text-sm text-slate-300">
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 flex-shrink-0" />
+          <div className="flex items-start gap-2 text-xs md:text-sm text-slate-300">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
             <span>{word.tips}</span>
           </div>
         </div>
