@@ -1305,62 +1305,6 @@ fall,fall_p3s,fall_inf,He/She/It falls,verb-p3s,ის ვარდება,ver
 fall,fall_p1p,fall_inf,We fall,verb-p1p,ჩვენ ვვარდებით,verb,2,verbs,We fall asleep quickly.,ჩვენ სწრაფად გვეძინება (ვვარდებით).,
 fall,fall_p2p,fall_inf,You (pl) fall,verb-p2p,თქვენ ვარდებით,verb,2,verbs,You (pl) fall down.,თქვენ ვარდებით.,
 fall,fall_p3p,fall_inf,They fall,verb-p3p,ისინი ვარდებიან,verb,2,verbs,They fall in love.,მათ უყვარდებათ (სიყვარულში ვარდებიან).,
-push,push_inf,push,to push,verb-inf,ბიძგება,verb,2,verbs,You have to push the door.,კარს ხელი უნდა ჰკრა (მიაწვე).,
-push,push_p1s,push,I push,verb-p1s,მე ვაწვები,verb,2,verbs,I push the button.,მე ღილაკს ვაწვები.,
-push,push_p2s,push,You push,verb-p2s,შენ აწვები,verb,2,verbs,You push the cart.,შენ ურიკას აწვები.,
-push,push_p3s,push,He/She/It pushes,verb-p3s,ის აწვება,verb,2,verbs,He pushes me on the swing.,ის საქანელაზე მაწვება.,
-push,push_p1p,push,We push,verb-p1p,ჩვენ ვაწვებით,verb,2,verbs,We push the car.,ჩვენ მანქანას ვაწვებით.,
-push,push_p2p,push,You (pl) push,verb-p2p,თქვენ აწვებით,verb,2,verbs,You (pl) push the table.,თქვენ მაგიდას აწვებით.,
-push,push_p3p,push,They push,verb-p3p,ისინი აწვებიან,verb,2,verbs,They push the box.,ისინი ყუთს აწვებიან.,
-pull,pull_inf,pull,to pull,verb-inf,ქაჩვა,verb,2,verbs,to pull the rope,თოკის მოქაჩვა,
-pull,pull_p1s,pull,I pull,verb-p1s,მე ვქაჩავ,verb,2,verbs,I pull the door open.,მე კარს ვაღებ (ვქაჩავ).,
-pull,pull_p2s,pull,You pull,verb-p2s,შენ ქაჩავ,verb,2,verbs,You pull the chair.,შენ სკამს ქაჩავ.,
-pull,pull_p3s,pull,He/She/It pulls,verb-p3s,ის ქაჩავს,verb,2,verbs,She pulls my hair.,ის თმას მქაჩავს.,
-pull,pull_p1p,pull,We pull,verb-p1p,ჩვენ ვქაჩავთ,verb,2,verbs,We pull the wagon.,ჩვენ ურემს ვქაჩავთ.,
-pull,pull_p2p,pull,You (pl) pull,verb-p2p,თქვენ ქაჩავთ,verb,2,verbs,You (pl) pull the curtain.,თქვენ ფარდას ქაჩავთ.,
-pull,pull_p3p,pull,They pull,verb-p3p,ისინი ქაჩავენ,verb,2,verbs,They pull the sled.,ისინი მარხილს ქაჩავენ.,
-carry,carry_inf,carry,to carry,verb-inf,ტარება,verb,2,verbs,Help me carry this.,დამეხმარე ამის ტარებაში.,
-carry,carry_p1s,carry,I carry,verb-p1s,მე ვატარებ,verb,2,verbs,I carry a bag.,მე ჩანთას ვატარებ.,
-carry,carry_p2s,carry,You carry,verb-p2s,შენ ატარებ,verb,2,verbs,You carry the books.,შენ წიგნებს ატარებ.,
-carry,carry_p3s,carry,He/She/It carries,verb-p3s,ის ატარებს,verb,2,verbs,He carries the boxes.,ის ყუთებს ატარებს.,
-carry,carry_p1p,carry,We carry,verb-p1p,ჩვენ ვატარებთ,verb,2,verbs,We carry our luggage.,ჩვენ ჩვენი ბარგი მიგვაქვს (ვატარებთ).,
-carry,carry_p2p,carry,You (pl) carry,verb-p2p,თქვენ ატარებთ,verb,2,verbs,You (pl) carry the chairs.,თქვენ სკამები მიგაქვთ (ატარებთ).,
-carry,carry_p3p,carry,They carry,verb-p3p,ისინი ატარებენ,verb,2,verbs,They carry the flag.,ისინი დროშას ატარებენ.,
-break,break_inf,break,to break,verb-inf,გატეხვა,verb,2,verbs,Breaking glass is dangerous,მინის გატეხვა საშიშია,
-break,break_p1s,break,I break,verb-p1s,მე ვამტვრევ,verb,2,verbs,I break the glass.,მე ჭიქას ვამტვრევ.,
-break,break_p2s,break,You break,verb-p2s,შენ ამტვრევ,verb,2,verbs,You break the rules.,შენ წესებს არღვევ (ამტვრევ).,
-break,break_p3s,break,He/She/It breaks,verb-p3s,ის ამტვრევს,verb,2,verbs,He breaks his promise.,ის თავის პირობას არღვევს (ამტვრევს).,
-break,break_p1p,break,We break,verb-p1p,ჩვენ ვამტვრევთ,verb,2,verbs,We break the wood.,ჩვენ შეშას ვამტვრევთ.,
-break,break_p2p,break,You (pl) break,verb-p2p,თქვენ ამტვრევთ,verb,2,verbs,You (pl) break the eggs.,თქვენ კვერცხებს ამტვრევთ.,
-break,break_p3p,break,They break,verb-p3p,ისინი ამტვრევენ,verb,2,verbs,They break the window.,ისინი ფანჯარას ამტვრევენ.,
-wear,wear_inf,wear,to wear,verb-inf,ტარება,verb,2,verbs,Wearing a uniform is required,ფორმის ტარება აუცილებელია,"Same root word as ""carry"" (ტარება)."
-wear,wear_p1s,wear,I wear,verb-p1s,მე მაცვია,verb,2,verbs,I wear a coat.,მე პალტო მაცვია.,"Stative verb: Literally ""It is on me"" (clothing)."
-wear,wear_p2s,wear,You wear,verb-p2s,შენ გაცვია,verb,2,verbs,You wear a nice dress.,შენ ლამაზი კაბა გაცვია.,
-wear,wear_p3s,wear,He/She/It wears,verb-p3s,მას აცვია,verb,2,verbs,He wears glasses.,მას სათვალე უკეთია (აცვია).,
-wear,wear_p1p,wear,We wear,verb-p1p,ჩვენ გვაცვია,verb,2,verbs,We wear uniforms to school.,ჩვენ სკოლაში ფორმა გვაცვია.,
-wear,wear_p2p,wear,You (pl) wear,verb-p2p,თქვენ გაცვიათ,verb,2,verbs,You (pl) wear hats.,თქვენ ქუდები გახურავთ (გაცვიათ).,
-wear,wear_p3p,wear,They wear,verb-p3p,მათ აცვიათ,verb,2,verbs,They wear matching shirts.,მათ ერთნაირი პერანგები აცვიათ.,
-hang,hang_inf,hang,to hang,verb-inf,დაკიდება,verb,2,verbs,to hang a picture on the wall,კედელზე სურათის დაკიდება,
-hang,hang_p1s,hang,I hang,verb-p1s,მე ვკიდებ,verb,2,verbs,I hang my coat up.,მე ჩემს პალტოს ვკიდებ.,
-hang,hang_p2s,hang,You hang,verb-p2s,შენ კიდებ,verb,2,verbs,You hang the clothes.,შენ ტანსაცმელს კიდებ.,
-hang,hang_p3s,hang,He/She/It hangs,verb-p3s,ის კიდებს,verb,2,verbs,She hangs the painting.,ის ნახატს კიდებს.,
-hang,hang_p1p,hang,We hang,verb-p1p,ჩვენ ვკიდებთ,verb,2,verbs,We hang the decorations.,ჩვენ დეკორაციებს ვკიდებთ.,
-hang,hang_p2p,hang,You (pl) hang,verb-p2p,თქვენ კიდებთ,verb,2,verbs,You (pl) hang the lights.,თქვენ ნათურებს კიდებთ.,
-hang,hang_p3p,hang,They hang,verb-p3p,ისინი კიდებენ,verb,2,verbs,They hang the sign.,ისინი აბრას კიდებენ.,
-shake,shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb,2,verbs,to shake hands with someone,ვიღაცისთვის ხელის ჩამორთმევა,
-shake,shake_p1s,shake,I shake,verb-p1s,მე ვანჯღრევ,verb,2,verbs,I shake the bottle.,მე ბოთლს ვანჯღრევ.,
-shake,shake_p2s,shake,You shake,verb-p2s,შენ ანჯღრევ,verb,2,verbs,You shake your head.,შენ თავს აქნევ (ანჯღრევ).,
-shake,shake_p3s,shake,He/She/It shakes,verb-p3s,ის ანჯღრევს,verb,2,verbs,The ground shakes.,მიწა ირყევა (ინჯღრევა).,
-shake,shake_p1p,shake,We shake,verb-p1p,ჩვენ ვანჯღრევთ,verb,2,verbs,We shake the blanket.,ჩვენ საბანს ვაფერთხებთ (ვანჯღრევთ).,
-shake,shake_p2p,shake,You (pl) shake,verb-p2p,თქვენ ანჯღრევთ,verb,2,verbs,You (pl) shake the tree.,თქვენ ხეს ანჯღრევთ.,
-shake,shake_p3p,shake,They shake,verb-p3p,ისინი ანჯღრევენ,verb,2,verbs,They shake with fear.,ისინი შიშისგან ცახცახებენ (ინჯღრევიან).,
-sign,sign_inf,sign,to sign,verb-inf,ხელმოწერა,verb,2,verbs,Signing the contract is necessary,ხელშეკრულების ხელმოწერა აუცილებელია,
-sign,sign_p1s,sign,I sign,verb-p1s,მე ვაწერ ხელს,verb,2,verbs,I sign the document.,მე დოკუმენტს ვაწერ ხელს.,
-sign,sign_p2s,sign,You sign,verb-p2s,შენ აწერ ხელს,verb,2,verbs,You sign the card.,შენ ბარათს აწერ ხელს.,
-sign,sign_p3s,sign,He/She/It signs,verb-p3s,ის აწერს ხელს,verb,2,verbs,She signs the letter.,ის წერილს აწერს ხელს.,
-sign,sign_p1p,sign,We sign,verb-p1p,ჩვენ ვაწერთ ხელს,verb,2,verbs,We sign the contract.,ჩვენ კონტრაქტს ვაწერთ ხელს.,
-sign,sign_p2p,sign,You (pl) sign,verb-p2p,თქვენ აწერთ ხელს,verb,2,verbs,You (pl) sign the petition.,თქვენ პეტიციას აწერთ ხელს.,
-sign,sign_p3p,sign,They sign,verb-p3p,ისინი აწერენ ხელს,verb,2,verbs,They sign the agreement.,ისინი შეთანხმებას აწერენ ხელს.,
 how_much_many,how_much_many,how_much_many,How much? / How many?,phrase,რამდენი?,question_word,1,phrases,How many people are there?,რამდენი ხალხია?,Used for price and quantity. Nouns following რამდენი stay singular.
 for_example,for_example,for_example,For example,phrase,მაგალითად,phrase,1,phrases,"For example, this wine.","მაგალითად, ეს ღვინო.",Root is მაგალითი (example).
 in_my_opinion,in_my_opinion,in_my_opinion,In my opinion,phrase,ჩემი აზრით,phrase,1,phrases,"In my opinion, it's good.","ჩემი აზრით, კარგია.",-ით = by/with. აზრი = opinion.
@@ -1368,25 +1312,66 @@ what_does_this_mean,what_does_this_mean,what_does_this_mean,What does this mean?
 can_you_repeat,can_you_repeat,can_you_repeat,Can you repeat that?,phrase,გაიმეორეთ?,phrase,1,phrases,Please repeat the word.,"გთხოვთ, სიტყვა გაიმეოროთ.",
 i_have_a_question,i_have_a_question,i_have_a_question,I have a question,phrase,კითხვა მაქვს,phrase,1,phrases,I have one small question.,ერთი პატარა კითხვა მაქვს.,Using the inanimate 'have' (მაქვს) for the question.
 i_dont_know,i_dont_know,i_dont_know,I don’t know,phrase,არ ვიცი,phrase,1,phrases,I really don't know.,ნამდვილად არ ვიცი.,
-idea,idea,idea,Idea / Thought,noun,აზრი,abstract,1,general,That is a good idea.,ეგ კარგი აზრია.,"Can mean opinion, thought, or sense."
+push,push_inf,push,to push,verb-inf,ბიძგება,verb,2,verbs,You have to push the door.,კარს ხელი უნდა ჰკრა (მიაწვე).,
+push,push_p1s,push,I push,verb-p1s,მე ვაწვები,verb,2,verbs,I push the button.,მე ღილაკს ვაწვები.,
+push,push_p2s,push,You push,verb-p2s,შენ აწვები,verb,2,verbs,You push the cart.,შენ ურიკას აწვები.,
+push,push_p3s,push,He/She/It pushes,verb-p3s,ის აწვება,verb,2,verbs,He pushes me on the swing.,ის საქანელაზე მაწვება.,
+push,push_p1p,push,We push,verb-p1p,ჩვენ ვაწვებით,verb,2,verbs,We push the car.,ჩვენ მანქანას ვაწვებით.,
+push,push_p2p,push,You (pl) push,verb-p2p,თქვენ აწვებით,verb,2,verbs,You (pl) push the table.,თქვენ მაგიდას აწვებით.,
+push,push_p3p,push,They push,verb-p3p,ისინი აწვებიან,verb,2,verbs,They push the box.,ისინი ყუთს აწვებიან.,
 problem,problem,problem,Problem,noun,პრობლემა,abstract,1,general,Is there any problem?,რაიმე პრობლემაა?,
 question,question,question,Question,noun,კითხვა,abstract,1,general,This question is difficult.,ეს კითხვა რთულია.,Also means 'reading'.
 answer,answer,answer,Answer,noun,პასუხი,abstract,1,general,I need an answer.,პასუხი მჭირდება.,
 story_news,story_news,story_news,Story / News / Matter,noun,ამბავი,abstract,1,general,What is the news? (What's up?),რა ამბავია?,"Universal word for story, news, or 'thing'."
 but,but,but,But,conjunction,მაგრამ,conjunction,1,general,"I want it, but it's expensive.","მინდა, მაგრამ ძვირია.",
 if,if,if,If,conjunction,თუ,conjunction,1,general,"If you want, let's go.","თუ გინდა, წავიდეთ.",
+pull,pull_inf,pull,to pull,verb-inf,ქაჩვა,verb,2,verbs,to pull the rope,თოკის მოქაჩვა,
+pull,pull_p1s,pull,I pull,verb-p1s,მე ვქაჩავ,verb,2,verbs,I pull the door open.,მე კარს ვაღებ (ვქაჩავ).,
+pull,pull_p2s,pull,You pull,verb-p2s,შენ ქაჩავ,verb,2,verbs,You pull the chair.,შენ სკამს ქაჩავ.,
+pull,pull_p3s,pull,He/She/It pulls,verb-p3s,ის ქაჩავს,verb,2,verbs,She pulls my hair.,ის თმას მქაჩავს.,
+pull,pull_p1p,pull,We pull,verb-p1p,ჩვენ ვქაჩავთ,verb,2,verbs,We pull the wagon.,ჩვენ ურემს ვქაჩავთ.,
+pull,pull_p2p,pull,You (pl) pull,verb-p2p,თქვენ ქაჩავთ,verb,2,verbs,You (pl) pull the curtain.,თქვენ ფარდას ქაჩავთ.,
+pull,pull_p3p,pull,They pull,verb-p3p,ისინი ქაჩავენ,verb,2,verbs,They pull the sled.,ისინი მარხილს ქაჩავენ.,
+scared,scared,scared,Scared / Afraid,adjective,შეშინებული,adjective,1,general,The child is scared.,ბავშვი შეშინებულია.,Root is შიში (fear).
+open_adj,open_adj,open_adj,Open,adjective,ღია,adjective,1,general,The door is open.,კარი ღიაა.,Also used for 'light' colors (e.g. ღია ლურჯი - light blue).
+closed_adj,closed_adj,closed_adj,Closed,adjective,დახურული,adjective,1,general,The shop is closed.,მაღაზია დახურულია.,
+empty,empty,empty,Empty,adjective,ცარიელი,adjective,1,general,The bottle is empty.,ბოთლი ცარიელია.,
+full,full,full,Full,adjective,სავსე,adjective,1,general,The glass is full.,ჭიქა სავსეა.,
+sweet,sweet,sweet,Sweet,adjective,ტკბილი,food,1,general,I love sweet wine.,ტკბილი ღვინო მიყვარს.,
+hang,hang_inf,hang,to hang,verb-inf,დაკიდება,verb,2,verbs,to hang a picture on the wall,კედელზე სურათის დაკიდება,
+hang,hang_p1s,hang,I hang,verb-p1s,მე ვკიდებ,verb,2,verbs,I hang my coat up.,მე ჩემს პალტოს ვკიდებ.,
+hang,hang_p2s,hang,You hang,verb-p2s,შენ კიდებ,verb,2,verbs,You hang the clothes.,შენ ტანსაცმელს კიდებ.,
+hang,hang_p3s,hang,He/She/It hangs,verb-p3s,ის კიდებს,verb,2,verbs,She hangs the painting.,ის ნახატს კიდებს.,
+hang,hang_p1p,hang,We hang,verb-p1p,ჩვენ ვკიდებთ,verb,2,verbs,We hang the decorations.,ჩვენ დეკორაციებს ვკიდებთ.,
+hang,hang_p2p,hang,You (pl) hang,verb-p2p,თქვენ კიდებთ,verb,2,verbs,You (pl) hang the lights.,თქვენ ნათურებს კიდებთ.,
+hang,hang_p3p,hang,They hang,verb-p3p,ისინი კიდებენ,verb,2,verbs,They hang the sign.,ისინი აბრას კიდებენ.,
+idea,idea,idea,Idea / Thought,noun,აზრი,abstract,1,general,That is a good idea.,ეგ კარგი აზრია.,"Can mean opinion, thought, or sense."
 without,without,without,Without,preposition,გარეშე,preposition,1,general,Coffee without sugar.,ყავა შაქრის გარეშე.,Postposition: appears after the noun (noun + genitive case).
 maybe,maybe,maybe,Maybe,adverb,შეიძლება,adverb,1,general,Maybe I will come tomorrow.,შეიძლება ხვალ მოვიდე.,Literally 'it is possible'.
 interesting,interesting,interesting,Interesting,adjective,საინტერესო,adjective,1,general,It is a very interesting movie.,ძალიან საინტერესო ფილმია.,Root is ინტერესი (interest).
 boring,boring,boring,Boring,adjective,მოსაწყენი,adjective,1,general,This lesson is boring.,ეს გაკვეთილი მოსაწყენია.,Root is მოწყენა (boredom).
 tired,tired,tired,Tired,adjective,დაღლილი,adjective,1,general,I am very tired today.,დღეს ძალიან დაღლილი ვარ.,Root is დაღლა (fatigue).
+sign,sign_inf,sign,to sign,verb-inf,ხელმოწერა,verb,2,verbs,Signing the contract is necessary,ხელშეკრულების ხელმოწერა აუცილებელია,
+sign,sign_p1s,sign,I sign,verb-p1s,მე ვაწერ ხელს,verb,2,verbs,I sign the document.,მე დოკუმენტს ვაწერ ხელს.,
+sign,sign_p2s,sign,You sign,verb-p2s,შენ აწერ ხელს,verb,2,verbs,You sign the card.,შენ ბარათს აწერ ხელს.,
+sign,sign_p3s,sign,He/She/It signs,verb-p3s,ის აწერს ხელს,verb,2,verbs,She signs the letter.,ის წერილს აწერს ხელს.,
+sign,sign_p1p,sign,We sign,verb-p1p,ჩვენ ვაწერთ ხელს,verb,2,verbs,We sign the contract.,ჩვენ კონტრაქტს ვაწერთ ხელს.,
+sign,sign_p2p,sign,You (pl) sign,verb-p2p,თქვენ აწერთ ხელს,verb,2,verbs,You (pl) sign the petition.,თქვენ პეტიციას აწერთ ხელს.,
+sign,sign_p3p,sign,They sign,verb-p3p,ისინი აწერენ ხელს,verb,2,verbs,They sign the agreement.,ისინი შეთანხმებას აწერენ ხელს.,
 busy,busy,busy,Busy,adjective,დაკავებული,adjective,1,general,He is busy at work.,სამსახურში დაკავებულია.,
 free_status,free_status,free_status,Free (not busy),adjective,თავისუფალი,adjective,1,general,Are you free tonight?,საღამოს თავისუფალი ხარ?,Also means 'free' (liberty) or 'empty'.
 free_cost,free_cost,free_cost,Free (no cost),adjective,უფასო,adjective,1,general,This water is free.,ეს წყალი უფასოა.,Prefix უ- (without) + Root ფასი (price).
 same,same,same,Same,adjective,იგივე,adjective,1,general,I want the same.,იგივე მინდა.,
 different,different,different,Different,adjective,განსხვავებული,adjective,1,general,They are completely different.,სრულიად განსხვავებულია.,Root is სხვა (other).
 ready,ready,ready,Ready,adjective,მზად,adjective,1,general,I am ready to go.,წასასვლელად მზად ვარ.,Usually used with the verb 'to be'.
-sure_certain,sure_certain,sure_certain,Sure / Certain,adjective,დარწმუნებული,adjective,1,general,Are you sure?,დარწმუნებული ხარ?,Root is რწმენა (belief).
+shake,shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb,2,verbs,to shake hands with someone,ვიღაცისთვის ხელის ჩამორთმევა,
+shake,shake_p1s,shake,I shake,verb-p1s,მე ვანჯღრევ,verb,2,verbs,I shake the bottle.,მე ბოთლს ვანჯღრევ.,
+shake,shake_p2s,shake,You shake,verb-p2s,შენ ანჯღრევ,verb,2,verbs,You shake your head.,შენ თავს აქნევ (ანჯღრევ).,
+shake,shake_p3s,shake,He/She/It shakes,verb-p3s,ის ანჯღრევს,verb,2,verbs,The ground shakes.,მიწა ირყევა (ინჯღრევა).,
+shake,shake_p1p,shake,We shake,verb-p1p,ჩვენ ვანჯღრევთ,verb,2,verbs,We shake the blanket.,ჩვენ საბანს ვაფერთხებთ (ვანჯღრევთ).,
+shake,shake_p2p,shake,You (pl) shake,verb-p2p,თქვენ ანჯღრევთ,verb,2,verbs,You (pl) shake the tree.,თქვენ ხეს ანჯღრევთ.,
+shake,shake_p3p,shake,They shake,verb-p3p,ისინი ანჯღრევენ,verb,2,verbs,They shake with fear.,ისინი შიშისგან ცახცახებენ (ინჯღრევიან).,
+sure_certain,sure_cshake,shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb,2,verbs,to shake hands with someone,ვიღაცისთვის ხელის ჩამორთმევა,
 mirror,mirror,mirror,Mirror,noun,სარკე,home,1,general,Look in the mirror.,სარკეში ჩაიხედე.,
 stairs,stairs,stairs,Stairs,noun,კიბე,home,1,general,Go up the stairs.,კიბეზე ადი.,Also means 'ladder'.
 towel,towel,towel,Towel,noun,პირსახოცი,home,1,general,I need a dry towel.,მშრალი პირსახოცი მჭირდება.,Compound: პირი (face) + სახოცი (wiper).
@@ -1397,10 +1382,6 @@ fridge,fridge,fridge,Fridge,noun,მაცივარი,home,1,general,Put it 
 washing_machine,washing_machine,washing_machine,Washing machine,noun,სარეცხი მანქანა,home,1,general,The washing machine is broken.,სარეცხი მანქანა გაფუჭდა.,Literally 'laundry machine'.
 charger,charger,charger,Charger,noun,დამტენი,electronics,1,general,Do you have a charger?,დამტენი გაქვს?,Root is ტენვა (to charge/fill).
 backpack,backpack,backpack,Backpack,noun,ზურგჩანთა,clothing,1,general,This backpack is heavy.,ეს ზურგჩანთა მძიმეა.,Compound: ზურგი (back) + ჩანთა (bag).
-weather,weather,weather,Weather,noun,ამინდი,nature,1,general,What is the weather like?,როგორი ამინდია?,
-cloud,cloud,cloud,Cloud,noun,ღრუბელი,nature,1,general,There is a dark cloud.,შავი ღრუბელი.,Also means 'sponge'.
-rainy,rainy,rainy,Rainy,adjective,წვიმიანი,nature,1,general,It is a rainy day.,წვიმიანი დღეა.,From წვიმა (rain).
-traffic_light,traffic_light,traffic_light,Traffic light,noun,შუქნიშანი,city,1,general,Stop at the traffic light.,შუქნიშანთან გაჩერდი.,Compound: შუქი (light) + ნიშანი (sign).
 need,need_inf,need,to need,verb-inf,საჭიროება,verb,1,verbs,It implies a necessity.,ეს საჭიროებაა.,Dative verb: The subject is the one needing.
 need,need_p1s,need,I need,verb-p1s,მჭირდება,verb,1,verbs,I need water.,მე წყალი მჭირდება.,"Literally ""to me it is needed""."
 need,need_p2s,need,You need,verb-p2s,გჭირდება,verb,1,verbs,You need help.,შენ დახმარება გჭირდება.,
@@ -1408,6 +1389,10 @@ need,need_p3s,need,He/She/It needs,verb-p3s,სჭირდება,verb,1,verb
 need,need_p1p,need,We need,verb-p1p,გვჭირდება,verb,1,verbs,We need time.,ჩვენ დრო გვჭირდება.,
 need,need_p2p,need,You (pl) need,verb-p2p,გჭირდებათ,verb,1,verbs,Do you need anything?,რამე ხომ არ გჭირდებათ?,
 need,need_p3p,need,They need,verb-p3p,სჭირდებათ,verb,1,verbs,They need money.,მათ ფული სჭირდებათ.,
+weather,weather,weather,Weather,noun,ამინდი,nature,1,general,What is the weather like?,როგორი ამინდია?,
+cloud,cloud,cloud,Cloud,noun,ღრუბელი,nature,1,general,There is a dark cloud.,შავი ღრუბელი.,Also means 'sponge'.
+rainy,rainy,rainy,Rainy,adjective,წვიმიანი,nature,1,general,It is a rainy day.,წვიმიანი დღეა.,From წვიმა (rain).
+traffic_light,traffic_light,traffic_light,Traffic light,noun,შუქნიშანი,city,1,general,Stop at the traffic light.,შუქნიშანთან გაჩერდი.,Compound: შუქი (light) + ნიშანი (sign).
 use,use_inf,use,to use,verb-inf,გამოყენება,verb,1,verbs,Using this is easy.,ამის გამოყენება ადვილია.,
 use,use_p1s,use,I use,verb-p1s,ვიყენებ,verb,1,verbs,I use the computer.,მე კომპიუტერს ვიყენებ.,
 use,use_p2s,use,You use,verb-p2s,იყენებ,verb,1,verbs,Which phone do you use?,რომელ ტელეფონს იყენებ?,
@@ -1422,6 +1407,13 @@ museum,museum,museum,Museum,noun,მუზეუმი,location,1,general,We are
 elevator,elevator,elevator,Elevator,noun,ლიფტი,home,1,general,Call the elevator.,ლიფტი გამოიძახე.,
 restroom,restroom,restroom,Restroom,noun,საპირფარეშო,location,1,general,The restroom is occupied.,საპირფარეშო დაკავებულია.,Formal term. 'Tualeti' is also common.
 passport,passport,passport,Passport,noun,პასპორტი,travel,1,general,Show me your passport.,პასპორტი მაჩვენეთ.,
+show,show_inf,show,to show,verb-inf,ჩვენება,verb,1,verbs,Show me the way.,გზა მაჩვენე.,
+show,show_p1s,show,I show,verb-p1s,ვაჩვენებ,verb,1,verbs,I show him the photo.,მას ფოტოს ვაჩვენებ.,
+show,show_p2s,show,You show,verb-p2s,აჩვენებ,verb,1,verbs,You show the ticket.,ბილეთს აჩვენებ.,
+show,show_p3s,show,He/She/It shows,verb-p3s,აჩვენებს,verb,1,verbs,He shows me the room.,ის ოთახს მაჩვენებს.,
+show,show_p1p,show,We show,verb-p1p,ვაჩვენებთ,verb,1,verbs,We show the city.,ქალაქს ვაჩვენებთ.,
+show,show_p2p,show,You (pl) show,verb-p2p,აჩვენებთ,verb,1,verbs,Show us the menu.,მენიუ გვაჩვენეთ.,(Imperative context)
+show,show_p3p,show,They show,verb-p3p,აჩვენებენ,verb,1,verbs,They show a movie.,ფილმს აჩვენებენ.,
 cash,cash,cash,Cash,noun,ნაღდი ფული,money,1,general,I pay with cash.,ნაღდი ფულით ვიხდი.,
 receipt,receipt,receipt,Receipt,noun,ქვითარი,money,1,general,Take the receipt.,ქვითარი აიღეთ.,
 napkin,napkin,napkin,Napkin,noun,სახოცი,food,1,general,Pass me a napkin.,სახოცი მომაწოდე.,
@@ -1436,13 +1428,6 @@ wait,wait_p3s,wait,He/She/It waits,verb-p3s,ელოდება,verb,1,verbs,H
 wait,wait_p1p,wait,We wait,verb-p1p,ველოდებით,verb,1,verbs,We are waiting for a guest.,სტუმარს ველოდებით.,
 wait,wait_p2p,wait,You (pl) wait,verb-p2p,ელოდებით,verb,1,verbs,Are you waiting for us?,ჩვენ გველოდებით?,
 wait,wait_p3p,wait,They wait,verb-p3p,ელოდებიან,verb,1,verbs,They are waiting outside.,გარეთ ელოდებიან.,
-agree,agree_inf,agree,to agree,verb-inf,დათანხმება,verb,1,verbs,To agree is better.,დათანხმება ჯობია.,
-agree,agree_p1s,agree,I agree,verb-p1s,ვეთანხმები,verb,1,verbs,I agree with you.,შენ გეთანხმები.,
-agree,agree_p2s,agree,You agree,verb-p2s,ეთანხმები,verb,1,verbs,Do you agree with this?,ამას ეთანხმები?,
-agree,agree_p3s,agree,He/She/It agrees,verb-p3s,ეთანხმება,verb,1,verbs,He agrees with the plan.,გეგმას ეთანხმება.,
-agree,agree_p1p,agree,We agree,verb-p1p,ვეთანხმებით,verb,1,verbs,We agree with the decision.,გადაწყვეტილებას ვეთანხმებით.,
-agree,agree_p2p,agree,You (pl) agree,verb-p2p,ეთანხმებით,verb,1,verbs,Do you agree with us?,ჩვენ გეთანხმებით?,
-agree,agree_p3p,agree,They agree,verb-p3p,ეთანხმებიან,verb,1,verbs,They agree with everything.,ყველაფერს ეთანხმებიან.,
 strawberry,strawberry,strawberry,Strawberry,noun,მარწყვი,food,1,general,I love fresh strawberries.,ახალი მარწყვი მიყვარს.,Pronounced: Mar-tsq-vi.
 watermelon,watermelon,watermelon,Watermelon,noun,საზამთრო,food,1,general,This watermelon is sweet.,ეს საზამთრო ტკბილია.,Root word is ზამთარი (winter).
 ice_cream,ice_cream,ice_cream,Ice cream,noun,ნაყინი,food,1,general,I want chocolate ice cream.,შოკოლადის ნაყინი მინდა.,
@@ -1451,13 +1436,6 @@ guest,guest,guest,Guest,noun,სტუმარი,people,1,general,We have a gu
 boss,boss,boss,Boss / Elder,noun,უფროსი,people,1,general,My boss is busy.,ჩემი უფროსი დაკავებულია.,Also means 'senior' or 'older'.
 writer,writer,writer,Writer,noun,მწერალი,job,1,general,He is a famous writer.,ის ცნობილი მწერალია.,Root is წერა (to write).
 worker,worker,worker,Worker,noun,მუშა,job,1,general,The worker is tired.,მუშა დაღლილია.,Usually refers to manual labor.
-show,show_inf,show,to show,verb-inf,ჩვენება,verb,1,verbs,Show me the way.,გზა მაჩვენე.,
-show,show_p1s,show,I show,verb-p1s,ვაჩვენებ,verb,1,verbs,I show him the photo.,მას ფოტოს ვაჩვენებ.,
-show,show_p2s,show,You show,verb-p2s,აჩვენებ,verb,1,verbs,You show the ticket.,ბილეთს აჩვენებ.,
-show,show_p3s,show,He/She/It shows,verb-p3s,აჩვენებს,verb,1,verbs,He shows me the room.,ის ოთახს მაჩვენებს.,
-show,show_p1p,show,We show,verb-p1p,ვაჩვენებთ,verb,1,verbs,We show the city.,ქალაქს ვაჩვენებთ.,
-show,show_p2p,show,You (pl) show,verb-p2p,აჩვენებთ,verb,1,verbs,Show us the menu.,მენიუ გვაჩვენეთ.,(Imperative context)
-show,show_p3p,show,They show,verb-p3p,აჩვენებენ,verb,1,verbs,They show a movie.,ფილმს აჩვენებენ.,
 bring_inanimate,bring_inanimate_inf,bring_inanimate,to bring (things),verb-inf,მოტანა,verb,1,verbs,Please bring water.,წყალი მომიტანე.,Imperative form used in requests.
 bring_inanimate,bring_inanimate_p1s,bring_inanimate,I bring (am carrying),verb-p1s,მომაქვს,verb,1,verbs,I am bringing the wine.,ღვინო მომაქვს.,Literally 'I have it coming'.
 bring_inanimate,bring_inanimate_p2s,bring_inanimate,You bring,verb-p2s,მოგაქვს,verb,1,verbs,What are you bringing?,რა მოგაქვს?,
@@ -1471,6 +1449,13 @@ almost,almost,almost,Almost,adverb,თითქმის,adverb,1,general,I am a
 straight_ahead,straight_ahead,straight_ahead,Straight ahead,noun,პირდაპირ,directions,1,general,Go straight ahead.,იარე პირდაპირ.,
 far,far,far,Far,adjective,შორს,directions,1,general,Is it far from here?,აქედან შორს არის?,
 jacket,jacket,jacket,Jacket,noun,ქურთუკი,clothing,1,general,Wear a warm jacket.,თბილი ქურთუკი ჩაიცვი.,
+agree,agree_inf,agree,to agree,verb-inf,დათანხმება,verb,1,verbs,To agree is better.,დათანხმება ჯობია.,
+agree,agree_p1s,agree,I agree,verb-p1s,ვეთანხმები,verb,1,verbs,I agree with you.,შენ გეთანხმები.,
+agree,agree_p2s,agree,You agree,verb-p2s,ეთანხმები,verb,1,verbs,Do you agree with this?,ამას ეთანხმები?,
+agree,agree_p3s,agree,He/She/It agrees,verb-p3s,ეთანხმება,verb,1,verbs,He agrees with the plan.,გეგმას ეთანხმება.,
+agree,agree_p1p,agree,We agree,verb-p1p,ვეთანხმებით,verb,1,verbs,We agree with the decision.,გადაწყვეტილებას ვეთანხმებით.,
+agree,agree_p2p,agree,You (pl) agree,verb-p2p,ეთანხმებით,verb,1,verbs,Do you agree with us?,ჩვენ გეთანხმებით?,
+agree,agree_p3p,agree,They agree,verb-p3p,ეთანხმებიან,verb,1,verbs,They agree with everything.,ყველაფერს ეთანხმებიან.,
 scarf,scarf,scarf,Scarf,noun,შარფი,clothing,1,general,I like your scarf.,შენი შარფი მომწონს.,
 gloves,gloves,gloves,Gloves,noun,ხელთათმანები,clothing,1,general,Where are my gloves?,სად არის ხელთათმანები?,Compound: Hand (ხელი) + mitten (თათმანი).
 socks,socks,socks,Socks,noun,წინდები,clothing,1,general,I need warm socks.,თბილი წინდები მჭირდება.,
@@ -1525,9 +1510,6 @@ just_simply,just_simply,just_simply,Just / Simply,adverb,უბრალოდ,a
 exactly,exactly,exactly,Exactly,adverb,ზუსტად,adverb,1,general,Exactly 5 o'clock.,ზუსტად 5 საათია.,Common one-word response to agree.
 alone,alone,alone,Alone,adjective,მარტო,adjective,1,general,I am alone.,მარტო ვარ.,Related to მარტივი (simple/single).
 together,together,together,Together,adverb,ერთად,adverb,1,general,Let's go together.,ერთად წავიდეთ.,Derived from ერთი (one). Literally 'as one'.
-hope,hope,hope,Hope,noun,იმედი,abstract,1,general,I have hope.,იმედი მაქვს.,Used with the verb 'to have' (მაქვს).
-truth,truth,truth,Truth,noun,სიმართლე,abstract,1,general,Tell the truth.,სიმართლე თქვი.,Root is მართალი (true/right).
-feeling,feeling,feeling,Feeling,noun,გრძნობა,abstract,1,general,I have a bad feeling.,ცუდი გრძნობა მაქვს.,Also means 'sense' (like sense of smell).
 feel,feel_inf,feel,to feel,verb-inf,გრძნობა,verb,1,verbs,I feel good.,თავს კარგად ვგრძნობ.,Usually reflexive: 'I feel myself good'.
 feel,feel_p1s,feel,I feel,verb-p1s,ვგრძნობ,verb,1,verbs,I feel cold.,სიცივეს ვგრძნობ.,
 feel,feel_p2s,feel,You feel,verb-p2s,გრძნობ,verb,1,verbs,Do you feel pain?,ტკივილს გრძნობ?,
@@ -1535,6 +1517,9 @@ feel,feel_p3s,feel,He/She/It feels,verb-p3s,გრძნობს,verb,1,verbs,H
 feel,feel_p1p,feel,We feel,verb-p1p,ვგრძნობთ,verb,1,verbs,We feel happy.,თავს ბედნიერად ვგრძნობთ.,
 feel,feel_p2p,feel,You (pl) feel,verb-p2p,გრძნობთ,verb,1,verbs,Do you feel better?,უკეთესად გრძნობთ თავს?,
 feel,feel_p3p,feel,They feel,verb-p3p,გრძნობენ,verb,1,verbs,They feel fear.,შიშს გრძნობენ.,
+hope,hope,hope,Hope,noun,იმედი,abstract,1,general,I have hope.,იმედი მაქვს.,Used with the verb 'to have' (მაქვს).
+truth,truth,truth,Truth,noun,სიმართლე,abstract,1,general,Tell the truth.,სიმართლე თქვი.,Root is მართალი (true/right).
+feeling,feeling,feeling,Feeling,noun,გრძნობა,abstract,1,general,I have a bad feeling.,ცუდი გრძნობა მაქვს.,Also means 'sense' (like sense of smell).
 happiness,happiness,happiness,Happiness,noun,ბედნიერება,abstract,1,general,Money is not happiness.,ფული ბედნიერება არ არის.,Root is ბედი (fate/luck).
 freedom,freedom,freedom,Freedom,noun,თავისუფლება,abstract,1,general,Freedom is important.,თავისუფლება მნიშვნელოვანია.,Literally 'Head-of-myself-ness' (Master of oneself).
 mean_signify,mean_signify_inf,mean_signify,to mean / signify,verb-inf,ნიშნა,verb,1,verbs,What does it mean?,რას ნიშნავს?,Root is ნიშანი (sign).
@@ -1546,17 +1531,18 @@ mean_signify,mean_signify_p2p,mean_signify,You (pl) mean,verb-p2p,გული�
 mean_signify,mean_signify_p3p,mean_signify,They mean,verb-p3p,გულისხმობენ,verb,1,verbs,They mean us.,ჩვენ გვგულისხმობენ.,
 angry,angry,angry,Angry,adjective,გაბრაზებული,adjective,1,general,Why are you angry?,რატომ ხარ გაბრაზებული?,Root is ბრაზი (anger).
 surprised,surprised,surprised,Surprised,adjective,გაკვირვებული,adjective,1,general,I am surprised.,გაკვირვებული ვარ.,Root is კვირვება (wonder/surprise).
-scared,scared,scared,Scared / Afraid,adjective,შეშინებული,adjective,1,general,The child is scared.,ბავშვი შეშინებულია.,Root is შიში (fear).
-open_adj,open_adj,open_adj,Open,adjective,ღია,adjective,1,general,The door is open.,კარი ღიაა.,Also used for 'light' colors (e.g. ღია ლურჯი - light blue).
-closed_adj,closed_adj,closed_adj,Closed,adjective,დახურული,adjective,1,general,The shop is closed.,მაღაზია დახურულია.,
-empty,empty,empty,Empty,adjective,ცარიელი,adjective,1,general,The bottle is empty.,ბოთლი ცარიელია.,
-full,full,full,Full,adjective,სავსე,adjective,1,general,The glass is full.,ჭიქა სავსეა.,
-sweet,sweet,sweet,Sweet,adjective,ტკბილი,food,1,general,I love sweet wine.,ტკბილი ღვინო მიყვარს.,
 sour,sour,sour,Sour,adjective,მჟავე,food,1,general,This lemon is sour.,ეს ლიმონი მჟავეა.,
-bitter,bitter,bitter,Bitter,adjective,მწარე,food,1,general,The coffee is bitter.,ყავა ძალიან მწარეა.,Also describes a 'bitter' experience or person.
 spicy,spicy,spicy,Spicy / Hot,adjective,ცხარე,food,1,general,Is the food spicy?,საჭმელი ცხარეა?,Distinct from ცხელი (hot temperature).
-taste,taste,taste,Taste,noun,გემო,food,1,general,It has a good taste.,კარგი გემო აქვს.,Root of გემრიელი (delicious).
+bitter,bitter,bitter,Bitter,adjective,მწარე,food,1,general,The coffee is bitter.,ყავა ძალიან მწარეა.,Also describes a 'bitter' experience or person.
 smell,smell,smell,Smell,noun,სუნი,nature,1,general,What is that smell?,რა სუნია?,
+point,point_inf,point,to point,verb-inf,მითითება,verb,1,verbs,Point to the map.,რუკაზე მიუთითე.,Root is თითი (finger).
+point,point_p1s,point,I point,verb-p1s,ვუთითებ,verb,1,verbs,I point at him.,მასზე ვუთითებ.,
+point,point_p2s,point,You point,verb-p2s,უთითებ,verb,1,verbs,You point the way.,გზას უთითებ.,
+point,point_p3s,point,He/She/It points,verb-p3s,უთითებს,verb,1,verbs,She points a finger.,თითს უთითებს (იშვერს).,
+point,point_p1p,point,We point,verb-p1p,ვუთითებთ,verb,1,verbs,We point out the problem.,პრობლემაზე ვუთითებთ.,
+point,point_p2p,point,You (pl) point,verb-p2p,უთითებთ,verb,1,verbs,Where do you point?,სად უთითებთ?,
+point,point_p3p,point,They point,verb-p3p,უთითებენ,verb,1,verbs,They point to the sky.,ცისკენ უთითებენ.,
+taste,taste,taste,Taste,noun,გემო,food,1,general,It has a good taste.,კარგი გემო აქვს.,Root of გემრიელი (delicious).
 strange,strange,strange,Strange / Weird,adjective,უცნაური,adjective,1,general,That is very strange.,ეს ძალიან უცნაურია.,Derived from უცხო (foreign/alien).
 simple,simple,simple,Simple / Easy,adjective,მარტივი,adjective,1,general,The answer is simple.,პასუხი მარტივია.,
 useful,useful,useful,Useful,adjective,სასარგებლო,adjective,1,general,It is useful info.,სასარგებლო ინფორმაციაა.,Root is სარგებელი (benefit/profit).
@@ -1577,13 +1563,6 @@ palm,palm,palm,Palm,noun,ხელისგული,body,1,general,Open your pa
 ankle,ankle,ankle,Ankle,noun,კოჭი,body,1,general,I twisted my ankle.,კოჭი გადავიბრუნე.,
 purple,purple,purple,Purple,adjective,იასამნისფერი,color,1,general,I like purple flowers.,იასამნისფერი ყვავილები მომწონს.,Derived from Iasamani (Lilac flower).
 beige,beige,beige,Beige,adjective,ბეჟი,color,1,general,Beige coat.,ბეჟი პალტო.,
-point,point_inf,point,to point,verb-inf,მითითება,verb,1,verbs,Point to the map.,რუკაზე მიუთითე.,Root is თითი (finger).
-point,point_p1s,point,I point,verb-p1s,ვუთითებ,verb,1,verbs,I point at him.,მასზე ვუთითებ.,
-point,point_p2s,point,You point,verb-p2s,უთითებ,verb,1,verbs,You point the way.,გზას უთითებ.,
-point,point_p3s,point,He/She/It points,verb-p3s,უთითებს,verb,1,verbs,She points a finger.,თითს უთითებს (იშვერს).,
-point,point_p1p,point,We point,verb-p1p,ვუთითებთ,verb,1,verbs,We point out the problem.,პრობლემაზე ვუთითებთ.,
-point,point_p2p,point,You (pl) point,verb-p2p,უთითებთ,verb,1,verbs,Where do you point?,სად უთითებთ?,
-point,point_p3p,point,They point,verb-p3p,უთითებენ,verb,1,verbs,They point to the sky.,ცისკენ უთითებენ.,
 repeat,repeat_inf,repeat,to repeat,verb-inf,გამეორება,verb,1,verbs,Can you repeat?,შეგიძლიათ გაიმეოროთ?,Root is მეორე (second).
 repeat,repeat_p1s,repeat,I repeat,verb-p1s,ვიმეორებ,verb,1,verbs,I repeat the word.,სიტყვას ვიმეორებ.,
 repeat,repeat_p2s,repeat,You repeat,verb-p2s,იმეორებ,verb,1,verbs,You repeat often.,ხშირად იმეორებ.,
@@ -1604,13 +1583,6 @@ ask,ask_p3s,ask,He/She/It asks,verb-p3s,კითხულობს,verb,1,verbs
 ask,ask_p1p,ask,We ask,verb-p1p,ვკითხულობთ,verb,1,verbs,We ask the teacher.,მასწავლებელს ვკითხულობთ.,
 ask,ask_p2p,ask,You (pl) ask,verb-p2p,კითხულობთ,verb,1,verbs,Why do you ask?,რატომ კითხულობთ?,
 ask,ask_p3p,ask,They ask,verb-p3p,კითხულობენ,verb,1,verbs,They ask the price.,ფასს კითხულობენ.,
-send,send_inf,send,to send,verb-inf,გაგზავნა,verb,1,verbs,I need to send it.,ამის გაგზავნა მჭირდება.,Root is გზა (road).
-send,send_p1s,send,I send,verb-p1s,ვაგზავნი,verb,1,verbs,I send a letter.,წერილს ვაგზავნი.,
-send,send_p2s,send,You send,verb-p2s,აგზავნი,verb,1,verbs,You send a message.,შეტყობინებას აგზავნი.,
-send,send_p3s,send,He/She/It sends,verb-p3s,აგზავნის,verb,1,verbs,He sends money.,ფულს აგზავნის.,
-send,send_p1p,send,We send,verb-p1p,ვაგზავნით,verb,1,verbs,We send gifts.,საჩუქრებს ვაგზავნით.,
-send,send_p2p,send,You (pl) send,verb-p2p,აგზავნით,verb,1,verbs,Where do you send it?,სად აგზავნით?,
-send,send_p3p,send,They send,verb-p3p,აგზავნიან,verb,1,verbs,They send an email.,მეილს აგზავნიან.,
 language,language,language,Language,noun,ენა,abstract,1,general,Georgian language is beautiful.,ქართული ენა ლამაზია.,Also means 'Tongue' (body part).
 word,word,word,Word,noun,სიტყვა,abstract,1,general,I don't know this word.,ეს სიტყვა არ ვიცი.,
 beginning,beginning,beginning,Beginning,noun,დასაწყისი,abstract,1,general,At the beginning.,დასაწყისში.,Root is წყ (source/water).
@@ -1619,12 +1591,26 @@ reason,reason,reason,Reason,noun,მიზეზი,abstract,1,general,What is t
 goal,goal,goal,Goal / Aim,noun,მიზანი,abstract,1,general,My main goal.,ჩემი მთავარი მიზანი.,Target or purpose.
 noise,noise,noise,Noise,noun,ხმაური,abstract,1,general,Too much noise.,ძალიან დიდი ხმაურია.,Root is ხმა (voice/sound).
 silence,silence,silence,Silence,noun,სიჩუმე,abstract,1,general,I like silence.,სიჩუმე მიყვარს.,Root is ჩუმი (silent/quiet).
+carry,carry_inf,carry,to carry,verb-inf,ტარება,verb,2,verbs,Help me carry this.,დამეხმარე ამის ტარებაში.,
+carry,carry_p1s,carry,I carry,verb-p1s,მე ვატარებ,verb,2,verbs,I carry a bag.,მე ჩანთას ვატარებ.,
+carry,carry_p2s,carry,You carry,verb-p2s,შენ ატარებ,verb,2,verbs,You carry the books.,შენ წიგნებს ატარებ.,
+carry,carry_p3s,carry,He/She/It carries,verb-p3s,ის ატარებს,verb,2,verbs,He carries the boxes.,ის ყუთებს ატარებს.,
+carry,carry_p1p,carry,We carry,verb-p1p,ჩვენ ვატარებთ,verb,2,verbs,We carry our luggage.,ჩვენ ჩვენი ბარგი მიგვაქვს (ვატარებთ).,
+carry,carry_p2p,carry,You (pl) carry,verb-p2p,თქვენ ატარებთ,verb,2,verbs,You (pl) carry the chairs.,თქვენ სკამები მიგაქვთ (ატარებთ).,
+carry,carry_p3p,carry,They carry,verb-p3p,ისინი ატარებენ,verb,2,verbs,They carry the flag.,ისინი დროშას ატარებენ.,
 quantity,quantity,quantity,Quantity,noun,რაოდენობა,abstract,1,general,Large quantity.,დიდი რაოდენობა.,Root is რამდენი (how much).
 only,only,only,Only,adverb,მხოლოდ,general,1,general,Only one person.,მხოლოდ ერთი ადამიანი.,
 then_after,then_after,then_after,Then / After,adverb,მერე,general,1,general,What happened then?,მერე რა მოხდა?,Colloquial way to say 'after that'.
 such,such,such,Such / Like this,adjective,ასეთი,general,1,general,Such a good day.,ასეთი კარგი დღე.,Refers to something close or mentioned.
 whole,whole,whole,Whole / Entire,adjective,მთელი,general,1,general,The whole world.,მთელი მსოფლიო.,Root of სულ (all/soul).
 main,main,main,Main / Chief,adjective,მთავარი,general,1,general,Main street.,მთავარი ქუჩა.,Root of მთავრობა (government).
+break,break_inf,break,to break,verb-inf,გატეხვა,verb,2,verbs,Breaking glass is dangerous,მინის გატეხვა საშიშია,
+break,break_p1s,break,I break,verb-p1s,მე ვამტვრევ,verb,2,verbs,I break the glass.,მე ჭიქას ვამტვრევ.,
+break,break_p2s,break,You break,verb-p2s,შენ ამტვრევ,verb,2,verbs,You break the rules.,შენ წესებს არღვევ (ამტვრევ).,
+break,break_p3s,break,He/She/It breaks,verb-p3s,ის ამტვრევს,verb,2,verbs,He breaks his promise.,ის თავის პირობას არღვევს (ამტვრევს).,
+break,break_p1p,break,We break,verb-p1p,ჩვენ ვამტვრევთ,verb,2,verbs,We break the wood.,ჩვენ შეშას ვამტვრევთ.,
+break,break_p2p,break,You (pl) break,verb-p2p,თქვენ ამტვრევთ,verb,2,verbs,You (pl) break the eggs.,თქვენ კვერცხებს ამტვრევთ.,
+break,break_p3p,break,They break,verb-p3p,ისინი ამტვრევენ,verb,2,verbs,They break the window.,ისინი ფანჯარას ამტვრევენ.,
 real,real,real,Real / True,adjective,ნამდვილი,general,1,general,Real friend.,ნამდვილი მეგობარი.,
 any,any,any,Any / Whichever,pronoun,ნებისმიერი,general,1,general,Any time.,ნებისმიერ დროს.,Literally 'any will'.
 rule,rule,rule,Rule,noun,წესი,general,1,general,Follow the rule.,წესს მიყევი.,Also means 'order' or 'manner'.
@@ -1632,6 +1618,13 @@ law,law,law,Law,noun,კანონი,general,1,general,It is the law.,ეს 
 government,government,government,Government,noun,მთავრობა,general,1,general,New government.,ახალი მთავრობა.,Derived from მთავარი (main/head).
 power,power,power,Power / Strength,noun,ძალა,general,1,general,He has power.,მას ძალა აქვს.,Also used for 'force'.
 result,result,result,Result,noun,შედეგი,general,1,general,Good result.,კარგი შედეგი.,
+wear,wear_inf,wear,to wear,verb-inf,ტარება,verb,2,verbs,Wearing a uniform is required,ფორმის ტარება აუცილებელია,"Same root word as ""carry"" (ტარება)."
+wear,wear_p1s,wear,I wear,verb-p1s,მე მაცვია,verb,2,verbs,I wear a coat.,მე პალტო მაცვია.,"Stative verb: Literally ""It is on me"" (clothing)."
+wear,wear_p2s,wear,You wear,verb-p2s,შენ გაცვია,verb,2,verbs,You wear a nice dress.,შენ ლამაზი კაბა გაცვია.,
+wear,wear_p3s,wear,He/She/It wears,verb-p3s,მას აცვია,verb,2,verbs,He wears glasses.,მას სათვალე უკეთია (აცვია).,
+wear,wear_p1p,wear,We wear,verb-p1p,ჩვენ გვაცვია,verb,2,verbs,We wear uniforms to school.,ჩვენ სკოლაში ფორმა გვაცვია.,
+wear,wear_p2p,wear,You (pl) wear,verb-p2p,თქვენ გაცვიათ,verb,2,verbs,You (pl) wear hats.,თქვენ ქუდები გახურავთ (გაცვიათ).,
+wear,wear_p3p,wear,They wear,verb-p3p,მათ აცვიათ,verb,2,verbs,They wear matching shirts.,მათ ერთნაირი პერანგები აცვიათ.,
 situation,situation,situation,Situation / Condition,noun,მდგომარეობა,general,1,general,Difficult situation.,რთული მდგომარეობა.,Root is დგომა (standing).
 case_event,case_event,case_event,Case / Event,noun,შემთხვევა,general,1,general,In this case.,ამ შემთხვევაში.,Also means 'accident'.
 world_political,world_political,world_political,World (Global),noun,მსოფლიო,general,1,general,Around the world.,მსოფლიოს გარშემო.,Distinct from სამყარო (Universe/Nature).
@@ -1644,6 +1637,12 @@ receive,receive_p3s,receive,He/She/It receives,verb-p3s,იღებს,verb,1,g
 receive,receive_p1p,receive,We receive,verb-p1p,ვიღებთ,verb,1,general,We receive info.,ინფორმაციას ვიღებთ.,
 receive,receive_p2p,receive,You (pl) receive,verb-p2p,იღებთ,verb,1,general,Do you receive it?,ამას იღებთ?,
 receive,receive_p3p,receive,They receive,verb-p3p,იღებენ,verb,1,general,They receive help.,დახმარებას იღებენ.,
+part,part,part,Part / Piece,noun,ნაწილი,general,1,general,Part of the plan.,გეგმის ნაწილი.,Root is წილი (share/lot).
+group,group,group,Group,noun,ჯგუფი,general,1,general,Small group of people.,ხალხის პატარა ჯგუფი.,
+system,system,system,System,noun,სისტემა,general,1,general,New system.,ახალი სისტემა.,
+salary,salary,salary,Salary,noun,ხელფასი,general,1,general,I got my salary.,ხელფასი ავიღე.,Compound: ხელი (hand) + ფასი (price).
+meeting,meeting,meeting,Meeting,noun,შეხვედრა,general,1,general,I have a meeting.,შეხვედრა მაქვს.,Derived from ხვდება (meets).
+decision,decision,decision,Decision,noun,გადაწყვეტილება,general,1,general,It is your decision.,ეს შენი გადაწყვეტილებაა.,Root is წყვეტს (decides/cuts).
 leave_obj,leave_obj_inf,leave_obj,to leave (something),verb-inf,დატოვება,verb,1,general,Don't leave me.,არ დამტოვო.,Transitive: leaving an object or person.
 leave_obj,leave_obj_p1s,leave_obj,I leave,verb-p1s,ვტოვებ,verb,1,general,I leave the key.,გასაღებს ვტოვებ.,
 leave_obj,leave_obj_p2s,leave_obj,You leave,verb-p2s,ტოვებ,verb,1,general,You leave the house.,სახლს ტოვებ.,
@@ -1651,12 +1650,6 @@ leave_obj,leave_obj_p3s,leave_obj,He/She/It leaves,verb-p3s,ტოვებს,v
 leave_obj,leave_obj_p1p,leave_obj,We leave,verb-p1p,ვტოვებთ,verb,1,general,We leave it here.,ამას აქ ვტოვებთ.,
 leave_obj,leave_obj_p2p,leave_obj,You (pl) leave,verb-p2p,ტოვებთ,verb,1,general,Why do you leave it?,რატომ ტოვებთ?,
 leave_obj,leave_obj_p3p,leave_obj,They leave,verb-p3p,ტოვებენ,verb,1,general,They leave the city.,ქალაქს ტოვებენ.,
-part,part,part,Part / Piece,noun,ნაწილი,general,1,general,Part of the plan.,გეგმის ნაწილი.,Root is წილი (share/lot).
-group,group,group,Group,noun,ჯგუფი,general,1,general,Small group of people.,ხალხის პატარა ჯგუფი.,
-system,system,system,System,noun,სისტემა,general,1,general,New system.,ახალი სისტემა.,
-salary,salary,salary,Salary,noun,ხელფასი,general,1,general,I got my salary.,ხელფასი ავიღე.,Compound: ხელი (hand) + ფასი (price).
-meeting,meeting,meeting,Meeting,noun,შეხვედრა,general,1,general,I have a meeting.,შეხვედრა მაქვს.,Derived from ხვდება (meets).
-decision,decision,decision,Decision,noun,გადაწყვეტილება,general,1,general,It is your decision.,ეს შენი გადაწყვეტილებაა.,Root is წყვეტს (decides/cuts).
 already,already,already,Already,adverb,უკვე,general,1,general,I already know.,უკვე ვიცი.,
 still,still,still,Still / Yet,adverb,ჯერ კიდევ,general,1,general,I am still here.,ჯერ კიდევ აქ ვარ.,
 around,around,around,Around,preposition,ირგვლივ,general,1,general,Look around.,ირგვლივ მიმოიხედე.,Root is რგოლი (ring/circle).
@@ -1669,6 +1662,12 @@ arrive_come_down,arrive_come_down_p3s,arrive_come_down,He/She/It arrives,verb-p3
 arrive_come_down,arrive_come_down_p1p,arrive_come_down,We arrive,verb-p1p,ჩამოვდივართ,verb,1,general,We arrive together.,ერთად ჩამოვდივართ.,
 arrive_come_down,arrive_come_down_p2p,arrive_come_down,You (pl) arrive,verb-p2p,ჩამოდიხართ,verb,1,general,When do you arrive?,როდის ჩამოდიხართ?,
 arrive_come_down,arrive_come_down_p3p,arrive_come_down,They arrive,verb-p3p,ჩამოდიან,verb,1,general,They arrive soon.,მალე ჩამოდიან.,
+prefer,prefer,prefer,to prefer,verb,მირჩევნია,verb,1,general,I prefer tea.,ჩაი მირჩევნია.,Static verb (like 'I like').
+interrupt,interrupt_inf,interrupt,to interrupt,verb-inf,გაწყვეტინება,verb,1,general,Sorry to interrupt.,ბოდიში რომ გაწყვეტინებ.,Literally 'to make someone break/stop'.
+celebrate,celebrate_inf,celebrate,to celebrate,verb-inf,ზეიმი,verb,1,general,We will celebrate.,ვიზეიმებთ.,
+wait_moment,wait_moment,wait_moment,Moment / Minute,noun,წუთი,time,1,general,One moment.,ერთი წუთი.,
+lottery,lottery,lottery,Lottery,noun,ლატარია,society,1,general,I won the lottery.,ლატარიაში მოვიგე.,
+meet_introduce,meet_introduce_inf,meet_introduce,to meet / introduce,verb-inf,გაცნობა,verb,1,general,Nice to meet you.,სასიამოვნოა გაცნობა.,Root is ცნობა (knowing).
 recommend,recommend_inf,recommend,to recommend / advise,verb-inf,რჩევა,verb,1,general,What do you recommend?,რას მირჩევთ?,Also the noun for 'Advice'.
 recommend,recommend_p1s,recommend,I recommend,verb-p1s,გირჩევ,verb,1,general,I recommend this wine.,ამ ღვინოს გირჩევ.,(Note: Conjugation often includes object marker 'g-' for 'to you').
 recommend,recommend_p2s,recommend,You recommend,verb-p2s,მირჩევ,verb,1,general,You recommend me.,შენ მე მირჩევ.,
@@ -1676,6 +1675,13 @@ recommend,recommend_p3s,recommend,He/She/It recommends,verb-p3s,გვირჩ�
 recommend,recommend_p1p,recommend,We recommend,verb-p1p,გირჩევთ,verb,1,general,We recommend it.,ამას გირჩევთ.,
 recommend,recommend_p2p,recommend,You (pl) recommend,verb-p2p,გვირჩევთ,verb,1,general,What do you recommend?,რას გვირჩევთ?,
 recommend,recommend_p3p,recommend,They recommend,verb-p3p,გვირჩევენ,verb,1,general,They recommend the fish.,თევზს გვირჩევენ.,
+soul,soul,soul,Soul / Spirit,noun,სული,abstract,1,general,I have one soul (I can't wait).,ერთი სული მაქვს.,Also means 'breath'.
+continue,continue_inf,continue,to continue,verb-inf,გაგრძელება,verb,1,general,Please continue.,გააგრძელე.,Root is გრძელი (long).
+bet,bet,bet,You bet! (Of course),interjection,აბა რა,phrase,1,general,You bet!,აბა რა!,Colloquial phrase meaning 'What else?' or 'Naturally'.
+honest,honest,honest,Honest / True,adjective,მართალი,adjective,1,general,To be honest.,მართალი რომ გითხრა.,Root of სიმართლე (truth).
+pity_sad,pity_sad,pity_sad,Pity / Sad,adjective,სამწუხარო,adjective,1,general,What a pity.,რა სამწუხაროა.,Root is წუხილი (sorrow/worry).
+short_brief,short_brief,short_brief,Short / Brief,adjective,მოკლე,adjective,1,general,In short.,მოკლედ.,
+sneeze,sneeze_inf,sneeze,to sneeze,verb-inf,დაცემინება,verb,1,general,He sneezed.,დააცემინა.,
 browse,browse_inf,browse,to look around / browse,verb-inf,დათვალიერება,verb,1,general,I am just browsing.,უბრალოდ ვათვალიერებ.,Root is თვალი (eye).
 browse,browse_p1s,browse,I browse,verb-p1s,ვათვალიერებ,verb,1,general,I browse the shop.,მაღაზიას ვათვალიერებ.,
 browse,browse_p2s,browse,You browse,verb-p2s,ათვალიერებ,verb,1,general,You browse the web.,ინტერნეტს ათვალიერებ.,
@@ -1683,28 +1689,13 @@ browse,browse_p3s,browse,He/She/It browses,verb-p3s,ათვალიერე�
 browse,browse_p1p,browse,We browse,verb-p1p,ვათვალიერებთ,verb,1,general,We browse together.,ერთად ვათვალიერებთ.,
 browse,browse_p2p,browse,You (pl) browse,verb-p2p,ათვალიერებთ,verb,1,general,You browse the museum.,მუზეუმს ათვალიერებთ.,
 browse,browse_p3p,browse,They browse,verb-p3p,ათვალიერებენ,verb,1,general,They browse the market.,ბაზარს ათვალიერებენ.,
-try_on,try_on_inf,try_on,to try on (clothes),verb-inf,მოზომება,verb,1,general,Can I try it on?,შეიძლება მოვიზომო?,Specific to clothes/fitting.
-try_on,try_on_p1s,try_on,I try on,verb-p1s,ვიზომებ,verb,1,general,I try on the shoes.,ფეხსაცმელს ვიზომებ.,
-try_on,try_on_p2s,try_on,You try on,verb-p2s,იზომებ,verb,1,general,You try on the coat.,პალტოს იზომებ.,
-try_on,try_on_p3s,try_on,He/She/It tries on,verb-p3s,იზომებს,verb,1,general,She tries on the hat.,ქუდს იზომებს.,
-try_on,try_on_p1p,try_on,We try on,verb-p1p,ვიზომებთ,verb,1,general,We try on clothes.,ტანსაცმელს ვიზომებთ.,
-try_on,try_on_p2p,try_on,You (pl) try on,verb-p2p,იზომებთ,verb,1,general,Do you try it on?,იზომებთ ამას?,
-try_on,try_on_p3p,try_on,They try on,verb-p3p,იზომებენ,verb,1,general,They try on everything.,ყველაფერს იზომებენ.,
-prefer,prefer,prefer,to prefer,verb,მირჩევნია,verb,1,general,I prefer tea.,ჩაი მირჩევნია.,Static verb (like 'I like').
-interrupt,interrupt_inf,interrupt,to interrupt,verb-inf,გაწყვეტინება,verb,1,general,Sorry to interrupt.,ბოდიში რომ გაწყვეტინებ.,Literally 'to make someone break/stop'.
-celebrate,celebrate_inf,celebrate,to celebrate,verb-inf,ზეიმი,verb,1,general,We will celebrate.,ვიზეიმებთ.,
-wait_moment,wait_moment,wait_moment,Moment / Minute,noun,წუთი,time,1,general,One moment.,ერთი წუთი.,
-lottery,lottery,lottery,Lottery,noun,ლატარია,society,1,general,I won the lottery.,ლატარიაში მოვიგე.,
-meet_introduce,meet_introduce_inf,meet_introduce,to meet / introduce,verb-inf,გაცნობა,verb,1,general,Nice to meet you.,სასიამოვნოა გაცნობა.,Root is ცნობა (knowing).
-continue,continue_inf,continue,to continue,verb-inf,გაგრძელება,verb,1,general,Please continue.,გააგრძელე.,Root is გრძელი (long).
-bet,bet,bet,You bet! (Of course),interjection,აბა რა,phrase,1,general,You bet!,აბა რა!,Colloquial phrase meaning 'What else?' or 'Naturally'.
-honest,honest,honest,Honest / True,adjective,მართალი,adjective,1,general,To be honest.,მართალი რომ გითხრა.,Root of სიმართლე (truth).
-pity_sad,pity_sad,pity_sad,Pity / Sad,adjective,სამწუხარო,adjective,1,general,What a pity.,რა სამწუხაროა.,Root is წუხილი (sorrow/worry).
-short_brief,short_brief,short_brief,Short / Brief,adjective,მოკლე,adjective,1,general,In short.,მოკლედ.,
-sneeze,sneeze_inf,sneeze,to sneeze,verb-inf,დაცემინება,verb,1,general,He sneezed.,დააცემინა.,
 bless,bless_inf,bless,to bless,verb-inf,დალოცვა,verb,1,general,God bless you.,ღმერთმა დაგლოცოს.,Root is ლოცვა (prayer).
 health,health,health,Health,noun,ჯანმრთელობა,abstract,1,general,To your health!,ჯანმრთელობა!,Root is ჯანი (vigor/strength).
 knowledge,knowledge,knowledge,Knowledge,noun,ცოდნა,abstract,1,general,As far as I know.,რამდენადაც ვიცი (As much as my knowledge).,Verb is ვიცი (I know).
+exclude,exclude_inf,exclude,to exclude,verb-inf,გამორიცხვა,verb,1,general,It is not excluded (possible).,არ არის გამორიცხული.,Root is რიცხვი (number).
+end_final,end_final,end_final,End / Final,noun,ბოლო,abstract,1,general,At the end.,ბოლოს.,
+middle,middle,middle,Middle,noun,შუა,location,1,general,In the middle.,შუაში.,Root of შუადღე (noon/midday).
+sense,sense,sense,Sense / Meaning,noun,აზრი,abstract,1,general,It makes no sense.,აზრი არ აქვს (It has no thought/point).,Same word as 'Idea'.
 rest_relax,rest_relax_inf,rest_relax,to rest / relax,verb-inf,დასვენება,verb,1,general,Time to rest.,დასვენების დროა.,
 rest_relax,rest_relax_p1s,rest_relax,I rest,verb-p1s,ვისვენებ,verb,1,general,I rest at home.,სახლში ვისვენებ.,
 rest_relax,rest_relax_p2s,rest_relax,You rest,verb-p2s,ისვენებ,verb,1,general,You rest today.,დღეს ისვენებ.,
@@ -1712,8 +1703,17 @@ rest_relax,rest_relax_p3s,rest_relax,He/She/It rests,verb-p3s,ისვენე
 rest_relax,rest_relax_p1p,rest_relax,We rest,verb-p1p,ვისვენებთ,verb,1,general,We rest in summer.,ზაფხულში ვისვენებთ.,
 rest_relax,rest_relax_p2p,rest_relax,You (pl) rest,verb-p2p,ისვენებთ,verb,1,general,Where do you rest?,სად ისვენებთ?,
 rest_relax,rest_relax_p3p,rest_relax,They rest,verb-p3p,ისვენებენ,verb,1,general,They rest well.,კარგად ისვენებენ.,
-exclude,exclude_inf,exclude,to exclude,verb-inf,გამორიცხვა,verb,1,general,It is not excluded (possible).,არ არის გამორიცხული.,Root is რიცხვი (number).
-end_final,end_final,end_final,End / Final,noun,ბოლო,abstract,1,general,At the end.,ბოლოს.,
-middle,middle,middle,Middle,noun,შუა,location,1,general,In the middle.,შუაში.,Root of შუადღე (noon/midday).
-sense,sense,sense,Sense / Meaning,noun,აზრი,abstract,1,general,It makes no sense.,აზრი არ აქვს (It has no thought/point).,Same word as 'Idea'.
-soul,soul,soul,Soul / Spirit,noun,სული,abstract,1,general,I have one soul (I can't wait).,ერთი სული მაქვს.,Also means 'breath'.
+try_on,try_on_inf,try_on,to try on (clothes),verb-inf,მოზომება,verb,1,general,Can I try it on?,შეიძლება მოვიზომო?,Specific to clothes/fitting.
+try_on,try_on_p1s,try_on,I try on,verb-p1s,ვიზომებ,verb,1,general,I try on the shoes.,ფეხსაცმელს ვიზომებ.,
+try_on,try_on_p2s,try_on,You try on,verb-p2s,იზომებ,verb,1,general,You try on the coat.,პალტოს იზომებ.,
+try_on,try_on_p3s,try_on,He/She/It tries on,verb-p3s,იზომებს,verb,1,general,She tries on the hat.,ქუდს იზომებს.,
+try_on,try_on_p1p,try_on,We try on,verb-p1p,ვიზომებთ,verb,1,general,We try on clothes.,ტანსაცმელს ვიზომებთ.,
+try_on,try_on_p2p,try_on,You (pl) try on,verb-p2p,იზომებთ,verb,1,general,Do you try it on?,იზომებთ ამას?,
+try_on,try_on_p3p,try_on,They try on,verb-p3p,იზომებენ,verb,1,general,They try on everything.,ყველაფერს იზომებენ.,
+send,send_inf,send,to send,verb-inf,გაგზავნა,verb,1,verbs,I need to send it.,ამის გაგზავნა მჭირდება.,Root is გზა (road).
+send,send_p1s,send,I send,verb-p1s,ვაგზავნი,verb,1,verbs,I send a letter.,წერილს ვაგზავნი.,
+send,send_p2s,send,You send,verb-p2s,აგზავნი,verb,1,verbs,You send a message.,შეტყობინებას აგზავნი.,
+send,send_p3s,send,He/She/It sends,verb-p3s,აგზავნის,verb,1,verbs,He sends money.,ფულს აგზავნის.,
+send,send_p1p,send,We send,verb-p1p,ვაგზავნით,verb,1,verbs,We send gifts.,საჩუქრებს ვაგზავნით.,
+send,send_p2p,send,You (pl) send,verb-p2p,აგზავნით,verb,1,verbs,Where do you send it?,სად აგზავნით?,
+send,send_p3p,send,They send,verb-p3p,აგზავნიან,verb,1,verbs,They send an email.,მეილს აგზავნიან.,
