@@ -113,9 +113,8 @@ export default function MorphologyPage() {
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 text-center">
-            Georgian uses prefixes, suffixes, and circumfixes to modify word meanings. Learning these markers helps you understand and construct words.
-          </p>
+          <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 text-left">
+            Georgian uses prefixes, suffixes, and circumfixes to modify word meanings. Learning these markers helps you remember, understand, and build words much easier. Importantly, they work best as general patterns rather than strict rules. Preverbs are a good example: their directional meaning shows up mainly with motion verbs, while in most other verbs they are just part of how the verb forms its tenses. I will make a dedicated preverb page and practice deck in the future.</p>
           <Link
             href="/morphology/deck"
             className="flex items-center justify-center gap-2 w-full sm:w-auto sm:mx-auto px-6 py-3
@@ -126,11 +125,13 @@ export default function MorphologyPage() {
           </Link>
         </div>
 
+        <div className="h-8"></div>
+
         {/* Mobile Cards */}
         <div className="md:hidden space-y-6">
           {Array.from(groupedMarkers.entries()).map(([type, typeMarkers]) => (
             <div key={type}>
-              <h2 className={`text-sm font-medium px-3 py-1.5 rounded-lg mb-3 border ${getMarkerTypeColor(type)}`}>
+              <h2 className={`text-lg border-b font-semibold px-3 py-3 rounded-t-lg mb-3   ${getMarkerTypeColor(type)}`}>
                 {type}
               </h2>
               <div className="space-y-3">
@@ -141,7 +142,7 @@ export default function MorphologyPage() {
                     <div key={index} className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
                       <div className="flex items-center gap-4">
                         <div className="flex flex-col items-center justify-center">
-                          <span className="text-3xl px-2">{marker.marker}</span>
+                          <span className="text-2xl px-2">{marker.marker}</span>
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-base text-gray-200 mb-2">{marker.meaning}</p>
@@ -170,10 +171,10 @@ export default function MorphologyPage() {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden md:block space-y-8">
+        <div className="hidden md:block space-y-8 ">
           {Array.from(groupedMarkers.entries()).map(([type, typeMarkers]) => (
             <div key={type}>
-              <h2 className={`text-sm font-medium px-3 py-1.5 rounded-lg mb-3 inline-block border ${getMarkerTypeColor(type)}`}>
+              <h2 className={`text-lg border-b font-semibold px-3 py-3 rounded-t-lg mb-3  ${getMarkerTypeColor(type)}`}>
                 {type}
               </h2>
               <div className="overflow-x-auto">
