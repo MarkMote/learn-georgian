@@ -46,6 +46,14 @@ function getEquivalentIcon(equiv: string) {
 export default function AlphabetPage() {
   const [letters, setLetters] = useState<AlphabetData[]>([]);
 
+  // Reset body scroll styles (in case deck page disabled them)
+  useEffect(() => {
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+    document.body.style.overflow = '';
+  }, []);
+
   useEffect(() => {
     fetch("/alphabet.csv")
       .then((res) => res.text())

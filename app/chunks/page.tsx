@@ -43,6 +43,14 @@ export default function ChunkHomePage() {
   const [allChunks, setAllChunks] = useState<ChunkData[]>([]);
   const [chunkCount, setChunkCount] = useState<number>(0);
 
+  // Reset body scroll styles (in case deck page disabled them)
+  useEffect(() => {
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+    document.body.style.overflow = '';
+  }, []);
+
   useEffect(() => {
     fetch("/chunks.csv")
       .then((res) => res.text())

@@ -70,6 +70,14 @@ function groupByType(markers: MorphologyData[]): Map<string, MorphologyData[]> {
 export default function MorphologyPage() {
   const [markers, setMarkers] = useState<MorphologyData[]>([]);
 
+  // Reset body scroll styles (in case deck page disabled them)
+  useEffect(() => {
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+    document.body.style.overflow = '';
+  }, []);
+
   useEffect(() => {
     fetch("/morphology.csv")
       .then((res) => res.text())
