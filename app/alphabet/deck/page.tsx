@@ -100,7 +100,7 @@ export default function AlphabetDeckPage() {
         </button>
 
         <div className="text-sm text-center">
-          <div>Letters: {letterProgress.unlocked}/{letterProgress.total}</div>
+          <div>Letters: {letterProgress.unlocked}/33</div>
         </div>
 
         <button

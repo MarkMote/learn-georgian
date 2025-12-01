@@ -350,14 +350,9 @@ export default function AdminImagesPage() {
                     {words.map((word, idx) => (
                       <div key={idx} className="text-sm text-gray-300 flex gap-2">
                         <span className="text-gray-500">#{idx + 1}</span>
-                        <span>{word.georgian}</span>
+                        <span>{word.GeorgianWord}</span>
                         <span className="text-gray-500">→</span>
-                        <span>{word.english}</span>
-                        {word.chunk && (
-                          <span className="text-gray-600 text-xs">
-                            (chunk: {word.chunk})
-                          </span>
-                        )}
+                        <span>{word.EnglishWord}</span>
                       </div>
                     ))}
                   </div>
