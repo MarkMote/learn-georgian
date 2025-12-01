@@ -135,6 +135,14 @@ export default function ReviewHomePage() {
   const [chunkCount, setChunkCount] = useState<number>(0);
   const [chunkProgress, setChunkProgress] = useState<Map<number, ChunkProgress>>(new Map());
 
+  // Reset body scroll styles (in case review page disabled them)
+  useEffect(() => {
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+    document.body.style.overflow = '';
+  }, []);
+
   useEffect(() => {
     fetch("/words.csv")
       .then((res) => res.text())

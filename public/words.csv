@@ -1291,6 +1291,13 @@ find,find_p3s,find,He/She/It finds,verb-p3s,ის პოულობს,verb,2,
 find,find_p1p,find,We find,verb-p1p,ჩვენ ვპოულობთ,verb,2,verbs,We find beauty everywhere.,ჩვენ სილამაზეს ყველგან ვპოულობთ.,
 find,find_p2p,find,You (pl) find,verb-p2p,თქვენ პოულობთ,verb,2,verbs,You (pl) find the answers.,თქვენ პასუხებს პოულობთ.,
 find,find_p3p,find,They find,verb-p3p,ისინი პოულობენ,verb,2,verbs,They find the hidden treasure.,ისინი დამალულ განძს პოულობენ.,
+dangerous,dangerous,dangerous,Dangerous,adjective,საშიში,adjective,1,general,It is dangerous here.,აქ საშიშია.,Root is შიში (fear).
+safe,safe,safe,Safe,adjective,უსაფრთხო,adjective,1,general,Safe place.,უსაფრთხო ადგილი.,Literally 'without danger'.
+possibility,possibility,possibility,Possibility,noun,შესაძლებლობა,abstract,1,general,Good possibility.,კარგი შესაძლებლობა.,Related to შეძლება (to be able).
+culture,culture,culture,Culture,noun,კულტურა,abstract,1,general,Ancient culture.,უძველესი კულტურა.,
+history,history,history,History,noun,ისტორია,abstract,1,general,Georgian history.,საქართველოს ისტორია.,
+information,information,information,Information,noun,ინფორმაცია,abstract,1,general,I need information.,ინფორმაცია მჭირდება.,
+quality,quality,quality,Quality,noun,ხარისხი,abstract,1,general,High quality.,მაღალი ხარისხი.,
 fall_inf,fall_inf,fall_inf,to fall,verb-inf,ვარდნა,verb,2,verbs,The leaves begin to fall.,ფოთლები იწყებს ცვენას (ვარდნას).,
 fall,fall_p1s,fall_inf,I fall,verb-p1s,მე ვვარდები,verb,2,verbs,I fall on the ice.,მე ყინულზე ვვარდები.,
 fall,fall_p2s,fall_inf,You fall,verb-p2s,შენ ვარდები,verb,2,verbs,"Be careful, you will fall.","ფრთხილად, დავარდები.",
@@ -1612,13 +1619,6 @@ reason,reason,reason,Reason,noun,მიზეზი,abstract,1,general,What is t
 goal,goal,goal,Goal / Aim,noun,მიზანი,abstract,1,general,My main goal.,ჩემი მთავარი მიზანი.,Target or purpose.
 noise,noise,noise,Noise,noun,ხმაური,abstract,1,general,Too much noise.,ძალიან დიდი ხმაურია.,Root is ხმა (voice/sound).
 silence,silence,silence,Silence,noun,სიჩუმე,abstract,1,general,I like silence.,სიჩუმე მიყვარს.,Root is ჩუმი (silent/quiet).
-dangerous,dangerous,dangerous,Dangerous,adjective,საშიში,adjective,1,general,It is dangerous here.,აქ საშიშია.,Root is შიში (fear).
-safe,safe,safe,Safe,adjective,უსაფრთხო,adjective,1,general,Safe place.,უსაფრთხო ადგილი.,Literally 'without danger'.
-possibility,possibility,possibility,Possibility,noun,შესაძლებლობა,abstract,1,general,Good possibility.,კარგი შესაძლებლობა.,Related to შეძლება (to be able).
-culture,culture,culture,Culture,noun,კულტურა,abstract,1,general,Ancient culture.,უძველესი კულტურა.,
-history,history,history,History,noun,ისტორია,abstract,1,general,Georgian history.,საქართველოს ისტორია.,
-information,information,information,Information,noun,ინფორმაცია,abstract,1,general,I need information.,ინფორმაცია მჭირდება.,
-quality,quality,quality,Quality,noun,ხარისხი,abstract,1,general,High quality.,მაღალი ხარისხი.,
 quantity,quantity,quantity,Quantity,noun,რაოდენობა,abstract,1,general,Large quantity.,დიდი რაოდენობა.,Root is რამდენი (how much).
 only,only,only,Only,adverb,მხოლოდ,general,1,general,Only one person.,მხოლოდ ერთი ადამიანი.,
 then_after,then_after,then_after,Then / After,adverb,მერე,general,1,general,What happened then?,მერე რა მოხდა?,Colloquial way to say 'after that'.
