@@ -1,54 +1,162 @@
 // lib/spacedRepetition/selectNextCard.ts
 
-import { CardState, DeckState, WordData, SRSConfig } from './types';
-import { calculateRisk } from './lib/calculateRisk';
+import { CardState, DeckState, WordData, SRSConfig, SelectNextCardResult } from './types';
 
 /**
- * Select next card to show (highest risk)
+ * Select next card using Leitner-style queue management
+ *
+ * Priority:
+ * 1. Learning cards whose step is due (must show other cards between repeats)
+ * 2. Review cards that are due (FSRS scheduled)
+ * 3. Practice mode - review non-due cards if nothing else to do
+ *
+ * Introduction:
+ * - Introduce new card when learning box has fewer than targetLearningCount cards
  */
 export function selectNextCard(
   cardStates: Map<string, CardState>,
   deckState: DeckState,
   availableWords: WordData[],
   config: SRSConfig,
+  recentCardKeys: string[] = [],  // For interleaving - recently shown cards
   filterPredicate?: (word: WordData) => boolean
-): { nextCardKey: string | null; shouldIntroduceNew: boolean } {
+): SelectNextCardResult {
+  const now = new Date();
 
-  if (cardStates.size === 0) {
-    return { nextCardKey: null, shouldIntroduceNew: true };
-  }
+  // Build word lookup map for efficiency
+  const wordByKey = new Map(availableWords.map(w => [w.key, w]));
+  const recentSet = new Set(recentCardKeys);
 
-  // Calculate risks for all cards
-  const cardRisks: Array<{ key: string; risk: number }> = [];
+  // Partition cards into queues
+  const learningDue: Array<{ key: string; stepDue: Date }> = [];
+  const reviewDue: Array<{ key: string; due: Date }> = [];
+  const practiceCards: Array<{ key: string; stability: number }> = [];
+  let learningCount = 0;
 
-  cardStates.forEach((cardState) => {
+  cardStates.forEach((cardState, key) => {
     // Check if word passes filter
-    const word = availableWords.find(w => w.key === cardState.key);
+    const word = wordByKey.get(key);
     if (!word || (filterPredicate && !filterPredicate(word))) {
       return; // Skip filtered cards
     }
 
-    const daysSinceReview = deckState.currentStep - cardState.lastReviewStep;
-    const risk = calculateRisk(cardState.stability, daysSinceReview, config.beta);
-    cardRisks.push({ key: cardState.key, risk });
+    if (cardState.phase === 'learning') {
+      learningCount++;
+      const stepDue = new Date(cardState.stepDue);
+      if (stepDue <= now) {
+        learningDue.push({ key, stepDue });
+      }
+    } else if (cardState.phase === 'review' || cardState.phase === 'graduated') {
+      const due = new Date(cardState.due);
+      if (due <= now) {
+        reviewDue.push({ key, due });
+      } else {
+        // Not due - available for practice
+        practiceCards.push({ key, stability: cardState.stability });
+      }
+    }
   });
 
-  if (cardRisks.length === 0) {
-    return { nextCardKey: null, shouldIntroduceNew: true };
+  // Sort queues
+  learningDue.sort((a, b) => a.stepDue.getTime() - b.stepDue.getTime());
+  reviewDue.sort((a, b) => a.due.getTime() - b.due.getTime());
+  practiceCards.sort((a, b) => a.stability - b.stability); // Weakest first
+
+  // Determine if we need to introduce a new card
+  const allIntroduced = cardStates.size >= availableWords.length;
+  const shouldIntroduceNew = !allIntroduced && learningCount < config.targetLearningCount;
+
+  // Helper to filter out recent cards (for interleaving)
+  const filterRecent = <T extends { key: string }>(cards: T[]): T[] => {
+    const filtered = cards.filter(c => !recentSet.has(c.key));
+    // If all cards are recent, return original list (will pick oldest from recent)
+    return filtered.length > 0 ? filtered : cards;
+  };
+
+  // Case 1: Learning cards due (with interleaving)
+  if (learningDue.length > 0) {
+    const candidates = filterRecent(learningDue);
+    if (candidates.length > 0) {
+      return {
+        nextCardKey: candidates[0].key,
+        shouldIntroduceNew,
+        source: 'learning',
+        allComplete: false,
+      };
+    }
   }
 
-  // Sort by risk (highest first)
-  cardRisks.sort((a, b) => b.risk - a.risk);
+  // Case 2: Review cards due
+  if (reviewDue.length > 0) {
+    const candidates = filterRecent(reviewDue);
+    if (candidates.length > 0) {
+      return {
+        nextCardKey: candidates[0].key,
+        shouldIntroduceNew,
+        source: 'review',
+        allComplete: false,
+      };
+    }
+  }
 
-  const highestRisk = cardRisks[0].risk;
+  // Case 3: If we should introduce a new card and nothing else is due, signal it
+  if (shouldIntroduceNew) {
+    return {
+      nextCardKey: null,
+      shouldIntroduceNew: true,
+      source: 'new',
+      allComplete: false,
+    };
+  }
 
-  // Always introduce new cards until we have at least 3
-  const shouldIntroduceNew = cardStates.size < 3 ||
-    highestRisk < config.riskThreshold ||
-    deckState.consecutiveEasyCount >= config.maxConsecutiveEasy;
+  // Case 4: Practice mode - no due cards, review weakest
+  if (practiceCards.length > 0) {
+    const candidates = filterRecent(practiceCards);
+    if (candidates.length > 0) {
+      return {
+        nextCardKey: candidates[0].key,
+        shouldIntroduceNew: false,
+        source: 'practice',
+        allComplete: false,
+      };
+    }
+  }
 
+  // Case 5: Learning cards exist but not yet due (waiting)
+  // Pick the one that will be due soonest
+  if (learningDue.length === 0 && learningCount > 0) {
+    // Find the learning card with earliest stepDue
+    let earliestKey: string | null = null;
+    let earliestDue: Date | null = null;
+
+    cardStates.forEach((cardState, key) => {
+      const word = wordByKey.get(key);
+      if (!word || (filterPredicate && !filterPredicate(word))) return;
+
+      if (cardState.phase === 'learning') {
+        const stepDue = new Date(cardState.stepDue);
+        if (!earliestDue || stepDue < earliestDue) {
+          earliestDue = stepDue;
+          earliestKey = key;
+        }
+      }
+    });
+
+    if (earliestKey) {
+      return {
+        nextCardKey: earliestKey,
+        shouldIntroduceNew,
+        source: 'learning',
+        allComplete: false,
+      };
+    }
+  }
+
+  // Case 6: Nothing to do - all complete!
   return {
-    nextCardKey: cardRisks[0].key,
-    shouldIntroduceNew: shouldIntroduceNew && cardStates.size < availableWords.length
+    nextCardKey: null,
+    shouldIntroduceNew: false,
+    source: 'practice',
+    allComplete: true,
   };
 }

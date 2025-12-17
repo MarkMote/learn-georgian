@@ -2,7 +2,13 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { ChunkData, KnownChunkState, DifficultyRating, ReviewMode, ExampleMode, ExplanationMode } from "../types";
-import { WordData, CardState, DeckState, Grade } from "../../../../lib/spacedRepetition/types";
+import {
+  WordData,
+  CardState,
+  DeckState,
+  Grade,
+  SelectNextCardResult,
+} from "../../../../lib/spacedRepetition/types";
 import {
   initializeDeck,
   updateStateOnGrade,
@@ -11,6 +17,7 @@ import {
   calculateDeckStats,
 } from "../../../../lib/spacedRepetition";
 import { getMergedConfig } from "../../../../lib/spacedRepetition/lib/configManager";
+import { createCardState } from "../../../../lib/spacedRepetition/lib/fsrs";
 
 // Convert ChunkData to WordData format
 function chunkToWordData(chunk: ChunkData): WordData {
@@ -41,7 +48,7 @@ function difficultyToGrade(difficulty: DifficultyRating): Grade {
 
 // Storage helpers
 function getStorageKey(chunkId: string, mode: string): string {
-  return `srs_chunks_${chunkId}_${mode}`;
+  return `srs_chunks_v3_${chunkId}_${mode}`;  // v3 for learning box format
 }
 
 function saveState(chunkId: string, mode: string, cardStates: Map<string, CardState>, deckState: DeckState) {
@@ -50,7 +57,8 @@ function saveState(chunkId: string, mode: string, cardStates: Map<string, CardSt
   try {
     const data = {
       cardStates: Object.fromEntries(cardStates),
-      deckState
+      deckState,
+      version: 3,
     };
     localStorage.setItem(getStorageKey(chunkId, mode), JSON.stringify(data));
   } catch (error) {
@@ -58,7 +66,11 @@ function saveState(chunkId: string, mode: string, cardStates: Map<string, CardSt
   }
 }
 
-function loadState(chunkId: string, mode: string): { cardStates: Map<string, CardState>; deckState: DeckState } | null {
+function loadState(
+  chunkId: string,
+  mode: string,
+  totalAvailable: number
+): { cardStates: Map<string, CardState>; deckState: DeckState } | null {
   if (typeof window === 'undefined') return null;
 
   try {
@@ -66,6 +78,23 @@ function loadState(chunkId: string, mode: string): { cardStates: Map<string, Car
     if (!stored) return null;
 
     const data = JSON.parse(stored);
+
+    // Only load v3 format - older formats will be reset
+    if (data.version !== 3) {
+      console.log("Old SRS format detected, resetting progress for new learning box system");
+      return null;
+    }
+
+    // Validate that cards have the new fields
+    const firstCardKey = Object.keys(data.cardStates)[0];
+    if (firstCardKey) {
+      const firstCard = data.cardStates[firstCardKey];
+      if (!('phase' in firstCard) || !('learningStep' in firstCard)) {
+        console.log("Card format missing learning box fields, resetting");
+        return null;
+      }
+    }
+
     return {
       cardStates: new Map(Object.entries(data.cardStates)),
       deckState: data.deckState
@@ -82,6 +111,10 @@ export interface UseChunkStateReturn {
   knownChunks: KnownChunkState[];
   currentIndex: number;
   cognitiveLoad: number;
+
+  // Learning box state
+  source: SelectNextCardResult['source'];
+  allComplete: boolean;
 
   // UI state
   isFlipped: boolean;
@@ -128,11 +161,26 @@ export function useChunkState(
   // Core SRS state
   const [cardStates, setCardStates] = useState<Map<string, CardState>>(new Map());
   const [deckState, setDeckState] = useState<DeckState>(() => ({
-    currentStep: 0,
     currentCardKey: null,
-    consecutiveEasyCount: 0,
-    stats: { averageRisk: 0, cardsAtRisk: 0 }
+    stats: {
+      dueCount: 0,
+      learningCount: 0,
+      graduatedCount: 0,
+      totalIntroduced: 0,
+      totalAvailable: 0,
+    },
   }));
+
+  // Recent cards for interleaving (not persisted - session only)
+  const [recentCardKeys, setRecentCardKeys] = useState<string[]>([]);
+
+  // Selection state
+  const [selectionResult, setSelectionResult] = useState<SelectNextCardResult>({
+    nextCardKey: null,
+    shouldIntroduceNew: false,
+    source: 'new',
+    allComplete: false,
+  });
 
   // UI state
   const [isFlipped, setIsFlipped] = useState(false);
@@ -146,21 +194,70 @@ export function useChunkState(
   useEffect(() => {
     if (availableWords.length === 0) return;
 
-    const saved = loadState(chunkId, reviewMode);
+    const availableKeys = new Set(availableWords.map(w => w.key));
+    const saved = loadState(chunkId, reviewMode, availableWords.length);
+
+    // Check if saved state is compatible with current availableWords
+    let useSaved = false;
     if (saved) {
-      setCardStates(saved.cardStates);
-      setDeckState(prev => ({
+      const validCardCount = Array.from(saved.cardStates.keys()).filter(key => availableKeys.has(key)).length;
+      useSaved = validCardCount > 0;
+
+      if (!useSaved) {
+        console.log('Saved SRS state incompatible with current words, reinitializing...');
+        try {
+          localStorage.removeItem(getStorageKey(chunkId, reviewMode));
+        } catch (e) {
+          console.warn('Failed to clear incompatible state:', e);
+        }
+      }
+    }
+
+    if (useSaved && saved) {
+      // Filter cardStates to only include cards that exist in availableWords
+      const filteredCardStates = new Map<string, CardState>();
+      saved.cardStates.forEach((cardState, key) => {
+        if (availableKeys.has(key)) {
+          filteredCardStates.set(key, cardState);
+        }
+      });
+
+      setCardStates(filteredCardStates);
+      const stats = calculateDeckStats(filteredCardStates, availableWords.length);
+      const selection = selectNextCard(
+        filteredCardStates,
+        saved.deckState,
+        availableWords,
+        config,
+        []  // No recent cards on load
+      );
+
+      // Determine valid currentCardKey
+      let validCurrentKey: string | null = selection.nextCardKey;
+      if (!validCurrentKey && filteredCardStates.size > 0) {
+        validCurrentKey = Array.from(filteredCardStates.keys())[0];
+      }
+
+      setDeckState({
         ...saved.deckState,
-        stats: calculateDeckStats(saved.cardStates, saved.deckState, config)
-      }));
+        currentCardKey: validCurrentKey,
+        stats,
+      });
+      setSelectionResult(selection);
     } else {
       const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords, config);
       setCardStates(initialCards);
       setDeckState({
         ...initialDeck,
-        stats: calculateDeckStats(initialCards, initialDeck, config)
+        stats: calculateDeckStats(initialCards, availableWords.length),
       });
+
+      const selection = selectNextCard(initialCards, initialDeck, availableWords, config, []);
+      setSelectionResult(selection);
     }
+
+    // Reset recent cards on chunk/mode change
+    setRecentCardKeys([]);
   }, [chunkId, reviewMode, availableWords.length, config]);
 
   // Save state when it changes
@@ -185,11 +282,10 @@ export function useChunkState(
 
   // Handle scoring
   const handleScore = useCallback((difficulty: DifficultyRating) => {
-    if (!currentCardState) return;
+    if (!currentCardState || !deckState.currentCardKey) return;
 
     const grade = difficultyToGrade(difficulty);
 
-    // Update card and deck
     const { cardState: updatedCard, deckState: updatedDeck } = updateStateOnGrade(
       currentCardState,
       deckState,
@@ -197,27 +293,32 @@ export function useChunkState(
       config
     );
 
-    // Update card states
     const newCardStates = new Map(cardStates);
     newCardStates.set(updatedCard.key, updatedCard);
 
-    // Check if we should introduce a new card
-    const { nextCardKey, shouldIntroduceNew } = selectNextCard(
+    // Add current card to recent list (for interleaving)
+    const newRecentCards = [...recentCardKeys, deckState.currentCardKey];
+    const maxRecent = Math.max(config.minInterleaveCount + 2, 5);
+    if (newRecentCards.length > maxRecent) {
+      newRecentCards.shift();
+    }
+
+    const selection = selectNextCard(
       newCardStates,
       updatedDeck,
       availableWords,
-      config
+      config,
+      newRecentCards
     );
 
     let finalCardStates = newCardStates;
     let finalDeckState = updatedDeck;
 
-    if (shouldIntroduceNew) {
+    if (selection.shouldIntroduceNew) {
       const { cardStates: cardsWithNew, newCardKey } = introduceNewCard(
         newCardStates,
         updatedDeck,
-        availableWords,
-        config
+        availableWords
       );
 
       if (newCardKey) {
@@ -225,29 +326,28 @@ export function useChunkState(
         finalDeckState = {
           ...updatedDeck,
           currentCardKey: newCardKey,
-          consecutiveEasyCount: 0
         };
       } else {
         finalDeckState = {
           ...updatedDeck,
-          currentCardKey: nextCardKey
+          currentCardKey: selection.nextCardKey,
         };
       }
     } else {
       finalDeckState = {
         ...updatedDeck,
-        currentCardKey: nextCardKey
+        currentCardKey: selection.nextCardKey,
       };
     }
 
-    // Calculate updated stats
-    const newStats = calculateDeckStats(finalCardStates, finalDeckState, config);
+    const newStats = calculateDeckStats(finalCardStates, availableWords.length);
     finalDeckState.stats = newStats;
 
-    // Update state
     setCardStates(finalCardStates);
     setDeckState(finalDeckState);
-  }, [currentCardState, deckState, cardStates, availableWords, config]);
+    setSelectionResult(selection);
+    setRecentCardKeys(newRecentCards);
+  }, [currentCardState, deckState, cardStates, availableWords, config, recentCardKeys]);
 
   // Clear progress
   const clearProgress = useCallback(() => {
@@ -263,10 +363,13 @@ export function useChunkState(
     setCardStates(freshCards);
     setDeckState({
       ...freshDeck,
-      stats: calculateDeckStats(freshCards, freshDeck, config)
+      stats: calculateDeckStats(freshCards, availableWords.length),
     });
 
-    // Reset UI state
+    const selection = selectNextCard(freshCards, freshDeck, availableWords, config, []);
+    setSelectionResult(selection);
+    setRecentCardKeys([]);
+
     setIsFlipped(false);
     setRevealedExamples(new Set());
     setRevealedExplanations(new Set());
@@ -278,16 +381,20 @@ export function useChunkState(
       const chunk = chunkSet.find(c => c.chunk_key === key);
       if (!chunk) return null;
 
+      const daysSinceReview = cardState.last_review
+        ? Math.floor((Date.now() - new Date(cardState.last_review).getTime()) / (1000 * 60 * 60 * 24))
+        : 0;
+
       return {
         data: chunk,
         rating: 2,
-        lastSeen: deckState.currentStep - cardState.lastReviewStep,
-        interval: cardState.stability,
-        repetitions: cardState.reviewCount,
+        lastSeen: daysSinceReview,
+        interval: cardState.scheduled_days,
+        repetitions: cardState.reps,
         easeFactor: 2.5
       };
     }).filter(item => item !== null) as KnownChunkState[];
-  }, [cardStates, chunkSet, deckState.currentStep]);
+  }, [cardStates, chunkSet]);
 
   const currentIndex = knownChunks.findIndex(item => item.data.chunk_key === deckState.currentCardKey);
 
@@ -301,11 +408,20 @@ export function useChunkState(
     }
   }, [knownChunks]);
 
+  const cognitiveLoad = useMemo(() => {
+    if (deckState.stats.totalIntroduced === 0) return 0;
+    return deckState.stats.learningCount / deckState.stats.totalIntroduced;
+  }, [deckState.stats]);
+
   return {
     // Legacy format for UI
     knownChunks,
     currentIndex: Math.max(0, currentIndex),
-    cognitiveLoad: deckState.stats.averageRisk,
+    cognitiveLoad,
+
+    // Learning box state
+    source: selectionResult.source,
+    allComplete: selectionResult.allComplete,
 
     // UI state
     isFlipped,

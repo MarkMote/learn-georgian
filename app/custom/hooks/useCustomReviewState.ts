@@ -2,7 +2,13 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { CustomWord, CustomWordData, CustomReviewMode, CustomExampleMode } from "../types";
-import { WordData, CardState, DeckState, Grade } from "../../../lib/spacedRepetition/types";
+import {
+  WordData,
+  CardState,
+  DeckState,
+  Grade,
+  SelectNextCardResult,
+} from "../../../lib/spacedRepetition/types";
 import {
   initializeDeck,
   updateStateOnGrade,
@@ -11,6 +17,7 @@ import {
   calculateDeckStats,
 } from "../../../lib/spacedRepetition";
 import { getMergedConfig } from "../../../lib/spacedRepetition/lib/configManager";
+import { createCardState } from "../../../lib/spacedRepetition/lib/fsrs";
 
 // Convert CustomWord to WordData format
 function customWordToWordData(word: CustomWord): WordData {
@@ -43,7 +50,7 @@ function difficultyToGrade(difficulty: DifficultyRating): Grade {
 
 // Storage helpers
 function getStorageKey(mode: string): string {
-  return `srs_custom_${mode}`;
+  return `srs_custom_v3_${mode}`;  // v3 for learning box format
 }
 
 function saveState(mode: string, cardStates: Map<string, CardState>, deckState: DeckState) {
@@ -52,7 +59,8 @@ function saveState(mode: string, cardStates: Map<string, CardState>, deckState: 
   try {
     const data = {
       cardStates: Object.fromEntries(cardStates),
-      deckState
+      deckState,
+      version: 3,
     };
     localStorage.setItem(getStorageKey(mode), JSON.stringify(data));
   } catch (error) {
@@ -60,7 +68,10 @@ function saveState(mode: string, cardStates: Map<string, CardState>, deckState: 
   }
 }
 
-function loadState(mode: string): { cardStates: Map<string, CardState>; deckState: DeckState } | null {
+function loadState(
+  mode: string,
+  totalAvailable: number
+): { cardStates: Map<string, CardState>; deckState: DeckState } | null {
   if (typeof window === 'undefined') return null;
 
   try {
@@ -68,6 +79,23 @@ function loadState(mode: string): { cardStates: Map<string, CardState>; deckStat
     if (!stored) return null;
 
     const data = JSON.parse(stored);
+
+    // Only load v3 format - older formats will be reset
+    if (data.version !== 3) {
+      console.log("Old SRS format detected, resetting progress for new learning box system");
+      return null;
+    }
+
+    // Validate that cards have the new fields
+    const firstCardKey = Object.keys(data.cardStates)[0];
+    if (firstCardKey) {
+      const firstCard = data.cardStates[firstCardKey];
+      if (!('phase' in firstCard) || !('learningStep' in firstCard)) {
+        console.log("Card format missing learning box fields, resetting");
+        return null;
+      }
+    }
+
     return {
       cardStates: new Map(Object.entries(data.cardStates)),
       deckState: data.deckState
@@ -84,6 +112,10 @@ export interface UseCustomReviewStateReturn {
   knownWords: CustomWordData[];
   currentIndex: number;
   cognitiveLoad: number;
+
+  // Learning box state
+  source: SelectNextCardResult['source'];
+  allComplete: boolean;
 
   // UI state
   isFlipped: boolean;
@@ -127,11 +159,26 @@ export function useCustomReviewState(
   // Core SRS state
   const [cardStates, setCardStates] = useState<Map<string, CardState>>(new Map());
   const [deckState, setDeckState] = useState<DeckState>(() => ({
-    currentStep: 0,
     currentCardKey: null,
-    consecutiveEasyCount: 0,
-    stats: { averageRisk: 0, cardsAtRisk: 0 }
+    stats: {
+      dueCount: 0,
+      learningCount: 0,
+      graduatedCount: 0,
+      totalIntroduced: 0,
+      totalAvailable: 0,
+    },
   }));
+
+  // Recent cards for interleaving (not persisted - session only)
+  const [recentCardKeys, setRecentCardKeys] = useState<string[]>([]);
+
+  // Selection state
+  const [selectionResult, setSelectionResult] = useState<SelectNextCardResult>({
+    nextCardKey: null,
+    shouldIntroduceNew: false,
+    source: 'new',
+    allComplete: false,
+  });
 
   // UI state
   const [isFlipped, setIsFlipped] = useState(false);
@@ -144,45 +191,67 @@ export function useCustomReviewState(
   useEffect(() => {
     if (availableWords.length === 0) return;
 
-    const saved = loadState(reviewMode);
-    let shouldUseSaved = false;
+    const availableKeys = new Set(availableWords.map(w => w.key));
+    const saved = loadState(reviewMode, availableWords.length);
 
+    let useSaved = false;
     if (saved) {
-      // Validate that saved state has at least one card that exists in current availableWords
-      const availableWordKeys = new Set(availableWords.map(w => w.key));
-      const hasValidCards = Array.from(saved.cardStates.keys()).some(key =>
-        availableWordKeys.has(key)
-      );
+      const validCardCount = Array.from(saved.cardStates.keys()).filter(key => availableKeys.has(key)).length;
+      useSaved = validCardCount > 0;
 
-      shouldUseSaved = hasValidCards;
-
-      if (!hasValidCards) {
-        console.log('Saved SRS state is incompatible with current words, reinitializing...');
-        // Clear the invalid saved state
-        if (typeof window !== 'undefined') {
-          try {
-            localStorage.removeItem(getStorageKey(reviewMode));
-          } catch (error) {
-            console.warn("Failed to clear invalid SRS state:", error);
-          }
+      if (!useSaved) {
+        console.log('Saved SRS state incompatible with current custom words, reinitializing...');
+        try {
+          localStorage.removeItem(getStorageKey(reviewMode));
+        } catch (e) {
+          console.warn('Failed to clear incompatible state:', e);
         }
       }
     }
 
-    if (shouldUseSaved && saved) {
-      setCardStates(saved.cardStates);
-      setDeckState(prev => ({
+    if (useSaved && saved) {
+      const filteredCardStates = new Map<string, CardState>();
+      saved.cardStates.forEach((cardState, key) => {
+        if (availableKeys.has(key)) {
+          filteredCardStates.set(key, cardState);
+        }
+      });
+
+      setCardStates(filteredCardStates);
+      const stats = calculateDeckStats(filteredCardStates, availableWords.length);
+      const selection = selectNextCard(
+        filteredCardStates,
+        saved.deckState,
+        availableWords,
+        config,
+        []  // No recent cards on load
+      );
+
+      let validCurrentKey: string | null = selection.nextCardKey;
+      if (!validCurrentKey && filteredCardStates.size > 0) {
+        validCurrentKey = Array.from(filteredCardStates.keys())[0];
+      }
+
+      setDeckState({
         ...saved.deckState,
-        stats: calculateDeckStats(saved.cardStates, saved.deckState, config)
-      }));
+        currentCardKey: validCurrentKey,
+        stats,
+      });
+      setSelectionResult(selection);
     } else {
       const { cardStates: initialCards, deckState: initialDeck } = initializeDeck(availableWords, config);
       setCardStates(initialCards);
       setDeckState({
         ...initialDeck,
-        stats: calculateDeckStats(initialCards, initialDeck, config)
+        stats: calculateDeckStats(initialCards, availableWords.length),
       });
+
+      const selection = selectNextCard(initialCards, initialDeck, availableWords, config, []);
+      setSelectionResult(selection);
     }
+
+    // Reset recent cards on mode change
+    setRecentCardKeys([]);
   }, [reviewMode, availableWords.length, config]);
 
   // Save state when it changes
@@ -206,11 +275,10 @@ export function useCustomReviewState(
 
   // Handle scoring
   const handleScore = useCallback((difficulty: DifficultyRating) => {
-    if (!currentCardState) return;
+    if (!currentCardState || !deckState.currentCardKey) return;
 
     const grade = difficultyToGrade(difficulty);
 
-    // Update card and deck
     const { cardState: updatedCard, deckState: updatedDeck } = updateStateOnGrade(
       currentCardState,
       deckState,
@@ -218,27 +286,32 @@ export function useCustomReviewState(
       config
     );
 
-    // Update card states
     const newCardStates = new Map(cardStates);
     newCardStates.set(updatedCard.key, updatedCard);
 
-    // Check if we should introduce a new card
-    const { nextCardKey, shouldIntroduceNew } = selectNextCard(
+    // Add current card to recent list (for interleaving)
+    const newRecentCards = [...recentCardKeys, deckState.currentCardKey];
+    const maxRecent = Math.max(config.minInterleaveCount + 2, 5);
+    if (newRecentCards.length > maxRecent) {
+      newRecentCards.shift();
+    }
+
+    const selection = selectNextCard(
       newCardStates,
       updatedDeck,
       availableWords,
-      config
+      config,
+      newRecentCards
     );
 
     let finalCardStates = newCardStates;
     let finalDeckState = updatedDeck;
 
-    if (shouldIntroduceNew) {
+    if (selection.shouldIntroduceNew) {
       const { cardStates: cardsWithNew, newCardKey } = introduceNewCard(
         newCardStates,
         updatedDeck,
-        availableWords,
-        config
+        availableWords
       );
 
       if (newCardKey) {
@@ -246,29 +319,28 @@ export function useCustomReviewState(
         finalDeckState = {
           ...updatedDeck,
           currentCardKey: newCardKey,
-          consecutiveEasyCount: 0
         };
       } else {
         finalDeckState = {
           ...updatedDeck,
-          currentCardKey: nextCardKey
+          currentCardKey: selection.nextCardKey,
         };
       }
     } else {
       finalDeckState = {
         ...updatedDeck,
-        currentCardKey: nextCardKey
+        currentCardKey: selection.nextCardKey,
       };
     }
 
-    // Calculate updated stats
-    const newStats = calculateDeckStats(finalCardStates, finalDeckState, config);
+    const newStats = calculateDeckStats(finalCardStates, availableWords.length);
     finalDeckState.stats = newStats;
 
-    // Update state
     setCardStates(finalCardStates);
     setDeckState(finalDeckState);
-  }, [currentCardState, deckState, cardStates, availableWords, config]);
+    setSelectionResult(selection);
+    setRecentCardKeys(newRecentCards);
+  }, [currentCardState, deckState, cardStates, availableWords, config, recentCardKeys]);
 
   // Clear progress
   const clearProgress = useCallback(() => {
@@ -284,10 +356,13 @@ export function useCustomReviewState(
     setCardStates(freshCards);
     setDeckState({
       ...freshDeck,
-      stats: calculateDeckStats(freshCards, freshDeck, config)
+      stats: calculateDeckStats(freshCards, availableWords.length),
     });
 
-    // Reset UI state
+    const selection = selectNextCard(freshCards, freshDeck, availableWords, config, []);
+    setSelectionResult(selection);
+    setRecentCardKeys([]);
+
     setIsFlipped(false);
     setRevealedExamples(new Set());
   }, [reviewMode, availableWords, config]);
@@ -301,9 +376,9 @@ export function useCustomReviewState(
       return {
         data: word,
         easinessFactor: 2.5,
-        interval: cardState.stability,
-        repetitions: cardState.reviewCount,
-        nextReviewDate: new Date(Date.now() + cardState.stability * 24 * 60 * 60 * 1000)
+        interval: cardState.scheduled_days,
+        repetitions: cardState.reps,
+        nextReviewDate: new Date(cardState.due)
       };
     }).filter(item => item !== null) as CustomWordData[];
   }, [cardStates, customWords]);
@@ -320,11 +395,20 @@ export function useCustomReviewState(
     }
   }, [knownWords]);
 
+  const cognitiveLoad = useMemo(() => {
+    if (deckState.stats.totalIntroduced === 0) return 0;
+    return deckState.stats.learningCount / deckState.stats.totalIntroduced;
+  }, [deckState.stats]);
+
   return {
     // Legacy format for UI
     knownWords,
     currentIndex: Math.max(0, currentIndex),
-    cognitiveLoad: deckState.stats.averageRisk,
+    cognitiveLoad,
+
+    // Learning box state
+    source: selectionResult.source,
+    allComplete: selectionResult.allComplete,
 
     // UI state
     isFlipped,

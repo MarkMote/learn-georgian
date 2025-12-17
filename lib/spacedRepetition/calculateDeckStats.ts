@@ -1,36 +1,59 @@
 // lib/spacedRepetition/calculateDeckStats.ts
 
-import { CardState, DeckState, SRSConfig } from './types';
-import { calculateRisk } from './lib/calculateRisk';
+import { CardState, DeckState, WordData } from './types';
 
 /**
- * Calculate deck statistics
+ * Calculate deck statistics based on learning box phases
  */
 export function calculateDeckStats(
   cardStates: Map<string, CardState>,
-  deckState: DeckState,
-  config: SRSConfig
-): { averageRisk: number; cardsAtRisk: number } {
+  totalAvailable: number,
+  filterPredicate?: (word: WordData) => boolean,
+  wordByKey?: Map<string, WordData>
+): DeckState['stats'] {
+  const now = new Date();
 
   if (cardStates.size === 0) {
-    return { averageRisk: 0, cardsAtRisk: 0 };
+    return {
+      dueCount: 0,
+      learningCount: 0,
+      graduatedCount: 0,
+      totalIntroduced: 0,
+      totalAvailable,
+    };
   }
 
-  let totalRisk = 0;
-  let cardsAtRisk = 0;
+  let dueCount = 0;
+  let learningCount = 0;
+  let graduatedCount = 0;
 
-  cardStates.forEach((cardState) => {
-    const daysSinceReview = deckState.currentStep - cardState.lastReviewStep;
-    const risk = calculateRisk(cardState.stability, daysSinceReview, config.beta);
+  cardStates.forEach((cardState, key) => {
+    // Apply filter if provided
+    if (filterPredicate && wordByKey) {
+      const word = wordByKey.get(key);
+      if (!word || !filterPredicate(word)) return;
+    }
 
-    totalRisk += risk;
-    if (risk > config.riskThreshold) {
-      cardsAtRisk++;
+    if (cardState.phase === 'learning') {
+      learningCount++;
+      // Learning cards use stepDue, not FSRS due
+      if (new Date(cardState.stepDue) <= now) {
+        dueCount++;
+      }
+    } else if (cardState.phase === 'graduated' || cardState.phase === 'review') {
+      graduatedCount++;
+      // Graduated cards use FSRS due
+      if (new Date(cardState.due) <= now) {
+        dueCount++;
+      }
     }
   });
 
   return {
-    averageRisk: totalRisk / cardStates.size,
-    cardsAtRisk
+    dueCount,
+    learningCount,
+    graduatedCount,
+    totalIntroduced: cardStates.size,
+    totalAvailable,
   };
 }

@@ -8,13 +8,19 @@ import {
   loadUserConfig,
   clearUserConfig,
   getDefaultUserConfig,
-  getMergedConfig
 } from '../../../../lib/spacedRepetition/lib/configManager';
 
 interface SRSConfigPanelProps {
   isOpen: boolean;
   onClose: () => void;
   onConfigChange: () => void;
+}
+
+// Helper to format learning step time
+function formatStepMs(ms: number): string {
+  if (ms < 60 * 1000) return `${ms / 1000}s`;
+  if (ms < 60 * 60 * 1000) return `${ms / (60 * 1000)}m`;
+  return `${ms / (60 * 60 * 1000)}h`;
 }
 
 export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSConfigPanelProps) {
@@ -35,10 +41,10 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
     const current = config;
     setHasChanges(
       !saved ||
-      saved.beta !== current.beta ||
-      saved.stabilityMultiplier !== current.stabilityMultiplier ||
-      saved.riskThreshold !== current.riskThreshold ||
-      saved.maxConsecutiveEasy !== current.maxConsecutiveEasy
+      saved.targetLearningCount !== current.targetLearningCount ||
+      saved.minInterleaveCount !== current.minInterleaveCount ||
+      saved.almostDueThresholdMs !== current.almostDueThresholdMs ||
+      JSON.stringify(saved.learningSteps) !== JSON.stringify(current.learningSteps)
     );
   }, [config]);
 
@@ -58,11 +64,11 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
 
   if (!isOpen) return null;
 
-  // Calculate actual values for display
-  const mergedConfig = getMergedConfig();
-  const actualHardGrowth = (0.1 * config.stabilityMultiplier).toFixed(2);
-  const actualGoodGrowth = (0.4 * config.stabilityMultiplier).toFixed(2);
-  const actualEasyGrowth = (1.0 * config.stabilityMultiplier).toFixed(2);
+  // Convert almostDueThresholdMs to hours for display
+  const almostDueHours = (config.almostDueThresholdMs ?? 4 * 60 * 60 * 1000) / (60 * 60 * 1000);
+  const targetLearningCount = config.targetLearningCount ?? 5;
+  const minInterleaveCount = config.minInterleaveCount ?? 2;
+  const learningSteps = config.learningSteps ?? [60 * 1000, 10 * 60 * 1000];
 
   return (
     <div className="fixed inset-0 bg-neutral-950/50 z-50 flex items-center justify-center p-4">
@@ -78,111 +84,23 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
         </div>
 
         <div className="p-6 space-y-6">
-          {/* Beta Parameter */}
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <label className="font-medium text-gray-700 dark:text-gray-300">
-                Forgetting Curve Steepness (β)
-              </label>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {config.beta.toFixed(2)}
-              </span>
-            </div>
-            <input
-              type="range"
-              min="0.75"
-              max="1.25"
-              step="0.05"
-              value={config.beta}
-              onChange={(e) => setConfig({ ...config, beta: parseFloat(e.target.value) })}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>0.75 (Gradual)</span>
-              <span>1.00 (Linear)</span>
-              <span>1.25 (Steep)</span>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Controls how quickly memory decays. Lower values mean slower forgetting (more forgiving),
-              higher values mean faster forgetting (more challenging).
+          {/* Learning Box Info */}
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <h3 className="font-medium text-blue-800 dark:text-blue-300 mb-2">Learning Box System (FSRS + Leitner)</h3>
+            <p className="text-sm text-blue-700 dark:text-blue-400">
+              Uses a learning box to manage new cards before they graduate to FSRS scheduling.
+              Cards go through learning steps first, then FSRS handles long-term scheduling.
             </p>
           </div>
 
-          {/* Stability Multiplier */}
+          {/* Target Learning Count */}
           <div>
             <div className="flex justify-between items-baseline mb-2">
               <label className="font-medium text-gray-700 dark:text-gray-300">
-                Stability Growth Multiplier
+                Target Learning Box Size
               </label>
               <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {config.stabilityMultiplier.toFixed(2)}x
-              </span>
-            </div>
-            <input
-              type="range"
-              min="0.5"
-              max="2.0"
-              step="0.1"
-              value={config.stabilityMultiplier}
-              onChange={(e) => setConfig({ ...config, stabilityMultiplier: parseFloat(e.target.value) })}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>0.5x (Conservative)</span>
-              <span>1.0x (Default)</span>
-              <span>2.0x (Aggressive)</span>
-            </div>
-            <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900 rounded text-xs">
-              <div className="grid grid-cols-3 gap-2">
-                <div>Hard: +{actualHardGrowth}</div>
-                <div>Good: +{actualGoodGrowth}</div>
-                <div>Easy: +{actualEasyGrowth}</div>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Scales how much stability increases with each successful review. Higher values mean
-              longer intervals between reviews (fewer repetitions needed).
-            </p>
-          </div>
-
-          {/* Risk Threshold */}
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <label className="font-medium text-gray-700 dark:text-gray-300">
-                New Card Introduction Threshold
-              </label>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {(config.riskThreshold * 100).toFixed(0)}%
-              </span>
-            </div>
-            <input
-              type="range"
-              min="0.1"
-              max="0.9"
-              step="0.05"
-              value={config.riskThreshold}
-              onChange={(e) => setConfig({ ...config, riskThreshold: parseFloat(e.target.value) })}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>10% (Thorough)</span>
-              <span>50%</span>
-              <span>90% (Quick)</span>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Introduces new cards when the highest-risk card drops below this threshold.
-              Lower values ensure better mastery before new material, higher values introduce cards sooner.
-            </p>
-          </div>
-
-          {/* Max Consecutive Easy */}
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <label className="font-medium text-gray-700 dark:text-gray-300">
-                Max Consecutive Easy Before New Card
-              </label>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {config.maxConsecutiveEasy}
+                {targetLearningCount} cards
               </span>
             </div>
             <input
@@ -190,18 +108,97 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
               min="3"
               max="10"
               step="1"
-              value={config.maxConsecutiveEasy}
-              onChange={(e) => setConfig({ ...config, maxConsecutiveEasy: parseInt(e.target.value) })}
+              value={targetLearningCount}
+              onChange={(e) => setConfig({ ...config, targetLearningCount: parseInt(e.target.value) })}
               className="w-full"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>3 (Frequent)</span>
+              <span>3 (Light)</span>
               <span>5</span>
-              <span>10 (Rare)</span>
+              <span>10 (Intensive)</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Forces introduction of a new card after this many consecutive &quot;Easy&quot; ratings,
-              even if risk threshold hasn&apos;t been reached. Prevents getting stuck on one card.
+              How many cards to keep in the learning box at once. When a card graduates,
+              a new one is introduced to maintain this target.
+            </p>
+          </div>
+
+          {/* Min Interleave Count */}
+          <div>
+            <div className="flex justify-between items-baseline mb-2">
+              <label className="font-medium text-gray-700 dark:text-gray-300">
+                Minimum Interleave
+              </label>
+              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                {minInterleaveCount} cards
+              </span>
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              step="1"
+              value={minInterleaveCount}
+              onChange={(e) => setConfig({ ...config, minInterleaveCount: parseInt(e.target.value) })}
+              className="w-full"
+            />
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>1 (Less spacing)</span>
+              <span>2</span>
+              <span>5 (More spacing)</span>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              Minimum cards to show between repeats of the same card. Prevents seeing
+              the same card twice in a row during learning.
+            </p>
+          </div>
+
+          {/* Learning Steps Display */}
+          <div>
+            <div className="flex justify-between items-baseline mb-2">
+              <label className="font-medium text-gray-700 dark:text-gray-300">
+                Learning Steps
+              </label>
+              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                {learningSteps.map(formatStepMs).join(' → ')}
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              Cards must pass through these intervals before graduating to FSRS scheduling.
+              Good/Easy advances to the next step; Fail resets to step 1.
+            </p>
+          </div>
+
+          {/* Almost Due Threshold */}
+          <div>
+            <div className="flex justify-between items-baseline mb-2">
+              <label className="font-medium text-gray-700 dark:text-gray-300">
+                Almost Due Window
+              </label>
+              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                {almostDueHours} hours
+              </span>
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="12"
+              step="1"
+              value={almostDueHours}
+              onChange={(e) => setConfig({
+                ...config,
+                almostDueThresholdMs: parseInt(e.target.value) * 60 * 60 * 1000
+              })}
+              className="w-full"
+            />
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>1 hour</span>
+              <span>6 hours</span>
+              <span>12 hours</span>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              Cards due within this time window are considered &quot;almost due&quot; and may be shown
+              early if no other cards are due. Helps smooth out your review sessions.
             </p>
           </div>
 

@@ -1,34 +1,36 @@
 // lib/spacedRepetition/initializeDeck.ts
 
 import { WordData, CardState, DeckState, SRSConfig } from './types';
+import { createCardState } from './lib/fsrs';
+import { DEFAULT_CONFIG } from './config';
 
 /**
- * Initialize deck with first card
+ * Initialize deck with target number of cards in learning box
  */
-export function initializeDeck(availableWords: WordData[], config: SRSConfig): { cardStates: Map<string, CardState>; deckState: DeckState } {
+export function initializeDeck(
+  availableWords: WordData[],
+  config: SRSConfig = DEFAULT_CONFIG
+): { cardStates: Map<string, CardState>; deckState: DeckState } {
   const cardStates = new Map<string, CardState>();
+  const now = new Date();
 
-  // Start with first word if available
-  if (availableWords.length > 0) {
-    const firstWord = availableWords[0];
-    cardStates.set(firstWord.key, {
-      key: firstWord.key,
-      stability: config.initialStability,
-      lastReviewStep: 0,
-      reviewCount: 0,
-      lapseCount: 0,
-      introducedAtStep: 0
-    });
+  // Initialize with targetLearningCount cards (or all available if fewer)
+  const initialCount = Math.min(config.targetLearningCount, availableWords.length);
+
+  for (let i = 0; i < initialCount; i++) {
+    const word = availableWords[i];
+    cardStates.set(word.key, createCardState(word.key, now));
   }
 
   const deckState: DeckState = {
-    currentStep: 0,
-    currentCardKey: availableWords.length > 0 ? availableWords[0].key : null,
-    consecutiveEasyCount: 0,
+    currentCardKey: initialCount > 0 ? availableWords[0].key : null,
     stats: {
-      averageRisk: 0,
-      cardsAtRisk: 0
-    }
+      dueCount: 0,
+      learningCount: initialCount,  // All initial cards are in learning
+      graduatedCount: 0,
+      totalIntroduced: initialCount,
+      totalAvailable: availableWords.length,
+    },
   };
 
   return { cardStates, deckState };

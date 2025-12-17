@@ -7,18 +7,7 @@ export type {
   DeckState,
   SRSConfig,
   Grade,
-  DifficultyRating,
-  SelectNextCardResult,
-  LearningPhase,
-  LegacyCardState,
-  LegacyDeckState,
-} from './types';
-
-// Export type guards
-export {
-  isLegacyCardState,
-  isLegacyDeckState,
-  State,
+  DifficultyRating
 } from './types';
 
 // Export configuration
@@ -31,11 +20,6 @@ export { selectNextCard } from './selectNextCard';
 export { introduceNewCard } from './introduceNewCard';
 export { calculateDeckStats } from './calculateDeckStats';
 
-// Export FSRS utilities
-export {
-  Rating,
-  gradeToRating,
-  ratingToGrade,
-  isCardDue,
-  getRetrievability,
-} from './lib/fsrs';
+// Export shared utility functions
+export { calculateRisk } from './lib/calculateRisk';
+export { updateStability } from './lib/updateStability';

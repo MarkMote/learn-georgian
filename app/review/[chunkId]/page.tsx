@@ -77,12 +77,13 @@ export default function ReviewPage() {
     currentIndex,
     cognitiveLoad,
     globalStep,
-    consecutiveEasyCount,
+    source,
     handleScore: srsHandleScore,
     clearProgress: srsClearProgress,
     currentWord,
     currentCardState,
     deckState,
+    cardStates,
   } = useReviewState(chunkId, chunkWords, reviewMode, filterPredicate);
 
   // Combined actions that coordinate both systems
@@ -316,11 +317,11 @@ export default function ReviewPage() {
           deckState={deckState}
           currentCardState={currentCardState}
           config={DEFAULT_CONFIG}
-          consecutiveEasy={consecutiveEasyCount}
-          isIntroducing={false}
+          source={source}
           skipVerbs={skipVerbs}
           knownWords={knownWords}
           currentIndex={currentIndex}
+          cardStates={cardStates}
         />
       )}
       <div

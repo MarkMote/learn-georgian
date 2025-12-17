@@ -4,13 +4,13 @@ import { SRSConfig } from '../types';
 import { DEFAULT_CONFIG } from '../config';
 
 export interface UserConfigOverride {
-  targetLearningCount?: number;
-  learningSteps?: number[];
-  minInterleaveCount?: number;
-  almostDueThresholdMs?: number;
+  beta: number;
+  stabilityMultiplier: number;
+  riskThreshold: number;
+  maxConsecutiveEasy: number;
 }
 
-const CONFIG_STORAGE_KEY = 'srs_config_v3';  // v3 for learning box config
+const CONFIG_STORAGE_KEY = 'srs_config_override';
 
 export function saveUserConfig(config: UserConfigOverride): void {
   if (typeof window !== 'undefined') {
@@ -48,18 +48,23 @@ export function getMergedConfig(): SRSConfig {
 
   // Apply user overrides to default config
   return {
-    targetLearningCount: userConfig.targetLearningCount ?? DEFAULT_CONFIG.targetLearningCount,
-    learningSteps: userConfig.learningSteps ?? DEFAULT_CONFIG.learningSteps,
-    minInterleaveCount: userConfig.minInterleaveCount ?? DEFAULT_CONFIG.minInterleaveCount,
-    almostDueThresholdMs: userConfig.almostDueThresholdMs ?? DEFAULT_CONFIG.almostDueThresholdMs,
+    ...DEFAULT_CONFIG,
+    beta: userConfig.beta,
+    hardGrowth: DEFAULT_CONFIG.hardGrowth * userConfig.stabilityMultiplier,
+    goodGrowth: DEFAULT_CONFIG.goodGrowth * userConfig.stabilityMultiplier,
+    easyGrowth: DEFAULT_CONFIG.easyGrowth * userConfig.stabilityMultiplier,
+    // failShrink is not multiplied - it stays constant
+    failShrink: DEFAULT_CONFIG.failShrink,
+    riskThreshold: userConfig.riskThreshold,
+    maxConsecutiveEasy: userConfig.maxConsecutiveEasy,
   };
 }
 
 export function getDefaultUserConfig(): UserConfigOverride {
   return {
-    targetLearningCount: DEFAULT_CONFIG.targetLearningCount,
-    learningSteps: DEFAULT_CONFIG.learningSteps,
-    minInterleaveCount: DEFAULT_CONFIG.minInterleaveCount,
-    almostDueThresholdMs: DEFAULT_CONFIG.almostDueThresholdMs,
+    beta: DEFAULT_CONFIG.beta,
+    stabilityMultiplier: 1.0,
+    riskThreshold: DEFAULT_CONFIG.riskThreshold,
+    maxConsecutiveEasy: DEFAULT_CONFIG.maxConsecutiveEasy,
   };
 }

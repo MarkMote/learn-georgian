@@ -1,5 +1,10 @@
 // lib/spacedRepetition/types.ts
 
+import { State } from 'ts-fsrs';
+
+// Re-export FSRS State for convenience
+export { State };
+
 // Static word content - never changes
 export interface WordData {
   key: string;
@@ -16,19 +21,78 @@ export interface WordData {
   tips?: string;
 }
 
-// Individual card SRS state
+// Learning phase for session management (Leitner-style)
+export type LearningPhase = 'learning' | 'review' | 'graduated';
+
+// Individual card SRS state (FSRS-compatible + learning box)
 export interface CardState {
-  key: string;           // Links to WordData.key
-  stability: number;     // Memory strength (days until 90% recall)
-  lastReviewStep: number;
-  reviewCount: number;
-  lapseCount: number;
-  introducedAtStep: number;
-  lastGrade?: Grade;     // Last grade given (0-3), optional for backwards compatibility
+  key: string;                    // Links to WordData.key
+  // FSRS fields (for long-term scheduling after graduation)
+  due: string;                    // ISO date string - when card is due (FSRS)
+  stability: number;              // FSRS stability (days until 90% recall)
+  difficulty: number;             // FSRS difficulty (1-10)
+  scheduled_days: number;         // Days until next review
+  reps: number;                   // Successful review count
+  lapses: number;                 // Failed review count (Again)
+  state: State;                   // New/Learning/Review/Relearning (FSRS state)
+  last_review?: string;           // ISO date string - last review time
+  // Learning box fields (for session management)
+  learningStep: number;           // Current learning step (0, 1, 2+)
+  stepDue: string;                // ISO date string - when current step is due
+  phase: LearningPhase;           // Current phase: learning, review, or graduated
+  // Custom fields
+  introducedAt: string;           // ISO date string - when card was introduced
+  lastGrade?: Grade;              // Last grade given (0-3), for UI
 }
 
 // Deck aggregate state
 export interface DeckState {
+  currentCardKey: string | null;
+  // Stats for UI
+  stats: {
+    dueCount: number;             // Review cards due now
+    learningCount: number;        // Cards in learning phase
+    graduatedCount: number;       // Cards that have graduated
+    totalIntroduced: number;      // Total cards introduced
+    totalAvailable: number;       // Total cards in deck
+  };
+}
+
+// SRS Configuration with learning box settings
+export interface SRSConfig {
+  // Learning box settings
+  targetLearningCount: number;    // Target cards in learning box (default: 5)
+  learningSteps: number[];        // Learning step intervals in ms (default: [60000, 600000] = 1min, 10min)
+  // Interleaving
+  minInterleaveCount: number;     // Minimum cards between repeats (default: 2)
+  // Practice mode settings
+  almostDueThresholdMs: number;   // "Almost due" threshold in ms (default: 4 hours)
+}
+
+export type Grade = 0 | 1 | 2 | 3; // fail | hard | good | easy
+export type DifficultyRating = "fail" | "hard" | "good" | "easy";
+
+// Selection result with queue info
+export interface SelectNextCardResult {
+  nextCardKey: string | null;
+  shouldIntroduceNew: boolean;    // True if learning box needs more cards
+  source: 'learning' | 'review' | 'practice' | 'new';  // Where the card came from
+  allComplete: boolean;           // True if no cards need review (celebration time!)
+}
+
+// Legacy CardState type for migration
+export interface LegacyCardState {
+  key: string;
+  stability: number;
+  lastReviewStep: number;
+  reviewCount: number;
+  lapseCount: number;
+  introducedAtStep: number;
+  lastGrade?: Grade;
+}
+
+// Legacy DeckState type for migration
+export interface LegacyDeckState {
   currentStep: number;
   currentCardKey: string | null;
   consecutiveEasyCount: number;
@@ -38,28 +102,25 @@ export interface DeckState {
   };
 }
 
-// SRS Configuration
-export interface SRSConfig {
-  // Memory model parameters
-  beta: number;           // Forgetting curve steepness (default: 0.3)
-
-  // Stability growth factors
-  hardGrowth: number;     // Grade 1 (default: 0.2)
-  goodGrowth: number;     // Grade 2 (default: 0.6)
-  easyGrowth: number;     // Grade 3 (default: 1.4)
-
-  // Failure handling
-  failShrink: number;     // Grade 0 stability reduction (default: 0.5)
-
-  // Card introduction
-  riskThreshold: number;  // When to introduce new cards (default: 0.1)
-  maxConsecutiveEasy: number; // Force new card after N easy (default: 5)
-
-  // Limits
-  minStability: number;   // Minimum card stability (default: 0.1)
-  maxStability: number;   // Maximum card stability (default: 365)
-  initialStability: number; // Starting stability for new cards (default: 1.0)
+/**
+ * Type guard to check if stored state is legacy format
+ */
+export function isLegacyCardState(state: unknown): state is LegacyCardState {
+  return (
+    typeof state === 'object' &&
+    state !== null &&
+    'lastReviewStep' in state &&
+    !('due' in state)
+  );
 }
 
-export type Grade = 0 | 1 | 2 | 3; // fail | hard | good | easy
-export type DifficultyRating = "fail" | "hard" | "good" | "easy";
+/**
+ * Type guard to check if stored deck state is legacy format
+ */
+export function isLegacyDeckState(state: unknown): state is LegacyDeckState {
+  return (
+    typeof state === 'object' &&
+    state !== null &&
+    'currentStep' in state
+  );
+}

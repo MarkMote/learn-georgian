@@ -1,63 +1,100 @@
 // app/review/[chunkId]/components/HybridDebugPanel.tsx
 
-import React, { useState, useEffect } from "react";
-import { CardState, DeckState, SRSConfig } from "../../../../lib/spacedRepetition/types";
-import { calculateRisk } from "../../../../lib/spacedRepetition/lib/calculateRisk";
+import React, { useState } from "react";
+import { CardState, DeckState, SRSConfig, SelectNextCardResult } from "../../../../lib/spacedRepetition/types";
+import { getRetrievability } from "../../../../lib/spacedRepetition/lib/fsrs";
 import { WordData } from "../types";
 
 interface HybridDebugPanelProps {
   deckState: DeckState;
   currentCardState: CardState | null;
   config: SRSConfig;
-  consecutiveEasy: number;
-  isIntroducing: boolean;
+  source: SelectNextCardResult['source'];
   skipVerbs: boolean;
   knownWords: Array<{ data: WordData; rating: number; lastSeen: number; interval: number; repetitions: number; easeFactor: number; }>;
   currentIndex: number;
+  cardStates?: Map<string, CardState>;
+}
+
+// Helper to format state enum
+function formatState(state: number): string {
+  switch (state) {
+    case 0: return "New";
+    case 1: return "Learning";
+    case 2: return "Review";
+    case 3: return "Relearning";
+    default: return "Unknown";
+  }
+}
+
+// Helper to format phase
+function formatPhase(phase: string): string {
+  switch (phase) {
+    case 'learning': return 'Learning';
+    case 'review': return 'Review';
+    case 'graduated': return 'Graduated';
+    default: return phase;
+  }
+}
+
+// Helper to format due date
+function formatDue(dueStr: string): string {
+  const due = new Date(dueStr);
+  const now = new Date();
+  const diffMs = due.getTime() - now.getTime();
+  const diffMins = Math.round(diffMs / (1000 * 60));
+  const diffHours = Math.round(diffMs / (1000 * 60 * 60));
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffMs < 0) {
+    const overdueMins = Math.abs(diffMins);
+    if (overdueMins < 60) return `${overdueMins}m overdue`;
+    const overdueHours = Math.abs(diffHours);
+    if (overdueHours < 24) return `${overdueHours}h overdue`;
+    return `${Math.abs(diffDays)}d overdue`;
+  }
+
+  if (diffMins < 60) return `in ${diffMins}m`;
+  if (diffHours < 24) return `in ${diffHours}h`;
+  return `in ${diffDays}d`;
+}
+
+// Format learning step time
+function formatStepTime(ms: number): string {
+  if (ms < 60 * 1000) return `${ms / 1000}s`;
+  if (ms < 60 * 60 * 1000) return `${ms / (60 * 1000)}m`;
+  return `${ms / (60 * 60 * 1000)}h`;
 }
 
 export default function HybridDebugPanel({
   deckState,
   currentCardState,
   config,
-  consecutiveEasy,
-  isIntroducing,
+  source,
   skipVerbs,
   knownWords,
-  currentIndex
+  currentIndex,
+  cardStates
 }: HybridDebugPanelProps) {
   const [isVisible, setIsVisible] = useState(true);
 
-  // Calculate stats for each card (from knownWords compatibility layer)
+  // Calculate stats for each card using FSRS retrievability
   const cardStats = knownWords.map((knownWord, idx) => {
-    const stepsSince = knownWord.lastSeen;
-    const stability = knownWord.interval; // Using interval as stability approximation
-    const risk = calculateRisk(stability, stepsSince, config.beta);
-
-    // Debug logging - show current card being reviewed
-    if (knownWord.data.key === deckState.currentCardKey) {
-      console.log('Debug - CURRENT card:', {
-        word: knownWord.data.GeorgianWord,
-        key: knownWord.data.key,
-        stepsSince,
-        stability,
-        risk: (risk * 100).toFixed(1) + '%',
-        deckStep: deckState.currentStep,
-        cardLastReview: currentCardState?.lastReviewStep
-      });
-    }
+    const cardState = cardStates?.get(knownWord.data.key);
+    const retrievability = cardState ? getRetrievability(cardState) : 1.0;
+    const isDue = cardState ? new Date(cardState.due) <= new Date() : false;
 
     return {
       word: knownWord,
-      risk,
-      stepsSince,
+      retrievability,
+      isDue,
       index: idx,
-      stability
+      cardState
     };
   });
 
-  // Sort by risk (highest first)
-  const sortedStats = [...cardStats].sort((a, b) => b.risk - a.risk);
+  // Sort by retrievability (lowest first - most at risk of forgetting)
+  const sortedStats = [...cardStats].sort((a, b) => a.retrievability - b.retrievability);
 
   if (!isVisible) {
     return (
@@ -87,46 +124,44 @@ export default function HybridDebugPanel({
       </button>
 
       <div className="p-4 border-b border-gray-700">
-        <h2 className="text-lg font-bold">Debug Panel</h2>
+        <h2 className="text-lg font-bold">Debug Panel (Learning Boxes)</h2>
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
-            <span className="text-gray-400">Step:</span> {deckState.currentStep}
+            <span className="text-gray-400">Due:</span> {deckState.stats.dueCount}
           </div>
           <div>
-            <span className="text-gray-400">Cards:</span> {knownWords.length}
+            <span className="text-gray-400">Learning:</span> {deckState.stats.learningCount}
           </div>
           <div>
-            <span className="text-gray-400">Current:</span> {currentIndex}
+            <span className="text-gray-400">Graduated:</span> {deckState.stats.graduatedCount}
+          </div>
+          <div>
+            <span className="text-gray-400">Introduced:</span> {deckState.stats.totalIntroduced}
+          </div>
+          <div>
+            <span className="text-gray-400">Total:</span> {deckState.stats.totalAvailable}
+          </div>
+          <div>
+            <span className="text-gray-400">Current Idx:</span> {currentIndex}
+          </div>
+          <div>
+            <span className="text-gray-400">Source:</span> {source}
           </div>
           <div>
             <span className="text-gray-400">Skip Verbs:</span> {skipVerbs ? "Yes" : "No"}
-          </div>
-          <div>
-            <span className="text-gray-400">Easy Count:</span> {consecutiveEasy}
-          </div>
-          <div>
-            <span className="text-gray-400">Introducing:</span> {isIntroducing ? "Yes" : "No"}
-          </div>
-          <div>
-            <span className="text-gray-400">Avg Risk:</span> {(deckState.stats.averageRisk * 100).toFixed(1)}%
-          </div>
-          <div>
-            <span className="text-gray-400">Cards at Risk:</span> {deckState.stats.cardsAtRisk}
           </div>
         </div>
       </div>
 
       <div className="p-4">
-        <h3 className="text-sm font-semibold mb-2 text-gray-300">Config</h3>
+        <h3 className="text-sm font-semibold mb-2 text-gray-300">Config (Learning Box)</h3>
         <div className="grid grid-cols-2 gap-1 text-xs mb-4">
-          <div><span className="text-gray-500">Beta:</span> {config.beta}</div>
-          <div><span className="text-gray-500">minStability:</span> {config.minStability}</div>
-          <div><span className="text-gray-500">hardGrowth:</span> {config.hardGrowth}</div>
-          <div><span className="text-gray-500">goodGrowth:</span> {config.goodGrowth}</div>
-          <div><span className="text-gray-500">easyGrowth:</span> {config.easyGrowth}</div>
-          <div><span className="text-gray-500">failShrink:</span> {config.failShrink}</div>
-          <div><span className="text-gray-500">riskThreshold:</span> {config.riskThreshold}</div>
-          <div><span className="text-gray-500">maxConsecutiveEasy:</span> {config.maxConsecutiveEasy}</div>
+          <div><span className="text-gray-500">targetLearningCount:</span> {config.targetLearningCount}</div>
+          <div><span className="text-gray-500">minInterleave:</span> {config.minInterleaveCount}</div>
+          <div className="col-span-2">
+            <span className="text-gray-500">learningSteps:</span>{' '}
+            {config.learningSteps.map(formatStepTime).join(', ')}
+          </div>
         </div>
 
         {currentCardState && (
@@ -134,36 +169,41 @@ export default function HybridDebugPanel({
             <h3 className="text-sm font-semibold mb-2 text-gray-300">Current Card State</h3>
             <div className="grid grid-cols-2 gap-1 text-xs mb-4">
               <div><span className="text-gray-500">Key:</span> {currentCardState.key}</div>
-              <div><span className="text-gray-500">Stability:</span> {currentCardState.stability.toFixed(1)}</div>
-              <div><span className="text-gray-500">Reviews:</span> {currentCardState.reviewCount}</div>
-              <div><span className="text-gray-500">Lapses:</span> {currentCardState.lapseCount}</div>
-              <div><span className="text-gray-500">Last Review:</span> {currentCardState.lastReviewStep}</div>
-              <div><span className="text-gray-500">Steps Since:</span> {deckState.currentStep - currentCardState.lastReviewStep}</div>
+              <div><span className="text-gray-500">Phase:</span> {formatPhase(currentCardState.phase)}</div>
+              <div><span className="text-gray-500">Learning Step:</span> {currentCardState.learningStep}/{config.learningSteps.length}</div>
+              <div><span className="text-gray-500">Step Due:</span> {formatDue(currentCardState.stepDue)}</div>
+              <div><span className="text-gray-500">FSRS State:</span> {formatState(currentCardState.state)}</div>
+              <div><span className="text-gray-500">Stability:</span> {currentCardState.stability.toFixed(2)}</div>
+              <div><span className="text-gray-500">Difficulty:</span> {currentCardState.difficulty.toFixed(2)}</div>
+              <div><span className="text-gray-500">Reps:</span> {currentCardState.reps}</div>
+              <div><span className="text-gray-500">Lapses:</span> {currentCardState.lapses}</div>
+              <div><span className="text-gray-500">FSRS Due:</span> {formatDue(currentCardState.due)}</div>
+              <div><span className="text-gray-500">Scheduled:</span> {currentCardState.scheduled_days}d</div>
+              <div><span className="text-gray-500">Retrievability:</span> {(getRetrievability(currentCardState) * 100).toFixed(0)}%</div>
+              <div><span className="text-gray-500">Last Grade:</span> {currentCardState.lastGrade ?? "none"}</div>
             </div>
           </>
         )}
 
-        <h3 className="text-sm font-semibold mb-2 text-gray-300">Cards (by risk)</h3>
+        <h3 className="text-sm font-semibold mb-2 text-gray-300">Cards (by retrievability)</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-gray-700">
                 <th className="text-left py-1 px-1">Idx</th>
                 <th className="text-left py-1 px-1">Word</th>
-                <th className="text-right py-1 px-1">Risk</th>
+                <th className="text-right py-1 px-1">R%</th>
                 <th className="text-right py-1 px-1">S</th>
-                <th className="text-right py-1 px-1">Seen</th>
-                <th className="text-right py-1 px-1">Since</th>
-                <th className="text-right py-1 px-1">Next</th>
+                <th className="text-right py-1 px-1">Ph</th>
+                <th className="text-right py-1 px-1">Stp</th>
+                <th className="text-right py-1 px-1">Due</th>
               </tr>
             </thead>
             <tbody>
-              {sortedStats.map(({ word, risk, stepsSince, index, stability }) => {
+              {sortedStats.map(({ word, retrievability, isDue, index, cardState }) => {
                 const isCurrent = index === currentIndex;
                 const wordText = word.data.EnglishWord || word.data.GeorgianWord;
-                const displayWord = wordText.length > 20 ? wordText.slice(0, 18) + "..." : wordText;
-                // Calculate when card should be reviewed next (at 50% recall)
-                const nextReview = Math.round(stability * Math.pow(-Math.log(0.5), 1/config.beta));
+                const displayWord = wordText.length > 15 ? wordText.slice(0, 13) + "..." : wordText;
 
                 return (
                   <tr
@@ -171,7 +211,7 @@ export default function HybridDebugPanel({
                     className={`
                       border-b border-gray-800
                       ${isCurrent ? "bg-blue-900 bg-opacity-40" : ""}
-                      ${risk > 0.5 ? "text-red-400" : risk > 0.3 ? "text-yellow-400" : "text-green-400"}
+                      ${isDue ? "text-red-400" : retrievability < 0.7 ? "text-yellow-400" : "text-green-400"}
                     `}
                   >
                     <td className="py-1 px-1">
@@ -181,19 +221,19 @@ export default function HybridDebugPanel({
                       {displayWord}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {(risk * 100).toFixed(0)}%
+                      {(retrievability * 100).toFixed(0)}%
                     </td>
                     <td className="text-right py-1 px-1">
-                      {stability.toFixed(1)}
+                      {cardState?.stability.toFixed(1) ?? "-"}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {word.repetitions}
+                      {cardState ? formatPhase(cardState.phase).charAt(0) : "-"}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {stepsSince}
+                      {cardState ? `${cardState.learningStep}` : "-"}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {nextReview}
+                      {cardState ? formatDue(cardState.phase === 'learning' ? cardState.stepDue : cardState.due) : "-"}
                     </td>
                   </tr>
                 );
@@ -206,18 +246,18 @@ export default function HybridDebugPanel({
           <h3 className="text-sm font-semibold mb-2 text-gray-300">Stats</h3>
           <div className="text-xs space-y-1">
             <div>
-              <span className="text-gray-500">Avg Risk:</span>{" "}
+              <span className="text-gray-500">Avg Retrievability:</span>{" "}
               {knownWords.length > 0
-                ? (sortedStats.reduce((sum, s) => sum + s.risk, 0) / sortedStats.length * 100).toFixed(1) + "%"
+                ? (sortedStats.reduce((sum, s) => sum + s.retrievability, 0) / sortedStats.length * 100).toFixed(1) + "%"
                 : "0%"}
             </div>
             <div>
-              <span className="text-gray-500">New Cards (seen &lt; 2):</span>{" "}
-              {knownWords.filter(w => w.repetitions < 2).length}
+              <span className="text-gray-500">Learning Cards:</span>{" "}
+              {deckState.stats.learningCount}
             </div>
             <div>
-              <span className="text-gray-500">Mature Cards:</span>{" "}
-              {knownWords.filter(w => w.repetitions >= 2).length}
+              <span className="text-gray-500">Due Now:</span>{" "}
+              {deckState.stats.dueCount}
             </div>
             <div>
               <span className="text-gray-500">Current Card Key:</span>{" "}
