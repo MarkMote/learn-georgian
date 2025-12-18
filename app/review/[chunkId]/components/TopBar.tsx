@@ -27,7 +27,7 @@ interface TopBarProps {
   showDebug: boolean;
   // Learning box stats
   graduatedCount: number;
-  learningCount: number;
+  totalIntroduced: number;
   totalAvailable: number;
 }
 
@@ -52,7 +52,7 @@ export default function TopBar({
   onOpenTipSuggestion,
   showDebug,
   graduatedCount,
-  learningCount,
+  totalIntroduced,
   totalAvailable,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -231,17 +231,15 @@ export default function TopBar({
                     </div>
                   )}
                 </li>
-                {showDebug && (
-                  <li>
-                    <button
-                      onClick={onOpenSRSSettings}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
-                    >
-                      <Settings size={16} />
-                      SRS Settings
-                    </button>
-                  </li>
-                )}
+                <li>
+                  <button
+                    onClick={onOpenSRSSettings}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <Settings size={16} />
+                    Study Settings
+                  </button>
+                </li>
                 <li>
                   <button
                     onClick={handleClearProgressClick}
@@ -265,8 +263,8 @@ export default function TopBar({
       </div>
 
       <div className="text-sm text-center">
-        <div>mastered: {graduatedCount}/{totalAvailable}</div>
-        <div className="text-gray-400">learning: {learningCount}</div>
+        <div>Mastered: {graduatedCount}/{totalAvailable}</div>
+        <div className="">Introduced: {totalIntroduced}/{totalAvailable}</div>
       </div>
 
       <button

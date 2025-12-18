@@ -67,7 +67,8 @@ export interface DeckState {
 // SRS Configuration with learning box settings
 export interface SRSConfig {
   // Learning box settings
-  targetLearningCount: number;    // Target cards in learning box (default: 5)
+  initialLearningCount: number;   // Cards to start with (default: 3)
+  targetLearningCount: number;    // Max cards in learning box (default: 5)
   learningSteps: number[];        // Learning step intervals in ms (default: [1,2,4,8,16] minutes)
   consolidationSteps: number[];   // Consolidation step intervals in ms (default: [30m, 1hr])
   maxGraduatingIntervalDays: number; // Cap first FSRS interval to this many days (default: 1)

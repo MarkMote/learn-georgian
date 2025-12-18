@@ -26,6 +26,7 @@ function formatStepMs(ms: number): string {
 export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSConfigPanelProps) {
   const [config, setConfig] = useState<UserConfigOverride>(getDefaultUserConfig());
   const [hasChanges, setHasChanges] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   // Load saved config on mount
   useEffect(() => {
@@ -72,9 +73,9 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
 
   return (
     <div className="fixed inset-0 bg-neutral-950/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex justify-between items-center">
-          <h2 className="text-xl font-semibold">SRS Algorithm Settings</h2>
+          <h2 className="text-xl font-semibold">Study Settings</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
@@ -84,20 +85,11 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
         </div>
 
         <div className="p-6 space-y-6">
-          {/* Learning Box Info */}
-          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <h3 className="font-medium text-blue-800 dark:text-blue-300 mb-2">Learning Box System (FSRS + Leitner)</h3>
-            <p className="text-sm text-blue-700 dark:text-blue-400">
-              Uses a learning box to manage new cards before they graduate to FSRS scheduling.
-              Cards go through learning steps first, then FSRS handles long-term scheduling.
-            </p>
-          </div>
-
-          {/* Target Learning Count */}
+          {/* Learning Box Size - Main Setting */}
           <div>
             <div className="flex justify-between items-baseline mb-2">
               <label className="font-medium text-gray-700 dark:text-gray-300">
-                Target Learning Box Size
+                Learning Box Size
               </label>
               <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
                 {targetLearningCount} cards
@@ -118,89 +110,97 @@ export default function SRSConfigPanel({ isOpen, onClose, onConfigChange }: SRSC
               <span>10 (Intensive)</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              How many cards to keep in the learning box at once. When a card graduates,
-              a new one is introduced to maintain this target.
+              How many new words to learn at once. Lower = less overwhelming, higher = faster progress.
             </p>
           </div>
 
-          {/* Min Interleave Count */}
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <label className="font-medium text-gray-700 dark:text-gray-300">
-                Minimum Interleave
-              </label>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {minInterleaveCount} cards
-              </span>
-            </div>
-            <input
-              type="range"
-              min="1"
-              max="5"
-              step="1"
-              value={minInterleaveCount}
-              onChange={(e) => setConfig({ ...config, minInterleaveCount: parseInt(e.target.value) })}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>1 (Less spacing)</span>
-              <span>2</span>
-              <span>5 (More spacing)</span>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Minimum cards to show between repeats of the same card. Prevents seeing
-              the same card twice in a row during learning.
-            </p>
-          </div>
+          {/* Advanced Options Toggle */}
+          <button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            {showAdvanced ? '▼ Hide advanced options' : '▶ Show advanced options'}
+          </button>
 
-          {/* Learning Steps Display */}
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <label className="font-medium text-gray-700 dark:text-gray-300">
-                Learning Steps
-              </label>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {learningSteps.map(formatStepMs).join(' → ')}
-              </span>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Cards must pass through these intervals before graduating to FSRS scheduling.
-              Good/Easy advances to the next step; Fail resets to step 1.
-            </p>
-          </div>
+          {showAdvanced && (
+            <>
+              {/* Min Interleave Count */}
+              <div>
+                <div className="flex justify-between items-baseline mb-2">
+                  <label className="font-medium text-gray-700 dark:text-gray-300">
+                    Minimum Interleave
+                  </label>
+                  <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                    {minInterleaveCount} cards
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="5"
+                  step="1"
+                  value={minInterleaveCount}
+                  onChange={(e) => setConfig({ ...config, minInterleaveCount: parseInt(e.target.value) })}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1 (Less spacing)</span>
+                  <span>2</span>
+                  <span>5 (More spacing)</span>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Minimum cards between repeats of the same word.
+                </p>
+              </div>
 
-          {/* Almost Due Threshold */}
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <label className="font-medium text-gray-700 dark:text-gray-300">
-                Almost Due Window
-              </label>
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                {almostDueHours} hours
-              </span>
-            </div>
-            <input
-              type="range"
-              min="1"
-              max="12"
-              step="1"
-              value={almostDueHours}
-              onChange={(e) => setConfig({
-                ...config,
-                almostDueThresholdMs: parseInt(e.target.value) * 60 * 60 * 1000
-              })}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>1 hour</span>
-              <span>6 hours</span>
-              <span>12 hours</span>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              Cards due within this time window are considered &quot;almost due&quot; and may be shown
-              early if no other cards are due. Helps smooth out your review sessions.
-            </p>
-          </div>
+              {/* Learning Steps Display */}
+              <div>
+                <div className="flex justify-between items-baseline mb-2">
+                  <label className="font-medium text-gray-700 dark:text-gray-300">
+                    Learning Steps
+                  </label>
+                  <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                    {learningSteps.map(formatStepMs).join(' → ')}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Cards progress through these intervals before graduating.
+                </p>
+              </div>
+
+              {/* Almost Due Threshold */}
+              <div>
+                <div className="flex justify-between items-baseline mb-2">
+                  <label className="font-medium text-gray-700 dark:text-gray-300">
+                    Almost Due Window
+                  </label>
+                  <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                    {almostDueHours} hours
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="12"
+                  step="1"
+                  value={almostDueHours}
+                  onChange={(e) => setConfig({
+                    ...config,
+                    almostDueThresholdMs: parseInt(e.target.value) * 60 * 60 * 1000
+                  })}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1 hour</span>
+                  <span>6 hours</span>
+                  <span>12 hours</span>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Cards due within this window may be shown early.
+                </p>
+              </div>
+            </>
+          )}
 
           {/* Action Buttons */}
           <div className="flex justify-between pt-4 border-t border-gray-200 dark:border-gray-700">

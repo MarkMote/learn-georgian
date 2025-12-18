@@ -3,8 +3,9 @@
 import { SRSConfig } from './types';
 
 export const DEFAULT_CONFIG: SRSConfig = {
-  // Learning box settings (soft target - can exceed if user wants to keep learning)
-  targetLearningCount: 5,
+  // Learning box settings
+  initialLearningCount: 3,        // Start with 3 cards to avoid overwhelm
+  targetLearningCount: 5,         // Grow to 5 cards as user progresses
   learningSteps: [
     1 * 60 * 1000,                // Step 0: 1 minute
     2 * 60 * 1000,                // Step 1: 2 minutes

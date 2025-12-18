@@ -5,7 +5,8 @@ import { createCardState } from './lib/fsrs';
 import { DEFAULT_CONFIG } from './config';
 
 /**
- * Initialize deck with target number of cards in learning box
+ * Initialize deck with initial number of cards in learning box
+ * Starts with fewer cards to avoid overwhelm, grows to targetLearningCount as user progresses
  */
 export function initializeDeck(
   availableWords: WordData[],
@@ -14,8 +15,9 @@ export function initializeDeck(
   const cardStates = new Map<string, CardState>();
   const now = new Date();
 
-  // Initialize with targetLearningCount cards (or all available if fewer)
-  const initialCount = Math.min(config.targetLearningCount, availableWords.length);
+  // Initialize with initialLearningCount cards (or all available if fewer)
+  // The selectNextCard logic will grow this to targetLearningCount as cards progress
+  const initialCount = Math.min(config.initialLearningCount, availableWords.length);
 
   for (let i = 0; i < initialCount; i++) {
     const word = availableWords[i];

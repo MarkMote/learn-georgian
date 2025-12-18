@@ -4,6 +4,7 @@ import { SRSConfig } from '../types';
 import { DEFAULT_CONFIG } from '../config';
 
 export interface UserConfigOverride {
+  initialLearningCount?: number;
   targetLearningCount?: number;
   learningSteps?: number[];
   consolidationSteps?: number[];
@@ -50,6 +51,7 @@ export function getMergedConfig(): SRSConfig {
 
   // Apply user overrides to default config
   return {
+    initialLearningCount: userConfig.initialLearningCount ?? DEFAULT_CONFIG.initialLearningCount,
     targetLearningCount: userConfig.targetLearningCount ?? DEFAULT_CONFIG.targetLearningCount,
     learningSteps: userConfig.learningSteps ?? DEFAULT_CONFIG.learningSteps,
     consolidationSteps: userConfig.consolidationSteps ?? DEFAULT_CONFIG.consolidationSteps,
@@ -61,6 +63,7 @@ export function getMergedConfig(): SRSConfig {
 
 export function getDefaultUserConfig(): UserConfigOverride {
   return {
+    initialLearningCount: DEFAULT_CONFIG.initialLearningCount,
     targetLearningCount: DEFAULT_CONFIG.targetLearningCount,
     learningSteps: DEFAULT_CONFIG.learningSteps,
     consolidationSteps: DEFAULT_CONFIG.consolidationSteps,
