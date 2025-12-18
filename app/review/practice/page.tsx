@@ -1,10 +1,10 @@
 // app/review/practice/page.tsx
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useCallback, Suspense } from "react";
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { ArrowLeft, Home, Menu, RotateCcw, Settings } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ArrowLeft, Home, Menu, Settings, CheckCircle, Play } from 'lucide-react';
 import BottomBar from '../../components/BottomBar';
 import FlashCard from '../[chunkId]/components/FlashCard';
 import SRSConfigPanel from '../[chunkId]/components/SRSConfigPanel';
@@ -33,8 +33,11 @@ function getChunkCount(allWords: WordData[]): number {
   return Math.ceil(uniqueWordKeys.length / CHUNK_SIZE);
 }
 
-export default function PracticePage() {
+function PracticePageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const previewMode = searchParams.get('preview') === 'true';
+
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [chunkCount, setChunkCount] = useState(0);
   const [isSRSConfigOpen, setIsSRSConfigOpen] = useState(false);
@@ -98,16 +101,16 @@ export default function PracticePage() {
   // SRS state
   const {
     knownWords,
-    currentIndex,
     currentWord,
     currentCardState,
-    deckState,
-    source,
     handleScore: srsHandleScore,
-    clearProgress,
     isLoading,
     totalMastered,
-  } = usePracticeState(allWords, chunkCount);
+    dueCount,
+    isReviewComplete,
+    isPracticeMode,
+    startPracticeMode,
+  } = usePracticeState(allWords, chunkCount, previewMode);
 
   // Reset card display
   const resetCardDisplay = useCallback(() => {
@@ -145,6 +148,8 @@ export default function PracticePage() {
 
   // Keyboard navigation
   useEffect(() => {
+    if (isReviewComplete && !isPracticeMode) return; // Disable when showing completion screen
+
     function handleKey(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
         return;
@@ -174,10 +179,10 @@ export default function PracticePage() {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [isFlipped, handleScore]);
+  }, [isFlipped, handleScore, isReviewComplete, isPracticeMode]);
 
-  // Lock flashcard screen (no zoom, scroll, or orientation flip)
-  useFlashcardLock(true);
+  // Lock flashcard screen (no zoom, scroll, or orientation flip) - but not on completion screen
+  useFlashcardLock(!isReviewComplete || isPracticeMode);
 
   // Close menu on outside click
   useEffect(() => {
@@ -237,7 +242,49 @@ export default function PracticePage() {
     );
   }
 
-  // No current card
+  // Review complete - show congratulations screen
+  if (isReviewComplete) {
+    return (
+      <div className="min-h-screen bg-neutral-950 text-white">
+        <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+            <Link
+              href="/review"
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-sm font-medium pt-1">Back to Review</span>
+            </Link>
+          </div>
+        </header>
+        <main className="flex flex-col items-center justify-center px-4 py-16">
+          <CheckCircle className="w-20 h-20 text-green-500 mb-6" />
+          <h1 className="text-2xl font-light mb-2 text-slate-200">All Caught Up!</h1>
+          <p className="text-gray-400 text-center max-w-md mb-8">
+            You&apos;ve reviewed all your due words. Great job keeping up with your practice!
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/review"
+              className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-center"
+            >
+              Back to Review
+            </Link>
+            <button
+              onClick={startPracticeMode}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+            >
+              <Play className="w-4 h-4" />
+              Keep Practicing ({totalMastered} words)
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // No current card (shouldn't happen if not complete, but handle gracefully)
   if (!currentWord) {
     return (
       <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
@@ -247,7 +294,8 @@ export default function PracticePage() {
     );
   }
 
-  const currentCard = knownWords[currentIndex];
+  // Find current card info for chunk number display
+  const currentCardInfo = knownWords.find(k => k.data.key === currentWord.key);
   const verbHint = getVerbHint(currentWord);
   const verbTenseLabel = getVerbTenseLabel(currentWord);
 
@@ -259,7 +307,7 @@ export default function PracticePage() {
       >
         {/* Top Bar */}
         <div className="flex items-center justify-between p-4 relative top-bar-menu-area">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 w-24">
             <div className="relative">
               <button
                 onClick={() => setIsMenuOpen(prev => !prev)}
@@ -316,17 +364,6 @@ export default function PracticePage() {
                         Study Settings
                       </button>
                     </li>
-                    <li>
-                      <button
-                        onClick={() => {
-                          clearProgress();
-                          setIsMenuOpen(false);
-                        }}
-                        className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700"
-                      >
-                        Reset Progress
-                      </button>
-                    </li>
                   </ul>
                 </div>
               )}
@@ -341,15 +378,23 @@ export default function PracticePage() {
             </button>
           </div>
 
-          <div className="text-sm text-center">
-            <div className="text-green-400">Review Known Words</div>
-            <div className="text-gray-400">{deckState.stats.graduatedCount + deckState.stats.consolidationCount} words</div>
+          <div className="text-sm text-center flex-1">
+            {isPracticeMode ? (
+              <>
+                <div className="text-purple-400">Practice Mode</div>
+                <div className="text-gray-400">{totalMastered} words</div>
+              </>
+            ) : (
+              <>
+                <div className="text-green-400">Words left in review</div>
+                <div className="text-white font-semibold text-lg">{dueCount}</div>
+              </>
+            )}
           </div>
 
-          <div className="text-xs text-gray-500 text-right">
-            <div>Due: {deckState.stats.dueCount}</div>
-            {currentCard && (
-              <div className="text-gray-600">Set {currentCard.chunkNumber}</div>
+          <div className="text-xs text-gray-500 text-right w-24">
+            {currentCardInfo && (
+              <div className="text-gray-600">Set {currentCardInfo.chunkNumber}</div>
             )}
           </div>
         </div>
@@ -387,7 +432,27 @@ export default function PracticePage() {
           onClose={() => setIsSRSConfigOpen(false)}
           onConfigChange={handleSRSConfigChange}
         />
+
+        {/* Preview mode indicator */}
+        {previewMode && (
+          <div className="fixed bottom-20 left-1/2 -translate-x-1/2 bg-yellow-600 text-black px-4 py-2 rounded-full text-sm font-medium">
+            Preview Mode - No changes saved
+          </div>
+        )}
       </div>
     </div>
+  );
+}
+
+export default function PracticePage() {
+  return (
+    <Suspense fallback={
+      <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
+        <p className="text-lg">Loading...</p>
+      </div>
+    }>
+      <PracticePageContent />
+    </Suspense>
   );
 }

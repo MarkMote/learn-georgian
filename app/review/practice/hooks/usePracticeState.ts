@@ -1,5 +1,6 @@
 // app/review/practice/hooks/usePracticeState.ts
 // SRS state management for practice mode - reviews mastered words from all chunks
+// Updates are written back to original chunk storage
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import {
@@ -7,15 +8,12 @@ import {
   CardState,
   DeckState,
   Grade,
-  SelectNextCardResult,
 } from "../../../../lib/spacedRepetition/types";
 import {
   updateStateOnGrade,
-  selectNextCard,
   calculateDeckStats,
 } from "../../../../lib/spacedRepetition";
 import { getMergedConfig } from "../../../../lib/spacedRepetition/lib/configManager";
-import { createCardState } from "../../../../lib/spacedRepetition/lib/fsrs";
 
 type DifficultyRating = "fail" | "hard" | "good" | "easy";
 
@@ -26,39 +24,6 @@ function difficultyToGrade(difficulty: DifficultyRating): Grade {
     case "hard": return 1;
     case "good": return 2;
     case "easy": return 3;
-  }
-}
-
-// Storage key for practice deck
-const PRACTICE_STORAGE_KEY = "srs_v3_practice_review";
-
-function saveState(cardStates: Map<string, CardState>, deckState: DeckState) {
-  try {
-    const data = {
-      cardStates: Object.fromEntries(cardStates),
-      deckState,
-      version: 3,
-    };
-    localStorage.setItem(PRACTICE_STORAGE_KEY, JSON.stringify(data));
-  } catch (error) {
-    console.warn("Failed to save practice state:", error);
-  }
-}
-
-function loadState(): { cardStates: Map<string, CardState>; deckState: DeckState } | null {
-  try {
-    const stored = localStorage.getItem(PRACTICE_STORAGE_KEY);
-    if (!stored) return null;
-
-    const data = JSON.parse(stored);
-    if (data.version !== 3) return null;
-
-    return {
-      cardStates: new Map(Object.entries(data.cardStates)),
-      deckState: data.deckState,
-    };
-  } catch {
-    return null;
   }
 }
 
@@ -120,49 +85,65 @@ function loadAllMasteredWords(allWords: WordData[], chunkCount: number): Mastere
   return masteredWords;
 }
 
+// Save updated card state back to chunk storage
+function saveToChunkStorage(chunkNumber: number, cardKey: string, updatedCard: CardState) {
+  const storageKey = `srs_v3_${chunkNumber}_normal`;
+  try {
+    const stored = localStorage.getItem(storageKey);
+    if (!stored) return;
+
+    const data = JSON.parse(stored);
+    data.cardStates[cardKey] = updatedCard;
+    localStorage.setItem(storageKey, JSON.stringify(data));
+  } catch (error) {
+    console.warn("Failed to save to chunk storage:", error);
+  }
+}
+
 export interface UsePracticeStateReturn {
   knownWords: Array<{ data: WordData; chunkNumber: number }>;
-  currentIndex: number;
   currentWord: WordData | null;
   currentCardState: CardState | null;
-  deckState: DeckState;
-  source: SelectNextCardResult['source'];
   handleScore: (difficulty: DifficultyRating) => void;
-  clearProgress: () => void;
   isLoading: boolean;
   totalMastered: number;
+  // New: due cards tracking
+  dueCount: number;
+  isReviewComplete: boolean;
+  // New: practice mode (round-robin after review complete)
+  isPracticeMode: boolean;
+  startPracticeMode: () => void;
 }
 
 export function usePracticeState(
   allWords: WordData[],
-  chunkCount: number
+  chunkCount: number,
+  previewMode: boolean = false  // If true, treat all cards as due for testing
 ): UsePracticeStateReturn {
   const config = useMemo(() => getMergedConfig(), []);
 
   const [isLoading, setIsLoading] = useState(true);
   const [masteredWordInfos, setMasteredWordInfos] = useState<MasteredWordInfo[]>([]);
   const [cardStates, setCardStates] = useState<Map<string, CardState>>(new Map());
-  const [deckState, setDeckState] = useState<DeckState>({
-    currentCardKey: null,
-    consecutiveEasyCount: 0,
-    stats: {
-      dueCount: 0,
-      learningCount: 0,
-      consolidationCount: 0,
-      graduatedCount: 0,
-      totalIntroduced: 0,
-      totalAvailable: 0,
-    },
-  });
-  const [recentCardKeys, setRecentCardKeys] = useState<string[]>([]);
-  const [selectionResult, setSelectionResult] = useState<SelectNextCardResult>({
-    nextCardKey: null,
-    shouldIntroduceNew: false,
-    source: 'practice',
-    allComplete: false,
-  });
+  const [currentCardKey, setCurrentCardKey] = useState<string | null>(null);
 
-  // Load mastered words and initialize deck
+  // Due cards queue (cards that need review)
+  const [dueQueue, setDueQueue] = useState<string[]>([]);
+
+  // Practice mode (round-robin after review complete)
+  const [isPracticeMode, setIsPracticeMode] = useState(false);
+  const [practiceQueue, setPracticeQueue] = useState<string[]>([]);
+
+  // Create a map from card key to chunk number for saving
+  const cardToChunk = useMemo(() => {
+    const map = new Map<string, number>();
+    masteredWordInfos.forEach(info => {
+      map.set(info.word.key, info.chunkNumber);
+    });
+    return map;
+  }, [masteredWordInfos]);
+
+  // Load mastered words and initialize queues
   useEffect(() => {
     if (allWords.length === 0 || chunkCount === 0) return;
 
@@ -174,144 +155,166 @@ export function usePracticeState(
       return;
     }
 
-    // Create WordData array for the practice deck
-    const practiceWords = mastered.map(m => m.word);
-
-    // Initialize card states for practice - all cards start as "graduated" (practice mode)
+    // Initialize card states
     const newCardStates = new Map<string, CardState>();
-    const now = new Date();
-
     for (const info of mastered) {
-      // Copy the card state but ensure it's in graduated phase for practice
-      newCardStates.set(info.word.key, {
-        ...info.cardState,
-        // Keep the original state - we're just reviewing them
-      });
+      newCardStates.set(info.word.key, { ...info.cardState });
     }
-
     setCardStates(newCardStates);
 
-    // Calculate initial stats
-    const stats = calculateDeckStats(newCardStates, practiceWords.length);
+    // Build due queue (cards that are due now, or all cards in preview mode)
+    const now = new Date();
+    const dueCards: Array<{ key: string; due: Date }> = [];
 
-    // Select first card
-    const initialDeckState: DeckState = {
-      currentCardKey: null,
-      consecutiveEasyCount: 0,
-      stats,
-    };
-
-    const selection = selectNextCard(
-      newCardStates,
-      initialDeckState,
-      practiceWords,
-      config,
-      []
-    );
-
-    setDeckState({
-      ...initialDeckState,
-      currentCardKey: selection.nextCardKey || (practiceWords.length > 0 ? practiceWords[0].key : null),
-    });
-    setSelectionResult(selection);
-    setIsLoading(false);
-  }, [allWords, chunkCount, config]);
-
-  // Save state when it changes
-  useEffect(() => {
-    if (cardStates.size > 0) {
-      saveState(cardStates, deckState);
+    for (const info of mastered) {
+      const dueDate = new Date(info.cardState.due);
+      if (previewMode || dueDate <= now) {
+        dueCards.push({ key: info.word.key, due: dueDate });
+      }
     }
-  }, [cardStates, deckState]);
+
+    // Sort by due date (oldest first)
+    dueCards.sort((a, b) => a.due.getTime() - b.due.getTime());
+    const queue = dueCards.map(c => c.key);
+
+    setDueQueue(queue);
+    setCurrentCardKey(queue[0] || null);
+    setIsLoading(false);
+  }, [allWords, chunkCount, previewMode]);
 
   // Get current card state
   const currentCardState = useMemo(() => {
-    if (!deckState.currentCardKey) return null;
-    return cardStates.get(deckState.currentCardKey) || null;
-  }, [deckState.currentCardKey, cardStates]);
+    if (!currentCardKey) return null;
+    return cardStates.get(currentCardKey) || null;
+  }, [currentCardKey, cardStates]);
 
-  // Get available words for the practice deck
-  const availableWords = useMemo(() => {
-    return masteredWordInfos.map(m => m.word);
-  }, [masteredWordInfos]);
+  // Get current word
+  const currentWord = useMemo(() => {
+    if (!currentCardKey) return null;
+    const info = masteredWordInfos.find(m => m.word.key === currentCardKey);
+    return info?.word || null;
+  }, [currentCardKey, masteredWordInfos]);
 
   // Handle scoring
   const handleScore = useCallback((difficulty: DifficultyRating) => {
-    if (!currentCardState || !deckState.currentCardKey) return;
+    if (!currentCardState || !currentCardKey) return;
 
+    const chunkNumber = cardToChunk.get(currentCardKey);
+    if (!chunkNumber) return;
+
+    if (isPracticeMode) {
+      // PRACTICE MODE: Round-robin, no SRS updates
+      const newQueue = practiceQueue.filter(k => k !== currentCardKey);
+
+      let insertPosition: number;
+      switch (difficulty) {
+        case 'fail':
+          insertPosition = Math.min(2, newQueue.length);
+          break;
+        case 'hard':
+          insertPosition = Math.min(4, newQueue.length);
+          break;
+        case 'good':
+          insertPosition = Math.min(8, newQueue.length);
+          break;
+        case 'easy':
+          insertPosition = newQueue.length;
+          break;
+      }
+
+      newQueue.splice(insertPosition, 0, currentCardKey);
+      const nextKey = newQueue[0] !== currentCardKey ? newQueue[0] : newQueue[1] || newQueue[0];
+
+      setPracticeQueue(newQueue);
+      setCurrentCardKey(nextKey);
+      return;
+    }
+
+    // REVIEW MODE: Update SRS and save to chunk storage
     const grade = difficultyToGrade(difficulty);
 
-    const { cardState: updatedCard, deckState: updatedDeck } = updateStateOnGrade(
+    // Create a minimal deck state for updateStateOnGrade
+    const deckState: DeckState = {
+      currentCardKey,
+      consecutiveEasyCount: 0,
+      stats: {
+        dueCount: dueQueue.length,
+        learningCount: 0,
+        consolidationCount: 0,
+        graduatedCount: masteredWordInfos.length,
+        totalIntroduced: masteredWordInfos.length,
+        totalAvailable: masteredWordInfos.length,
+      },
+    };
+
+    const { cardState: updatedCard } = updateStateOnGrade(
       currentCardState,
       deckState,
       grade,
       config
     );
 
+    // Update local state
     const newCardStates = new Map(cardStates);
     newCardStates.set(updatedCard.key, updatedCard);
-
-    // Add current card to recent list (for interleaving)
-    const newRecentCards = [...recentCardKeys, deckState.currentCardKey];
-    const maxRecent = Math.max(config.minInterleaveCount + 2, 5);
-    if (newRecentCards.length > maxRecent) {
-      newRecentCards.shift();
-    }
-
-    const selection = selectNextCard(
-      newCardStates,
-      updatedDeck,
-      availableWords,
-      config,
-      newRecentCards
-    );
-
-    const finalDeckState: DeckState = {
-      ...updatedDeck,
-      currentCardKey: selection.nextCardKey,
-      stats: calculateDeckStats(newCardStates, availableWords.length),
-    };
-
     setCardStates(newCardStates);
-    setDeckState(finalDeckState);
-    setSelectionResult(selection);
-    setRecentCardKeys(newRecentCards);
-  }, [currentCardState, deckState, cardStates, availableWords, config, recentCardKeys]);
 
-  // Clear progress
-  const clearProgress = useCallback(() => {
-    try {
-      localStorage.removeItem(PRACTICE_STORAGE_KEY);
-    } catch {
-      // Ignore
+    // Save to original chunk storage (skip in preview mode)
+    if (!previewMode) {
+      saveToChunkStorage(chunkNumber, currentCardKey, updatedCard);
     }
-    // Reload to reset state
-    window.location.reload();
-  }, []);
+
+    // Move to next card in due queue
+    const newDueQueue = dueQueue.filter(k => k !== currentCardKey);
+    setDueQueue(newDueQueue);
+
+    if (newDueQueue.length > 0) {
+      setCurrentCardKey(newDueQueue[0]);
+    } else {
+      // All due cards reviewed
+      setCurrentCardKey(null);
+    }
+
+    console.log('Review:', difficulty, 'remaining:', newDueQueue.length);
+  }, [currentCardState, currentCardKey, cardStates, dueQueue, cardToChunk, config, isPracticeMode, practiceQueue, masteredWordInfos.length, previewMode]);
+
+  // Start practice mode (round-robin with all cards)
+  const startPracticeMode = useCallback(() => {
+    // Shuffle all mastered words for practice
+    const allKeys = masteredWordInfos.map(m => m.word.key);
+    const shuffled = [...allKeys];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    setPracticeQueue(shuffled);
+    setCurrentCardKey(shuffled[0] || null);
+    setIsPracticeMode(true);
+  }, [masteredWordInfos]);
 
   // Convert to format expected by UI
   const knownWords = useMemo(() => {
-    return masteredWordInfos
-      .filter(info => cardStates.has(info.word.key))
-      .map(info => ({
-        data: info.word,
-        chunkNumber: info.chunkNumber,
-      }));
-  }, [masteredWordInfos, cardStates]);
+    return masteredWordInfos.map(info => ({
+      data: info.word,
+      chunkNumber: info.chunkNumber,
+    }));
+  }, [masteredWordInfos]);
 
-  const currentIndex = knownWords.findIndex(item => item.data.key === deckState.currentCardKey);
-  const currentWord = currentIndex >= 0 ? knownWords[currentIndex]?.data : null;
+  const isReviewComplete = dueQueue.length === 0 && !isPracticeMode;
 
   return {
     knownWords,
-    currentIndex: Math.max(0, currentIndex),
     currentWord,
     currentCardState,
-    deckState,
-    source: selectionResult.source,
     handleScore,
-    clearProgress,
     isLoading,
     totalMastered: masteredWordInfos.length,
+    // Due cards tracking
+    dueCount: dueQueue.length,
+    isReviewComplete,
+    // Practice mode
+    isPracticeMode,
+    startPracticeMode,
   };
 }

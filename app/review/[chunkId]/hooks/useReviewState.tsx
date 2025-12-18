@@ -97,6 +97,7 @@ export interface UseReviewStateReturn {
   // Learning box state
   source: SelectNextCardResult['source'];
   allComplete: boolean;
+  isPracticeMode: boolean;
 
   // Legacy compatibility (for existing UI)
   knownWords: Array<{
@@ -159,6 +160,11 @@ export function useReviewState(
 
   // Recent cards for interleaving (not persisted - session only)
   const [recentCardKeys, setRecentCardKeys] = useState<string[]>([]);
+
+  // Practice mode queue (session-only, no persistence)
+  // When all cards are graduated and nothing is due, we use simple round-robin
+  const [practiceQueue, setPracticeQueue] = useState<string[]>([]);
+  const [isPracticeMode, setIsPracticeMode] = useState(false);
 
   // Selection state
   const [selectionResult, setSelectionResult] = useState<SelectNextCardResult>({
@@ -243,12 +249,41 @@ export function useReviewState(
     setRecentCardKeys([]);
   }, [chunkId, reviewMode, availableWords.length, config, filterPredicate]);
 
-  // Save state when it changes
+  // Save state when it changes (but not in practice mode)
   useEffect(() => {
-    if (cardStates.size > 0) {
+    if (cardStates.size > 0 && !isPracticeMode) {
       saveState(chunkId, reviewMode, cardStates, deckState);
     }
-  }, [cardStates, deckState, chunkId, reviewMode]);
+  }, [cardStates, deckState, chunkId, reviewMode, isPracticeMode]);
+
+  // Initialize practice queue when entering practice mode
+  useEffect(() => {
+    if (selectionResult.source === 'practice' && !isPracticeMode) {
+      // Entering practice mode - initialize queue with all graduated cards (shuffled)
+      const graduatedKeys = Array.from(cardStates.entries())
+        .filter(([_, state]) => state.phase === 'graduated' || state.phase === 'consolidation')
+        .map(([key, _]) => key);
+
+      // Shuffle the queue
+      const shuffled = [...graduatedKeys];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
+      setPracticeQueue(shuffled);
+      setIsPracticeMode(true);
+
+      // Set current card to first in queue
+      if (shuffled.length > 0) {
+        setDeckState(prev => ({ ...prev, currentCardKey: shuffled[0] }));
+      }
+    } else if (selectionResult.source !== 'practice' && isPracticeMode) {
+      // Exiting practice mode
+      setIsPracticeMode(false);
+      setPracticeQueue([]);
+    }
+  }, [selectionResult.source, isPracticeMode, cardStates]);
 
   // Get current word data
   const currentWord = useMemo(() => {
@@ -266,6 +301,45 @@ export function useReviewState(
   const handleScore = useCallback((difficulty: DifficultyRating) => {
     if (!currentCardState || !deckState.currentCardKey) return;
 
+    // PRACTICE MODE: Simple round-robin, no SRS updates
+    if (isPracticeMode && practiceQueue.length > 0) {
+      const currentKey = deckState.currentCardKey;
+
+      // Remove current card from its position
+      const newQueue = practiceQueue.filter(k => k !== currentKey);
+
+      // Determine reinsert position based on difficulty
+      // fail=2 ahead, hard=4 ahead, good=8 ahead, easy=end (round-robin)
+      let insertPosition: number;
+      switch (difficulty) {
+        case 'fail':
+          insertPosition = Math.min(2, newQueue.length);
+          break;
+        case 'hard':
+          insertPosition = Math.min(4, newQueue.length);
+          break;
+        case 'good':
+          insertPosition = Math.min(8, newQueue.length);
+          break;
+        case 'easy':
+          insertPosition = newQueue.length; // End of queue
+          break;
+      }
+
+      // Insert card at the calculated position
+      newQueue.splice(insertPosition, 0, currentKey);
+
+      // Next card is first in queue (after current is removed and reinserted)
+      const nextKey = newQueue[0] !== currentKey ? newQueue[0] : newQueue[1] || newQueue[0];
+
+      setPracticeQueue(newQueue);
+      setDeckState(prev => ({ ...prev, currentCardKey: nextKey }));
+
+      console.log('Practice mode:', difficulty, 'reinsert at', insertPosition, 'next:', nextKey);
+      return;
+    }
+
+    // NORMAL MODE: Full SRS logic
     const grade = difficultyToGrade(difficulty);
 
     // Check if current word is a verb (for special graduation rules)
@@ -347,7 +421,7 @@ export function useReviewState(
     setDeckState(finalDeckState);
     setSelectionResult(selection);
     setRecentCardKeys(newRecentCards);
-  }, [currentCardState, currentWord, deckState, cardStates, availableWords, filterPredicate, config, recentCardKeys]);
+  }, [currentCardState, currentWord, deckState, cardStates, availableWords, filterPredicate, config, recentCardKeys, isPracticeMode, practiceQueue]);
 
   // Clear progress
   const clearProgress = useCallback(() => {
@@ -409,6 +483,7 @@ export function useReviewState(
     // Learning box state
     source: selectionResult.source,
     allComplete: selectionResult.allComplete,
+    isPracticeMode,
 
     // Legacy compatibility
     knownWords,

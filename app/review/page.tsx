@@ -123,11 +123,45 @@ function loadChunkProgress(chunkNumber: number, chunkWords: WordData[]): ChunkPr
   }
 }
 
+// Count due words across all chunks
+function countDueWords(chunkCount: number): number {
+  const now = new Date();
+  let dueCount = 0;
+
+  for (let chunkNumber = 1; chunkNumber <= chunkCount; chunkNumber++) {
+    const storageKey = `srs_v3_${chunkNumber}_normal`;
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (!stored) continue;
+
+      const data = JSON.parse(stored);
+      const cardStates = data.cardStates || {};
+
+      for (const cardState of Object.values(cardStates)) {
+        const state = cardState as { phase?: string; due?: string };
+        const phase = state.phase || 'learning';
+        // Only count graduated/consolidation cards that are due
+        if ((phase === 'graduated' || phase === 'consolidation') && state.due) {
+          const dueDate = new Date(state.due);
+          if (dueDate <= now) {
+            dueCount++;
+          }
+        }
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return dueCount;
+}
+
 export default function ReviewHomePage() {
   const router = useRouter();
   const [allWords, setAllWords] = useState<WordData[]>([]);
   const [chunkCount, setChunkCount] = useState<number>(0);
   const [chunkProgress, setChunkProgress] = useState<Map<number, ChunkProgress>>(new Map());
+  const [dueCount, setDueCount] = useState<number>(0);
 
   // Reset body scroll styles (in case review page disabled them)
   useEffect(() => {
@@ -160,6 +194,9 @@ export default function ReviewHomePage() {
       progressMap.set(i, loadChunkProgress(i, chunkWords));
     }
     setChunkProgress(progressMap);
+
+    // Count due words
+    setDueCount(countDueWords(chunkCount));
   }, [allWords, chunkCount]);
 
   const handleChunkClick = (chunkNumber: number) => {
@@ -256,14 +293,26 @@ export default function ReviewHomePage() {
 
           {/* Bottom Actions */}
           <div className="pt-6 border-t border-gray-700 space-y-3">
-            {/* Review Known Words Button */}
-            {hasKnownWords && (
+            {/* Review Due Words Button - prominent when words are due */}
+            {hasKnownWords && dueCount > 0 && (
               <Link
                 href="/review/practice"
-                className="block px-6 py-4 w-full text-center bg-green-950/30 border border-green-400/50 rounded-lg text-base hover:bg-green-900/30 transition-all 
+                className="block px-6 py-4 w-full text-center bg-amber-950/50 border border-amber-400/70 rounded-lg text-base hover:bg-amber-900/40 transition-all
+                duration-150 ease-in-out font-medium active:scale-98"
+              >
+                <div className="text-amber-300 text-lg">{dueCount} words due for review</div>
+                <div className="text-amber-400/70 text-sm mt-1">Tap to review now</div>
+              </Link>
+            )}
+            {/* Review Known Words Button - subtle when no words due */}
+            {hasKnownWords && dueCount === 0 && (
+              <Link
+                href="/review/practice"
+                className="block px-6 py-4 w-full text-center bg-green-950/30 border border-green-400/50 rounded-lg text-base hover:bg-green-900/30 transition-all
                 duration-150 ease-in-out text-green-300/80 font-medium active:scale-98"
               >
-                Review Known Words ({totalStats.known})
+                <div>All caught up!</div>
+                <div className="text-green-400/60 text-sm mt-1">Practice {totalStats.known} known words</div>
               </Link>
             )}
             <Link
