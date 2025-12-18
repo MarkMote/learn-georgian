@@ -92,7 +92,7 @@ export default function ChunkHomePage() {
         </h1>
         
         <p className="text-sm sm:text-base text-gray-400 mb-8 sm:mb-10 text-center max-w-md px-4">
-          The below phrases are generated from high-frequency <Link href="https://en.wikipedia.org/wiki/N-gram" className="underline hover:text-gray-200 transition-colors whitespace-nowrap" target="_blank">n-grams</Link> of Georgian text. i.e. I found a large dataset of Georgian text and extracted the most common 1-4 word combinations.
+          The below phrases are generated from high-frequency <Link href="https://en.wikipedia.org/wiki/N-gram" className="underline hover:text-gray-200 transition-colors whitespace-nowrap" target="_blank">n-grams</Link> of Georgian text. That is, the phrases are the most common 1-4 word combinations found in a large corpus of Georgian text.
         </p>
 
         <div className="flex flex-col space-y-6 w-full max-w-md px-4 sm:px-0">
