@@ -3,7 +3,8 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Home, BookOpen } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
+import BackHeader from '../components/BackHeader';
 import Papa from 'papaparse';
 
 type MorphologyData = {
@@ -48,7 +49,7 @@ function getMarkerTypeColor(type: string): string {
     case "Version Marker": return "bg-purple-900/30 text-purple-300 border-purple-700";
     case "Circumfix (Noun)": return "bg-orange-900/30 text-orange-300 border-orange-700";
     case "Circumfix (Adj)": return "bg-amber-900/30 text-amber-300 border-amber-700";
-    case "Suffix (Noun)": return "bg-pink-900/30 text-pink-300 border-pink-700";
+    case "Suffix (Noun)": return "bg-pink-900/0 text-pink-300 border-pink-700";
     case "Suffix (Adj)": return "bg-rose-900/30 text-rose-300 border-rose-700";
     case "Suffix (Adverb)": return "bg-red-900/30 text-red-300 border-red-700";
     case "Postposition": return "bg-cyan-900/30 text-cyan-300 border-cyan-700";
@@ -92,28 +93,20 @@ export default function MorphologyPage() {
 
   const groupedMarkers = groupByType(markers);
 
+  const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
+
   return (
     <div className="min-h-screen bg-neutral-950 text-white">
-      {/* Header */}
-      <div className="sticky top-0 bg-neutral-950/90 backdrop-blur-sm border-b border-gray-800 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            <Link
-              href="/"
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              aria-label="Go to Home"
-            >
-              <Home size={20} />
-            </Link>
-            <h1 className="text-lg sm:text-2xl font-light">Georgian Morphology</h1>
-          </div>
-        </div>
-      </div>
+      <BackHeader />
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
+        <h1 className={`text-3xl sm:text-4xl font-light mb-3 text-slate-300 ${carvedTextStyle}`}>
+          Georgian Morphology
+        </h1>
+
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 text-left">
+          <p className="text-sm sm:text-base md:text-base text-gray-400 mb-6 py-3 text-left">
             Georgian uses prefixes, suffixes, and circumfixes to modify word meanings. Learning these markers helps you remember, understand, and build words much easier. Importantly, they work best as general patterns rather than strict rules. Preverbs are a good example: their directional meaning shows up mainly with motion verbs, while in most other verbs they are just part of how the verb forms its tenses. I will make a dedicated preverb page and practice deck in the future.</p>
           <Link
             href="/morphology/deck"
@@ -121,17 +114,17 @@ export default function MorphologyPage() {
             bg-indigo-900/50 border-indigo-700 border hover:bg-indigo-900/80 rounded-lg transition-colors text-indigo-100"
           >
             <BookOpen size={18} />
-            <span>Practice Morphology</span>
+            <span>Practice Morphology Patterns</span>
           </Link>
         </div>
 
         <div className="h-8"></div>
 
         {/* Mobile Cards */}
-        <div className="md:hidden space-y-6">
+        <div className="md:hidden space-y-6 text-slate-200">
           {Array.from(groupedMarkers.entries()).map(([type, typeMarkers]) => (
             <div key={type}>
-              <h2 className={`text-lg border-b font-semibold px-3 py-3 rounded-t-lg mb-3   ${getMarkerTypeColor(type)}`}>
+              <h2 className={`text-2xl text-slate-300 font-semibold px-3 py-3 rounded-t-lg mb-3   `}>
                 {type}
               </h2>
               <div className="space-y-3">
@@ -174,30 +167,32 @@ export default function MorphologyPage() {
         <div className="hidden md:block space-y-8 ">
           {Array.from(groupedMarkers.entries()).map(([type, typeMarkers]) => (
             <div key={type}>
-              <h2 className={`text-lg border-b font-semibold px-3 py-3 rounded-t-lg mb-3  ${getMarkerTypeColor(type)}`}>
+              <h2 className={`text-2xl text-slate-300 font-semibold px-3 py-3 rounded-t-xl mb-4 `}>
                 {type}
               </h2>
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
+                <table className="w-full border-separate border-spacing-0 bg-neutral-300/5 rounded-xl overflow-hidden border-2  border-gray-500/20 ">
                   <thead>
-                    <tr className="border-b border-gray-700">
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-300 w-32">Marker</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Meaning</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Example 1</th>
-                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Example 2</th>
+                    <tr className="bg-neutral-200/5">
+                      <th className="text-left py-5 px-6 text-base font-semibold text-gray-300 w-32 border-b-2 border-gray-500/80">Marker</th>
+                      <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Meaning</th>
+                      <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Example 1</th>
+                      <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Example 2</th>
                     </tr>
                   </thead>
                   <tbody>
                     {typeMarkers.map((marker, index) => {
                       const ex1 = parseExample(marker.example1);
                       const ex2 = parseExample(marker.example2);
+                      const isLastRow = index === typeMarkers.length - 1;
+                      const borderClass = isLastRow ? "" : "border-b border-gray-800";
                       return (
-                        <tr key={index} className="border-b border-gray-800 hover:bg-gray-900/50">
-                          <td className="py-4 px-4">
+                        <tr key={index}>
+                          <td className={`py-4 px-6 ${borderClass}`}>
                             <span className="text-2xl">{marker.marker}</span>
                           </td>
-                          <td className="py-4 px-4 text-gray-200">{marker.meaning}</td>
-                          <td className="py-4 px-4">
+                          <td className={`py-4 px-4 text-gray-200 ${borderClass}`}>{marker.meaning}</td>
+                          <td className={`py-4 px-4 ${borderClass}`}>
                             {marker.example1 && (
                               <div>
                                 <p className="text-base">{ex1.georgian}</p>
@@ -205,7 +200,7 @@ export default function MorphologyPage() {
                               </div>
                             )}
                           </td>
-                          <td className="py-4 px-4">
+                          <td className={`py-4 px-4 ${borderClass}`}>
                             {marker.example2 && (
                               <div>
                                 <p className="text-base">{ex2.georgian}</p>

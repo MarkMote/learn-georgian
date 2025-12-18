@@ -1,3 +1,4 @@
+// app/all/page.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -5,7 +6,7 @@ import { WordData, KnownWordState } from "../review/[chunkId]/types";
 import { parseCSV } from "../review/[chunkId]/utils/dataProcessing";
 import WordCard from "./components/WordCard";
 import Link from "next/link";
-import { Home } from "lucide-react";
+import BackHeader from "../components/BackHeader";
 
 interface WordWithProgress {
   word: WordData;
@@ -104,20 +105,17 @@ export default function AllWordsPage() {
     );
   }
 
+  const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
+
   return (
     <div className="min-h-screen bg-neutral-950 text-white">
+      <BackHeader />
+
       <div className="container mx-auto px-4 py-8">
         <div className="mb-4">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold">All Words</h1>
-            <Link 
-              href="/"
-              className="p-2 border border-gray-600 rounded hover:bg-gray-700 transition-colors"
-              aria-label="Go to Home"
-            >
-              <Home size={20} />
-            </Link>
-          </div>
+          <h1 className={`text-3xl sm:text-4xl font-light mb-3 text-slate-300 ${carvedTextStyle}`}>
+            All Words
+          </h1>
           <p className="text-gray-400">
             {allWords.length} total words • {wordsWithProgress.filter(w => w.progress).length} learned
           </p>

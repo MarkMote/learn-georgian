@@ -3,7 +3,8 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Home, BookOpen } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
+import BackHeader from '../components/BackHeader';
 import Papa from 'papaparse';
 
 type AlphabetData = {
@@ -66,28 +67,20 @@ export default function AlphabetPage() {
       });
   }, []);
 
+  const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
+
   return (
     <div className="min-h-screen bg-neutral-950 text-white">
-      {/* Header */}
-      <div className="sticky top-0 bg-neutral-950/90 backdrop-blur-sm border-b border-gray-800 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            <Link
-              href="/"
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              aria-label="Go to Home"
-            >
-              <Home size={20} />
-            </Link>
-            <h1 className="text-lg sm:text-2xl font-light">Georgian Alphabet</h1>
-          </div>
-        </div>
-      </div>
+      <BackHeader />
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
+        <h1 className={`text-3xl sm:text-4xl font-light mb-3 text-slate-300 ${carvedTextStyle}`}>
+          Georgian Alphabet
+        </h1>
+
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm sm:text-base md:text-base text-gray-300/90 mb-6 text-left font-light py-5">
+          <p className="text-sm sm:text-base md:text-base text-gray-400 mb-6 py-3 text-left font-light">
             The Georgian alphabet (Mkhedruli) has 33 letters. There is no capitalization. Georgian spelling is almost perfectly phonemic: each letter always represents the same sound and each letter of a word is always pronounced (so it&apos;s kind of like the opposite of French). There are no silent letters, diacritics, or digraphs, and even complex consonant clusters are written exactly as spoken. 
             <span className="font-bold text-gray-300"> This means that once you learn the alphabet, pronounciation becomes predictable.</span>
           </p>
@@ -102,7 +95,7 @@ export default function AlphabetPage() {
         </div>
 
         {/* Legend */}
-        <div className="mb-8 p-3 bg-gray-900/50 border border-gray-800 rounded-lg">
+        <div className="mb-8 p-3 bg-gray-900/50 border border-gray-800 rounded-lg ">
           <div className="flex flex-wrap gap-4 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5">
               <span className="text-green-400 font-bold">●</span>
@@ -153,41 +146,45 @@ export default function AlphabetPage() {
 
         {/* Desktop Table */}
         <div className="hidden md:block overflow-x-auto">
-          <table className="w-full border-collapse">
+          <table className="w-full border-separate border-spacing-0 bg-neutral-300/5 rounded-xl overflow-hidden border-2 border-gray-500/20">
             <thead>
-              <tr className="border-b border-gray-700">
-                <th className="text-center py-3 px-4 text-sm font-medium text-gray-300"></th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Letter</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Transliteration</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">IPA</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Explanation</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-300">Example</th>
+              <tr className="bg-neutral-200/5">
+                <th className="text-center py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80"></th>
+                <th className="text-left py-5 px-6 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Letter</th>
+                <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Transliteration</th>
+                <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">IPA</th>
+                <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Explanation</th>
+                <th className="text-left py-5 px-4 text-base font-semibold text-gray-300 border-b-2 border-gray-500/80">Example</th>
               </tr>
             </thead>
             <tbody>
-              {letters.map((letter, index) => (
-                <tr key={index} className="border-b border-gray-800 hover:bg-gray-900/50">
-                  <td className="py-4 px-4 text-center">
-                    {getEquivalentIcon(letter.englishEquivalent)}
-                  </td>
-                  <td className="py-4 px-4">
-                    <span className="text-5xl">{letter.georgianLetter}</span>
-                  </td>
-                  <td className="py-4 px-4 text-lg">{letter.englishLetter}</td>
-                  <td className="py-4 px-4 text-lg text-gray-200">{letter.ipaSymbol}</td>
-                  <td className="py-4 px-4 text-lg text-gray-200 max-w-md">{letter.explanation}</td>
-                  <td className="py-4 px-4">
-                    {letter.georgianExample && (
-                      <div className="space-y-1">
-                        <p className="text-base">{letter.georgianExample}</p>
-                        {letter.translation && (
-                          <p className="text-sm text-gray-500">{letter.translation}</p>
-                        )}
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
+              {letters.map((letter, index) => {
+                const isLastRow = index === letters.length - 1;
+                const borderClass = isLastRow ? "" : "border-b border-gray-800";
+                return (
+                  <tr key={index}>
+                    <td className={`py-4 px-4 text-center ${borderClass}`}>
+                      {getEquivalentIcon(letter.englishEquivalent)}
+                    </td>
+                    <td className={`py-4 px-6 ${borderClass}`}>
+                      <span className="text-5xl">{letter.georgianLetter}</span>
+                    </td>
+                    <td className={`py-4 px-4 text-lg ${borderClass}`}>{letter.englishLetter}</td>
+                    <td className={`py-4 px-4 text-lg text-gray-200 ${borderClass}`}>{letter.ipaSymbol}</td>
+                    <td className={`py-4 px-4 text-lg text-gray-200 max-w-md ${borderClass}`}>{letter.explanation}</td>
+                    <td className={`py-4 px-4 ${borderClass}`}>
+                      {letter.georgianExample && (
+                        <div className="space-y-1">
+                          <p className="text-base">{letter.georgianExample}</p>
+                          {letter.translation && (
+                            <p className="text-sm text-gray-500">{letter.translation}</p>
+                          )}
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

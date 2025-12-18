@@ -2,31 +2,23 @@
 "use client";
 
 import Link from 'next/link';
-import { Home } from 'lucide-react';
+import BackHeader from '../components/BackHeader';
 
 export default function GettingStartedPage() {
+  const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
+
   return (
-    <div className="min-h-screen bg-[#0d1117] text-slate-200">
-      {/* Header */}
-      <div className="sticky top-0 bg-[#0d1117] backdrop-blur-sm border-b border-gray-800 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-4">
-          <div className="flex items-center space-x-4">
-            <Link
-              href="/"
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              aria-label="Go to Home"
-            >
-              <Home size={20} />
-            </Link>
-            <h1 className="text-2xl font-light">Getting Started</h1>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-neutral-950 text-slate-200">
+      <BackHeader />
 
       {/* Content */}
       <div className="max-w-3xl mx-auto px-4 py-8">
+        <h1 className={`text-3xl sm:text-4xl font-light mb-6 text-slate-300 ${carvedTextStyle}`}>
+          Getting Started
+        </h1>
+
         <div className="prose prose-invert max-w-none">
-          <p className="text-lg text-gray-300 mb-8">
+          <p className="text-lg text-gray-400 mb-8">
             This is a spaced repetition app for learning the Georgian language. Progress is saved in the browser so there is no login or download required. It looks best on mobile, but works on desktop too.
           </p>
 
