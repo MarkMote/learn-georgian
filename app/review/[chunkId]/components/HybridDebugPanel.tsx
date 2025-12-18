@@ -31,6 +31,7 @@ function formatState(state: number): string {
 function formatPhase(phase: string): string {
   switch (phase) {
     case 'learning': return 'Learning';
+    case 'consolidation': return 'Consolidation';
     case 'review': return 'Review';
     case 'graduated': return 'Graduated';
     default: return phase;
@@ -162,6 +163,10 @@ export default function HybridDebugPanel({
             <span className="text-gray-500">learningSteps:</span>{' '}
             {config.learningSteps.map(formatStepTime).join(', ')}
           </div>
+          <div className="col-span-2">
+            <span className="text-gray-500">consolidationSteps:</span>{' '}
+            {config.consolidationSteps.map(formatStepTime).join(', ')}
+          </div>
         </div>
 
         {currentCardState && (
@@ -233,7 +238,7 @@ export default function HybridDebugPanel({
                       {cardState ? `${cardState.learningStep}` : "-"}
                     </td>
                     <td className="text-right py-1 px-1">
-                      {cardState ? formatDue(cardState.phase === 'learning' ? cardState.stepDue : cardState.due) : "-"}
+                      {cardState ? formatDue(cardState.phase === 'graduated' ? cardState.due : cardState.stepDue) : "-"}
                     </td>
                   </tr>
                 );
