@@ -12,6 +12,7 @@ import { usePracticeState } from './hooks/usePracticeState';
 import { WordData } from '../../../lib/spacedRepetition/types';
 import { ExampleMode, ReviewMode, DifficultyRating } from '../[chunkId]/types';
 import { getVerbHint, getVerbTenseLabel, parseCSV } from '../[chunkId]/utils/dataProcessing';
+import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 const CHUNK_SIZE = 50;
 
@@ -175,29 +176,8 @@ export default function PracticePage() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [isFlipped, handleScore]);
 
-  // Prevent body scroll
-  useEffect(() => {
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-    document.body.style.height = '100%';
-    document.body.style.overflow = 'hidden';
-
-    const preventDefault = (e: TouchEvent) => {
-      const target = e.target as HTMLElement;
-      if (!target.closest('button') && !target.closest('a') && !target.closest('[role="button"]')) {
-        e.preventDefault();
-      }
-    };
-    document.addEventListener('touchmove', preventDefault, { passive: false });
-
-    return () => {
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-      document.body.style.overflow = '';
-      document.removeEventListener('touchmove', preventDefault);
-    };
-  }, []);
+  // Lock flashcard screen (no zoom, scroll, or orientation flip)
+  useFlashcardLock(true);
 
   // Close menu on outside click
   useEffect(() => {

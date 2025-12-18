@@ -10,12 +10,13 @@ import CustomTopBar from './components/CustomTopBar';
 import UploadForm from './components/UploadForm';
 import DeckManager from './components/DeckManager';
 import { useCustomReviewState } from './hooks/useCustomReviewState';
+import { useFlashcardLock } from '../hooks/useFlashcardLock';
 import { CustomWord, CustomReviewMode } from './types';
-import { 
-  loadCustomWords, 
-  saveCustomWords, 
-  addToCustomDeck, 
-  clearCustomDeck 
+import {
+  loadCustomWords,
+  saveCustomWords,
+  addToCustomDeck,
+  clearCustomDeck
 } from './utils';
 
 type PageState = 'empty' | 'upload' | 'manager' | 'review' | 'add-more';
@@ -99,35 +100,8 @@ function CustomPageContent() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [pageState, isFlipped, handleScore, setIsFlipped, setShowEnglish]);
 
-  // Prevent scrolling during review
-  useEffect(() => {
-    if (pageState === 'review') {
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.height = '100%';
-      document.body.style.overflow = 'hidden';
-      
-      const preventDefault = (e: TouchEvent) => {
-        // Only prevent default on document body, not on buttons or interactive elements
-        const target = e.target as HTMLElement;
-        if (!target.closest('button') && !target.closest('a') && !target.closest('[role="button"]')) {
-          e.preventDefault();
-        }
-      };
-      document.addEventListener('touchmove', preventDefault, { passive: false });
-      
-      return () => {
-        document.removeEventListener('touchmove', preventDefault);
-      };
-    }
-    
-    return () => {
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-      document.body.style.overflow = '';
-    };
-  }, [pageState]);
+  // Lock flashcard screen (no zoom, scroll, or orientation flip) when in review mode
+  useFlashcardLock(pageState === 'review');
 
   // Reset flip state when index changes
   useEffect(() => {
@@ -329,8 +303,8 @@ function CustomPageContent() {
   }
 
   return (
-    <div 
-      className="relative w-full bg-neutral-950 text-white" 
+    <div
+      className="relative w-full bg-neutral-950 text-white"
       style={{ height: '100dvh', overflow: 'hidden' }}
     >
       <CustomTopBar

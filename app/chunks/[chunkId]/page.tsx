@@ -8,12 +8,13 @@ import TopBar from './components/TopBar';
 import ProgressModal from './components/ProgressModal';
 import { useChunkState } from './hooks/useChunkState';
 import { ChunkData, ReviewMode, ExampleMode, ExplanationMode } from './types';
-import { 
-  parseCSV, 
+import {
+  parseCSV,
   getChunksForSet,
-  computePercentageScore, 
-  getChunkProgress 
+  computePercentageScore,
+  getChunkProgress
 } from './utils/dataProcessing';
+import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 export default function ChunkPage() {
   const params = useParams();
@@ -91,34 +92,8 @@ export default function ChunkPage() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [isFlipped, currentIndex, handleScore, setIsFlipped]);
 
-  useEffect(() => {
-    if (!isProgressModalOpen) {
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.height = '100%';
-      document.body.style.overflow = 'hidden';
-      
-      const preventDefault = (e: TouchEvent) => {
-        // Only prevent default on document body, not on buttons or interactive elements
-        const target = e.target as HTMLElement;
-        if (!target.closest('button') && !target.closest('a') && !target.closest('[role="button"]')) {
-          e.preventDefault();
-        }
-      };
-      document.addEventListener('touchmove', preventDefault, { passive: false });
-      
-      return () => {
-        document.removeEventListener('touchmove', preventDefault);
-      };
-    }
-    
-    return () => {
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-      document.body.style.overflow = '';
-    };
-  }, [isProgressModalOpen]);
+  // Lock flashcard screen (no zoom, scroll, or orientation flip) when modal is closed
+  useFlashcardLock(!isProgressModalOpen);
 
   const currentCard = knownChunks[currentIndex];
 

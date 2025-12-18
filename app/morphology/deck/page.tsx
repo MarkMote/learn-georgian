@@ -9,6 +9,7 @@ import BottomBar from '../../components/BottomBar';
 import { MorphologyData } from './types';
 import { parseCSV } from './utils/dataProcessing';
 import { useMorphologyReviewState } from './hooks/useMorphologyReviewState';
+import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 export default function MorphologyDeckPage() {
   const router = useRouter();
@@ -35,6 +36,9 @@ export default function MorphologyDeckPage() {
     setIsLeftHanded,
     clearProgress
   } = useMorphologyReviewState(allMarkers);
+
+  // Lock flashcard screen (no zoom, scroll, or orientation flip)
+  useFlashcardLock(true);
 
   // Keyboard shortcuts
   useEffect(() => {

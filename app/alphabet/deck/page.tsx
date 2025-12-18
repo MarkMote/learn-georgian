@@ -10,6 +10,7 @@ import AlphabetDebugPanel from './components/AlphabetDebugPanel';
 import { AlphabetData } from './types';
 import { parseCSV } from './utils/dataProcessing';
 import { useAlphabetReviewState } from './hooks/useAlphabetReviewState';
+import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 function AlphabetDeckContent() {
   const router = useRouter();
@@ -43,6 +44,9 @@ function AlphabetDeckContent() {
     currentCardState,
     source,
   } = useAlphabetReviewState(allLetters);
+
+  // Lock flashcard screen (no zoom, scroll, or orientation flip) when not in debug mode
+  useFlashcardLock(!showDebug);
 
   // Keyboard shortcuts
   useEffect(() => {
