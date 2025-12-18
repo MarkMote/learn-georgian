@@ -7,18 +7,24 @@ import { DEFAULT_CONFIG } from './config';
 /**
  * Update card and deck state on grade
  *
- * Learning phase logic:
+ * Learning phase logic [1m, 2m, 4m, 8m, 16m]:
  * - Fail: Reset to step 0
  * - Hard: Retry current step (stay at same step)
  * - Good: Advance +1 step (or +2 if new card)
  * - Easy: Advance +2 steps (or graduate immediately if new non-verb, +3 if new verb)
+ * - After final learning step: move to consolidation
  *
  * Special rules:
- * - New non-verb cards: Easy = graduate immediately, Good = +2 steps
+ * - New non-verb cards: Easy = graduate immediately (skip consolidation), Good = +2 steps
  * - New verb cards: Easy = +3 steps, Good = +2 steps (verbs need more practice)
- * - 3 consecutive Easy grades = graduate (prevents feeling stuck)
  *
- * Review/Graduated phase logic:
+ * Consolidation phase logic [30m, 1hr]:
+ * - Fail: Go back to learning step 0
+ * - Hard: Retry current consolidation step
+ * - Good/Easy: Advance +1 consolidation step
+ * - After final consolidation step: graduate to FSRS
+ *
+ * Graduated phase logic:
  * - Fail: Go back to learning step 0
  * - Hard/Good/Easy: FSRS schedules next review
  *
@@ -32,8 +38,9 @@ export function updateStateOnGrade(
   isVerb: boolean = false
 ): { cardState: CardState; deckState: DeckState } {
   const now = new Date();
-  const { learningSteps } = config;
-  const maxStep = learningSteps.length - 1;
+  const { learningSteps, consolidationSteps } = config;
+  const maxLearningStep = learningSteps.length - 1;
+  const maxConsolidationStep = consolidationSteps.length - 1;
 
   let newPhase: LearningPhase = cardState.phase;
   let newLearningStep = cardState.learningStep;
@@ -63,9 +70,11 @@ export function updateStateOnGrade(
 
       case 2: // Good - advance +1 step (or +2 if new card)
         newLearningStep += isNewCard ? 2 : 1;
-        if (newLearningStep > maxStep) {
-          newPhase = 'graduated';
-          isGraduating = true;
+        if (newLearningStep > maxLearningStep) {
+          // Move to consolidation phase
+          newPhase = 'consolidation';
+          newLearningStep = 0; // Reset to consolidation step 0
+          newStepDue = new Date(now.getTime() + consolidationSteps[0]).toISOString();
         } else {
           newStepDue = new Date(now.getTime() + learningSteps[newLearningStep]).toISOString();
         }
@@ -77,27 +86,55 @@ export function updateStateOnGrade(
             // New verb + Easy = +3 steps (verbs need more practice)
             newLearningStep += 3;
           } else {
-            // New non-verb + Easy = graduate immediately
+            // New non-verb + Easy = graduate immediately (skip consolidation)
             newPhase = 'graduated';
             isGraduating = true;
-            newLearningStep = maxStep + 1;
+            newLearningStep = 0; // Reset for graduated state
           }
         } else {
           // Existing card + Easy = +2 steps
           newLearningStep += 2;
         }
 
-        // Check if should graduate (for verb case or existing card)
-        if (!isGraduating && newLearningStep > maxStep) {
-          newPhase = 'graduated';
-          isGraduating = true;
+        // Check if should move to consolidation (for verb case or existing card)
+        if (!isGraduating && newLearningStep > maxLearningStep) {
+          newPhase = 'consolidation';
+          newLearningStep = 0; // Reset to consolidation step 0
+          newStepDue = new Date(now.getTime() + consolidationSteps[0]).toISOString();
         } else if (!isGraduating) {
           newStepDue = new Date(now.getTime() + learningSteps[newLearningStep]).toISOString();
         }
         break;
     }
+  } else if (cardState.phase === 'consolidation') {
+    // Card is in consolidation phase
+    switch (grade) {
+      case 0: // Fail - send back to learning step 0
+        newPhase = 'learning';
+        newLearningStep = 0;
+        newStepDue = new Date(now.getTime() + learningSteps[0]).toISOString();
+        newConsecutiveEasyCount = 0;
+        break;
+
+      case 1: // Hard - retry current consolidation step
+        newStepDue = new Date(now.getTime() + consolidationSteps[newLearningStep]).toISOString();
+        break;
+
+      case 2: // Good - advance +1 consolidation step
+      case 3: // Easy - advance +1 consolidation step (no skipping in consolidation)
+        newLearningStep += 1;
+        if (newLearningStep > maxConsolidationStep) {
+          // Graduate to FSRS
+          newPhase = 'graduated';
+          isGraduating = true;
+          newLearningStep = 0; // Reset for graduated state
+        } else {
+          newStepDue = new Date(now.getTime() + consolidationSteps[newLearningStep]).toISOString();
+        }
+        break;
+    }
   } else {
-    // Card is in review/graduated phase
+    // Card is in graduated phase
     if (grade === 0) {
       // Fail - send back to learning
       newPhase = 'learning';

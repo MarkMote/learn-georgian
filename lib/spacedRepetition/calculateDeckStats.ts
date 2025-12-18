@@ -17,6 +17,7 @@ export function calculateDeckStats(
     return {
       dueCount: 0,
       learningCount: 0,
+      consolidationCount: 0,
       graduatedCount: 0,
       totalIntroduced: 0,
       totalAvailable,
@@ -25,6 +26,7 @@ export function calculateDeckStats(
 
   let dueCount = 0;
   let learningCount = 0;
+  let consolidationCount = 0;
   let graduatedCount = 0;
 
   cardStates.forEach((cardState, key) => {
@@ -40,7 +42,13 @@ export function calculateDeckStats(
       if (new Date(cardState.stepDue) <= now) {
         dueCount++;
       }
-    } else if (cardState.phase === 'graduated' || cardState.phase === 'review') {
+    } else if (cardState.phase === 'consolidation') {
+      consolidationCount++;
+      // Consolidation cards use stepDue
+      if (new Date(cardState.stepDue) <= now) {
+        dueCount++;
+      }
+    } else if (cardState.phase === 'graduated') {
       graduatedCount++;
       // Graduated cards use FSRS due
       if (new Date(cardState.due) <= now) {
@@ -52,6 +60,7 @@ export function calculateDeckStats(
   return {
     dueCount,
     learningCount,
+    consolidationCount,
     graduatedCount,
     totalIntroduced: cardStates.size,
     totalAvailable,

@@ -22,7 +22,10 @@ export interface WordData {
 }
 
 // Learning phase for session management (Leitner-style)
-export type LearningPhase = 'learning' | 'review' | 'graduated';
+// - learning: rapid drilling [1m, 2m, 4m, 8m, 16m], card in learning box
+// - consolidation: same-day spacing [30m, 1hr], card out of learning box
+// - graduated: FSRS long-term [1d+], mastered for the day
+export type LearningPhase = 'learning' | 'consolidation' | 'graduated';
 
 // Individual card SRS state (FSRS-compatible + learning box)
 export interface CardState {
@@ -54,6 +57,7 @@ export interface DeckState {
   stats: {
     dueCount: number;             // Review cards due now
     learningCount: number;        // Cards in learning phase
+    consolidationCount: number;   // Cards in consolidation phase
     graduatedCount: number;       // Cards that have graduated
     totalIntroduced: number;      // Total cards introduced
     totalAvailable: number;       // Total cards in deck
@@ -65,6 +69,7 @@ export interface SRSConfig {
   // Learning box settings
   targetLearningCount: number;    // Target cards in learning box (default: 5)
   learningSteps: number[];        // Learning step intervals in ms (default: [1,2,4,8,16] minutes)
+  consolidationSteps: number[];   // Consolidation step intervals in ms (default: [30m, 1hr])
   maxGraduatingIntervalDays: number; // Cap first FSRS interval to this many days (default: 1)
   // Interleaving
   minInterleaveCount: number;     // Minimum cards between repeats (default: 2)

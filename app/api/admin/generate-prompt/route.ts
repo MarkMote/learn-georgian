@@ -24,7 +24,8 @@ Your goal is to create memorable, visually interesting images that help learners
 IMPORTANT STYLE RULES:
 - AVOID cartoon, clipart, flat illustration, vector art, or typical "flashcard" styles - these are boring and forgettable
 - PREFER: realistic photography, cinematic shots, oil paintings, watercolors, charcoal sketches, polaroid, vintage photographs, film stills, documentary style, fine art, surrealist art, Renaissance style, impressionist paintings, abstract, concept art, detailed digital illustration, pop art, ukiyo-e Japanese woodblock, gouache illustration, Art Nouveau, neon noir, Baroque painting, stained glass style, psychedelic art, Persian miniature, paper cut-out style, or anything not flashcard style.
-- Additionally, the tone should match the word, but generally prefer "bright and vivid" vs "dark and moody" for words that are neutral
+- Additionally, the tone should match the word, but generally prefer "bright and vivid" vs "dark and moody" for words that are neutral. 
+- Prefer creative and colorfull styles, rather than generic oil paintings (those are fine in moderation)
 - Each image should feel unique and memorable, but still educational
 - Each image should perfectly and uniquely describe the word
 - include the word or phrase in the prompt

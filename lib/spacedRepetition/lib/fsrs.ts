@@ -203,7 +203,7 @@ export function fsrsCardToCardState(
   learningFields: {
     learningStep: number;
     stepDue: string;
-    phase: 'learning' | 'review' | 'graduated';
+    phase: 'learning' | 'consolidation' | 'graduated';
     consecutiveEasyCount: number;
   }
 ): CardState {

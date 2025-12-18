@@ -1213,14 +1213,13 @@ nuclear,nuclear,nuclear,nuclear,adjective,ბირთვული,adjective,2,g
 parent,parent,parent,parent,noun,მშობელი,people,2,general,Every parent worries about their child.,ყველა მშობელი ღელავს თავის შვილზე.,
 bone,bone,bone,bone,noun,ძვალი,body,2,general,The dog buried his bone.,ძაღლმა თავისი ძვალი დამარხა.,
 contract,contract,contract,contract,noun,კონტრაქტი,society,2,general,You need to sign the contract.,კონტრაქტს ხელი უნდა მოაწერო.,
-player,player,player,player,noun,მოთამაშე,people,2,general,He is a professional basketball player.,ის პროფესიონალი კალათბურთელია.,Prefix მო- often indicates the doer of an action (from თამაში = game/play).
-draw,draw_inf,draw,to draw,verb-inf,ხატვა,verb,2,verbs,Drawing pictures is fun,სურათების ხატვა სასიამოვნოა,
+player,player,player,player,noun,მოთამაშე,people,2,general,He is a good player.,ის კარგი მოთამაშეა.,"Prefix მო- often indicates the doer of an action (from თამაში = game/play)."draw,draw_inf,draw,to draw,verb-inf,ხატვა,verb,2,verbs,Drawing pictures is fun,სურათების ხატვა სასიამოვნოა,
 draw,draw_p1s,draw,I draw,verb-p1s,მე ვხატავ,verb,2,verbs,I draw pictures in my free time.,თავისუფალ დროს სურათებს ვხატავ.,
 draw,draw_p2s,draw,You draw,verb-p2s,შენ ხატავ,verb,2,verbs,You draw very well.,შენ ძალიან კარგად ხატავ.,
 draw,draw_p3s,draw,He/She/It draws,verb-p3s,ის ხატავს,verb,2,verbs,She draws portraits of people.,ის ადამიანების პორტრეტებს ხატავს.,
 draw,draw_p1p,draw,We draw,verb-p1p,ჩვენ ვხატავთ,verb,2,verbs,We draw on the whiteboard.,ჩვენ თეთრ დაფაზე ვხატავთ.,
 draw,draw_p2p,draw,You (pl) draw,verb-p2p,თქვენ ხატავთ,verb,2,verbs,You (pl) draw landscapes.,თქვენ პეიზაჟებს ხატავთ.,
-draw,draw_p3p,draw,They draw,verb-p3p,ისინი ხატავენ,verb,2,verbs,They draw cartoons for a living.,ისინი საარსებოდ მულტფილმებს ხატავენ.,
+draw,draw_p3p,draw,They draw,verb-p3p,ისინი ხატავენ,verb,2,verbs,They draw pictures.,ისინი სურათებს ხატავენ.,
 shoulder,shoulder,shoulder,shoulder,noun,მხარი,body,2,general,He has a pain in his shoulder.,მას მხარი სტკივა.,"Also means ""support"" (giving a shoulder)."
 pain,pain,pain,pain,noun,ტკივილი,misc_nouns,2,general,Where do you feel the pain?,სად გრძნობთ ტკივილს?,
 spring,spring,spring,spring,noun,გაზაფხული,seasons,2,general,Flowers bloom in the spring.,გაზაფხულზე ყვავილები ყვავის.,Compound: გა- (prefix) + ზაფხული (summer). Literal: toward summer.

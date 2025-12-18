@@ -150,6 +150,7 @@ export function useReviewState(
     stats: {
       dueCount: 0,
       learningCount: 0,
+      consolidationCount: 0,
       graduatedCount: 0,
       totalIntroduced: 0,
       totalAvailable: 0,

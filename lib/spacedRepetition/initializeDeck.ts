@@ -28,6 +28,7 @@ export function initializeDeck(
     stats: {
       dueCount: 0,
       learningCount: initialCount,  // All initial cards are in learning
+      consolidationCount: 0,
       graduatedCount: 0,
       totalIntroduced: initialCount,
       totalAvailable: availableWords.length,
