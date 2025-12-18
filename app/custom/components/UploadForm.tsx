@@ -1,7 +1,8 @@
+// app/custom/components/UploadForm.tsx
 "use client";
 
 import React, { useState } from 'react';
-import { Eye, Upload, X, Edit3 } from 'lucide-react';
+import { Eye, Upload, X, Edit3, Copy, Check } from 'lucide-react';
 import { CustomWord } from '../types';
 import { parseCustomCSV } from '../utils';
 
@@ -16,6 +17,60 @@ export default function UploadForm({ onUpload, isAddMode = false, onCancel }: Up
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
   const [preview, setPreview] = useState<CustomWord[]>([]);
+  const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const [copiedCSV, setCopiedCSV] = useState(false);
+
+  const examplePrompt = `Generate a vocabulary list in CSV format for learning Georgian.
+
+Topic: [YOUR TOPIC]
+Number of rows: [NUMBER]
+
+Use this exact CSV format with headers:
+front,back,examplePreview,exampleRevealed
+
+Where:
+- front: English word/phrase
+- back: Translation in target language
+- examplePreview: Example sentence in English
+- exampleRevealed: Same sentence translated
+
+Use quotations to enclose the content of each row so things are properly delimited. 
+
+Output ONLY the CSV with no explanation.`;
+
+  const exampleCSV = `front,back,examplePreview,exampleRevealed
+"go","წასვლა","I go home.","მე სახლში მივდივარ."
+"come","მოსვლა","I come to you.","მე შენთან მოვდივარ."
+"walk","სიარული","I walk in the park.","მე პარკში დავდივარ."
+"run","სირბილი","I run every morning.","მე ყოველ დილით ვარბენ."
+"arrive","მისვლა","I arrive at work.","მე სამსახურში მივდივარ."
+"leave","გამოსვლა","I leave the house.","მე სახლიდან გამოვდივარ."
+"enter","შესვლა","I enter the room.","მე ოთახში შევდივარ."
+"exit","გამოსვლა","I exit the building.","მე შენობიდან გამოვდივარ."
+"return","დაბრუნება","I return home.","მე სახლში ვბრუნდები."
+"travel","მოგზაურობა","I travel to Georgia.","მე საქართველოში ვმოგზაურობ."
+"move","მოძრაობა","I move forward.","მე წინ ვმოძრაობ."
+"bring","მოტანა","I bring the book.","მე წიგნს მოვიტან."
+"take","წაღება","I take the bag.","მე ჩანთას წავიღებ."
+"approach","მიახლოება","I approach the door.","მე კართან ვუახლოვდები."
+"pass","გავლა","I pass the street.","მე ქუჩას გავდივარ."
+"cross","გადაკვეთა","I cross the bridge.","მე ხიდს გადავკვეთ."
+"climb","ასვლა","I climb the hill.","მე გორაზე ავდივარ."
+"descend","ჩასვლა","I descend the stairs.","მე კიბეზე ჩავდივარ."
+"stop","გაჩერება","I stop here.","მე აქ ვჩერდები."
+"follow","გაყოლა","I follow you.","მე შენ გყვები."`;
+
+  const handleCopyPrompt = async () => {
+    await navigator.clipboard.writeText(examplePrompt);
+    setCopiedPrompt(true);
+    setTimeout(() => setCopiedPrompt(false), 2000);
+  };
+
+  const handleCopyCSV = async () => {
+    await navigator.clipboard.writeText(exampleCSV);
+    setCopiedCSV(true);
+    setTimeout(() => setCopiedCSV(false), 2000);
+  };
 
   const handlePreview = () => {
     if (!csvText.trim()) {
@@ -57,19 +112,19 @@ dog,ძაღლი,The dog is big,ძაღლი დიდია
 house,სახლი,My house is small,ჩემი სახლი პატარაა`;
 
   return (
-    <div className="text-white p-6 max-w-2xl w-full">
+    <div className="text-white p-6 max-w-3xl w-full">
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-light mb-4 text-slate-300">
           {isAddMode ? 'Add More Words' : 'Upload Custom Deck'}
         </h1>
         <p className="text-gray-400 text-sm">
-          Paste your CSV content below. Format: front,back,examplePreview,exampleRevealed
+          Paste your CSV content below. Format: front,back. Optional columns: examplePreview,exampleRevealed. 
         </p>
       </div>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2">CSV Content</label>
+          <label className="block text-lg font-medium mb-4">CSV Content</label>
           <textarea
             value={csvText}
             onChange={(e) => setCsvText(e.target.value)}
@@ -158,15 +213,60 @@ house,სახლი,My house is small,ჩემი სახლი პატ�
         </div>
       </div>
 
-      <div className="mt-6 p-4 bg-gray-900 rounded text-sm">
-        <h4 className="font-medium mb-2">CSV Format Guide:</h4>
-        <ul className="text-gray-400 space-y-1">
-          <li>• <strong>front,back</strong> - Required columns</li>
-          <li>• <strong>examplePreview,exampleRevealed</strong> - Optional example columns</li>
-          <li>• Header row is auto-detected and skipped</li>
-          <li>• Use commas to separate columns</li>
-          <li>• Wrap text in quotes if it contains commas</li>
-        </ul>
+      <div className="mt-12  text-sm">
+        <div className="flex items-center py-2 justify-between mb-3">
+          <h4 className="font-medium text-lg">Example Prompt for AI</h4>
+          <button
+            onClick={handleCopyPrompt}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-neutral-800 hover:bg-neutral-700 border border-gray-600 rounded-lg transition-colors"
+          >
+            {copiedPrompt ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-green-400" />
+                <span className="text-green-400">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy</span>
+              </>
+            )}
+          </button>
+        </div>
+        <pre className="text-gray-300 border rounded-xl my-3 border-neutral-700 text-xs whitespace-pre-wrap bg-neutral-800/40 p-5  overflow-x-auto">
+{examplePrompt}
+        </pre>
+        <p className="text-gray-500 text-xs mt-2">
+          Copy this prompt, customize the [BRACKETS], and paste into ChatGPT, Claude, Gemini, or your preferred AI.
+        </p>
+      </div>
+
+      <div className="mt-8 text-sm">
+        <div className="flex items-center py-2 justify-between mb-3">
+          <h4 className="font-medium text-lg">Example CSV</h4>
+          <button
+            onClick={handleCopyCSV}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-neutral-800 hover:bg-neutral-700 border border-gray-600 rounded-lg transition-colors"
+          >
+            {copiedCSV ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-green-400" />
+                <span className="text-green-400">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy</span>
+              </>
+            )}
+          </button>
+        </div>
+        <pre className="text-gray-300 border rounded-xl my-3 border-neutral-700 text-xs whitespace-pre-wrap bg-neutral-800/40 p-5 overflow-x-auto max-h-60 overflow-y-auto">
+{exampleCSV}
+        </pre>
+        <p className="text-gray-500 text-xs mt-2">
+          20 Georgian motion verbs with example sentences. Copy and paste directly into the text area above.
+        </p>
       </div>
     </div>
   );

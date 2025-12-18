@@ -238,7 +238,7 @@ export default function ReviewHomePage() {
           Core Vocabulary
         </h1>
 
-        <p className="text-sm sm:text-base text-gray-400 mb-4 text-center max-w-md px-4">
+        <p className="text-sm sm:text-base text-gray-400 mb-4 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
           High-frequency Georgian words with images for visual learning. Each set contains 50-100 words. 
         </p>
 
@@ -258,12 +258,12 @@ export default function ReviewHomePage() {
 
         
 
-        <div className="flex flex-col space-y-6 w-full max-w-md px-4 sm:px-0">
+        <div className="flex flex-col space-y-6 w-full max-w-md md:max-w-2xl lg:max-w-4xl px-4 sm:px-0">
 
 
           <div className="space-y-3">
             {chunkCount > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {Array.from({ length: chunkCount }, (_, index) => {
                   const chunkNumber = index + 1;
                   const progress = chunkProgress.get(chunkNumber);
