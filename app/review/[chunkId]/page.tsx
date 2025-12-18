@@ -349,6 +349,7 @@ export default function ReviewPage() {
         onOpenTipSuggestion={() => setIsTipSuggestionModalOpen(true)}
         showDebug={showDebug}
         graduatedCount={deckState.stats.graduatedCount}
+        consolidationCount={deckState.stats.consolidationCount}
         totalIntroduced={deckState.stats.totalIntroduced}
         totalAvailable={deckState.stats.totalAvailable}
       />

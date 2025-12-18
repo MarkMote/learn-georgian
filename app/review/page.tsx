@@ -19,9 +19,9 @@ type WordData = {
 };
 
 type ChunkProgress = {
-  score: number; // 0-100
-  unlockedCount: number;
-  totalCount: number;
+  seenCount: number;      // Unique word_keys that have been introduced
+  knownCount: number;     // Unique word_keys that are graduated or consolidation
+  totalCount: number;     // Total unique word_keys in chunk
 };
 
 const CHUNK_SIZE = 50;
@@ -77,55 +77,49 @@ function getWordsForChunk(allWords: WordData[], chunkNumber: number): WordData[]
 }
 
 function loadChunkProgress(chunkNumber: number, chunkWords: WordData[]): ChunkProgress {
-  const uniqueWordKeys = getUniqueWordKeys(chunkWords);
-  const totalCount = uniqueWordKeys.length;
+  // Total = all cards in chunk (including verb conjugations)
+  const totalCount = chunkWords.length;
 
-  // Try to load from localStorage (using 'normal' mode as default)
-  const storageKey = `srs_simple_${chunkNumber}_normal`;
+  const emptyProgress: ChunkProgress = {
+    seenCount: 0,
+    knownCount: 0,
+    totalCount,
+  };
+
+  const storageKey = `srs_v3_${chunkNumber}_normal`;
   try {
     const stored = localStorage.getItem(storageKey);
     if (!stored) {
-      return { score: 0, unlockedCount: 0, totalCount };
+      return emptyProgress;
     }
 
     const data = JSON.parse(stored);
     const cardStates = data.cardStates || {};
 
-    // Count unlocked words and calculate score
-    const knownWordKeys = new Set<string>();
-    let totalScore = 0;
+    // Count cards directly (not by word_key)
+    let seenCount = 0;
+    let knownCount = 0;
 
-    // Map card keys back to word_keys
     for (const [cardKey, cardState] of Object.entries(cardStates)) {
       const word = chunkWords.find(w => w.key === cardKey);
       if (word) {
-        knownWordKeys.add(word.word_key);
-        // Use lastGrade if available, default to 2
-        const lastGrade = (cardState as any).lastGrade ?? 2;
-        const ratingAsPercent = lastGrade <= 1 ? 0 : (lastGrade - 1) * 50;
-        totalScore += ratingAsPercent;
+        seenCount++;
+        const state = cardState as { phase?: string };
+        const phase = state.phase || 'learning';
+        if (phase === 'graduated' || phase === 'consolidation') {
+          knownCount++;
+        }
       }
     }
 
-    const unlockedCount = knownWordKeys.size;
-    const score = unlockedCount > 0 ? Math.round(totalScore / unlockedCount) : 0;
-
-    return { score, unlockedCount, totalCount };
+    return {
+      seenCount,
+      knownCount,
+      totalCount,
+    };
   } catch (error) {
     console.warn("Failed to load chunk progress:", error);
-    return { score: 0, unlockedCount: 0, totalCount };
-  }
-}
-
-function getProgressColor(progressPercent: number): string {
-  if (progressPercent < 10) {
-    return "border-gray-600"; // Not started or barely started
-  } else if (progressPercent >= 100) {
-    return "border-green-500 bg-green-500/10"; // Complete
-  } else if (progressPercent >= 80) {
-    return "border-lime-500 bg-lime-500/10"; // Yellow-green
-  } else {
-    return "border-yellow-500 bg-yellow-500/10"; // In progress (10-79%)
+    return emptyProgress;
   }
 }
 
@@ -172,6 +166,18 @@ export default function ReviewHomePage() {
     router.push(`/review/${chunkNumber}`);
   };
 
+  // Calculate total stats across all chunks
+  const totalStats = Array.from(chunkProgress.values()).reduce(
+    (acc, progress) => ({
+      seen: acc.seen + progress.seenCount,
+      known: acc.known + progress.knownCount,
+      total: acc.total + progress.totalCount,
+    }),
+    { seen: 0, known: 0, total: 0 }
+  );
+
+  const hasKnownWords = totalStats.known > 0;
+
   const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
 
   return (
@@ -195,33 +201,49 @@ export default function ReviewHomePage() {
           Core Vocabulary
         </h1>
 
-        <p className="text-sm sm:text-base text-gray-400 mb-8 sm:mb-10 text-center max-w-md px-4">
-          High-frequency Georgian words with images for visual learning. Each set contains {CHUNK_SIZE} words ordered by frequency. Progress is saved automatically in your browser.
+        <p className="text-sm sm:text-base text-gray-400 mb-4 text-center max-w-md px-4">
+          High-frequency Georgian words with images for visual learning. Each set contains 50-100 words.
         </p>
 
+        {/* Progress Summary */}
+        {totalStats.seen > 0 && (
+          <div className="flex gap-6 mb-8 text-sm">
+            <div className="text-center">
+            <div className="text-gray-300 font-light text-sm"><span className="text-green-400 text-3xl font-bold pr-1">{totalStats.known}</span>/{totalStats.total}</div>
+              <div className="text-gray-500">Words Learned</div>
+            </div>
+            <div className="text-center">
+              <div className="text-gray-300 font-light text-sm"><span className="text-blue-200 text-3xl font-bold pr-1">{totalStats.seen}</span>/{totalStats.total}</div>
+              <div className="text-gray-500">Words Seen</div>
+            </div>
+          </div>
+        )}
+
+        
+
         <div className="flex flex-col space-y-6 w-full max-w-md px-4 sm:px-0">
+
+
           <div className="space-y-3">
             {chunkCount > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {Array.from({ length: chunkCount }, (_, index) => {
                   const chunkNumber = index + 1;
-                  const startWord = index * CHUNK_SIZE + 1;
-                  const endWord = Math.min((index + 1) * CHUNK_SIZE, getUniqueWordKeys(allWords).length);
                   const progress = chunkProgress.get(chunkNumber);
-                  const progressPercent = progress && progress.totalCount > 0
-                    ? Math.round((progress.unlockedCount / progress.totalCount) * 100)
-                    : 0;
-                  const colorClass = getProgressColor(progressPercent);
+                  const hasProgress = progress && progress.seenCount > 0;
 
                   return (
                     <button
                       key={chunkNumber}
                       onClick={() => handleChunkClick(chunkNumber)}
-                      className={`px-4 py-3 sm:py-4 text-center border rounded-lg text-sm sm:text-base hover:brightness-110 transition-all duration-150 ease-in-out cursor-pointer active:scale-98 ${colorClass}`}
+                      className="px-4 py-3 sm:py-4 text-center border border-gray-600 rounded-lg text-sm sm:text-base hover:bg-gray-800 hover:border-gray-500 transition-all duration-150 ease-in-out cursor-pointer active:scale-98"
                     >
-                      Words {startWord}-{endWord}
-                      {progressPercent > 0 && (
-                        <span className="text-gray-400 ml-1">({progressPercent}%)</span>
+                      <div>Set {chunkNumber}</div>
+                      {hasProgress && (
+                        <div className="text-xs text-gray-400 mt-1">
+                          <span className="text-gray-300">{progress.knownCount}</span>
+                          <span className="text-gray-400"> of {progress.totalCount} learned</span>
+                        </div>
                       )}
                     </button>
                   );
@@ -232,8 +254,18 @@ export default function ReviewHomePage() {
             )}
           </div>
 
-          {/* Review All Words Button */}
-          <div className="pt-6 border-t border-gray-700">
+          {/* Bottom Actions */}
+          <div className="pt-6 border-t border-gray-700 space-y-3">
+            {/* Review Known Words Button */}
+            {hasKnownWords && (
+              <Link
+                href="/review/practice"
+                className="block px-6 py-4 w-full text-center bg-green-950/30 border border-green-400/50 rounded-lg text-base hover:bg-green-900/30 transition-all 
+                duration-150 ease-in-out text-green-300/80 font-medium active:scale-98"
+              >
+                Review Known Words ({totalStats.known})
+              </Link>
+            )}
             <Link
               href="/all"
               className="block px-6 py-4 w-full text-center border border-slate-400 rounded-lg text-base sm:text-lg hover:bg-blue-600/10 transition-all duration-150 ease-in-out text-slate-300/90 font-medium active:scale-98"

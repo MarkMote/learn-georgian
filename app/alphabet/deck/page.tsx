@@ -1,17 +1,20 @@
 // app/alphabet/deck/page.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
+import React, { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import FlashCard from './components/FlashCard';
 import BottomBar from '../../components/BottomBar';
+import AlphabetDebugPanel from './components/AlphabetDebugPanel';
 import { AlphabetData } from './types';
 import { parseCSV } from './utils/dataProcessing';
 import { useAlphabetReviewState } from './hooks/useAlphabetReviewState';
 
-export default function AlphabetDeckPage() {
+function AlphabetDeckContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const showDebug = searchParams.get('debug') !== null;
   const [allLetters, setAllLetters] = useState<AlphabetData[]>([]);
 
   // Load alphabet data
@@ -33,7 +36,12 @@ export default function AlphabetDeckPage() {
     handleScore,
     handleFlip,
     setIsLeftHanded,
-    clearProgress
+    clearProgress,
+    // Debug state
+    cardStates,
+    deckState,
+    currentCardState,
+    source,
   } = useAlphabetReviewState(allLetters);
 
   // Keyboard shortcuts
@@ -88,7 +96,17 @@ export default function AlphabetDeckPage() {
   }
 
   return (
-    <div className="flex flex-col bg-neutral-950 text-slate-100" style={{ height: '100dvh', overflow: 'hidden' }}>
+    <div className="flex w-full">
+      {showDebug && (
+        <AlphabetDebugPanel
+          deckState={deckState}
+          currentCardState={currentCardState}
+          source={source}
+          cardStates={cardStates}
+          allLetters={allLetters}
+        />
+      )}
+    <div className={`flex flex-col bg-neutral-950 text-slate-100 ${showDebug ? 'md:w-1/2 md:ml-auto w-full' : 'w-full'}`} style={{ height: '100dvh', overflow: 'hidden' }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <button
@@ -128,5 +146,21 @@ export default function AlphabetDeckPage() {
         onToggleHandedness={handleToggleHandedness}
       />
     </div>
+    </div>
+  );
+}
+
+export default function AlphabetDeckPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4 mx-auto"></div>
+          <p className="text-lg">Loading...</p>
+        </div>
+      </div>
+    }>
+      <AlphabetDeckContent />
+    </Suspense>
   );
 }

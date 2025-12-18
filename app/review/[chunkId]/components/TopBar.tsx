@@ -27,6 +27,7 @@ interface TopBarProps {
   showDebug: boolean;
   // Learning box stats
   graduatedCount: number;
+  consolidationCount: number;
   totalIntroduced: number;
   totalAvailable: number;
 }
@@ -52,6 +53,7 @@ export default function TopBar({
   onOpenTipSuggestion,
   showDebug,
   graduatedCount,
+  consolidationCount,
   totalIntroduced,
   totalAvailable,
 }: TopBarProps) {
@@ -263,8 +265,8 @@ export default function TopBar({
       </div>
 
       <div className="text-sm text-center">
-        <div>Mastered: {graduatedCount}/{totalAvailable}</div>
-        <div className="">Introduced: {totalIntroduced}/{totalAvailable}</div>
+        <div>Known: {graduatedCount + consolidationCount}/{totalAvailable}</div>
+        <div className="text-gray-400">Seen: {totalIntroduced}/{totalAvailable}</div>
       </div>
 
       <button

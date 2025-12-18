@@ -110,6 +110,11 @@ export interface UseAlphabetReviewStateReturn {
   source: SelectNextCardResult['source'];
   allComplete: boolean;
 
+  // Debug state
+  cardStates: Map<string, CardState>;
+  deckState: DeckState;
+  currentCardState: CardState | null;
+
   // UI state
   isFlipped: boolean;
   isLeftHanded: boolean;
@@ -389,6 +394,11 @@ export function useAlphabetReviewState(
     // Learning box state
     source: selectionResult.source,
     allComplete: selectionResult.allComplete,
+
+    // Debug state
+    cardStates,
+    deckState,
+    currentCardState,
 
     // UI state
     isFlipped,
