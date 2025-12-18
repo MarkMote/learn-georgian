@@ -29,8 +29,9 @@ export function useFlashcardLock(enabled: boolean = true) {
     // Try to lock orientation (works in some mobile browsers when in fullscreen/PWA)
     const lockOrientation = async () => {
       try {
-        if (screen.orientation && 'lock' in screen.orientation) {
-          await screen.orientation.lock('portrait');
+        const orientation = screen.orientation as ScreenOrientation & { lock?: (orientation: string) => Promise<void> };
+        if (orientation && typeof orientation.lock === 'function') {
+          await orientation.lock('portrait');
         }
       } catch (e) {
         // Orientation lock not supported or not allowed - that's ok
@@ -72,8 +73,9 @@ export function useFlashcardLock(enabled: boolean = true) {
 
       // Unlock orientation
       try {
-        if (screen.orientation && 'unlock' in screen.orientation) {
-          screen.orientation.unlock();
+        const orientation = screen.orientation as ScreenOrientation & { unlock?: () => void };
+        if (orientation && typeof orientation.unlock === 'function') {
+          orientation.unlock();
         }
       } catch (e) {
         // Ignore

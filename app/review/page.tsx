@@ -236,7 +236,7 @@ export default function ReviewHomePage() {
                     <button
                       key={chunkNumber}
                       onClick={() => handleChunkClick(chunkNumber)}
-                      className="px-4 py-3 sm:py-4 text-center border border-gray-600 rounded-lg text-sm sm:text-base hover:bg-gray-800 hover:border-gray-500 transition-all duration-150 ease-in-out cursor-pointer active:scale-98"
+                      className="px-4 py-3 sm:py-4 min-h-[68px] text-center border border-gray-600 rounded-lg text-sm sm:text-base hover:bg-gray-800 hover:border-gray-500 transition-all duration-150 ease-in-out cursor-pointer active:scale-98 flex flex-col items-center justify-center"
                     >
                       <div>Set {chunkNumber}</div>
                       {hasProgress && (
