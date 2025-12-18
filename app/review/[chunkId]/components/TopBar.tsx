@@ -25,6 +25,10 @@ interface TopBarProps {
   onOpenSRSSettings: () => void;
   onOpenTipSuggestion: () => void;
   showDebug: boolean;
+  // Learning box stats
+  graduatedCount: number;
+  learningCount: number;
+  totalAvailable: number;
 }
 
 export default function TopBar({
@@ -47,6 +51,9 @@ export default function TopBar({
   onOpenSRSSettings,
   onOpenTipSuggestion,
   showDebug,
+  graduatedCount,
+  learningCount,
+  totalAvailable,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
@@ -258,8 +265,8 @@ export default function TopBar({
       </div>
 
       <div className="text-sm text-center">
-        <div>Words: {wordProgress.unlocked}/{wordProgress.total}</div>
-        <div>Score: {percentageScore}%</div>
+        <div>mastered: {graduatedCount}/{totalAvailable}</div>
+        <div className="text-gray-400">learning: {learningCount}</div>
       </div>
 
       <button

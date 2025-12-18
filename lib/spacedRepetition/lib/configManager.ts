@@ -6,11 +6,12 @@ import { DEFAULT_CONFIG } from '../config';
 export interface UserConfigOverride {
   targetLearningCount?: number;
   learningSteps?: number[];
+  maxGraduatingIntervalDays?: number;
   minInterleaveCount?: number;
   almostDueThresholdMs?: number;
 }
 
-const CONFIG_STORAGE_KEY = 'srs_config_v3';  // v3 for learning box config
+const CONFIG_STORAGE_KEY = 'srs_config_v4';  // v4 for 5-step learning box
 
 export function saveUserConfig(config: UserConfigOverride): void {
   if (typeof window !== 'undefined') {
@@ -50,6 +51,7 @@ export function getMergedConfig(): SRSConfig {
   return {
     targetLearningCount: userConfig.targetLearningCount ?? DEFAULT_CONFIG.targetLearningCount,
     learningSteps: userConfig.learningSteps ?? DEFAULT_CONFIG.learningSteps,
+    maxGraduatingIntervalDays: userConfig.maxGraduatingIntervalDays ?? DEFAULT_CONFIG.maxGraduatingIntervalDays,
     minInterleaveCount: userConfig.minInterleaveCount ?? DEFAULT_CONFIG.minInterleaveCount,
     almostDueThresholdMs: userConfig.almostDueThresholdMs ?? DEFAULT_CONFIG.almostDueThresholdMs,
   };
@@ -59,6 +61,7 @@ export function getDefaultUserConfig(): UserConfigOverride {
   return {
     targetLearningCount: DEFAULT_CONFIG.targetLearningCount,
     learningSteps: DEFAULT_CONFIG.learningSteps,
+    maxGraduatingIntervalDays: DEFAULT_CONFIG.maxGraduatingIntervalDays,
     minInterleaveCount: DEFAULT_CONFIG.minInterleaveCount,
     almostDueThresholdMs: DEFAULT_CONFIG.almostDueThresholdMs,
   };

@@ -64,7 +64,12 @@ export function selectNextCard(
 
   // Determine if we need to introduce a new card
   const allIntroduced = cardStates.size >= availableWords.length;
-  const shouldIntroduceNew = !allIntroduced && learningCount < config.targetLearningCount;
+  // Introduce new card if:
+  // 1. Learning box below target, OR
+  // 2. 4+ consecutive easys (user is finding things easy, give them more)
+  const consecutiveEasyThreshold = 4;
+  const forceNewFromEasy = !allIntroduced && (deckState.consecutiveEasyCount ?? 0) >= consecutiveEasyThreshold;
+  const shouldIntroduceNew = !allIntroduced && (learningCount < config.targetLearningCount || forceNewFromEasy);
 
   // Helper to filter out recent cards (for interleaving)
   const filterRecent = <T extends { key: string }>(cards: T[]): T[] => {
@@ -109,25 +114,12 @@ export function selectNextCard(
     };
   }
 
-  // Case 4: Practice mode - no due cards, review weakest
-  if (practiceCards.length > 0) {
-    const candidates = filterRecent(practiceCards);
-    if (candidates.length > 0) {
-      return {
-        nextCardKey: candidates[0].key,
-        shouldIntroduceNew: false,
-        source: 'practice',
-        allComplete: false,
-      };
-    }
-  }
-
-  // Case 5: Learning cards exist but not yet due (waiting)
-  // Pick the one that will be due soonest
-  if (learningDue.length === 0 && learningCount > 0) {
-    // Find the learning card with earliest stepDue
-    let earliestKey: string | null = null;
-    let earliestDue: Date | null = null;
+  // Case 4: Learning cards exist but not yet due (waiting)
+  // IMPORTANT: Check this BEFORE practice mode - we want to wait for learning cards
+  // rather than jumping to practice mode with graduated cards
+  if (learningCount > 0) {
+    // Find learning cards not yet due, sorted by stepDue
+    const waitingCards: Array<{ key: string; stepDue: Date }> = [];
 
     cardStates.forEach((cardState, key) => {
       const word = wordByKey.get(key);
@@ -135,18 +127,37 @@ export function selectNextCard(
 
       if (cardState.phase === 'learning') {
         const stepDue = new Date(cardState.stepDue);
-        if (!earliestDue || stepDue < earliestDue) {
-          earliestDue = stepDue;
-          earliestKey = key;
+        // Only include cards that aren't due yet (due cards handled in Case 1)
+        if (stepDue > now) {
+          waitingCards.push({ key, stepDue });
         }
       }
     });
 
-    if (earliestKey) {
+    // Sort by stepDue (earliest first)
+    waitingCards.sort((a, b) => a.stepDue.getTime() - b.stepDue.getTime());
+
+    // Apply interleaving - don't show the same card we just graded
+    const candidates = filterRecent(waitingCards);
+    if (candidates.length > 0) {
       return {
-        nextCardKey: earliestKey,
-        shouldIntroduceNew,
+        nextCardKey: candidates[0].key,
+        shouldIntroduceNew: false,
         source: 'learning',
+        allComplete: false,
+      };
+    }
+  }
+
+  // Case 5: Practice mode - no due cards AND no learning cards waiting
+  // Only go to practice mode when there's truly nothing else to do
+  if (practiceCards.length > 0) {
+    const candidates = filterRecent(practiceCards);
+    if (candidates.length > 0) {
+      return {
+        nextCardKey: candidates[0].key,
+        shouldIntroduceNew: false,
+        source: 'practice',
         allComplete: false,
       };
     }

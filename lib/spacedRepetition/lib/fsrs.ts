@@ -187,6 +187,7 @@ export function createCardState(key: string, now: Date = new Date()): CardState 
     phase: 'learning',
     // Custom fields
     introducedAt: now.toISOString(),
+    consecutiveEasyCount: 0,
   };
 }
 
@@ -203,6 +204,7 @@ export function fsrsCardToCardState(
     learningStep: number;
     stepDue: string;
     phase: 'learning' | 'review' | 'graduated';
+    consecutiveEasyCount: number;
   }
 ): CardState {
   return {
@@ -223,5 +225,6 @@ export function fsrsCardToCardState(
     // Custom fields
     introducedAt,
     lastGrade: grade,
+    consecutiveEasyCount: learningFields.consecutiveEasyCount,
   };
 }

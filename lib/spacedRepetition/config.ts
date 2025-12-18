@@ -3,12 +3,18 @@
 import { SRSConfig } from './types';
 
 export const DEFAULT_CONFIG: SRSConfig = {
-  // Learning box settings
-  targetLearningCount: 5,         // Keep 5 cards in the learning box
+  // Learning box settings (soft target - can exceed if user wants to keep learning)
+  targetLearningCount: 5,
   learningSteps: [
     1 * 60 * 1000,                // Step 0: 1 minute
-    10 * 60 * 1000,               // Step 1: 10 minutes
-  ],                              // After step 1, card graduates to review
+    2 * 60 * 1000,                // Step 1: 2 minutes
+    4 * 60 * 1000,                // Step 2: 4 minutes
+    8 * 60 * 1000,                // Step 3: 8 minutes
+    16 * 60 * 1000,               // Step 4: 16 minutes
+  ],                              // After step 4, card graduates to review
+
+  // Cap first FSRS interval to prevent newly graduated cards from being scheduled too far out
+  maxGraduatingIntervalDays: 1,   // First FSRS review within 1 day max
 
   // Interleaving: must show at least 2 other cards before repeating
   minInterleaveCount: 2,

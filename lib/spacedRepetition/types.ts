@@ -43,11 +43,13 @@ export interface CardState {
   // Custom fields
   introducedAt: string;           // ISO date string - when card was introduced
   lastGrade?: Grade;              // Last grade given (0-3), for UI
+  consecutiveEasyCount: number;   // Track consecutive Easy grades for graduation rule
 }
 
 // Deck aggregate state
 export interface DeckState {
   currentCardKey: string | null;
+  consecutiveEasyCount: number;   // Track consecutive Easy grades across all cards
   // Stats for UI
   stats: {
     dueCount: number;             // Review cards due now
@@ -62,7 +64,8 @@ export interface DeckState {
 export interface SRSConfig {
   // Learning box settings
   targetLearningCount: number;    // Target cards in learning box (default: 5)
-  learningSteps: number[];        // Learning step intervals in ms (default: [60000, 600000] = 1min, 10min)
+  learningSteps: number[];        // Learning step intervals in ms (default: [1,2,4,8,16] minutes)
+  maxGraduatingIntervalDays: number; // Cap first FSRS interval to this many days (default: 1)
   // Interleaving
   minInterleaveCount: number;     // Minimum cards between repeats (default: 2)
   // Practice mode settings

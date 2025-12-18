@@ -146,6 +146,7 @@ export function useReviewState(
   const [cardStates, setCardStates] = useState<Map<string, CardState>>(new Map());
   const [deckState, setDeckState] = useState<DeckState>(() => ({
     currentCardKey: null,
+    consecutiveEasyCount: 0,
     stats: {
       dueCount: 0,
       learningCount: 0,
@@ -266,12 +267,17 @@ export function useReviewState(
 
     const grade = difficultyToGrade(difficulty);
 
+    // Check if current word is a verb (for special graduation rules)
+    const isVerb = currentWord?.PartOfSpeech?.toLowerCase().includes('verb') &&
+                   !currentWord?.PartOfSpeech?.toLowerCase().includes('adverb');
+
     // Update card and deck with learning box logic
     const { cardState: updatedCard, deckState: updatedDeck } = updateStateOnGrade(
       currentCardState,
       deckState,
       grade,
-      config
+      config,
+      isVerb ?? false
     );
 
     // Update card states
@@ -340,7 +346,7 @@ export function useReviewState(
     setDeckState(finalDeckState);
     setSelectionResult(selection);
     setRecentCardKeys(newRecentCards);
-  }, [currentCardState, deckState, cardStates, availableWords, filterPredicate, config, recentCardKeys]);
+  }, [currentCardState, currentWord, deckState, cardStates, availableWords, filterPredicate, config, recentCardKeys]);
 
   // Clear progress
   const clearProgress = useCallback(() => {

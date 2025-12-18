@@ -24,6 +24,7 @@ export function initializeDeck(
 
   const deckState: DeckState = {
     currentCardKey: initialCount > 0 ? availableWords[0].key : null,
+    consecutiveEasyCount: 0,
     stats: {
       dueCount: 0,
       learningCount: initialCount,  // All initial cards are in learning

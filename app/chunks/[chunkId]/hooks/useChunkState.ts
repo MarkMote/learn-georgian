@@ -162,6 +162,7 @@ export function useChunkState(
   const [cardStates, setCardStates] = useState<Map<string, CardState>>(new Map());
   const [deckState, setDeckState] = useState<DeckState>(() => ({
     currentCardKey: null,
+    consecutiveEasyCount: 0,
     stats: {
       dueCount: 0,
       learningCount: 0,

@@ -348,6 +348,9 @@ export default function ReviewPage() {
         onOpenSRSSettings={() => setIsSRSConfigOpen(true)}
         onOpenTipSuggestion={() => setIsTipSuggestionModalOpen(true)}
         showDebug={showDebug}
+        graduatedCount={deckState.stats.graduatedCount}
+        learningCount={deckState.stats.learningCount}
+        totalAvailable={deckState.stats.totalAvailable}
       />
 
       <div className="flex items-center justify-center px-4" style={{ height: 'calc(100svh - 140px)' }}>
