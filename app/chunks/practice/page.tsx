@@ -1,71 +1,71 @@
-// app/review/practice/page.tsx
+// app/chunks/practice/page.tsx
 "use client";
 
 import React, { useEffect, useState, useCallback, Suspense } from "react";
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ArrowLeft, Home, Menu, Settings, CheckCircle, Play } from 'lucide-react';
+import { ArrowLeft, Home, Menu, CheckCircle, Play } from 'lucide-react';
+import Papa from 'papaparse';
 import BottomBar from '../../components/BottomBar';
 import FlashCard from '../[chunkId]/components/FlashCard';
-import SRSConfigPanel from '../[chunkId]/components/SRSConfigPanel';
-import { usePracticeState } from './hooks/usePracticeState';
-import { WordData } from '../../../lib/spacedRepetition/types';
-import { ExampleMode, ReviewMode, DifficultyRating } from '../[chunkId]/types';
-import { getVerbHint, getVerbTenseLabel, parseCSV } from '../[chunkId]/utils/dataProcessing';
+import { useChunkPracticeState } from './hooks/useChunkPracticeState';
+import { ChunkData, ExampleMode, ExplanationMode, ReviewMode, DifficultyRating } from '../[chunkId]/types';
 import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 const CHUNK_SIZE = 50;
 
-function getUniqueWordKeys(allWords: WordData[]): string[] {
-  const seen = new Set<string>();
-  const uniqueKeys: string[] = [];
-  for (const word of allWords) {
-    if (!seen.has(word.word_key)) {
-      seen.add(word.word_key);
-      uniqueKeys.push(word.word_key);
-    }
-  }
-  return uniqueKeys;
+function parseCSV(csvText: string): ChunkData[] {
+  const result = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true,
+    transform: (value) => value.trim() || undefined,
+  });
+
+  return result.data.map((row: any, index: number) => ({
+    chunk_key: `chunk_${index}`,
+    chunk_en: row.chunk_en || "",
+    chunk_ka: row.chunk_ka || "",
+    explanation: row.explanation || "",
+    example_en: row.example_en || "",
+    example_ka: row.example_ka || "",
+  }));
 }
 
-function getChunkCount(allWords: WordData[]): number {
-  const uniqueWordKeys = getUniqueWordKeys(allWords);
-  return Math.ceil(uniqueWordKeys.length / CHUNK_SIZE);
+function getSetCount(allChunks: ChunkData[]): number {
+  return Math.ceil(allChunks.length / CHUNK_SIZE);
 }
 
-function PracticePageContent() {
+function ChunkPracticePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const previewMode = searchParams.get('preview') === 'true';
   const autoPractice = searchParams.get('practice') === 'true';
 
-  const [allWords, setAllWords] = useState<WordData[]>([]);
-  const [chunkCount, setChunkCount] = useState(0);
-  const [isSRSConfigOpen, setIsSRSConfigOpen] = useState(false);
+  const [allChunks, setAllChunks] = useState<ChunkData[]>([]);
+  const [setCount, setSetCount] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // UI state
   const [isFlipped, setIsFlipped] = useState(false);
-  const [showEnglish, setShowEnglish] = useState(false);
-  const [isLeftHanded, setIsLeftHanded] = useState(false);
-  const [showImageHint, setShowImageHint] = useState(true);
   const [showExamples, setShowExamples] = useState<ExampleMode>("tap-ka");
-  const [showTips, setShowTips] = useState(true);
+  const [showExplanation, setShowExplanation] = useState<ExplanationMode>("on");
   const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
+  const [revealedExplanations, setRevealedExplanations] = useState<Set<string>>(new Set());
+  const [isLeftHanded, setIsLeftHanded] = useState(false);
 
   // Review mode (practice always uses normal mode)
   const reviewMode: ReviewMode = 'normal';
 
   // Load UI preferences
   useEffect(() => {
-    const prefsKey = 'ui_prefs_practice_normal';
+    const prefsKey = 'ui_prefs_chunks_practice_normal';
     const stored = localStorage.getItem(prefsKey);
     if (stored) {
       try {
         const prefs = JSON.parse(stored);
         setIsLeftHanded(prefs.isLeftHanded ?? false);
         setShowExamples(prefs.showExamples ?? "tap-ka");
-        setShowTips(prefs.showTips ?? true);
+        setShowExplanation(prefs.showExplanation ?? "on");
       } catch (err) {
         console.error("Failed to load UI preferences:", err);
       }
@@ -74,25 +74,19 @@ function PracticePageContent() {
 
   // Save UI preferences
   useEffect(() => {
-    const prefsKey = 'ui_prefs_practice_normal';
-    const prefs = { isLeftHanded, showExamples, showTips };
+    const prefsKey = 'ui_prefs_chunks_practice_normal';
+    const prefs = { isLeftHanded, showExamples, showExplanation };
     localStorage.setItem(prefsKey, JSON.stringify(prefs));
-  }, [isLeftHanded, showExamples, showTips]);
+  }, [isLeftHanded, showExamples, showExplanation]);
 
-  // Auto-hide image hint
+  // Load chunks
   useEffect(() => {
-    const timer = setTimeout(() => setShowImageHint(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Load words
-  useEffect(() => {
-    fetch("/words.csv")
+    fetch("/chunks.csv")
       .then((res) => res.text())
       .then((csv) => {
         const parsed = parseCSV(csv);
-        setAllWords(parsed);
-        setChunkCount(getChunkCount(parsed));
+        setAllChunks(parsed);
+        setSetCount(getSetCount(parsed));
       })
       .catch((error) => {
         console.error("Error loading CSV:", error);
@@ -101,8 +95,8 @@ function PracticePageContent() {
 
   // SRS state
   const {
-    knownWords,
-    currentWord,
+    knownChunks,
+    currentChunk,
     currentCardState,
     handleScore: srsHandleScore,
     isLoading,
@@ -111,13 +105,13 @@ function PracticePageContent() {
     isReviewComplete,
     isPracticeMode,
     startPracticeMode,
-  } = usePracticeState(allWords, chunkCount, previewMode);
+  } = useChunkPracticeState(allChunks, setCount, previewMode);
 
   // Reset card display
   const resetCardDisplay = useCallback(() => {
     setIsFlipped(false);
-    setShowEnglish(false);
     setRevealedExamples(new Set());
+    setRevealedExplanations(new Set());
   }, []);
 
   // Combined score handler
@@ -129,12 +123,11 @@ function PracticePageContent() {
   // Handlers
   const handleFlip = () => setIsFlipped(true);
   const handleToggleHandedness = () => setIsLeftHanded(prev => !prev);
-  const handleImageClick = () => {
-    setShowEnglish(prev => !prev);
-    setShowImageHint(false);
+  const handleRevealExamples = (chunkKey: string) => {
+    setRevealedExamples(prev => new Set([...prev, chunkKey]));
   };
-  const handleRevealExamples = (wordKey: string) => {
-    setRevealedExamples(prev => new Set([...prev, wordKey]));
+  const handleRevealExplanation = (chunkKey: string) => {
+    setRevealedExplanations(prev => new Set([...prev, chunkKey]));
   };
   const handleToggleExamples = () => {
     setShowExamples(prev => {
@@ -145,11 +138,13 @@ function PracticePageContent() {
       return "off";
     });
   };
-  const handleToggleTips = () => setShowTips(prev => !prev);
+  const handleToggleExplanation = () => {
+    setShowExplanation(prev => prev === "on" ? "off" : "on");
+  };
 
   // Keyboard navigation
   useEffect(() => {
-    if (isReviewComplete && !isPracticeMode) return; // Disable when showing completion screen
+    if (isReviewComplete && !isPracticeMode) return;
 
     function handleKey(e: KeyboardEvent) {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
@@ -160,9 +155,6 @@ function PracticePageContent() {
         case " ":
           e.preventDefault();
           if (!isFlipped) setIsFlipped(true);
-          break;
-        case "i":
-          setShowEnglish(prev => !prev);
           break;
         case "r":
           if (isFlipped) handleScore("easy");
@@ -182,7 +174,7 @@ function PracticePageContent() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [isFlipped, handleScore, isReviewComplete, isPracticeMode]);
 
-  // Lock flashcard screen (no zoom, scroll, or orientation flip) - but not on completion screen
+  // Lock flashcard screen
   useFlashcardLock(!isReviewComplete || isPracticeMode);
 
   // Auto-start practice mode if ?practice=true and review is complete
@@ -204,43 +196,38 @@ function PracticePageContent() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
 
-  const handleSRSConfigChange = () => {
-    setIsSRSConfigOpen(false);
-    window.location.reload();
-  };
-
   // Loading state
   if (isLoading) {
     return (
       <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
-        <p className="text-lg">Loading mastered words...</p>
+        <p className="text-lg">Loading mastered phrases...</p>
       </div>
     );
   }
 
-  // No mastered words
+  // No mastered chunks
   if (totalMastered === 0) {
     return (
       <div className="min-h-screen bg-neutral-950 text-white">
         <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
             <Link
-              href="/review"
+              href="/chunks"
               className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span className="text-sm font-medium pt-1">Back to Review</span>
+              <span className="text-sm font-medium pt-1">Back to Phrases</span>
             </Link>
           </div>
         </header>
         <main className="flex flex-col items-center justify-center px-4 py-16">
-          <h1 className="text-2xl font-light mb-4 text-slate-300">No Known Words Yet</h1>
+          <h1 className="text-2xl font-light mb-4 text-slate-300">No Known Phrases Yet</h1>
           <p className="text-gray-400 text-center max-w-md">
-            Keep practicing! Words will appear here once you&apos;ve mastered them through the learning process.
+            Keep practicing! Phrases will appear here once you&apos;ve mastered them through the learning process.
           </p>
           <Link
-            href="/review"
+            href="/chunks"
             className="mt-8 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             Start Learning
@@ -257,11 +244,11 @@ function PracticePageContent() {
         <header className="sticky top-0 bg-neutral-950/95 backdrop-blur-sm border-b border-gray-800 z-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
             <Link
-              href="/review"
+              href="/chunks"
               className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span className="text-sm font-medium pt-1">Back to Review</span>
+              <span className="text-sm font-medium pt-1">Back to Phrases</span>
             </Link>
           </div>
         </header>
@@ -269,22 +256,22 @@ function PracticePageContent() {
           <CheckCircle className="w-20 h-20 text-green-500 mb-6" />
           <h1 className="text-2xl font-light mb-2 text-slate-200">All Caught Up!</h1>
           <p className="text-gray-400 text-center max-w-md mb-8">
-            You&apos;ve reviewed all your due words. Great job keeping up with your practice!
+            You&apos;ve reviewed all your due phrases. Great job keeping up with your practice!
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/review"
+              href="/chunks"
               className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-center"
             >
-              Back to Review
+              Back to Phrases
             </Link>
             <button
               onClick={startPracticeMode}
               className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
             >
               <Play className="w-4 h-4" />
-              Keep Practicing ({totalMastered} words)
+              Keep Practicing ({totalMastered} phrases)
             </button>
           </div>
         </main>
@@ -293,7 +280,7 @@ function PracticePageContent() {
   }
 
   // No current card (shouldn't happen if not complete, but handle gracefully)
-  if (!currentWord) {
+  if (!currentChunk) {
     return (
       <div className="p-8 text-center text-white bg-neutral-950 h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mr-3"></div>
@@ -302,10 +289,8 @@ function PracticePageContent() {
     );
   }
 
-  // Find current card info for chunk number display
-  const currentCardInfo = knownWords.find(k => k.data.key === currentWord.key);
-  const verbHint = getVerbHint(currentWord);
-  const verbTenseLabel = getVerbTenseLabel(currentWord);
+  // Find current card info for set number display
+  const currentCardInfo = knownChunks.find(k => k.data.chunk_key === currentChunk.chunk_key);
 
   return (
     <div className="flex w-full">
@@ -351,25 +336,13 @@ function PracticePageContent() {
                     </li>
                     <li>
                       <button
-                        onClick={handleToggleTips}
+                        onClick={handleToggleExplanation}
                         className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
                       >
-                        <span>Show Tips</span>
-                        <span className={`ml-2 px-2 py-0.5 rounded text-xs ${showTips ? 'bg-green-600' : 'bg-gray-600'}`}>
-                          {showTips ? 'ON' : 'OFF'}
+                        <span>Show Explanation</span>
+                        <span className={`ml-2 px-2 py-0.5 rounded text-xs ${showExplanation === 'on' ? 'bg-green-600' : 'bg-gray-600'}`}>
+                          {showExplanation === 'on' ? 'ON' : 'OFF'}
                         </span>
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => {
-                          setIsSRSConfigOpen(true);
-                          setIsMenuOpen(false);
-                        }}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
-                      >
-                        <Settings size={16} />
-                        Study Settings
                       </button>
                     </li>
                   </ul>
@@ -378,7 +351,7 @@ function PracticePageContent() {
             </div>
 
             <button
-              onClick={() => router.push('/review')}
+              onClick={() => router.push('/chunks')}
               className="p-2 border border-gray-600 rounded hover:bg-gray-700"
               aria-label="Go to Home"
             >
@@ -390,11 +363,11 @@ function PracticePageContent() {
             {isPracticeMode ? (
               <>
                 <div className="text-purple-400">Practice Mode</div>
-                <div className="text-gray-400">{totalMastered} words</div>
+                <div className="text-gray-400">{totalMastered} phrases</div>
               </>
             ) : (
               <>
-                <div className="text-green-400">Words left in review</div>
+                <div className="text-green-400">Phrases left in review</div>
                 <div className="text-white font-semibold text-lg">{dueCount}</div>
               </>
             )}
@@ -402,7 +375,7 @@ function PracticePageContent() {
 
           <div className="text-xs text-gray-500 text-right w-24">
             {currentCardInfo && (
-              <div className="text-gray-600">Set {currentCardInfo.chunkNumber}</div>
+              <div className="text-gray-600">Set {currentCardInfo.setNumber}</div>
             )}
           </div>
         </div>
@@ -410,18 +383,15 @@ function PracticePageContent() {
         {/* Flash Card */}
         <div className="flex items-center justify-center px-4" style={{ height: 'calc(100svh - 140px)' }}>
           <FlashCard
-            word={currentWord}
+            chunk={currentChunk}
             isFlipped={isFlipped}
-            showEnglish={showEnglish}
-            showImageHint={showImageHint}
             showExamples={showExamples}
-            showTips={showTips}
+            showExplanation={showExplanation}
             revealedExamples={revealedExamples}
-            verbHint={verbHint}
-            verbTenseLabel={verbTenseLabel}
+            revealedExplanations={revealedExplanations}
             reviewMode={reviewMode}
-            onImageClick={handleImageClick}
             onRevealExamples={handleRevealExamples}
+            onRevealExplanation={handleRevealExplanation}
           />
         </div>
 
@@ -432,13 +402,6 @@ function PracticePageContent() {
           onFlip={handleFlip}
           onRate={handleScore}
           onToggleHandedness={handleToggleHandedness}
-        />
-
-        {/* SRS Config Panel */}
-        <SRSConfigPanel
-          isOpen={isSRSConfigOpen}
-          onClose={() => setIsSRSConfigOpen(false)}
-          onConfigChange={handleSRSConfigChange}
         />
 
         {/* Preview mode indicator */}
@@ -452,7 +415,7 @@ function PracticePageContent() {
   );
 }
 
-export default function PracticePage() {
+export default function ChunkPracticePage() {
   return (
     <Suspense fallback={
       <div className="p-8 text-center text-white bg-neutral-950 h-screen flex flex-col items-center justify-center">
@@ -460,7 +423,7 @@ export default function PracticePage() {
         <p className="text-lg">Loading...</p>
       </div>
     }>
-      <PracticePageContent />
+      <ChunkPracticePageContent />
     </Suspense>
   );
 }

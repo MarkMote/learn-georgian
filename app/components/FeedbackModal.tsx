@@ -54,7 +54,10 @@ export default function FeedbackModal({
     <div className="fixed inset-0 bg-neutral-950 bg-opacity-90 z-50 flex items-center justify-center p-4">
       <div className="bg-gray-900 w-full max-w-md rounded-lg">
         <div className="flex justify-between items-center p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold text-white">Send Feedback</h2>
+          <div>
+            <h2 className="text-xl font-bold text-white">Send Feedback</h2>
+            <div className="text-sm text-gray-400">Share your thoughts, suggestions, or report bugs.</div>
+          </div>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
@@ -76,7 +79,7 @@ export default function FeedbackModal({
                 <textarea
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                  placeholder="Share your thoughts, suggestions, or report bugs..."
+                  placeholder="My social security number is ..."
                   className="w-full h-32 p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 resize-none focus:outline-none focus:border-gray-600"
                   maxLength={1000}
                   required

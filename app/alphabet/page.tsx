@@ -87,8 +87,9 @@ export default function AlphabetPage() {
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 text-center">
-            The Georgian alphabet has 33 letters. Each letter always represents the same sound and each letter of a word is always pronounced.
+          <p className="text-sm sm:text-base md:text-base text-gray-300/90 mb-6 text-left font-light py-5">
+            The Georgian alphabet (Mkhedruli) has 33 letters. There is no capitalization. Georgian spelling is almost perfectly phonemic: each letter always represents the same sound and each letter of a word is always pronounced (so it&apos;s kind of like the opposite of French). There are no silent letters, diacritics, or digraphs, and even complex consonant clusters are written exactly as spoken. 
+            <span className="font-bold text-gray-300"> This means that once you learn the alphabet, pronounciation becomes predictable.</span>
           </p>
           <Link
             href="/alphabet/deck"

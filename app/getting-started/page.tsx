@@ -123,6 +123,11 @@ export default function GettingStartedPage() {
             <br />
             If you like AI slop code, yes, go ahead! Do whatever you want with it. 
           </p>
+          <p className="mb-4">
+            <strong>I like the system, could you build it for other languages?</strong>
+            <br />
+            All the data is just stored in csv files. You could fairly easily convert the core vocabulary to the language of your choice, given a couple hours and some api credits. For the colloquial phrases, you would need to find a dataset of source text in the language. 
+          </p>
 
           <div className="mt-12 pt-8 border-t border-gray-800">
             <Link

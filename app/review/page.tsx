@@ -239,7 +239,7 @@ export default function ReviewHomePage() {
         </h1>
 
         <p className="text-sm sm:text-base text-gray-400 mb-4 text-center max-w-md px-4">
-          High-frequency Georgian words with images for visual learning. Each set contains 50-100 words.
+          High-frequency Georgian words with images for visual learning. Each set contains 50-100 words. 
         </p>
 
         {/* Progress Summary */}
@@ -307,7 +307,7 @@ export default function ReviewHomePage() {
             {/* Review Known Words Button - subtle when no words due */}
             {hasKnownWords && dueCount === 0 && (
               <Link
-                href="/review/practice"
+                href="/review/practice?practice=true"
                 className="block px-6 py-4 w-full text-center bg-green-950/30 border border-green-400/50 rounded-lg text-base hover:bg-green-900/30 transition-all
                 duration-150 ease-in-out text-green-300/80 font-medium active:scale-98"
               >
