@@ -238,7 +238,7 @@ export default function ReviewHomePage() {
           Core Vocabulary
         </h1>
 
-        <p className="text-sm sm:text-base text-gray-400 mb-4 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
+        <p className="text-sm sm:text-base text-gray-400 mb-6 mt-2 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
           High-frequency Georgian words with images for visual learning. Each set contains 50-100 words. 
         </p>
 
