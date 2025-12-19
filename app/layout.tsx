@@ -63,6 +63,28 @@ export const metadata: Metadata = {
   category: "education"
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Learn Georgian',
+  description: 'A Spaced Repetition Flashcard App for Learning Georgian',
+  applicationCategory: 'EducationalApplication',
+  operatingSystem: 'Any',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Mark',
+  },
+  inLanguage: ['en', 'ka'],
+  educationalLevel: 'Beginner',
+  learningResourceType: 'Flashcard',
+  teaches: 'Georgian Language',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,6 +92,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-black bg-gray-50`}
       >
