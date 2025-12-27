@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { Github, Star, Upload, MessageCircle, MessageSquare, Languages, Puzzle } from 'lucide-react';
+import { Github, Star, Upload, MessageCircle, MessageSquare, Languages, Puzzle, Layers } from 'lucide-react';
 import FeedbackModal from './components/FeedbackModal';
 
 // --- Constants for Animation ---
@@ -151,6 +151,13 @@ export default function HomePage() {
           >
             <MessageCircle className="w-4 h-4 text-gray-400" />
             <span>Learn Colloquial Georgian (advanced)</span>
+          </Link>
+          <Link
+            href="/structure"
+            className="flex items-center justify-center gap-3 px-4 py-3 w-full border border-gray-600 rounded text-sm hover:bg-gray-700 transition-colors duration-150 ease-in-out"
+          >
+            <Layers className="w-4 h-4 text-gray-400" />
+            <span>Learn Sentence Structure (advanced)</span>
           </Link>
           <Link
             href="/morphology"
