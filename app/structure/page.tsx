@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronRight } from 'lucide-react';
 import { MODULES } from './[moduleId]/utils/modules';
 import {
   parseFramesCSV,
@@ -95,6 +95,19 @@ export default function StructureHomePage() {
   const [moduleProgress, setModuleProgress] = useState<Map<number, ModuleProgress>>(new Map());
   const [dueCount, setDueCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [expandedFrames, setExpandedFrames] = useState<Set<string>>(new Set());
+
+  const toggleFrameExpanded = (frameId: string) => {
+    setExpandedFrames(prev => {
+      const next = new Set(prev);
+      if (next.has(frameId)) {
+        next.delete(frameId);
+      } else {
+        next.add(frameId);
+      }
+      return next;
+    });
+  };
 
   // Reset body scroll styles
   useEffect(() => {
@@ -273,31 +286,86 @@ export default function StructureHomePage() {
                           const frameExamples = moduleExamples.filter(
                             (ex) => ex.frame_id === frame.frame_id
                           );
-                          const sampleExample = frameExamples[0];
+                          const isExpanded = expandedFrames.has(frame.frame_id);
 
                           return (
                             <div
                               key={frame.frame_id}
-                              className="bg-gray-800/50 rounded-lg p-4 space-y-2"
+                              className="bg-gray-800/50 rounded-lg overflow-hidden"
                             >
-                              <div className="flex justify-between items-start">
-                                <div className="font-medium text-gray-200 text-sm">
-                                  {frame.frame_name}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                  {frameExamples.length} examples
-                                </div>
-                              </div>
-                              <p className="text-xs text-gray-400">
-                                {frame.usage_summary}
-                              </p>
-                              {sampleExample && (
-                                <div className="mt-2 pt-2 border-t border-gray-700">
-                                  <div className="text-xs text-gray-300">
-                                    {sampleExample.georgian}
+                              {/* Header - always visible */}
+                              <button
+                                onClick={() => toggleFrameExpanded(frame.frame_id)}
+                                className="w-full p-4 text-left hover:bg-gray-700/30 transition-colors"
+                              >
+                                <div className="flex justify-between items-start">
+                                  <div className="flex items-start gap-2">
+                                    {isExpanded ? (
+                                      <ChevronDown className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                    ) : (
+                                      <ChevronRight className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                    )}
+                                    <div>
+                                      <div className="font-medium text-gray-200 text-sm">
+                                        {frame.frame_name}
+                                      </div>
+                                      {frame.slot_map && (
+                                        <div className="text-xs text-blue-400/80 font-mono mt-1">
+                                          {frame.slot_map}
+                                        </div>
+                                      )}
+                                    </div>
                                   </div>
-                                  <div className="text-xs text-gray-500">
-                                    {sampleExample.english}
+                                  <div className="text-xs text-gray-500 flex-shrink-0 ml-2">
+                                    {frameExamples.length} examples
+                                  </div>
+                                </div>
+                                <p className="text-xs text-gray-400 mt-2 ml-6">
+                                  {frame.usage_summary}
+                                </p>
+                              </button>
+
+                              {/* Expanded content */}
+                              {isExpanded && (
+                                <div className="px-4 pb-4 ml-6 space-y-4 border-t border-gray-700">
+                                  {/* Deep grammar explanation */}
+                                  {frame.deep_grammar && (
+                                    <div className="pt-3">
+                                      <p className="text-xs text-gray-300 leading-relaxed">
+                                        {frame.deep_grammar.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+                                          if (part.startsWith('**') && part.endsWith('**')) {
+                                            return (
+                                              <span key={i} className="font-semibold text-gray-200">
+                                                {part.slice(2, -2)}
+                                              </span>
+                                            );
+                                          }
+                                          return part;
+                                        })}
+                                      </p>
+                                    </div>
+                                  )}
+
+                                  {/* All examples */}
+                                  <div className="space-y-2">
+                                    {frameExamples.map((ex) => (
+                                      <div
+                                        key={ex.example_id}
+                                        className="py-1"
+                                      >
+                                        <div className="text-sm text-gray-200">
+                                          {ex.georgian}
+                                        </div>
+                                        <div className="text-xs text-gray-400">
+                                          {ex.english}
+                                        </div>
+                                        {ex.usage_tip && (
+                                          <div className="text-xs text-gray-500 mt-0.5 italic">
+                                            {ex.usage_tip}
+                                          </div>
+                                        )}
+                                      </div>
+                                    ))}
                                   </div>
                                 </div>
                               )}
