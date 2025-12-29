@@ -30,6 +30,7 @@ function StructurePracticePageContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
+  const [showContext, setShowContext] = useState(false);
 
   // Load CSV data
   useEffect(() => {
@@ -274,8 +275,9 @@ function StructurePracticePageContent() {
             example={currentExample}
             frame={currentFrame}
             isFlipped={isFlipped}
-            reviewMode="normal"
+            reviewMode="reverse"
             onExplainClick={handleExplainClick}
+            showContext={showContext}
           />
         </div>
 

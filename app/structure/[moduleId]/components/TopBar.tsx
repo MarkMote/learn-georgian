@@ -15,6 +15,8 @@ interface TopBarProps {
   reviewMode: ReviewMode;
   onModeChange: (mode: ReviewMode) => void;
   moduleName: string;
+  showContext: boolean;
+  onToggleContext: () => void;
 }
 
 export default function TopBar({
@@ -26,6 +28,8 @@ export default function TopBar({
   reviewMode,
   onModeChange,
   moduleName,
+  showContext,
+  onToggleContext,
 }: TopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
@@ -132,6 +136,20 @@ export default function TopBar({
                       </div>
                     </div>
                   )}
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      onToggleContext();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex justify-between items-center w-full px-4 py-2 text-sm text-slate-200 hover:bg-gray-700"
+                  >
+                    <span>Context Hints</span>
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${showContext ? 'bg-green-600' : 'bg-gray-600'}`}>
+                      {showContext ? 'On' : 'Off'}
+                    </span>
+                  </button>
                 </li>
                 <li>
                   <button

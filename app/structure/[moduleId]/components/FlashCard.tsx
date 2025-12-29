@@ -11,6 +11,7 @@ interface FlashCardProps {
   isFlipped: boolean;
   reviewMode: ReviewMode;
   onExplainClick: () => void;
+  showContext: boolean;
 }
 
 export default function FlashCard({
@@ -19,6 +20,7 @@ export default function FlashCard({
   isFlipped,
   reviewMode,
   onExplainClick,
+  showContext,
 }: FlashCardProps) {
   const [justCopied, setJustCopied] = useState(false);
 
@@ -54,7 +56,7 @@ export default function FlashCard({
           <p className={`tracking-wide transition-colors duration-200 ${getTextSize(frontMain, true)}`}>
             {frontMain}
           </p>
-          {frontContext && (
+          {showContext && frontContext && (
             <p className="text-sm text-gray-500 italic">
               {frontContext}
             </p>

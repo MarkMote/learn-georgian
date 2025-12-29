@@ -34,6 +34,7 @@ export default function StructureModulePage() {
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const [explainerFrame, setExplainerFrame] = useState<FrameData | null>(null);
+  const [showContext, setShowContext] = useState(false);
 
   const reviewMode = (searchParams.get('mode') as ReviewMode) || 'reverse';
   const moduleConfig = getModuleById(moduleNumber);
@@ -196,6 +197,8 @@ export default function StructureModulePage() {
         reviewMode={reviewMode}
         onModeChange={handleModeChange}
         moduleName={moduleConfig?.name || `Module ${moduleId}`}
+        showContext={showContext}
+        onToggleContext={() => setShowContext(prev => !prev)}
       />
 
       <div className="flex items-center justify-center px-4 h-[calc(100vh-140px)]">
@@ -205,6 +208,7 @@ export default function StructureModulePage() {
           isFlipped={isFlipped}
           reviewMode={reviewMode}
           onExplainClick={handleExplainClick}
+          showContext={showContext}
         />
       </div>
 
