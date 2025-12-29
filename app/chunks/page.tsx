@@ -248,9 +248,34 @@ export default function ChunkHomePage() {
           <span className='font-bold'> Best Practice</span>: complete all sets in Comprehension mode first, then repeat in Production mode.
         </p>
 
-        {/* Mode Toggle - Tab Style with Slider */}
+        {/* Mode Toggle - 2x2 Grid on Mobile, Slider on Desktop */}
         <div className="flex flex-col items-center mb-8">
-          <div className="relative inline-flex bg-gray-800/50 rounded-lg p-1 border border-gray-700/50">
+          {/* Mobile: 2x2 Grid */}
+          <div className="grid grid-cols-2 gap-1.5 p-1.5 bg-gray-800/50 rounded-lg border border-gray-700/50 sm:hidden">
+            {[
+              { value: 'reverse' as ReviewMode, label: 'Comprehension' },
+              { value: 'normal' as ReviewMode, label: 'Production' },
+              { value: 'examples-reverse' as ReviewMode, label: 'Ex. Comprehension', disabled: !hasExampleChunks },
+              { value: 'examples' as ReviewMode, label: 'Ex. Production', disabled: !hasExampleChunks },
+            ].map((mode) => (
+              <button
+                key={mode.value}
+                onClick={() => !mode.disabled && handleModeChange(mode.value)}
+                className={`px-3 py-2 text-xs font-medium rounded-md transition-colors duration-200 ${
+                  reviewMode === mode.value
+                    ? 'bg-gray-700 text-white'
+                    : mode.disabled
+                      ? 'text-gray-600 cursor-not-allowed'
+                      : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop: Horizontal Slider */}
+          <div className="relative hidden sm:inline-flex bg-gray-800/50 rounded-lg p-1 border border-gray-700/50">
             {/* Sliding background */}
             <div
               className={`absolute top-1 bottom-1 w-[140px] bg-gray-700 rounded-md transition-transform duration-200 ease-out ${
@@ -298,7 +323,7 @@ export default function ChunkHomePage() {
             </button>
           </div>
 
-          <p className="text-xs text-gray-400 mt-3 text-center max-w-lg">
+          <p className="text-xs text-gray-400 mt-3 text-center max-w-xs sm:max-w-lg">
             {getModeDescription(reviewMode)}
           </p>
         </div>

@@ -225,36 +225,36 @@ export default function StructureHomePage() {
           <div className="relative inline-flex bg-gray-800/50 rounded-lg p-1 border border-gray-700/50">
             {/* Sliding background */}
             <div
-              className={`absolute top-1 bottom-1 w-[200px] bg-gray-700 rounded-md transition-transform duration-200 ease-out ${
-                reviewMode === 'normal' ? 'translate-x-[200px]' : 'translate-x-0'
+              className={`absolute top-1 bottom-1 w-[150px] bg-gray-700 rounded-md transition-transform duration-200 ease-out ${
+                reviewMode === 'normal' ? 'translate-x-[150px]' : 'translate-x-0'
               }`}
             />
             <button
               onClick={() => handleModeChange('reverse')}
-              className={`relative z-10 px-5 py-1.5 w-[200px] text-sm font-medium transition-colors duration-200 rounded-md ${
+              className={`relative z-10 px-5 py-1.5 w-[150px] text-sm font-medium transition-colors duration-200 rounded-md ${
                 reviewMode === 'reverse'
                   ? 'text-white'
                   : 'text-gray-500 hover:text-gray-300'
               }`}
             >
-              Comprehension Mode
+              Comprehension
               {/* <div className='opacity-50 text-[10px]'>
                 (Georgian to English)
               </div> */}
             </button>
             <button
               onClick={() => handleModeChange('normal')}
-              className={`relative z-10 px-5 py-1.5 w-[200px] text-sm font-medium transition-colors duration-200 rounded-md ${
+              className={`relative z-10 px-5 py-1.5 w-[150px] text-sm font-medium transition-colors duration-200 rounded-md ${
                 reviewMode === 'normal'
                   ? 'text-white'
                   : 'text-gray-500 hover:text-gray-300'
               }`}
             >
-              Production Mode
+              Production
             </button>
           </div>
 
-          <p className="text-xs text-gray-400 mt-3 text-center  ">
+          <p className="text-xs text-gray-400 mt-3 text-center px-3">
             {reviewMode === 'reverse'
               ? "See Georgian, translate to English. Best for learning to read and understand."
               : "See English, translate to Georgian. Best for learning to speak and write."
