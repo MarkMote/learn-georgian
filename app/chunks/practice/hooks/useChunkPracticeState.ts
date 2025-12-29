@@ -40,14 +40,16 @@ interface MasteredChunkInfo {
   setNumber: number;
 }
 
+type ReviewMode = 'normal' | 'reverse' | 'examples' | 'examples-reverse';
+
 const CHUNK_SIZE = 50;
 
 // Load mastered chunks from all sets
-function loadAllMasteredChunks(allChunks: ChunkData[], setCount: number): MasteredChunkInfo[] {
+function loadAllMasteredChunks(allChunks: ChunkData[], setCount: number, mode: ReviewMode): MasteredChunkInfo[] {
   const masteredChunks: MasteredChunkInfo[] = [];
 
   for (let setNumber = 1; setNumber <= setCount; setNumber++) {
-    const storageKey = `srs_chunks_v3_${setNumber}_normal`;
+    const storageKey = `srs_chunks_v3_${setNumber}_${mode}`;
     try {
       const stored = localStorage.getItem(storageKey);
       if (!stored) continue;
@@ -83,8 +85,8 @@ function loadAllMasteredChunks(allChunks: ChunkData[], setCount: number): Master
 }
 
 // Save updated card state back to set storage
-function saveToSetStorage(setNumber: number, cardKey: string, updatedCard: CardState) {
-  const storageKey = `srs_chunks_v3_${setNumber}_normal`;
+function saveToSetStorage(setNumber: number, cardKey: string, updatedCard: CardState, mode: ReviewMode) {
+  const storageKey = `srs_chunks_v3_${setNumber}_${mode}`;
   try {
     const stored = localStorage.getItem(storageKey);
     if (!stored) return;
@@ -115,7 +117,8 @@ export interface UseChunkPracticeStateReturn {
 export function useChunkPracticeState(
   allChunks: ChunkData[],
   setCount: number,
-  previewMode: boolean = false
+  previewMode: boolean = false,
+  reviewMode: ReviewMode = 'reverse'
 ): UseChunkPracticeStateReturn {
   const config = useMemo(() => getMergedConfig(), []);
 
@@ -144,7 +147,7 @@ export function useChunkPracticeState(
   useEffect(() => {
     if (allChunks.length === 0 || setCount === 0) return;
 
-    const mastered = loadAllMasteredChunks(allChunks, setCount);
+    const mastered = loadAllMasteredChunks(allChunks, setCount, reviewMode);
     setMasteredChunkInfos(mastered);
 
     if (mastered.length === 0) {
@@ -177,7 +180,7 @@ export function useChunkPracticeState(
     setDueQueue(queue);
     setCurrentCardKey(queue[0] || null);
     setIsLoading(false);
-  }, [allChunks, setCount, previewMode]);
+  }, [allChunks, setCount, previewMode, reviewMode]);
 
   // Get current card state
   const currentCardState = useMemo(() => {
@@ -258,7 +261,7 @@ export function useChunkPracticeState(
 
     // Save to original set storage (skip in preview mode)
     if (!previewMode) {
-      saveToSetStorage(setNumber, currentCardKey, updatedCard);
+      saveToSetStorage(setNumber, currentCardKey, updatedCard, reviewMode);
     }
 
     // Move to next card in due queue
@@ -273,7 +276,7 @@ export function useChunkPracticeState(
     }
 
     console.log('Review:', difficulty, 'remaining:', newDueQueue.length);
-  }, [currentCardState, currentCardKey, cardStates, dueQueue, cardToSet, config, isPracticeMode, practiceQueue, masteredChunkInfos.length, previewMode]);
+  }, [currentCardState, currentCardKey, cardStates, dueQueue, cardToSet, config, isPracticeMode, practiceQueue, masteredChunkInfos.length, previewMode, reviewMode]);
 
   // Start practice mode (round-robin with all cards)
   const startPracticeMode = useCallback(() => {

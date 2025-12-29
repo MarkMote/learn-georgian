@@ -13,6 +13,7 @@ import { ChunkData, ExampleMode, ExplanationMode, ReviewMode, DifficultyRating }
 import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 const CHUNK_SIZE = 50;
+const CHUNKS_MODE_KEY = 'chunks_mode_preference';
 
 function parseCSV(csvText: string): ChunkData[] {
   const result = Papa.parse(csvText, {
@@ -52,9 +53,17 @@ function ChunkPracticePageContent() {
   const [revealedExamples, setRevealedExamples] = useState<Set<string>>(new Set());
   const [revealedExplanations, setRevealedExplanations] = useState<Set<string>>(new Set());
   const [isLeftHanded, setIsLeftHanded] = useState(false);
+  const [reviewMode, setReviewMode] = useState<ReviewMode>('reverse');
 
-  // Review mode (practice always uses normal mode)
-  const reviewMode: ReviewMode = 'normal';
+  // Load mode preference from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem(CHUNKS_MODE_KEY) as ReviewMode | null;
+      if (savedMode === 'normal' || savedMode === 'reverse') {
+        setReviewMode(savedMode);
+      }
+    }
+  }, []);
 
   // Load UI preferences
   useEffect(() => {
@@ -105,7 +114,7 @@ function ChunkPracticePageContent() {
     isReviewComplete,
     isPracticeMode,
     startPracticeMode,
-  } = useChunkPracticeState(allChunks, setCount, previewMode);
+  } = useChunkPracticeState(allChunks, setCount, previewMode, reviewMode);
 
   // Reset card display
   const resetCardDisplay = useCallback(() => {

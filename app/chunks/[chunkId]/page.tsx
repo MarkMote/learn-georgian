@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+
+const CHUNKS_MODE_KEY = 'chunks_mode_preference';
 import BottomBar from '../../components/BottomBar';
 import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
@@ -18,14 +20,21 @@ import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 export default function ChunkPage() {
   const params = useParams();
-  const searchParams = useSearchParams();
-  const router = useRouter();
   const chunkId = params.chunkId as string;
   const [allChunks, setAllChunks] = useState<ChunkData[]>([]);
   const [chunkSet, setChunkSet] = useState<ChunkData[]>([]);
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
-  
-  const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
+  const [reviewMode, setReviewMode] = useState<ReviewMode>('reverse');
+
+  // Load mode preference from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem(CHUNKS_MODE_KEY) as ReviewMode | null;
+      if (savedMode === 'normal' || savedMode === 'reverse') {
+        setReviewMode(savedMode);
+      }
+    }
+  }, []);
 
   const {
     knownChunks,
@@ -127,18 +136,19 @@ export default function ChunkPage() {
   };
   
   const handleModeChange = (newMode: ReviewMode) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('mode', newMode);
-    router.push(url.pathname + url.search);
+    setReviewMode(newMode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(CHUNKS_MODE_KEY, newMode);
+    }
   };
   
   const handleCycleMode = () => {
-    const modes: ReviewMode[] = ['normal', 'reverse'];
+    const modes: ReviewMode[] = ['reverse', 'normal'];
     const hasExamples = chunkSet.some(c => c.example_en && c.example_ka);
     if (hasExamples) {
-      modes.push('examples', 'examples-reverse');
+      modes.push('examples-reverse', 'examples');
     }
-    
+
     const currentModeIndex = modes.indexOf(reviewMode);
     const nextMode = modes[(currentModeIndex + 1) % modes.length];
     handleModeChange(nextMode);

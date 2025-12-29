@@ -22,7 +22,10 @@ type ChunkProgress = {
   totalCount: number;
 };
 
+type ReviewMode = 'normal' | 'reverse' | 'examples' | 'examples-reverse';
+
 const CHUNK_SIZE = 50;
+const CHUNKS_MODE_KEY = 'chunks_mode_preference';
 
 function parseCSV(csvText: string): ChunkData[] {
   const result = Papa.parse(csvText, {
@@ -51,7 +54,7 @@ function getChunksForSet(allChunks: ChunkData[], chunkNumber: number): ChunkData
   return allChunks.slice(startIndex, endIndex);
 }
 
-function loadChunkProgress(chunkNumber: number, setChunks: ChunkData[]): ChunkProgress {
+function loadChunkProgress(chunkNumber: number, setChunks: ChunkData[], mode: ReviewMode): ChunkProgress {
   const totalCount = setChunks.length;
   const emptyProgress: ChunkProgress = {
     seenCount: 0,
@@ -59,7 +62,7 @@ function loadChunkProgress(chunkNumber: number, setChunks: ChunkData[]): ChunkPr
     totalCount,
   };
 
-  const storageKey = `srs_chunks_v3_${chunkNumber}_normal`;
+  const storageKey = `srs_chunks_v3_${chunkNumber}_${mode}`;
   try {
     const stored = localStorage.getItem(storageKey);
     if (!stored) {
@@ -95,12 +98,12 @@ function loadChunkProgress(chunkNumber: number, setChunks: ChunkData[]): ChunkPr
   }
 }
 
-function countDueChunks(chunkCount: number): number {
+function countDueChunks(chunkCount: number, mode: ReviewMode): number {
   const now = new Date();
   let dueCount = 0;
 
   for (let chunkNumber = 1; chunkNumber <= chunkCount; chunkNumber++) {
-    const storageKey = `srs_chunks_v3_${chunkNumber}_normal`;
+    const storageKey = `srs_chunks_v3_${chunkNumber}_${mode}`;
     try {
       const stored = localStorage.getItem(storageKey);
       if (!stored) continue;
@@ -132,6 +135,24 @@ export default function ChunkHomePage() {
   const [chunkCount, setChunkCount] = useState<number>(0);
   const [chunkProgress, setChunkProgress] = useState<Map<number, ChunkProgress>>(new Map());
   const [dueCount, setDueCount] = useState<number>(0);
+  const [reviewMode, setReviewMode] = useState<ReviewMode>('reverse');
+
+  // Load mode preference from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem(CHUNKS_MODE_KEY) as ReviewMode | null;
+      if (savedMode === 'normal' || savedMode === 'reverse' || savedMode === 'examples' || savedMode === 'examples-reverse') {
+        setReviewMode(savedMode);
+      }
+    }
+  }, []);
+
+  const handleModeChange = (newMode: ReviewMode) => {
+    setReviewMode(newMode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(CHUNKS_MODE_KEY, newMode);
+    }
+  };
 
   // Reset body scroll styles (in case deck page disabled them)
   useEffect(() => {
@@ -154,20 +175,20 @@ export default function ChunkHomePage() {
       });
   }, []);
 
-  // Load progress for all chunks once data is loaded
+  // Load progress for all chunks once data is loaded (re-run when mode changes)
   useEffect(() => {
     if (allChunks.length === 0 || chunkCount === 0) return;
 
     const progressMap = new Map<number, ChunkProgress>();
     for (let i = 1; i <= chunkCount; i++) {
       const setChunks = getChunksForSet(allChunks, i);
-      progressMap.set(i, loadChunkProgress(i, setChunks));
+      progressMap.set(i, loadChunkProgress(i, setChunks, reviewMode));
     }
     setChunkProgress(progressMap);
 
     // Count due chunks
-    setDueCount(countDueChunks(chunkCount));
-  }, [allChunks, chunkCount]);
+    setDueCount(countDueChunks(chunkCount, reviewMode));
+  }, [allChunks, chunkCount, reviewMode]);
 
   const handleChunkClick = (chunkNumber: number) => {
     router.push(`/chunks/${chunkNumber}`);
@@ -184,6 +205,20 @@ export default function ChunkHomePage() {
   );
 
   const hasKnownPhrases = totalStats.known > 0;
+  const hasExampleChunks = allChunks.some(c => c.example_en && c.example_ka);
+
+  const getModeDescription = (mode: ReviewMode) => {
+    switch (mode) {
+      case 'reverse':
+        return "See Georgian, translate to English. Best for learning to read and understand.";
+      case 'normal':
+        return "See English, translate to Georgian. Best for learning to speak and write.";
+      case 'examples-reverse':
+        return "See Georgian examples, translate to English. Practice phrases in context.";
+      case 'examples':
+        return "See English examples, translate to Georgian. Practice producing phrases in context.";
+    }
+  };
 
   const carvedTextStyle = "[text-shadow:1px_1px_1px_rgba(0,0,0,0.5),_-1px_-1px_1px_rgba(255,255,255,0.05)]";
 
@@ -208,9 +243,65 @@ export default function ChunkHomePage() {
           Colloquial Georgian
         </h1>
 
-        <p className="text-sm sm:text-base text-gray-400 mb-4 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4 md:py-4 ">
-          High-frequency phrases in Georgian. Each set contains 50 phrases. The phrases are the most frequent N-grams (<a href="https://en.wikipedia.org/wiki/N-gram">1-4 word combinations</a>) from a large dataset of Georgian Text. 
+        <p className="text-sm sm:text-base text-gray-400 mb-8 mt-2 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
+          High-frequency phrases in Georgian. Each set contains 50 phrases. The phrases are the most frequent N-grams (<a href="https://en.wikipedia.org/wiki/N-gram" className="underline hover:text-gray-300">1-4 word combinations</a>) from a large dataset of Georgian Text.
+          <span className='font-bold'> Best Practice</span>: complete all sets in Comprehension mode first, then repeat in Production mode.
         </p>
+
+        {/* Mode Toggle - Tab Style with Slider */}
+        <div className="flex flex-col items-center mb-8">
+          <div className="relative inline-flex bg-gray-800/50 rounded-lg p-1 border border-gray-700/50">
+            {/* Sliding background */}
+            <div
+              className={`absolute top-1 bottom-1 w-[140px] bg-gray-700 rounded-md transition-transform duration-200 ease-out ${
+                reviewMode === 'reverse' ? 'translate-x-0' :
+                reviewMode === 'normal' ? 'translate-x-[140px]' :
+                reviewMode === 'examples-reverse' ? 'translate-x-[280px]' :
+                'translate-x-[420px]'
+              }`}
+            />
+            <button
+              onClick={() => handleModeChange('reverse')}
+              className={`relative z-10 px-3 py-1.5 w-[140px] text-xs font-medium transition-colors duration-200 rounded-md ${
+                reviewMode === 'reverse' ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              Comprehension
+            </button>
+            <button
+              onClick={() => handleModeChange('normal')}
+              className={`relative z-10 px-3 py-1.5 w-[140px] text-xs font-medium transition-colors duration-200 rounded-md ${
+                reviewMode === 'normal' ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              Production
+            </button>
+            <button
+              onClick={() => hasExampleChunks && handleModeChange('examples-reverse')}
+              className={`relative z-10 px-3 py-1.5 w-[140px] text-xs font-medium transition-colors duration-200 rounded-md ${
+                reviewMode === 'examples-reverse' ? 'text-white' :
+                !hasExampleChunks ? 'text-gray-600 cursor-not-allowed' :
+                'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              Ex. Comprehension
+            </button>
+            <button
+              onClick={() => hasExampleChunks && handleModeChange('examples')}
+              className={`relative z-10 px-3 py-1.5 w-[140px] text-xs font-medium transition-colors duration-200 rounded-md ${
+                reviewMode === 'examples' ? 'text-white' :
+                !hasExampleChunks ? 'text-gray-600 cursor-not-allowed' :
+                'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              Ex. Production
+            </button>
+          </div>
+
+          <p className="text-xs text-gray-400 mt-3 text-center max-w-lg">
+            {getModeDescription(reviewMode)}
+          </p>
+        </div>
 
         {/* Progress Summary */}
         {totalStats.seen > 0 && (

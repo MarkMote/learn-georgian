@@ -42,11 +42,11 @@ export default function TopBar({
   
   const getModeLabel = (mode: ReviewMode) => {
     switch (mode) {
-      case 'normal': return 'Normal';
-      case 'reverse': return 'Reverse';
-      case 'examples': return 'Examples';
-      case 'examples-reverse': return 'Examples Rev';
-      default: return 'Normal';
+      case 'normal': return 'Production';
+      case 'reverse': return 'Comprehension';
+      case 'examples': return 'Ex. Production';
+      case 'examples-reverse': return 'Ex. Comprehension';
+      default: return 'Comprehension';
     }
   };
 
@@ -149,10 +149,10 @@ export default function TopBar({
                     <div className="bg-gray-900 mx-2 my-2 rounded-lg p-3">
                       <div className="grid grid-cols-1 gap-2">
                         {[
-                          { value: 'normal' as ReviewMode, label: 'Normal', description: 'English → Georgian' },
-                          { value: 'reverse' as ReviewMode, label: 'Reverse', description: 'Georgian → English' },
-                          { value: 'examples' as ReviewMode, label: 'Examples', description: 'Practice with examples', disabled: !hasExampleChunks },
-                          { value: 'examples-reverse' as ReviewMode, label: 'Examples Reverse', description: 'Georgian examples → English', disabled: !hasExampleChunks },
+                          { value: 'reverse' as ReviewMode, label: 'Comprehension', description: 'Georgian → English' },
+                          { value: 'normal' as ReviewMode, label: 'Production', description: 'English → Georgian' },
+                          { value: 'examples-reverse' as ReviewMode, label: 'Examples Comprehension', description: 'Georgian examples → English', disabled: !hasExampleChunks },
+                          { value: 'examples' as ReviewMode, label: 'Examples Production', description: 'English examples → Georgian', disabled: !hasExampleChunks },
                         ].map((mode) => (
                           <button
                             key={mode.value}
