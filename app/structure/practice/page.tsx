@@ -9,14 +9,17 @@ import BottomBar from '../../components/BottomBar';
 import FlashCard from '../[moduleId]/components/FlashCard';
 import FrameExplainerModal from '../[moduleId]/components/FrameExplainerModal';
 import { useStructurePracticeState } from './hooks/useStructurePracticeState';
-import { FrameData, FrameExampleData, DifficultyRating } from '../[moduleId]/types';
+import { FrameData, FrameExampleData, DifficultyRating, ReviewMode } from '../[moduleId]/types';
 import {
   parseFramesCSV,
   parseExamplesCSV,
   buildFrameLookup,
 } from '../[moduleId]/utils/dataProcessing';
+
 import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 import { getModuleById } from '../[moduleId]/utils/modules';
+
+const STRUCTURE_MODE_KEY = 'structure_mode_preference';
 
 function StructurePracticePageContent() {
   const router = useRouter();
@@ -31,6 +34,17 @@ function StructurePracticePageContent() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const [showContext, setShowContext] = useState(false);
+  const [reviewMode, setReviewMode] = useState<ReviewMode>('reverse');
+
+  // Load mode preference from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem(STRUCTURE_MODE_KEY) as ReviewMode | null;
+      if (savedMode === 'normal' || savedMode === 'reverse') {
+        setReviewMode(savedMode);
+      }
+    }
+  }, []);
 
   // Load CSV data
   useEffect(() => {
@@ -62,7 +76,7 @@ function StructurePracticePageContent() {
     isReviewComplete,
     isPracticeMode,
     startPracticeMode,
-  } = useStructurePracticeState(examples, frames, frameLookup, previewMode);
+  } = useStructurePracticeState(examples, frames, frameLookup, previewMode, reviewMode);
 
   const resetCardDisplay = useCallback(() => {
     setIsFlipped(false);
@@ -275,7 +289,7 @@ function StructurePracticePageContent() {
             example={currentExample}
             frame={currentFrame}
             isFlipped={isFlipped}
-            reviewMode="reverse"
+            reviewMode={reviewMode}
             onExplainClick={handleExplainClick}
             showContext={showContext}
           />

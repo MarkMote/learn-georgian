@@ -11,7 +11,7 @@ import {
   updateStateOnGrade,
 } from "../../../../lib/spacedRepetition";
 import { getMergedConfig } from "../../../../lib/spacedRepetition/lib/configManager";
-import { FrameData, FrameExampleData, DifficultyRating } from "../../[moduleId]/types";
+import { FrameData, FrameExampleData, DifficultyRating, ReviewMode } from "../../[moduleId]/types";
 import { MODULES } from "../../[moduleId]/utils/modules";
 
 function difficultyToGrade(difficulty: DifficultyRating): Grade {
@@ -33,12 +33,13 @@ interface MasteredExampleInfo {
 function loadAllMasteredExamples(
   allExamples: FrameExampleData[],
   frames: FrameData[],
-  frameLookup: Map<string, FrameData>
+  frameLookup: Map<string, FrameData>,
+  mode: ReviewMode
 ): MasteredExampleInfo[] {
   const masteredExamples: MasteredExampleInfo[] = [];
 
   for (const mod of MODULES) {
-    const storageKey = `srs_structure_v3_${mod.id}_normal`;
+    const storageKey = `srs_structure_v3_${mod.id}_${mode}`;
     try {
       const stored = localStorage.getItem(storageKey);
       if (!stored) continue;
@@ -71,8 +72,8 @@ function loadAllMasteredExamples(
   return masteredExamples;
 }
 
-function saveToModuleStorage(moduleId: number, cardKey: string, updatedCard: CardState) {
-  const storageKey = `srs_structure_v3_${moduleId}_normal`;
+function saveToModuleStorage(moduleId: number, cardKey: string, updatedCard: CardState, mode: ReviewMode) {
+  const storageKey = `srs_structure_v3_${moduleId}_${mode}`;
   try {
     const stored = localStorage.getItem(storageKey);
     if (!stored) return;
@@ -103,7 +104,8 @@ export function useStructurePracticeState(
   allExamples: FrameExampleData[],
   frames: FrameData[],
   frameLookup: Map<string, FrameData>,
-  previewMode: boolean = false
+  previewMode: boolean = false,
+  mode: ReviewMode = 'reverse'
 ): UseStructurePracticeStateReturn {
   const config = useMemo(() => getMergedConfig(), []);
 
@@ -128,7 +130,7 @@ export function useStructurePracticeState(
   useEffect(() => {
     if (allExamples.length === 0 || frames.length === 0) return;
 
-    const mastered = loadAllMasteredExamples(allExamples, frames, frameLookup);
+    const mastered = loadAllMasteredExamples(allExamples, frames, frameLookup, mode);
     setMasteredInfos(mastered);
 
     if (mastered.length === 0) {
@@ -158,7 +160,7 @@ export function useStructurePracticeState(
     setDueQueue(queue);
     setCurrentCardKey(queue[0] || null);
     setIsLoading(false);
-  }, [allExamples, frames, frameLookup, previewMode]);
+  }, [allExamples, frames, frameLookup, previewMode, mode]);
 
   const currentCardState = useMemo(() => {
     if (!currentCardKey) return null;
@@ -237,7 +239,7 @@ export function useStructurePracticeState(
     setCardStates(newCardStates);
 
     if (!previewMode) {
-      saveToModuleStorage(moduleId, currentCardKey, updatedCard);
+      saveToModuleStorage(moduleId, currentCardKey, updatedCard, mode);
     }
 
     const newDueQueue = dueQueue.filter(k => k !== currentCardKey);
@@ -248,7 +250,7 @@ export function useStructurePracticeState(
     } else {
       setCurrentCardKey(null);
     }
-  }, [currentCardState, currentCardKey, cardStates, dueQueue, cardToModule, config, isPracticeMode, practiceQueue, masteredInfos.length, previewMode]);
+  }, [currentCardState, currentCardKey, cardStates, dueQueue, cardToModule, config, isPracticeMode, practiceQueue, masteredInfos.length, previewMode, mode]);
 
   const startPracticeMode = useCallback(() => {
     const allKeys = masteredInfos.map(m => m.example.example_id);

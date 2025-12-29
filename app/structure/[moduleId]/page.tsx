@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams, useSearchParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import BottomBar from '../../components/BottomBar';
 import FlashCard from './components/FlashCard';
 import TopBar from './components/TopBar';
@@ -21,10 +21,10 @@ import {
 import { getModuleById } from './utils/modules';
 import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
+const STRUCTURE_MODE_KEY = 'structure_mode_preference';
+
 export default function StructureModulePage() {
   const params = useParams();
-  const searchParams = useSearchParams();
-  const router = useRouter();
   const moduleId = params.moduleId as string;
   const moduleNumber = parseInt(moduleId, 10);
 
@@ -35,8 +35,17 @@ export default function StructureModulePage() {
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const [explainerFrame, setExplainerFrame] = useState<FrameData | null>(null);
   const [showContext, setShowContext] = useState(false);
+  const [reviewMode, setReviewMode] = useState<ReviewMode>('reverse');
 
-  const reviewMode = (searchParams.get('mode') as ReviewMode) || 'reverse';
+  // Load mode preference from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem(STRUCTURE_MODE_KEY) as ReviewMode | null;
+      if (savedMode === 'normal' || savedMode === 'reverse') {
+        setReviewMode(savedMode);
+      }
+    }
+  }, []);
   const moduleConfig = getModuleById(moduleNumber);
 
   const {
@@ -118,9 +127,10 @@ export default function StructureModulePage() {
   };
 
   const handleModeChange = (newMode: ReviewMode) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('mode', newMode);
-    router.push(url.pathname + url.search);
+    setReviewMode(newMode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STRUCTURE_MODE_KEY, newMode);
+    }
   };
 
   const handleCycleMode = () => {

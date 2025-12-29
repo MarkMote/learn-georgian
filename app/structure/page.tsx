@@ -12,9 +12,11 @@ import {
   getExamplesForModule,
   getFramesForModule,
 } from './[moduleId]/utils/dataProcessing';
-import { FrameData, FrameExampleData, ModuleProgress } from './[moduleId]/types';
+import { FrameData, FrameExampleData, ModuleProgress, ReviewMode } from './[moduleId]/types';
 
-function loadModuleProgress(moduleId: number, moduleExamples: FrameExampleData[]): ModuleProgress {
+const STRUCTURE_MODE_KEY = 'structure_mode_preference';
+
+function loadModuleProgress(moduleId: number, moduleExamples: FrameExampleData[], mode: ReviewMode): ModuleProgress {
   const totalCount = moduleExamples.length;
   const emptyProgress: ModuleProgress = {
     seenCount: 0,
@@ -24,7 +26,7 @@ function loadModuleProgress(moduleId: number, moduleExamples: FrameExampleData[]
 
   if (typeof window === 'undefined') return emptyProgress;
 
-  const storageKey = `srs_structure_v3_${moduleId}_normal`;
+  const storageKey = `srs_structure_v3_${moduleId}_${mode}`;
   try {
     const stored = localStorage.getItem(storageKey);
     if (!stored) return emptyProgress;
@@ -55,14 +57,14 @@ function loadModuleProgress(moduleId: number, moduleExamples: FrameExampleData[]
   }
 }
 
-function countDueExamples(allExamples: FrameExampleData[]): number {
+function countDueExamples(allExamples: FrameExampleData[], mode: ReviewMode): number {
   if (typeof window === 'undefined') return 0;
 
   const now = new Date();
   let dueCount = 0;
 
   for (const mod of MODULES) {
-    const storageKey = `srs_structure_v3_${mod.id}_normal`;
+    const storageKey = `srs_structure_v3_${mod.id}_${mode}`;
     try {
       const stored = localStorage.getItem(storageKey);
       if (!stored) continue;
@@ -96,6 +98,28 @@ export default function StructureHomePage() {
   const [dueCount, setDueCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const [expandedFrames, setExpandedFrames] = useState<Set<string>>(new Set());
+  const [reviewMode, setReviewMode] = useState<ReviewMode>('reverse');
+
+  // Load mode preference from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem(STRUCTURE_MODE_KEY) as ReviewMode | null;
+      if (savedMode === 'normal' || savedMode === 'reverse') {
+        setReviewMode(savedMode);
+      }
+    }
+  }, []);
+
+  const handleModeChange = (newMode: ReviewMode) => {
+    setReviewMode(newMode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STRUCTURE_MODE_KEY, newMode);
+    }
+  };
+
+  const getModeLabel = (mode: ReviewMode) => {
+    return mode === 'reverse' ? 'Comprehension' : 'Production';
+  };
 
   const toggleFrameExpanded = (frameId: string) => {
     setExpandedFrames(prev => {
@@ -136,18 +160,18 @@ export default function StructureHomePage() {
       });
   }, []);
 
-  // Load progress for all modules
+  // Load progress for all modules (re-run when mode changes)
   useEffect(() => {
     if (examples.length === 0) return;
 
     const progressMap = new Map<number, ModuleProgress>();
     for (const mod of MODULES) {
       const moduleExamples = getExamplesForModule(examples, mod.id);
-      progressMap.set(mod.id, loadModuleProgress(mod.id, moduleExamples));
+      progressMap.set(mod.id, loadModuleProgress(mod.id, moduleExamples, reviewMode));
     }
     setModuleProgress(progressMap);
-    setDueCount(countDueExamples(examples));
-  }, [examples]);
+    setDueCount(countDueExamples(examples, reviewMode));
+  }, [examples, reviewMode]);
 
   const handleModuleClick = (moduleId: number) => {
     router.push(`/structure/${moduleId}`);
@@ -187,10 +211,56 @@ export default function StructureHomePage() {
           Sentence Structure
         </h1>
 
-        <p className="text-sm sm:text-base text-gray-400 mb-6 mt-2 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
+        <p className="text-sm sm:text-base text-gray-400 mb-8 mt-2 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
           Learn how to construct Georgian sentences through semantic frames. Each module teaches
-          common grammatical patterns with example sentences.
+        common grammatical patterns with example sentences.  
+        <span className='font-bold'> Best Practice</span>: complete all modules in Comprehension mode first, then repeat in Production mode.
         </p>
+        {/* <p className="text-sm sm:text-base text-gray-400 mb-8 text-center max-w-md md:max-w-2xl lg:max-w-4xl px-4">
+        Recommendation: complete the set in Comprehension mode first, then repeat in Production mode.
+        </p>  */}
+
+        {/* Mode Toggle - Tab Style */}
+        <div className="flex flex-col items-center mb-8">
+          <div className="relative inline-flex bg-gray-800/50 rounded-lg p-1 border border-gray-700/50">
+            {/* Sliding background */}
+            <div
+              className={`absolute top-1 bottom-1 w-[200px] bg-gray-700 rounded-md transition-transform duration-200 ease-out ${
+                reviewMode === 'normal' ? 'translate-x-[200px]' : 'translate-x-0'
+              }`}
+            />
+            <button
+              onClick={() => handleModeChange('reverse')}
+              className={`relative z-10 px-5 py-1.5 w-[200px] text-sm font-medium transition-colors duration-200 rounded-md ${
+                reviewMode === 'reverse'
+                  ? 'text-white'
+                  : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              Comprehension Mode
+              {/* <div className='opacity-50 text-[10px]'>
+                (Georgian to English)
+              </div> */}
+            </button>
+            <button
+              onClick={() => handleModeChange('normal')}
+              className={`relative z-10 px-5 py-1.5 w-[200px] text-sm font-medium transition-colors duration-200 rounded-md ${
+                reviewMode === 'normal'
+                  ? 'text-white'
+                  : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              Production Mode
+            </button>
+          </div>
+
+          <p className="text-xs text-gray-400 mt-3 text-center  ">
+            {reviewMode === 'reverse'
+              ? "See Georgian, translate to English. Best for learning to read and understand."
+              : "See English, translate to Georgian. Best for learning to speak and write."
+            }
+          </p>
+        </div>
 
         {/* Progress Summary */}
         {totalStats.seen > 0 && (

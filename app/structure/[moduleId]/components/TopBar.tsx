@@ -37,9 +37,9 @@ export default function TopBar({
 
   const getModeLabel = (mode: ReviewMode) => {
     switch (mode) {
-      case 'normal': return 'Normal';
-      case 'reverse': return 'Reverse';
-      default: return 'Normal';
+      case 'normal': return 'Production';
+      case 'reverse': return 'Comprehension';
+      default: return 'Comprehension';
     }
   };
 
@@ -108,8 +108,8 @@ export default function TopBar({
                     <div className="bg-gray-900 mx-2 my-2 rounded-lg p-3">
                       <div className="grid grid-cols-1 gap-2">
                         {[
-                          { value: 'normal' as ReviewMode, label: 'Normal', description: 'English → Georgian' },
-                          { value: 'reverse' as ReviewMode, label: 'Reverse', description: 'Georgian → English' },
+                          { value: 'reverse' as ReviewMode, label: 'Comprehension', description: 'Georgian → English' },
+                          { value: 'normal' as ReviewMode, label: 'Production', description: 'English → Georgian' },
                         ].map((mode) => (
                           <button
                             key={mode.value}
