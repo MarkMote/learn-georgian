@@ -1,23 +1,224 @@
+we just made the following upates, can you integrate into the /structure route
+Here is the concise summary of the structural changes we made to your Grammar Engine.
+1. Frames Renamed
 
-    Stage 1: The Foundations (Pattern A - NOM Subject)
+You need to find these IDs in your Example File and rename them.
 
-        Frames 1–5, 33-34, 47. (Being, Going, Entering, Origins).
+    obligation_present
 
-    Stage 2: The Internal World (Pattern C - DAT Subject)
+            
+    →→
 
-        Frames 6–10, 15-19, 31-32, 36-37. (Wanting, Liking, Needing, Having, Must, Emotions).
+          
 
-    Stage 3: The Active World (Pattern B - NOM Subj / DAT Obj)
+    obligation_intransitive (For "Must Go/Be" examples only).
 
-        Frames 11, 12, 20-30, 38-40. (Doing, Working, Finding, Starting, Asking).
+    completed_transitive_past
 
-    Stage 4: The Past & Social World (Pattern B Shift - ERG Subj / NOM Obj)
+            
+    →→
 
-        Frames 13, 14, 46, 48. (Completed actions, "Should", Benefactive).
+          
 
-    Stage 5: The Complex World (Connectors & Logic)
+    active_past_aorist (For all "I did it" examples).
 
-        Frames 35, 41-45, 49-50. (Because, If, Reported speech, Comparisons).
+2. Frames Added
+
+You need to add new definitions and new examples for these.
+
+    obligation_active (Must Do - Transitive).
+
+    active_future (I will do).
+
+    active_imperfect (I was doing).
+
+    conditional_present (I would do).
+
+    relative_clause_identity (The one who...).
+
+    reflexive_action (Myself).
+
+    dynamic_passive (It opens/happens).
+
+    temporal_sequence_after (After X).
+
+3. Frames Modified (Internal Fixes)
+
+The ID stayed the same, but the logic/grammar description was fixed.
+
+    knowledge_present: Updated to specify the Subject uses -მა (Ergative).
+
+    location_state: Updated to allow -ზე (on) as well as -ში (in).
+
+    motion_away_present: Updated to allow -ზე (on) as well as -ში (in).
+
+
+
+a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Great! here is what we want to do. 
+
+Idea: start stringing words and basic together by learning semantic frames, through examples
+- 50 frames: core ways for puting together a sentence 
+- Each frame has 15 examples: these will become the flashcards 
+
+New deck: /structure
+
+Data Source: 
+- frames.csv: contains infomation on semantic frames. 
+- frame_examples.csv: the content of the flashcards. 
+
+We will break these up into modules. Each module will have a deck. 
+
+What the /structure page will look like
+- list the buttons for the module decks up top. 
+- Below these buttons, we can have a description of all frames: ie the content in frames.csv (with a few examples thrown in from frame_examples.csv)
+
+The flashcards will look like: 
+Front: 
+- english sentence (main content, from frame examples)
+- context (from frame examples, in subtle text)
+
+Back:
+- georgian sentence (main content, from frame examples)
+- english sentence (still)
+- slot map (from frames.csv; optional)
+- usage tip (from frame examples; optional)
+- explain this frame (button somewhere, possibly top right, shows a modal with the information from frames.csv explaining the frame)
+
+note: there is nothing new about the spaced repetition here, its the same pattern and functions as /chunks, /review, alphabet, etc. 
+
+Modules: 
+Module 1 — States & Identity
+
+What things are and where they are.
+Frames:
+
+identity_state
+
+location_state
+
+origin_state
+
+passive_state_result
+
+Module 2 — Motion & Direction
+
+How people and things move in space.
+Frames:
+
+motion_away_present
+
+motion_toward_present
+
+irregular_future_motion
+
+motion_advanced_directional
+
+Module 3 — Doing Things
+
+Actions you actively perform.
+Frames:
+
+doing_present
+
+activity_present
+
+taking_getting
+
+process_start_finish
+
+Module 4 — Interaction & Exchange
+
+Doing things with or for others.
+Frames:
+
+communication_interaction_present
+
+objective_version_present
+
+commerce_transaction_present
+
+selection_order
+
+Module 5 — Experience & Feelings
+
+Things that happen to you internally.
+Frames:
+
+emotion_experiencer_present
+
+physical_sensations
+
+desire_present
+
+liking_present
+
+Module 6 — Mind & Ability
+
+What you know, understand, or are able to do.
+Frames:
+
+perception_experiencer_present
+
+knowledge_present
+
+ability_present
+
+preference_present
+
+Module 7 — Possession & Relationships
+
+How things and people relate to you.
+Frames:
+
+possession_inanimate
+
+possession_animate
+
+ownership_belonging
+
+expectation_waiting
+
+Module 8 — Intent, Rules & Outcomes
+
+Plans, obligations, permissions, and results.
+Frames:
+
+plans_intent
+
+obligation_must
+
+permission_possibility
+
+evidential_perfect
+
+Does this make sense? can you confirm the goal? maybe put it in a markdown document we will use for planning?
+
+
+
+
+
+---
+
 
 Front: 
 - English sentence 

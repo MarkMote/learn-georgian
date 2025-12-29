@@ -54,7 +54,25 @@ export const MODULES: ModuleConfig[] = [
     id: 8,
     name: "Intent, Rules & Outcomes",
     description: "Plans, obligations, permissions, and results.",
-    frames: ["plans_intent", "obligation_must", "permission_possibility", "evidential_perfect"]
+    frames: ["plans_intent", "obligation_intransitive", "obligation_active", "permission_possibility", "evidential_perfect"]
+  },
+  {
+    id: 9,
+    name: "Tenses & Time",
+    description: "How actions relate to past, future, and hypotheticals.",
+    frames: ["active_future", "active_imperfect", "active_past_aorist", "conditional_present"]
+  },
+  {
+    id: 10,
+    name: "Advanced Patterns",
+    description: "Relative clauses, reflexives, and voice.",
+    frames: ["relative_clause_identity", "reflexive_action", "dynamic_passive", "temporal_sequence_after"]
+  },
+  {
+    id: 11,
+    name: "Commands & Complex Actions",
+    description: "Prohibitions, permissions, and linked actions.",
+    frames: ["prohibition_imperative", "optative_permission", "simultaneous_action", "benefactive_external"]
   }
 ];
 
