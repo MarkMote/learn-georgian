@@ -62,7 +62,7 @@ export default function FrameExplainerModal({
           {frame.slot_map && (
             <div>
               <h3 className="text-xs uppercase tracking-wide text-gray-500 mb-2">
-                Pattern
+                Common Pattern
               </h3>
               <div className="bg-gray-800 rounded-lg px-4 py-3">
                 <p className="text-sm font-mono text-gray-300">

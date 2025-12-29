@@ -105,17 +105,6 @@ export default function FlashCard({
             )}
           </div>
 
-          {/* Slot map - if available */}
-          {frame.slot_map && (
-            <div className="w-full max-w-sm px-4">
-              <div className="bg-gray-800/50 rounded-lg px-4 py-2">
-                <p className="text-xs text-gray-400 font-mono">
-                  {frame.slot_map}
-                </p>
-              </div>
-            </div>
-          )}
-
           {/* Usage tip - if available */}
           {example.usage_tip && (
             <div className="w-full max-w-sm px-4">

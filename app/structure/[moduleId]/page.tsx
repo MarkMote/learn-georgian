@@ -35,7 +35,7 @@ export default function StructureModulePage() {
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const [explainerFrame, setExplainerFrame] = useState<FrameData | null>(null);
 
-  const reviewMode = (searchParams.get('mode') as ReviewMode) || 'normal';
+  const reviewMode = (searchParams.get('mode') as ReviewMode) || 'reverse';
   const moduleConfig = getModuleById(moduleNumber);
 
   const {

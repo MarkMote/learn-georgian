@@ -70,9 +70,27 @@ export const MODULES: ModuleConfig[] = [
   },
   {
     id: 11,
-    name: "Commands & Complex Actions",
-    description: "Prohibitions, permissions, and linked actions.",
-    frames: ["prohibition_imperative", "optative_permission", "simultaneous_action", "benefactive_external"]
+    name: "Discovery & Change",
+    description: "Finding, losing, and becoming.",
+    frames: ["discovery_finding_present", "discovery_loss_active", "becoming_change_state", "success_managing"]
+  },
+  {
+    id: 12,
+    name: "Needs & Habits",
+    description: "What you need and how often you do things.",
+    frames: ["necessity_present", "frequency_habit", "emotion_states", "perception_seeing_present"]
+  },
+  {
+    id: 13,
+    name: "Logic & Conditions",
+    description: "Reasoning, comparing, and if/then.",
+    frames: ["logic_reason", "conditionals_real", "comparison_degree", "reported_speech"]
+  },
+  {
+    id: 14,
+    name: "Purpose & Suggestions",
+    description: "Goals, suggestions, and doing things for others.",
+    frames: ["purpose_intent", "intent_optative_present", "obligation_must", "general_relative_finale", "version_shift_benefactive"]
   }
 ];
 
