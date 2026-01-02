@@ -18,7 +18,7 @@ import {
   computePercentageScore,
   getExampleProgress,
 } from './utils/dataProcessing';
-import { getModuleById } from './utils/modules';
+import { ModuleConfig, buildModulesFromFrames } from './utils/modules';
 import { useFlashcardLock } from '../../hooks/useFlashcardLock';
 
 const STRUCTURE_MODE_KEY = 'structure_mode_preference';
@@ -29,6 +29,7 @@ export default function StructureModulePage() {
   const moduleNumber = parseInt(moduleId, 10);
 
   const [frames, setFrames] = useState<FrameData[]>([]);
+  const [modules, setModules] = useState<ModuleConfig[]>([]);
   const [moduleExamples, setModuleExamples] = useState<FrameExampleData[]>([]);
   const [frameLookup, setFrameLookup] = useState<Map<string, FrameData>>(new Map());
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
@@ -46,7 +47,8 @@ export default function StructureModulePage() {
       }
     }
   }, []);
-  const moduleConfig = getModuleById(moduleNumber);
+
+  const moduleConfig = modules.find(m => m.id === moduleNumber);
 
   const {
     knownExamples,
@@ -67,11 +69,13 @@ export default function StructureModulePage() {
       .then(([framesCSV, examplesCSV]) => {
         const parsedFrames = parseFramesCSV(framesCSV);
         const parsedExamples = parseExamplesCSV(examplesCSV);
+        const builtModules = buildModulesFromFrames(parsedFrames);
 
         setFrames(parsedFrames);
+        setModules(builtModules);
         setFrameLookup(buildFrameLookup(parsedFrames));
 
-        const filtered = getExamplesForModule(parsedExamples, moduleNumber);
+        const filtered = getExamplesForModule(parsedExamples, moduleNumber, builtModules);
         setModuleExamples(filtered);
       })
       .catch((error) => {

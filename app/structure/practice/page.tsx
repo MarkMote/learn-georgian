@@ -17,7 +17,7 @@ import {
 } from '../[moduleId]/utils/dataProcessing';
 
 import { useFlashcardLock } from '../../hooks/useFlashcardLock';
-import { getModuleById } from '../[moduleId]/utils/modules';
+import { ModuleConfig, buildModulesFromFrames } from '../[moduleId]/utils/modules';
 
 const STRUCTURE_MODE_KEY = 'structure_mode_preference';
 
@@ -28,6 +28,7 @@ function StructurePracticePageContent() {
   const autoPractice = searchParams.get('practice') === 'true';
 
   const [frames, setFrames] = useState<FrameData[]>([]);
+  const [modules, setModules] = useState<ModuleConfig[]>([]);
   const [examples, setExamples] = useState<FrameExampleData[]>([]);
   const [frameLookup, setFrameLookup] = useState<Map<string, FrameData>>(new Map());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,7 +56,9 @@ function StructurePracticePageContent() {
       .then(([framesCSV, examplesCSV]) => {
         const parsedFrames = parseFramesCSV(framesCSV);
         const parsedExamples = parseExamplesCSV(examplesCSV);
+        const builtModules = buildModulesFromFrames(parsedFrames);
         setFrames(parsedFrames);
+        setModules(builtModules);
         setExamples(parsedExamples);
         setFrameLookup(buildFrameLookup(parsedFrames));
       })
@@ -76,7 +79,7 @@ function StructurePracticePageContent() {
     isReviewComplete,
     isPracticeMode,
     startPracticeMode,
-  } = useStructurePracticeState(examples, frames, frameLookup, previewMode, reviewMode);
+  } = useStructurePracticeState(examples, frames, frameLookup, modules, previewMode, reviewMode);
 
   const resetCardDisplay = useCallback(() => {
     setIsFlipped(false);
@@ -242,7 +245,7 @@ function StructurePracticePageContent() {
   }
 
   const currentInfo = knownExamples.find(k => k.example.example_id === currentExample.example_id);
-  const moduleConfig = currentInfo ? getModuleById(currentInfo.moduleId) : null;
+  const moduleConfig = currentInfo ? modules.find(m => m.id === currentInfo.moduleId) : null;
 
   return (
     <div className="flex w-full">

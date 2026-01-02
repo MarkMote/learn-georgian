@@ -12,7 +12,7 @@ import {
 } from "../../../../lib/spacedRepetition";
 import { getMergedConfig } from "../../../../lib/spacedRepetition/lib/configManager";
 import { FrameData, FrameExampleData, DifficultyRating, ReviewMode } from "../../[moduleId]/types";
-import { MODULES } from "../../[moduleId]/utils/modules";
+import { ModuleConfig } from "../../[moduleId]/utils/modules";
 
 function difficultyToGrade(difficulty: DifficultyRating): Grade {
   switch (difficulty) {
@@ -34,11 +34,12 @@ function loadAllMasteredExamples(
   allExamples: FrameExampleData[],
   frames: FrameData[],
   frameLookup: Map<string, FrameData>,
+  modules: ModuleConfig[],
   mode: ReviewMode
 ): MasteredExampleInfo[] {
   const masteredExamples: MasteredExampleInfo[] = [];
 
-  for (const mod of MODULES) {
+  for (const mod of modules) {
     const storageKey = `srs_structure_v3_${mod.id}_${mode}`;
     try {
       const stored = localStorage.getItem(storageKey);
@@ -104,6 +105,7 @@ export function useStructurePracticeState(
   allExamples: FrameExampleData[],
   frames: FrameData[],
   frameLookup: Map<string, FrameData>,
+  modules: ModuleConfig[],
   previewMode: boolean = false,
   mode: ReviewMode = 'reverse'
 ): UseStructurePracticeStateReturn {
@@ -128,9 +130,9 @@ export function useStructurePracticeState(
 
   // Load mastered examples
   useEffect(() => {
-    if (allExamples.length === 0 || frames.length === 0) return;
+    if (allExamples.length === 0 || frames.length === 0 || modules.length === 0) return;
 
-    const mastered = loadAllMasteredExamples(allExamples, frames, frameLookup, mode);
+    const mastered = loadAllMasteredExamples(allExamples, frames, frameLookup, modules, mode);
     setMasteredInfos(mastered);
 
     if (mastered.length === 0) {
@@ -160,7 +162,7 @@ export function useStructurePracticeState(
     setDueQueue(queue);
     setCurrentCardKey(queue[0] || null);
     setIsLoading(false);
-  }, [allExamples, frames, frameLookup, previewMode, mode]);
+  }, [allExamples, frames, frameLookup, modules, previewMode, mode]);
 
   const currentCardState = useMemo(() => {
     if (!currentCardKey) return null;

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ChevronDown, ChevronRight } from 'lucide-react';
-import { MODULES } from './[moduleId]/utils/modules';
+import { ModuleConfig, buildModulesFromFrames } from './[moduleId]/utils/modules';
 import {
   parseFramesCSV,
   parseExamplesCSV,
@@ -57,13 +57,13 @@ function loadModuleProgress(moduleId: number, moduleExamples: FrameExampleData[]
   }
 }
 
-function countDueExamples(allExamples: FrameExampleData[], mode: ReviewMode): number {
+function countDueExamples(modules: ModuleConfig[], mode: ReviewMode): number {
   if (typeof window === 'undefined') return 0;
 
   const now = new Date();
   let dueCount = 0;
 
-  for (const mod of MODULES) {
+  for (const mod of modules) {
     const storageKey = `srs_structure_v3_${mod.id}_${mode}`;
     try {
       const stored = localStorage.getItem(storageKey);
@@ -94,6 +94,7 @@ export default function StructureHomePage() {
   const router = useRouter();
   const [frames, setFrames] = useState<FrameData[]>([]);
   const [examples, setExamples] = useState<FrameExampleData[]>([]);
+  const [modules, setModules] = useState<ModuleConfig[]>([]);
   const [moduleProgress, setModuleProgress] = useState<Map<number, ModuleProgress>>(new Map());
   const [dueCount, setDueCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -150,8 +151,10 @@ export default function StructureHomePage() {
       .then(([framesCSV, examplesCSV]) => {
         const parsedFrames = parseFramesCSV(framesCSV);
         const parsedExamples = parseExamplesCSV(examplesCSV);
+        const builtModules = buildModulesFromFrames(parsedFrames);
         setFrames(parsedFrames);
         setExamples(parsedExamples);
+        setModules(builtModules);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -162,16 +165,16 @@ export default function StructureHomePage() {
 
   // Load progress for all modules (re-run when mode changes)
   useEffect(() => {
-    if (examples.length === 0) return;
+    if (examples.length === 0 || modules.length === 0) return;
 
     const progressMap = new Map<number, ModuleProgress>();
-    for (const mod of MODULES) {
-      const moduleExamples = getExamplesForModule(examples, mod.id);
+    for (const mod of modules) {
+      const moduleExamples = getExamplesForModule(examples, mod.id, modules);
       progressMap.set(mod.id, loadModuleProgress(mod.id, moduleExamples, reviewMode));
     }
     setModuleProgress(progressMap);
-    setDueCount(countDueExamples(examples, reviewMode));
-  }, [examples, reviewMode]);
+    setDueCount(countDueExamples(modules, reviewMode));
+  }, [examples, modules, reviewMode]);
 
   const handleModuleClick = (moduleId: number) => {
     router.push(`/structure/${moduleId}`);
@@ -286,7 +289,7 @@ export default function StructureHomePage() {
               <div className="text-center text-gray-400 py-8">Loading modules...</div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {MODULES.map((module) => {
+                {modules.map((module) => {
                   const progress = moduleProgress.get(module.id);
                   const hasProgress = progress && progress.seenCount > 0;
 
@@ -338,13 +341,13 @@ export default function StructureHomePage() {
           </div>
 
           {/* Frame Reference Section */}
-          {frames.length > 0 && examples.length > 0 && (
+          {frames.length > 0 && examples.length > 0 && modules.length > 0 && (
             <div className="pt-8 border-t border-gray-700">
               <h2 className="text-xl font-light text-gray-300 mb-6 text-center">Frame Reference</h2>
               <div className="space-y-8">
-                {MODULES.map((mod) => {
-                  const moduleFrames = getFramesForModule(frames, mod.id);
-                  const moduleExamples = getExamplesForModule(examples, mod.id);
+                {modules.map((mod) => {
+                  const moduleFrames = getFramesForModule(frames, mod.id, modules);
+                  const moduleExamples = getExamplesForModule(examples, mod.id, modules);
 
                   return (
                     <div key={mod.id} className="space-y-4">

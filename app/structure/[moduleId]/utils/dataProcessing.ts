@@ -2,7 +2,7 @@
 
 import Papa from "papaparse";
 import { FrameData, FrameExampleData, KnownExampleState, DifficultyRating } from "../types";
-import { getModuleById } from "./modules";
+import { ModuleConfig } from "./modules";
 
 export function parseFramesCSV(csvText: string): FrameData[] {
   const result = Papa.parse(csvText, {
@@ -52,9 +52,10 @@ export function buildFrameLookup(frames: FrameData[]): Map<string, FrameData> {
 
 export function getExamplesForModule(
   examples: FrameExampleData[],
-  moduleId: number
+  moduleId: number,
+  modules: ModuleConfig[]
 ): FrameExampleData[] {
-  const moduleConfig = getModuleById(moduleId);
+  const moduleConfig = modules.find(m => m.id === moduleId);
   if (!moduleConfig) return [];
 
   const frameSet = new Set(moduleConfig.frames);
@@ -107,9 +108,10 @@ export function getExampleProgress(
 
 export function getFramesForModule(
   frames: FrameData[],
-  moduleId: number
+  moduleId: number,
+  modules: ModuleConfig[]
 ): FrameData[] {
-  const moduleConfig = getModuleById(moduleId);
+  const moduleConfig = modules.find(m => m.id === moduleId);
   if (!moduleConfig) return [];
 
   const frameSet = new Set(moduleConfig.frames);
@@ -125,9 +127,10 @@ export function countExamplesPerFrame(
 
 export function getExampleCountsForModule(
   examples: FrameExampleData[],
-  moduleId: number
+  moduleId: number,
+  modules: ModuleConfig[]
 ): Map<string, number> {
-  const moduleConfig = getModuleById(moduleId);
+  const moduleConfig = modules.find(m => m.id === moduleId);
   if (!moduleConfig) return new Map();
 
   const counts = new Map<string, number>();
