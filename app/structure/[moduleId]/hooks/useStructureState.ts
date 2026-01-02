@@ -345,7 +345,7 @@ export function useStructureState(
       return {
         data: example,
         frame: frame,
-        rating: 2,
+        rating: cardState.lastGrade ?? 0,
         lastSeen: daysSinceReview,
         interval: cardState.scheduled_days,
         repetitions: cardState.reps,
