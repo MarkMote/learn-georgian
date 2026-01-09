@@ -62,7 +62,6 @@ are_you_ready,are_you_ready,are_you_ready,Are you ready?,phrase,მზად ხ
 if_you_could,if_you_could,if_you_could,If you could/ if you can,phrase,თუ შეგიძლია,phrase,1,phrases,If you could help me?,თუ შეგიძლია დამეხმარო?,"Root is ძალა (power/ability). Literally ""if you have the power""."
 let_it_be,let_it_be,let_it_be,let it be,phrase,იყოს,phrase,1,phrases,"Okay, let it be","კარგი, იყოს","Common and versatile phrase for acceptance, permission, or letting go."
 would_you_like,would_you_like,would_you_like,Would you like...? / Don't you want...?,phrase,ხომ არ გინდა...?,polite_offer,1,phrases,Would you like coffee?,ხომ არ გინდა ყავა?,"""ხომ"" is a particle often used for polite offers or confirming questions. Literally ""Don't you want...?"""
-can,can_p1s,can,I can / Can I...?,verb-p1s,შემიძლია,ability,1,verbs,Can I help you?,შემიძლია დაგეხმარო?,"Root is ძალა (power). Used for ability (""I can"") or permission (""Can I?"")."
 in_general,in_general,in_general,in general,adverb,ზოგადად,adverb,1,phrases,"In general, I agree","ზოგადად, ვეთანხმები",
 in_one_month,in_one_month,in_one_month,in one month,phrase,ერთ თვეში,time,1,phrases,See you in one month,ერთ თვეში შევხვდებით,"თვე = ""month"", -ში = ""in"""
 in_one_week,in_one_week,in_one_week,in one week,phrase,ერთ კვირაში,time,1,phrases,in one week's time,ერთ კვირაში,"კვირა = ""week"", -ში = ""in"""

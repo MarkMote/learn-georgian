@@ -2,10 +2,10 @@ georgianLetter,englishLetter,ipaSymbol,explanation,georgianExample,englishExampl
 ა,a,/ɑ/,like 'a' in father or car,მამა (mama),"father, car, spa",father,yes
 ბ,b,/b/,like 'b' in boy or book,ბავშვი (bavshvi),"boy, book, baby",child,yes
 გ,g,/ɡ/,like 'g' in go or game,გოგო (gogo),"go, game, give",girl,yes
-დ,d,/d/,like 'd' in dog or day,დღეს (dghes),"dog, day, did",today,yes
+დ,d,/d/,like 'd' in dog or day,დედა (deda),"dad, day, did",dad,yes
 ე,e,/ɛ/,like 'e' in egg or desk,ენა (ena),"egg, desk, red",language,yes
 ვ,v,/v/,like 'v' in very or love,ვაშლი (vashli),"very, love, have",apple,yes
-ზ,z,/z/,like 'z' in zoo or buzz,ზღვა (zghva),"zoo, buzz, zero",sea,yes
+ზ,z,/z/,like 'z' in zoo or buzz,ზუზუნი (zuzuni),"zoo, buzz, zero",buzzing,yes
 თ,t,/tʰ/,"aspirated 't' like in top or tap (stronger puff of air)",თოვლი (tovli),"top, tea, tap",snow,similar
 ი,i,/i/,like 'ee' in see or bee,ისინი (isini),"bee, see, three",they,yes
 კ,k',/kʼ/,ejective k (no air),კაცი (k’atsi),,man,similar
@@ -13,12 +13,12 @@ georgianLetter,englishLetter,ipaSymbol,explanation,georgianExample,englishExampl
 მ,m,/m/,like 'm' in mother or home,მზე (mze),"mother, home, make",sun,yes
 ნ,n,/n/,like 'n' in no or fun,ნამდვილი (namdvili),"no, fun, name",real,yes
 ო,o,/ɔ/,like 'o' in more or boat,ოჯახი (ojakhi),"boat, goat, home",family,yes
-პ,p',/pʼ/,ejective p (no air),პური (p’uri),,bread,similar
+პ,p',/pʼ/,ejective p (no air),პეპელა (p’ep’ela),,butterfly,similar
 ჟ,zh,/ʒ/,like 's' in measure,ჟურნალი (zhurnali),"measure, vision, beige",magazine,yes
 რ,r,/r/,rolled r (like Spanish rr),რძე (rdze),,milk,similar
 ს,s,/s/,like 's' in sun or pass,სახლი (sakhli),"sun, pass, see",house,yes
-ტ,t',/tʼ/,ejective t (no air),ტყე (tk’e),,forest,similar
-უ,u,/u/,like 'oo' in moon or boot,უსაფრთხო (usafrto),"moon, boot, zoo",safe,yes
+ტ,t',/tʼ/,ejective t (no air),ტიტა (t'it'a),,tulip,similar
+უ,u,/u/,like 'oo' in moon or boot,უკაცრავად (uk'atsravad),"moon, boot, zoo",excuse me,yes
 ფ,p,/pʰ/,"aspirated p like in pot or paper (stronger puff of air)",ფული (puli),"pot, pink, phone",money,similar
 ქ,k,/kʰ/,"aspirated k like in cat or key (stronger puff of air)",ქალი (kali),"cat, key, kind",woman,similar
 ღ,gh,/ɣ/,"voiced velar fricative (soft gargle, French r)",ღამე (ghame),,night,no

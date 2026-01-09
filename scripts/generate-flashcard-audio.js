@@ -1,10 +1,11 @@
-      const fs = require('fs');
+// scripts/generate-flashcard-audio.js
+const fs = require('fs');
 const path = require('path');
 const { parse } = require('csv-parse/sync');
 require('dotenv').config({ path: '.env.local' });
 
 // HARDCODED WORD KEY - CHANGE THIS TO GENERATE DIFFERENT WORDS
-const WORD_KEY = 'happy';
+const WORD_KEY = 'hello';
 
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1';
@@ -23,7 +24,7 @@ async function generateAudio(text, outputPath, voiceId, voiceSettings) {
     },
     body: JSON.stringify({
       text: text,
-      model_id: 'eleven_turbo_v2',
+      model_id: 'eleven_v3',
       voice_settings: voiceSettings,
       output_format: 'mp3_44100_128'
     }),
@@ -43,7 +44,12 @@ async function main() {
   // Read words.csv to find the word
   const csvPath = path.join(__dirname, '..', 'public', 'words.csv');
   const csvContent = fs.readFileSync(csvPath, 'utf-8');
-  const words = parse(csvContent, { columns: true, skip_empty_lines: true });
+  const words = parse(csvContent, {
+    columns: true,
+    skip_empty_lines: true,
+    relax_quotes: true,
+    relax_column_count: true
+  });
 
   // Find the word by key
   const word = words.find(w => w.key === WORD_KEY);
@@ -59,33 +65,36 @@ async function main() {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  // Voice settings
+  // Voice settings for eleven_v3 (stability must be 0.0, 0.5, or 1.0)
   const naturalSettings = {
-    stability: 0.4,           // 0-1: Lower = more expressive/variable, Higher = monotone/consistent
-    similarity_boost: 0.6,    // 0-1: Higher = closer to original voice, Lower = more creative interpretation
-    style: 0.2,               // 0-1: Speaking style exaggeration (subtle for natural speech)
-    use_speaker_boost: false  // Enhances clarity but can sound artificial - off for natural speech
+    stability: 1,           // Natural speaking style (0.5 = Natural, required value for v3)
+    similarity_boost: 0.6,    // Moderate voice similarity
+    style: 0.7,               // Subtle style for natural speech
+    use_speaker_boost: false, // Off for natural speech
+    speed: 0.9                // Slightly slower for easier listening (0.7-1.2, default 1.0)
   };
-  
+
   const emphasisSettings = {
-    stability: 1,          // Higher stability for clear, consistent pronunciation
-    similarity_boost: 1,    // Very close to original voice for maximum clarity
-    style: 1,               // More style/emphasis for teaching pronunciation
-    use_speaker_boost: true   // Boost clarity and reduce artifacts for learning
+    stability: 1.0,             // Robust/clear pronunciation (1.0 = Robust, required value for v3)
+    similarity_boost: 1,        // Maximum voice similarity
+    style: 1,                   // More emphasis for teaching
+    use_speaker_boost: true,    // Boost clarity for learning
+    speed: 0.7                  // Slower for clear pronunciation
   };
 
   // Generate 4 files
-  await generateAudio(word.GeorgianWord, path.join(outputDir, 'word_v1.mp3'), VOICE_2, naturalSettings);
+  // V1 = Female + Emphasis, V2 = Male + Natural
+  await generateAudio(word.GeorgianWord, path.join(outputDir, 'word_v2.mp3'), VOICE_2, emphasisSettings);
   await new Promise(resolve => setTimeout(resolve, 300));
-  
-  await generateAudio(word.GeorgianWord, path.join(outputDir, 'word_v2.mp3'), VOICE_1, emphasisSettings);
+
+  await generateAudio(word.GeorgianWord, path.join(outputDir, 'word_v1.mp3'), VOICE_1, naturalSettings);
   await new Promise(resolve => setTimeout(resolve, 300));
 
   if (word.ExampleGeorgian1) {
-    await generateAudio(word.ExampleGeorgian1, path.join(outputDir, 'sentence_v1.mp3'), VOICE_2, naturalSettings);
+    await generateAudio(word.ExampleGeorgian1, path.join(outputDir, 'sentence_v2.mp3'), VOICE_2, emphasisSettings);
     await new Promise(resolve => setTimeout(resolve, 300));
-    
-    await generateAudio(word.ExampleGeorgian1, path.join(outputDir, 'sentence_v2.mp3'), VOICE_1, emphasisSettings);
+
+    await generateAudio(word.ExampleGeorgian1, path.join(outputDir, 'sentence_v1.mp3'), VOICE_1, naturalSettings);
   }
 
   console.log(`\n✨ Done! Files created in: ${outputDir}`);
