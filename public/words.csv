@@ -61,6 +61,8 @@ have_animate,have_animate_p3p,have_animate,They have (animate),verb-p3p,მა�
 are_you_ready,are_you_ready,are_you_ready,Are you ready?,phrase,მზად ხარ?,phrase,1,phrases,Are you ready yet?,მზად ხარ უკვე?,
 if_you_could,if_you_could,if_you_could,If you could/ if you can,phrase,თუ შეგიძლია,phrase,1,phrases,If you could help me?,თუ შეგიძლია დამეხმარო?,"Root is ძალა (power/ability). Literally ""if you have the power""."
 let_it_be,let_it_be,let_it_be,let it be,phrase,იყოს,phrase,1,phrases,"Okay, let it be","კარგი, იყოს","Common and versatile phrase for acceptance, permission, or letting go."
+would_you_like,would_you_like,would_you_like,Would you like...? / Don't you want...?,phrase,ხომ არ გინდა...?,polite_offer,1,phrases,Would you like coffee?,ხომ არ გინდა ყავა?,"""ხომ"" is a particle often used for polite offers or confirming questions. Literally ""Don't you want...?"""
+can,can_p1s,can,I can / Can I...?,verb-p1s,შემიძლია,ability,1,verbs,Can I help you?,შემიძლია დაგეხმარო?,"Root is ძალა (power). Used for ability (""I can"") or permission (""Can I?"")."
 in_general,in_general,in_general,in general,adverb,ზოგადად,adverb,1,phrases,"In general, I agree","ზოგადად, ვეთანხმები",
 in_one_month,in_one_month,in_one_month,in one month,phrase,ერთ თვეში,time,1,phrases,See you in one month,ერთ თვეში შევხვდებით,"თვე = ""month"", -ში = ""in"""
 in_one_week,in_one_week,in_one_week,in one week,phrase,ერთ კვირაში,time,1,phrases,in one week's time,ერთ კვირაში,"კვირა = ""week"", -ში = ""in"""
@@ -76,6 +78,7 @@ know,know_p3p,know,They know,verb-p3p,მათ იციან,verb,1,verbs,The
 one_week_ago,one_week_ago,one_week_ago,one week ago,phrase,ერთი კვირის წინ,time,1,phrases,I arrived one week ago,ერთი კვირის წინ ჩამოვედი,"Use წინ after a time phrase to mean ago, and შემდეგ to mean in (from now) or after"
 one_year_ago,one_year_ago,one_year_ago,one year ago,phrase,ერთი წლის წინ,time,1,phrases,I moved here one year ago,ერთი წლის წინ გადმოვედი აქ,"Use წინ after a time phrase to mean ago, and შემდეგ to mean in (from now) or after"
 i_lost_my_bag,i_lost_my_bag,i_lost_my_bag,I lost my bag,phrase,ჩემი ჩანთა დავკარგე,phrase,1,phrases,"Help, I lost my bag!","დამეხმარეთ, ჩემი ჩანთა დავკარგე!",
+look_for,look_for_p1s,look_for,I am looking for,verb-p1s,მე ვეძებ,verb,1,verbs,I am looking for a pharmacy,მე ვეძებ აფთიაქს,"The object you are looking for must be in the Dative case (ending in -ს). Pharmacy = აფთიაქი -> აფთიაქს."
 from_six_until_nine,from_six_until_nine,from_six_until_nine,from six o'clock until nine o'clock,phrase,ექვსიდან ცხრამდე,time,1,phrases,Open from six until nine,ღიაა ექვსიდან ცხრამდე,"-დან = from, -მდე = to / until"
 stop_here,stop_here,stop_here,stop here,phrase,აქ გაჩერდი,phrase,1,phrases,"Stop here, please","აქ გააჩერეთ, თუ შეიძლება",გაჩერდი is a command. Root is გაჩერება (stopping).
 travel,travel,travel,travel,noun,მოგზაურობა,transportation,1,phrases,I love to travel,მე მიყვარს მოგზაურობა,"მო- often ""toward"" or ""along"", გზა = ""road"", -ობა turns a word into an abstract noun like -ness, -hood, or -ship in English."
@@ -90,6 +93,7 @@ say,say_p2p,say,You (pl) say,verb-p2p,თქვენ ამბობთ,verb,1,
 say,say_p3p,say,They say,verb-p3p,ისინი ამბობენ,verb,1,verbs,They say it's good,ისინი ამბობენ კარგია,
 its_easy,its_easy,its_easy,it's easy,phrase,ადვილია,phrase,1,phrases,The exam is easy,გამოცდა ადვილია,Root is ადვილი. -ა = is.
 its_hard,its_hard,its_hard,it's hard,phrase,რთულია,phrase,1,phrases,The work is hard,სამუშაო რთულია,Root is რთული. -ა = is.
+glad,glad_p1s,glad,I am glad,verb-p1s,მიხარია,emotion,1,verbs,"I am glad to see you","მიხარია, რომ გხედავ","Indirect verb. Root is სიხარული (joy). Literally ""It gladdens me"". რომ = that."
 not_yet,not_yet,yet,Not yet,phrase,ჯერ არა,time,1,phrases,"No, not yet","არა, ჯერ არა",
 perhaps,perhaps,perhaps,perhaps/ probably,adverb,ალბათ,adverb,1,phrases,Perhaps you are right,ალბათ მართალი ხარ,
 im_sorry_didnt_hear,im_sorry_didnt_hear,im_sorry_didnt_hear,I’m sorry? (didn't hear),phrase,ბატონო?,phrase,1,phrases,"I'm sorry, one more time","ბატონო, კიდევ ერთხელ","ბატონო means sir, and ქალბატონო madam. While you generally need to distinguish, ბატონო can be used for ""pardon?"" when addressing either sex. "

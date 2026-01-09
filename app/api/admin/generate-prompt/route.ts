@@ -23,7 +23,7 @@ Your goal is to create memorable, visually interesting images that help learners
 
 IMPORTANT STYLE RULES:
 - AVOID cartoon, clipart, flat illustration, vector art, or typical "flashcard" styles - these are boring and forgettable
-- PREFER: realistic photography, cinematic shots, oil paintings, watercolors, charcoal sketches, polaroid, vintage photographs, film stills, documentary style, fine art, surrealist art, Renaissance style, impressionist paintings, abstract, concept art, detailed digital illustration, pop art, ukiyo-e Japanese woodblock, gouache illustration, Art Nouveau, neon noir, stained glass style, psychedelic art, Persian miniature, paper cut-out style, or anything not flashcard style.
+- Choose a unique art or photography style that matches the vibe of the thing being described. For example: realistic photography, cinematic shots, oil paintings, charcoal sketches, polaroid, vintage photographs, film stills, documentary style, fine art, surrealist art, Renaissance style, impressionist paintings, abstract, concept art, detailed digital illustration, pop art, ukiyo-e Japanese woodblock, gouache illustration, Art Nouveau, neon noir, stained glass style, psychedelic art, Persian miniature, paper cut-out style, or anything not flashcard style, are all fair game. but you may come up with your own. 
 - Additionally, the tone should match the word, but generally prefer "bright and vivid" vs "dark and moody" for words that are neutral. 
 - Prefer creative and colorfull styles, rather than generic paintings (those are fine in moderation)
 - Each image should feel unique and memorable, but still educational
@@ -37,7 +37,7 @@ Guidelines:
 - For abstract words, not everything needs to be abstract, you can also depict people in a situation where the word is most relevant. e.g. the word "answer" could be shown abstractly, but it would better be shown by a person at a white board writing down an answer. 
 - For concrete nouns, consider interesting compositions, lighting, or perspectives
 - Keep prompts concise but descriptive (1-2 sentences)
-- NEVER include any text, letters, or writing in the image
+- You may embed text in the image if the thing needing to be described requires it (e.g. "apple" doesnt need text, but "yes" does). Text should be embedded subtly. 
 - Vary your approach - pick a different style for each word
 - If a word needs multiple examples, you can consider composite images 
 - Keep things simple! we dont need a complex prompt or image, just something that communicates the word concept
@@ -59,7 +59,7 @@ Generate a creative, memorable image prompt:`;
         { role: 'user', content: userPrompt },
       ],
       max_tokens: 150,
-      temperature: 0.7, // Higher temperature for more variety
+      temperature: 0.8, // Higher temperature for more variety
     });
 
     const generatedPrompt = response.choices[0]?.message?.content?.trim();
@@ -74,7 +74,7 @@ Generate a creative, memorable image prompt:`;
     // Append the no-text instruction to be safe
     const finalPrompt = generatedPrompt.includes('no text')
       ? generatedPrompt
-      : `${generatedPrompt} Do not include any text in the image.`;
+      : `${generatedPrompt} `;
 
     return NextResponse.json({ prompt: finalPrompt });
   } catch (error: any) {
