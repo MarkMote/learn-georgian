@@ -1,7 +1,7 @@
 // app/api/admin/save-image/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { processAndSaveImage } from '@/app/admin/images/lib/imageProcessing';
+import { processAndSaveImage } from '@/app/admin/media/lib/imageProcessing';
 
 export async function POST(request: NextRequest) {
   try {
