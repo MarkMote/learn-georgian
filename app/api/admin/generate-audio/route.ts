@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
     const naturalSettings: VoiceSettings = {
       stability: 0.5,           // Natural speaking style (0.5 = Natural, required value for v3)
       similarity_boost: 0.6,
-      style: 0.4,
+      style: 0.6,
       use_speaker_boost: false,
       speed: 0.9,
     };

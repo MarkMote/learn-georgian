@@ -1,9 +1,9 @@
 // app/admin/alphabet/page.tsx
 "use client";
 
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import Link from "next/link";
-import { Home, Loader2 } from "lucide-react";
+import { Home, Loader2, Play, Square } from "lucide-react";
 import Papa from 'papaparse';
 import AlphabetRow from "./components/AlphabetRow";
 
@@ -37,11 +37,23 @@ function parseCSV(csvText: string): AlphabetData[] {
   }));
 }
 
+interface BatchProgress {
+  current: number;
+  total: number;
+  currentLetter: string;
+  errors: Array<{ letter: string; error: string }>;
+}
+
 export default function AdminAlphabetPage() {
   const [letters, setLetters] = useState<AlphabetData[]>([]);
   const [loading, setLoading] = useState(true);
   const [missingAudio, setMissingAudio] = useState<AlphabetData[]>([]);
   const [checkingAudio, setCheckingAudio] = useState(false);
+
+  // Batch generation state
+  const [batchAudioProgress, setBatchAudioProgress] = useState<BatchProgress | null>(null);
+  const [batchAudioLimit, setBatchAudioLimit] = useState(10);
+  const stopBatchAudioRef = useRef(false);
 
   useEffect(() => {
     fetch("/alphabet.csv")
@@ -97,6 +109,74 @@ export default function AdminAlphabetPage() {
     );
   };
 
+  // Generate audio for a single letter
+  const generateAudioForLetter = async (letter: AlphabetData): Promise<void> => {
+    // Extract just the Georgian part from georgianExample (e.g., "მამა (mama)" -> "მამა")
+    const cleanExample = letter.georgianExample.split('(')[0].trim();
+
+    const response = await fetch("/api/admin/generate-alphabet-audio", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        georgianLetter: letter.georgianLetter,
+        georgianExample: cleanExample,
+        englishLetter: letter.englishLetter,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to generate audio");
+    }
+  };
+
+  // Start batch audio generation
+  const startBatchAudioGeneration = async () => {
+    // First, check all files to get accurate missing count
+    const allMissing = await checkMissingAudio();
+
+    // Use the accurate missing list
+    const lettersToGenerate = allMissing.slice(0, batchAudioLimit);
+    if (lettersToGenerate.length === 0) return;
+
+    stopBatchAudioRef.current = false;
+    setBatchAudioProgress({
+      current: 0,
+      total: lettersToGenerate.length,
+      currentLetter: lettersToGenerate[0].englishLetter,
+      errors: [],
+    });
+
+    for (let i = 0; i < lettersToGenerate.length; i++) {
+      if (stopBatchAudioRef.current) break;
+
+      const letter = lettersToGenerate[i];
+      setBatchAudioProgress((prev) => prev ? {
+        ...prev,
+        current: i,
+        currentLetter: letter.englishLetter,
+      } : null);
+
+      try {
+        await generateAudioForLetter(letter);
+        setMissingAudio((prev) => prev.filter((l) => l.georgianLetter !== letter.georgianLetter));
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      } catch (error: any) {
+        setBatchAudioProgress((prev) => prev ? {
+          ...prev,
+          errors: [...prev.errors, { letter: letter.englishLetter, error: error.message }],
+        } : null);
+      }
+    }
+
+    setBatchAudioProgress((prev) => prev ? { ...prev, current: prev.total, currentLetter: "Done!" } : null);
+  };
+
+  // Stop batch audio generation
+  const stopBatchAudioGeneration = () => {
+    stopBatchAudioRef.current = true;
+  };
+
   // Create a Set of Georgian letters that are known to be missing audio (for fast lookup)
   const missingAudioLetters = useMemo(() => {
     return new Set(missingAudio.map(letter => letter.georgianLetter));
@@ -142,9 +222,73 @@ export default function AdminAlphabetPage() {
                 <Loader2 size={16} className="animate-spin" />
                 Checking for missing audio...
               </div>
+            ) : batchAudioProgress ? (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm">
+                    <span className="text-gray-400">Generating: </span>
+                    <span className="text-white">{batchAudioProgress.currentLetter}</span>
+                    <span className="text-gray-500 ml-2">
+                      ({batchAudioProgress.current + 1}/{batchAudioProgress.total})
+                    </span>
+                  </div>
+                  {batchAudioProgress.current < batchAudioProgress.total && (
+                    <button
+                      onClick={stopBatchAudioGeneration}
+                      className="flex items-center gap-1 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg transition-colors"
+                    >
+                      <Square size={14} />
+                      Stop
+                    </button>
+                  )}
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div
+                    className="bg-orange-500 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${(batchAudioProgress.current / batchAudioProgress.total) * 100}%` }}
+                  />
+                </div>
+                {batchAudioProgress.errors.length > 0 && (
+                  <div className="text-xs text-red-400">
+                    {batchAudioProgress.errors.length} error(s)
+                  </div>
+                )}
+                {batchAudioProgress.current >= batchAudioProgress.total && (
+                  <button
+                    onClick={() => {
+                      setBatchAudioProgress(null);
+                      checkMissingAudio();
+                    }}
+                    className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded-lg transition-colors"
+                  >
+                    Done - Refresh
+                  </button>
+                )}
+              </div>
             ) : missingAudio.length > 0 ? (
-              <div className="text-sm text-gray-400">
-                {missingAudio.length}+ missing audio file{missingAudio.length !== 1 ? "s" : ""} (sample check)
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-400">
+                    {missingAudio.length}+ missing audio file{missingAudio.length !== 1 ? "s" : ""} (sample check)
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      max={missingAudio.length}
+                      value={batchAudioLimit}
+                      onChange={(e) => setBatchAudioLimit(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="w-16 px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-sm"
+                    />
+                    <button
+                      onClick={startBatchAudioGeneration}
+                      className="flex items-center gap-1 px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-sm rounded-lg transition-colors"
+                    >
+                      <Play size={14} />
+                      Generate Next {Math.min(batchAudioLimit, missingAudio.length)}
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="text-sm text-gray-400">

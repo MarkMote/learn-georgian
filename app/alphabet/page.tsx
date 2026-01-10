@@ -2,8 +2,8 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { BookOpen } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { BookOpen, Volume2 } from 'lucide-react';
 import BackHeader from '../components/BackHeader';
 import Papa from 'papaparse';
 
@@ -46,6 +46,9 @@ function getEquivalentIcon(equiv: string) {
 
 export default function AlphabetPage() {
   const [letters, setLetters] = useState<AlphabetData[]>([]);
+  const [playingLetter, setPlayingLetter] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playbackIdRef = useRef(0);
 
   // Reset body scroll styles (in case deck page disabled them)
   useEffect(() => {
@@ -54,6 +57,59 @@ export default function AlphabetPage() {
     document.body.style.height = '';
     document.body.style.overflow = '';
   }, []);
+
+  const playAudio = (src: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+
+      const audio = new Audio(src);
+      audioRef.current = audio;
+
+      audio.onended = () => resolve();
+      audio.onerror = () => reject(new Error("Failed to play audio"));
+
+      audio.play().catch(reject);
+    });
+  };
+
+  const handlePlayWord = async (georgianLetter: string) => {
+    // Increment playback ID to cancel any in-progress playback
+    const currentPlaybackId = ++playbackIdRef.current;
+
+    // Stop any currently playing audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    setPlayingLetter(georgianLetter);
+    try {
+      await playAudio(`/audio/alphabet/${georgianLetter}/word_v1.mp3`);
+
+      // Check if this playback was cancelled
+      if (playbackIdRef.current !== currentPlaybackId) return;
+
+      await new Promise((resolve) => setTimeout(resolve, 50));
+
+      // Check again before playing v2
+      if (playbackIdRef.current !== currentPlaybackId) return;
+
+      await playAudio(`/audio/alphabet/${georgianLetter}/word_v2.mp3`);
+    } catch (error) {
+      // Only log if this playback wasn't cancelled
+      if (playbackIdRef.current === currentPlaybackId) {
+        console.error("Error playing audio:", error);
+      }
+    } finally {
+      // Only clear playing state if this playback wasn't superseded
+      if (playbackIdRef.current === currentPlaybackId) {
+        setPlayingLetter(null);
+      }
+    }
+  };
 
   useEffect(() => {
     fetch("/alphabet.csv")
@@ -87,7 +143,7 @@ export default function AlphabetPage() {
           <Link
             href="/alphabet/deck"
             className="flex items-center justify-center gap-2 w-full sm:w-auto sm:mx-auto px-6 py-3 
-            bg-indigo-900/50 border-indigo-700 border hover:bg-indigo-900/80 rounded-lg transition-colors text-indigo-100"
+            bg-cyan-800/20 border-cyan-700 border hover:bg-cyan-900/40 rounded-lg transition-colors text-cyan-100"
           >
             <BookOpen size={18} />
             <span>Practice Georgian Alphabet</span>
@@ -95,7 +151,7 @@ export default function AlphabetPage() {
         </div>
 
         {/* Legend */}
-        <div className="mb-8 p-3 bg-gray-900/50 border border-gray-800 rounded-lg ">
+        <div className="mb-8 p-3 bg-zinc-800/50 border border-zinc-800 rounded-lg ">
           <div className="flex flex-wrap gap-4 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5">
               <span className="text-green-400 font-bold">●</span>
@@ -115,7 +171,7 @@ export default function AlphabetPage() {
         {/* Mobile Cards */}
         <div className="md:hidden space-y-3">
           {letters.map((letter, index) => (
-            <div key={index} className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <div key={index} className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
               <div className="flex items-center gap-4">
                 <div className="flex flex-col items-center justify-center">
                   <span className="text-5xl mb-1 px-5">{letter.georgianLetter}</span>
@@ -132,10 +188,21 @@ export default function AlphabetPage() {
                   )}
                   {letter.georgianExample && (
                     <div className="mt-2 pt-2 border-t border-gray-800">
-                      <p className="text-sm">{letter.georgianExample}</p>
-                      {letter.translation && (
-                        <p className="text-xs text-gray-500">{letter.translation}</p>
-                      )}
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handlePlayWord(letter.georgianLetter)}
+                          className="p-2 mr-2 rounded-lg bg-cyan-500/50 hover:bg-cyan-600 transition-colors touch-manipulation"
+                          aria-label={`Play pronunciation of ${letter.georgianExample}`}
+                        >
+                          <Volume2 size={20} className={playingLetter === letter.georgianLetter ? "animate-pulse" : ""} />
+                        </button>
+                        <div>
+                          <p className="text-sm">{letter.georgianExample}</p>
+                          {letter.translation && (
+                            <p className="text-xs text-gray-400">{letter.translation}</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -174,11 +241,20 @@ export default function AlphabetPage() {
                     <td className={`py-4 px-4 text-lg text-gray-200 max-w-md ${borderClass}`}>{letter.explanation}</td>
                     <td className={`py-4 px-4 ${borderClass}`}>
                       {letter.georgianExample && (
-                        <div className="space-y-1">
-                          <p className="text-base">{letter.georgianExample}</p>
-                          {letter.translation && (
-                            <p className="text-sm text-gray-500">{letter.translation}</p>
-                          )}
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handlePlayWord(letter.georgianLetter)}
+                            className="p-2 mr-2 rounded-xl bg-cyan-600/50 hover:bg-cyan-600/80 transition-colors"
+                            aria-label={`Play pronunciation of ${letter.georgianExample}`}
+                          >
+                            <Volume2 size={22} className={playingLetter === letter.georgianLetter ? "animate-pulse" : ""} />
+                          </button>
+                          <div>
+                            <p className="text-base">{letter.georgianExample}</p>
+                            {letter.translation && (
+                              <p className="text-sm text-gray-500">{letter.translation}</p>
+                            )}
+                          </div>
                         </div>
                       )}
                     </td>
