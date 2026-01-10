@@ -68,17 +68,14 @@ function MinimalPairRow({
 
   const handlePlayWord = async (word: string) => {
     const currentPlaybackId = ++playbackIdRef.current;
-
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
-
     setPlayingWord(word);
     try {
       const audio = new Audio(`/audio/similar-sounds/${word}/word.mp3`);
       audioRef.current = audio;
-
       await new Promise<void>((resolve, reject) => {
         audio.onended = () => resolve();
         audio.onerror = () => reject(new Error("Failed to play audio"));
@@ -95,58 +92,32 @@ function MinimalPairRow({
     }
   };
 
-  const WordButton = ({ word, roman, meaning, colorClass }: { word: string; roman: string; meaning: string; colorClass: string }) => (
-    <button
-      onClick={() => handlePlayWord(word)}
-      className={`group flex flex-col items-center gap-0.5 touch-manipulation w-full ${colorClass}`}
-      aria-label={`Play pronunciation of ${word}`}
-    >
-      <span className="flex items-center gap-2 text-2xl group-hover:text-white transition-colors">
-        {word}
-        <Volume2 size={18} className={`text-gray-500 group-hover:text-white transition-colors ${playingWord === word ? "text-white animate-pulse" : ""}`} />
-      </span>
-      <span className="text-sm text-gray-400">{roman}</span>
-      <span className="text-base text-gray-300 mt-1">{meaning}</span>
-    </button>
-  );
-
   return (
-    <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
-      {/* Contrast header */}
-      <div className="text-center mb-4">
-        <span className="text-2xl font-light text-gray-300">{contrast}</span>
-      </div>
-
-      {/* Mobile: stacked layout */}
-      <div className="md:hidden space-y-4">
+    <div className="border-b border-neutral-800 last:border-b-0 py-4 first:pt-0">
+      <div className="text-center text-xl text-gray-300 mb-3 pt-4">{contrast}</div>
+      <div className="space-y-2">
         {pairs.map((pair, idx) => (
-          <div key={idx} className="space-y-2">
-            {/* Aspirated */}
-            <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg p-3">
-              <div className="text-amber-400 text-xs uppercase tracking-wide mb-1">Aspirated</div>
-              <WordButton word={pair.aspirated} roman={pair.aspiratedRoman} meaning={pair.aspiratedMeaning} colorClass="text-amber-100" />
-            </div>
-            {/* Ejective */}
-            <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg p-3">
-              <div className="text-emerald-400 text-xs uppercase tracking-wide mb-1">Ejective</div>
-              <WordButton word={pair.ejective} roman={pair.ejectiveRoman} meaning={pair.ejectiveMeaning} colorClass="text-emerald-100" />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Desktop: side-by-side layout */}
-      <div className="hidden md:block">
-        {pairs.map((pair, idx) => (
-          <div key={idx} className={`grid grid-cols-2 gap-4 ${idx > 0 ? 'mt-3 pt-3 border-t border-neutral-800' : ''}`}>
-            {/* Aspirated */}
-            <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg p-4">
-              <WordButton word={pair.aspirated} roman={pair.aspiratedRoman} meaning={pair.aspiratedMeaning} colorClass="text-amber-100" />
-            </div>
-            {/* Ejective */}
-            <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg p-4">
-              <WordButton word={pair.ejective} roman={pair.ejectiveRoman} meaning={pair.ejectiveMeaning} colorClass="text-emerald-100" />
-            </div>
+          <div key={idx} className="grid grid-cols-2 gap-3 text-center">
+            <button
+              onClick={() => handlePlayWord(pair.aspirated)}
+              className="group py-2 hover:bg-neutral-800/50 rounded transition-colors"
+            >
+              <span className="flex items-center justify-center gap-1.5 md:text-3xl text-2xl text-gray-200">
+                {pair.aspirated}
+                <Volume2 size={22} className={`text-gray-600 ml-2 group-hover:text-gray-400 ${playingWord === pair.aspirated ? "text-gray-300 animate-pulse" : ""}`} />
+              </span>
+              <span className="text-base text-gray-500">{pair.aspiratedRoman} · {pair.aspiratedMeaning}</span>
+            </button>
+            <button
+              onClick={() => handlePlayWord(pair.ejective)}
+              className="group py-2 hover:bg-neutral-800/50 rounded transition-colors pt-5"
+            >
+              <span className="flex items-center justify-center gap-1.5 md:text-3xl text-2xl text-gray-200">
+                {pair.ejective}
+                <Volume2 size={22} className={`text-gray-600 ml-2 group-hover:text-gray-400 ${playingWord === pair.ejective ? "text-gray-300 animate-pulse" : ""}`} />
+              </span>
+              <span className="text-base text-gray-500">{pair.ejectiveRoman} · {pair.ejectiveMeaning}</span>
+            </button>
           </div>
         ))}
       </div>
@@ -380,21 +351,17 @@ export default function AlphabetPage() {
           <h2 className={`text-2xl sm:text-3xl font-light mb-3 text-slate-300 ${carvedTextStyle}`}>
             Similar Sounds
           </h2>
-          <p className="text-sm sm:text-base text-gray-300/90 mb-6 py-3 font-light">
-            Georgian has pairs of consonants that sound almost identical to English speakers but are distinct sounds to Georgians.
-            These are <span className="text-amber-400">aspirated</span> (with a puff of air) versus <span className="text-emerald-400">ejective</span> (sharp, no air from lungs) consonants.
-            Mixing them up changes the meaning of words completely.
+          <p className="text-sm sm:text-base text-gray-400 mb-6 font-light">
+            Georgian has consonant pairs that sound identical to English speakers but are distinct to Georgians:
+            aspirated (puff of air) vs ejective (sharp, no air). Tap to compare.
           </p>
 
-          {/* Minimal Pairs Table */}
-          <div className="space-y-4">
-            {/* Header row for desktop */}
-            <div className="hidden md:grid md:grid-cols-2 gap-4 mb-2 px-4">
-              <div className="text-center text-amber-400 font-medium">Aspirated (puff of air)</div>
-              <div className="text-center text-emerald-400 font-medium">Ejective (no air)</div>
-            </div>
+          <div className="grid grid-cols-2 gap-3 text-center text-lg text-gray-500 uppercase tracking-wide mb-2">
+            <div>Aspirated</div>
+            <div>Ejective</div>
+          </div>
 
-            {/* თ vs ტ */}
+          <div className="bg-[#141414] border-2 border-neutral-200/10 rounded-lg px-4">
             <MinimalPairRow
               contrast="თ / ტ"
               aspiratedLetter="თ"

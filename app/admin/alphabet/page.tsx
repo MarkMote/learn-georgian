@@ -3,9 +3,48 @@
 
 import React, { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import Link from "next/link";
-import { Home, Loader2, Play, Square } from "lucide-react";
+import { Home, Loader2, Play, Square, Volume2, RefreshCw } from "lucide-react";
 import Papa from 'papaparse';
 import AlphabetRow from "./components/AlphabetRow";
+
+// Similar sounds data
+const SIMILAR_SOUNDS_DATA = [
+  {
+    contrast: "თ / ტ",
+    pairs: [
+      { aspirated: "თივა", ejective: "ტივა", voice: "v1" },
+      { aspirated: "თამაში", ejective: "ტამაში", voice: "v2" },
+    ]
+  },
+  {
+    contrast: "ქ / კ",
+    pairs: [
+      { aspirated: "ქარი", ejective: "კარი", voice: "v1" },
+      { aspirated: "ქანა", ejective: "კანა", voice: "v2" },
+    ]
+  },
+  {
+    contrast: "ფ / პ",
+    pairs: [
+      { aspirated: "ფარი", ejective: "პარი", voice: "v1" },
+      { aspirated: "ფერი", ejective: "პერი", voice: "v2" },
+    ]
+  },
+  {
+    contrast: "ც / წ",
+    pairs: [
+      { aspirated: "ცილა", ejective: "წილა", voice: "v1" },
+      { aspirated: "ცელი", ejective: "წელი", voice: "v2" },
+    ]
+  },
+  {
+    contrast: "ჩ / ჭ",
+    pairs: [
+      { aspirated: "ჩაი", ejective: "ჭაი", voice: "v1" },
+      { aspirated: "ჩირი", ejective: "ჭირი", voice: "v2" },
+    ]
+  },
+];
 
 type AlphabetData = {
   georgianLetter: string;
@@ -58,6 +97,9 @@ export default function AdminAlphabetPage() {
   // Similar sounds audio state
   const [similarSoundsGenerating, setSimilarSoundsGenerating] = useState(false);
   const [similarSoundsResult, setSimilarSoundsResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [playingWord, setPlayingWord] = useState<string | null>(null);
+  const [regeneratingWord, setRegeneratingWord] = useState<string | null>(null);
+  const similarAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     fetch("/alphabet.csv")
@@ -211,6 +253,49 @@ export default function AdminAlphabetPage() {
       });
     } finally {
       setSimilarSoundsGenerating(false);
+    }
+  };
+
+  // Play a similar sounds word
+  const playSimilarWord = async (word: string) => {
+    if (similarAudioRef.current) {
+      similarAudioRef.current.pause();
+      similarAudioRef.current.currentTime = 0;
+    }
+    setPlayingWord(word);
+    try {
+      const audio = new Audio(`/audio/similar-sounds/${word}/word.mp3?t=${Date.now()}`);
+      similarAudioRef.current = audio;
+      await new Promise<void>((resolve, reject) => {
+        audio.onended = () => resolve();
+        audio.onerror = () => reject();
+        audio.play().catch(reject);
+      });
+    } catch (error) {
+      console.error("Error playing:", error);
+    } finally {
+      setPlayingWord(null);
+    }
+  };
+
+  // Regenerate a single similar sounds word
+  const regenerateSimilarWord = async (word: string, voice: string) => {
+    setRegeneratingWord(word);
+    try {
+      const response = await fetch("/api/admin/generate-similar-sounds-audio/single", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ word, voice }),
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to regenerate");
+      }
+    } catch (error: any) {
+      console.error("Error regenerating:", error);
+      alert(`Failed to regenerate ${word}: ${error.message}`);
+    } finally {
+      setRegeneratingWord(null);
     }
   };
 
@@ -379,6 +464,64 @@ export default function AdminAlphabetPage() {
               hasAudio={!missingAudioLetters.has(letter.georgianLetter)}
             />
           ))}
+        </div>
+
+        {/* Similar Sounds Comparison Section */}
+        <div className="mt-12 pt-8 border-t border-gray-800">
+          <h2 className="text-xl font-light mb-6">Similar Sounds - Compare & Regenerate</h2>
+
+          <div className="space-y-6">
+            {SIMILAR_SOUNDS_DATA.map((group) => (
+              <div key={group.contrast} className="bg-gray-900 rounded-lg p-4">
+                <div className="text-lg text-gray-400 mb-3">{group.contrast}</div>
+                <div className="space-y-3">
+                  {group.pairs.map((pair) => (
+                    <div key={pair.aspirated} className="flex items-center gap-4 text-sm">
+                      <span className="text-xs text-gray-500 w-8">{pair.voice}</span>
+
+                      {/* Aspirated word */}
+                      <div className="flex items-center gap-2 flex-1">
+                        <button
+                          onClick={() => playSimilarWord(pair.aspirated)}
+                          className="p-1.5 rounded bg-gray-800 hover:bg-gray-700 transition-colors"
+                          disabled={playingWord === pair.aspirated}
+                        >
+                          <Volume2 size={14} className={playingWord === pair.aspirated ? "animate-pulse" : ""} />
+                        </button>
+                        <span className="text-gray-200">{pair.aspirated}</span>
+                        <button
+                          onClick={() => regenerateSimilarWord(pair.aspirated, pair.voice)}
+                          disabled={regeneratingWord === pair.aspirated}
+                          className="p-1.5 rounded bg-gray-800 hover:bg-orange-600 transition-colors"
+                        >
+                          <RefreshCw size={14} className={regeneratingWord === pair.aspirated ? "animate-spin" : ""} />
+                        </button>
+                      </div>
+
+                      {/* Ejective word */}
+                      <div className="flex items-center gap-2 flex-1">
+                        <button
+                          onClick={() => playSimilarWord(pair.ejective)}
+                          className="p-1.5 rounded bg-gray-800 hover:bg-gray-700 transition-colors"
+                          disabled={playingWord === pair.ejective}
+                        >
+                          <Volume2 size={14} className={playingWord === pair.ejective ? "animate-pulse" : ""} />
+                        </button>
+                        <span className="text-gray-200">{pair.ejective}</span>
+                        <button
+                          onClick={() => regenerateSimilarWord(pair.ejective, pair.voice)}
+                          disabled={regeneratingWord === pair.ejective}
+                          className="p-1.5 rounded bg-gray-800 hover:bg-orange-600 transition-colors"
+                        >
+                          <RefreshCw size={14} className={regeneratingWord === pair.ejective ? "animate-spin" : ""} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
