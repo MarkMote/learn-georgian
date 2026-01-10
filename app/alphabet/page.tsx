@@ -110,7 +110,7 @@ function MinimalPairRow({
             </button>
             <button
               onClick={() => handlePlayWord(pair.ejective)}
-              className="group py-2 hover:bg-neutral-800/50 rounded transition-colors pt-5"
+              className="group py-2 hover:bg-neutral-800/50 rounded transition-colors"
             >
               <span className="flex items-center justify-center gap-1.5 md:text-3xl text-2xl text-gray-200">
                 {pair.ejective}
@@ -254,8 +254,8 @@ export default function AlphabetPage() {
           {letters.map((letter, index) => (
             <div key={index} className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
               <div className="flex items-center gap-4">
-                <div className="flex flex-col items-center justify-center">
-                  <span className="text-5xl mb-1 px-5">{letter.georgianLetter}</span>
+                <div className="flex flex-col items-center justify-center w-20 shrink-0">
+                  <span className="text-5xl mb-1">{letter.georgianLetter}</span>
                   {/* {getEquivalentIcon(letter.englishEquivalent)} */}
                 </div>
                 <div className="flex-1 min-w-0">
