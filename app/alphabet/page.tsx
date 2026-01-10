@@ -351,9 +351,12 @@ export default function AlphabetPage() {
           <h2 className={`text-2xl sm:text-3xl font-light mb-3 text-slate-300 ${carvedTextStyle}`}>
             Similar Sounds
           </h2>
-          <p className="text-sm sm:text-base text-gray-400 mb-6 font-light">
+          <p className="text-sm sm:text-base text-gray-400 mb-2 font-light">
             Georgian has consonant pairs that sound identical to English speakers but are distinct to Georgians:
             aspirated (puff of air) vs ejective (sharp, no air). Tap to compare.
+          </p>
+          <p className="text-sm sm:text-base text-gray-400 mb-6 font-light">
+            NOTE: Voices are AI generated and far from perfect. Supplement with YouTube or working with a native speaker. 
           </p>
 
           <div className="grid grid-cols-2 gap-3 text-center text-lg text-gray-500 uppercase tracking-wide mb-2">
