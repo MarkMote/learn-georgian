@@ -4,7 +4,7 @@ georgianLetter,englishLetter,ipaSymbol,explanation,georgianExample,englishExampl
 გ,g,/ɡ/,like 'g' in go or game,გოგო (gogo),"go, game, give",girl,yes
 დ,d,/d/,like 'd' in dog or day,დედა (deda),"dad, day, did",dad,yes
 ე,e,/ɛ/,like 'e' in egg or desk,ენა (ena),"egg, desk, red",language,yes
-ვ,v,/v/,like 'v' in very or love,ვაშლი (vashli),"very, love, have",apple,yes
+ვ,v,/v/,like 'v' in very or 'w' in wish - both acceptable,ვაშლი (vashli),"very, love, have",apple,yes
 ზ,z,/z/,like 'z' in zoo or buzz,ზუზუნი (zuzuni),"zoo, buzz, zero",buzzing,yes
 თ,t,/tʰ/,"aspirated 't' like in top or tap (stronger puff of air)",თოვლი (tovli),"top, tea, tap",snow,similar
 ი,i,/i/,like 'ee' in see or bee,ისინი (isini),"bee, see, three",they,yes
@@ -28,7 +28,7 @@ georgianLetter,englishLetter,ipaSymbol,explanation,georgianExample,englishExampl
 ც,ts,/t͡sʰ/,like 'ts' in bits or cats,ცივი (tsivi),"tsunami, bits, pizza",cold,similar
 ძ,dz,/d͡z/,like 'ds' in beds or hands,ძაღლი (dzaghli),"beds, hands",dog,similar
 წ,ts',/t͡sʼ/,"ejective ts, more forceful",წყალი (ts’qali),,water,no
-ჭ,ch',/t͡ʃʼ/,"ejective ch, more forceful",ჭიქა (ch’ika),,cup,no
+ჭ,ch',/t͡ʃʼ/,"ejective ch, more forceful",ჭაჭა (ch’ach'a),,a type of Georgian brandy,no
 ხ,kh,/x/,"like German 'ch', closest ch in loch or Bach",ხელი (kheli),"loch, ach",hand,no
 ჯ,j,/d͡ʒ/,like 'j' in judge or bridge,ჯამი (jami),"judge, bridge, jump",bowl,yes
 ჰ,h,/h/,like 'h' in house or hello,ჰაერი (haeri),"house, hello, have",air,yes

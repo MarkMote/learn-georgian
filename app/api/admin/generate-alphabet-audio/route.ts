@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
     const emphasisSettings: VoiceSettings = {
       stability: 1.0,           // Robust/clear pronunciation
       similarity_boost: 1,
-      style: 1,
+      style: 0.5,               // Reduced from 1 to minimize breath artifacts
       use_speaker_boost: true,
       speed: 0.7,
     };

@@ -55,6 +55,10 @@ export default function AdminAlphabetPage() {
   const [batchAudioLimit, setBatchAudioLimit] = useState(10);
   const stopBatchAudioRef = useRef(false);
 
+  // Similar sounds audio state
+  const [similarSoundsGenerating, setSimilarSoundsGenerating] = useState(false);
+  const [similarSoundsResult, setSimilarSoundsResult] = useState<{ success: boolean; message: string } | null>(null);
+
   useEffect(() => {
     fetch("/alphabet.csv")
       .then((res) => res.text())
@@ -177,6 +181,39 @@ export default function AdminAlphabetPage() {
     stopBatchAudioRef.current = true;
   };
 
+  // Generate similar sounds audio
+  const generateSimilarSoundsAudio = async () => {
+    setSimilarSoundsGenerating(true);
+    setSimilarSoundsResult(null);
+
+    try {
+      const response = await fetch("/api/admin/generate-similar-sounds-audio", {
+        method: "POST",
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSimilarSoundsResult({
+          success: true,
+          message: `Generated ${data.generated?.length || 0} audio files`,
+        });
+      } else {
+        setSimilarSoundsResult({
+          success: false,
+          message: data.error || "Failed to generate audio",
+        });
+      }
+    } catch (error: any) {
+      setSimilarSoundsResult({
+        success: false,
+        message: error.message || "Network error",
+      });
+    } finally {
+      setSimilarSoundsGenerating(false);
+    }
+  };
+
   // Create a Set of Georgian letters that are known to be missing audio (for fast lookup)
   const missingAudioLetters = useMemo(() => {
     return new Set(missingAudio.map(letter => letter.georgianLetter));
@@ -293,6 +330,38 @@ export default function AdminAlphabetPage() {
             ) : (
               <div className="text-sm text-gray-400">
                 First 10 letters have audio - <button onClick={() => checkMissingAudio()} className="text-blue-400 hover:text-blue-300 underline">check all</button>
+              </div>
+            )}
+          </div>
+
+          {/* Similar Sounds Audio */}
+          <div className="mt-3 pt-3 border-t border-gray-700">
+            <div className="text-xs font-semibold text-gray-400 mb-2">SIMILAR SOUNDS AUDIO</div>
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-400">
+                Generate audio for minimal pairs (20 words)
+              </div>
+              <button
+                onClick={generateSimilarSoundsAudio}
+                disabled={similarSoundsGenerating}
+                className="flex items-center gap-1 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm rounded-lg transition-colors"
+              >
+                {similarSoundsGenerating ? (
+                  <>
+                    <Loader2 size={14} className="animate-spin" />
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <Play size={14} />
+                    Generate All
+                  </>
+                )}
+              </button>
+            </div>
+            {similarSoundsResult && (
+              <div className={`mt-2 text-sm ${similarSoundsResult.success ? 'text-green-400' : 'text-red-400'}`}>
+                {similarSoundsResult.message}
               </div>
             )}
           </div>

@@ -44,6 +44,116 @@ function getEquivalentIcon(equiv: string) {
   return null;
 }
 
+type MinimalPair = {
+  aspirated: string;
+  aspiratedRoman: string;
+  aspiratedMeaning: string;
+  ejective: string;
+  ejectiveRoman: string;
+  ejectiveMeaning: string;
+};
+
+function MinimalPairRow({
+  contrast,
+  pairs
+}: {
+  contrast: string;
+  aspiratedLetter: string;
+  ejectiveLetter: string;
+  pairs: MinimalPair[];
+}) {
+  const [playingWord, setPlayingWord] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playbackIdRef = useRef(0);
+
+  const handlePlayWord = async (word: string) => {
+    const currentPlaybackId = ++playbackIdRef.current;
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    setPlayingWord(word);
+    try {
+      const audio = new Audio(`/audio/similar-sounds/${word}/word.mp3`);
+      audioRef.current = audio;
+
+      await new Promise<void>((resolve, reject) => {
+        audio.onended = () => resolve();
+        audio.onerror = () => reject(new Error("Failed to play audio"));
+        audio.play().catch(reject);
+      });
+    } catch (error) {
+      if (playbackIdRef.current === currentPlaybackId) {
+        console.error("Error playing audio:", error);
+      }
+    } finally {
+      if (playbackIdRef.current === currentPlaybackId) {
+        setPlayingWord(null);
+      }
+    }
+  };
+
+  const WordButton = ({ word, roman, meaning, colorClass }: { word: string; roman: string; meaning: string; colorClass: string }) => (
+    <button
+      onClick={() => handlePlayWord(word)}
+      className={`group flex flex-col items-center gap-0.5 touch-manipulation w-full ${colorClass}`}
+      aria-label={`Play pronunciation of ${word}`}
+    >
+      <span className="flex items-center gap-2 text-2xl group-hover:text-white transition-colors">
+        {word}
+        <Volume2 size={18} className={`text-gray-500 group-hover:text-white transition-colors ${playingWord === word ? "text-white animate-pulse" : ""}`} />
+      </span>
+      <span className="text-sm text-gray-400">{roman}</span>
+      <span className="text-base text-gray-300 mt-1">{meaning}</span>
+    </button>
+  );
+
+  return (
+    <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
+      {/* Contrast header */}
+      <div className="text-center mb-4">
+        <span className="text-2xl font-light text-gray-300">{contrast}</span>
+      </div>
+
+      {/* Mobile: stacked layout */}
+      <div className="md:hidden space-y-4">
+        {pairs.map((pair, idx) => (
+          <div key={idx} className="space-y-2">
+            {/* Aspirated */}
+            <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg p-3">
+              <div className="text-amber-400 text-xs uppercase tracking-wide mb-1">Aspirated</div>
+              <WordButton word={pair.aspirated} roman={pair.aspiratedRoman} meaning={pair.aspiratedMeaning} colorClass="text-amber-100" />
+            </div>
+            {/* Ejective */}
+            <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg p-3">
+              <div className="text-emerald-400 text-xs uppercase tracking-wide mb-1">Ejective</div>
+              <WordButton word={pair.ejective} roman={pair.ejectiveRoman} meaning={pair.ejectiveMeaning} colorClass="text-emerald-100" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: side-by-side layout */}
+      <div className="hidden md:block">
+        {pairs.map((pair, idx) => (
+          <div key={idx} className={`grid grid-cols-2 gap-4 ${idx > 0 ? 'mt-3 pt-3 border-t border-neutral-800' : ''}`}>
+            {/* Aspirated */}
+            <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg p-4">
+              <WordButton word={pair.aspirated} roman={pair.aspiratedRoman} meaning={pair.aspiratedMeaning} colorClass="text-amber-100" />
+            </div>
+            {/* Ejective */}
+            <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg p-4">
+              <WordButton word={pair.ejective} roman={pair.ejectiveRoman} meaning={pair.ejectiveMeaning} colorClass="text-emerald-100" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function AlphabetPage() {
   const [letters, setLetters] = useState<AlphabetData[]>([]);
   const [playingLetter, setPlayingLetter] = useState<string | null>(null);
@@ -136,7 +246,7 @@ export default function AlphabetPage() {
         </h1>
 
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm sm:text-base md:text-base text-gray-400 mb-6 py-3 text-left font-light">
+          <p className="text-sm sm:text-base md:text-base text-gray-300/90 mb-6 py-3 text-left font-light">
             The Georgian alphabet (Mkhedruli) has 33 letters. There is no capitalization. Georgian spelling is almost perfectly phonemic: each letter always represents the same sound and each letter of a word is always pronounced (so it&apos;s kind of like the opposite of French). There are no silent letters, diacritics, or digraphs, and even complex consonant clusters are written exactly as spoken. 
             <span className="font-bold text-gray-300"> This means that once you learn the alphabet, pronounciation becomes predictable.</span>
           </p>
@@ -263,6 +373,82 @@ export default function AlphabetPage() {
               })}
             </tbody>
           </table>
+        </div>
+
+        {/* Similar Sounds Section */}
+        <div className="mt-16">
+          <h2 className={`text-2xl sm:text-3xl font-light mb-3 text-slate-300 ${carvedTextStyle}`}>
+            Similar Sounds
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300/90 mb-6 py-3 font-light">
+            Georgian has pairs of consonants that sound almost identical to English speakers but are distinct sounds to Georgians.
+            These are <span className="text-amber-400">aspirated</span> (with a puff of air) versus <span className="text-emerald-400">ejective</span> (sharp, no air from lungs) consonants.
+            Mixing them up changes the meaning of words completely.
+          </p>
+
+          {/* Minimal Pairs Table */}
+          <div className="space-y-4">
+            {/* Header row for desktop */}
+            <div className="hidden md:grid md:grid-cols-2 gap-4 mb-2 px-4">
+              <div className="text-center text-amber-400 font-medium">Aspirated (puff of air)</div>
+              <div className="text-center text-emerald-400 font-medium">Ejective (no air)</div>
+            </div>
+
+            {/* თ vs ტ */}
+            <MinimalPairRow
+              contrast="თ / ტ"
+              aspiratedLetter="თ"
+              ejectiveLetter="ტ"
+              pairs={[
+                { aspirated: "თივა", aspiratedRoman: "tiva", aspiratedMeaning: "hay", ejective: "ტივა", ejectiveRoman: "t'iva", ejectiveMeaning: "raft" },
+                { aspirated: "თამაში", aspiratedRoman: "tamashi", aspiratedMeaning: "game", ejective: "ტამაში", ejectiveRoman: "t'amashi", ejectiveMeaning: "beat" },
+              ]}
+            />
+
+            {/* ქ vs კ */}
+            <MinimalPairRow
+              contrast="ქ / კ"
+              aspiratedLetter="ქ"
+              ejectiveLetter="კ"
+              pairs={[
+                { aspirated: "ქარი", aspiratedRoman: "kari", aspiratedMeaning: "wind", ejective: "კარი", ejectiveRoman: "k'ari", ejectiveMeaning: "door" },
+                { aspirated: "ქანა", aspiratedRoman: "kana", aspiratedMeaning: "swing", ejective: "კანა", ejectiveRoman: "k'ana", ejectiveMeaning: "hemp" },
+              ]}
+            />
+
+            {/* ფ vs პ */}
+            <MinimalPairRow
+              contrast="ფ / პ"
+              aspiratedLetter="ფ"
+              ejectiveLetter="პ"
+              pairs={[
+                { aspirated: "ფარი", aspiratedRoman: "pari", aspiratedMeaning: "shield", ejective: "პარი", ejectiveRoman: "p'ari", ejectiveMeaning: "parry" },
+                { aspirated: "ფერი", aspiratedRoman: "peri", aspiratedMeaning: "color", ejective: "პერი", ejectiveRoman: "p'eri", ejectiveMeaning: "fairy" },
+              ]}
+            />
+
+            {/* ც vs წ */}
+            <MinimalPairRow
+              contrast="ც / წ"
+              aspiratedLetter="ც"
+              ejectiveLetter="წ"
+              pairs={[
+                { aspirated: "ცილა", aspiratedRoman: "tsila", aspiratedMeaning: "egg white", ejective: "წილა", ejectiveRoman: "ts'ila", ejectiveMeaning: "portion" },
+                { aspirated: "ცელი", aspiratedRoman: "tseli", aspiratedMeaning: "scythe", ejective: "წელი", ejectiveRoman: "ts'eli", ejectiveMeaning: "year" },
+              ]}
+            />
+
+            {/* ჩ vs ჭ */}
+            <MinimalPairRow
+              contrast="ჩ / ჭ"
+              aspiratedLetter="ჩ"
+              ejectiveLetter="ჭ"
+              pairs={[
+                { aspirated: "ჩაი", aspiratedRoman: "chai", aspiratedMeaning: "tea", ejective: "ჭაი", ejectiveRoman: "ch'ai", ejectiveMeaning: "well" },
+                { aspirated: "ჩირი", aspiratedRoman: "chiri", aspiratedMeaning: "dried fruit", ejective: "ჭირი", ejectiveRoman: "ch'iri", ejectiveMeaning: "plague" },
+              ]}
+            />
+          </div>
         </div>
 
         {/* Back to Home Link */}
