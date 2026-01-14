@@ -748,11 +748,11 @@ die,die_p2p,die,You (pl) die,verb-p2p,თქვენ კვდებით,verb
 die,die_p3p,die,They die,verb-p3p,ისინი კვდებიან,verb,2,verbs,They die of old age.,ისინი სიბერით კვდებიან.,
 beef,beef,beef,beef,noun,საქონლის ხორცი,food,2,general,"I don't eat beef, I'm a vegetarian.","მე არ ვჭამ საქონლის ხორცს, ვეგეტარიანელი ვარ.",Literal: Cattle (საქონელი) meat (ხორცი).
 finger,finger,finger,finger,noun,თითი,body,2,general,I cut my finger,თითი გავიჭერი,
-quiet,quiet,quiet,quiet,adjective,ჩუმი,adjective,2,general,Be quiet for a moment,ერთი წუთით ჩუმად იყავი,
+quiet,quiet,quiet,quiet,adjective,ჩუმი,adjective,2,general,Be quiet,ჩუმად იყავი,
 television,television,television,television,noun,ტელევიზორი,electronics,2,general,Nothing is on television,ტელევიზორში არაფერია,
 wide,wide,wide,wide,adjective,ფართო,adjective,2,general,The river is wide,მდინარე ფართოა,
 program,program,program,program (computer),noun,პროგრამა,electronics,2,general,I installed a new program,ახალი პროგრამა დავაყენე,
-space,space,space,space (outer space),noun,კოსმოსი,location,2,general,Life exists in space,კოსმოსში ცხოვრება არსებობს,
+space,space,space,space (outer space),noun,კოსმოსი,location,2,general,Space is very far,კოსმოსი ძალიან შორს არის,
 church,church,church,church,noun,ეკლესია,location,2,general,We went to church on Sunday,კვირას ეკლესიაში წავედით,
 earth,earth,earth,Earth,noun,დედამიწა,nature,2,general,The Earth is round,დედამიწა მრგვალია,Literal: Mother (დედა) Earth/Soil (მიწა).
 kill,kill_p1s,kill,I kill,verb-p1s,მე ვკლავ,verb,2,verbs,I kill time.,მე დროს ვკლავ.,
@@ -766,7 +766,7 @@ healthy,healthy,healthy,healthy,adjective,ჯანმრთელი,adjective,
 cake,cake,cake,cake,noun,ტორტი,food,2,general,The cake is delicious,ტორტი გემრიელია,
 vowel,vowel,vowel,vowel,noun,ხმოვანი,misc_nouns,2,general,This word has two vowels,ამ სიტყვაში ორი ხმოვანია,Root: ხმა (voice/sound).
 magazine,magazine,magazine,magazine,noun,ჟურნალი,society,2,general,She is reading a magazine,ის ჟურნალს კითხულობს,
-pound,pound,pound,pound,noun,ფუნტი,math_measurements,2,general,One pound is not enough,ერთი ფუნტი საკმარისი არაა,
+pound,pound,pound,pound,noun,ფუნტი,math_measurements,2,general,One pound is a lot,ერთი ფუნტი ბევრია,
 coat,coat,coat,coat,noun,პალტო,clothing,2,general,He put on a coat,მან პალტო ჩაიცვა,
 one_hundred,one_hundred,one_hundred,100,noun,ასი,numbers,2,general,One hundred people arrived,ასი ადამიანი მოვიდა,
 smile,smile_inf,smile,to smile,verb-inf,ღიმილი,verb,2,verbs,Smiling makes me happy,ღიმილი მახარებს,
@@ -778,13 +778,13 @@ smile,smile_p2p,smile,You (pl) smile,verb-p2p,თქვენ იღიმით
 smile,smile_p3p,smile,They smile,verb-p3p,ისინი იღიმიან,verb,2,verbs,They smile at me.,ისინი მე მიღიმიან.,
 job,job,job,job,noun,სამუშაო,category,2,general,He found a new job,მან ახალი სამუშაო იპოვა,Prefix სა- (place/purpose) + root მუშა (work).
 race_sport,race_sport,race_sport,race (sport),noun,რბოლა,society,2,general,The race starts today,რბოლა დღეს იწყება,
-orange_fruit,orange_fruit,orange_fruit,orange,noun,ფორთოხალი,food,2,general,I peeled an orange,მე ფორთოხალი გავფრცი,
+orange_fruit,orange_fruit,orange_fruit,orange,noun,ფორთოხალი,food,2,general,I bought an orange,მე ფორთოხალი ვიყიდე,
 curved,curved,curved,curved,adjective,მოხრილი,adjective,2,general,The road is curved,გზა მოხრილია,
 noun,noun,noun,noun,noun,არსებითი სახელი,category,2,general,Dog is a common noun,ძაღლი ჩვეულებრივი არსებითი სახელია,Literal: Essential (არსებითი) Name (სახელი).
 wife,wife,wife,wife,noun,ცოლი,people,2,general,This is my wife,ეს ჩემი ცოლია,
 face,face,face,face,noun,სახე,body,2,general,Her face is beautiful,მისი სახე ლამაზია,
 foot_measurement,foot_measurement,foot_measurement,foot,noun,ფუტი,math_measurements,2,general,Ten feet is long,ათი ფუტი გრძელია,
-laugh,laugh_inf,laugh,to laugh,verb-inf,სიცილი,verb,2,verbs,Don't laugh!,არ გაიცინო!,
+laugh,laugh_inf,laugh,to laugh,verb-inf,სიცილი,verb,2,verbs,Laughter is good.,სიცილი კარგია.,
 laugh,laugh_p1s,laugh,I laugh,verb-p1s,მე ვიცინი,verb,2,verbs,I laugh a lot.,მე ბევრს ვიცინი.,
 laugh,laugh_p2s,laugh,You laugh,verb-p2s,შენ იცინი,verb,2,verbs,You laugh loudly.,შენ ხმამაღლა იცინი.,
 laugh,laugh_p3s,laugh,He/She/It laughs,verb-p3s,ის იცინის,verb,2,verbs,She laughs often.,ის ხშირად იცინის.,
@@ -799,7 +799,7 @@ july,july,july,July,noun,ივლისი,months,2,general,It’s hot in July,
 technology,technology,technology,technology,noun,ტექნოლოგია,society,2,general,Technology changes fast,ტექნოლოგია სწრაფად იცვლება,
 west,west,west,west,noun,დასავლეთი,directions,2,general,The sun sets in the west,მზე დასავლეთში ჩადის,
 strong,strong,strong,strong,adjective,ძლიერი,adjective,2,general,He is a strong man,ის ძლიერი კაცია,Root: ძალა (power/force).
-cry,cry_inf,cry,to cry,verb-inf,ტირილი,verb,2,verbs,Don't cry.,არ იტირო.,
+cry,cry_inf,cry,to cry,verb-inf,ტირილი,verb,2,verbs,I don't like crying.,ტირილი არ მომწონს.,
 cry,cry_p1s,cry,I cry,verb-p1s,მე ვტირი,verb,2,verbs,I never cry.,მე არასდროს ვტირი.,
 cry,cry_p2s,cry,You cry,verb-p2s,შენ ტირი,verb,2,verbs,Why do you cry?,რატომ ტირი?,
 cry,cry_p3s,cry,He/She/It cries,verb-p3s,ის ტირის,verb,2,verbs,The baby cries.,ბავშვი ტირის.,
@@ -825,7 +825,7 @@ one_thousand_one,one_thousand_one,one_thousand_one,1001,noun,ათას ერ
 art,art,art,art,noun,ხელოვნება,category,2,general,modern art,თანამედროვე ხელოვნება,Root: ხელი (hand).
 dead,dead,dead,dead,adjective,მკვდარი,adjective,2,general,The phone is dead,ტელეფონი მკვდარია,
 camera,camera,camera,camera,noun,კამერა,electronics,2,general,He bought a new camera,მან ახალი კამერა იყიდა,
-side,side,side,side,noun,გვერდი,directions,2,general,Which side are you on?,რომელ მხარეს ხარ?,
+side,side,side,side,noun,გვერდი,directions,2,general,Sit next to me.,ჩემს გვერდით იჯექი.,
 head,head,head,head,noun,თავი,body,2,general,My head hurts.,თავი მტკივა.,"Also used for ""self"" (თავისუფლება = freedom)."
 waiter,waiter,waiter,waiter,noun,მიმტანი,job,2,general,call the waiter,დაუძახე მიმტანს,"Literally ""one who brings"" (მიტანა = to bring)."
 world,world,world,world,noun,სამყარო,nature,2,general,the whole world,მთელი სამყარო,
@@ -839,10 +839,10 @@ jump,jump_p3p,jump,They jump,verb-p3p,ისინი ხტებიან,verb
 nature,nature,nature,nature,noun,ბუნება,category,2,general,We walked in nature,ჩვენ ბუნებაში ვიარეთ,
 crowd,crowd,crowd,crowd,noun,ბრბო,people,2,general,The crowd was loud,ბრბო ხმაურიანი იყო,
 fan,fan,fan,fan,noun,გულშემატკივარი,people,2,general,He is a football fan,ის ფეხბურთის გულშემატკივარია,Literal: Heart (გულ) supporter/cheerer.
-centimeter,centimeter,centimeter,centimeter,noun,სანტიმეტრი,math_measurements,2,general,It is one centimeter long,ის ერთი სანტიმეტრის სიგრძისაა,
+centimeter,centimeter,centimeter,centimeter,noun,სანტიმეტრი,math_measurements,2,general,This is five centimeters,ეს ხუთი სანტიმეტრია,
 body,body,body,body,noun,სხეული,category,2,general,The human body is strong,ადამიანის სხეული ძლიერია,
 poor,poor,poor,poor,adjective,ღარიბი,adjective,2,general,The poor man is hungry,ღარიბი კაცი მშიერია,
-mean,mean,mean,mean,adjective,ბოროტი,adjective,2,general,Don’t be mean to him,ნუ იქნები მის მიმართ ბოროტი,"Also means ""evil"" or ""wicked""."
+mean,mean,mean,mean,adjective,ბოროტი,adjective,2,general,Don't be mean,ნუ ხარ ბოროტი,"Also means ""evil"" or ""wicked""."
 bill,bill,bill,bill,noun,ანგარიში,society,2,general,"The bill, please.","ანგარიში, თუ შეიძლება.","Also means ""account"" or ""score""."
 smell,smell_inf,smell,to smell,verb-inf,ყნოსვა,verb,2,verbs,The smell of flowers is pleasant,ყვავილების ყნოსვა სასიამოვნოა,Refers to the act of smelling (sniffing).
 smell,smell_p1s,smell,I smell,verb-p1s,მე ვყნოსავ,verb,2,verbs,I smell a flower.,მე ყვავილს ვყნოსავ.,
@@ -852,14 +852,14 @@ smell,smell_p1p,smell,We smell,verb-p1p,ჩვენ ვყნოსავთ,ve
 smell,smell_p2p,smell,You (pl) smell,verb-p2p,თქვენ ყნოსავთ,verb,2,verbs,You (pl) smell the air.,თქვენ ჰაერს ყნოსავთ.,
 smell,smell_p3p,smell,They smell,verb-p3p,ისინი ყნოსავენ,verb,2,verbs,They smell smoke.,ისინი კვამლს ყნოსავენ.,
 weight,weight,weight,weight,noun,წონა,math_measurements,2,general,What's your weight?,რა არის შენი წონა?,
-bottom,bottom,bottom,bottom,noun,ქვედა,directions,2,general,The box is on the bottom shelf,ქვედა თაროზე ყუთია,Root: ქვე (down/under).
-material,material,material,material,noun,მასალა,category,2,general,We need more material,ჩვენ მეტი მასალა გვჭირდება,
+bottom,bottom,bottom,bottom,noun,ქვედა,directions,2,general,Bottom floor,ქვედა სართული,Root: ქვე (down/under).
+material,material,material,material,noun,მასალა,category,2,general,What material is this?,ეს რა მასალაა?,
 back_direction,back_direction,back_direction,back,noun,უკანა,directions,2,general,He went out the back door,ის უკანა კარიდან გავიდა,Root: უკუ (reverse).
 sick,sick,sick,sick,adjective,ავად,adjective,2,general,I am very sick today,დღეს ძალიან ავად ვარ,Short for ავადმყოფი (sick person).
-sweat,sweat,sweat,sweat,noun,ოფლი,body,2,general,His face is full of sweat,მისი სახე ოფლით სავსეა,
+sweat,sweat,sweat,sweat,noun,ოფლი,body,2,general,I am sweating,ოფლი მდის,
 race_ethnicity,race_ethnicity,race_ethnicity,race (ethnicity),noun,რასა,society,2,general,The human race is old,ადამიანთა რასა ძველია,
 camp,camp,camp,camp,noun,ბანაკი,location,2,general,The children are at summer camp,ბავშვები საზაფხულო ბანაკში არიან,
-taste,taste_inf,taste,to taste,verb-inf,გასინჯვა,verb,2,verbs,I want to taste it.,მინდა გავსინჯო.,
+taste,taste_inf,taste,to taste,verb-inf,გასინჯვა,verb,2,verbs,Wine tasting is fun.,ღვინის გასინჯვა სახალისოა.,
 taste,taste_p1s,taste,I taste,verb-p1s,მე ვაგემოვნებ,verb,2,verbs,I taste the soup.,მე სუპს ვაგემოვნებ.,Root is გემო (taste). -ებ makes it a verb.
 taste,taste_p2s,taste,You taste,verb-p2s,შენ აგემოვნებ,verb,2,verbs,You taste the wine.,შენ ღვინოს აგემოვნებ.,
 taste,taste_p3s,taste,He/She/It tastes,verb-p3s,ის აგემოვნებს,verb,2,verbs,He tastes the food.,ის საჭმელს აგემოვნებს.,
@@ -872,7 +872,7 @@ radio,radio,radio,radio,noun,რადიო,electronics,2,general,I heard it on
 rice,rice,rice,rice,noun,ბრინჯი,food,2,general,I ate rice and beans,მე ბრინჯი და ლობიო შევჭამე,
 beverage,beverage,beverage,beverage,noun,სასმელი,category,2,general,This beverage is sweet,ეს სასმელი ტკბილია,Root: სმა (drink). Prefix სა- (thing for).
 short_height,short_height,short_height,short (height),adjective,დაბალი,adjective,2,general,He is a short boy,ის დაბალი ბიჭია,"Also means ""low""."
-energy,energy,energy,energy,noun,ენერგია,society,2,general,She has no energy today,დღეს მას ენერგია არ აქვს,
+energy,energy,energy,energy,noun,ენერგია,society,2,general,He has no energy,მას ენერგია არ აქვს,
 adult,adult,adult,adult,noun,ზრდასრული,people,2,general,Only adults can enter,მხოლოდ ზრდასრულები შეიძლება შევიდნენ,Literal: Growth (ზრდა) + Completed/Full (სრული).
 touch,touch_inf,touch,to touch,verb-inf,შეხება,verb,2,verbs,Touching the painting is forbidden,სურათზე შეხება აკრძალულია,
 touch,touch_p1s,touch,I touch,verb-p1s,მე ვეხები,verb,2,verbs,I touch the screen.,მე ეკრანს ვეხები.,
@@ -885,7 +885,7 @@ famous,famous,famous,famous,adjective,ცნობილი,adjective,2,general,
 copper,copper,copper,copper,noun,სპილენძი,materials,2,general,The pot is made of copper,ქვაბი სპილენძისაა,
 valley,valley,valley,valley,noun,ველი,nature,2,general,We walked through the green valley,ჩვენ მწვანე ველზე გავიარეთ,"Also means ""field""."
 sign,sign,sign,sign,noun,ნიშანი,society,2,general,I saw a road sign,საგზაო ნიშანი დავინახე,
-blind,blind,blind,blind,adjective,ბრმა,adjective,2,general,He helped the blind man,მან ბრმა კაცი დაეხმარა,
+blind,blind,blind,blind,adjective,ბრმა,adjective,2,general,The blind man has a dog,ბრმა კაცს ძაღლი ჰყავს,
 hat,hat,hat,hat,noun,ქუდი,clothing,2,general,She put on a hat,მან ქუდი დაიხურა,
 edge,edge,edge,edge,noun,ზღვარი,math_measurements,2,general,We are standing at the edge,ჩვენ ზღვარზე ვდგავართ,"Also means ""limit"" or ""border""."
 third,third,third,3rd,noun,მესამე,numbers,2,general,She finished in third place,ის მესამე ადგილზე გავიდა,Ordinal: მე- + სამი + -ე.
@@ -895,8 +895,8 @@ kiss,kiss_p2s,kiss,You kiss,verb-p2s,შენ კოცნი,verb,2,verbs,You 
 kiss,kiss_p3s,kiss,He/She/It kisses,verb-p3s,ის კოცნის,verb,2,verbs,She kisses the baby.,ის ბავშვს კოცნის.,
 kiss,kiss_p1p,kiss,We kiss,verb-p1p,ჩვენ ვკოცნით,verb,2,verbs,We kiss each other.,ჩვენ ერთმანეთს ვკოცნით.,
 kiss,kiss_p2p,kiss,You (pl) kiss,verb-p2p,თქვენ კოცნით,verb,2,verbs,You (pl) kiss them.,თქვენ მათ კოცნით.,
-kiss,kiss_p3p,kiss,They kiss,verb-p3p,ისინი კოცნიან,verb,2,verbs,They kiss goodbye.,ისინი დამშვიდობებისას კოცნიან.,
-piece,piece,piece,piece,noun,ნაწილი,misc_nouns,2,general,a piece of cake,ტორტის ნაჭერი,
+kiss,kiss_p3p,kiss,They kiss,verb-p3p,ისინი კოცნიან,verb,2,verbs,They kiss often.,ისინი ხშირად კოცნიან.,
+piece,piece,piece,piece,noun,ნაწილი,misc_nouns,2,general,This is a car part.,ეს მანქანის ნაწილია.,
 market,market,market,market,noun,ბაზარი,location,2,general,Let's go to the market.,წავიდეთ ბაზარში.,
 death,death,death,death,noun,სიკვდილი,society,2,general,life and death,სიცოცხლე და სიკვდილი,
 ugly,ugly,ugly,ugly,adjective,მახინჯი,adjective,2,general,That sweater is ugly.,ეს სვიტერი მახინჯია.,
@@ -912,11 +912,11 @@ burn,burn_p1p,burn,We burn,verb-p1p,ჩვენ ვწვავთ,verb,2,verbs
 burn,burn_p2p,burn,You (pl) burn,verb-p2p,თქვენ წვავთ,verb,2,verbs,You (pl) burn candles.,თქვენ სანთლებს წვავთ.,
 burn,burn_p3p,burn,They burn,verb-p3p,ისინი წვავენ,verb,2,verbs,They burn old photos.,ისინი ძველ ფოტოებს წვავენ.,
 light_brightness,light_brightness,light_brightness,light (brightness),adjective,ნათელი,adjective,2,general,a bright future,ნათელი მომავალი,
-june,june,june,June,noun,ივნისი,months,2,general,My birthday is in June.,ჩემი დაბადების დღე ივნისშია.,
+june,june,june,June,noun,ივნისი,months,2,general,It is hot in June.,ივნისში ცხელა.,
 banana,banana,banana,banana,noun,ბანანი,food,2,general,He ate a banana,მან ბანანი შეჭამა,
-one_hundred_two,one_hundred_two,one_hundred_two,102,noun,ას ორი,numbers,2,general,Page one hundred two is missing,გვერდი ას ორი აკლია,
+one_hundred_two,one_hundred_two,one_hundred_two,102,noun,ას ორი,numbers,2,general,This costs 102 lari,ეს ას ორი ლარი ღირს,
 plastic,plastic,plastic,plastic,noun,პლასტმასი,materials,2,general,This bag is made of plastic,ეს ჩანთა პლასტმასისაა,
-soap,soap,soap,soap,noun,საპონი,home,2,general,There is no soap in the bathroom,აბაზანაში საპონი აღარ არის,
+soap,soap,soap,soap,noun,საპონი,home,2,general,Where is the soap?,საპონი სად არის?,
 milk,milk,milk,milk,noun,რძე,beverages,2,general,The milk is cold,რძე ცივია,
 library,library,library,library,noun,ბიბლიოთეკა,location,2,general,I'm going to the library.,მე ბიბლიოთეკაში მივდივარ.,Place (თეკა) for bible/books (ბიბლიო).
 melt,melt_inf,melt,to melt,verb-inf,დნობა,verb,2,verbs,Ice melting is slow,ყინულის დნობა ნელია,
@@ -972,9 +972,9 @@ sit,sit_p1p,sit,We sit,verb-p1p,ჩვენ ვსხედვართ,verb,2,
 sit,sit_p2p,sit,You (pl) sit,verb-p2p,თქვენ სხედხართ,verb,2,verbs,You (pl) sit over there.,თქვენ იქ სხედხართ.,
 sit,sit_p3p,sit,They sit,verb-p3p,ისინი სხედან,verb,2,verbs,They sit on the floor.,ისინი იატაკზე სხედან.,
 tight,tight,tight,tight,adjective,მჭიდრო,adjective,2,general,These pants are too tight.,ეს შარვალი ძალიან მჭიდროა.,
-lip,lip,lip,lip,noun,ტუჩი,body,2,general,My lips are dry.,ტუჩები გამიშრა.,
-tool,tool,tool,tool,noun,ხელსაწყო,home,2,general,This is a useful tool.,ეს სასარგებლო ხელსაწყოა.,
-toe,toe,toe,toe,noun,ფეხის თითი,body,2,general,I hurt my big toe.,ფეხის დიდი თითი ვიტკინე.,"Literally ""finger of the foot""."
+lip,lip,lip,lip,noun,ტუჩი,body,2,general,She has red lips.,მას წითელი ტუჩები აქვს.,
+tool,tool,tool,tool,noun,ხელსაწყო,home,2,general,He works with a tool.,ის ხელსაწყოთი მუშაობს.,
+toe,toe,toe,toe,noun,ფეხის თითი,body,2,general,My toe hurts.,ფეხის თითი მტკივა.,"Literally ""finger of the foot""."
 hand,hand,hand,hand,noun,ხელი,body,2,general,Wash your hands.,დაიბანე ხელები.,
 april,april,april,April,noun,აპრილი,months,2,general,It often rains in April.,აპრილში ხშირად წვიმს.,
 photograph,photograph,photograph,photograph,noun,ფოტო,home,2,general,Let's take a photograph.,ფოტო გადავიღოთ.,
@@ -990,18 +990,18 @@ map,map,map,map,noun,რუკა,misc_nouns,2,general,Look at the map.,რუ�
 husband,husband,husband,husband,noun,ქმარი,people,2,general,She loves her husband.,მას უყვარს თავისი ქმარი.,
 dress,dress,dress,dress,noun,კაბა,clothing,2,general,She bought a new dress.,მან ახალი კაბა იყიდა.,
 leaf,leaf,leaf,leaf,noun,ფოთოლი,nature,2,general,The leaves are falling.,ფოთლები ცვივა.,
-glass,glass,glass,glass,noun,მინა,materials,2,general,The window is made of glass.,ფანჯარა მინისგანაა გაკეთებული.,
+glass,glass,glass,glass,noun,მინა,materials,2,general,The glass is broken.,მინა გატეხილია.,
 color,color,color,color,noun,ფერი,category,2,general,What's your favorite color?,რა არის შენი საყვარელი ფერი?,
 one_thousand,one_thousand,one_thousand,1000,noun,ათასი,numbers,2,general,one thousand people,ათასი ადამიანი,
 narrow,narrow,narrow,narrow,adjective,ვიწრო,adjective,2,general,The street is narrow.,ქუჩა ვიწროა.,
-pass_by,pass_by_inf,pass_by,to pass by,verb-inf,ჩავლა,verb,2,verbs,to pass by the house,სახლისთვის ჩავლა,
+pass_by,pass_by_inf,pass_by,to pass by,verb-inf,ჩავლა,verb,2,verbs,to pass by the house,სახლთან ჩავლა,
 pass_by,pass_by_p1s,pass_by,I pass by,verb-p1s,მე ჩავუვლი,verb,2,verbs,I pass by the school.,მე სკოლას ჩავუვლი.,
 pass_by,pass_by_p2s,pass_by,You pass by,verb-p2s,შენ ჩაუვლი,verb,2,verbs,You pass by the park.,შენ პარკს ჩაუვლი.,
 pass_by,pass_by_p3s,pass_by,He/She/It passes by,verb-p3s,ის ჩაუვლის,verb,2,verbs,A car passes by.,მანქანა ჩაუვლის.,
 pass_by,pass_by_p1p,pass_by,We pass by,verb-p1p,ჩვენ ჩავუვლით,verb,2,verbs,We pass by the store.,ჩვენ მაღაზიას ჩავუვლით.,
 pass_by,pass_by_p2p,pass_by,You (pl) pass by,verb-p2p,თქვენ ჩაუვლით,verb,2,verbs,You (pl) pass by my house.,თქვენ ჩემს სახლს ჩაუვლით.,
 pass_by,pass_by_p3p,pass_by,They pass by,verb-p3p,ისინი ჩაუვლიან,verb,2,verbs,They pass by the river.,ისინი მდინარეს ჩაუვლიან.,
-light,light,light,light,noun,სინათლე,misc_nouns,2,general,Turn on the light.,შუქი აანთე.,Root is ნათელი (bright/light).
+light,light,light,light,noun,სინათლე,misc_nouns,2,general,Light comes through the window.,სინათლე ფანჯრიდან შემოდის.,Root is ნათელი (bright/light).
 air,air,air,air,noun,ჰაერი,nature,2,general,I need some fresh air.,სუფთა ჰაერი მჭირდება.,
 prison,prison,prison,prison,noun,ციხე,society,2,general,He is in prison.,ის ციხეშია.,"Also means ""fortress"" or ""castle""."
 apple,apple,apple,apple,noun,ვაშლი,food,2,general,I like to eat an apple.,მე მიყვარს ვაშლის ჭამა.,
@@ -1009,7 +1009,7 @@ thick,thick,thick,thick,adjective,სქელი,adjective,2,general,This is a 
 rich,rich,rich,rich,adjective,მდიდარი,adjective,2,general,He is a rich man.,ის მდიდარი კაცია.,
 child,child,child,child,noun,ბავშვი,people,2,general,The child is playing.,ბავშვი თამაშობს.,
 image,image,image,image,noun,გამოსახულება,misc_nouns,2,general,a clear image on the screen,ეკრანზე მკაფიო გამოსახულება,Root is სახე (face/image).
-cut,cut_inf,cut,to cut,verb-inf,ჭრა,verb,2,verbs,Cutting bread makes crumbs,პურის ჭრა ნამცეცებს აკეთებს,
+cut,cut_inf,cut,to cut,verb-inf,ჭრა,verb,2,verbs,The knife doesn't cut the bread.,დანა პურს არ ჭრის.,
 cut,cut_p1s,cut,I cut,verb-p1s,მე ვჭრი,verb,2,verbs,I cut the bread.,მე პურს ვჭრი.,
 cut,cut_p2s,cut,You cut,verb-p2s,შენ ჭრი,verb,2,verbs,You cut the paper.,შენ ქაღალდს ჭრი.,
 cut,cut_p3s,cut,He/She/It cuts,verb-p3s,ის ჭრის,verb,2,verbs,She cuts her hair.,ის თმას იჭრის.,
@@ -1039,7 +1039,7 @@ club,club,club,club,noun,კლუბი,location,2,general,Let's go to the club
 team,team,team,team,noun,გუნდი,society,2,general,What's your favorite team?,რომელია შენი საყვარელი გუნდი?,
 note,note,note,note,noun,შენიშვნა,home,2,general,He left me a note.,მან შენიშვნა დამიტოვა.,
 lemon,lemon,lemon,lemon,noun,ლიმონი,food,2,general,The lemon is very sour.,ლიმონი ძალიან მჟავეა.,
-lie_down,lie_down_inf,lie_down,to lie down,verb-inf,წოლა,verb,2,verbs,I need to lie down.,უნდა დავწვე.,
+lie_down,lie_down_inf,lie_down,to lie down,verb-inf,წოლა,verb,2,verbs,I need a bit of rest.,ცოტა წოლა მჭირდება.,
 lie_down,lie_down_p1s,lie_down,I lie down,verb-p1s,მე ვწვები,verb,2,verbs,I lie down on the sofa.,მე დივანზე ვწვები.,
 lie_down,lie_down_p2s,lie_down,You lie down,verb-p2s,შენ წვები,verb,2,verbs,You lie down to rest.,შენ დასასვენებლად წვები.,
 lie_down,lie_down_p3s,lie_down,He/She/It lies down,verb-p3s,ის წვება,verb,2,verbs,The dog lies down.,ძაღლი წვება.,
@@ -1047,7 +1047,7 @@ lie_down,lie_down_p1p,lie_down,We lie down,verb-p1p,ჩვენ ვწვებ
 lie_down,lie_down_p2p,lie_down,You (pl) lie down,verb-p2p,თქვენ წვებით,verb,2,verbs,You (pl) lie down on the floor.,თქვენ იატაკზე წვებით.,
 lie_down,lie_down_p3p,lie_down,They lie down,verb-p3p,ისინი წვებიან,verb,2,verbs,They lie down on the grass.,ისინი ბალახზე წვებიან.,
 theater,theater,theater,theater,noun,თეატრი,location,2,general,We are going to the theater.,ჩვენ თეატრში მივდივართ.,
-soil,soil,soil,soil/earth,noun,ნიადაგი,nature,2,general,The soil is very fertile.,ნიადაგი ძალიან ნაყოფიერია.,
+soil,soil,soil,soil/earth,noun,ნიადაგი,nature,2,general,The flower needs good soil.,ყვავილს კარგი ნიადაგი სჭირდება.,
 half,half,half,half,noun,ნახევარი,math_measurements,2,general,Wait for half an hour.,დაიცადე ნახევარი საათი.,
 sun,sun,sun,sun,noun,მზე,nature,2,general,The sun is shining brightly.,მზე კაშკაშად ანათებს.,
 expensive,expensive,expensive,expensive,adjective,ძვირი,adjective,2,general,That watch is too expensive.,ეს საათი ძალიან ძვირია.,"Can also mean ""dear"" (beloved/valued)."
@@ -1058,13 +1058,13 @@ wake_up,wake_up_inf,wake_up,to wake up,verb-inf,გაღვიძება,verb
 wake_up,wake_up_p1s,wake_up,I wake up,verb-p1s,მე ვიღვიძებ,verb,2,verbs,I wake up at 8 AM.,მე 8 საათზე ვიღვიძებ.,
 wake_up,wake_up_p2s,wake_up,You wake up,verb-p2s,შენ იღვიძებ,verb,2,verbs,You wake up early.,შენ ადრე იღვიძებ.,
 wake_up,wake_up_p3s,wake_up,He/She/It wakes up,verb-p3s,ის იღვიძებს,verb,2,verbs,He wakes up late.,ის გვიან იღვიძებს.,
-wake_up,wake_up_p1p,wake_up,We wake up,verb-p1p,ჩვენ ვიღვიძებთ,verb,2,verbs,We wake up at the same time.,ჩვენ ერთსა და იმავე დროს ვიღვიძებთ.,
+wake_up,wake_up_p1p,wake_up,We wake up,verb-p1p,ჩვენ ვიღვიძებთ,verb,2,verbs,We wake up early.,ჩვენ ადრე ვიღვიძებთ.,
 wake_up,wake_up_p2p,wake_up,You (pl) wake up,verb-p2p,თქვენ იღვიძებთ,verb,2,verbs,When do you (pl) wake up?,თქვენ როდის იღვიძებთ?,
 wake_up,wake_up_p3p,wake_up,They wake up,verb-p3p,ისინი იღვიძებენ,verb,2,verbs,They wake up with the sun.,ისინი მზესთან ერთად იღვიძებენ.,
 army,army,army,army,noun,არმია,job,2,general,He decided to join the army.,მან გადაწყვიტა არმიაში წასვლა.,
 religion,religion,religion,religion,noun,რელიგია,society,2,general,What is your religion?,რა არის შენი რელიგია?,
 corner,corner,corner,corner,noun,კუთხე,math_measurements,2,general,He is in the corner.,ის კუთხეშია.,
-second_ordinal,second_ordinal,second_ordinal,2nd,noun,მეორე,numbers,2,general,This is the second time.,ეს მეორე შემთხვევაა.,Root is ორი (two).
+second_ordinal,second_ordinal,second_ordinal,2nd,noun,მეორე,numbers,2,general,This is the second day.,ეს მეორე დღეა.,Root is ორი (two).
 network,network,network,network,noun,ქსელი,electronics,2,general,The social network is popular,სოციალური ქსელი პოპულარულია,
 town,town,town,town,noun,ქალაქი,location,2,general,I live in a small town.,მე პატარა ქალაქში ვცხოვრობ.,"Commonly used for ""City""."
 february,february,february,February,noun,თებერვალი,months,2,general,February is a short month.,თებერვალი მოკლე თვეა.,
@@ -1076,15 +1076,15 @@ sing,sing_p3s,sing,He/She/It sings,verb-p3s,ის მღერის,verb,2,ver
 sing,sing_p1p,sing,We sing,verb-p1p,ჩვენ ვმღერით,verb,2,verbs,We sing together.,ჩვენ ერთად ვმღერით.,
 sing,sing_p2p,sing,You (pl) sing,verb-p2p,თქვენ მღერით,verb,2,verbs,You (pl) sing in a choir.,თქვენ გუნდში მღერით.,
 sing,sing_p3p,sing,They sing,verb-p3p,ისინი მღერიან,verb,2,verbs,They sing loudly.,ისინი ხმამაღლა მღერიან.,
-brain,brain,brain,brain,noun,ტვინი,body,2,general,You have to use your brain.,შენი ტვინი უნდა გამოიყენო.,
+brain,brain,brain,brain,noun,ტვინი,body,2,general,Use your brain.,ტვინი გამოიყენე.,
 shirt,shirt,shirt,shirt,noun,პერანგი,clothing,2,general,I like your new shirt.,მომწონს შენი ახალი პერანგი.,
-heaven,heaven,heaven,heaven,noun,სამოთხე,society,2,general,This place is like heaven.,ეს ადგილი სამოთხეს ჰგავს.,
-skin,skin,skin,skin,noun,კანი,body,2,general,She has very soft skin.,მას ძალიან რბილი კანი აქვს.,
-lawyer,lawyer,lawyer,lawyer,noun,ადვოკატი,job,2,general,I need to hire a lawyer.,ადვოკატი უნდა დავიქირაო.,
+heaven,heaven,heaven,heaven,noun,სამოთხე,society,2,general,Georgia is paradise.,საქართველო სამოთხეა.,
+skin,skin,skin,skin,noun,კანი,body,2,general,She has soft skin.,მას რბილი კანი აქვს.,
+lawyer,lawyer,lawyer,lawyer,noun,ადვოკატი,job,2,general,I need a lawyer.,ადვოკატი მჭირდება.,
 country,country,country,country,noun,ქვეყანა,location,2,general,Georgia is a beautiful country.,საქართველო ლამაზი ქვეყანაა.,"Also means ""world""."
 wedding,wedding,wedding,wedding,noun,ქორწილი,society,2,general,Are you going to the wedding?,ქორწილში მიდიხარ?,
 lamp,lamp,lamp,lamp,noun,ნათურა,electronics,2,general,Please turn on the lamp.,"გთხოვ, ნათურა აანთე.",Root is ნათელი (bright/light).
-count,count_inf,count,to count,verb-inf,თვლა,verb,2,verbs,Counting money takes time,ფულის თვლა დროს მოითხოვს,
+count,count_inf,count,to count,verb-inf,თვლა,verb,2,verbs,I know how to count money.,ფულის თვლა ვიცი.,
 count,count_p1s,count,I count,verb-p1s,მე ვითვლი,verb,2,verbs,I count the money.,მე ფულს ვითვლი.,
 count,count_p2s,count,You count,verb-p2s,შენ ითვლი,verb,2,verbs,You count the stars.,შენ ვარსკვლავებს ითვლი.,
 count,count_p3s,count,He/She/It counts,verb-p3s,ის ითვლის,verb,2,verbs,She counts her sheep.,ის თავის ცხვრებს ითვლის.,
@@ -1096,8 +1096,8 @@ hair,hair,hair,hair,noun,თმა,body,2,general,She has beautiful hair.,მა
 star,star,star,star,noun,ვარსკვლავი,nature,2,general,Look at that bright star.,შეხედე იმ კაშკაშა ვარსკვლავს.,
 east,east,east,east,noun,აღმოსავლეთი,directions,2,general,The sun rises in the east.,მზე აღმოსავლეთიდან ამოდის.,"Literally ""the place of going up"" (sunrise)."
 t_shirt,t_shirt,t_shirt,T-shirt,noun,მაისური,clothing,2,general,I am wearing a white T-shirt.,მე მაცვია თეთრი მაისური.,"Derived from მაისი (May). Literally ""shirt for May""."
-nose,nose,nose,nose,noun,ცხვირი,body,2,general,My nose is running.,ცხვირიდან მომდის.,
-artist,artist,artist,artist,noun,მხატვარი,job,2,general,My friend is a talented artist.,ჩემი მეგობარი ნიჭიერი მხატვარია.,Root is ხატვა (to paint/draw).
+nose,nose,nose,nose,noun,ცხვირი,body,2,general,My nose hurts.,ცხვირი მტკივა.,
+artist,artist,artist,artist,noun,მხატვარი,job,2,general,My friend is a painter.,ჩემი მეგობარი მხატვარია.,Root is ხატვა (to paint/draw).
 marry,marry_inf,marry,to marry,verb-inf,ქორწინება,verb,2,verbs,When are you going to marry?,როდის აპირებ დაქორწინებას?,
 marry,marry_p1s,marry,I marry,verb-p1s,მე ვქორწინდები,verb,2,verbs,I am marrying my best friend.,მე ვქორწინდები ჩემს საუკეთესო მეგობარზე.,
 marry,marry_p2s,marry,You marry,verb-p2s,შენ ქორწინდები,verb,2,verbs,You are marrying a good man.,შენ კარგ კაცზე ქორწინდები.,
@@ -1106,13 +1106,13 @@ marry,marry_p1p,marry,We marry,verb-p1p,ჩვენ ვქორწინდე
 marry,marry_p2p,marry,You (pl) marry,verb-p2p,თქვენ ქორწინდებით,verb,2,verbs,You (pl) are marrying too young.,თქვენ ძალიან ახალგაზრდები ქორწინდებით.,
 marry,marry_p3p,marry,They marry,verb-p3p,ისინი ქორწინდებიან,verb,2,verbs,They are marrying in a church.,ისინი ეკლესიაში ქორწინდებიან.,
 music,music,music,music,noun,მუსიკა,art,2,general,I love listening to music.,მე მიყვარს მუსიკის მოსმენა.,
-beard,beard,beard,beard,noun,წვერი,body,2,general,He decided to grow a beard.,მან გადაწყვიტა წვერი გაეზარდა.,"Also means ""tip"" or ""point""."
-foot,foot,foot,foot,noun,ტერფი,body,2,general,I stepped on a nail with my foot.,ლურსმანზე დავაბიჯე ტერფი.,"Specific to the foot itself, not the whole leg (ფეხი)."
+beard,beard,beard,beard,noun,წვერი,body,2,general,He has a long beard.,მას გრძელი წვერი აქვს.,"Also means ""tip"" or ""point""."
+foot,foot,foot,foot,noun,ტერფი,body,2,general,My foot hurts.,ტერფი მტკივა.,"Specific to the foot itself, not the whole leg (ფეხი)."
 war,war,war,war,noun,ომი,society,2,general,No one wants war.,არავის უნდა ომი.,
 bottle,bottle,bottle,bottle,noun,ბოთლი,food,2,general,Give me a bottle of water.,მომეცი ერთი ბოთლი წყალი.,
-tear,tear,tear,tear (drop),noun,ცრემლი,body,2,general,A tear ran down her cheek.,ცრემლი ჩამოუგორდა ლოყაზე.,
-wet,wet,wet,wet,adjective,სველი,adjective,2,general,My shoes are wet from the rain.,ჩემი ფეხსაცმელი სველია წვიმისგან.,
-square,square,square,square,noun,კვადრატი,math_measurements,2,general,A square has four equal sides.,კვადრატს ოთხი ტოლი გვერდი აქვს.,
+tear,tear,tear,tear (drop),noun,ცრემლი,body,2,general,A tear is falling.,ცრემლი მოდის.,
+wet,wet,wet,wet,adjective,სველი,adjective,2,general,The floor is wet.,იატაკი სველია.,
+square,square,square,square,noun,კვადრატი,math_measurements,2,general,This table is a square.,ეს მაგიდა კვადრატია.,
 pray,pray_inf,pray,to pray,verb-inf,ლოცვა,verb,2,verbs,to pray for peace,მშვიდობისთვის ლოცვა,
 pray,pray_p1s,pray,I pray,verb-p1s,მე ვლოცულობ,verb,2,verbs,I pray for my family.,მე ჩემი ოჯახისთვის ვლოცულობ.,
 pray,pray_p2s,pray,You pray,verb-p2s,შენ ლოცულობ,verb,2,verbs,You pray every night.,შენ ყოველ ღამე ლოცულობ.,
@@ -1120,14 +1120,14 @@ pray,pray_p3s,pray,He/She/It prays,verb-p3s,ის ლოცულობს,verb
 pray,pray_p1p,pray,We pray,verb-p1p,ჩვენ ვლოცულობთ,verb,2,verbs,We pray together.,ჩვენ ერთად ვლოცულობთ.,
 pray,pray_p2p,pray,You (pl) pray,verb-p2p,თქვენ ლოცულობთ,verb,2,verbs,You (pl) pray before meals.,თქვენ ჭამის წინ ლოცულობთ.,
 pray,pray_p3p,pray,They pray,verb-p3p,ისინი ლოცულობენ,verb,2,verbs,They pray for a miracle.,ისინი სასწაულისთვის ლოცულობენ.,
-gold,gold,gold,gold,noun,ოქრო,materials,2,general,She wears a gold necklace.,მას ოქროს ყელსაბამი უკეთია.,
+gold,gold,gold,gold,noun,ოქრო,materials,2,general,Gold is expensive.,ოქრო ძვირია.,
 island,island,island,island,noun,კუნძული,nature,2,general,They live on a beautiful island.,ისინი ლამაზ კუნძულზე ცხოვრობენ.,
-flower,flower,flower,flower,noun,ყვავილი,nature,2,general,This flower smells nice.,ამ ყვავილს კარგი სუნი აქვს.,
-peace,peace,peace,peace,noun,მშვიდობა,society,2,general,We all want peace in the world.,ჩვენ ყველას გვინდა მშვიდობა მსოფლიოში.,
+flower,flower,flower,flower,noun,ყვავილი,nature,2,general,I bought a flower.,მე ყვავილი ვიყიდე.,
+peace,peace,peace,peace,noun,მშვიდობა,society,2,general,Peace is necessary.,მშვიდობა აუცილებელია.,
 tall,tall,tall,tall,adjective,მაღალი,adjective,2,general,That is a very tall building.,ეს ძალიან მაღალი შენობაა.,"Also means ""high""."
 neck,neck,neck,neck,noun,კისერი,body,2,general,He has a pain in his neck.,მას კისერი სტკივა.,
 pocket,pocket,pocket,pocket,noun,ჯიბე,clothing,2,general,I have no money in my pocket.,ჯიბეში ფული არ მაქვს.,
-november,november,november,November,noun,ნოემბერი,months,2,general,Her birthday is in November.,მისი დაბადების დღე ნოემბერშია.,
+november,november,november,November,noun,ნოემბერი,months,2,general,It is cold in November.,ნოემბერში ცივა.,
 mix,mix_inf,mix,to mix,verb-inf,არევა,verb,2,verbs,to mix the ingredients,ინგრედიენტების არევა,
 mix,mix_p1s,mix,I mix,verb-p1s,მე ვურევ,verb,2,verbs,I mix the paint.,მე საღებავს ვურევ.,
 mix,mix_p2s,mix,You mix,verb-p2s,შენ ურევ,verb,2,verbs,You mix the salad.,შენ სალათს ურევ.,
@@ -1135,27 +1135,27 @@ mix,mix_p3s,mix,He/She/It mixes,verb-p3s,ის ურევს,verb,2,verbs,She
 mix,mix_p1p,mix,We mix,verb-p1p,ჩვენ ვურევთ,verb,2,verbs,We mix the colors together.,ჩვენ ფერებს ერთმანეთში ვურევთ.,
 mix,mix_p2p,mix,You (pl) mix,verb-p2p,თქვენ ურევთ,verb,2,verbs,You (pl) mix the cards.,თქვენ ბარათებს ურევთ.,
 mix,mix_p3p,mix,They mix,verb-p3p,ისინი ურევენ,verb,2,verbs,They mix the chemicals.,ისინი ქიმიკატებს ურევენ.,
-gift,gift,gift,gift,noun,საჩუქარი,home,2,general,Thank you for the wonderful gift.,გმადლობთ შესანიშნავი საჩუქრისთვის.,Root is ჩუქება (to gift). Sa- prefix indicates object/purpose.
-deaf,deaf,deaf,deaf,adjective,ყრუ,adjective,2,general,The old man is deaf in one ear.,მოხუცი ცალ ყურში ყრუა.,
+gift,gift,gift,gift,noun,საჩუქარი,home,2,general,This gift is for you.,ეს საჩუქარი შენთვისაა.,Root is ჩუქება (to gift). Sa- prefix indicates object/purpose.
+deaf,deaf,deaf,deaf,adjective,ყრუ,adjective,2,general,The deaf man doesn't hear.,ყრუ კაცს არ ესმის.,
 sea,sea,sea,sea,noun,ზღვა,nature,2,general,I love swimming in the sea.,მე მიყვარს ზღვაში ცურვა.,
 pattern,pattern,pattern,pattern,noun,ნიმუში,misc_nouns,2,general,I like the pattern on your dress.,მომწონს შენი კაბის ნიმუში.,
-knee,knee,knee,knee,noun,მუხლი,body,2,general,I fell and hurt my knee.,დავეცი და მუხლი ვიტკინე.,
+knee,knee,knee,knee,noun,მუხლი,body,2,general,My knee hurts.,მუხლი მტკივა.,
 down,down,down,down,noun,ქვემოთ,directions,2,general,Please look down.,"გთხოვთ, ქვემოთ ჩაიხედეთ.",Suffix -ოთ indicates direction.
 blood,blood,blood,blood,noun,სისხლი,body,2,general,Blood is red.,სისხლი წითელია.,
-corn,corn,corn,corn,noun,სიმინდი,food,2,general,I like to eat grilled corn.,მე მიყვარს შემწვარი სიმინდის ჭამა.,
+corn,corn,corn,corn,noun,სიმინდი,food,2,general,We are eating corn.,ჩვენ სიმინდს ვჭამთ.,
 bend,bend_inf,bend,to bend,verb-inf,მოხრა,verb,2,verbs,Can you bend this pipe?,შეგიძლია ამ მილის მოხრა?,
 bend,bend_p1s,bend,I bend,verb-p1s,მე ვხრი,verb,2,verbs,I bend the wire.,მე მავთულს ვხრი.,
 bend,bend_p2s,bend,You bend,verb-p2s,შენ ხრი,verb,2,verbs,You bend your knees.,შენ მუხლებს ხრი.,
 bend,bend_p3s,bend,He/She/It bends,verb-p3s,ის ხრის,verb,2,verbs,He bends the spoon.,ის კოვზს ხრის.,
 bend,bend_p1p,bend,We bend,verb-p1p,ჩვენ ვხრით,verb,2,verbs,We bend the paper.,ჩვენ ქაღალდს ვხრით.,
 bend,bend_p2p,bend,You (pl) bend,verb-p2p,თქვენ ხრით,verb,2,verbs,You (pl) bend the stick.,თქვენ ჯოხს ხრით.,
-bend,bend_p3p,bend,They bend,verb-p3p,ისინი ხრიან,verb,2,verbs,They bend the rules.,ისინი წესებს არღვევენ (ხრიან).,
+bend,bend_p3p,bend,They bend,verb-p3p,ისინი ხრიან,verb,2,verbs,They bend the stick.,ისინი ჯოხს ხრიან.,
 nice,nice,nice,nice,adjective,კეთილი,adjective,2,general,He is a very nice person.,ის ძალიან კეთილი ადამიანია.,"Literally means ""kind""."
 victim,victim,victim,victim,noun,მსხვერპლი,people,2,general,He was the victim of a crime.,ის დანაშაულის მსხვერპლი იყო.,
-lake,lake,lake,lake,noun,ტბა,nature,2,general,We went boating on the lake.,ჩვენ ტბაზე ნავით გავისეირნეთ.,
+lake,lake,lake,lake,noun,ტბა,nature,2,general,We are going to the lake.,ჩვენ ტბაზე მივდივართ.,
 telephone,telephone,telephone,telephone,noun,ტელეფონი,home,2,general,The telephone is ringing.,ტელეფონი რეკავს.,
 ear,ear,ear,ear,noun,ყური,body,2,general,I have an ache in my right ear.,მარჯვენა ყური მტკივა.,
-farm,farm,farm,farm,noun,ფერმა,location,2,general,They grow vegetables on their farm.,ისინი თავიანთ ფერმაში ბოსტნეულს ზრდიან.,
+farm,farm,farm,farm,noun,ფერმა,location,2,general,I work on a farm.,მე ფერმაში ვმუშაობ.,
 eye,eye,eye,eye,noun,თვალი,body,2,general,Close your eyes and listen.,დახუჭე თვალები და მოისმინე.,
 temperature,temperature,temperature,temperature,noun,ტემპერატურა,math_measurements,2,general,The temperature is very high today.,დღეს ტემპერატურა ძალიან მაღალია.,
 wash,wash_inf,wash,to wash,verb-inf,რეცხვა,verb,2,verbs,Washing hands is important,ხელების რეცხვა მნიშვნელოვანია,"Used for washing things (clothes, dishes). Washing oneself is დაბანა."
@@ -1165,12 +1165,12 @@ wash,wash_p3s,wash,He/She/It washes,verb-p3s,ის რეცხავს,verb,2
 wash,wash_p1p,wash,We wash,verb-p1p,ჩვენ ვრეცხავთ,verb,2,verbs,We wash the windows.,ჩვენ ფანჯრებს ვრეცხავთ.,
 wash,wash_p2p,wash,You (pl) wash,verb-p2p,თქვენ რეცხავთ,verb,2,verbs,You (pl) wash the floor.,თქვენ იატაკს რეცხავთ.,
 wash,wash_p3p,wash,They wash,verb-p3p,ისინი რეცხავენ,verb,2,verbs,They wash the dog.,ისინი ძაღლს რეცხავენ.,
-medicine,medicine,medicine,medicine,noun,წამალი,society,2,general,I have to take my medicine.,მე ჩემი წამალი უნდა მივიღო.,
+medicine,medicine,medicine,medicine,noun,წამალი,society,2,general,I need medicine.,წამალი მჭირდება.,
 female,female,female,female,adjective,მდედრობითი,adjective,2,general,female gender,მდედრობითი სქესი,
 north,north,north,north,noun,ჩრდილოეთი,directions,2,general,The birds are flying north.,ჩიტები ჩრდილოეთით მიფრინავენ.,Root is ჩრდილი (shadow). The north side is the shady side.
-million,million,million,million,noun,მილიონი,numbers,2,general,It costs one million dollars.,ეს ერთი მილიონი დოლარი ღირს.,
+million,million,million,million,noun,მილიონი,numbers,2,general,Here are a million people.,აქ მილიონი ადამიანია.,
 dot,dot,dot,dot,noun,წერტილი,misc_nouns,2,general,Put a dot at the end.,ბოლოში დასვი წერტილი.,
-son,son,son,son,noun,ვაჟიშვილი,people,2,general,He is my only son.,ის ჩემი ერთადერთი ვაჟიშვილია.,Compound: ვაჟი (lad/male) + შვილი (child).
+son,son,son,son,noun,ვაჟიშვილი,people,2,general,This is my son.,ეს ჩემი ვაჟიშვილია.,Compound: ვაჟი (lad/male) + შვილი (child).
 paper,paper,paper,paper,noun,ქაღალდი,home,2,general,I need a piece of paper.,მე ფურცელი ქაღალდი მჭირდება.,
 cell_phone,cell_phone,cell_phone,cell phone,noun,მობილური ტელეფონი,electronics,2,general,My cell phone is broken.,ჩემი მობილური ტელეფონი გაფუჭებულია.,
 turn,turn_inf,turn,to turn,verb-inf,შებრუნება,verb,2,verbs,Turning back is difficult,უკან შებრუნება რთულია,
@@ -1181,12 +1181,12 @@ turn,turn_p1p,turn,We turn,verb-p1p,ჩვენ ვბრუნდებით,
 turn,turn_p2p,turn,You (pl) turn,verb-p2p,თქვენ ბრუნდებით,verb,2,verbs,You (pl) turn back to the city.,თქვენ ქალაქში ბრუნდებით.,
 turn,turn_p3p,turn,They turn,verb-p3p,ისინი ბრუნდებიან,verb,2,verbs,They turn back at night.,ისინი ღამით ბრუნდებიან.,
 high,high,high,high,adjective,მაღალი,adjective,2,general,The price is too high.,ფასი ძალიან მაღალია.,"Same word as ""tall""."
-summer,summer,summer,summer,noun,ზაფხული,seasons,2,general,We are going on vacation this summer.,ჩვენ ამ ზაფხულს შვებულებაში მივდივართ.,
+summer,summer,summer,summer,noun,ზაფხული,seasons,2,general,Summer is hot.,ზაფხული ცხელია.,
 right,right,right,right,noun,მარჯვენა,directions,2,general,Raise your right hand.,ასწიე შენი მარჯვენა ხელი.,
-circle,circle,circle,circle,noun,წრე,math_measurements,2,general,Let's all sit in a circle.,"მოდით, ყველა წრეზე დავსხდეთ.",
-oil,oil,oil,oil,noun,ზეთი,food,2,general,I need to buy some cooking oil.,სამზარეულოს ზეთი უნდა ვიყიდო.,
+circle,circle,circle,circle,noun,წრე,math_measurements,2,general,This is a big circle.,ეს დიდი წრეა.,
+oil,oil,oil,oil,noun,ზეთი,food,2,general,I need oil.,ზეთი მჭირდება.,
 date,date,date,date,noun,თარიღი,math_measurements,2,general,What is the date today?,რა თარიღია დღეს?,
-dark,dark,dark,dark,adjective,ბნელი,adjective,2,general,It is too dark to see anything.,"ძალიან ბნელა, რომ რამე დავინახო.",
+dark,dark,dark,dark,adjective,ბნელი,adjective,2,general,The room is dark.,ოთახი ბნელია.,
 build,build_inf,build,to build,verb-inf,აშენება,verb,2,verbs,to build a house,სახლის აშენება,
 build,build_p1s,build,I build,verb-p1s,მე ვაშენებ,verb,2,verbs,I build with Lego.,მე ლეგოთი ვაშენებ.,
 build,build_p2s,build,You build,verb-p2s,შენ აშენებ,verb,2,verbs,You build a sandcastle.,შენ ქვიშის კოშკს აშენებ.,
@@ -1194,9 +1194,9 @@ build,build_p3s,build,He/She/It builds,verb-p3s,ის აშენებს,ver
 build,build_p1p,build,We build,verb-p1p,ჩვენ ვაშენებთ,verb,2,verbs,We build a better future.,ჩვენ უკეთეს მომავალს ვაშენებთ.,
 build,build_p2p,build,You (pl) build,verb-p2p,თქვენ აშენებთ,verb,2,verbs,You (pl) build a company.,თქვენ კომპანიას აშენებთ.,
 build,build_p3p,build,They build,verb-p3p,ისინი აშენებენ,verb,2,verbs,They build a bridge.,ისინი ხიდს აშენებენ.,
-lock,lock,lock,lock,noun,ბოქლომი,home,2,general,He put a big lock on the gate.,მან ჭიშკარზე დიდი ბოქლომი დაადო.,Refers to a padlock.
-grandfather,grandfather,grandfather,grandfather,noun,ბაბუა,people,2,general,My grandfather tells great stories.,ბაბუაჩემი შესანიშნავ ამბებს ჰყვება.,
-manager,manager,manager,manager,noun,მენეჯერი,job,2,general,I need to speak with the manager.,მენეჯერს უნდა დაველაპარაკო.,
+lock,lock,lock,lock,noun,ბოქლომი,home,2,general,There is a padlock on the door.,კარზე ბოქლომია.,Refers to a padlock.
+grandfather,grandfather,grandfather,grandfather,noun,ბაბუა,people,2,general,I love grandfather.,მე ბაბუა მიყვარს.,
+manager,manager,manager,manager,noun,მენეჯერი,job,2,general,The manager is busy.,მენეჯერი დაკავებულია.,
 tree,tree,tree,tree,noun,ხე,nature,2,general,An apple fell from the tree.,ხიდან ვაშლი ჩამოვარდა.,"Also means ""wood""."
 plant,plant,plant,plant,noun,მცენარე,nature,2,general,That plant needs more water.,ამ მცენარეს მეტი წყალი სჭირდება.,
 actor,actor,actor,actor,noun,მსახიობი,job,2,general,He is my favorite actor.,ის ჩემი საყვარელი მსახიობია.,Root is სახიობა (acting/performance).
@@ -1207,13 +1207,13 @@ grow,grow_p1s,grow,I grow,verb-p1s,მე ვიზრდები,verb,2,verbs,
 grow,grow_p2s,grow,You grow,verb-p2s,შენ იზრდები,verb,2,verbs,You grow up so fast.,შენ ძალიან სწრაფად იზრდები.,
 grow,grow_p3s,grow,He/She/It grows,verb-p3s,ის იზრდება,verb,2,verbs,The plant grows towards the sun.,მცენარე მზისკენ იზრდება.,
 grow,grow_p1p,grow,We grow,verb-p1p,ჩვენ ვიზრდებით,verb,2,verbs,We grow older every day.,ჩვენ ყოველდღე ვიზრდებით.,
-grow,grow_p2p,grow,You (pl) grow,verb-p2p,თქვენ იზრდებით,verb,2,verbs,You (pl) grow wiser with age.,თქვენ ასაკთან ერთად ბრძენდებით (იზრდებით).,
+grow,grow_p2p,grow,You (pl) grow,verb-p2p,თქვენ იზრდებით,verb,2,verbs,You grow very fast.,თქვენ ძალიან სწრაფად იზრდებით.,
 grow,grow_p3p,grow,They grow,verb-p3p,ისინი იზრდებიან,verb,2,verbs,They grow vegetables in their garden.,ისინი თავიანთ ბაღში ბოსტნეულს ზრდიან.,
-meter,meter,meter,meter,noun,მეტრი,math_measurements,2,general,The room is three meters wide.,ოთახი სამი მეტრი სიგანისაა.,
+meter,meter,meter,meter,noun,მეტრი,math_measurements,2,general,This is two meters.,ეს ორი მეტრია.,
 kilogram,kilogram,kilogram,kilogram,noun,კილოგრამი,math_measurements,2,general,I want one kilogram of tomatoes.,ერთი კილოგრამი პომიდორი მინდა.,
 park,park,park,park,noun,პარკი,location,2,general,Let's have a picnic in the park.,"მოდი, პარკში პიკნიკი მოვაწყოთ.",
-nuclear,nuclear,nuclear,nuclear,adjective,ბირთვული,adjective,2,general,nuclear power plant,ბირთვული ელექტროსადგური,
-parent,parent,parent,parent,noun,მშობელი,people,2,general,Every parent worries about their child.,ყველა მშობელი ღელავს თავის შვილზე.,
+nuclear,nuclear,nuclear,nuclear,adjective,ბირთვული,adjective,2,general,Nuclear war is dangerous.,ბირთვული ომი საშიშია.,
+parent,parent,parent,parent,noun,მშობელი,people,2,general,The parent goes to school.,მშობელი სკოლაში მიდის.,
 bone,bone,bone,bone,noun,ძვალი,body,2,general,The dog buried his bone.,ძაღლმა თავისი ძვალი დამარხა.,
 contract,contract,contract,contract,noun,კონტრაქტი,society,2,general,You need to sign the contract.,კონტრაქტს ხელი უნდა მოაწერო.,
 player,player,player,player,noun,მოთამაშე,people,2,general,He is a good player.,ის კარგი მოთამაშეა.,"Prefix მო- often indicates the doer of an action (from თამაში = game/play)."draw,draw_inf,draw,to draw,verb-inf,ხატვა,verb,2,verbs,Drawing pictures is fun,სურათების ხატვა სასიამოვნოა,
@@ -1238,9 +1238,9 @@ feed,feed_p3s,feed,He/She/It feeds,verb-p3s,ის კვებავს,verb,2,
 feed,feed_p1p,feed,We feed,verb-p1p,ჩვენ ვკვებავთ,verb,2,verbs,We feed the homeless.,ჩვენ უსახლკაროებს ვკვებავთ.,
 feed,feed_p2p,feed,You (pl) feed,verb-p2p,თქვენ კვებავთ,verb,2,verbs,You (pl) feed the animals.,თქვენ ცხოველებს კვებავთ.,
 feed,feed_p3p,feed,They feed,verb-p3p,ისინი კვებავენ,verb,2,verbs,They feed the fish in the pond.,ისინი ტბაში თევზებს კვებავენ.,
-hard,hard,hard,hard (also slang for cool),adjective,მაგარი,adjective,2,general,This test is very hard.,ეს ტესტი ძალიან რთულია.,"Common slang for ""cool"" or ""awesome""."
-weak,weak,weak,weak,adjective,სუსტი,adjective,2,general,I feel too weak to work.,"ძალიან სუსტად ვგრძნობ თავს, რომ ვიმუშაო.",
-clay,clay,clay,clay,noun,თიხა,materials,2,general,This vase is made of clay.,ეს ლარნაკი თიხისგანაა დამზადებული.,
+hard,hard,hard,hard (also slang for cool),adjective,მაგარი,adjective,2,general,Stone is hard.,ქვა მაგარია.,"Common slang for ""cool"" or ""awesome""."
+weak,weak,weak,weak,adjective,სუსტი,adjective,2,general,I am weak.,მე სუსტი ვარ.,
+clay,clay,clay,clay,noun,თიხა,materials,2,general,This is a clay bowl.,ეს თიხის ჯამია.,
 bedroom,bedroom,bedroom,bedroom,noun,საძინებელი,home,2,general,My bedroom is on the second floor.,ჩემი საძინებელი მეორე სართულზეა.,Prefix სა- indicates place/purpose. ძილი = sleep.
 clothing,clothing,clothing,clothing,noun,ტანსაცმელი,category,2,general,I need to wash my clothing.,ჩემი ტანსაცმელი უნდა გავრეცხო.,Compound: ტანი (body) + საცმელი (wearable).
 price,price,price,price,noun,ფასი,society,2,general,The price is too high for me.,ფასი ჩემთვის ძალიან მაღალია.,
@@ -1248,33 +1248,33 @@ instrument,instrument,instrument,instrument (musical),noun,ინსტრუმ
 paint,paint,paint,paint,noun,საღებავი,home,2,general,The paint is still wet.,საღებავი ჯერ კიდევ სველია.,
 catch,catch_inf,catch,to catch,verb-inf,დაჭერა,verb,2,verbs,to catch a fish,თევზის დაჭერა,
 catch,catch_p1s,catch,I catch,verb-p1s,მე ვიჭერ,verb,2,verbs,I catch the ball.,მე ბურთს ვიჭერ.,
-catch,catch_p2s,catch,You catch,verb-p2s,შენ იჭერ,verb,2,verbs,You catch a cold easily.,შენ ადვილად ცივდები (იჭერ გაციებას).,
+catch,catch_p2s,catch,You catch,verb-p2s,შენ იჭერ,verb,2,verbs,You catch fish in the river.,შენ მდინარეში თევზს იჭერ.,
 catch,catch_p3s,catch,He/She/It catches,verb-p3s,ის იჭერს,verb,2,verbs,The cat catches the mouse.,კატა თაგვს იჭერს.,
 catch,catch_p1p,catch,We catch,verb-p1p,ჩვენ ვიჭერთ,verb,2,verbs,We catch the bus every morning.,ჩვენ ავტობუსს ყოველ დილით ვიჭერთ.,
 catch,catch_p2p,catch,You (pl) catch,verb-p2p,თქვენ იჭერთ,verb,2,verbs,You (pl) catch butterflies.,თქვენ პეპლებს იჭერთ.,
 catch,catch_p3p,catch,They catch,verb-p3p,ისინი იჭერენ,verb,2,verbs,They catch criminals.,ისინი დამნაშავეებს იჭერენ.,
 river,river,river,river,noun,მდინარე,nature,2,general,We sat by the river.,ჩვენ მდინარის პირას ვისხედით.,
-mountain,mountain,mountain,mountain,noun,მთა,nature,2,general,The view from the mountain is amazing.,მთიდან ხედი საოცარია.,
+mountain,mountain,mountain,mountain,noun,მთა,nature,2,general,We are going to the mountains.,ჩვენ მთაში მივდივართ.,
 hill,hill,hill,hill,noun,ბორცვი,nature,2,general,Their house is on a hill.,მათი სახლი ბორცვზეა.,
 short_length,short_length,short_length,short (length),adjective,მოკლე,adjective,2,general,Can you tell me a short story?,შეგიძლია მოკლე ამბავი მომიყვე?,
 dollar,dollar,dollar,dollar,noun,დოლარი,society,2,general,This book costs five dollars.,ეს წიგნი ხუთი დოლარი ღირს.,
 metal,metal,metal,metal,noun,ლითონი,materials,2,general,The gate is made of metal.,ჭიშკარი ლითონისგანაა დამზადებული.,
 school,school,school,school,noun,სკოლა,location,2,general,My brother is still in school.,ჩემი ძმა ჯერ კიდევ სკოლაშია.,
-ocean,ocean,ocean,ocean,noun,ოკეანე,nature,2,general,The ship sailed across the ocean.,გემი ოკეანის გადაღმა გაცურა.,
-throw,throw_inf,throw,to throw,verb-inf,სროლა,verb,2,verbs,Throwing the ball is fun,ბურთის სროლასნიხარია,
+ocean,ocean,ocean,ocean,noun,ოკეანე,nature,2,general,The ship is in the ocean.,გემი ოკეანეშია.,
+throw,throw_inf,throw,to throw,verb-inf,სროლა,verb,2,verbs,Throwing the ball is fun,ბურთის სროლა სასიამოვნოა,
 throw,throw_p1s,throw,I throw,verb-p1s,მე ვისვრი,verb,2,verbs,I throw the trash away.,მე ნაგავს ვაგდებ.,
 throw,throw_p2s,throw,You throw,verb-p2s,შენ ისვრი,verb,2,verbs,You throw the keys to me.,შენ გასაღებს მესვრი.,
 throw,throw_p3s,throw,He/She/It throws,verb-p3s,ის ისვრის,verb,2,verbs,She throws the frisbee.,ის ფრისბის ისვრის.,
-throw,throw_p1p,throw,We throw,verb-p1p,ჩვენ ვისვრით,verb,2,verbs,We throw a party every year.,ჩვენ ყოველ წელს წვეულებას ვაწყობთ (ვისვრით).,
-throw,throw_p2p,throw,You (pl) throw,verb-p2p,თქვენ ისვრით,verb,2,verbs,You (pl) throw the dice.,თქვენ კამათელს აგორებთ (ისვრით).,
+throw,throw_p1p,throw,We throw,verb-p1p,ჩვენ ვისვრით,verb,2,verbs,We throw stones into the water.,ჩვენ ქვებს წყალში ვისვრით.,
+throw,throw_p2p,throw,You (pl) throw,verb-p2p,თქვენ ისვრით,verb,2,verbs,Where do you throw the trash?,სად ისვრით ნაგავს?,
 throw,throw_p3p,throw,They throw,verb-p3p,ისინი ისვრიან,verb,2,verbs,They throw stones into the water.,ისინი წყალში ქვებს ისვრიან.,
 september,september,september,September,noun,სექტემბერი,months,2,general,We are getting married in September.,ჩვენ სექტემბერში ვქორწინდებით.,
 soup,soup,soup,soup,noun,სუპი,food,2,general,This chicken soup is delicious.,ეს ქათმის სუპი გემრიელია.,
 bank,bank,bank,bank,noun,ბანკი,location,2,general,I need to deposit money in the bank.,ბანკში ფული უნდა შევიტანო.,
 person,person,person,person,noun,პირი,category,2,general,third-person singular,მესამე პირი მხოლობითი,"Also means ""face"" or ""mouth""."
-front,front,front,front,noun,წინა,directions,2,general,Please go to the front of the line.,"გთხოვთ, რიგის თავში გადადით.",
-floor,floor,floor,floor,noun,იატაკი,home,2,general,My apartment is on the third floor.,ჩემი ბინა მესამე სართულზეა.,"Refers to the surface you walk on. ""Story/Level"" is სართული."
-straight,straight,straight,straight,noun,პირდაპირ,directions,2,general,Go straight and then turn left.,იარეთ პირდაპირ და შემდეგ შეუხვიეთ მარცხნივ.,
+front,front,front,front,noun,წინა,directions,2,general,front door,წინა კარი.,
+floor,floor,floor,floor,noun,იატაკი,home,2,general,The floor is clean.,იატაკი სუფთაა.,"Refers to the surface you walk on. ""Story/Level"" is სართული."
+straight,straight,straight,straight,noun,პირდაპირ,directions,2,general,Walk straight.,იარე პირდაპირ.,
 clean,clean_inf,clean,to clean,verb-inf,დასუფთავება,verb,2,verbs,You need to clean your room.,შენი ოთახი უნდა დაასუფთაო.,
 clean,clean_p1s,clean,I clean,verb-p1s,მე ვასუფთავებ,verb,2,verbs,I clean the house on Saturdays.,მე სახლს შაბათობით ვასუფთავებ.,
 clean,clean_p2s,clean,You clean,verb-p2s,შენ ასუფთავებ,verb,2,verbs,You clean the windows well.,შენ ფანჯრებს კარგად ასუფთავებ.,
@@ -1300,13 +1300,13 @@ culture,culture,culture,Culture,noun,კულტურა,abstract,1,general,An
 history,history,history,History,noun,ისტორია,abstract,1,general,Georgian history.,საქართველოს ისტორია.,
 information,information,information,Information,noun,ინფორმაცია,abstract,1,general,I need information.,ინფორმაცია მჭირდება.,
 quality,quality,quality,Quality,noun,ხარისხი,abstract,1,general,High quality.,მაღალი ხარისხი.,
-fall_inf,fall_inf,fall_inf,to fall,verb-inf,ვარდნა,verb,2,verbs,The leaves begin to fall.,ფოთლები იწყებს ცვენას (ვარდნას).,
+fall_inf,fall_inf,fall_inf,to fall,verb-inf,ვარდნა,verb,2,verbs,Falling from a horse is dangerous.,ცხენიდან ვარდნა საშიშია.,
 fall,fall_p1s,fall_inf,I fall,verb-p1s,მე ვვარდები,verb,2,verbs,I fall on the ice.,მე ყინულზე ვვარდები.,
 fall,fall_p2s,fall_inf,You fall,verb-p2s,შენ ვარდები,verb,2,verbs,"Be careful, you will fall.","ფრთხილად, დავარდები.",
-fall,fall_p3s,fall_inf,He/She/It falls,verb-p3s,ის ვარდება,verb,2,verbs,The rain falls from the sky.,წვიმა ციდან ცვივა (ვარდება).,
-fall,fall_p1p,fall_inf,We fall,verb-p1p,ჩვენ ვვარდებით,verb,2,verbs,We fall asleep quickly.,ჩვენ სწრაფად გვეძინება (ვვარდებით).,
+fall,fall_p3s,fall_inf,He/She/It falls,verb-p3s,ის ვარდება,verb,2,verbs,The cup falls from the table.,ჭიქა მაგიდიდან ვარდება.,
+fall,fall_p1p,fall_inf,We fall,verb-p1p,ჩვენ ვვარდებით,verb,2,verbs,We fall into the water.,ჩვენ წყალში ვვარდებით.,
 fall,fall_p2p,fall_inf,You (pl) fall,verb-p2p,თქვენ ვარდებით,verb,2,verbs,You (pl) fall down.,თქვენ ვარდებით.,
-fall,fall_p3p,fall_inf,They fall,verb-p3p,ისინი ვარდებიან,verb,2,verbs,They fall in love.,მათ უყვარდებათ (სიყვარულში ვარდებიან).,
+fall,fall_p3p,fall_inf,They fall,verb-p3p,ისინი ვარდებიან,verb,2,verbs,Stones fall from the mountain.,ქვები მთიდან ვარდებიან.,
 how_much_many,how_much_many,how_much_many,How much? / How many?,phrase,რამდენი?,question_word,1,phrases,How many people are there?,რამდენი ხალხია?,Used for price and quantity. Nouns following რამდენი stay singular.
 for_example,for_example,for_example,For example,phrase,მაგალითად,phrase,1,phrases,"For example, this wine.","მაგალითად, ეს ღვინო.",Root is მაგალითი (example).
 in_my_opinion,in_my_opinion,in_my_opinion,In my opinion,phrase,ჩემი აზრით,phrase,1,phrases,"In my opinion, it's good.","ჩემი აზრით, კარგია.",-ით = by/with. აზრი = opinion.
@@ -1314,7 +1314,7 @@ what_does_this_mean,what_does_this_mean,what_does_this_mean,What does this mean?
 can_you_repeat,can_you_repeat,can_you_repeat,Can you repeat that?,phrase,გაიმეორეთ?,phrase,1,phrases,Please repeat the word.,"გთხოვთ, სიტყვა გაიმეოროთ.",
 i_have_a_question,i_have_a_question,i_have_a_question,I have a question,phrase,კითხვა მაქვს,phrase,1,phrases,I have one small question.,ერთი პატარა კითხვა მაქვს.,Using the inanimate 'have' (მაქვს) for the question.
 i_dont_know,i_dont_know,i_dont_know,I don’t know,phrase,არ ვიცი,phrase,1,phrases,I really don't know.,ნამდვილად არ ვიცი.,
-push,push_inf,push,to push,verb-inf,ბიძგება,verb,2,verbs,You have to push the door.,კარს ხელი უნდა ჰკრა (მიაწვე).,
+push,push_inf,push,to push,verb-inf,ბიძგება,verb,2,verbs,Pushing the car is hard.,მანქანის ბიძგება რთულია.,
 push,push_p1s,push,I push,verb-p1s,მე ვაწვები,verb,2,verbs,I push the button.,მე ღილაკს ვაწვები.,
 push,push_p2s,push,You push,verb-p2s,შენ აწვები,verb,2,verbs,You push the cart.,შენ ურიკას აწვები.,
 push,push_p3s,push,He/She/It pushes,verb-p3s,ის აწვება,verb,2,verbs,He pushes me on the swing.,ის საქანელაზე მაწვება.,
@@ -1328,7 +1328,7 @@ story_news,story_news,story_news,Story / News / Matter,noun,ამბავი,a
 but,but,but,But,conjunction,მაგრამ,conjunction,1,general,"I want it, but it's expensive.","მინდა, მაგრამ ძვირია.",
 if,if,if,If,conjunction,თუ,conjunction,1,general,"If you want, let's go.","თუ გინდა, წავიდეთ.",
 pull,pull_inf,pull,to pull,verb-inf,ქაჩვა,verb,2,verbs,to pull the rope,თოკის მოქაჩვა,
-pull,pull_p1s,pull,I pull,verb-p1s,მე ვქაჩავ,verb,2,verbs,I pull the door open.,მე კარს ვაღებ (ვქაჩავ).,
+pull,pull_p1s,pull,I pull,verb-p1s,მე ვქაჩავ,verb,2,verbs,I pull the door.,მე კარს ვქაჩავ.,
 pull,pull_p2s,pull,You pull,verb-p2s,შენ ქაჩავ,verb,2,verbs,You pull the chair.,შენ სკამს ქაჩავ.,
 pull,pull_p3s,pull,He/She/It pulls,verb-p3s,ის ქაჩავს,verb,2,verbs,She pulls my hair.,ის თმას მქაჩავს.,
 pull,pull_p1p,pull,We pull,verb-p1p,ჩვენ ვქაჩავთ,verb,2,verbs,We pull the wagon.,ჩვენ ურემს ვქაჩავთ.,
@@ -1366,14 +1366,14 @@ free_cost,free_cost,free_cost,Free (no cost),adjective,უფასო,adjective
 same,same,same,Same,adjective,იგივე,adjective,1,general,I want the same.,იგივე მინდა.,
 different,different,different,Different,adjective,განსხვავებული,adjective,1,general,They are completely different.,სრულიად განსხვავებულია.,Root is სხვა (other).
 ready,ready,ready,Ready,adjective,მზად,adjective,1,general,I am ready to go.,წასასვლელად მზად ვარ.,Usually used with the verb 'to be'.
-shake,shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb,2,verbs,to shake hands with someone,ვიღაცისთვის ხელის ჩამორთმევა,
+shake,shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb,2,verbs,Shaking the medicine is necessary.,წამლის ანჯღრევა საჭიროა.,
 shake,shake_p1s,shake,I shake,verb-p1s,მე ვანჯღრევ,verb,2,verbs,I shake the bottle.,მე ბოთლს ვანჯღრევ.,
-shake,shake_p2s,shake,You shake,verb-p2s,შენ ანჯღრევ,verb,2,verbs,You shake your head.,შენ თავს აქნევ (ანჯღრევ).,
-shake,shake_p3s,shake,He/She/It shakes,verb-p3s,ის ანჯღრევს,verb,2,verbs,The ground shakes.,მიწა ირყევა (ინჯღრევა).,
-shake,shake_p1p,shake,We shake,verb-p1p,ჩვენ ვანჯღრევთ,verb,2,verbs,We shake the blanket.,ჩვენ საბანს ვაფერთხებთ (ვანჯღრევთ).,
+shake,shake_p2s,shake,You shake,verb-p2s,შენ ანჯღრევ,verb,2,verbs,You shake the tree.,შენ ხეს ანჯღრევ.,
+shake,shake_p3s,shake,He/She/It shakes,verb-p3s,ის ანჯღრევს,verb,2,verbs,The old bus shakes.,ძველი ავტობუსი ინჯღრევა.,
+shake,shake_p1p,shake,We shake,verb-p1p,ჩვენ ვანჯღრევთ,verb,2,verbs,We shake the juice bottle.,ჩვენ წვენის ბოთლს ვანჯღრევთ.,
 shake,shake_p2p,shake,You (pl) shake,verb-p2p,თქვენ ანჯღრევთ,verb,2,verbs,You (pl) shake the tree.,თქვენ ხეს ანჯღრევთ.,
-shake,shake_p3p,shake,They shake,verb-p3p,ისინი ანჯღრევენ,verb,2,verbs,They shake with fear.,ისინი შიშისგან ცახცახებენ (ინჯღრევიან).,
-sure_certain,sure_cshake,shake_inf,shake,to shake,verb-inf,ანჯღრევა,verb,2,verbs,to shake hands with someone,ვიღაცისთვის ხელის ჩამორთმევა,
+shake,shake_p3p,shake,They shake,verb-p3p,ისინი ანჯღრევენ,verb,2,verbs,Passengers shake in the car.,მგზავრები მანქანაში ინჯღრევიან.,
+sure_certain,sure_certain,sure_certain,sure/certain,adjective,დარწმუნებული,adjective,2,general,I am sure.,მე დარწმუნებული ვარ.,
 mirror,mirror,mirror,Mirror,noun,სარკე,home,1,general,Look in the mirror.,სარკეში ჩაიხედე.,
 stairs,stairs,stairs,Stairs,noun,კიბე,home,1,general,Go up the stairs.,კიბეზე ადი.,Also means 'ladder'.
 towel,towel,towel,Towel,noun,პირსახოცი,home,1,general,I need a dry towel.,მშრალი პირსახოცი მჭირდება.,Compound: პირი (face) + სახოცი (wiper).
@@ -1597,8 +1597,8 @@ carry,carry_inf,carry,to carry,verb-inf,ტარება,verb,2,verbs,Help me 
 carry,carry_p1s,carry,I carry,verb-p1s,მე ვატარებ,verb,2,verbs,I carry a bag.,მე ჩანთას ვატარებ.,
 carry,carry_p2s,carry,You carry,verb-p2s,შენ ატარებ,verb,2,verbs,You carry the books.,შენ წიგნებს ატარებ.,
 carry,carry_p3s,carry,He/She/It carries,verb-p3s,ის ატარებს,verb,2,verbs,He carries the boxes.,ის ყუთებს ატარებს.,
-carry,carry_p1p,carry,We carry,verb-p1p,ჩვენ ვატარებთ,verb,2,verbs,We carry our luggage.,ჩვენ ჩვენი ბარგი მიგვაქვს (ვატარებთ).,
-carry,carry_p2p,carry,You (pl) carry,verb-p2p,თქვენ ატარებთ,verb,2,verbs,You (pl) carry the chairs.,თქვენ სკამები მიგაქვთ (ატარებთ).,
+carry,carry_p1p,carry,We carry,verb-p1p,ჩვენ ვატარებთ,verb,2,verbs,We carry the child.,ჩვენ ბავშვს ვატარებთ.,
+carry,carry_p2p,carry,You (pl) carry,verb-p2p,თქვენ ატარებთ,verb,2,verbs,Do you carry a passport with you?,პასპორტს თან ატარებთ?,
 carry,carry_p3p,carry,They carry,verb-p3p,ისინი ატარებენ,verb,2,verbs,They carry the flag.,ისინი დროშას ატარებენ.,
 quantity,quantity,quantity,Quantity,noun,რაოდენობა,abstract,1,general,Large quantity.,დიდი რაოდენობა.,Root is რამდენი (how much).
 only,only,only,Only,adverb,მხოლოდ,general,1,general,Only one person.,მხოლოდ ერთი ადამიანი.,
@@ -1608,8 +1608,8 @@ whole,whole,whole,Whole / Entire,adjective,მთელი,general,1,general,The
 main,main,main,Main / Chief,adjective,მთავარი,general,1,general,Main street.,მთავარი ქუჩა.,Root of მთავრობა (government).
 break,break_inf,break,to break,verb-inf,გატეხვა,verb,2,verbs,Breaking glass is dangerous,მინის გატეხვა საშიშია,
 break,break_p1s,break,I break,verb-p1s,მე ვამტვრევ,verb,2,verbs,I break the glass.,მე ჭიქას ვამტვრევ.,
-break,break_p2s,break,You break,verb-p2s,შენ ამტვრევ,verb,2,verbs,You break the rules.,შენ წესებს არღვევ (ამტვრევ).,
-break,break_p3s,break,He/She/It breaks,verb-p3s,ის ამტვრევს,verb,2,verbs,He breaks his promise.,ის თავის პირობას არღვევს (ამტვრევს).,
+break,break_p2s,break,You break,verb-p2s,შენ ამტვრევ,verb,2,verbs,You smash the old door.,შენ ძველ კარს ამტვრევ.,
+break,break_p3s,break,He/She/It breaks,verb-p3s,ის ამტვრევს,verb,2,verbs,The wind breaks the tree.,ქარი ხეს ამტვრევს.,
 break,break_p1p,break,We break,verb-p1p,ჩვენ ვამტვრევთ,verb,2,verbs,We break the wood.,ჩვენ შეშას ვამტვრევთ.,
 break,break_p2p,break,You (pl) break,verb-p2p,თქვენ ამტვრევთ,verb,2,verbs,You (pl) break the eggs.,თქვენ კვერცხებს ამტვრევთ.,
 break,break_p3p,break,They break,verb-p3p,ისინი ამტვრევენ,verb,2,verbs,They break the window.,ისინი ფანჯარას ამტვრევენ.,
